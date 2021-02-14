@@ -28,9 +28,14 @@
 
 \usepackage{common}
 \usepackage{english-theorems}
-
+\setcounter{tocdepth}{1}
 
 \begin{document}
+\tableofcontents
+\clearpage
+\ifodd\value{page}\else
+\thispagestyle{empty}
+\fi
 \input{RealNumbers}
 \input{MetricSpaces}
 \input{Differentiation}

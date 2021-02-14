@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  14 FEB 2021 14:08
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  14 FEB 2021 17:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -416,74 +416,82 @@ Package graphics Info: Driver file: xetex.def on input line 105.
 )
 \Gin@req@height=\dimen171
 \Gin@req@width=\dimen172
-) (./RealNumbers.tex
-Chapter 1.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 11.
-(c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
+) (./main.toc
+LaTeX Font Info:    Trying to load font information for U+msa on input line 2.
+ (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 11.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 2.
  (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 11.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 2.
  (c:/texlive/2020/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
-) [1
+))
+\tf@toc=\write3
+\openout3 = `main.toc'.
+
+ [1
 
 
-] [2] [3]) (./MetricSpaces.tex [4]
+] (./RealNumbers.tex [2
+
+
+]
+Chapter 1.
+[3] [4] [5]) (./MetricSpaces.tex [6]
 Chapter 2.
-[5
+[7
 
-] [6] [7]
+] [8] [9]
 Overfull \hbox (2.0439pt too wide) in paragraph at lines 150--151
 \TU/lmr/m/n/12 Let $[]$ be a metric space. A \TU/lmr/bx/n/12 sequence \TU/lmr/m/n/12 is a function in form of $[]$
  []
 
-[8] [9] [10] [11]
+[10] [11] [12] [13]
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
 (Font)              Font shape `U/lasy/m/n' tried instead on input line 285.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
 (Font)              Font shape `U/lasy/m/n' tried instead on input line 285.
- [12] [13] [14] [15] [16] [17] [18]) (./Differentiation.tex [19] [20
+ [14] [15] [16] [17] [18] [19] [20]) (./Differentiation.tex [21] [22
 
 ]
 Chapter 3.
-[21] [22] [23] [24]
-Overfull \hbox (2.49733pt too wide) detected at line 195
+[23] [24] [25] [26]
+Overfull \hbox (2.49733pt too wide) detected at line 196
 []
  []
 
-) (./Integral.tex [25] [26
+) (./Integral.tex [27] [28
 
 ]
 Chapter 4.
-[27] [28] [29] [30]) (./Series.tex [31] [32
+[29] [30] [31] [32]) (./Series.tex [33] [34
 
 ]
 Chapter 5.
-[33]) (./FunctionSpaces.tex [34]
+[35]) (./FunctionSpaces.tex [36]
 Chapter 6.
 
-Overfull \hbox (23.02748pt too wide) in paragraph at lines 18--19
+Overfull \hbox (23.02748pt too wide) in paragraph at lines 20--21
 []$\OMS/cmsy/m/n/12 C[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 X; \U/msb/m/n/12 R\OT1/cmr/m/n/12 ) :$ \TU/lmr/m/n/12 all continuous function from $\OML/cmm/m/it/12 X$ \TU/lmr/m/n/12 to $\U/msb/m/n/12 R$\TU/lmr/m/n/12 . $\OML/cmm/m/it/12 d\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f; g\OT1/cmr/m/n/12 ) = [] []$ 
  []
 
-[35
+[37
 
 ])
-\tf@thm=\write3
-\openout3 = `main.thm'.
+\tf@thm=\write4
+\openout4 = `main.thm'.
 
- [36] (./main.aux) ) 
+ [38] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 7078 strings out of 477454
- 116116 string characters out of 5840441
+ 7083 strings out of 477454
+ 116152 string characters out of 5840441
  445775 words of memory out of 5000000
- 26446 multiletter control sequences out of 15000+600000
+ 26448 multiletter control sequences out of 15000+600000
  545955 words of font info for 88 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 71i,13n,74p,828b,572s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,13n,74p,828b,574s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (36 pages, 411208 bytes).
+Output written on main.xdv (38 pages, 423508 bytes).
