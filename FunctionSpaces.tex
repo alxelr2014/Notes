@@ -1,0 +1,64 @@
+\chapter{Function Spaces}
+\begin{definition}[Point Convergence]
+    for each point there is a \(\epsilon\)
+\end{definition}
+example \(x^n\), 1/2 lines, \(sqrt(x^2 + 1/n)\), rationals
+\begin{definition}[Uniform Convergence]
+    there is a \(\epsilon\) for all points
+\end{definition}
+\begin{corollary}
+    Uniform convergence implies point convergence.
+\end{corollary}
+example x/n with restriction
+\begin{theorem}
+    \(f_n\) are uniformly convergent and continuous then \(f\) is continuous
+\end{theorem}
+
+\begin{definition}
+    \(\mathcal{C}^0(X,\mathbb{R}):\) all continuous function from \(X \) to \(\mathbb{R}\). \(d(f,g) = \sup{\{|f(x) - g(x)| : x \in X\}}\)
+\end{definition}
+\begin{definition}
+    \(\|f\| = \sup\{|f(x)| : x \in X\}\) therefore \(d(f,g) = \|f - g\|\)
+\end{definition}
+
+\begin{theorem}
+    \(f_n:[a,b] \to \mathbb{R}\) uniformly convergent if \(f_n\) is Riemann integrable then \(f\) is Riemann integrable
+    \[\int_{a}^{b} \underbrace{\lim{f_n}}_{f} = \lim{\int_{a}^{b}{f_n}}\]
+\end{theorem}
+\begin{lemma}
+    metric spaces and \(f_n: X \to X'\) are uniformly convergent if \(f_n\) is bounded then \(f\) is bounded.
+\end{lemma}
+
+\begin{proposition}
+    \((\mathcal{C}^0_b,d)\) is a complete metric space.
+\end{proposition}
+\begin{definition}
+    \(\mathcal{C}^0_b(X,\mathbb{R})\) and 	\(\mathcal{C}_b(X,\mathbb{R})\) closed subset of \(\mathcal{B}(X,\mathbb{R})\)
+\end{definition}
+exampele: any compact metric space
+\begin{theorem}
+    \(f_n\) are differentiable functions
+    \begin{enumerate}
+        \item \(f_n'\) are uniformly convergent to \(g\)
+        \item \(f_n\) are point convergent
+    \end{enumerate}
+\end{theorem}
+\begin{proposition}
+    \(f_n:[a,b] \to \mathbb{R}\) consider \(\sum{f_n}\)
+    \begin{enumerate}
+        \item \(f_n\) are riemann integrable and the series uniformly convergent then the \(\sum{f_n}\) is riemann integrable and
+              \[ \int_{a}^{b}{\sum{f_n}} = \sum {\int_{a}^{b}{f_n}}\]
+        \item
+              Similarly for derivative
+    \end{enumerate}
+\end{proposition}
+\begin{definition}[Wierstrass M test]
+    This is super cool
+\end{definition}
+power series and convergence
+radius of convergence of integral/derivative of power series is equal to the radius of convergence of the originalo series.
+\begin{theorem}
+    in the convergence cirle the power series is inifinitely integrable and differentiable, and coefficients are taylor coefficients
+\end{theorem}
+analytical definition
+proof of analytical means analytical in interval using a pair sequence

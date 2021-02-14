@@ -1,0 +1,115 @@
+\thispagestyle{headings}
+\chapter{Real Numbers}
+\section{Axiomatic Formulation of Real Numbers}
+The building axioms of real numbers is devided into three groups based on the properties they are describing.
+\begin{enumerate}
+    \item Field axioms.
+    \item Order axioms.
+    \item Completeness axiom.
+\end{enumerate}
+\subsection{Field Axioms}
+A field is a non-empty set \(\Field\) with two binary operations \textit{addition}, \(+\), and \textit{multiplication}, \(\cdot\). For all \(x,y,z \in  \Field\):
+\begin{enumerate}[wide,start=1,label={Axiom \arabic*.}]
+    \item Addition and multiplication are commutitive.
+          \[x + y = y + x, \quad \ x \cdot y = y \cdot x\]
+    \item Addition and multiplication are associative.
+          \[x + (y + z) = (x + y) + z, \quad x\cdot (y\cdot z) = (x \cdot y) \cdot z\]
+    \item  Multiplication distributes over addition.
+          \[x \cdot (y + z) = x \cdot y + x \cdot z\]
+    \item There exists a number \(0\) such that for every number \(x\):
+          \[ x + 0  = 0 + x = x\]
+    \item There exists a number \(1\) such that for every number \(x\):
+          \[ x \cdot 1 = 1 \cdot x = x\]
+    \item  For every number \(x\), there exists a number \(y\) such that:
+          \[x + y = 0\]
+          \(y\) is called the negative of \(x\) and is denoted by \(-x\).
+    \item For every number \(x \neq 0\), there exists a number \(y\) such that:
+          \[x \cdot y = 1\]
+          \(y\) is called the reciprocal of \(x\) and is denoted by \(x^{-1}\) or \(\dfrac{1}{x}\).
+\end{enumerate}
+\subsection{Order Axioms}
+The order axioms establishes an ordering on the numbers of \(\Field\) to determine which element is larger or smaller. To achieve an ordering, we define the set of positive real numbers \(\Field^+ \subset \Field\).
+\begin{enumerate}[wide,resume,label={Axiom \arabic*.}]
+    \item The \(\Field^+\) is closed under addition and multiplication.
+          \[\forall x,y \in \Field^+, \quad (x + y) \in \Field^+ \text{ and } (x \cdot y) \in \Field^+\]
+    \item \(0 \notin \Field^+\).
+    \item For every number \(x \neq 0\), either \(x \in \Field^+\) or \(-x \in \Field^+\).
+\end{enumerate}
+We then define the binary operator \( > \) such that \(x > y \) whenever \((x - y) \in \Field^+\).
+\subsection{Completeness Axiom}
+Given that \((\Field, + ,\cdot , >)\) is an ordered field, we define the followings:
+\begin{definition} [Upper bound]
+    A set \(S \in \Field\) has an upper bound if for some \(a \in \Field\) is greater or equal to all element of \(S\). That is, \(\forall x \in S\: a \geq x\). We say that \(S\) is bounded from above.
+\end{definition}
+\begin{definition} [The least upper bound]
+    \(a \in \Field\) is the least upper bound of a set \(S \subset \Field\) if it is smaller than every upper bound of \(S\). We say \(a\) is the supremum of \(S\), denoted by \(a = \sup{S}\).
+\end{definition}
+Note that, if the least upper bound exists, it must be unique.
+\begin{enumerate}[wide,resume,label={Axiom \arabic*.}]
+    \item If \(S\) is a non-empty set that bounded from above that it has supremum.
+\end{enumerate}
+\begin{theorem}
+    There exists a unique set that satisifies all the axioms above. It is denoted by \(\Reals\), the set of real numbers.
+\end{theorem}
+\begin{proof}
+    The existence of \(\Reals\) is proved in many ways. One way to construct real numbers uses \textit{Dedekind Cuts}. Let the pair of rational sets \((A,B)\) be a partition of \(\Rationals\) such that:
+    \begin{enumerate}
+        \item \(A \neq \emptyset\) and \(A \neq \Rationals\).
+        \item \(\forall x,y \in \Rationals \; \mathrm{s.t.} \; x < y,\: y \in A \implies x \in A\).
+        \item \(\nexists x \in A \; \mathrm{s.t.} \; \forall y \in A, x \geq y\).
+    \end{enumerate}
+    For convenience we let \(A\) represent the pair \((A,B)\) as \(A\) completely determines \(B\).
+    We define \(+\), \(\cdot\), and \( > \) as follows:
+    \begin{flalign*}
+        A + B &= \{ a + b : a \in A, b\in B\} &&\\
+        \mathbb{0} &= \{ a : a < 0\}&& \\
+        -A &= \{a' : \forall a \in A, a' < -a \}&&
+        \intertext{For \(\cdot\), we first take two set \(A\) and \(B\) that have some positive elements.}
+        A \cdot B &= \{ a \cdot b : a \in A \land a \leq 0, b\in B \land b \leq 0 \} \: \cup \: \mathbb{0}&&\\
+        \intertext{If \(A\) or \(B\) did not have any positive elements, we first take the negative of the set, and then multiply the two sets and take the negative of the product. Similarly, we define the reciprocal of \(A\) if \(A\) has a positive element.}
+        \mathbb{1} &= \{a : a < 1\}&&\\
+        A^{-1} &= \{ a' :\forall a \in A, a > 0, a' < \dfrac{1}{a} \} &&
+        \intertext{Lastly:}
+        A &> B \text{ if } A \supset B &&
+    \end{flalign*}
+    Also, if a non-empty set \(S\) of real numbers is bounded from above, then it has a supremum in \(\Reals\) equal to \( \bigcup S\). It is left to the reader that the \((\Reals, + , \cdot, >)\) satisifies the axioms above.
+
+    The set of real numbers is unique in sense that if \((\Reals, + , \cdot, >)\) and \((\Reals',+',\cdot', >')\) both satisify the axioms, then there exists bijective mapping \(\alpha : \Reals \to \Reals'\) such that:
+    \begin{flalign*}
+        \alpha(x + y) &= \alpha(x) +' \alpha(y) &&\\
+        \alpha(0) &= 0'&&\\
+        \alpha(x\cdot y) &= \alpha(x)\cdot'\alpha(y)&&\\
+        \alpha(1) &= 1' &&\\
+        x < y &\iff \alpha(x) <' \alpha(y) &&
+    \end{flalign*}
+    Lastly, if \(S\) is a non-empty set in \(\Reals\) and \( \alpha(S) = \{\alpha(x) : x \in S\} \), then \(S\) is has an upper bound if and only if \(\alpha(S)\) has an upper bound. Furthermore \( \alpha(\sup{S}) = \sup{\alpha(S)}\).
+\end{proof}
+\begin{results}
+    \leavevmode
+    \begin{enumerate}
+        \item The set of natural numbers \(\Naturals\) in \(\Reals\) is not bounded from above.
+        \item Let \(x \in \Reals\) be such that for all \(n \in \Naturals\)
+              \[ 0\leq x \leq \dfrac{1}{n}\]
+              then \(x = 0\).
+        \item (Archimedean Property) For all \(a,b > 0\) there exists \(n \in \Naturals\):
+              \[ na > b\]
+        \item Consider \(I_n = [a_n,b_n] \;\forall n \in \Naturals \) such that \(I_1 \supset I_2 \supset \dots\;\). Then \(\cap{I_n}\) is not empty. Moreover, if for each \(e > 0\) there exists \( n\) such that \(b_n - a_n < e\), then \(\cap{I_n}\) is a single point.
+        \item \(\sqrt{2} \in \Reals\). In addition, for all \(p > 0\), there is a positive real number \(q \) such that \(q^2 = p\)
+    \end{enumerate}
+\end{results}
+\newpage
+{\Large\textbf{Exercises}}
+\begin{enumerate}
+    \item Prove that the addition and multiplication identity elements are unique.
+    \item Show that the Trichotomy law holds for \( (>) \). That is, exactly one of the following three is true.
+          \[ x > y \qquad x = y \qquad y > x\]
+    \item Show that \(1 \in \Field^+\).
+    \item Show that if \(x > -1\) and \(n \in \Naturals\):
+          \[(1 + x)^n \geq 1 + nx\]
+          and equality only holds when \(n = 1\).
+    \item Let \(F_p = \{ 0, 1, \dots, p -1 \}\) where \(p\) is a prime number. Define \(+\) and \(\cdot\) to be the modular addition and product modulus \(p\), respectively. Investigate whether if \(F_p\) can be ordered.
+    \item Consider the set of all rational polynomials \(\Rationals[x]\):
+          \[\Rationals[x] = \left\{ \frac{a_m x^m + \dots + a_1 x + a_0}{b_n x^n + \dots + b_1 x + b_0}: a_i, b_j \in \Rationals, b_n \neq 0\right\}\]
+          Show that \(\Rationals[x]\) under the normal addition and multiplication is a field. Furthermore, show that \(\Rationals^+[x] = \{ q \in \Rationals[x] : a_m \cdot b_n > 0 \}\) constitutes an ordering on \(\Rationals[x]\).
+\end{enumerate}
+

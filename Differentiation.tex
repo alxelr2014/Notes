@@ -1,0 +1,206 @@
+\thispagestyle{headings}
+\chapter{Differentiation}
+\begin{definition}
+    Let \(I\) be an interval in \(\mathbb{R}\). If \(a\) is an interior point of \(I\), then we say that \(f: I \to \mathbb{R}\) is differentiable at \(a\) when the following limit exists:
+    \[\lim_{x \to a} \dfrac{f(x) - f(a)}{x - a} \]
+    The limit, if exists, is denoted by \(f'(a)\).
+    If \(a\) is an end point and the length of the interval is greater than zero, then the limit only exists from one direction.
+
+    Equivalently, there exists a line \(l\), not parallel to \(y\)-axis, in form of \(l : A(x) = mx + b\), that is tangent to \(f\) at \(x = a\). In this case:
+    \[\lim_{x \to a}\dfrac{f(x) - [mx + b]}{x - a } = 0 \qquad A(a) = f(a) \]
+\end{definition}
+In a general case, two functions \(f,g\) are tangent to each other at \(x = a\) if:
+\begin{equation}
+    f(a) = g(a) \qquad \lim_{x \to a}{\dfrac{f(x) - g(x)}{x - a} = 0}
+\end{equation}
+\begin{corollary}\leavevmode
+    \begin{enumerate}
+        \item \(f\) is differentiable at \(a\) if it is continuous at \(a\).
+        \item \label{extrma} If \(f'(a) > 0\), there exists \(\delta > 0\) such that for \(x \in \; ]a- \delta,a[\; \cap I \implies f(x) < f(a) \) and for \(x \in \; ]a, a +  \delta[\; \cap I \implies f(x) < f(a)\). And if \(f'(a) < 0\) the inequality sign are reversed. Therefore, if \(f\) has a local extremum at \(a\), then in case \(f'(a)\) exists, \(f'(a) = 0\).
+    \end{enumerate}
+\end{corollary}
+\begin{example}
+    a function that its derivate is not continuous (with \(\sin\frac{1}{x}\)).
+\end{example}
+\begin{theorem}[Rolle's theorem] \label{Rolle}
+    Let \(f: [a,b] \to \mathbb{R}\) be a continuous and differentiable on the interval. If \(f(a) = 0, f(b) = 0\), then there exists \(c \in \; ]a,b[\) such that:
+    \[f'(c) = 0\]
+\end{theorem}
+\begin{proof}
+    If \(f \equiv 0\) on \([a,b]\) then its derivative \(f'(x) \equiv 0\) on \([a,b]\). If \(f(x) \neq 0\) for some \(x \in ]a,b[\) then it must have a non-zero maximum or minimum at some \(c \in ]a,b[\). Since \([a,b]\) is compact then by continuity of \(f\), \(f([a,b])\) is also compact in \(\mathbb{R}\) and therefore \(f\) attains its maximum or minimum. We know that at least one of its extremities must lie in \(]a,b[\), say point \(c\), hence by \Cref{extrma} \(f'(c) = 0\).
+\end{proof}
+\begin{theorem}[Mean value theorem]\label{MVT}
+    Let \(f: [a,b] \to \mathbb{R}\) be a continuous and differentiable on the interval,then there exists \(c \in \; ]a,b[\) such that:
+    \[f'(c) = \dfrac{f(b) - f(a)}{b - a}\]
+\end{theorem}
+\begin{proof}
+    Define \(g(x) = f(x)  - f(a) - \dfrac{f(b) - f(a)}{b-a}(x-a)\). Then it is clear that \(g(a) = g(b) = 0\) and \(g\) is continous and differentiable on the interval. Then by \Cref{Rolle} there exists \(c \in ]a,b[\) such that \(g'(c) = 0\). Equivalently:
+    \begin{align*}
+         & g'(c) = f'(c) -  \dfrac{f(b) - f(a)}{b-a} = 0 \\
+         & \implies f'(c) =  \dfrac{f(b) - f(a)}{b-a}
+    \end{align*}
+    which concludes the proof.
+\end{proof}
+\begin{corollary}[Growth Estimate]
+    If \(|f'(x)| \leq M \) in \(]a,b[\) then \(f\) satisfies the global lipschitz condition for all \(x,y \in [a,b]\) \(|f(x) - f(y) | \leq M |x-y|  \).
+\end{corollary}
+\begin{corollary}
+    Let \(f: [a,b] \to \mathbb{R}\) is continuous and \(f'(x) < 0\) (or \(f'(x) > 0\)) for all \(x \in ]a,b[\) then \(f\) is strictly increasing (or decreasing) on \([a,b]\).
+\end{corollary}
+\begin{theorem}
+    \(f: [a,b] \to \mathbb{R}\) is continuous and differentiable on \(]a,b[\) then for \(f'(]a,b[)\) the intermediate value theorem holds and thus it is an interval.
+\end{theorem}
+\begin{proof}
+    Let \(x_1, x_2 \in ]a,b[\ \). WLOG assume \(f'(x_1) < f'(x_2)\), we wish to prove that for all \(y^* \in ]f'(x_1), f'(x_2)[\) there is a \(x^* \in ]x_1,x_2[ \) such that \(f(x^*) = y^*\). Put \(g(x) = f(x) - y^*x\). By differentiability of \(f\) on \([a,b]\), \(g\) is differentiable on \([a,b]\). Then, \(g'(x_1) = f'(x_1) - y^* < 0\) and \(g'(x_2) =  f'(x_2) - y^* > 0\), therefore there are \(t_1,t_2 \in ]x_1,x_2[\) such that \(g(t_1) < g(x_1)\) and \(g(t_2) < g(x_2)\). Since \(g\) is continuous on \([x_1,x_2]\) then it must attains its minimum at some \(x^* \in [x_1,x_2]\). However \(x^* \) can't be \(x_1\) or \(x_2\) and hence \(x^* \in ]x_1,x_2[\). It is then easy to see that \(f'(x^*) = y^*\).
+\end{proof}
+\begin{definition}[Darboux continous]
+    A function \(f\) is Darboux continous if it posseses the intermediate value property.
+\end{definition}
+For example \(f'\) of differentiable function is Darboux continuous.
+\begin{theorem}[Cauchy's mean value theorem]
+    \(f,g : [a,b] \to \mathbb{R}\) are continuous then there exists a \(c \in \; ]a,b[\), such that:
+    \begin{equation*}
+        f'(c)(g(b) - g(a)) = g'(c)(f(b) - f(a))
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Define \(h(x) = (f(x) - f(a))(g(b) - g(a)) -  (g(x) - g(a))(f(b) - f(a))\), then clearly \(h(a) =0, h(b) =0\) and \(h(x)\) is continous and differentiable on \([a,b]\). Hence by applying the \cref{Rolle} for some \(c \in ]a,b[\) we have:
+    \begin{align*}
+         & h'(c)  = 0                                            \\
+         & \implies f'(c)(g(b) - g(a)) -  g'(c)(f(b) - f(a)) = 0 \\
+         & \implies  f'(c)(g(b) - g(a)) =  g'(c)(f(b) - f(a))
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[L'Hopital's rule]
+    Suppose that \(\lim_{x \to a^+}{f(x)} = 0,\lim_{x \to a^+}{g(x)} = 0 \) where \(f,g\) are differentiable on a open interval \(I = ]a,b[\) for some \(b\) such that \(g'(x) \neq 0\) in \(I\) except maybe at \(x = a\) and the limit
+    \begin{equation*}
+        \lim_{x \to a^+}{\dfrac{f'(x)}{g'(x)}} = L
+    \end{equation*}
+    exists, then:
+    \begin{equation*}
+        \lim_{x \to a^+}{\dfrac{f(x)}{g(x)}} = L
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    For a fixed \(\epsilon > 0\) there exists a \(\delta > 0\) such that:
+    \begin{equation*}
+        \abs{x - a} < \delta \implies \abs{\dfrac{f'(x)}{g'(x)} - L} < \dfrac{ \epsilon}{2}
+    \end{equation*}
+    then since \(f(t), g(t) \to 0\) as \(t \to a\) from right side then there must be a \(t \in ]a,x[\) such that
+    \begin{equation*}
+        \abs{\dfrac{f(x) - f(t)}{g(x) - g(t)} - \dfrac{f(x)}{g(x)}} < \dfrac{\epsilon}{2}
+    \end{equation*}
+    then simply:
+    \begin{align}
+        \abs{\dfrac{f(x)}{g(x)} - L} & \leq \abs{\dfrac{f(x)}{g(x)} - \dfrac{f(x) - f(t)}{g(x) - g(t)} } + \abs{\dfrac{f(x) - f(t)}{g(x) - g(t)} - L} \\
+                                     & < \dfrac{\epsilon}{2} + \abs{\dfrac{f'(\theta)}{g'(\theta)} - L}                                               \\
+                                     & < \epsilon
+    \end{align}
+    Note that \(\theta \in \; ]t,x[\) and thus \(\abs{\theta - a} < \delta \)
+\end{proof}
+\begin{definition}[Higher order derivatives]
+    \(f\) is said to be \(r_{\text{th}}\)-differentiable at \(x\) if it is differentiable \(r\) times. The \(r_{\text{th}}\) derivative of \(f\) is denoted as \(f^{(r)}\). If \(f^{(r)}\) exists for all \(r\) and \(x\) then \(f\) is said to be infinitely differentiable or smooth.
+\end{definition}
+\begin{definition}[Smoothness classes]
+    The set of all \(f\) is continuosly \(r_{\text{th}}\)-differentiable is called class \(\mathcal{C}^r\).
+\end{definition}
+\begin{definition}[Taylor polynomial]
+    The \(r_{\text{th}}\)-order Taylor polynomial of an \(r_{\text{th}}\)-order differentiable function \(f\) at \(x\) is
+    \begin{equation*}
+        P_r(x,h) =f(x) + f'(x)h +  \dfrac{f''(x)}{2}h^2 + \dots +  \dfrac{f^{(r)}(x)}{r!} h^r = \sum_{n = 0}^{r}\dfrac{f^{(n)}(x)}{n!} h^n
+    \end{equation*}
+\end{definition}
+\begin{theorem}[Taylor approximation theorem]
+    Let \(f\) be a \(r\)-differentiable function at \(x\) then:
+    \begin{enumerate}
+        \item
+              \begin{equation*}
+                  \dfrac{f(x+h) - P_r(x,h)}{h^r} \to 0 \text{ as } h \to 0
+              \end{equation*}
+        \item
+              and \(P_r\) is the only \(r_{\text{th}}\) degree polynomial that has such property.
+        \item
+              Furthermore, if \(f\) is \(r\)-differentiable on an interval \(I\) for every \(x,y \in I\), there exists \(\xi\) between \(x,y\) such that:
+              \begin{equation*}
+                  f(y) - P_{r-1}(x,y-x) = \dfrac{f^{(r)}(\xi )}{(r)!}(y-x)^{r}
+              \end{equation*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof} \leavevmode
+    \begin{enumerate}
+        \item
+              For the base case \(r = 1\)
+              \begin{align*}
+                  \lim\limits_{h \to 0}{\dfrac{f(x+h) - f(x) -f'(x)h}{h}} = f'(x) - f'(x) = 0
+              \end{align*}
+
+              and by induction we prove the case \(r = n \geq 2\)
+              \begin{align*}
+                   & \lim\limits_{h \to 0}{\dfrac{f(x+h) - P_n(x,h)}{h^n}} = 0                                                                      \\
+                   & \iff \forall \epsilon >0, \ \exists \delta > 0\ \text{such that } \ |h| < \delta \implies |f(x+h) - P_n(x,h)| < \epsilon |h^n|
+              \end{align*}
+
+              Let \(g(h) = f(x+h) - P_n(x,h)\) then since both \(f(x+h)\) and \(P_n(x,h)\) are differentiable then we apply \Cref{MVT}
+              \begin{align*}
+                  g(h) - g(0) & = g(h) = h(g'(c))                                                   \\
+                              & = h(f'(x+c) - \sum_{k = 1}^{n}{\dfrac{f^{(k)}(x)}{(k-1)!}c^{k-1}})  \\
+                              & =  h(f'(x+c) - \sum_{k = 0}^{n-1}{\dfrac{f^{(k+1)}(x)}{k!}c^{k}})   \\
+                              & =  h(f'(x+c) - \sum_{k = 0}^{n-1}{\dfrac{f^{'^{(k)}}(x)}{k!}c^{k}})
+              \end{align*}
+              for some \(c \in ]0,h[\). Note that \(f'\) is \((n-1)\)-differentiable at \(x\) thus by induction for any \(\epsilon > 0\) there exists a \(\delta\) such that if \(c < \delta \) then:
+              \begin{equation*}
+                  |f'(x+c) - \sum_{k = 0}^{n-1}{\dfrac{f^{'^{(k)}}(x)}{k!}c^{k}}| < \epsilon |c^{n-1}|
+              \end{equation*}
+
+              which means
+              \begin{align*}
+                  |f(x+h) - P_n(x,h)| & = |g(h)| = |h| |f'(x+c) - \sum_{k = 0}^{n-1}{\dfrac{f^{'^{(k)}}(x)}{k!}c^{k}}| \\
+                                      & < |h| \epsilon |c^{n-1}|< \epsilon |h^n|
+              \end{align*}
+
+              Therefore for any \(\epsilon\) if \(h < \delta\) then \(c < \delta\) and the result holds.
+        \item
+              Let \(Q_r(x,h)\) be another \(r_{\text{th}}\) degree polynomial such that
+              \begin{equation*}
+                  \lim\limits_{h \to 0}{\dfrac{f(x+h) -Q_r(x,h)}{h^r}} = 0
+              \end{equation*}
+
+              then
+              \begin{equation*}
+                  \lim\limits_{h \to 0}{\dfrac{P_r(x,h) -Q_r(x,h)}{h^r}} = 0
+              \end{equation*}
+
+              however this can only happen if \(Q_r(x,h) = P_r(x,h)\).
+        \item
+              Again for the base case \(r = 1\)
+              \begin{equation*}
+                  f(y) - f(x) = f'(\xi)(y-x)
+              \end{equation*}
+
+              which is the \Cref{MVT}. for \(r = n\) we have that
+              \begin{equation*}
+                  g(h) = f(x+h) - P_{n-1}(x,h) + Ch^n \implies g(0) = g'(0) = \dots = g^{(n-1)} =0
+              \end{equation*}
+              Set \(C\) such that \(g(y-x) = 0\). Then by applying \Cref{Rolle} \((n-1)\) times
+
+              \begin{flalign*}
+                  &&g(0) = g(y-x) = 0 &\implies g'(c_1) = 0 \quad c_1\in ]0,y-x[ &&\\
+                  &&g'(0) = g'(c_1) = 0& \implies g'(c_2) = 0 \quad c_2 \in ]0,c_0[ &&\\
+                  && &\vdots &&\\
+                  &&g^{(n-2)}(0) = g^{(n-2)}(c_{n-2}) = 0 &\implies g^{(n-1)}(c_{n-1}) = 0 \quad c_{n-1} \in ]0,c_{n-2}[&&\\
+                  &&g^{(n-1)}(0) = g^{(n-1)}(c_{n-1}) = 0 &\implies g^{(n)}(\xi - x) = 0 \quad \xi - x \in ]0,c_{n-1}[ \;\subset\; ]0,y-x[&&\\
+                  &&\implies  g^{(n)}(\xi - x) =  f^{(n)}(\xi) + Cn! &= f^{(n)}(\xi) - \dfrac{n!}{(y-x)^n}(f(y) - P_{n-1}(x,y-x) ) = 0 &&\\
+                  &&\implies f(y) - P_{n-1}(x,y-x)  &=  \dfrac{f^{(n)}(\xi)}{n!}(y-x)^n \qquad \xi \in ]x,y[&&
+              \end{flalign*}
+    \end{enumerate}
+    which completes the proof.
+\end{proof}
+
+\begin{theorem}[Inverse function]
+    Let \(I\) be an open set and \(f : I \to \mathbb{R}\) is continuous and differentiable such that its derivate is non-zero. Thus, \(f\) is either monotonic. Furthermore, it is one to one then it has a differentiable inverse \(f^{-1}\):
+    \[f^{-1}(x) = \dfrac{1}{f'(f^{-1}(x))}\]
+\end{theorem}
+\begin{proof}
+    limit algebra
+\end{proof}

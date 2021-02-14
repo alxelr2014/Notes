@@ -1,0 +1,88 @@
+\begin{enumerate}
+    \item \label{P1}
+          Let \(x,y \in \mathbb{R}, \ x < y\) and \(n \in \mathbb{N}\). Define \(\delta  := \frac{y - x}{n}\):
+          \begin{align}
+              \abs{f(x)  - f(y)} & \leq \sum_{i = 1}^{n}{\abs{f(x + i\delta) - f(x + (i-1)\delta)}} \\
+                                 & \leq \sum_{i = 1}^{n}{\abs{x + i\delta - (x + (i-1)\delta)}^2}   \\
+                                 & = n \delta^2 = \dfrac{(y -x)^2}{n}                               \\
+              \implies           & \abs{f(x) - f(y)} = 0,\qquad \forall x,y \in \mathbb{R}          \\
+              \implies           & f(x) \equiv c
+          \end{align}
+    \item \leavevmode
+          \begin{enumerate}
+              \item
+                    \(f(x)\) is uniformly continuous by letting \(\delta = \left(\frac{\epsilon}{H + 1}\right)^\frac{1}{\alpha}\). Since \(f(x)\) is continuous then for any sequence \(\{x_n\}\) such that \(x_n \to a\), \(\{f(x_n)\}\) is convergent. Let its limit to be \(L_a\). Define \(L_b\) similarly for \(b\). Then by the uniqueness of the limits
+                    \begin{equation}
+                        g(x) = \begin{cases}
+                            f(x) & a < x < b \\
+                            L_a  & x = a     \\
+                            L_b  & x = b
+                        \end{cases}
+                    \end{equation}
+                    is unique and continuous. WLOG we prove that:
+                    \begin{equation}
+                        \forall x \in [a,b] \ \abs{g(x) - g(a)} \leq 2H\abs{x - a}^\alpha
+                    \end{equation}
+                    let \(x_n \to a\) and fix \(\epsilon \leq H\abs{x - a}^\alpha\). Then for some \(n >= N_g\) we have:
+                    \begin{equation}
+                        \begin{cases}
+                            \abs{g(x_n)- g(a)} < \epsilon               \\
+                            x_n < x \implies \abs{x_n -a} < \abs{x - a} \\
+                        \end{cases}
+                    \end{equation}
+                    thus:
+                    \begin{align}
+                        \abs{g(a) - g(x)} & \leq \abs{g(a) - g(x_n)} + \abs{g(x_n) - g(x)}                       \\
+                                          & \leq \epsilon + H\abs{x_n - x}^\alpha                                \\
+                                          & \leq H\abs{x - a}^\alpha + H\abs{a-x}^\alpha = 2H \abs{x - a}^\alpha
+                    \end{align}
+              \item
+                    it means ur mama gay.
+              \item
+                    same as \cref{P1}.
+          \end{enumerate}
+    \item
+          \begin{enumerate}
+              \item use mean value theorem
+              \item increasing (not strict).
+          \end{enumerate}
+    \item conjugate / l'Hopital
+    \item true by MVT.
+          \begin{equation}
+              \lim_{x \to 0}{\dfrac{f(x) - f(0)}{x}} = \lim_{x \to 0}{f'(c_x)} = L
+          \end{equation}
+    \item [Old book 6.] because of the endpoint can be the minimum and thus they only need to smaller from the values to one side, not both.
+    \item l'Hopital proof
+    \item l'Hopital proof
+    \item \(f(x) = \sqrt{1 - x^2}\) - it seems to follow MVT
+    \item define \(g(x) = f(x) - x\) bound it by a linear function. Prove existence and then use monoticity to prove uniqueness.
+    \item no clue
+    \item By Taylor's theorem:
+          \begin{align}
+              \lim_{h \to 0}{\dfrac{f(x+h) - f(x) - f'(x)h - \dfrac{f''(x)}{2} h^2}{h^2}} & = 0
+              \\
+              \lim_{h \to 0}{\dfrac{f(x-h) - f(x) + f'(x)h - \dfrac{f''(x)}{2} h^2}{h^2}} & = 0
+              \\
+              \implies \lim_{h \to 0}{\dfrac{f(x+h)  -2 f(x) + f(x-h) - f''(x) h^2}{h^2}} & = 0
+          \end{align}
+          \(f(x) = x^2\sin{\dfrac{1}{x}}\)
+    \item for (i) and (ii) simply use the conditions to bound the following, also use the fact that limit exists ofcourse.
+          \begin{align}
+               & \abs{\dfrac{1}{\beta_n - \alpha_n}}\abs{f(\beta_n) - f(\alpha_n) - (\beta_n - \alpha_n)f'(0)}                                                                                               \\
+               & \leq \abs{\dfrac{1}{\beta_n - \alpha_n}}\abs{f(\beta_n) - f(0) - \beta_n f'(0)} + \abs{\dfrac{1}{\beta_n - \alpha_n}}\abs{ f(\alpha_n) - f(0) - \alpha_n f'(0)}                             \\
+               & = \abs{\dfrac{\beta_n}{\beta_n - \alpha_n}}\abs{\dfrac{f(\beta_n) - f(0)}{\beta_n} - f'(0)} + \abs{\dfrac{\alpha_n}{\beta_n - \alpha_n}}\abs{ \dfrac{f(\alpha_n) - f(0)}{\alpha_n} - f'(0)}
+          \end{align}
+          for (iii) use MVT and by continuity of derivative arrive at the desired result. for (b) do the work, no biggie :))
+    \item hint induction
+    \item \(f(x) = x^{r+1}\sin{\dfrac{1}{x}} \in \mathcal{C}^r\) but it not \(\mathcal{C}^{r+1}\)
+    \item \leavevmode
+          \begin{enumerate}
+              \item Clearly on the derivative at \(x = 0\) may fail to exist. We claim that \(\frac{d^n}{dx^n}\mathcal{E}(0) = 0\)
+              \item yes it is analytic.
+              \item the product of two smooth function is smooth. the rest is obvious
+          \end{enumerate}
+    \item \(L\) is closed then \(U = L^c\) is open in \(\mathbb{R}\). Therefore there are countable disjoint open intervals \(I_n\) such that \(U = \cup I_n\). Let \(I_i = ]a_i,b_i[\). Define:
+          \begin{equation}
+              \beta_L(x) = \sum_{i = 1}^{\infty}{e^2 \mathcal{E}(x -a_i) \mathcal{E}(b_i - x)}
+          \end{equation}
+\end{enumerate}

@@ -1,0 +1,61 @@
+\thispagestyle{headings}
+\chapter{Series}
+\begin{theorem}
+    A series \(s_n\) is convergent if and only if for each \(\epsilon > 0\) there exists a \(N \in \mathbb{N}\) such that:
+    \begin{equation*}
+        m,n \geq N \implies \abs{\sum_{i = n}{m}{a_m}} \leq \epsilon
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Obviously any convergent sequence is Cauchy. Furthermore, due to completeness of \(\mathbb{R}\) every Cauchy sequence is convergent.
+\end{proof}
+\begin{corollary}
+    The series \(s_n\) is convergent if \(a_n \to 0\).
+\end{corollary}
+\begin{theorem}	\leavevmode
+    \begin{enumerate}
+        \item
+              If \(|a_n| < b_n\) for all \(n > N\) for a sufficiently large \(N\) then convergence of \(\sum{b_n}\) implies the convergence \(\sum{a_n}\).
+        \item
+              If \(0 < b_n < a_n\) for all \(n > N\) for a sufficiently large \(N\) then divergence of \(\sum{b_n}\) implies the divergence \(\sum{a_n}\).
+    \end{enumerate}
+\end{theorem}
+\begin{corollary}
+    Absolute convergence implies convergence.
+\end{corollary}
+\begin{theorem}[Integral Test]
+    Consider the improper integral \(\int_{0}^{\infty}{f}\) and the series \(\sum_{i = 1}^{\infty}{a_k}\)
+    \begin{enumerate}
+        \item \(0 \leq a_k \leq f(x)\) for sufficiently large \(k\) and each \(x \in \; ]k-1, k]\), then the convergence of integral implies the convergence of the series.
+        \item Similarly if \(0 \leq f(x) \leq a_k\) for sufficiently large \(k\) and each \(x \in \; [k,k+1[\), then the divergence of integral implies the divergence of the series.
+    \end{enumerate}
+\end{theorem}
+\begin{definition}
+    The exponential growth rate of the series \(\sum{a_n}\)
+    \begin{equation*}
+        \alpha = \limsup_{k \to \infty}{\sqrt[k]{a_k}}
+    \end{equation*}
+\end{definition}
+\begin{theorem}[Root test]
+    If \(\alpha < 1\) the series is convergent and if \(\alpha > 1\) it is divergent. If \(\alpha = 1\) the test is inconclusive.
+\end{theorem}
+\begin{theorem}[Ratio test]
+    Let the ratio between successive terms of the series \(a_k\) be \({r_k = |\frac{a_{k+1}}{a_k}|}\)
+    \begin{equation*}
+        \rho = \limsup {r_k} \qquad \lambda  = \liminf{r_k}
+    \end{equation*}
+    If \(\rho < 1\) then the series converges, if \(\lambda > 1\)  then the series diverges, and otherwise the ratio test is inconclusive.
+\end{theorem}
+\begin{theorem}
+    Let \(a_1 \geq a_2 \geq \dots \geq 0\) be a decreasing non-negative sequence then the alternating series
+    \begin{equation}
+        \sum_{n = 1}^{\infty}{a_n (-1)^n}
+    \end{equation}
+    is convergent.
+\end{theorem}
+\begin{theorem}
+    Suppose \(\sum{c_k x^k}\) is a power series. Its radius of convergence \(R\) is unique and is such that for \(|x| < R\) the power series converges and for \(|x| > R\) diverges.
+    \begin{equation*}
+        R = \dfrac{1}{\limsup {\sqrt[k]{c_k}}}
+    \end{equation*}
+\end{theorem}

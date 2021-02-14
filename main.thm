@@ -1,0 +1,163 @@
+\contentsline {definition}{{Definition}{1}{Upper bound}}{2}{}%
+\contentsline {definition}{{Definition}{2}{The least upper bound}}{2}{}%
+\contentsline {theorem}{{Theorem}{1.{1}}{}}{2}{}%
+\contentsline {proof}{{Proof}{1}{}}{2}{}%
+\contentsline {results}{{Results}{1}{}}{3}{}%
+\contentsline {example}{{Example}{2.{1}}{}}{5}{}%
+\contentsline {example}{{Example}{2.{2}}{}}{6}{}%
+\contentsline {definition}{{Definition}{3}{}}{6}{}%
+\contentsline {definition}{{Definition}{4}{Open Set}}{6}{}%
+\contentsline {definition}{{Definition}{5}{Internal Point}}{6}{}%
+\contentsline {definition}{{Definition}{6}{Interior}}{6}{}%
+\contentsline {definition}{{Definition}{7}{Adherent Point}}{6}{}%
+\contentsline {definition}{{Definition}{8}{Limit Point}}{6}{}%
+\contentsline {note}{{Note}{1}{}}{6}{}%
+\contentsline {definition}{{Definition}{9}{Closed Set}}{6}{}%
+\contentsline {definition}{{Definition}{10}{Closure}}{6}{}%
+\contentsline {note}{{Note}{2}{}}{6}{}%
+\contentsline {theorem}{{Theorem}{2.{1}}{}}{6}{}%
+\contentsline {proof}{{Proof}{2}{}}{6}{}%
+\contentsline {corollary}{{Corollary}{2.{2}}{}}{7}{}%
+\contentsline {remark}{{Remark}{1}{}}{7}{}%
+\contentsline {prooflemma}{{Proof}{1}{}}{7}{}%
+\contentsline {corollary}{{Corollary}{2.{3}}{}}{7}{}%
+\contentsline {proof}{{Proof}{3}{}}{7}{}%
+\contentsline {theorem}{{Theorem}{2.{4}}{}}{8}{}%
+\contentsline {proof}{{Proof}{4}{}}{8}{}%
+\contentsline {definition}{{Definition}{11}{Subsequence}}{8}{}%
+\contentsline {proposition}{{Proposition}{2.{5}}{}}{9}{}%
+\contentsline {lemma}{{Lemma}{2.{6}}{}}{9}{}%
+\contentsline {prooflemma}{{Proof}{2}{}}{9}{}%
+\contentsline {lemma}{{Lemma}{2.{7}}{}}{9}{}%
+\contentsline {prooflemma}{{Proof}{3}{}}{9}{}%
+\contentsline {proof}{{Proof}{5}{}}{9}{}%
+\contentsline {theorem}{{Theorem}{2.{8}}{}}{11}{}%
+\contentsline {proof}{{Proof}{6}{}}{11}{}%
+\contentsline {definition}{{Definition}{12}{Continuity}}{12}{}%
+\contentsline {proposition}{{Proposition}{2.{9}}{}}{12}{}%
+\contentsline {proof}{{Proof}{7}{}}{12}{}%
+\contentsline {theorem}{{Theorem}{2.{10}}{\(\epsilon -\delta \) condition}}{12}{}%
+\contentsline {proof}{{Proof}{8}{}}{12}{}%
+\contentsline {example}{{Example}{2.{3}}{}}{12}{}%
+\contentsline {theorem}{{Theorem}{2.{11}}{}}{12}{}%
+\contentsline {proof}{{Proof}{9}{}}{13}{}%
+\contentsline {corollary}{{Corollary}{2.{12}}{}}{14}{}%
+\contentsline {proof}{{Proof}{10}{}}{14}{}%
+\contentsline {theorem}{{Theorem}{2.{13}}{}}{14}{}%
+\contentsline {proof}{{Proof}{11}{}}{14}{}%
+\contentsline {proposition}{{Proposition}{2.{14}}{}}{14}{}%
+\contentsline {proof}{{Proof}{12}{}}{14}{}%
+\contentsline {corollary}{{Corollary}{2.{15}}{}}{14}{}%
+\contentsline {note}{{Note}{3}{}}{14}{}%
+\contentsline {proposition}{{Proposition}{2.{16}}{}}{14}{}%
+\contentsline {corollary}{{Corollary}{2.{17}}{}}{14}{}%
+\contentsline {proof}{{Proof}{13}{}}{15}{}%
+\contentsline {theorem}{{Theorem}{2.{18}}{}}{15}{}%
+\contentsline {proof}{{Proof}{14}{}}{15}{}%
+\contentsline {corollary}{{Corollary}{2.{19}}{}}{15}{}%
+\contentsline {note}{{Note}{4}{}}{15}{}%
+\contentsline {definition}{{Definition}{13}{Uniform continuity}}{15}{}%
+\contentsline {proposition}{{Proposition}{2.{20}}{}}{15}{}%
+\contentsline {proof}{{Proof}{15}{}}{15}{}%
+\contentsline {proposition}{{Proposition}{2.{21}}{}}{15}{}%
+\contentsline {proof}{{Proof}{16}{}}{15}{}%
+\contentsline {proposition}{{Proposition}{2.{22}}{}}{16}{}%
+\contentsline {proof}{{Proof}{17}{}}{16}{}%
+\contentsline {definition}{{Definition}{14}{}}{17}{}%
+\contentsline {example}{{Example}{2.{4}}{}}{17}{}%
+\contentsline {definition}{{Definition}{15}{}}{17}{}%
+\contentsline {example}{{Example}{2.{5}}{}}{17}{}%
+\contentsline {theorem}{{Theorem}{2.{23}}{}}{17}{}%
+\contentsline {corollary}{{Corollary}{2.{24}}{Mean value theorem}}{17}{}%
+\contentsline {proposition}{{Proposition}{2.{25}}{}}{17}{}%
+\contentsline {definition}{{Definition}{16}{}}{17}{}%
+\contentsline {theorem}{{Theorem}{2.{26}}{}}{17}{}%
+\contentsline {example}{{Example}{2.{6}}{}}{17}{}%
+\contentsline {proposition}{{Proposition}{2.{27}}{}}{17}{}%
+\contentsline {definition}{{Definition}{17}{Path connected}}{17}{}%
+\contentsline {theorem}{{Theorem}{2.{28}}{}}{17}{}%
+\contentsline {example}{{Example}{2.{7}}{}}{17}{}%
+\contentsline {proposition}{{Proposition}{2.{29}}{}}{17}{}%
+\contentsline {proposition}{{Proposition}{2.{30}}{}}{17}{}%
+\contentsline {definition}{{Definition}{18}{Covering}}{18}{}%
+\contentsline {definition}{{Definition}{19}{Sub covering}}{18}{}%
+\contentsline {example}{{Example}{2.{8}}{}}{18}{}%
+\contentsline {theorem}{{Theorem}{2.{31}}{}}{18}{}%
+\contentsline {proof}{{Proof}{18}{}}{18}{}%
+\contentsline {definition}{{Definition}{20}{}}{18}{}%
+\contentsline {example}{{Example}{2.{9}}{}}{18}{}%
+\contentsline {definition}{{Definition}{21}{}}{19}{}%
+\contentsline {definition}{{Definition}{22}{Perfect space}}{19}{}%
+\contentsline {proposition}{{Proposition}{2.{32}}{}}{19}{}%
+\contentsline {definition}{{Definition}{23}{}}{19}{}%
+\contentsline {proposition}{{Proposition}{2.{33}}{}}{19}{}%
+\contentsline {theorem}{{Theorem}{2.{34}}{}}{19}{}%
+\contentsline {definition}{{Definition}{24}{}}{21}{}%
+\contentsline {corollary}{{Corollary}{3.{1}}{}}{21}{}%
+\contentsline {example}{{Example}{3.{1}}{}}{21}{}%
+\contentsline {theorem}{{Theorem}{3.{2}}{Rolle's theorem}}{21}{}%
+\contentsline {proof}{{Proof}{19}{}}{21}{}%
+\contentsline {theorem}{{Theorem}{3.{3}}{Mean value theorem}}{22}{}%
+\contentsline {proof}{{Proof}{20}{}}{22}{}%
+\contentsline {corollary}{{Corollary}{3.{4}}{Growth Estimate}}{22}{}%
+\contentsline {corollary}{{Corollary}{3.{5}}{}}{22}{}%
+\contentsline {theorem}{{Theorem}{3.{6}}{}}{22}{}%
+\contentsline {proof}{{Proof}{21}{}}{22}{}%
+\contentsline {definition}{{Definition}{25}{Darboux continous}}{22}{}%
+\contentsline {theorem}{{Theorem}{3.{7}}{Cauchy's mean value theorem}}{22}{}%
+\contentsline {proof}{{Proof}{22}{}}{22}{}%
+\contentsline {theorem}{{Theorem}{3.{8}}{L'Hopital's rule}}{23}{}%
+\contentsline {proof}{{Proof}{23}{}}{23}{}%
+\contentsline {definition}{{Definition}{26}{Higher order derivatives}}{23}{}%
+\contentsline {definition}{{Definition}{27}{Smoothness classes}}{23}{}%
+\contentsline {definition}{{Definition}{28}{Taylor polynomial}}{23}{}%
+\contentsline {theorem}{{Theorem}{3.{9}}{Taylor approximation theorem}}{23}{}%
+\contentsline {proof}{{Proof}{24}{}}{24}{}%
+\contentsline {theorem}{{Theorem}{3.{10}}{Inverse function}}{25}{}%
+\contentsline {proof}{{Proof}{25}{}}{25}{}%
+\contentsline {definition}{{Definition}{29}{Partition}}{27}{}%
+\contentsline {definition}{{Definition}{30}{Riemann Integrability}}{27}{}%
+\contentsline {theorem}{{Theorem}{4.{1}}{}}{27}{}%
+\contentsline {proof}{{Proof}{26}{}}{27}{}%
+\contentsline {corollary}{{Corollary}{4.{2}}{}}{27}{}%
+\contentsline {definition}{{Definition}{31}{Commen refinement}}{28}{}%
+\contentsline {definition}{{Definition}{32}{Darboux Integral}}{28}{}%
+\contentsline {theorem}{{Theorem}{4.{3}}{}}{28}{}%
+\contentsline {proof}{{Proof}{27}{}}{28}{}%
+\contentsline {definition}{{Definition}{33}{Zero set}}{29}{}%
+\contentsline {proposition}{{Proposition}{4.{4}}{}}{30}{}%
+\contentsline {definition}{{Definition}{34}{Oscillation}}{30}{}%
+\contentsline {proposition}{{Proposition}{4.{5}}{}}{30}{}%
+\contentsline {theorem}{{Theorem}{4.{6}}{Riemann-Lebesgue theorem}}{30}{}%
+\contentsline {proof}{{Proof}{28}{}}{30}{}%
+\contentsline {corollary}{{Corollary}{4.{7}}{}}{31}{}%
+\contentsline {prooflemma}{{Proof}{4}{}}{31}{}%
+\contentsline {theorem}{{Theorem}{4.{8}}{Fundamental theorem of calculus}}{31}{}%
+\contentsline {definition}{{Definition}{35}{}}{31}{}%
+\contentsline {corollary}{{Corollary}{4.{9}}{}}{31}{}%
+\contentsline {theorem}{{Theorem}{4.{10}}{}}{31}{}%
+\contentsline {theorem}{{Theorem}{5.{1}}{}}{33}{}%
+\contentsline {proof}{{Proof}{29}{}}{33}{}%
+\contentsline {corollary}{{Corollary}{5.{2}}{}}{33}{}%
+\contentsline {theorem}{{Theorem}{5.{3}}{}}{33}{}%
+\contentsline {corollary}{{Corollary}{5.{4}}{}}{33}{}%
+\contentsline {theorem}{{Theorem}{5.{5}}{Integral Test}}{33}{}%
+\contentsline {definition}{{Definition}{36}{}}{33}{}%
+\contentsline {theorem}{{Theorem}{5.{6}}{Root test}}{33}{}%
+\contentsline {theorem}{{Theorem}{5.{7}}{Ratio test}}{33}{}%
+\contentsline {theorem}{{Theorem}{5.{8}}{}}{34}{}%
+\contentsline {theorem}{{Theorem}{5.{9}}{}}{34}{}%
+\contentsline {definition}{{Definition}{37}{Point Convergence}}{35}{}%
+\contentsline {definition}{{Definition}{38}{Uniform Convergence}}{35}{}%
+\contentsline {corollary}{{Corollary}{6.{1}}{}}{35}{}%
+\contentsline {theorem}{{Theorem}{6.{2}}{}}{35}{}%
+\contentsline {definition}{{Definition}{39}{}}{35}{}%
+\contentsline {definition}{{Definition}{40}{}}{35}{}%
+\contentsline {theorem}{{Theorem}{6.{3}}{}}{35}{}%
+\contentsline {lemma}{{Lemma}{6.{4}}{}}{35}{}%
+\contentsline {proposition}{{Proposition}{6.{5}}{}}{35}{}%
+\contentsline {definition}{{Definition}{41}{}}{35}{}%
+\contentsline {theorem}{{Theorem}{6.{6}}{}}{35}{}%
+\contentsline {proposition}{{Proposition}{6.{7}}{}}{35}{}%
+\contentsline {definition}{{Definition}{42}{Wierstrass M test}}{36}{}%
+\contentsline {theorem}{{Theorem}{6.{8}}{}}{36}{}%
