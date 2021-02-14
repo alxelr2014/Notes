@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  14 FEB 2021 17:38
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  15 FEB 2021 00:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -186,7 +186,10 @@ Package: enumitem 2019/06/20 v3.9 Customized lists
 \enitdp@description=\count266
 ) (c:/texlive/texmf-local/tex/latex/local/common/common.sty
 Package: common 
-) (c:/texlive/texmf-local/tex/latex/local/english-theorems/english-theorems.sty
+ (c:/texlive/2020/texmf-dist/tex/latex/bbold/bbold.sty
+Package: bbold 1994/04/06 Bbold symbol package
+LaTeX Font Info:    Redeclaring math alphabet \mathbb on input line 42.
+)) (c:/texlive/texmf-local/tex/latex/local/english-theorems/english-theorems.sty
 Package: english-theorems 
  (c:/texlive/2020/texmf-dist/tex/latex/ntheorem/ntheorem.sty
 Style `ntheorem', Version 1.33 <2011/08/15>
@@ -435,12 +438,13 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
  [1
 
 
-] (./RealNumbers.tex [2
+] (./Chapters/RealNumbers.tex [2
 
 
 ]
 Chapter 1.
-[3] [4] [5]) (./MetricSpaces.tex [6]
+LaTeX Font Info:    Trying to load font information for U+bbold on input line 11.
+(c:/texlive/2020/texmf-dist/tex/latex/bbold/Ubbold.fd) [3] [4] [5]) (./Chapters/MetricSpaces.tex [6]
 Chapter 2.
 [7
 
@@ -454,7 +458,7 @@ LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
 (Font)              Font shape `U/lasy/m/n' tried instead on input line 285.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
 (Font)              Font shape `U/lasy/m/n' tried instead on input line 285.
- [14] [15] [16] [17] [18] [19] [20]) (./Differentiation.tex [21] [22
+ [14] [15] [16] [17] [18] [19] [20]) (./Chapters/Differentiation.tex [21] [22
 
 ]
 Chapter 3.
@@ -463,19 +467,19 @@ Overfull \hbox (2.49733pt too wide) detected at line 196
 []
  []
 
-) (./Integral.tex [27] [28
+) (./Chapters/Integral.tex [27] [28
 
 ]
 Chapter 4.
-[29] [30] [31] [32]) (./Series.tex [33] [34
+[29] [30] [31] [32]) (./Chapters/Series.tex [33] [34
 
 ]
 Chapter 5.
-[35]) (./FunctionSpaces.tex [36]
+[35]) (./Chapters/FunctionSpaces.tex [36]
 Chapter 6.
 
-Overfull \hbox (23.02748pt too wide) in paragraph at lines 20--21
-[]$\OMS/cmsy/m/n/12 C[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 X; \U/msb/m/n/12 R\OT1/cmr/m/n/12 ) :$ \TU/lmr/m/n/12 all continuous function from $\OML/cmm/m/it/12 X$ \TU/lmr/m/n/12 to $\U/msb/m/n/12 R$\TU/lmr/m/n/12 . $\OML/cmm/m/it/12 d\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f; g\OT1/cmr/m/n/12 ) = [] []$ 
+Overfull \hbox (20.70784pt too wide) in paragraph at lines 20--21
+[]$\OMS/cmsy/m/n/12 C[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 X; \U/bbold/m/n/12 R\OT1/cmr/m/n/12 ) :$ \TU/lmr/m/n/12 all continuous function from $\OML/cmm/m/it/12 X$ \TU/lmr/m/n/12 to $\U/bbold/m/n/12 R$\TU/lmr/m/n/12 . $\OML/cmm/m/it/12 d\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f; g\OT1/cmr/m/n/12 ) = [] []$ 
  []
 
 [37
@@ -486,12 +490,12 @@ Overfull \hbox (23.02748pt too wide) in paragraph at lines 20--21
 
  [38] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 7083 strings out of 477454
- 116152 string characters out of 5840441
- 445775 words of memory out of 5000000
- 26448 multiletter control sequences out of 15000+600000
- 545955 words of font info for 88 fonts, out of 8000000 for 9000
+ 7117 strings out of 477454
+ 116932 string characters out of 5840441
+ 445995 words of memory out of 5000000
+ 26468 multiletter control sequences out of 15000+600000
+ 547068 words of font info for 94 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 71i,13n,74p,828b,574s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,13n,74p,837b,574s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (38 pages, 423508 bytes).
+Output written on main.xdv (38 pages, 423564 bytes).

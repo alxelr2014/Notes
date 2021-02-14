@@ -62,12 +62,12 @@ Note that, if the least upper bound exists, it must be unique.
     We define \(+\), \(\cdot\), and \( > \) as follows:
     \begin{flalign*}
         A + B &= \{ a + b : a \in A, b\in B\} &&\\
-        \mathbb{0} &= \{ a : a < 0\}&& \\
+        \DSZero &= \{ a : a < 0\}&& \\
         -A &= \{a' : \forall a \in A, a' < -a \}&&
         \intertext{For \(\cdot\), we first take two set \(A\) and \(B\) that have some positive elements.}
-        A \cdot B &= \{ a \cdot b : a \in A \land a \leq 0, b\in B \land b \leq 0 \} \: \cup \: \mathbb{0}&&\\
+        A \cdot B &= \{ a \cdot b : a \in A \land a \leq 0, b\in B \land b \leq 0 \} \: \cup \: \DSZero &&\\
         \intertext{If \(A\) or \(B\) did not have any positive elements, we first take the negative of the set, and then multiply the two sets and take the negative of the product. Similarly, we define the reciprocal of \(A\) if \(A\) has a positive element.}
-        \mathbb{1} &= \{a : a < 1\}&&\\
+        \DSOne &= \{a : a < 1\}&&\\
         A^{-1} &= \{ a' :\forall a \in A, a > 0, a' < \dfrac{1}{a} \} &&
         \intertext{Lastly:}
         A &> B \text{ if } A \supset B &&
