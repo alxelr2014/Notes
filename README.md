@@ -1,4 +1,4 @@
-# Data Structures and Algorithms
+# Discrete Mathematics
 
 As tought by _prof. Abam_ in 21-22 Spring semester at **Sharif University of Technology**.
 
