@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  16 FEB 2021 11:57
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  19 FEB 2021 13:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -443,18 +443,18 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 
 ]
 Chapter 1.
-)
+[3])
 \tf@thm=\write4
 \openout4 = `main.thm'.
 
- [3] (./main.aux) ) 
+ [4] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 6999 strings out of 477454
- 114886 string characters out of 5840441
- 426073 words of memory out of 5000000
- 26395 multiletter control sequences out of 15000+600000
- 540123 words of font info for 59 fonts, out of 8000000 for 9000
+ 6998 strings out of 477454
+ 114806 string characters out of 5840441
+ 436079 words of memory out of 5000000
+ 26396 multiletter control sequences out of 15000+600000
+ 540107 words of font info for 57 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 71i,11n,74p,293b,284s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,11n,74p,581b,325s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (3 pages, 4584 bytes).
+Output written on main.xdv (4 pages, 16912 bytes).

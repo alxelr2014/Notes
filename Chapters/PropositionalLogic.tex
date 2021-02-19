@@ -1,7 +1,60 @@
 \chapter{Propositional Logic}
 \thispagestyle{headings}
+A logical \textbf{proposition} is a statement that is either true or false.
 \section{Operators}
-\subsection{Not Operator}
-\subsection{Conjunction}
-Conjunction and not are universal.
-\subsection{Disjunction }
+\begin{definition} [Negation]
+Let \(p\) be a proposition, then its negation \(\neg p\), read as ``not \(p\)'', has the opposite truth value of \(p\).
+\begin{center}
+    \begin{tabular}[c]{c | c}
+        \(p\) & \(\neg p\) \\ \hline
+        T     & F          \\
+        F     & T
+    \end{tabular}
+\end{center}
+\end {definition}
+
+\begin{definition}[Conjunction]
+    Let \(p\) and \(q\) be two propositions, then their conjunction \(p \land q\), read as ``\(p\) and \(q\)'', is true only when both \(p\) and \(q\) are true, it is false otherwise.
+    \begin{center}
+        \begin{tabular}[c]{c  c | c}
+            \(p\) & \(q\) & \(p \land q\) \\ \hline
+            F     & F     & F             \\
+            F     & T     & F             \\
+            T     & F     & F             \\
+            T     & T     & T             \\
+        \end{tabular}
+    \end{center}
+\end{definition}
+
+Conjunction and not operators are \textbf{universal}, also called \textbf{functionally complete}, in the sense that every boolean function \(f: B^n \to B\) can be generated with these two operators. Note that, every boolean function \(f : B^n \to B\) for \(n \geq 2\) can be generated with binary boolean functions thus, it only suffice to show that every binary and unary boolean function can be generated with \(\{\land, \neg\}\).
+
+
+\begin{definition}[Disjunction]
+    Let \(p\) and \(q\) be two propositions, then their disjunction \(p \lor q\), read as ``\(p\) or \(q\)'', is false only when both \(p\) and \(q\) are false, and true otherwise.
+    \begin{center}
+        \begin{tabular}[c]{c  c | c}
+            \(p\) & \(q\) & \(p \lor q\) \\ \hline
+            F     & F     & F            \\
+            F     & T     & T            \\
+            T     & F     & T            \\
+            T     & T     & T            \\
+        \end{tabular}
+    \end{center}
+\end{definition}
+
+Similary, \(\{\lor, \neg\}\) is functionally complete.
+
+\begin{definition}[Exclusive or]
+    Let \(p\) and \(q\) be two propositions, then their exclusive or \(p \xor q\), read as ``\(p\) xor \(q\)'', is true only when exactly one the \(p\) or \(q\) is true, it is false otherwise.
+    \begin{center}
+        \begin{tabular}[c]{c  c | c}
+            \(p\) & \(q\) & \(p \xor q\) \\ \hline
+            F     & F     & F            \\
+            F     & T     & T            \\
+            T     & F     & T            \\
+            T     & T     & F            \\
+        \end{tabular}
+    \end{center}
+\end{definition}
+
+Curiously, \(\{\xor, \neg\}\) is not universal.
