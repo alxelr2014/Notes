@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  15 FEB 2021 00:58
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  21 FEB 2021 20:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/emadz/Desktop/School/Books/Semester III/Analysis I/Notes/main.tex"
-(c:/Users/emadz/Desktop/School/Books/Semester III/Analysis I/Notes/main.tex
+**"c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex"
+(c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex
 LaTeX2e <2020-10-01> patch level 2
 L3 programming layer <2020-10-05> xparse <2020-03-03> (c:/texlive/2020/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2020/04/10 v1.4m Standard LaTeX document class
@@ -438,64 +438,24 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
  [1
 
 
-] (./Chapters/RealNumbers.tex [2
+] (./Chapters/Multivariable.tex [2
 
 
 ]
 Chapter 1.
-LaTeX Font Info:    Trying to load font information for U+bbold on input line 11.
-(c:/texlive/2020/texmf-dist/tex/latex/bbold/Ubbold.fd) [3] [4] [5]) (./Chapters/MetricSpaces.tex [6]
-Chapter 2.
-[7
-
-] [8] [9]
-Overfull \hbox (2.0439pt too wide) in paragraph at lines 150--151
-\TU/lmr/m/n/12 Let $[]$ be a metric space. A \TU/lmr/bx/n/12 sequence \TU/lmr/m/n/12 is a function in form of $[]$
- []
-
-[10] [11] [12] [13]
-LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 285.
-LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 285.
- [14] [15] [16] [17] [18] [19] [20]) (./Chapters/Differentiation.tex [21] [22
-
-]
-Chapter 3.
-[23] [24] [25] [26]
-Overfull \hbox (2.49733pt too wide) detected at line 196
-[]
- []
-
-) (./Chapters/Integral.tex [27] [28
-
-]
-Chapter 4.
-[29] [30] [31] [32]) (./Chapters/Series.tex [33] [34
-
-]
-Chapter 5.
-[35]) (./Chapters/FunctionSpaces.tex [36]
-Chapter 6.
-
-Overfull \hbox (20.70784pt too wide) in paragraph at lines 20--21
-[]$\OMS/cmsy/m/n/12 C[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 X; \U/bbold/m/n/12 R\OT1/cmr/m/n/12 ) :$ \TU/lmr/m/n/12 all continuous function from $\OML/cmm/m/it/12 X$ \TU/lmr/m/n/12 to $\U/bbold/m/n/12 R$\TU/lmr/m/n/12 . $\OML/cmm/m/it/12 d\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f; g\OT1/cmr/m/n/12 ) = [] []$ 
- []
-
-[37
-
-])
+LaTeX Font Info:    Trying to load font information for U+bbold on input line 7.
+(c:/texlive/2020/texmf-dist/tex/latex/bbold/Ubbold.fd))
 \tf@thm=\write4
 \openout4 = `main.thm'.
 
- [38] (./main.aux) ) 
+ [3] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 7117 strings out of 477454
- 116932 string characters out of 5840441
- 445995 words of memory out of 5000000
- 26468 multiletter control sequences out of 15000+600000
- 547068 words of font info for 94 fonts, out of 8000000 for 9000
+ 7017 strings out of 477454
+ 115158 string characters out of 5840441
+ 427107 words of memory out of 5000000
+ 26406 multiletter control sequences out of 15000+600000
+ 540666 words of font info for 61 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 71i,13n,74p,837b,574s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,11n,74p,332b,284s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (38 pages, 423564 bytes).
+Output written on main.xdv (3 pages, 6608 bytes).
