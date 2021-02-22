@@ -2,11 +2,70 @@
 \thispagestyle{headings}
 \section{Linear Algebra}
 
+\begin{definition}[Normed vector space]
+    Let \(V\) be a vector space. A \textbf{norm} is a real valued function \(\norm: V \to \Reals\) which has the following properties
+    \begin{enumerate}
+        \item \(\forall x \in V, \; \norm[x] > 0\).
+        \item \(\norm[x] = 0 \implies x = 0\).
+        \item \(\forall x \in V \; \forall \alpha \in \Field, \; \norm[\alpha x] = \abs[\alpha] \norm[x]\).
+        \item \(\forall x,y \in V \; \norm[x+y] \leq \norm[x] + \norm[y]\).
+    \end{enumerate}
+\end{definition}
+
+Each normed vector space induces a metric space \(\metricSpace{V}{d}\) where \(\func{d}{x,y} = \norm[y - x]\).
+
+\begin{definition}
+    Assume \(V\) is a vector space and let \(\norm_1, \; \norm_2\) be two norms for \(V\). They are said to be equivalent when
+    \begin{equation*}
+        \exists c_1,c_2 > 0 \; \forall x : \qquad c_1 \norm[x]_1 \leq \norm[x]_2 \leq c_2 \norm[x]
+    \end{equation*}
+\end{definition}
+
+To check if the above definition is indeed an equivalence relation, we must show that following:
+\begin{description}
+    \item [Reflexive] \(\norm_1 \sim \norm_1\).
+    \item [Symmetric] \(\norm_1 \sim \norm_2 \implies \norm_2 \sim \norm_1\).
+    \item [Transitive] \( \norm_1 \sim \norm_2 , \; \norm_2 \sim \norm_3 \implies \norm_1 \sim \norm_3\).
+\end{description}
+
+\begin{theorem}
+    All norms defined on a finite dimensional vector spacev \(V\) are equivalent.
+\end{theorem}
+
+
+
+\begin{proof}
+    Let \(\norm\) be an arbitrary norm on \(V\) and \(\{e_1, e_2, \dots , e_n\} \) be a basis of \(V\). Let \(\norm_2\) be \(L_2\)-norm (Euclidean norm). It will suffice to show \(\norm \sim \norm_2\). Let
+    \begin{equation*}
+        M = \max \! \left( \norm[e_1], \dots , \norm[e_n] \right)
+    \end{equation*}
+    Take \(x \in V\), writing \(x = \sum_{i = 1}^n {\xi_i e_i}\) we have:
+    \begin{equation*}
+        \norm[x] = \norm[\sum_{i = i}^n {\xi_i e_i}] \leq \sum_{i = 1}^n \abs{\xi_i} \norm[e_i] \leq M \sqrt{n} \norm[x]_2
+    \end{equation*}
+    Taking \(c_2 = M \sqrt{n}\) proves the right inequality. For the left inequality we need the following lemma
+    \begin{lemma} \label{lm:ContinuityOfNorm}
+        If \(V\) is a normed vector space with \(\norm_2\), as defined above, is viewed as metric space \(\metricSpace{V}{\norm_2}\) then \(\norm : V \to \Reals\) is continuous.
+    \end{lemma}
+
+    \begin{prooflemma}
+        Let \(x_0 \in V\) and \(M\) be defined as above. For any \(\epsilon > 0\) consider \(\delta = \frac{\epsilon}{M \sqrt{n}}\) then if \(\norm[x - x_0]_2 < \delta\)
+        \begin{equation*}
+            \abs[\norm[x] - \norm{x_0}] \leq \norm[x - x_0] \leq M \sqrt{n} \norm[x - x_0] \leq \epsilon
+        \end{equation*}
+    \end{prooflemma}
+
+    Now consider the sphere of radius \(r = 1\) centered at \(0\), \(\func{S_1}{0} = S_1 = \{x \in V : \norm[x]_2 = 1\}\). One can show that \(S\) is compact. Therefore, \(\norm[x]\) assumes its minimum on \(S\). Let \( a = \norm[x_0]\) be the minimum. Since \(0 \notin S\) then \(a > 0\). By letting \(y = x / \norm[x]_2 \), we have \(y \in S\) and thus \(a \leq \norm[y]\) which is
+    \begin{equation*}
+        a \norm[x]_2 \leq \norm[x]
+    \end{equation*}
+    Taking \(c_1 = a\) proves the theorem.
+\end{proof}
 
 \begin{theorem}
     Let \(f : \Reals^n \to \Reals^n\) linear transformation is invertible if and only if there exists a \(c\) such that:
     \begin{equation*}
-        c \norm{x} \leq \norm{\func{f}{x}}
+        c \norm[x] \leq \norm[\func{f}{x}]
     \end{equation*}
 \end{theorem}
 
