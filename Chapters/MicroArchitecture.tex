@@ -1,0 +1,35 @@
+\chapter{Micro-Architecture}
+Basic blocks of a Micro-Architecture:
+\begin{description}
+    \item [Cache] A high-speed unit to keep code and data.
+          \begin{description}
+              \item [ICache] holds instructions.
+              \item [DCache] holde data.
+          \end{description}
+    \item [IFU] A unit to fetch instruction from cache.
+    \item [IDU] A unit to decode instruction after fetch.'
+    \item [EU] A unit to execute instruction:
+          \begin{description}
+              \item [ALU] for arithmetic and logic.
+              \item [Branch Unit] for branching instruction.
+              \item [L/S Unit] for loading and saving instruction
+          \end{description}
+    \item [Register File] A unit to save temporary results.
+    \item [Program Counter] A unit to locate next instruction.
+    \item [Control Unit] A unit to schedule all data movement.
+\end{description}
+
+\section{Standard Benchmarks}
+\subsection{Performance Metrics}
+\textbf{Latency} is the time between start and finish of a single task. The number of taks finished in a give unit of time \textbf{Throughput}.
+\textbf{Response time} is the total time to complete a task, also called.
+Response time consistes of
+\begin{enumerate}
+    \item CPU time
+          \begin{enumerate}
+              \item User CPU time
+              \item System CPU time: time spent in OS doing tasks on behalf of a program.
+          \end{enumerate}
+    \item I/O time
+\end{enumerate}
+Then \textbf{System Performance} is the inverse time elapsed and \textbf{CPU performance} is the inverse user CPU time. From user perespective response time is more important and from system admin perespective throughput is more important.
