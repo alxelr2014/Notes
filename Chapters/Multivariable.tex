@@ -1,6 +1,7 @@
 \chapter{Multivariable Calculus}
 \thispagestyle{headings}
 \section{Linear Algebra}
+\subsection{Vector Spaces}
 
 \begin{definition}[Normed vector space]
     Let \(V\) be a vector space. A \textbf{norm} is a real valued function \(\norm: V \to \Reals\) which has the following properties
@@ -13,6 +14,15 @@
 \end{definition}
 
 Each normed vector space induces a metric space \(\metricSpace{V}{d}\) where \(\func{d}{x,y} = \norm[y - x]\).
+
+\begin{theorem}
+    In every normed space \(\normedSpace{V}{\norm}\) we have
+    \begin{equation*}
+        \abs[ {\norm[v] - \norm[w]}] \leq \norm[v - w]
+    \end{equation*}
+    Hence the norm is Lipschitz continuous.
+\end{theorem}
+
 
 \begin{definition}
     Assume \(V\) is a vector space and let \(\norm_1, \; \norm_2\) be two norms for \(V\). They are said to be equivalent when
@@ -28,11 +38,13 @@ To check if the above definition is indeed an equivalence relation, we must show
     \item [Transitive] \( \norm_1 \sim \norm_2 , \; \norm_2 \sim \norm_3 \implies \norm_1 \sim \norm_3\).
 \end{description}
 
+\begin{remark}
+    Equivalent norms induce equivalent metrics, hence they induce the same topology.
+\end{remark}
+
 \begin{theorem}
-    All norms defined on a finite dimensional vector spacev \(V\) are equivalent.
+    All norms defined on a finite dimensional vector space \(V\) are equivalent.
 \end{theorem}
-
-
 
 \begin{proof}
     Let \(\norm\) be an arbitrary norm on \(V\) and \(\{e_1, e_2, \dots , e_n\} \) be a basis of \(V\). Let \(\norm_2\) be \(L_2\)-norm (Euclidean norm). It will suffice to show \(\norm \sim \norm_2\). Let
@@ -63,6 +75,91 @@ To check if the above definition is indeed an equivalence relation, we must show
 \end{proof}
 
 \begin{theorem}
+    Let \(\normedSpace{V}{\norm}\) be a normed space. The following are equivalent
+    \begin{enumerate}
+        \item \(V\) is finite dimensional.
+        \item every bounded closed set in \(V\) is compact.
+        \item the closed unit ball in \(V\) is compact.
+    \end{enumerate}
+\end{theorem}
+
+%TODO: do the proof, 3 to 1 is the hardest part
+\begin{proof}
+
+\end{proof}
+
+\subsection{Linear Maps}
+Let \(V\) and \(W\) be a vector spaces over \(\Field\). A map \(T: V \to W\) is \textbf{linear} if
+\begin{equation*}
+    \func{T}{x + \lambda y} = \func{T}{x} + \lambda \func{T}{y}
+\end{equation*}
+for all \(x,y \in V\) and \(\lambda \in \Field\).
+
+\begin{definition}
+    Let \(\normedSpace{V}{\norm_V}\) and \(\normedSpace{W}{\norm_W}\) be normed spaces then, a linear transformation \(T : V \to W\) is \textbf{bounded} if there exists a constant \(C > 0\) such that
+    \begin{equation*}
+        \norm[Tv]_W \leq C \norm[v]_V
+    \end{equation*}
+    for all \(v \in V\).
+\end{definition}
+
+\begin{definition}
+    If \(\normedSpace{V}{\norm_V},\normedSpace{W}{\norm_W}\) are normed spaces then the \textbf{operator norm} of a linear transformation \(T : V \to W\) is
+    \begin{equation*}
+        \norm[T] = \sup \left\{\dfrac{\norm[Tv]_W}{\norm[v]_V} \middle| v \neq 0 \right\}
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    Let \(\normedSpace{V}{\norm_V}\) and \(\normedSpace{W}{\norm_W}\) be normed spaces and \(T: V \to W\) be a linear transformation. The following are equivalent
+    \begin{enumerate}
+        \item \(\norm[T]\) is finite. \label{it:LinearCont1}
+        \item \(T\) is bounded. \label{it:LinearCont2}
+        \item \(T\) is Lipschitz continuous. \label{it:LinearCont3}
+        \item \(T\) is continuous at a point. \label{it:LinearCont4}
+        \item \(\sup_{\norm[v]_V = 1} \norm[Tv]_W < \infty\). \label{it:LinearCont5}
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    %TODO: fix the references
+    \cref{it:LinearCont1} \(\Rightarrow\) \cref{it:LinearCont2}: Obviously
+    \begin{align*}
+        \dfrac{\norm[Tv]_W}{\norm[v]_V} & \leq \norm[T]            \\
+        \implies \norm[Tv]_W            & \leq \norm[T] \norm[v]_V
+    \end{align*}
+    note that if \(v = 0\) then \(Tv = 0\) as well and thus the last inequality holds for all \(v \in V\).
+
+    \cref{it:LinearCont2} \(\Rightarrow\) \cref{it:LinearCont3}:
+    \begin{equation*}
+        \norm[Tv - Tu]_W = \norm[T(u - v)]_W \leq C \norm[u - v]_V
+    \end{equation*}
+
+    \cref{it:LinearCont3} \(\Rightarrow\) \cref{it:LinearCont4}: Trivial.
+
+    \cref{it:LinearCont4} \(\Rightarrow\) \cref{it:LinearCont5}: Let \(T\) be continuous at \(u \in V\). Then there is  a \(\delta > 0 \) such that
+    \begin{equation*}
+        \norm[v-u] < \delta \implies \norm[Tv - Tu]_W = \norm[T(v-u)]_W < 1
+    \end{equation*}
+    Now for an arbitrary non-zero \(v\) we have
+    \begin{equation*}
+        \norm[\left( \dfrac{\delta v}{2\norm[v]_V} + u \right) - u]_V < \delta
+    \end{equation*}
+    Therefore
+    \begin{align*}
+         & \norm[\func{T}{\dfrac{\delta v}{2\norm[v]_V}}]_W  < 1         \\
+         & \norm[\func{T}{\dfrac{v}{\norm[v]_V}}]_W  < \dfrac{2}{\delta}
+    \end{align*}
+
+    \cref{it:LinearCont5} \(\Rightarrow\) \cref{it:LinearCont1}: Let \(v \in V\) be an arbitrary vector. Then
+    \begin{align*}
+                 & \sup \norm[\func{T}{\dfrac{v}{\norm[v]_V}}] < \infty \\
+        \implies & \sup \norm[Tv] < \infty
+    \end{align*}
+
+\end{proof}
+
+\begin{theorem}
     Let \(f : \Reals^n \to \Reals^n\) linear transformation is invertible if and only if there exists a \(c\) such that:
     \begin{equation*}
         c \norm[x] \leq \norm[\func{f}{x}]
@@ -72,3 +169,34 @@ To check if the above definition is indeed an equivalence relation, we must show
 \begin{proof}
     A linear transformation \(f: \Reals^n \to \Reals^n\) is one-to-one if and only if it is surjective because \(\dim \Image f + \dim \ker f = n\). Hence, we only need to show that \(f\) is one-to-one.
 \end{proof}
+
+\section{Derivative}
+Let \(f: U \subset \Reals^n \to \Reals^m\) where \(U\) is open. Then \(f\) is differentiable at \(x_0\) when a linear transformation \(T : \Reals^n \to \Reals^m\) such that
+\begin{equation*}
+    \lim_{\norm[h] \to 0} \dfrac{\norm[\func{f}{x_0 + h} - \func{f}{x_0} - \func{T}{h}]}{\norm[h]}= 0
+\end{equation*}
+Usually, \(T\) is represented by \(\func{f'}{x_0}\).
+
+\begin{proposition}
+    Assume \(f: U \subset \Reals^n \to \Reals^m\) is differentiable at \(x_0\) and let \(u \in \Reals^n\) then
+    \begin{equation*}
+        \lim_{t \to 0} \dfrac{\func{f}{x_0 + tu} - \func{f}{x_0}}{t} = \func{f'}{x_0} \cdot u
+    \end{equation*}
+\end{proposition}
+
+\begin{definition}[Partial derivative]
+    define
+
+\end{definition}
+
+\begin{proposition}
+    If \(f\) is differentiable then its partial derivatives exist.
+\end{proposition}
+
+\begin{proposition}
+    \(f : U \subset \Reals^n \to \Reals^m\) is differentiable at \(x_0\) if and only if every component is differentiable at \(x_0\).
+\end{proposition}
+
+\begin{theorem}
+    \(f : U \subset \Reals^n \to \Reals^m\) has all of its partial derivative and they're continuous then \(f\) is differentiable.
+\end{theorem}

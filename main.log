@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  22 FEB 2021 15:26
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  25 FEB 2021 16:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -443,19 +443,19 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 
 ]
 Chapter 1.
-LaTeX Font Info:    Trying to load font information for U+bbold on input line 6.
-(c:/texlive/2020/texmf-dist/tex/latex/bbold/Ubbold.fd) [3])
+LaTeX Font Info:    Trying to load font information for U+bbold on input line 7.
+(c:/texlive/2020/texmf-dist/tex/latex/bbold/Ubbold.fd) [3] [4] [5])
 \tf@thm=\write4
 \openout4 = `main.thm'.
 
- [4] (./main.aux) ) 
+ [6] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 7027 strings out of 477454
- 115320 string characters out of 5840441
- 437128 words of memory out of 5000000
- 26416 multiletter control sequences out of 15000+600000
- 540666 words of font info for 61 fonts, out of 8000000 for 9000
+ 7044 strings out of 477454
+ 115641 string characters out of 5840441
+ 443142 words of memory out of 5000000
+ 26431 multiletter control sequences out of 15000+600000
+ 540682 words of font info for 63 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 71i,11n,74p,499b,367s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,12n,74p,499b,458s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (4 pages, 22140 bytes).
+Output written on main.xdv (6 pages, 46028 bytes).

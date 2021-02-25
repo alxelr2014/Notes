@@ -1,2 +1,5 @@
 \contentsline {chapter}{\numberline {1}Multivariable Calculus}{3}{}%
 \contentsline {section}{\numberline {1.1}Linear Algebra}{3}{}%
+\contentsline {subsection}{\numberline {1.1.1}Vector Spaces}{3}{}%
+\contentsline {subsection}{\numberline {1.1.2}Linear Maps}{4}{}%
+\contentsline {section}{\numberline {1.2}Derivative}{6}{}%
