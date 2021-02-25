@@ -1,4 +1,5 @@
 \chapter{Micro-Architecture}
+Micro-Architecture is the way a given ISA is implemented on a processor.
 Basic blocks of a Micro-Architecture:
 \begin{description}
     \item [Cache] A high-speed unit to keep code and data.
@@ -7,7 +8,7 @@ Basic blocks of a Micro-Architecture:
               \item [DCache] holde data.
           \end{description}
     \item [IFU] A unit to fetch instruction from cache.
-    \item [IDU] A unit to decode instruction after fetch.'
+    \item [IDU] A unit to decode instruction after fetch.
     \item [EU] A unit to execute instruction:
           \begin{description}
               \item [ALU] for arithmetic and logic.
@@ -33,3 +34,91 @@ Response time consistes of
     \item I/O time
 \end{enumerate}
 Then \textbf{System Performance} is the inverse time elapsed and \textbf{CPU performance} is the inverse user CPU time. From user perespective response time is more important and from system admin perespective throughput is more important.
+
+For CPU time we have:
+\begin{align}
+    \text{CPU time } & = \text{CPU clock cycle} \times \text{Clock cycle time} \label{eq:CPUTime1} \\
+                     & = \text{CPU clock cycle} / \text{Clock rate} \label{eq:CPUTime2}
+\end{align}
+
+To have an estimation for CPU clock cycle we define \textbf{CPI}, \textit{cycle per instruction}, to be the average clock cycles per instruction. Thus the \Cref{eq:CPUTime1,,eq:CPUTime2} become
+
+\begin{align*}
+    \text{CPU time } & = \text{Instruction count} \times \text{CPI} \times \text{Clock cycle time} \\
+                     & = (\text{Instruction count} \times \text{CPI}) / \text{Clock rate}
+\end{align*}
+
+Therefore, CPU time is dependent on:
+\begin{enumerate}
+    \item Instruction count
+          \begin{itemize}
+              \item Program (e.g. Algorithm)
+              \item ISA
+              \item Compiler
+          \end{itemize}
+    \item CPI
+          \begin{itemize}
+              \item \(\mu\)Arch
+              \item Code CPI also depends on program
+          \end{itemize}
+    \item Clock cycle time
+          \begin{itemize}
+              \item \(\mu\)Arch and technology
+          \end{itemize}
+\end{enumerate}
+
+%TODO:complete from slides
+TO evaluate the performance of a computer we use \textbf{benchmarks}.
+
+\begin{itemize}
+    \item SPEC Benchmarks
+          \begin{itemize}
+              \item CPU/Memory intensive benchmarks
+              \item some stress CPU
+              \item some stress memory subsystem
+          \end{itemize}
+    \item SPEC Web
+          \begin{itemize}
+              \item I/O intensive benchmarks
+              \item mostly stress I/O subsystem
+          \end{itemize}
+\end{itemize}
+
+\subsection{Speedup}
+\begin{equation*}
+    \text{Speedup} = \text{Time}_{\text{original}} / \text{Time}_{\text{improved}}
+\end{equation*}
+
+\textbf{Amdahl's law} states that speedup is limited to the improved fraction. That is
+\begin{align*}
+    \text{Time}_{\text{improved}}   & = \text{Time}_{\text{original}} \times \left[ \left( 1 - \text{Fraction}_{\text{improved}} \right) + \text{Fraction}_{\text{improved}} / \text{Speedup}_{\text{improved}} \right] \\
+    \text{Speedup}_{\text{overall}} & = \text{Time}_{\text{original}} / \text{Time}_{\text{improved}}                                                                                                                   \\
+                                    & = \dfrac{1}{ \left( 1 - \text{Fraction}_{\text{improved}} \right) + \text{Fraction}_{\text{improved}} / \text{Speedup}_{\text{improved}}}
+\end{align*}
+
+\textbf{MIPS}, \textit{million instruction per second}, is a performance metric. The drawbacks of this metric are
+\begin{enumerate}
+    \item not taking into account capabilites of instructions
+    \item not realistic metric even on the same CPU
+\end{enumerate}
+
+\textbf{FLOPS}, \textit{floating point operations per second}, is another performance metric that measures floating point operations per unit time.
+\begin{equation*}
+    \text{FLOPS} = (\text{FP ops}/\text{program}) \times (\text{program} / \text{time})
+\end{equation*}
+The drawbacks of this metric are
+\begin{enumerate}
+    \item ignores other instruction (e.g. load/store)
+    \item not all floating point operations have common format
+    \item depends on how FP-instensive program is
+\end{enumerate}
+
+\section{RTL}
+Data movement is characterized in terms of
+\begin{itemize}
+    \item Registers
+    \item Operations done on registers
+\end{itemize}
+\textbf{RTL}, \textit{Register Transfer Language}, describes data movement at register level.
+\textbf{Micro-operations} is the functions performed on registers. For example, shift, clear, load, increment, etc.
+One can describe a \(\mu\)Arch in terms of RTL and \(\mu\)Ops and control signals that initiate sequence of \(\mu\)Ops to perfrom functions.

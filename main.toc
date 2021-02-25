@@ -1,3 +1,5 @@
 \contentsline {chapter}{\numberline {1}Micro-Architecture}{3}{}%
 \contentsline {section}{\numberline {1.1}Standard Benchmarks}{3}{}%
 \contentsline {subsection}{\numberline {1.1.1}Performance Metrics}{3}{}%
+\contentsline {subsection}{\numberline {1.1.2}Speedup}{5}{}%
+\contentsline {section}{\numberline {1.2}RTL}{5}{}%

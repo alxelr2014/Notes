@@ -1,10 +1,10 @@
 # Fdb version 3
-["xdvipdfmx"] 1614171561 "main.xdv" "main.pdf" "main" 1614171562
-  "main.xdv" 1614171561 15240 be8fb9fa0d2f849ac6088dde3f22c63b "xelatex"
+["xdvipdfmx"] 1614240083 "main.xdv" "main.pdf" "main" 1614240084
+  "main.xdv" 1614240082 40524 15f908f8fcee75bb8c95f60a47fa43f2 "xelatex"
   (generated)
   "main.pdf"
-["xelatex"] 1614171558 "c:/Users/emadz/Desktop/School/Books/Semester IV/Computer Architecture/Notes/main.tex" "main.xdv" "main" 1614171562
-  "Chapters/MicroArchitecture.tex" 1613394155 1728 a037626fba9f65efac81d8046e872e7a ""
+["xelatex"] 1614240081 "c:/Users/emadz/Desktop/School/Books/Semester IV/Computer Architecture/Notes/main.tex" "main.xdv" "main" 1614240084
+  "Chapters/MicroArchitecture.tex" 1614240078 5706 25f3f84b5aef60f24d32e6354c685d79 ""
   "c:/Users/emadz/Desktop/School/Books/Semester IV/Computer Architecture/Notes/main.tex" 1613394152 929 7f37caabc202eae52e279922bdbd36f3 ""
   "c:/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1603841547 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1603835713 1004 54797486969f23fa377b128694d548df ""
@@ -68,12 +68,12 @@
   "c:/texlive/2020/texmf.cnf" 1603851410 673 4ae7b2f49cee444c5343a45b5d0f169c ""
   "c:/texlive/texmf-local/tex/latex/local/common/common.sty" 1613994470 2450 144041b21de4984dd68f098b5d913927 ""
   "c:/texlive/texmf-local/tex/latex/local/english-theorems/english-theorems.sty" 1613400133 4968 3b54db98576bacad74958d08701ceb3d ""
-  "main.aux" 1614171561 437 852115f63eaf04f65f16b01dfa5c9e9a "xelatex"
+  "main.aux" 1614240082 822 5a8c8891ed651816d98d5fbc0a95c3e3 "xelatex"
   "main.tex" 1613394152 929 7f37caabc202eae52e279922bdbd36f3 ""
-  "main.toc" 1614171561 206 71c50aa8216797718d9a6bf636919d2e "xelatex"
+  "main.toc" 1614240082 319 c5b94eb5545b631d1fdce157bdb4cd4f "xelatex"
   (generated)
   "main.thm"
-  "main.toc"
-  "main.aux"
-  "main.log"
   "main.xdv"
+  "main.aux"
+  "main.toc"
+  "main.log"
