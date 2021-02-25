@@ -153,8 +153,8 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 
     \cref{it:LinearCont5} \(\Rightarrow\) \cref{it:LinearCont1}: Let \(v \in V\) be an arbitrary vector. Then
     \begin{align*}
-                 & \sup \norm[\func{T}{\dfrac{v}{\norm[v]_V}}] < \infty \\
-        \implies & \sup \norm[Tv] < \infty
+                 & \sup \norm[\func{T}{\dfrac{v}{\norm[v]_V}}]_W < \infty \\
+        \implies & \sup \norm[Tv]_W < \infty
     \end{align*}
 
 \end{proof}
@@ -169,6 +169,12 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 \begin{proof}
     A linear transformation \(f: \Reals^n \to \Reals^n\) is one-to-one if and only if it is surjective because \(\dim \Image f + \dim \ker f = n\). Hence, we only need to show that \(f\) is one-to-one.
 \end{proof}
+
+{\Large\textbf{Exercises}}
+\begin{enumerate}
+    \item Show that for a linear transformation \(T\), \(\norm[T] = \sup_{\norm[v]_V \leq 1} \norm[Tv]_W\).
+\end{enumerate}
+\newpage
 
 \section{Derivative}
 Let \(f: U \subset \Reals^n \to \Reals^m\) where \(U\) is open. Then \(f\) is differentiable at \(x_0\) when a linear transformation \(T : \Reals^n \to \Reals^m\) such that
