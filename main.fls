@@ -1,8 +1,8 @@
-PWD c:/Users/emadz/Desktop/School/Books/Semester IV/Digital System Design/Notes
+PWD c:/Users/emadz/Desktop/School/Books/Semester IV/Digital System Design/Digital System Design Notes
 INPUT c:/texlive/2020/texmf.cnf
 INPUT c:/texlive/2020/texmf-dist/web2c/texmf.cnf
 INPUT c:/texlive/2020/texmf-var/web2c/xetex/xelatex.fmt
-INPUT c:/Users/emadz/Desktop/School/Books/Semester IV/Digital System Design/Notes/main.tex
+INPUT c:/Users/emadz/Desktop/School/Books/Semester IV/Digital System Design/Digital System Design Notes/main.tex
 OUTPUT main.log
 INPUT c:/texlive/2020/texmf-dist/tex/latex/base/book.cls
 INPUT c:/texlive/2020/texmf-dist/tex/latex/base/book.cls

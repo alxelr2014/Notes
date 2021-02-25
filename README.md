@@ -1,6 +1,6 @@
 # Digital System Design
 
-As tought by prof. Bahravand in 21-22 Spring semester at **Sharif University of Technology**.
+As tought by _prof. Bahravand_ in 21-22 Spring semester at **Sharif University of Technology**.
 
 | Activities  | Percentage |
 | ----------- | ---------- |
