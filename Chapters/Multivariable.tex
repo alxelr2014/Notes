@@ -83,10 +83,19 @@ To check if the above definition is indeed an equivalence relation, we must show
     \end{enumerate}
 \end{theorem}
 
+
 %TODO: do the proof, 3 to 1 is the hardest part
 \begin{proof}
 
 \end{proof}
+
+\begin{definition}[Banach space]
+    A normed vector space \(V\) that is complete is a \textbf{Banach space}. A \textbf{Hilbert Space} is a Banach space whose norm is induced by an inner product.
+\end{definition}
+
+\begin{corollary}
+    Any finite dimensional normed vector space \(V\) is a Banach space.
+\end{corollary}
 
 \subsection{Linear Maps}
 Let \(V\) and \(W\) be a vector spaces over \(\Field\). A map \(T: V \to W\) is \textbf{linear} if
@@ -100,7 +109,7 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
     \begin{equation*}
         \norm[Tv]_W \leq C \norm[v]_V
     \end{equation*}
-    for all \(v \in V\).
+    for all \(v \in V\). We denote the set of all linear map from \(V \to W\) as \(\func{\CalL}{V,W}\). If \(T \in \func{\CalL}{V,W}\) is bijective such that \(T^{-1} \in \func{\CalL}{V,W}\), then \(T\) is called an \textbf{isomorphism} and \(V,W\) are \textbf{isomorphic}. An operator \(T \in \func{\CalL}{V,W}\) is called \textbf{isometric} if \(\norm[Tv]_W = \norm[v]_V\) for all \(v \in V\).
 \end{definition}
 
 \begin{definition}
@@ -160,7 +169,24 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 \end{proof}
 
 \begin{theorem}
-    Let \(f : \Reals^n \to \Reals^n\) linear transformation is invertible if and only if there exists a \(c\) such that:
+    For two normed vector spaces \(V,W\), \(\normedSpace{\func{\CalL}{V,W}}{\norm[T]}\) is a normed vector space. Moreover, it is a Banach space when \(W\) is a Banach space.
+\end{theorem}
+
+%TODO: do the proof dumbass
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}
+    Let \(\normedSpace{V}{\norm}\) be a normed space. Then any linear transformation \(T: \Reals^n \to V\) is continuous. Furthermore, if \(T\) is a bijection, it is a heomeomorphis.
+\end{theorem}
+%TODO: do the proof dumbass
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}
+    \(f : \Reals^n \to \Reals^n\) linear transformation is invertible if and only if there exists a \(c\) such that:
     \begin{equation*}
         c \norm[x] \leq \norm[\func{f}{x}]
     \end{equation*}
@@ -181,7 +207,7 @@ Let \(f: U \subset \Reals^n \to \Reals^m\) where \(U\) is open. Then \(f\) is di
 \begin{equation*}
     \lim_{\norm[h] \to 0} \dfrac{\norm[\func{f}{x_0 + h} - \func{f}{x_0} - \func{T}{h}]}{\norm[h]}= 0
 \end{equation*}
-Usually, \(T\) is represented by \(\func{f'}{x_0}\).
+Usually, \(T\) is represented by \(\func{f'}{x_0}\), \(\DiffOperator f\), or \(\func{\diffOperator f}{x}\).
 
 \begin{proposition}
     Assume \(f: U \subset \Reals^n \to \Reals^m\) is differentiable at \(x_0\) and let \(u \in \Reals^n\) then
