@@ -17,3 +17,6 @@ Supplementary resources:
 1. **Pugh C.C. - Real mathematical analysis- 1st ed**
 2. _Rudin W. - Principles of Mathematical Analysis - 3rd ed_
 3. _Apostol T.M. - Mathematical Analysis - 2nd ed_
+
+| Mideterm | Oridibesht 5th |
+| -------- | -------------- |
