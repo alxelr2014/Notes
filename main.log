@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  28 FEB 2021 16:41
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  2 MAR 2021 22:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -60,10 +60,6 @@ Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footers
 Package: inputenc 2020/08/01 v1.3d Input encoding file
 \inpenc@prehook=\toks17
 \inpenc@posthook=\toks18
-
-
-Package inputenc Warning: inputenc package ignored with utf8 based engines.
-
 ) (c:/texlive/2020/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2020/09/23 v2.17i AMS math features
 \@mathmargin=\skip58
@@ -450,12 +446,12 @@ LaTeX Font Info:    Trying to load font information for U+bbold on input line 7.
 
  [7] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 7073 strings out of 477454
- 116136 string characters out of 5840441
- 441948 words of memory out of 5000000
- 26460 multiletter control sequences out of 15000+600000
- 540682 words of font info for 63 fonts, out of 8000000 for 9000
+ 7086 strings out of 477454
+ 116470 string characters out of 5840441
+ 443944 words of memory out of 5000000
+ 26469 multiletter control sequences out of 15000+600000
+ 540698 words of font info for 65 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 71i,12n,74p,539b,354s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,12n,74p,539b,352s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (7 pages, 54844 bytes).
+Output written on main.xdv (7 pages, 72052 bytes).

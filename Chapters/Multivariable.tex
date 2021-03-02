@@ -42,7 +42,7 @@ To check if the above definition is indeed an equivalence relation, we must show
     Equivalent norms induce equivalent metrics, hence they induce the same topology.
 \end{remark}
 
-\begin{theorem}
+\begin{theorem} \label{th:normsEquivalent}
     All norms defined on a finite dimensional vector space \(V\) are equivalent.
 \end{theorem}
 
@@ -53,7 +53,7 @@ To check if the above definition is indeed an equivalence relation, we must show
     \end{equation*}
     Take \(x \in V\), writing \(x = \sum_{i = 1}^n {\xi_i e_i}\) we have:
     \begin{equation*}
-        \norm[x] = \norm[\sum_{i = i}^n {\xi_i e_i}] \leq \sum_{i = 1}^n \abs{\xi_i} \norm[e_i] \leq M \sqrt{n} \norm[x]_2
+        \norm[x] = \norm[\sum_{i = i}^n {\xi_i e_i}] \leq \sum_{i = 1}^n \abs[\xi_i] \norm[e_i] \leq M \sqrt{n} \norm[x]_2
     \end{equation*}
     Taking \(c_2 = M \sqrt{n}\) proves the right inequality. For the left inequality we need the following lemma
     \begin{lemma} \label{lm:ContinuityOfNorm}
@@ -89,6 +89,17 @@ To check if the above definition is indeed an equivalence relation, we must show
 
 \end{proof}
 
+\begin{example}
+    The closed unit ball in the infinite dimensional vector spave \(\func{C}{\clcl{0}{1},\Reals}\) with \(\norm[f] = \max \func{f}{x}\) is not compact.  Take \(\func{f_n}{x} = x^n\). Obviously \(\norm[f_n] = 1\), however \(f_n\) doesn't uniformly converge and hence \(f_n\) doesn't have a limit in \(\func{C}{\clcl{0}{1},\Reals}\) with the \(\max\) norm. Consider the following norm
+    \begin{equation*}
+        \norm[f]_I = \int_0^1 \abs[\func{f}{x}] \diffOperator x
+    \end{equation*}
+    Note that \(\norm_I\) and \(\norm_{\max} \) are not equivalent. Let \(\func{g}{x} = 0\) for all \(x \in \clcl{0}{1}\). Then
+    \begin{equation*}
+        \norm[f_n - g]_I = \dfrac{1}{n+1} \to 0 \quad \text{as} n \to \infty.
+    \end{equation*}
+\end{example}
+
 \begin{definition}[Banach space]
     A normed vector space \(V\) that is complete is a \textbf{Banach space}. A \textbf{Hilbert Space} is a Banach space whose norm is induced by an inner product.
 \end{definition}
@@ -119,7 +130,25 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
     \end{equation*}
 \end{definition}
 
-\begin{theorem}
+\begin{proposition}
+    Let \(T : U \to V\) and \(T' : V \to W\) be two linear transformations.
+    \begin{equation*}
+        \norm[T' \circ T] \leq \norm[T] \norm[T']
+    \end{equation*}
+\end{proposition}
+
+\begin{proof}
+    for an arbitrary non-zero \(x \in U\)
+    \begin{equation*}
+        \norm[\func{T' \circ T}{x}]_W \leq \norm[T'] \norm[Tx]_V \leq \norm[T'] \norm[T] \norm[x]_U
+    \end{equation*}
+    which implies
+    \begin{equation*}
+        \norm[T' \circ T] \leq \norm[T] \norm[T']
+    \end{equation*}
+\end{proof}
+
+\begin{theorem} \label{th:linearTransformation}
     Let \(\normedSpace{V}{\norm_V}\) and \(\normedSpace{W}{\norm_W}\) be normed spaces and \(T: V \to W\) be a linear transformation. The following are equivalent
     \begin{enumerate}
         \item \(\norm[T]\) is finite. \label{it:LinearCont1}
@@ -168,6 +197,21 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 
 \end{proof}
 
+
+
+
+\begin{theorem}
+    If \(V\) is a finite dimensional normed vector space then any linear transformation \(T : V \to W\) is continuous.
+\end{theorem}
+
+\begin{proof}
+    Since \(V\) is finite dimensional, according to \Cref{th:normsEquivalent}, any two norms are equivalent. Hence, take \(\norm_2\) to be Euclidean norm over a basis \(\{e_1, \dots , e_n\}\). Let \(x\) be such that \(\norm[x]_2 < \delta\) for some \(\delta > 0\). Therefore, \(\abs[\xi_i] < \delta^2\)
+    \begin{equation*}
+        \norm[Tx]_W = \norm[\sum \xi_i \func{T}{e_i}]_w \leq \sum \abs[\xi_i] \norm[\func{T}{e_i}]_W \leq \delta^2 K
+    \end{equation*}
+    where \(K = \max \norm[\func{T}{e_i}]_W \). By letting \(\delta = \sqrt{\frac{\epsilon}{K}}\) we proved continuity at \(0\) and hence the continuity by \Cref{th:linearTransformation}.
+\end{proof}
+
 \begin{theorem}
     For two normed vector spaces \(V,W\), \(\normedSpace{\func{\CalL}{V,W}}{\norm[T]}\) is a normed vector space. Moreover, it is a Banach space when \(W\) is a Banach space.
 \end{theorem}
@@ -203,32 +247,61 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 \newpage
 
 \section{Derivative}
-Let \(f: U \subset \Reals^n \to \Reals^m\) where \(U\) is open. Then \(f\) is differentiable at \(x_0\) when a linear transformation \(T : \Reals^n \to \Reals^m\) such that
+Let \(V,W\) be finite dimensional vector spaces and \(f: U \subset V \to W\) where \(U\) is open. Then \(f\) is differentiable at \(x_0\) when a linear transformation \(T : V \to W\) such that
 \begin{equation*}
     \lim_{\norm[h] \to 0} \dfrac{\norm[\func{f}{x_0 + h} - \func{f}{x_0} - \func{T}{h}]}{\norm[h]}= 0
 \end{equation*}
-Usually, \(T\) is represented by \(\func{f'}{x_0}\), \(\DiffOperator f\), or \(\func{\diffOperator f}{x}\).
+Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
+\begin{equation*}
+    \func{f}{x_0 + h} - \func{f}{x_0} - Th = \func{R}{h} \qquad \frac{\func{R}{h}}{\norm[h]} \to 0
+\end{equation*}
+\(T\) if it exists is unique, represented by \(\func{f'}{x_0}\), \(\DiffOperator f\), or \(\func{\diffOperator f}{x}\) and called the \textbf{total derivative} or \textbf{Fr\'{e}chet derivative}.
 
 \begin{proposition}
-    Assume \(f: U \subset \Reals^n \to \Reals^m\) is differentiable at \(x_0\) and let \(u \in \Reals^n\) then
+    Differentiability of \(f\) at \(x\) implies continuity at \(x\).
+\end{proposition}
+
+\begin{proposition} \label{eq:partialDerivative}
+    Assume \(f: U \subset V \to W\) is differentiable at \(x_0\) and let \(u \in V\) be a non-zero vector then
     \begin{equation*}
-        \lim_{t \to 0} \dfrac{\func{f}{x_0 + tu} - \func{f}{x_0}}{t} = \func{f'}{x_0} \cdot u
+        \lim_{t \to 0} \dfrac{\func{f}{x_0 + tu} - \func{f}{x_0}}{t} =\func{f'}{x_0} (u)
     \end{equation*}
 \end{proposition}
 
-\begin{definition}[Partial derivative]
-    define
+\begin{proof}
+    Let \(h = tu\) then
+    \begin{align*}
+        \func{R}{tu}                     & = \func{f}{x_0 + tu} - \func{f}{x_0} - \func{T}{tu}            \\
+                                         & = \func{f}{x_0 + tu} - \func{f}{x_0} - t\func{T}{u}            \\
+        \implies \dfrac{\func{R}{tu}}{t} & = \dfrac{ \func{f}{x_0 + tu} - \func{f}{x_0}}{t} - \func{T}{u} \\
+        \implies \lim_{t \to 0}          & \dfrac{ \func{f}{x_0 + tu} - \func{f}{x_0}}{t} = \func{T}{u}
+    \end{align*}
+\end{proof}
 
+\begin{definition}[Directional derivative]
+    If we let \(\norm[u] = 1\) then the limit in \Cref{eq:partialDerivative} becomes the \textbf{directional derivative} of \(f\) in the direction of \(u\) and is denoted by \(\DiffOperator_u f\).
 \end{definition}
 
+\begin{remark}
+    The existence of all directional derivatives of \(f\) doesnt imply its differentiability or even its continuity.
+\end{remark}
+
+\begin{theorem}
+    \(f : U \subset \Reals^n \to \Reals^m\) has all of its partial derivative and they're continuous then \(f\) is differentiable.
+\end{theorem}
+
 \begin{proposition}
-    If \(f\) is differentiable then its partial derivatives exist.
+    Let \(f,g : V \to W\) be differentiable at \(x\) and \(h : W \to U\) be differentiable at \(y = \func{f}{x}\). Furthermore, let \(c\) be an scalar then
+    \begin{enumerate}
+        \item \(\func{\DiffOperator}{ f + cg} = \func{\DiffOperator}{f} + c \func{\DiffOperator}{g}\).
+        \item  \(h \circ f\) is differentiable at \(x\) and
+              \begin{equation*}
+                  \func{\DiffOperator}{ h \circ f} =  \left( \func{\DiffOperator}{h}\circ f \right) \circ \func{\DiffOperator}{ f}
+              \end{equation*}
+    \end{enumerate}
 \end{proposition}
 
 \begin{proposition}
     \(f : U \subset \Reals^n \to \Reals^m\) is differentiable at \(x_0\) if and only if every component is differentiable at \(x_0\).
 \end{proposition}
 
-\begin{theorem}
-    \(f : U \subset \Reals^n \to \Reals^m\) has all of its partial derivative and they're continuous then \(f\) is differentiable.
-\end{theorem}
