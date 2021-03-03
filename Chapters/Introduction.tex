@@ -1,0 +1,63 @@
+\chapter{Introduction}
+\thispagestyle{headings}
+
+\section{Design Methodolgy}
+There are two design methodolgies.
+\begin{description}
+    \item [Embedded] buncha things.
+    \item [Integrated Circuits] the sexy stuff that we would love talk about them.
+\end{description}
+
+There three main type of ICs.
+\begin{description}
+    \item [Programmable Logic Devic] buncha AND and OR.
+    \item [Field Programmable Gate Arrays] buncha LUT. they are relatively cheap and easy to produce. programmed easily, usually done with USB - can't get easier! can it?!.
+    \item [Application Specific Integrate Circuite] customized but non-programmable. Longer design time and higher cost but high preformance and lower power consumptions. Good for big boys that are done playing with their FPGA. but first they gotta send their design (\textit{Fabrication patten}) to the factory (\textit{FAB}).
+\end{description}
+
+Now you may ask why should I use programmable logic. Firstly, because it is cool and eviroment friendly. DON'T be a climate change denier baster please :)). Here are more reason
+\begin{enumerate}
+    \item Reduce time to mark (TTM).
+    \item used for prototyping.
+    \item Reconfigurable computing
+    \item Custom computing
+    \item Reusability for different designs (Cant get greener than this :p ).
+\end{enumerate}
+
+\section{Hardware Description Languages}
+describes hardware, it is in the name -\_-!
+\begin{enumerate}
+    \item Popular HDLs (IEEE standard)
+          \begin{enumerate}
+              \item Verilog (we gonna use this mostly because it's the cooler kid)
+              \item VHDL (used for modeling mostly and thus not all constructs are synthesizable)
+          \end{enumerate}
+    \item other HDLs (not standard! not good! so no need to know baby)
+\end{enumerate}
+
+HDLs are concurrent and not sequential - just like the real world. It also has timing that is you can have clocks for sequential circuits. furhtermore, it supports desing hierarchy (donnu what this is).
+
+\begin{equation*}
+    \text{Logic Synthesis} = \text{Translation} \to \text{Optimization} \to \text{Mapping}
+\end{equation*}
+
+We use ASM, \textit{Algorithm State Machine} for large scale integration. and we use CAD/IDE (HDLs) for very large scale integrattion.
+
+\begin{definition}[Netlist]
+    HDL describing logic gates.
+\end{definition}
+
+\section{Design flow}
+\begin{enumerate}
+    \item Design specification- logical and physical.
+    \item Behavioral description- for the circuit.
+    \item RLT description via HDLs. \label{it:sucker}
+    \item Functional verification and testing. if you suck go back to \cref{it:sucker}.
+    \item Logic Synthesis.
+    \item Gate-level netlist. produced by logic synthesis.
+    \item Logical verification and testing. use the gate list and run test. if it sucks go back to \cref{it:sucker}.
+    \item Floor planning, automatic place \& route. usually done automaticly in FPGA and manually in ASIC. this step is called back-end design or physical design.
+    \item Physical layout - done with CAD and sent to FAB. GDStool
+    \item Layout verification. before you send your stupid design check it. done by barghis and not us.
+    \item Implementation. enjoy your shitty devic now.
+\end{enumerate}
