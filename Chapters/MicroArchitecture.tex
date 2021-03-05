@@ -120,5 +120,18 @@ Data movement is characterized in terms of
     \item Operations done on registers
 \end{itemize}
 \textbf{RTL}, \textit{Register Transfer Language}, describes data movement at register level.
+
 \textbf{Micro-operations} is the functions performed on registers. For example, shift, clear, load, increment, etc.
 One can describe a \(\mu\)Arch in terms of RTL and \(\mu\)Ops and control signals that initiate sequence of \(\mu\)Ops to perfrom functions.
+%session 5
+\subsection{Register Transfer}
+\begin{description}
+    \item [Point-to-Point] each register has dedicated wires and MUX.
+    \item [Common input from MUX] each register has a load enable and result of the MUX goes to each registe.
+    \item [Multiple busses] something between Common input and point-to-point.
+    \item [Common bus with output enable] similar to common input.
+\end{description}
+%session 6
+
+\subsection{Memomry Transfer}
+We have \textbf{MER}, \textit{Memory Address Register} which enables us to access memory.

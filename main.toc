@@ -3,3 +3,5 @@
 \contentsline {subsection}{\numberline {1.1.1}Performance Metrics}{3}{}%
 \contentsline {subsection}{\numberline {1.1.2}Speedup}{5}{}%
 \contentsline {section}{\numberline {1.2}RTL}{5}{}%
+\contentsline {subsection}{\numberline {1.2.1}Register Transfer}{5}{}%
+\contentsline {subsection}{\numberline {1.2.2}Memomry Transfer}{5}{}%
