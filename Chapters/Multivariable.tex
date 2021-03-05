@@ -74,23 +74,22 @@ To check if the above definition is indeed an equivalence relation, we must show
     Taking \(c_1 = a\) proves the theorem.
 \end{proof}
 
-\begin{theorem}
-    Let \(\normedSpace{V}{\norm}\) be a normed space. The following are equivalent
-    \begin{enumerate}
-        \item \(V\) is finite dimensional.
-        \item every bounded closed set in \(V\) is compact.
-        \item the closed unit ball in \(V\) is compact.
-    \end{enumerate}
-\end{theorem}
-
-
-%TODO: do the proof, 3 to 1 is the hardest part
-\begin{proof}
-
-\end{proof}
+%
+%\begin{theorem}
+%    Let \(\normedSpace{V}{\norm}\) be a normed space over a normed complete field \(\Field\). The following are equivalent
+%    \begin{enumerate}
+%        \item \(V\) is finite dimensional.
+%        \item every bounded closed set in \(V\) is compact.
+%        \item the closed unit ball in \(V\) is compact.
+%    \end{enumerate}
+%\end{theorem}
+% do the proof, 3 to 1 is the hardest part
+%\begin{proof}
+%
+%\end{proof}
 
 \begin{example}
-    The closed unit ball in the infinite dimensional vector spave \(\func{C}{\clcl{0}{1},\Reals}\) with \(\norm[f] = \max \func{f}{x}\) is not compact.  Take \(\func{f_n}{x} = x^n\). Obviously \(\norm[f_n] = 1\), however \(f_n\) doesn't uniformly converge and hence \(f_n\) doesn't have a limit in \(\func{C}{\clcl{0}{1},\Reals}\) with the \(\max\) norm. Consider the following norm
+    The closed unit ball in the infinite dimensional vector space \(\func{C}{\clcl{0}{1},\Reals}\) with \(\norm[f] = \max \func{f}{x}\) is not compact.  Take \(\func{f_n}{x} = x^n\). Obviously \(\norm[f_n] = 1\), however \(f_n\) doesn't uniformly converge and hence \(f_n\) doesn't have a limit in \(\func{C}{\clcl{0}{1},\Reals}\) with the \(\max\) norm. Consider the following norm
     \begin{equation*}
         \norm[f]_I = \int_0^1 \abs[\func{f}{x}] \diffOperator x
     \end{equation*}
@@ -105,8 +104,15 @@ To check if the above definition is indeed an equivalence relation, we must show
 \end{definition}
 
 \begin{corollary}
-    Any finite dimensional normed vector space \(V\) is a Banach space.
+    Any finite dimensional normed vector space \(V\) over a normed complete field \(\Field\) is a Banach space.
 \end{corollary}
+%
+%\begin{proof}
+%    Let \(\{e_1, \dots , e_n\}\) be a basis for \(V\) and \(\phi : V \to \Field^n\) be the representation map for the basis. Since \(\phi\) is a linear map then \(\phi\) is continuous, hence 
+%    \begin{equation*}
+%       \ab
+%    \end{equation*}
+%\end{proof}
 
 \subsection{Linear Maps}
 Let \(V\) and \(W\) be a vector spaces over \(\Field\). A map \(T: V \to W\) is \textbf{linear} if
@@ -207,7 +213,7 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 \begin{proof}
     Since \(V\) is finite dimensional, according to \Cref{th:normsEquivalent}, any two norms are equivalent. Hence, take \(\norm_2\) to be Euclidean norm over a basis \(\{e_1, \dots , e_n\}\). Let \(x\) be such that \(\norm[x]_2 < \delta\) for some \(\delta > 0\). Therefore, \(\abs[\xi_i] < \delta^2\)
     \begin{equation*}
-        \norm[Tx]_W = \norm[\sum \xi_i \func{T}{e_i}]_w \leq \sum \abs[\xi_i] \norm[\func{T}{e_i}]_W \leq \delta^2 K
+        \norm[Tx]_W = \norm[\sum \xi_i \func{T}{e_i}]_W \leq \sum \abs[\xi_i] \norm[\func{T}{e_i}]_W \leq \delta^2 K
     \end{equation*}
     where \(K = \max \norm[\func{T}{e_i}]_W \). By letting \(\delta = \sqrt{\frac{\epsilon}{K}}\) we proved continuity at \(0\) and hence the continuity by \Cref{th:linearTransformation}.
 \end{proof}
@@ -216,8 +222,23 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
     For two normed vector spaces \(V,W\), \(\normedSpace{\func{\CalL}{V,W}}{\norm[T]}\) is a normed vector space. Moreover, it is a Banach space when \(W\) is a Banach space.
 \end{theorem}
 
-%TODO: do the proof dumbass
+
 \begin{proof}
+    Clearly \(\func{\CalL}{V,W}\) is a vector space. For its norm \(\norm[T]\) we have
+    \begin{enumerate}
+        \item \(\norm[T] \geq 0\) by definition.
+        \item if \(\alpha \in \Field_W\) then
+              \begin{equation*}
+                  \norm[\alpha T] = \sup \left\{ \dfrac{\norm[(\alpha T)v]_W}{\norm[v]_V} \middle| v \neq 0 \right\} = \abs[\alpha] \sup \left\{ \dfrac{\norm[Tv]_W}{\norm[v]_V} \middle| v \neq 0 \right\} = \abs[\alpha] \norm[T]
+              \end{equation*}
+        \item for the triangle inequality
+              \begin{align*}
+                  \norm[T_1 + T_2] & = \sup \left\{ \dfrac{\norm[(T_1 + T_2)v]_W}{\norm[v]_V} \right\}                                                     \\
+                                   & \leq \sup \left\{ \dfrac{\norm[T_1v]_W + \norm[T_2v]_W}{\norm[v]_V} \right\}                                          \\
+                                   & = \sup \left\{ \dfrac{\norm[T_1v]_W}{\norm[v]_V} \right\} + \sup \left\{ \dfrac{\norm[ T_2 v]_W}{\norm[v]_V} \right\} \\
+                                   & = \norm[T_1] + \norm[T_2]
+              \end{align*}
+    \end{enumerate}
 
 \end{proof}
 
@@ -228,6 +249,10 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 \begin{proof}
 
 \end{proof}
+
+\begin{definition}
+    Let \(V_1, V_2 ,\dots , V_n\) be finite dimensional normed vector spaces. Then the function \(\phi : V_1 \times \dots \times V_n\) is \textbf{\(n\)-linear} if by fixing any \(n-1\) component, \(\phi\) is linear relative to the remaining components.
+\end{definition}
 
 \begin{theorem}
     \(f : \Reals^n \to \Reals^n\) linear transformation is invertible if and only if there exists a \(c\) such that:
@@ -256,6 +281,19 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
     \func{f}{x_0 + h} - \func{f}{x_0} - Th = \func{R}{h} \qquad \frac{\func{R}{h}}{\norm[h]} \to 0
 \end{equation*}
 \(T\) if it exists is unique, represented by \(\func{f'}{x_0}\), \(\DiffOperator f\), or \(\func{\diffOperator f}{x}\) and called the \textbf{total derivative} or \textbf{Fr\'{e}chet derivative}.
+
+\begin{example}
+    Every linear function \(f : V \to W\) with \(\func{f}{v} = Tv + b\) where \(b \in W\) is differentiable and \(\func{\DiffOperator f}{v} = T\). Since
+    \begin{equation*}
+        \norm[h]_V \delta \implies \norm[\func{f}{v + h} - \func{f}{v} - \func{\DiffOperator}{h}]_W = \norm[T(v+h) - Tv - Th]_W = 0 < \epsilon \norm[h]_V
+    \end{equation*}
+    Hence, the derivative of any linear function is constant.
+    Consider \(S : V \times V \to V\) with \(\func{S}{v,u} = v + u\). \(S\) is differentiable because \(S\) is linear (why?). %TODO: find its derivative.
+\end{example}
+
+\begin{example}
+    Let \(\mu : \Reals \times V \to V\) with \(\func{\mu}{r,x} = rx\). Then \(\mu\) is differentiable and \(\operatorFunc{\func{\DiffOperator \mu}{r,x}}{t,h} = rh + ta\). %TODO: do the derivation.
+\end{example}
 
 \begin{proposition}
     Differentiability of \(f\) at \(x\) implies continuity at \(x\).
@@ -300,6 +338,15 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
               \end{equation*}
     \end{enumerate}
 \end{proposition}
+
+
+\begin{theorem}[Leibnitz rule]
+    Let \(V_1, V_2, \dots , V_n\) be finite dimensional vector spaces and \(f: V_1 \times \dots \times V_n \to W\) is a \(n\)-linear function. \(f\) is differentiable at \(a = (a_1, \dots , a_n)\) and
+    \begin{equation*}
+        \operatorFunc{\func{\DiffOperator f}{a}}{h_1, \dots h_n} = \func{f}{h_1, a_2, \dots, a_n} + \func{f}{a_1, h_2, \dots, a_n} + \dots + \func{f}{a_1, a_2, \dots, h_n}
+    \end{equation*}
+\end{theorem}
+
 
 \begin{proposition}
     \(f : U \subset \Reals^n \to \Reals^m\) is differentiable at \(x_0\) if and only if every component is differentiable at \(x_0\).

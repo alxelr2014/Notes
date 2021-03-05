@@ -1,10 +1,10 @@
 # Fdb version 3
-["xdvipdfmx"] 1614710618 "main.xdv" "main.pdf" "main" 1614710619
-  "main.xdv" 1614710618 72052 a593765d9e7002c513c5709bebd29085 "xelatex"
+["xdvipdfmx"] 1614978843 "main.xdv" "main.pdf" "main" 1614979252
+  "main.xdv" 1614978842 80952 f03bc780bb3bb430aa504c9d3f64c3ee "xelatex"
   (generated)
   "main.pdf"
-["xelatex"] 1614710616 "c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex" "main.xdv" "main" 1614710619
-  "Chapters/Multivariable.tex" 1614710615 14537 1d1fbad870001279b35edd22a1598aaf ""
+["xelatex"] 1614978840 "c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex" "main.xdv" "main" 1614979252
+  "Chapters/Multivariable.tex" 1614979251 17648 52826dc2a78efe54f165d4c93a86ffc3 ""
   "c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex" 1614710614 1105 948c16dd6a95e52250002410edf552f8 ""
   "c:/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1603841547 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1603835713 1004 54797486969f23fa377b128694d548df ""
@@ -70,14 +70,14 @@
   "c:/texlive/2020/texmf-dist/web2c/texmf.cnf" 1603843268 39451 15a3ebee027466ecb89701aa91dfebaf ""
   "c:/texlive/2020/texmf-var/web2c/xetex/xelatex.fmt" 1603851620 4917463 ec99407bfeaeb7c7e4981fa16e994423 ""
   "c:/texlive/2020/texmf.cnf" 1603851410 673 4ae7b2f49cee444c5343a45b5d0f169c ""
-  "c:/texlive/texmf-local/tex/latex/local/common/common.sty" 1614517906 3119 833183a5482aa0f4846150e0ad36e7ed ""
+  "c:/texlive/texmf-local/tex/latex/local/common/common.sty" 1614960549 3206 7c75c2c1383094b90c23ec5c7dab1dad ""
   "c:/texlive/texmf-local/tex/latex/local/english-theorems/english-theorems.sty" 1613400133 4968 3b54db98576bacad74958d08701ceb3d ""
-  "main.aux" 1614710618 5166 8550f27e29c58ca9f85db4ebf01e32c2 "xelatex"
+  "main.aux" 1614978842 5316 8e7cd4ada16bc88fd0829705f12c6d05 "xelatex"
   "main.tex" 1614710614 1105 948c16dd6a95e52250002410edf552f8 ""
-  "main.toc" 1614710618 323 ebe0fada1e7397338141f7540b17bc2a "xelatex"
+  "main.toc" 1614978842 323 a832780fa57103c8cfe8d2ea8323e72e "xelatex"
   (generated)
+  "main.xdv"
+  "main.toc"
+  "main.log"
   "main.aux"
   "main.thm"
-  "main.log"
-  "main.toc"
-  "main.xdv"
