@@ -126,7 +126,8 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
     \begin{equation*}
         \norm[Tv]_W \leq C \norm[v]_V
     \end{equation*}
-    for all \(v \in V\). We denote the set of all linear map from \(V \to W\) as \(\func{\CalL}{V,W}\). If \(T \in \func{\CalL}{V,W}\) is bijective such that \(T^{-1} \in \func{\CalL}{V,W}\), then \(T\) is called an \textbf{isomorphism} and \(V,W\) are \textbf{isomorphic}. An operator \(T \in \func{\CalL}{V,W}\) is called \textbf{isometric} if \(\norm[Tv]_W = \norm[v]_V\) for all \(v \in V\).
+    %TODO: needs correction.
+    for all \(v \in V\). We denote the set of all linear map from \(V \to W\) as \(\func{\CalL}{V,W}\) and the set of all bounded linear maps as \(\func{\CalB}{V,W}\). If \(T \in \func{\CalL}{V,W}\) is bijective such that \(T^{-1} \in \func{\CalL}{V,W}\), then \(T\) is called an \textbf{isomorphism} and \(V,W\) are \textbf{isomorphic}. An operator \(T \in \func{\CalL}{V,W}\) is called \textbf{isometric} if \(\norm[Tv]_W = \norm[v]_V\) for all \(v \in V\).
 \end{definition}
 
 \begin{definition}
@@ -198,7 +199,7 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
     \cref{it:LinearCont5} \(\Rightarrow\) \cref{it:LinearCont1}: Let \(v \in V\) be an arbitrary vector. Then
     \begin{align*}
                  & \sup \norm[\func{T}{\dfrac{v}{\norm[v]_V}}]_W < \infty \\
-        \implies & \sup \norm[Tv]_W < \infty
+        \implies & \sup \dfrac{\norm[Tv]_W}{\norm[v]_W} < \infty
     \end{align*}
 
 \end{proof}
@@ -206,7 +207,7 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 
 
 
-\begin{theorem}
+\begin{theorem} \label{th:finiteDimensionTransformationContinuous}
     If \(V\) is a finite dimensional normed vector space then any linear transformation \(T : V \to W\) is continuous.
 \end{theorem}
 
@@ -219,12 +220,12 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 \end{proof}
 
 \begin{theorem}
-    For two normed vector spaces \(V,W\), \(\normedSpace{\func{\CalL}{V,W}}{\norm[T]}\) is a normed vector space. Moreover, it is a Banach space when \(W\) is a Banach space.
+    For two normed vector spaces \(V,W\), \(\normedSpace{\func{\CalB}{V,W}}{\norm[T]}\) is a normed vector space. Moreover, it is a Banach space when \(W\) is a Banach space.
 \end{theorem}
 
 
 \begin{proof}
-    Clearly \(\func{\CalL}{V,W}\) is a vector space. For its norm \(\norm[T]\) we have
+    Clearly \(\func{\CalB}{V,W}\) is a vector space. For its norm \(\norm[T]\) we have
     \begin{enumerate}
         \item \(\norm[T] \geq 0\) by definition.
         \item if \(\alpha \in \Field_W\) then
@@ -239,30 +240,79 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
                                    & = \norm[T_1] + \norm[T_2]
               \end{align*}
     \end{enumerate}
-
-\end{proof}
-
-\begin{theorem}
-    Let \(\normedSpace{V}{\norm}\) be a normed space. Then any linear transformation \(T: \Reals^n \to V\) is continuous. Furthermore, if \(T\) is a bijection, it is a heomeomorphis.
-\end{theorem}
-%TODO: do the proof dumbass
-\begin{proof}
-
-\end{proof}
-
-\begin{definition}
-    Let \(V_1, V_2 ,\dots , V_n\) be finite dimensional normed vector spaces. Then the function \(\phi : V_1 \times \dots \times V_n\) is \textbf{\(n\)-linear} if by fixing any \(n-1\) component, \(\phi\) is linear relative to the remaining components.
-\end{definition}
-
-\begin{theorem}
-    \(f : \Reals^n \to \Reals^n\) linear transformation is invertible if and only if there exists a \(c\) such that:
+    Suppose \(W\) is a Banach space and \(\{T_i\} \in \func{\CalB}{V,W}\) is a Cauchy sequence. Then for all \(v \in V\)
     \begin{equation*}
-        c \norm[x] \leq \norm[\func{f}{x}]
+        \forall \epsilon \, \exists N \; \suchThat \; m,n > N \implies \norm[T_m v - T_n v]_W \leq \norm[T_m - T_n] < \epsilon
+    \end{equation*}
+    \(\{T_i v\}\) is a Cauchy sequence. Since \(W\) is complete then \(T_i v \to Tv\) for some function \(T\). We claim that \(T\) is a bounded linear map and is the limit of \(T_i \to T\).
+    \begin{align*}
+        \func{T}{v + cu} & = \lim_{i \to \infty} \func{T_i}{v + cu} = \lim_{i \to \infty} T_i v + c T_i u \\
+                         & = Tv + c Tu
+    \end{align*}
+    Note that  \( \abs[\norm[T_m] - \norm[T_n]] \leq \norm[T_m - T_n]\) ans hence \(\norm[T_i]\) is a Cauchy in sequence in \(\Reals\) that has a limit \(t\). There exists a \(N\) such that \(\abs[\norm[T_n] - t] < 1\) for all \(n \geq N\).
+    \begin{equation*}
+        \dfrac{\norm[Tv]_W}{\norm[v]_V} = \lim_{i \to \infty}  \dfrac{\norm[T_i v]_W}{\norm[v]_V} < t + 1
+    \end{equation*}
+    hence \(T\) is bounded and \(T \in \func{B}{V,W}\). Finally, we show that \(T_i \to T\). For an arbitrary \(v \neq 0\) and \(\epsilon > 0\) there exist \(N\) such that
+    \begin{align*}
+        n \geq N \implies \norm[T_i v - Tv]_W < \epsilon \norm[v]_V
+    \end{align*}
+    which means that
+    \begin{equation*}
+        \norm[T_i - T] = \sup \dfrac{\norm[T_i v - Tv]_W}{\norm[v]_V} < \epsilon
+    \end{equation*}
+    Therefore \(T_i \to T\) as desired.
+\end{proof}
+
+\begin{theorem}
+    Let \(\normedSpace{V}{\norm}\) be a normed space. Then any linear transformation \(T: \Reals^n \to V\) is continuous. Furthermore, if \(T\) is a bijection, it is a homeomorphis.
+\end{theorem}
+
+\begin{proof}
+    Since \(\Reals^n\) is finite then by \Cref{th:finiteDimensionTransformationContinuous}, \(T\) is continuous. Assuming \(T\) is bijective, we must show that its inverse \(T^{-1}\) is continuous as well. Since \(T\) is a bijection then \(T\) is a linear isomorphism and \(\dim V = \dim \Reals^n = n\) hence \(T^{-1}\) is a continuous map.
+\end{proof}
+
+\begin{theorem}
+    \(T : \Reals^n \to \Reals^n\) linear transformation is invertible if and only if there exists a \(c\) such that:
+    \begin{equation*}
+        c \norm[x] \leq \norm[Tx]
     \end{equation*}
 \end{theorem}
 
 \begin{proof}
-    A linear transformation \(f: \Reals^n \to \Reals^n\) is one-to-one if and only if it is surjective because \(\dim \Image f + \dim \ker f = n\). Hence, we only need to show that \(f\) is one-to-one.
+    If \(T\) is invertible then \(T^{-1} : \Reals^n \to \Reals^n \) is bounded and thus
+    \begin{equation*}
+        \norm[T^{-1}x] \leq c \norm[x]
+    \end{equation*}
+    and since \(T\) is bijective then there exists \(y\) such that \(x = Ty\) which implies
+    \begin{equation*}
+        \norm[y] \leq c\norm[Ty]
+    \end{equation*}
+    If there exists such \(c\) then \(\norm[Tx] > 0\) for all non-zero \(x\) and hence \(\ker T  = 0\) which implies that \(T\) is a bijection and hence \(T\) is invertible.
+\end{proof}
+
+\begin{definition}
+    Let \(V_1, V_2 ,\dots , V_n\) be  normed vector spaces. Then the function \(\phi : V_1 \times \dots \times V_n \to W\) is \textbf{\(n\)-linear} if by fixing any \(n-1\) component, \(\phi\) is linear relative to the remaining components.
+\end{definition}
+
+\begin{proposition}
+    If \(V_1, V_2, \dots , V_n\) are  normed vector spaces and \(\ \phi : V_1 \times \dots \times V_n \to W \) is a \(n\)-linear then the followings are equivalent
+    \begin{enumerate}
+        \item \(\phi\) is continuous. \label{it:continuityOfnLinear}
+        \item \(\phi\) is continuous at a point. \label{it:continuityOfnLinearataPoint}
+        \item \(\phi\) is bounded, that is there exists a constant \(C > 0\) such that \label{it:boundednessOfnLinear}
+              \begin{equation*}
+                  \norm[\func{\phi}{v_1, \dots ,v_n}]_W \leq C \norm[v_1]_{V_1} \dots \norm[v_n]_{V_n}
+              \end{equation*}
+    \end{enumerate}
+\end{proposition}
+
+
+%TODO: do the proof dumbass
+\begin{proof}
+    \Cref{it:continuityOfnLinear} \(\implies\) \Cref{it:continuityOfnLinearataPoint}: Trivial.
+
+    \Cref{it:continuityOfnLinearataPoint} \(\implies\) \Cref{it:boundednessOfnLinear}
 \end{proof}
 
 {\Large\textbf{Exercises}}
@@ -288,11 +338,17 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
         \norm[h]_V \delta \implies \norm[\func{f}{v + h} - \func{f}{v} - \func{\DiffOperator}{h}]_W = \norm[T(v+h) - Tv - Th]_W = 0 < \epsilon \norm[h]_V
     \end{equation*}
     Hence, the derivative of any linear function is constant.
-    Consider \(S : V \times V \to V\) with \(\func{S}{v,u} = v + u\). \(S\) is differentiable because \(S\) is linear (why?). %TODO: find its derivative.
+    Consider \(S : V \times V \to V\) with \(\func{S}{v,u} = v + u\). \(S\) is differentiable because \(S\) is linear (why?). We claim that \(\DiffOperator S = S\) as
+    \begin{equation*}
+        \norm[\func{S}{(v + h),(u + k)} - \func{S}{v,u} - \func{S}{h,k}] = 0
+    \end{equation*}
 \end{example}
 
 \begin{example}
-    Let \(\mu : \Reals \times V \to V\) with \(\func{\mu}{r,x} = rx\). Then \(\mu\) is differentiable and \(\operatorFunc{\func{\DiffOperator \mu}{r,x}}{t,h} = rh + ta\). %TODO: do the derivation.
+    Let \(\mu : \Reals \times V \to V\) with \(\func{\mu}{r,x} = rx\). Then \(\mu\) is differentiable and \(\operatorFunc{\func{\DiffOperator \mu}{r,x}}{t,h} = rh + tx\) as
+    \begin{equation*}
+        \norm[\func{\mu}{(r + t),(x + h)} - \func{\mu}{r,x} - \operatorFunc{\func{\DiffOperator \mu}{r,x}}{t,h}] = \norm[rx + rh + tx + th - rx - rh - tx] = \abs[h] \norm[t]
+    \end{equation*}
 \end{example}
 
 \begin{proposition}
