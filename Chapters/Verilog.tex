@@ -1,0 +1,103 @@
+\chapter{Verilog}
+\lstset{language = Verilog}
+
+Behavioral design describes circuit as an algorithm and structural design describes explicit circuit elements. A behavioral example for a full adder.
+\begin{lstlisting}
+    module adder(a,b,cin,s,cout);
+        output s,cout;
+        input a,b,cin;
+        reg s, cout;
+        always @(a or b or cin)
+        begin
+            s = a^b^cin;
+            cout = a&b | a& cin | b& cin;
+        end
+    endmodule
+\end{lstlisting}
+
+And an example for a structural design of the same full adder.
+\begin{lstlisting}
+    module adder(a,b,cin,s,cout)
+        output s,cout;
+        input a,b,cin;
+
+        wire w1,w2,w3,w4,w5;
+        xor g1(w1,a,b);
+        xor g2(s,w1,cin);
+        and g3(w2,a,b);
+        and g4(w3,a,cin);
+        and g5(w4,b,cin);
+        or g6(w5,w2,w3);
+        or g7(cout,w4,w5);
+    endmodule
+\end{lstlisting}
+Number are specified by:
+\begin{itemize}
+    \item Radix ('b,'h,'o,'d)
+    \item Bit-length
+    \item Value
+\end{itemize}
+for example
+\begin{itemize}
+    \item 4'b1011
+    \item 12'habc
+    \item 16'd255
+\end{itemize}
+
+
+
+\subsection{4-value logic}
+The set of value are \(\{0,1,x,z\}\). \(x\) is for unknown and \(z\) is for high impedence.
+Signal strengths are (in order):
+\begin{enumerate}
+    \item supply (Driving)
+    \item strong (Driving)
+    \item pull (Driving)
+    \item large (Storage)
+    \item weak (Driving)
+    \item medium (Storage)
+    \item small (Storage)
+    \item highz (High impedence)
+\end{enumerate}
+
+wire is used to represent connections between hardware elements (default = z).
+reg for hardware as well but it retains its value until next assignment (default = x).
+
+\begin{enumerate}
+    \item Syntax
+
+          \begin{lstlisting}
+    wire/reg [msb_index : lsb_index] data_id;
+\end{lstlisting}
+    \item Example
+          \begin{lstlisting}
+        wire a;
+        wire [7:0] bus;
+        wire [31:0] busA, busB, busC;
+        reg clock;
+        reg [0:40] virtual_addr;
+    \end{lstlisting}
+\end{enumerate}
+
+modules are models of hardware. internals not visible to enviroment. internals can be changed as long as the interface (ports) is not changed.
+\begin{lstlisting}
+    module fulladd4 (sum, c_out,a,b,c_in)
+    ... 
+    endmodule  
+\end{lstlisting}
+Ports are the terminals (pins) which have three types (in, out, inout). For port declaration
+\begin{lstlisting}
+    input a,b,sel;
+    input signed [15:0] a,b;
+    output signed [31:9] result;
+    output reg signed [32:1] sun;
+    inout [15:12] addr;
+\end{lstlisting}
+In a module, inputs are always of type net but output can be reg as well. inout can be of type net only.
+We can implement delays as such
+\begin{lstlisting}
+    and #(delay-time) a1 (out,i1,i2);
+    and #(rise-val,fall-val) a1 (out,i1,i2);
+    and #(min:typ:max,min:typ:max) a1 (out,i1,i2);
+    bufif0 #(rise-val,fall-val,turnoff-val) a1 (out,in,control);
+\end{lstlisting}

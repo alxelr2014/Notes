@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  3 MAR 2021 18:15
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  17 MAR 2021 10:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -184,7 +184,29 @@ Package: enumitem 2019/06/20 v3.9 Customized lists
 \enit@inbox=\box50
 \enit@count@id=\count199
 \enitdp@description=\count266
-) (c:/texlive/texmf-local/tex/latex/local/common/common.sty
+) (c:/texlive/2020/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count267
+\lst@gtempboxa=\box51
+\lst@token=\toks25
+\lst@length=\count268
+\lst@currlwidth=\dimen167
+\lst@column=\count269
+\lst@pos=\count270
+\lst@lostspace=\dimen168
+\lst@width=\dimen169
+\lst@newlines=\count271
+\lst@lineno=\count272
+\lst@maxwidth=\dimen170
+ (c:/texlive/2020/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count273
+\lst@skipnumbers=\count274
+\lst@framebox=\box52
+) (c:/texlive/2020/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+ (c:/texlive/texmf-local/tex/latex/local/common/common.sty
 Package: common 
  (c:/texlive/2020/texmf-dist/tex/latex/bbold/bbold.sty
 Package: bbold 1994/04/06 Bbold symbol package
@@ -197,39 +219,39 @@ Package: ntheorem 2011/08/15 1.33
 (c:/texlive/2020/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\theorem@style=\toks25
-\theorem@@style=\toks26
-\theorembodyfont=\toks27
-\theoremnumbering=\toks28
+\theorem@style=\toks26
+\theorem@@style=\toks27
+\theorembodyfont=\toks28
+\theoremnumbering=\toks29
 \theorempreskipamount=\skip66
 \theorempostskipamount=\skip67
 \theoremframepreskipamount=\skip68
 \theoremframepostskipamount=\skip69
 \theoreminframepreskipamount=\skip70
 \theoreminframepostskipamount=\skip71
-\theorem@preskip=\toks29
-\theorem@postskip=\toks30
-\theorem@framepreskip=\toks31
-\theorem@framepostskip=\toks32
-\theorem@inframepreskip=\toks33
-\theorem@inframepostskip=\toks34
-\theoremindent=\dimen167
-\theorem@indent=\dimen168
-\theoremrightindent=\dimen169
-\theorem@rightindent=\dimen170
-\theoremheaderfont=\toks35
-\theoremseparator=\toks36
-\theoremprework=\toks37
-\theorempostwork=\toks38
-\theoremsymbol=\toks39
-\qedsymbol=\toks40
-\theoremkeyword=\toks41
-\qedsymbol=\toks42
+\theorem@preskip=\toks30
+\theorem@postskip=\toks31
+\theorem@framepreskip=\toks32
+\theorem@framepostskip=\toks33
+\theorem@inframepreskip=\toks34
+\theorem@inframepostskip=\toks35
+\theoremindent=\dimen171
+\theorem@indent=\dimen172
+\theoremrightindent=\dimen173
+\theorem@rightindent=\dimen174
+\theoremheaderfont=\toks36
+\theoremseparator=\toks37
+\theoremprework=\toks38
+\theorempostwork=\toks39
+\theoremsymbol=\toks40
+\qedsymbol=\toks41
+\theoremkeyword=\toks42
+\qedsymbol=\toks43
 \thm@topsep=\skip72
 \thm@topsepadd=\skip73
 Package ntheorem Info: Option `thmmarks' loaded on input line 1175.
-\c@endNonectr=\count267
-\c@currNonectr=\count268
+\c@endNonectr=\count275
+\c@currNonectr=\count276
 \mysavskip=\skip74
 Package ntheorem Info: Standard config file ntheorem.std used on input line 1184.
  (c:/texlive/2020/texmf-dist/tex/latex/ntheorem/ntheorem.std (c:/texlive/2020/texmf-dist/tex/latex/base/latexsym.sty
@@ -238,138 +260,139 @@ Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
 LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
 (Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
 )
-\c@currTheoremctr=\count269
-\c@endTheoremctr=\count270
-\c@Theorem=\count271
-\c@currtheoremctr=\count272
-\c@endtheoremctr=\count273
-\c@theorem=\count274
-\c@currSatzctr=\count275
-\c@endSatzctr=\count276
-\c@Satz=\count277
-\c@currsatzctr=\count278
-\c@endsatzctr=\count279
-\c@satz=\count280
-\c@currPropositionctr=\count281
-\c@endPropositionctr=\count282
-\c@Proposition=\count283
-\c@currpropositionctr=\count284
-\c@endpropositionctr=\count285
-\c@proposition=\count286
-\c@currLemmactr=\count287
-\c@endLemmactr=\count288
-\c@Lemma=\count289
-\c@currlemmactr=\count290
-\c@endlemmactr=\count291
-\c@lemma=\count292
-\c@currKorollarctr=\count293
-\c@endKorollarctr=\count294
-\c@Korollar=\count295
-\c@currkorollarctr=\count296
-\c@endkorollarctr=\count297
-\c@korollar=\count298
-\c@currCorollaryctr=\count299
-\c@endCorollaryctr=\count300
-\c@Corollary=\count301
-\c@currcorollaryctr=\count302
-\c@endcorollaryctr=\count303
-\c@corollary=\count304
-\c@currExamplectr=\count305
-\c@endExamplectr=\count306
-\c@Example=\count307
-\c@currexamplectr=\count308
-\c@endexamplectr=\count309
-\c@example=\count310
-\c@currBeispielctr=\count311
-\c@endBeispielctr=\count312
-\c@Beispiel=\count313
-\c@currbeispielctr=\count314
-\c@endbeispielctr=\count315
-\c@beispiel=\count316
-\c@currBemerkungctr=\count317
-\c@endBemerkungctr=\count318
-\c@Bemerkung=\count319
-\c@currbemerkungctr=\count320
-\c@endbemerkungctr=\count321
-\c@bemerkung=\count322
-\c@currAnmerkungctr=\count323
-\c@endAnmerkungctr=\count324
-\c@Anmerkung=\count325
-\c@curranmerkungctr=\count326
-\c@endanmerkungctr=\count327
-\c@anmerkung=\count328
-\c@currRemarkctr=\count329
-\c@endRemarkctr=\count330
-\c@Remark=\count331
-\c@currremarkctr=\count332
-\c@endremarkctr=\count333
-\c@remark=\count334
-\c@currDefinitionctr=\count335
-\c@endDefinitionctr=\count336
-\c@Definition=\count337
-\c@currdefinitionctr=\count338
-\c@enddefinitionctr=\count339
-\c@definition=\count340
-\c@currProofctr=\count341
-\c@endProofctr=\count342
-\c@Proof=\count343
-\c@currproofctr=\count344
-\c@endproofctr=\count345
-\c@proof=\count346
-\c@currBeweisctr=\count347
-\c@endBeweisctr=\count348
-\c@Beweis=\count349
-\c@currbeweisctr=\count350
-\c@endbeweisctr=\count351
-\c@beweis=\count352
+\c@currTheoremctr=\count277
+\c@endTheoremctr=\count278
+\c@Theorem=\count279
+\c@currtheoremctr=\count280
+\c@endtheoremctr=\count281
+\c@theorem=\count282
+\c@currSatzctr=\count283
+\c@endSatzctr=\count284
+\c@Satz=\count285
+\c@currsatzctr=\count286
+\c@endsatzctr=\count287
+\c@satz=\count288
+\c@currPropositionctr=\count289
+\c@endPropositionctr=\count290
+\c@Proposition=\count291
+\c@currpropositionctr=\count292
+\c@endpropositionctr=\count293
+\c@proposition=\count294
+\c@currLemmactr=\count295
+\c@endLemmactr=\count296
+\c@Lemma=\count297
+\c@currlemmactr=\count298
+\c@endlemmactr=\count299
+\c@lemma=\count300
+\c@currKorollarctr=\count301
+\c@endKorollarctr=\count302
+\c@Korollar=\count303
+\c@currkorollarctr=\count304
+\c@endkorollarctr=\count305
+\c@korollar=\count306
+\c@currCorollaryctr=\count307
+\c@endCorollaryctr=\count308
+\c@Corollary=\count309
+\c@currcorollaryctr=\count310
+\c@endcorollaryctr=\count311
+\c@corollary=\count312
+\c@currExamplectr=\count313
+\c@endExamplectr=\count314
+\c@Example=\count315
+\c@currexamplectr=\count316
+\c@endexamplectr=\count317
+\c@example=\count318
+\c@currBeispielctr=\count319
+\c@endBeispielctr=\count320
+\c@Beispiel=\count321
+\c@currbeispielctr=\count322
+\c@endbeispielctr=\count323
+\c@beispiel=\count324
+\c@currBemerkungctr=\count325
+\c@endBemerkungctr=\count326
+\c@Bemerkung=\count327
+\c@currbemerkungctr=\count328
+\c@endbemerkungctr=\count329
+\c@bemerkung=\count330
+\c@currAnmerkungctr=\count331
+\c@endAnmerkungctr=\count332
+\c@Anmerkung=\count333
+\c@curranmerkungctr=\count334
+\c@endanmerkungctr=\count335
+\c@anmerkung=\count336
+\c@currRemarkctr=\count337
+\c@endRemarkctr=\count338
+\c@Remark=\count339
+\c@currremarkctr=\count340
+\c@endremarkctr=\count341
+\c@remark=\count342
+\c@currDefinitionctr=\count343
+\c@endDefinitionctr=\count344
+\c@Definition=\count345
+\c@currdefinitionctr=\count346
+\c@enddefinitionctr=\count347
+\c@definition=\count348
+\c@currProofctr=\count349
+\c@endProofctr=\count350
+\c@Proof=\count351
+\c@currproofctr=\count352
+\c@endproofctr=\count353
+\c@proof=\count354
+\c@currBeweisctr=\count355
+\c@endBeweisctr=\count356
+\c@Beweis=\count357
+\c@currbeweisctr=\count358
+\c@endbeweisctr=\count359
+\c@beweis=\count360
 )) (c:/texlive/2020/texmf-dist/tex/latex/cleveref/cleveref.sty
 Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
 Package cleveref Info: `ntheorem' support loaded on input line 3055.
+Package cleveref Info: `listings' support loaded on input line 3131.
 )
-\c@currotheoremctr=\count353
-\c@endotheoremctr=\count354
-\c@otheorem=\count355
-\c@curroexamplectr=\count356
-\c@endoexamplectr=\count357
-\c@oexample=\count358
-\c@currnotectr=\count359
-\c@endnotectr=\count360
-\c@note=\count361
-\c@currprooflemmactr=\count362
-\c@endprooflemmactr=\count363
-\c@prooflemma=\count364
-\c@currresultsctr=\count365
-\c@endresultsctr=\count366
-\c@results=\count367
+\c@currotheoremctr=\count361
+\c@endotheoremctr=\count362
+\c@otheorem=\count363
+\c@curroexamplectr=\count364
+\c@endoexamplectr=\count365
+\c@oexample=\count366
+\c@currnotectr=\count367
+\c@endnotectr=\count368
+\c@note=\count369
+\c@currprooflemmactr=\count370
+\c@endprooflemmactr=\count371
+\c@prooflemma=\count372
+\c@currresultsctr=\count373
+\c@endresultsctr=\count374
+\c@results=\count375
 ) (c:/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
 File: l3backend-xetex.def 2020-09-24 L3 backend support: XeTeX
-\g__graphics_track_int=\count368
-\l__pdf_internal_box=\box51
-\g__pdf_backend_object_int=\count369
-\g__pdf_backend_annotation_int=\count370
+\g__graphics_track_int=\count376
+\l__pdf_internal_box=\box53
+\g__pdf_backend_object_int=\count377
+\g__pdf_backend_annotation_int=\count378
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 33.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 61.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 61.
  (c:/texlive/2020/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -417,9 +440,11 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: xetex.def on input line 105.
 )
-\Gin@req@height=\dimen171
-\Gin@req@width=\dimen172
-) (./main.toc
+\Gin@req@height=\dimen175
+\Gin@req@width=\dimen176
+)
+\c@lstlisting=\count379
+ (./main.toc
 LaTeX Font Info:    Trying to load font information for U+msa on input line 2.
  (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -445,20 +470,30 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 Chapter 1.
 [3]) (./Chapters/ASM.tex [4]
 Chapter 2.
-)
+) (./Chapters/Verilog.tex [5
+
+] [6
+
+]
+Chapter 3.
+(c:/texlive/2020/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+) (c:/texlive/2020/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2020/03/24 1.8d listings language file
+) (c:/texlive/2020/texmf-dist/tex/latex/listings/lstlang3.sty
+File: lstlang3.sty 2020/03/24 1.8d listings language file
+) [7])
 \tf@thm=\write4
 \openout4 = `main.thm'.
 
- [5
-
-] (./main.aux) ) 
+ [8] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 7051 strings out of 477454
- 115799 string characters out of 5840441
- 434948 words of memory out of 5000000
- 26440 multiletter control sequences out of 15000+600000
- 540131 words of font info for 60 fonts, out of 8000000 for 9000
+ 8547 strings out of 477454
+ 137555 string characters out of 5840441
+ 777464 words of memory out of 5000000
+ 27903 multiletter control sequences out of 15000+600000
+ 540171 words of font info for 65 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 71i,11n,74p,523b,284s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,11n,74p,523b,1199s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (5 pages, 39288 bytes).
+Output written on main.xdv (8 pages, 81788 bytes).
