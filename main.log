@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  19 FEB 2021 02:22
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  21 MAR 2021 16:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -426,18 +426,34 @@ Package graphics Info: Driver file: xetex.def on input line 105.
  [1
 
 
+] (./Chapters/GrowthFunction.tex [2
+
+
 ]
+Chapter 1.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 2.
+(c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 2.
+ (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 2.
+ (c:/texlive/2020/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+) [3])
 \tf@thm=\write4
 \openout4 = `main.thm'.
 
- (./main.aux) ) 
+ [4] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 6920 strings out of 477454
- 113497 string characters out of 5840441
- 426073 words of memory out of 5000000
- 26353 multiletter control sequences out of 15000+600000
- 535112 words of font info for 32 fonts, out of 8000000 for 9000
+ 7043 strings out of 477454
+ 115402 string characters out of 5840441
+ 439124 words of memory out of 5000000
+ 26443 multiletter control sequences out of 15000+600000
+ 540091 words of font info for 55 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 71i,11n,74p,307b,284s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,11n,74p,448b,511s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (1 page, 600 bytes).
+Output written on main.xdv (4 pages, 13940 bytes).
