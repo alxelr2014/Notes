@@ -1,1 +1,5 @@
 \contentsline {chapter}{\numberline {1}Growth of Functions}{3}{}%
+\contentsline {chapter}{\numberline {2}Data Structures}{5}{}%
+\contentsline {section}{\numberline {2.1}Elementary structures}{5}{}%
+\contentsline {subsection}{\numberline {2.1.1}Stack}{5}{}%
+\contentsline {subsection}{\numberline {2.1.2}Queue}{5}{}%

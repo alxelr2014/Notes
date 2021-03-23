@@ -2,40 +2,40 @@
 \begin{definition} \leavevmode
     \begin{description}
         \item[\(\Theta\)-notation] asymptotically tight bound
-              \[ \func{\Theta}{\func{g}{n}} = \set[\func{f}{n}]{ \exists c_1,c_2,n_0 \; \suchThat \; 0 \leq c_1\func{g}{n} \leq \func{f}{n} \leq c_2 \func{g}{n} \; \forall n \geq n_0} \]
+              \[ \bigTheta{\func{g}{n}} = \set[\func{f}{n}]{ \exists c_1,c_2,n_0 \; \suchThat \; 0 \leq c_1\func{g}{n} \leq \func{f}{n} \leq c_2 \func{g}{n} \; \forall n \geq n_0} \]
         \item [\(O\)-notation] asymptotic upper bound
-              \[ \func{O}{\func{g}{n}} = \set[\func{f}{n}]{ \exists c,n_0 \; \suchThat \; 0 \leq \func{f}{n} \leq c \func{g}{n} \; \forall n \geq n_0} \]
+              \[ \bigO{\func{g}{n}} = \set[\func{f}{n}]{ \exists c,n_0 \; \suchThat \; 0 \leq \func{f}{n} \leq c \func{g}{n} \; \forall n \geq n_0} \]
         \item [\(\Omega\)-notation] asymptotic lower bound
-              \[ \func{\Omega}{\func{g}{n}} = \set[\func{f}{n}]{ \exists c,n_0 \; \suchThat \; 0 \leq c \func{g}{n} \leq \func{f}{n} \; \forall n \geq n_0} \]
+              \[ \bigOmega{\func{g}{n}} = \set[\func{f}{n}]{ \exists c,n_0 \; \suchThat \; 0 \leq c \func{g}{n} \leq \func{f}{n} \; \forall n \geq n_0} \]
         \item [\(o\)-notation] asymptotically smaller
-              \[ \func{o}{\func{g}{n}} = \set[\func{f}{n}]{ \forall c > 0, \, \exists n_0 \; \suchThat \; 0 \leq \func{f}{n} < c \func{g}{n} \; \forall n \geq n_0} \]
+              \[ \littleO{\func{g}{n}} = \set[\func{f}{n}]{ \forall c > 0, \, \exists n_0 \; \suchThat \; 0 \leq \func{f}{n} < c \func{g}{n} \; \forall n \geq n_0} \]
         \item [\(\omega\)-notation] asymptotically larger
-              \[ \func{\omega}{\func{g}{n}} = \set[\func{f}{n}]{ \forall c > 0, \, \exists n_0 \; \suchThat \; 0 \leq c \func{g}{n}< \func{f}{n}  \; \forall n \geq n_0} \]
+              \[ \littleOmega{\func{g}{n}} = \set[\func{f}{n}]{ \forall c > 0, \, \exists n_0 \; \suchThat \; 0 \leq c \func{g}{n}< \func{f}{n}  \; \forall n \geq n_0} \]
     \end{description}
 \end{definition}
 
 \begin{proposition} \leavevmode
     \begin{enumerate}
-        \item For any two function \(\func{f}{n}\) and \(\func{g}{n}\), we have \(\func{f}{n} = \func{\Theta}{\func{g}{n}}\) if and only if \(\func{f}{n} = \func{O}{\func{g}{n}}\) and \(\func{f}{n} = \func{\Omega}{\func{g}{n}}\).
-        \item \(\func{f}{n} = \func{\omega}{\func{g}{n}}\) if and only if \(\func{g}{n} = \func{o}{\func{f}{n}}\) and \(\func{f}{n} = \func{\Omega}{\func{g}{n}}\) if and only if \(\func{g}{n} = \func{O}{\func{f}{n}}\)
+        \item For any two function \(\func{f}{n}\) and \(\func{g}{n}\), we have \(\func{f}{n} = \bigTheta{\func{g}{n}}\) if and only if \(\func{f}{n} = \bigO{\func{g}{n}}\) and \(\func{f}{n} = \bigOmega{\func{g}{n}}\).
+        \item \(\func{f}{n} = \littleOmega{\func{g}{n}}\) if and only if \(\func{g}{n} = \littleO{\func{f}{n}}\) and \(\func{f}{n} = \bigOmega{\func{g}{n}}\) if and only if \(\func{g}{n} = \bigO{\func{f}{n}}\)
     \end{enumerate}
 \end{proposition}
-A function \(\func{f}{n}\) is \textbf{polylogarithmically bounded} if  \(\func{f}{n} = \func{O}{\lg^k n}\). Any exponential function with a base strictly greater than 1 grows faster than any polynomial function and any polynomial function grows faster than any polylogarithmic function.
+A function \(\func{f}{n}\) is \textbf{polylogarithmically bounded} if  \(\func{f}{n} = \bigO{\lg^k n}\). Any exponential function with a base strictly greater than 1 grows faster than any polynomial function and any polynomial function grows faster than any polylogarithmic function.
 \begin{remark}[Stirling's approximation]
     \begin{equation}
-        n! = \sqrt{2\pi n} \left(\frac{n}{e}\right)^n \left(1 + \func{\Theta}{\frac{1}{n}}\right)
+        n! = \sqrt{2\pi n} \left(\frac{n}{e}\right)^n \left(1 + \bigTheta{\frac{1}{n}}\right)
     \end{equation}
 \end{remark}
 
-\begin{theorem}
+\begin{theorem}[Master's theorem]
     Let \(a \geq 1\) and \(b > 1\) be constants. The recurrence
     \begin{equation*}
         \func{T}{n} = a \func{T}{\frac{n}{b}} + \func{f}{b}
     \end{equation*}
     has the bounds
     \begin{enumerate}
-        \item If \(\func{f}{n} = \func{O}{n^{\log_b a - \epsilon}}\) for some \(\epsilon > 0\) then \(\func{T}{n} = \func{\Theta}{n^{\log_b a }}\).
-        \item If \(\func{f}{n} = \func{\Theta}{n^{\log_b a}}\) then \(\func{T}{n} = \func{\Theta}{n^{\log_b a } \lg n}\).
-        \item If \(\func{f}{n} = \func{\Omega}{n^{\log_b a + \epsilon}}\) for some \(\epsilon > 0\) and if \(a\func{f}{n/b} \leq c \func{f}{n}\) for some constant \(c < 1\) and all sufficiently large \(n\) then \(\func{T}{n} = \func{\Theta}{\func{f}{n}}\).
+        \item If \(\func{f}{n} = \bigO{n^{\log_b a - \epsilon}}\) for some \(\epsilon > 0\) then \(\func{T}{n} = \bigTheta{n^{\log_b a }}\).
+        \item If \(\func{f}{n} = \bigTheta{n^{\log_b a}}\) then \(\func{T}{n} = \bigTheta{n^{\log_b a } \lg n}\).
+        \item If \(\func{f}{n} = \bigOmega{n^{\log_b a + \epsilon}}\) for some \(\epsilon > 0\) and if \(a\func{f}{n/b} \leq c \func{f}{n}\) for some constant \(c < 1\) and all sufficiently large \(n\) then \(\func{T}{n} = \bigTheta{\func{f}{n}}\).
     \end{enumerate}
 \end{theorem}
