@@ -39,3 +39,33 @@ A function \(\func{f}{n}\) is \textbf{polylogarithmically bounded} if  \(\func{f
         \item If \(\func{f}{n} = \bigOmega{n^{\log_b a + \epsilon}}\) for some \(\epsilon > 0\) and if \(a\func{f}{n/b} \leq c \func{f}{n}\) for some constant \(c < 1\) and all sufficiently large \(n\) then \(\func{T}{n} = \bigTheta{\func{f}{n}}\).
     \end{enumerate}
 \end{theorem}
+
+\begin{example}
+    Multiplication of two number \(x = \overline{ x_{n-1} \dots x_0 }\) and \(y = \overline{y_{n-1} \dots y_0}\) can be done in \(\bigTheta{n^2} \) by noting that \(x = A \times 10^{n/2} + B\) and \(y = C \times 10^{n/2} + D\) then
+    \begin{equation*}
+        yx = AC \times 10^{n} + (AC + BD)\times 10^{n/2} + DB
+    \end{equation*}
+    therefore,
+    \begin{equation*}
+        \func{T}{n} = 4 \func{T}{\dfrac{n}{2}} + \bigO{n}
+    \end{equation*}
+    and by master theorem \(\func{T}{n} = \bigTheta{n^2}\). However, we can do better by first multiplying \((A + B)(C + D)\) and then computing \(AC\) and \(BD\). Then, \(AC + BD = (A+B)(C +  D) - AC - BD\) which means that the new recurrence is
+    \begin{equation*}
+        \func{T}{n} = 3 \func{T}{\dfrac{n}{2}} + \bigO{n}
+    \end{equation*}
+    and improves the bound to \(\bigTheta{n^{\lg 3}}\)\footnote{Karatsuba algorithm}. It is also possible to devise an algorithm with complexity of \(\bigTheta{n \lg n \func{ \lg}{ \lg n}}\) \footnote{Schönhage–Strassen algorithm} and even \(\bigTheta{n \lg n}\) \footnote{Harvey's algorithm}. It is proven that for any \(\epsilon > 0\) there exists an alogrithm with \(\bigTheta{n^{1 + \epsilon}}\)
+\end{example}
+
+\begin{example}
+    Given a tournament graph (directed complete graph), find a Hamiltonian path.
+\end{example}
+
+{\Large\textbf{Problems}}
+\begin{enumerate}
+    \item Given the recurrence
+          \begin{equation*}
+              \func{T}{n} = \func{T}{\alpha n} + \func{T}{\beta n} + n
+          \end{equation*}
+          solve for \(\alpha + \beta < 1\) and \(\alpha + \beta = 1\).
+\end{enumerate}
+\newpage

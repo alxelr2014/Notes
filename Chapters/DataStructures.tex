@@ -9,6 +9,10 @@ Stack is FIFO, \textit{First in first out}. We can do \(m\) pushes (with doublin
     \end{enumerate}
 \end{example}
 
+\begin{example}
+    Numbers \(a_1 , \dots a_n\) are given. For each index \(i\) find the smallest index \(j\) such that \(\forall j < k \leq i, \; a_k \leq a_i\)
+\end{example}
+
 \subsection{Queue}
 Queue is LIFO, \textit{Last in first out}.
 Pushing (amortized) and poping is done in constant time, \(\bigO{1}\).
@@ -21,3 +25,17 @@ Pushing (amortized) and poping is done in constant time, \(\bigO{1}\).
 
 \subsection{Linked lists}
 In \textbf{singly linked list} every element points to the next element. In \textbf{doubly linked list} every element points to the next and previous element. In \textbf{circulare linked list} the last element's next is the head and the head's previous is the last. Insertion and deletion is done in constant time.
+
+\begin{example}
+    Write a program that reverses an SLL.
+\end{example}
+
+\begin{example}
+    Write a program that removes duplicates from an SLL.
+\end{example}
+
+{\Large\textbf{Exercises}}
+\begin{enumerate}
+    \item Implement a stack using two queues. Implement a queue using two stacks.
+\end{enumerate}
+\newpage

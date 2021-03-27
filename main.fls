@@ -377,6 +377,17 @@ INPUT ./Chapters/GrowthFunction.tex
 INPUT Chapters/GrowthFunction.tex
 INPUT ./Chapters/GrowthFunction.tex
 INPUT Chapters/GrowthFunction.tex
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/latex-fonts/lasy10.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/latex-fonts/lasy7.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/latex-fonts/lasy5.tfm
 INPUT ./Chapters/DataStructures.tex
 INPUT Chapters/DataStructures.tex
 INPUT ./Chapters/DataStructures.tex
