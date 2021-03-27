@@ -272,6 +272,14 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
     Since \(\Reals^n\) is finite then by \Cref{th:finiteDimensionTransformationContinuous}, \(T\) is continuous. Assuming \(T\) is bijective, we must show that its inverse \(T^{-1}\) is continuous as well. Since \(T\) is a bijection then \(T\) is a linear isomorphism and \(\dim V = \dim \Reals^n = n\) hence \(T^{-1}\) is a continuous map.
 \end{proof}
 
+\begin{definition}[General linear group]
+    The \textbf{general linear group} of a vector space, written \(\func{\GL}{V}\) is the set of all bijective linear transformation.
+\end{definition}
+
+\begin{proposition}
+    If \(V\) is a finite (also works for infinite) vector space then \(\func{\GL}{V}\) is open in \(\func{\CalL}{V,V}\), in fact, if \(f \in \func{\GL}{V}\) then the open ball centered at \(f\) with radius \(\norm[f^{-1}]^{-1}\) remains in \(\func{\GL}{V}\). Furthermore, the inverse operator \(i : \func{\GL}{V} \to \func{\GL}{V}\), \(\func{i}{T} = T^{-1}\) is continuous.
+\end{proposition}
+
 \begin{theorem}
     \(T : \Reals^n \to \Reals^n\) linear transformation is invertible if and only if there exists a \(c\) such that:
     \begin{equation*}
@@ -335,7 +343,7 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
 \begin{example}
     Every linear function \(f : V \to W\) with \(\func{f}{v} = Tv + b\) where \(b \in W\) is differentiable and \(\func{\DiffOperator f}{v} = T\). Since
     \begin{equation*}
-        \norm[h]_V \delta \implies \norm[\func{f}{v + h} - \func{f}{v} - \func{\DiffOperator}{h}]_W = \norm[T(v+h) - Tv - Th]_W = 0 < \epsilon \norm[h]_V
+        \norm[h]_V < \delta \implies \norm[\func{f}{v + h} - \func{f}{v} - \operatorFunc{\DiffOperator \func{f}{v}}{h}]_W = \norm[T(v+h) - Tv - Th]_W = 0 < \epsilon \norm[h]_V
     \end{equation*}
     Hence, the derivative of any linear function is constant.
     Consider \(S : V \times V \to V\) with \(\func{S}{v,u} = v + u\). \(S\) is differentiable because \(S\) is linear (why?). We claim that \(\DiffOperator S = S\) as
@@ -347,18 +355,26 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
 \begin{example}
     Let \(\mu : \Reals \times V \to V\) with \(\func{\mu}{r,x} = rx\). Then \(\mu\) is differentiable and \(\operatorFunc{\func{\DiffOperator \mu}{r,x}}{t,h} = rh + tx\) as
     \begin{equation*}
-        \norm[\func{\mu}{(r + t),(x + h)} - \func{\mu}{r,x} - \operatorFunc{\func{\DiffOperator \mu}{r,x}}{t,h}] = \norm[rx + rh + tx + th - rx - rh - tx] = \abs[h] \norm[t]
+        \norm[\func{\mu}{(r + t),(x + h)} - \func{\mu}{r,x} - \operatorFunc{\func{\DiffOperator \mu}{r,x}}{t,h}] = \norm[rx + rh + tx + th - rx - rh - tx] = \abs[t] \norm[h] \leq \epsilon \norm[(t,h)]
     \end{equation*}
+    by letting \(\norm[(t,h)] = \sqrt{t^2 + \norm[h]^2}\) and \(\delta = \epsilon\).
 \end{example}
 
 \begin{proposition}
     Differentiability of \(f\) at \(x\) implies continuity at \(x\).
 \end{proposition}
 
+\begin{proof}
+    \begin{equation*}
+        \norm[\func{f}{x + h} - \func{f}{x}] = \norm[\operatorFunc{\DiffOperator \func{f}{x}}{h} + \func{R}{h}] \leq \norm[\DiffOperator \func{f}{x}]\norm[v] + \norm[\func{R}{v}] \to 0
+    \end{equation*}
+    as \(v \to 0\).
+\end{proof}
+
 \begin{proposition} \label{eq:partialDerivative}
     Assume \(f: U \subset V \to W\) is differentiable at \(x_0\) and let \(u \in V\) be a non-zero vector then
     \begin{equation*}
-        \lim_{t \to 0} \dfrac{\func{f}{x_0 + tu} - \func{f}{x_0}}{t} =\func{f'}{x_0} (u)
+        \func{f'}{x_0} (u) = \lim_{t \to 0} \dfrac{\func{f}{x_0 + tu} - \func{f}{x_0}}{t}
     \end{equation*}
 \end{proposition}
 
@@ -381,20 +397,36 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
 \end{remark}
 
 \begin{theorem}
-    \(f : U \subset \Reals^n \to \Reals^m\) has all of its partial derivative and they're continuous then \(f\) is differentiable.
+    \(f : V \to W\) has all of its partial derivative and they're continuous then \(f\) is differentiable.
 \end{theorem}
+
+\begin{proof}
+    Let \(\set{e_1, \dots, e_n}\) be a unit basis for \(V\).
+    \begin{align*}
+         & \norm[\func{f}{x_1 + h_1, \dots, x_n + h_n} - \func{f}{x_1, \dots , x_n} - \sum_{i = 1}^{n} \operatorFunc{\DiffOperator_{e_i} \func{f}{x}}{h}]                                                                    \\
+         & \leq \sum_{i = 1}^{n} \norm[\func{f}{x_1, \dots, x_{i-1} , x_i + h_i , \dots , x_n + h_n } - \func{f}{x_1, \dots , x_i , x_{i+1} + h_{i+1}, \dots x_n + h_n} - \operatorFunc{\DiffOperator_{e_i} \func{f}{x}}{h}] \\
+         & \leq
+    \end{align*}
+\end{proof}
 
 \begin{proposition}
     Let \(f,g : V \to W\) be differentiable at \(x\) and \(h : W \to U\) be differentiable at \(y = \func{f}{x}\). Furthermore, let \(c\) be an scalar then
     \begin{enumerate}
-        \item \(\func{\DiffOperator}{ f + cg} = \func{\DiffOperator}{f} + c \func{\DiffOperator}{g}\).
+        \item \(\func{\DiffOperator \,}{ f + cg} = \DiffOperator f + c \DiffOperator g\).
         \item  \(h \circ f\) is differentiable at \(x\) and
               \begin{equation*}
-                  \func{\DiffOperator}{ h \circ f} =  \left( \func{\DiffOperator}{h}\circ f \right) \circ \func{\DiffOperator}{ f}
+                  \func{\DiffOperator \,}{ h \circ f} =  \left( \func{\DiffOperator \,}{h}\circ f \right) \circ \func{\DiffOperator \, }{ f}
+              \end{equation*}
+        \item For a bilinear function \(\beta\)
+              \begin{equation*}
+                  \operatorFunc{\DiffOperator \func{\beta}{f,g}}{v} = \func{\beta}{\operatorFunc{\DiffOperator f}{v},g} + \func{\beta}{f, \operatorFunc{\DiffOperator g}{v}}
               \end{equation*}
     \end{enumerate}
 \end{proposition}
 
+\begin{proposition}
+    \(f : U \subset V \to W_1 \times \dots \times W_n\) is differentiable at \(x_0\) if and only if all its component is differentiable at \(x_0\). Furthermore, \(\DiffOperator f = (\DiffOperator f_1, \dots , \DiffOperator f_n)\).
+\end{proposition}
 
 \begin{theorem}[Leibnitz rule]
     Let \(V_1, V_2, \dots , V_n\) be finite dimensional vector spaces and \(f: V_1 \times \dots \times V_n \to W\) is a \(n\)-linear function. \(f\) is differentiable at \(a = (a_1, \dots , a_n)\) and
@@ -403,8 +435,26 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
     \end{equation*}
 \end{theorem}
 
+%TODO: [[]]
+\begin{proof}
 
-\begin{proposition}
-    \(f : U \subset \Reals^n \to \Reals^m\) is differentiable at \(x_0\) if and only if every component is differentiable at \(x_0\).
-\end{proposition}
+\end{proof}
+
+\begin{example}
+    Let \(Z: \Reals^3 \times \Reals^3 \to \Reals\) with \(\func{Z}{u,v}= u \times v\) be a bilinear function, \(f,g: \Reals \to \Reals^3\) and \(\func{h}{t} = \func{f}{t} \times \func{g}{t}\). \(h = Z \circ \phi\) where \(\func{\phi}{t} = (\func{f}{t},\func{g}{t})\). Then we have:
+    \begin{align*}
+        \DiffOperator \func{h}{t} & = \operatorFunc{\DiffOperator Z}{\func{\phi}{t}}\circ \DiffOperator \func{\phi}{t}                             \\
+                                  & =  \operatorFunc{\DiffOperator Z}{\func{\phi}{t}} \circ (\DiffOperator \func{f}{t}, \DiffOperator \func{g}{t}) \\
+                                  & = \func{Z}{\DiffOperator \func{f}{t}, \func{g}{t}} + \func{Z}{ \func{f}{t}, \DiffOperator \func{g}{t}}         \\
+                                  & = \DiffOperator \func{f}{t} \times \func{g}{t} + \func{f}{t} \times \DiffOperator \func{g}{t}
+    \end{align*}
+\end{example}
+
+\begin{example}
+    Consider \(A = [\func{f_{ij}}{x_1, \dots , x_n}]\) where each \(f_{ij}\) is differentiable. Then
+    \begin{equation*}
+        \DiffOperator \func{\det}{A}
+    \end{equation*}
+    can be calculated using the Leibnitz rule, since determinant is \(n\)-linear function.
+\end{example}
 
