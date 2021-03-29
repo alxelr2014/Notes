@@ -1,5 +1,6 @@
 \contentsline {chapter}{\numberline {1}Multivariable Calculus}{3}{}%
 \contentsline {section}{\numberline {1.1}Linear Algebra}{3}{}%
 \contentsline {subsection}{\numberline {1.1.1}Vector Spaces}{3}{}%
-\contentsline {subsection}{\numberline {1.1.2}Linear Maps}{5}{}%
-\contentsline {section}{\numberline {1.2}Derivative}{9}{}%
+\contentsline {subsection}{\numberline {1.1.2}Linear Maps}{4}{}%
+\contentsline {section}{\numberline {1.2}Derivative}{10}{}%
+\contentsline {subsection}{\numberline {1.2.1}Mean value theorem}{12}{}%
