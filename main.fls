@@ -377,6 +377,10 @@ INPUT ./Chapters/Multivariable.tex
 INPUT Chapters/Multivariable.tex
 INPUT ./Chapters/Multivariable.tex
 INPUT Chapters/Multivariable.tex
+INPUT ./Chapters/Multivariable/LinearAlgebra.tex
+INPUT Chapters/Multivariable/LinearAlgebra.tex
+INPUT ./Chapters/Multivariable/LinearAlgebra.tex
+INPUT Chapters/Multivariable/LinearAlgebra.tex
 INPUT c:/texlive/2020/texmf-dist/tex/latex/bbold/Ubbold.fd
 INPUT c:/texlive/2020/texmf-dist/tex/latex/bbold/Ubbold.fd
 INPUT c:/texlive/2020/texmf-dist/tex/latex/bbold/Ubbold.fd
@@ -384,5 +388,9 @@ INPUT c:/texlive/2020/texmf-dist/tex/latex/bbold/Ubbold.fd
 INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/bbold/bbold12.tfm
 INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/bbold/bbold8.tfm
 INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/bbold/bbold6.tfm
+INPUT ./Chapters/Multivariable/Derivative.tex
+INPUT Chapters/Multivariable/Derivative.tex
+INPUT ./Chapters/Multivariable/Derivative.tex
+INPUT Chapters/Multivariable/Derivative.tex
 OUTPUT main.thm
 INPUT main.aux

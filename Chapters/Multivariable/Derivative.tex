@@ -1,0 +1,323 @@
+\section{Derivative}
+Let \(V,W\) be finite dimensional vector spaces and \(f: U \subset V \to W\) where \(U\) is open. Then \(f\) is differentiable at \(x_0\) when a linear transformation \(T : V \to W\) such that
+\begin{equation*}
+    \lim_{\norm[h] \to 0} \dfrac{\norm[\func{f}{x_0 + h} - \func{f}{x_0} - \func{T}{h}]}{\norm[h]}= 0
+\end{equation*}
+Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
+\begin{equation*}
+    \func{f}{x_0 + h} - \func{f}{x_0} - Th = \func{R}{h} \qquad \frac{\func{R}{h}}{\norm[h]} \to 0
+\end{equation*}
+\(T\) if it exists is unique, represented by \(\func{f'}{x_0}\), \(\DiffOperator f\), or \(\func{\diffOperator f}{x}\) and called the \textbf{total derivative} or \textbf{Fr\'{e}chet derivative}.
+
+\begin{example}
+    Every linear function \(f : V \to W\) with \(\func{f}{v} = Tv + b\) where \(b \in W\) is differentiable and \(\func{\DiffOperator f}{v} = T\). Since
+    \begin{equation*}
+        \norm[h]_V < \delta \implies \norm[\func{f}{v + h} - \func{f}{v} - \operatorFunc{\DiffOperator \func{f}{v}}{h}]_W = \norm[T(v+h) - Tv - Th]_W = 0 < \epsilon \norm[h]_V
+    \end{equation*}
+    Hence, the derivative of any linear function is constant.
+    Consider \(S : V \times V \to V\) with \(\func{S}{v,u} = v + u\). \(S\) is differentiable because \(S\) is linear (why?). We claim that \(\DiffOperator S = S\) as
+    \begin{equation*}
+        \norm[\func{S}{(v + h),(u + k)} - \func{S}{v,u} - \func{S}{h,k}] = 0
+    \end{equation*}
+\end{example}
+
+\begin{example}
+    Let \(\mu : \Reals \times V \to V\) with \(\func{\mu}{r,x} = rx\). Then \(\mu\) is differentiable and \(\operatorFunc{\func{\DiffOperator \mu}{r,x}}{t,h} = rh + tx\) as
+    \begin{align*}
+        \norm[\func{\mu}{(r + t),(x + h)} - \func{\mu}{r,x} - \operatorFunc{\func{\DiffOperator \mu}{r,x}}{t,h}] & = \norm[rx + rh + tx + th - rx - rh - tx]     \\
+                                                                                                                 & = \abs[t] \norm[h] \leq \epsilon \norm[(t,h)]
+    \end{align*}
+    by letting \(\norm[(t,h)] = \sqrt{t^2 + \norm[h]^2}\) and \(\delta = \epsilon\).
+\end{example}
+
+\begin{proposition}
+    Differentiability of \(f\) at \(x\) implies continuity at \(x\).
+\end{proposition}
+
+\begin{proof}
+    \begin{equation*}
+        \norm[\func{f}{x + h} - \func{f}{x}] = \norm[\operatorFunc{\DiffOperator \func{f}{x}}{h} + \func{R}{h}] \leq \norm[\DiffOperator \func{f}{x}]\norm[v] + \norm[\func{R}{v}] \to 0
+    \end{equation*}
+    as \(v \to 0\).
+\end{proof}
+
+\begin{proposition} \label{eq:partialDerivative}
+    Assume \(f: U \subset V \to W\) is differentiable at \(x_0\) and let \(u \in V\) be a non-zero vector then
+    \begin{equation*}
+        \func{f'}{x_0} (u) = \lim_{t \to 0} \dfrac{\func{f}{x_0 + tu} - \func{f}{x_0}}{t}
+    \end{equation*}
+\end{proposition}
+
+\begin{proof}
+    Let \(h = tu\) then
+    \begin{align*}
+        \func{R}{tu}                     & = \func{f}{x_0 + tu} - \func{f}{x_0} - \func{T}{tu}            \\
+                                         & = \func{f}{x_0 + tu} - \func{f}{x_0} - t\func{T}{u}            \\
+        \implies \dfrac{\func{R}{tu}}{t} & = \dfrac{ \func{f}{x_0 + tu} - \func{f}{x_0}}{t} - \func{T}{u} \\
+        \implies \lim_{t \to 0}          & \dfrac{ \func{f}{x_0 + tu} - \func{f}{x_0}}{t} = \func{T}{u}
+    \end{align*}
+\end{proof}
+
+\begin{definition}[Directional derivative]
+    If we let \(\norm[u] = 1\) then the limit in \Cref{eq:partialDerivative} becomes the \textbf{directional derivative} of \(f\) in the direction of \(u\) and is denoted by \(\DiffOperator_u f\).
+\end{definition}
+
+\begin{remark}
+    The existence of all directional derivatives of \(f\) doesnt imply its differentiability or even its continuity.
+\end{remark}
+
+\begin{remark}
+    If \(\DiffOperator f: U \to \func{\CalL}{V,W}\) is continuous then each \(\PDiff{f_i}{x_j}\) is continuous. Since
+    \begin{equation*}
+        \DiffOperator \func{f}{x} = \begin{bmatrix}
+            \func{\PDiff{f_1}{x_1}}{x} & \dots  & \func{\PDiff{f_1}{x_n}}{x} \\
+            \vdots                     & \ddots &                            \\
+            \func{\PDiff{f_m}{x_1}}{x} & \dots  & \func{\PDiff{f_m}{x_n}}{x}
+        \end{bmatrix}
+    \end{equation*}
+    and the reverse is true as well.
+\end{remark}
+
+\begin{theorem}
+    \(f : V \to W\) has all of its partial derivative in a neighbourhood of \(u \in U\) and they're continuous at \(u\) then \(f\) is differentiable at \(u\). Especially, if \(\PDiff{f_i}{x_j}\) exist and are continuous at every point of \(u\) then \(f \in \CalC^1\).
+\end{theorem}
+
+\begin{proof}
+    We prove that each \(f_i\) is differentiable. Let \(\set{e_1, \dots , e_n}\) be a basis for \(V\) and take \(\norm[x] = \sum \abs[\xi_j]\). Consider a convex neighbourhood \(E\) of \(a\). Then, for a given \(\epsilon > 0\) we will show there exists a \(\delta > 0\) such that
+    \begin{equation*}
+        \norm[h] < \delta \implies \norm[\func{f_i}{a + h} - \func{f_i}{a} - \sum_{j = 1}^n \operatorFunc{\DiffOperator_{e_j} \func{f_i}{a}}{h_j}] \leq \epsilon \norm[h]
+    \end{equation*}
+    Cosider the point sequence \(a^k =\sum_{j < k} a_j e_j + \sum_{j \geq k} (a_j + h_j)e_j \) where \(a^1 = a + h\) and \(a^{n + 1} = a\) then
+    \begin{equation*}
+        \norm[\func{f_i}{a + h} - \func{f_i}{a} - \sum_{j = 1}^n \operatorFunc{\DiffOperator_{e_j} \func{f_i}{a}}{h_j}]  \leq \sum_{k = 1}^{n} \norm[\func{f_i}{a^k} - \func{f_i}{a^{k+1}} - \operatorFunc{\DiffOperator_{e_k} \func{f_i}{a}}{h_k}]
+    \end{equation*}
+    hence we are done if
+    \begin{equation*}
+        \norm[\func{f_i}{a^k} - \func{f_i}{a^{k+1}} - \operatorFunc{\DiffOperator_{e_k} \func{f_i}{a}}{h_k}] \leq \epsilon \abs[h_k]
+    \end{equation*}
+    for \(k = 1\) it is equivalent to the existence first partial derivative. and for the rest we use the continuity.
+\end{proof}
+
+% TODO: do the proof
+\begin{proposition}
+    Let \(f,g : V \to W\) be differentiable at \(x\) and \(h : W \to U\) be differentiable at \(y = \func{f}{x}\). Furthermore, let \(c\) be an scalar then
+    \begin{enumerate}
+        \item \(\func{\DiffOperator \,}{ f + cg} = \DiffOperator f + c \DiffOperator g\).
+        \item  \(h \circ f\) is differentiable at \(x\) and
+              \begin{equation*}
+                  \func{\DiffOperator \,}{ h \circ f} =  \left( \func{\DiffOperator \,}{h}\circ f \right) \circ \func{\DiffOperator \, }{ f}
+              \end{equation*}
+        \item For a bilinear function \(\beta\)
+              \begin{equation*}
+                  \operatorFunc{\DiffOperator \func{\beta}{f,g}}{v} = \func{\beta}{\operatorFunc{\DiffOperator f}{v},g} + \func{\beta}{f, \operatorFunc{\DiffOperator g}{v}}
+              \end{equation*}
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+
+\end{proof}
+
+%TODO: do the proof
+\begin{proposition}
+    \(f : U \subset V \to W_1 \times \dots \times W_n\) is differentiable at \(x_0\) if and only if all its component is differentiable at \(x_0\). Furthermore, \(\DiffOperator f = (\DiffOperator f_1, \dots , \DiffOperator f_n)\).
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}[Leibnitz rule]
+    Let \(V_1, V_2, \dots , V_n\) be finite dimensional vector spaces and \(f: V_1 \times \dots \times V_n \to W\) is a \(n\)-linear function. \(f\) is differentiable at \(a = (a_1, \dots , a_n)\) and
+    \begin{equation*}
+        \operatorFunc{\func{\DiffOperator f}{a}}{h_1, \dots h_n} = \func{f}{h_1, a_2, \dots, a_n} + \func{f}{a_1, h_2, \dots, a_n} + \dots + \func{f}{a_1, a_2, \dots, h_n}
+    \end{equation*}
+\end{theorem}
+
+%TODO: do the proof
+\begin{proof}
+    Consider the following points
+    \begin{align*}
+        \bar{a}^k & = (a_1, \dots , a_k, a_{k+1} + h_{k+1}, \dots , a_n + h_n), & \bar{a}^0 = a + h , \bar{a}^n = a  \\
+        \bar{b}^k & = (a_1, \dots a_k, h_{k+1},a_{k+2}, \dots, a_n)             & \bar{b}^0 = (h_1, a_2, \dots, a_n)
+    \end{align*}
+    for a fixed \(\epsilon > 0\) we have
+    %\begin{align*}
+    %   \norm[\func{f}{a + h} - \func{f}{a} - \operatorFunc{\func{\DiffOperator f}{a}}{h}]_W & \leq \sum_{i = 1}^n \norm[\func{f}{\bar{a}^{i-1}} -\func{f}{\bar{a}^i} - \func{f}{\bar{b}^{k-1}}]_W                          \\
+    %                                                                                       & = \sum_{i = 1}^n \norm[\func{f}{a_1, \dots, a_{i-1},h_i, a_{i+1} + h_{i + 1} , \dots a_n + h_n} - \func{f}{\bar{b}^{k-1}}]_W
+    %\end{align*}
+\end{proof}
+
+\begin{example}
+    Let \(Z: \Reals^3 \times \Reals^3 \to \Reals\) with \(\func{Z}{u,v}= u \times v\) be a bilinear function, \(f,g: \Reals \to \Reals^3\) and \(\func{h}{t} = \func{f}{t} \times \func{g}{t}\). \(h = Z \circ \phi\) where \(\func{\phi}{t} = (\func{f}{t},\func{g}{t})\). Then we have:
+    \begin{align*}
+        \DiffOperator \func{h}{t} & = \operatorFunc{\DiffOperator Z}{\func{\phi}{t}}\circ \DiffOperator \func{\phi}{t}                             \\
+                                  & =  \operatorFunc{\DiffOperator Z}{\func{\phi}{t}} \circ (\DiffOperator \func{f}{t}, \DiffOperator \func{g}{t}) \\
+                                  & = \func{Z}{\DiffOperator \func{f}{t}, \func{g}{t}} + \func{Z}{ \func{f}{t}, \DiffOperator \func{g}{t}}         \\
+                                  & = \DiffOperator \func{f}{t} \times \func{g}{t} + \func{f}{t} \times \DiffOperator \func{g}{t}
+    \end{align*}
+\end{example}
+
+\begin{example}
+    Consider \(A = [\func{f_{ij}}{x_1, \dots , x_n}]\) where each \(f_{ij}\) is differentiable. Then
+    \begin{equation*}
+        \DiffOperator \func{\det}{A}
+    \end{equation*}
+    can be calculated using the Leibnitz rule, since determinant is \(n\)-linear function.
+\end{example}
+
+\subsection{Mean value theorem}
+in general doesnt work \(f(t) = (t^2,t^3)\) however it works on a convex domain to reals.
+
+\begin{theorem}
+    Let \(V,W\) be normed finite dimensional vector spaces and \(f: U \to W\) is differentiable and \(A,B \in U\) are such that the line connecting in completely contained in \(U\) and for each \(p\) on that line
+    \begin{equation*}
+        \norm[\DiffOperator \func{f}{p}] \leq M
+    \end{equation*}
+    then
+    \begin{equation*}
+        \norm[\func{f}{B} - \func{f}{A}]_W \leq M \norm[B - A]_V
+    \end{equation*}
+\end{theorem}
+First consider the following lemma:
+Assume the following lemma
+\begin{lemma} \label{lm:MeanValueTheoremLemma}
+    If \(\phi: \clcl{0}{1} \to W\) is continuous, differentiable on \(\opop{0}{1}\) and \(\norm[\func{\phi'}{t}] \leq M\) for all \(t \in \opop{0}{1}\) then
+    \begin{equation*}
+        \norm[\func{\phi}{1} - \func{\phi}{0}]_W \leq M
+    \end{equation*}
+\end{lemma}
+
+\begin{prooflemma}
+    We provide three proofs for the lemma
+    \begin{enumerate}
+        \item Assuming the norm on \(W\) is induced by an inner product. Then, let \( e = \frac{\func{\phi}{1} - \func{\phi}{0}}{\norm[\func{\phi}{1} - \func{\phi}{0}]}\) be a unit vecor in \(W\) then \(\psi : \clcl{0}{1} \to \Reals\), \(\func{\psi}{t} = e \cdot \func{\phi}{t}\) is continuous and differentiable on \(\opop{0}{1}\). By the mean the value theorem
+              \begin{align*}
+                  \abs[\func{\psi}{1} - \func{\psi}{0}]                        & = \abs[\func{\psi'}{t_0}]       \\
+                  \abs[e \cdot \left( \func{\phi}{1} - \func{\phi}{0} \right)] & = \abs[e \cdot \func{\phi'}{t}] \\
+                  \norm[\func{\phi}{1} - \func{\phi}{0}]                       & \leq M
+              \end{align*}
+        \item Using the Hahn-Banach theorem, that is for a finite dimensional vector space \(V\) and \(e \in V\) with \(\norm[v] = 1\) then there exists a linear function \(\theta : V \to \Reals\) such that \(\norm[\theta] = 1\) and \(\func{\theta}{e} = 1\). Now let \(\func{\psi} = \func{\theta}{\func{\phi}{t}}\) then
+              \begin{align*}
+                  \abs[\func{\psi}{1} - \func{\psi}{0}]                & = \abs[\func{\psi'}{t_0}]                                                             \\
+                  \abs[\func{\theta}{\func{\phi}{1} - \func{\phi}{0}}] & = \operatorFunc{\DiffOperator \func{\theta}{\func{\phi}{t_0}}}{\func{\phi'}{t_0}}     \\
+                  \norm[\func{\phi}{1} - \func{\phi}{0}]               & = \func{\theta}{\func{\phi'}{t_0}} \leq \norm[\theta] \norm[\func{\phi'}{t_0}] \leq M
+              \end{align*}
+        \item From Hoimander. For any \(\epsilon\) consider the set \(T_\epsilon\).
+              \begin{equation*}
+                  T_\epsilon = \set[t \in \clcl{0}{1}]{\forall s, \; 0 \leq s \leq t, \; \norm[\func{\phi}{s} - \func{\phi}{0}] \leq(M + \epsilon)s + \epsilon}
+              \end{equation*}
+              first note that \(T_\epsilon = \clcl{0}{c}\) and \(c > 0\) because for \(s = 0\) the inequality is strict and both sides are continuous with respect to \(s\). We claim that \(c = 1\) because otherwise \(c < 1\) we have, by differentiability of \(\phi\), there exists a \(\delta < 1 - c\) such that if
+              \begin{align*}
+                  \norm[h] < \delta \implies \norm[\func{\phi}{c + h} - \func{\phi}{c} - \operatorFunc{\DiffOperator \func{\phi}{c}}{h}] & \leq \epsilon \norm[h]                                        \\
+                  \implies \norm[\func{\phi}{c + h} - \func{\phi}{c}]                                                                    & \leq\norm[h] \left( \epsilon + \norm[\func{\phi'}{c}] \right) \\
+                                                                                                                                         & \leq \norm[h] (\epsilon + M)
+                  \intertext{also since \(c \in T_\epsilon\)}
+                  \norm[\func{\phi}{c} - \func{\phi}{0}]                                                                                 & < (M + \epsilon)c + \epsilon                                  \\
+                  \implies \norm[\func{\phi}{c + h} - \func{\phi}{0}]                                                                    & < (M + \epsilon)(c + h) + \epsilon \qquad 0 < h < \delta
+              \end{align*}
+              hence \(c + h \in T_\epsilon\) which is a contradiction and thus \(c = 1\).
+    \end{enumerate}
+\end{prooflemma}
+
+\begin{proof}
+    Let \(\sigma : \clcl{0}{1} \to U\) is the parameterization of the line connecting \(A\) to \(B\), \(\func{\sigma}{t} = (1 - t) A + tB\). Let \(\phi = f \circ \sigma\) then clearly \(\phi\) is continuous on \(\clcl{0}{1}\) and differentiable on \(\opop{0}{1}\) and we have
+    \begin{align*}
+        \func{\phi'}{t}                 & = \operatorFunc{\DiffOperator \func{f}{\func{\sigma}{t}}}{\func{\sigma'}{t} }         \\
+                                        & = \operatorFunc{\DiffOperator \func{f}{\func{\sigma}{t}}}{B - A}                      \\
+        \implies \norm[\func{\phi'}{t}] & \leq \norm[\DiffOperator \func{f}{\func{\sigma}{t}}] \norm[B-A]_V \leq M \norm[B-A]_V
+    \end{align*}
+    therefore by the \Cref{lm:MeanValueTheoremLemma}
+    \begin{equation*}
+        \norm[\func{f}{B} - \func{f}{A}]_W = \norm[\func{\phi}{1} - \func{\phi}{0}]_W \leq M \norm[B-A]_V
+    \end{equation*}
+\end{proof}
+
+\begin{corollary}
+    Let \(U \subset V\) is connected and open and \(f: U \to W\) is differentiable and \(\DiffOperator \func{f}{u} = 0\) for all \(u \in U\) then \(f\) is constant.
+\end{corollary}
+
+\begin{proof}
+    closedness easy, openness from the MVT.
+\end{proof}
+
+\begin{corollary}
+    Let \(V_1, V_2, W\) be finite dimensional normed vector space and \(U \subset V_1 \times V_2\) is open such that for every \(y \in V_2\) the intersection \((V_1 \times \set{y}) \cap U\) is connected. Assumne \(f : U \to W\) is differentiable and \(\DiffOperator_{V_1} \func{f}{x,y} = 0\) for all \((x,y) \in U\) then for any two point \((x_1,y), (x_2,y) \in U\),\(\func{f}{x_1,y} = \func{f}{x_2,y}\).
+\end{corollary}
+
+\subsection{Fundamental theorem of calculus}
+\begin{theorem}
+    Let \(U\) be an open set of \(V\) such that for every \(A,B \in U\) the line segment connecting \(A\) and \(B\) remains in \(U\) and let \(\sigma : \clcl{0}{1}\to U\) be that line, \(\func{\sigma}{t} = (1-t)A + tB\), and lastly let \(f: U \to W\) is continuously differentiable. Then
+    \begin{equation*}
+        \func{f}{B} - \func{f}{A} = \func{T}{B - A}
+    \end{equation*}
+    where \(T\) is
+    \begin{equation*}
+        T = \int_{0}^{1} \DiffOperator f \circ \func{\sigma}{t} \diffOperator t
+    \end{equation*}
+\end{theorem}
+
+%TODO: do the proof
+\begin{proof}
+    look at a matrix, integrate with respect to each element and apply
+\end{proof}
+
+\begin{theorem}
+    Consider the \(T: U \times U \to \func{\CalL}{V,W}\) is continuous and such that
+    \begin{equation*}
+        \func{f}{B} - \func{f}{A} = \operatorFunc{\func{T}{A,B}}{B-A}
+    \end{equation*}
+    then \(f \in \CalC^1\) and \(\DiffOperator \func{f}{A} = \func{T}{A,A}\)
+\end{theorem}
+
+%TODO: do the proof
+\begin{proof}
+    only need to proof \(f\) is differentiable and equals to that shit.
+\end{proof}
+
+\begin{corollary}
+    Let \(V\) be a normed finite dimensional vector space and \(U\) is open subset of \(V\). If
+    \begin{equation*}
+        f :\clcl{a}{b} \times U \to \Reals
+    \end{equation*}
+    is continuous then
+    \begin{equation*}
+        \func{F}{y} \int_{a}^{b} \func{f}{x,y} \diffOperator x
+    \end{equation*}
+    is continuous. Furthermore, if \(\PDiff{f}{y_i}\) exists and is continuous then \(\PDiff{F}{y_i}\) exists and is continuous as well.
+    \begin{equation*}
+        \PDiff{F}{y_i} =  \int_{a}^{b} \func{\PDiff{f}{y_i}}{x,y} \diffOperator x
+    \end{equation*}
+\end{corollary}
+
+%TODO: do the proof
+\begin{proof}
+    continuity implies there are balls, compactness implies there are finite balls, take minimum
+\end{proof}
+
+\subsection{}
+
+\begin{definition}[Local convergence]
+    A functional sequence \(f_n\) is \textbf{locally convergent} if for each \(x \in U\)  there exists a open set \(x \in V \subset U\) such that \(\left. f_n \right|_V\) is uniformly convergent.
+\end{definition}
+
+\begin{theorem}
+    Let \(V,W\) be normed finite dimensional spaces, \(U \subset V\) is open and connected, \(x_0 \in U\) and \(f_n : U \to W\) is a sequence of differentiable function that
+    \begin{enumerate}
+        \item \(\func{f_n}{x_0}\) is convergent.
+        \item \(\DiffOperator f_n : U \to \func{\CalL}{V,W}\) is locally convergent to some function \(g : U \to \func{\CalL}{V,W}\)
+    \end{enumerate}
+    then the sequence \(f_n\) is locally convergent to \(f : U \to W\) and \(\DiffOperator f = g\). Furthermore, because of connectedness of \(U\) for each \(x \in U\), \(\func{f_n}{x}\) is convergent.
+\end{theorem}
+
+%TODO: do the proof
+\begin{proof}
+    take open ball \(W\) around \(x_0\) such that \(\DiffOperator f_n|_W\) is uniformly convergent. then prove the first statement.
+    \begin{equation*}
+        \norm[\func{f_m}{x} - \func{f_n}{x}] \leq \norm[\operatorFunc{f_m - f_n}{x} - \operatorFunc{f_m - f_n}{x_0}] + \norm[\func{f_m}{x_0} - \func{f_n}{x_0}]
+    \end{equation*}
+    apply MVT here and make the bounds smaller using (2). Then prove the differentiability with e/3. To prove (3) use open/close argument.
+\end{proof}
+
+\begin{corollary}
+
+\end{corollary}

@@ -1,10 +1,12 @@
 # Fdb version 3
-["xdvipdfmx"] 1617015665 "main.xdv" "main.pdf" "main" 1617015667
-  "main.xdv" 1617015665 147108 de98a4ef0acd24b1f57eae8416fa8888 "xelatex"
+["xdvipdfmx"] 1617108398 "main.xdv" "main.pdf" "main" 1617108400
+  "main.xdv" 1617108398 177024 c557ef5590a2df4aeef5f769bfb82e8d "xelatex"
   (generated)
   "main.pdf"
-["xelatex"] 1617015663 "c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex" "main.xdv" "main" 1617015667
-  "Chapters/Multivariable.tex" 1617015665 34848 1b36102c147dfdd9e660713467cb9b10 ""
+["xelatex"] 1617108396 "c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex" "main.xdv" "main" 1617108400
+  "Chapters/Multivariable.tex" 1617105534 155 de70c5518800d6d43ee5e511421805c3 ""
+  "Chapters/Multivariable/Derivative.tex" 1617108392 19459 ff8df399d51716b24b47915ccc536741 ""
+  "Chapters/Multivariable/LinearAlgebra.tex" 1617105751 22391 16ff5b35fff5fe0884be6f56b696e63b ""
   "c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex" 1617013308 1105 948c16dd6a95e52250002410edf552f8 ""
   "c:/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1603845147 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1603839313 1004 54797486969f23fa377b128694d548df ""
@@ -72,12 +74,12 @@
   "c:/texlive/2020/texmf.cnf" 1603855010 673 4ae7b2f49cee444c5343a45b5d0f169c ""
   "c:/texlive/texmf-local/tex/latex/local/common/common.sty" 1617015662 4362 40d22d80a416e556157c744258d9bdab ""
   "c:/texlive/texmf-local/tex/latex/local/english-theorems/english-theorems.sty" 1613403733 4968 3b54db98576bacad74958d08701ceb3d ""
-  "main.aux" 1617015665 7945 1a574d5acf8e87932ffe656bb04c7551 "xelatex"
+  "main.aux" 1617108398 9700 d6635e0fbf78293a1f9d2ae2929591d1 "xelatex"
   "main.tex" 1617013308 1105 948c16dd6a95e52250002410edf552f8 ""
-  "main.toc" 1617015665 397 672e2b3cb3f6fdd24968d56bce5998b0 "xelatex"
+  "main.toc" 1617108398 538 cfe26cfa0b047c4304c057848eca83c6 "xelatex"
   (generated)
-  "main.thm"
-  "main.toc"
-  "main.xdv"
-  "main.log"
   "main.aux"
+  "main.toc"
+  "main.log"
+  "main.thm"
+  "main.xdv"
