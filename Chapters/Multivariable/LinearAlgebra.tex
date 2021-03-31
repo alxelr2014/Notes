@@ -65,26 +65,32 @@ To check if the above definition is indeed an equivalence relation, we must show
         \end{equation*}
     \end{prooflemma}
 
-    Now consider the sphere of radius \(r = 1\) centered at \(0\), \(\func{S_1}{0} = S_1 = \{x \in V : \norm[x]_2 = 1\}\). One can show that \(S\) is compact. Therefore, \(\norm[x]\) assumes its minimum on \(S\). Let \( a = \norm[x_0]\) be the minimum. Since \(0 \notin S\) then \(a > 0\). By letting \(y = x / \norm[x]_2 \), we have \(y \in S\) and thus \(a \leq \norm[y]\) which is
+    Now consider the sphere of radius \(r = 1\) centered at \(0\), \(\func{S_1}{0} = S_1 = \{x \in V : \norm[x]_2 = 1\}\). One can show that \(S\) is compact (\Cref{th:CompactnessOfFiniteDimensional}). Therefore, \(\norm[x]\) assumes its minimum on \(S\). Let \( a = \norm[x_0]\) be the minimum. Since \(0 \notin S\) then \(a > 0\). By letting \(y = x / \norm[x]_2 \), we have \(y \in S\) and thus \(a \leq \norm[y]\) which is
     \begin{equation*}
         a \norm[x]_2 \leq \norm[x]
     \end{equation*}
     Taking \(c_1 = a\) proves the theorem.
 \end{proof}
 
+\begin{theorem}\label{th:CompactnessOfFiniteDimensional}
+    Let \(\normedSpace{V}{\norm}\) be a normed space over a normed complete field \(\Field\). The following are equivalent
+    \begin{enumerate}
+        \item \(V\) is finite dimensional. \label{it:COFD_1}
+        \item every bounded closed set in \(V\) is compact. \label{it:COFD_2}
+        \item the closed unit ball in \(V\) is compact. \label{it:COFD_3}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \Cref{it:COFD_1} \(\implies\) \Cref{it:COFD_2}: It is similar to proving a closed set \(\Reals^n\) is compact using the fact a closed interval is compact in \(\Reals\).
 
-% \begin{theorem}
-%    Let \(\normedSpace{V}{\norm}\) be a normed space over a normed complete field \(\Field\). The following are equivalent
-%    \begin{enumerate}
-%        \item \(V\) is finite dimensional.
-%        \item every bounded closed set in \(V\) is compact.
-%        \item the closed unit ball in \(V\) is compact.
-%    \end{enumerate}
-% \end{theorem}
-% do the proof, 3 to 1 is the hardest part
-% \begin{proof}
+    \Cref{it:COFD_2} \(\implies\) \Cref{it:COFD_3}: Trivial.
 
-% \end{proof}
+    \Cref{it:COFD_3} \(\implies\) \Cref{it:COFD_1}: Requires the following lemma:
+    \begin{lemma} [Riesz's lemma] \label{lm:RieszsLemma}
+        If \(V\) is a normed vector space and \(W\) is a closed proper subspace of \(V\) and \(\alpha \in \Reals\) with \(0 < \alpha < 1\), then there exists an \(v \in V\) with \(\norm[v] = 1\) such that \(\norm[v- w] \geq \alpha \) for all \(w \in W\)
+    \end{lemma}
+    Now suppose \(V\) were to be an infinite dimensional vector space. Then by the \Cref{lm:RieszsLemma} there is sequence of unit vectors \({x_n}\) such that \(\forall m,n \in \Naturals, \; \norm[x_n - x_m] > \alpha\) for some \(0 <\alpha < 1\). Which implies that no subsequence of \(\set{x_n}\) is convergent and hence the closed unit ball can not be compact.
+\end{proof}
 
 \begin{example}
     The closed unit ball in the infinite dimensional vector space \(\func{C}{\clcl{0}{1},\Reals}\) with \(\norm[f] = \max \func{f}{x}\) is not compact.  Take \(\func{f_n}{x} = x^n\). Obviously \(\norm[f_n] = 1\), however \(f_n\) doesn't uniformly converge and hence \(f_n\) doesn't have a limit in \(\func{C}{\clcl{0}{1},\Reals}\) with the \(\max\) norm. Consider the following norm
@@ -101,14 +107,26 @@ To check if the above definition is indeed an equivalence relation, we must show
     A normed vector space \(V\) that is complete is a \textbf{Banach space}. A \textbf{Hilbert Space} is a Banach space whose norm is induced by an inner product.
 \end{definition}
 
-%TODO: proof
-\begin{proposition}
-    A normed finite dimensional vecotr space \(V\), is Banach space.
+
+\begin{proposition} \label{pr:FiniteIsBanach}
+    A normed finite dimensional vector space \(V\) over a normed complete field \(\Field\), is Banach space.
 \end{proposition}
 
 \begin{proof}
-
+    Let \(\set{v_i} \in V\) be a Cauchy sequence, and \(\set{e_1, \dots ,e_n}\) be a basis for \(V\) with the norm \(L^1\), that is if \(v = (\xi^1 , \dots ,\xi^n)\) then \(\norm[v] = \sum_{m = 1}^n \abs[\xi^m]\). Then if \(v_i = (\xi^1_i , \dots , \xi^n_i)\)
+    \begin{equation*}
+        \abs[\xi^m_i - \xi^m_j] \leq \sum_{m=1}^n \abs[\xi^m_i - \xi^m_j] \leq \norm[v_i - v_j] < \epsilon
+    \end{equation*}
+    then \(\set{\xi^m_i}_i\) are a Cauchy sequence in \(\Field\) and hence they converge \(\xi^m_i \to \xi^m\). Then, clearly \(v_i \to v = (\xi^1 , \dots , \xi^n)\) as each component converges.
 \end{proof}
+
+\begin{example}
+    \(\Rationals\) form a vector space itself over itself. It is finite dimensional as \(\set{\DSOne_\Rationals}\) is the basis, however the sequence
+    \begin{equation*}
+        1 ,\; 1.4 ,\; 1.41 ,\; \dots
+    \end{equation*}
+    does not converge even though it is Cauchy.
+\end{example}
 
 \subsection{Linear Maps}
 Let \(V\) and \(W\) be a vector spaces over \(\Field\). A map \(T: V \to W\) is \textbf{linear} if
@@ -153,31 +171,30 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 \begin{theorem} \label{th:linearTransformation}
     Let \(\normedSpace{V}{\norm_V}\) and \(\normedSpace{W}{\norm_W}\) be normed spaces and \(T: V \to W\) be a linear transformation. The following are equivalent
     \begin{enumerate}
-        \item \(\norm[T]\) is finite. \label{it:LinearCont1}
-        \item \(T\) is bounded. \label{it:LinearCont2}
-        \item \(T\) is Lipschitz continuous. \label{it:LinearCont3}
-        \item \(T\) is continuous at a point. \label{it:LinearCont4}
-        \item \(\sup_{\norm[v]_V = 1} \norm[Tv]_W < \infty\). \label{it:LinearCont5}
+        \item \(\norm[T]\) is finite. \label{it:LT_1}
+        \item \(T\) is bounded. \label{it:LT_2}
+        \item \(T\) is Lipschitz continuous. \label{it:LT_3}
+        \item \(T\) is continuous at a point. \label{it:LT_4}
+        \item \(\sup_{\norm[v]_V = 1} \norm[Tv]_W < \infty\). \label{it:LT_5}
     \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-    %TODO: fix the references
-    \cref{it:LinearCont1} \(\Rightarrow\) \cref{it:LinearCont2}: Obviously
+    \cref{it:LT_1} \(\Rightarrow\) \cref{it:LT_2}: Obviously
     \begin{align*}
         \dfrac{\norm[Tv]_W}{\norm[v]_V} & \leq \norm[T]            \\
         \implies \norm[Tv]_W            & \leq \norm[T] \norm[v]_V
     \end{align*}
     note that if \(v = 0\) then \(Tv = 0\) as well and thus the last inequality holds for all \(v \in V\).
 
-    \cref{it:LinearCont2} \(\Rightarrow\) \cref{it:LinearCont3}:
+    \cref{it:LT_2} \(\Rightarrow\) \cref{it:LT_3}:
     \begin{equation*}
         \norm[Tv - Tu]_W = \norm[T(u - v)]_W \leq C \norm[u - v]_V
     \end{equation*}
 
-    \cref{it:LinearCont3} \(\Rightarrow\) \cref{it:LinearCont4}: Trivial.
+    \cref{it:LT_3} \(\Rightarrow\) \cref{it:LT_4}: Trivial.
 
-    \cref{it:LinearCont4} \(\Rightarrow\) \cref{it:LinearCont5}: Let \(T\) be continuous at \(u \in V\). Then there is  a \(\delta > 0 \) such that
+    \cref{it:LT_4} \(\Rightarrow\) \cref{it:LT_5}: Let \(T\) be continuous at \(u \in V\). Then there is  a \(\delta > 0 \) such that
     \begin{equation*}
         \norm[v-u] < \delta \implies \norm[Tv - Tu]_W = \norm[T(v-u)]_W < 1
     \end{equation*}
@@ -191,7 +208,7 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
          & \norm[\func{T}{\dfrac{v}{\norm[v]_V}}]_W  < \dfrac{2}{\delta}
     \end{align*}
 
-    \cref{it:LinearCont5} \(\Rightarrow\) \cref{it:LinearCont1}: Let \(v \in V\) be an arbitrary vector. Then
+    \cref{it:LT_5} \(\Rightarrow\) \cref{it:LT_1}: Let \(v \in V\) be an arbitrary vector. Then
     \begin{align*}
                  & \sup \norm[\func{T}{\dfrac{v}{\norm[v]_V}}]_W < \infty \\
         \implies & \sup \dfrac{\norm[Tv]_W}{\norm[v]_W} < \infty
@@ -209,14 +226,12 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 \begin{proof}
     Since \(V\) is finite dimensional, according to \Cref{th:normsEquivalent}, any two norms are equivalent. Hence, take \(\norm_2\) to be Euclidean norm over a basis \(\{e_1, \dots , e_n\}\). Let \(x\) be such that \(\norm[x]_2 < \delta\) for some \(\delta > 0\). Therefore, \(\abs[\xi_i] < \delta^2\)
     \begin{equation*}
-        \norm[Tx]_W = \norm[\sum \xi_i \func{T}{e_i}]_W \leq \sum \abs[\xi_i] \norm[\func{T}{e_i}]_W \leq \delta^2 K
+        \norm[Tx]_W = \norm[\sum_{i = 1}^n \xi_i \func{T}{e_i}]_W \leq \sum_{i = 1}^n \abs[\xi_i] \norm[\func{T}{e_i}]_W \leq \delta^2 K
     \end{equation*}
     where \(K = \max \norm[\func{T}{e_i}]_W \). By letting \(\delta = \sqrt{\frac{\epsilon}{K}}\) we proved continuity at \(0\) and hence the continuity by \Cref{th:linearTransformation}.
 \end{proof}
 
-\begin{corollary}
-    Any finite dimensional normed vector space \(V\) over a normed complete field \(\Field\) is a Banach space.
-\end{corollary}
+Another proof of \Cref{pr:FiniteIsBanach}
 
 \begin{proof}
     Let \(\{e_1, \dots , e_n\}\) be a basis for \(V\) and \(\phi : V \to \Field^n\) be the representation map for the basis. Since \(\phi\) is a linear map and a bijection then \(\phi\) is homeomorphism. Consider a Cauchy sequence \(\set{v_k} \in V\) and let \(x_k = \func{\phi}{v_k}\) then by continuity of \(\phi\) and \(\phi^{-1}\) we have
@@ -282,10 +297,33 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
     Let \(\normedSpace{V}{\norm}\) be a normed space. Then any linear transformation \(T: \Reals^n \to V\) is continuous. Furthermore, if \(T\) is a bijection, it is a homeomorphism.
 \end{theorem}
 
-%TODO: a better proof
 \begin{proof}
-    Since \(\Reals^n\) is finite then by \Cref{th:finiteDimensionTransformationContinuous}, \(T\) is continuous. Assuming \(T\) is bijective, we must show that its inverse \(T^{-1}\) is continuous as well. Since \(T\) is a bijection then \(T\) is a linear isomorphism and \(\dim V = \dim \Reals^n = n\) hence \(T^{-1}\) is a continuous map.
+    Since \(\Reals^n\) is finite then by \Cref{th:finiteDimensionTransformationContinuous}, \(T\) is continuous. Assuming \(T\) is bijective, we must show that its inverse \(T^{-1}\) is continuous as well. Since \(T\) is a bijection then \(T\) is a linear isomorphism and \(\dim V = \dim \Reals^n = n\) hence \(T^{-1}: V \to \Reals^n\) is a continuous map.
 \end{proof}
+
+
+\begin{theorem} \label{th:LinearInvertibility}
+    Let \(V,W\) be two finite dimensional normed vector spaces. \(T : V \to W\) linear transformation is invertible if and only if there exists a \(c\) such that:
+    \begin{equation*}
+        c \norm[v]_V \leq \norm[Tv]_W
+    \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    If \(T\) is invertible then \(T^{-1} : W \to V \) is bounded and thus
+    \begin{equation*}
+        \norm[T^{-1}w]_V \leq c \norm[w]_W
+    \end{equation*}
+    and since \(T\) is bijective then there exists \(v\) such that \(w = Tv\) which implies
+    \begin{equation*}
+        \norm[y]_V \leq c\norm[Ty]_W
+    \end{equation*}
+    If there exists such \(c\) then \(\norm[Tx] > 0\) for all non-zero \(x\) and hence \(\ker T  = 0\) which implies that \(T\) is a bijection and is invertible.
+\end{proof}
+
+\begin{remark}
+    the supremum of such \(c\) is \(\norm[T^{-1}]^{-1}\) which is called the \textbf{conorm} of \(T\).
+\end{remark}
 
 \begin{definition}[General linear group]
     The \textbf{general linear group} of a vector space, written \(\func{\GL}{V}\) is the set of all bijective linear transformation.
@@ -328,35 +366,17 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
     we proved the continuity.
 \end{proof}
 
-\begin{theorem}
-    \(T : \Reals^n \to \Reals^n\) linear transformation is invertible if and only if there exists a \(c\) such that:
-    \begin{equation*}
-        c \norm[x] \leq \norm[Tx]
-    \end{equation*}
-\end{theorem}
-
-\begin{proof}
-    If \(T\) is invertible then \(T^{-1} : \Reals^n \to \Reals^n \) is bounded and thus
-    \begin{equation*}
-        \norm[T^{-1}x] \leq c \norm[x]
-    \end{equation*}
-    and since \(T\) is bijective then there exists \(y\) such that \(x = Ty\) which implies
-    \begin{equation*}
-        \norm[y] \leq c\norm[Ty]
-    \end{equation*}
-    If there exists such \(c\) then \(\norm[Tx] > 0\) for all non-zero \(x\) and hence \(\ker T  = 0\) which implies that \(T\) is a bijection and is invertible.
-\end{proof}
 
 \begin{definition}
-    Let \(V_1, V_2 ,\dots , V_n\) be  normed vector spaces. Then the function \(\phi : V_1 \times \dots \times V_n \to W\) is \textbf{\(n\)-linear} if by fixing any \(n-1\) component, \(\phi\) is linear relative to the remaining component.
+    Let \(V_1, V_2 ,\dots , V_n\) be  normed vector spaces. Then \(\phi : V_1 \times \dots \times V_n \to W\) is \textbf{\(n\)-linear} if by fixing any \(n-1\) component, \(\phi\) is linear relative to the remaining component.
 \end{definition}
 
 \begin{proposition}
     If \(V_1, V_2, \dots , V_n\) are  normed vector spaces and \(\ \phi : V_1 \times \dots \times V_n \to W \) is a \(n\)-linear then the followings are equivalent
     \begin{enumerate}
-        \item \(\phi\) is continuous. \label{it:continuityOfnLinear}
-        \item \(\phi\) is continuous at 0. \label{it:continuityOfnLinearataPoint}
-        \item \(\phi\) is bounded, that is there exists a constant \(C > 0\) such that \label{it:boundednessOfnLinear}
+        \item \(\phi\) is continuous. \label{it:nLP_1}
+        \item \(\phi\) is continuous at 0. \label{it:nLP_2}
+        \item \(\phi\) is bounded, that is there exists a constant \(C > 0\) such that \label{it:nLP_3}
               \begin{equation*}
                   \norm[\func{\phi}{v_1, \dots ,v_n}]_W \leq C \norm[v_1]_{V_1} \dots \norm[v_n]_{V_n}
               \end{equation*}
@@ -368,9 +388,9 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 \end{remark}
 
 \begin{proof}
-    \Cref{it:continuityOfnLinear} \(\implies\) \Cref{it:continuityOfnLinearataPoint}: Trivial.
+    \Cref{it:nLP_1} \(\implies\) \Cref{it:nLP_2}: Trivial.
 
-    \Cref{it:continuityOfnLinearataPoint} \(\implies\) \Cref{it:boundednessOfnLinear}: For the sake of contradiction, suppose \Cref{it:boundednessOfnLinear} is false. That is, for every \(k \in \natural\) there exists a point \(v_k = (v^1_k, \dots , v^n_k)\) such that
+    \Cref{it:nLP_2} \(\implies\) \Cref{it:nLP_3}: For the sake of contradiction, suppose \Cref{it:nLP_3} is false. That is, for every \(k \in \Naturals\) there exists a point \(v_k = (v^1_k, \dots , v^n_k)\) such that
     \begin{equation*}
         \norm[\func{\phi}{v^1_k, \dots , v^n_k}]_W > n^n \norm[v^1_k]_{V_1} \dots \norm[v^n_k]_{V_k}
     \end{equation*}
@@ -384,7 +404,7 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
     \end{equation*}
     which is a contradiction.
 
-    \Cref{it:boundednessOfnLinear} \(\implies\) \Cref{it:continuityOfnLinear}. Let \(v_n \to v\) and define the points
+    \Cref{it:nLP_3} \(\implies\) \Cref{it:nLP_1}. Let \(v_n \to v\) and define the points
     \begin{equation*}
         \bar{v}^m_k = (v^1 , \dots , v^m, v^{m+1}_k , \dots , v^n_k) , \qquad \bar{v}^0_k = v_k
     \end{equation*}

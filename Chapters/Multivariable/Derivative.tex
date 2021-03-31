@@ -10,7 +10,7 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
 \(T\) if it exists is unique, represented by \(\func{f'}{x_0}\), \(\DiffOperator f\), or \(\func{\diffOperator f}{x}\) and called the \textbf{total derivative} or \textbf{Fr\'{e}chet derivative}.
 
 \begin{example}
-    Every linear function \(f : V \to W\) with \(\func{f}{v} = Tv + b\) where \(b \in W\) is differentiable and \(\func{\DiffOperator f}{v} = T\). Since
+    Any linear function \(f : V \to W\) with \(\func{f}{v} = Tv + b\) where \(b \in W\) is differentiable and \(\func{\DiffOperator f}{v} = T\). Since
     \begin{equation*}
         \norm[h]_V < \delta \implies \norm[\func{f}{v + h} - \func{f}{v} - \operatorFunc{\DiffOperator \func{f}{v}}{h}]_W = \norm[T(v+h) - Tv - Th]_W = 0 < \epsilon \norm[h]_V
     \end{equation*}
@@ -95,35 +95,73 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
     \begin{equation*}
         \norm[\func{f_i}{a^k} - \func{f_i}{a^{k+1}} - \operatorFunc{\DiffOperator_{e_k} \func{f_i}{a}}{h_k}] \leq \epsilon \abs[h_k]
     \end{equation*}
-    for \(k = 1\) it is equivalent to the existence first partial derivative. and for the rest we use the continuity.
+    for \(k = n\)
+    \begin{equation*}
+        \norm[\func{f_i}{a^n} - \func{f_i}{a} - \operatorFunc{\DiffOperator_{e_n} \func{f_i}{a}}{h_n}]
+    \end{equation*}
+    which equivalent to the existence \(n_\cardinalTH\) partial derivative of \(a\). and for \(k < n\)
+    \begin{align*}
+         & \norm[\func{f_i}{a^k} - \func{f_i}{a^{k+1}} - \operatorFunc{\DiffOperator_{e_k} \func{f_i}{a}}{h_k}]                                                                                                                                  \\
+         & \leq \norm[\func{f_i}{a^k} - \func{f_i}{a^{k+1}} - \operatorFunc{\DiffOperator_{e_k} \func{f_i}{a^k}}{h_k}]  + \norm[\operatorFunc{\DiffOperator_{e_k} \func{f_i}{a^k}}{h_k} - \operatorFunc{\DiffOperator_{e_k} \func{f_i}{a}}{h_k}]
+    \end{align*}
+    which uses the existence of partial derivatives in neighbourhood and its continuity.
 \end{proof}
 
-% TODO: do the proof
 \begin{proposition}
     Let \(f,g : V \to W\) be differentiable at \(x\) and \(h : W \to U\) be differentiable at \(y = \func{f}{x}\). Furthermore, let \(c\) be an scalar then
     \begin{enumerate}
         \item \(\func{\DiffOperator \,}{ f + cg} = \DiffOperator f + c \DiffOperator g\).
         \item  \(h \circ f\) is differentiable at \(x\) and
               \begin{equation*}
-                  \func{\DiffOperator \,}{ h \circ f} =  \left( \func{\DiffOperator \,}{h}\circ f \right) \circ \func{\DiffOperator \, }{ f}
-              \end{equation*}
-        \item For a bilinear function \(\beta\)
-              \begin{equation*}
-                  \operatorFunc{\DiffOperator \func{\beta}{f,g}}{v} = \func{\beta}{\operatorFunc{\DiffOperator f}{v},g} + \func{\beta}{f, \operatorFunc{\DiffOperator g}{v}}
+                  \func{\DiffOperator \,}{ h \circ f} =  \left( (\DiffOperator h) \circ f \right) \circ \DiffOperator f
               \end{equation*}
     \end{enumerate}
 \end{proposition}
-\begin{proof}
 
+\begin{proof} \leavevmode
+    \begin{enumerate}
+        \item we have
+              \begin{align*}
+                   & \norm[ \func{f + cg}{x + k} - \func{f + cg}{x} - \operatorFunc{\DiffOperator \func{f}{x} + c \DiffOperator \func{g}{x}}{k}]                                                          \\
+                   & \leq \norm[ \func{f}{x + k} - \func{f}{x} - \operatorFunc{\DiffOperator \func{f}{x}}{h}] + \abs[c]\norm[\func{g}{x + k} - \func{g}{x} - \operatorFunc{\DiffOperator \func{g}{x}}{h}]
+              \end{align*}
+        \item we know that
+              \begin{equation*}
+                  \begin{cases}
+                      \func{f}{x + k} - \func{f}{x} - \operatorFunc{\DiffOperator \func{f}{x}}{k}  = \func{R}{k} \\
+                      \func{h}{y + l} - \func{h}{y} - \operatorFunc{\DiffOperator \func{h}{y}}{l}  = \func{S}{l}
+                  \end{cases}
+              \end{equation*}
+              and we wish to prove that
+              \begin{equation*}
+                  \func{h \circ f}{x + k} - \func{h \circ f}{x} - \operatorFunc{\DiffOperator \func{h}{\func{f}{x}} \circ \DiffOperator \func{f}{x}}{k} = \func{T}{k}
+              \end{equation*}
+              where \(\norm[\func{T}{k}] \leq \epsilon \norm[k]\) whenever \(\norm[k] < \delta\). Let \(l = \func{f}{x + k} - \func{f}{x}\) and substituting into the second equation
+              \begin{align*}
+                  \func{h}{\func{f}{x + k}} & - \func{h}{\func{f}{x}} - \operatorFunc{\DiffOperator \func{h}{y}}{\func{f}{x + k} - \func{f}{x}}                                                                                         \\
+                                            & =  \func{h}{\func{f}{x + k}} - \func{h}{\func{f}{x}} - \operatorFunc{\DiffOperator \func{h}{y}}{\operatorFunc{\DiffOperator \func{f}{x}}{k}  + \func{R}{k}}                               \\
+                                            & = \func{h}{\func{f}{x + k}} - \func{h}{\func{f}{x}} - \operatorFunc{\DiffOperator \func{h}{y} \circ \DiffOperator \func{f}{x}}{k} - \operatorFunc{\DiffOperator \func{h}{y}}{\func{R}{k}} \\
+                                            & = \func{T}{k} - \operatorFunc{\DiffOperator \func{h}{y}}{\func{R}{k}} = \func{S}{l}                                                                                                       \\
+                  \implies \func{T}{k}      & = \func{S}{l} + \operatorFunc{\DiffOperator \func{h}{y}}{\func{R}{k}}
+              \end{align*}
+    \end{enumerate}
 \end{proof}
 
-%TODO: do the proof
+
 \begin{proposition}
     \(f : U \subset V \to W_1 \times \dots \times W_n\) is differentiable at \(x_0\) if and only if all its component is differentiable at \(x_0\). Furthermore, \(\DiffOperator f = (\DiffOperator f_1, \dots , \DiffOperator f_n)\).
 \end{proposition}
 
 \begin{proof}
-
+    Define the following norm on \(W_1 \times \dots \times W_n\)
+    \begin{equation}
+        \norm[(w_1, \dots w_n)] = \sum_{i = 1}^n \norm[w_i]_{W_i}
+    \end{equation}
+    then
+    \begin{equation*}
+        \norm[ \func{f}{x_0 + h} - \func{f}{x_0} - \operatorFunc{\DiffOperator \func{f}{a}}{h}] = \sum_{i = 1}^n \norm[ \func{f_i}{x_0 + h} - \func{f_i}{x_0} - \operatorFunc{\DiffOperator \func{f_i}{a}}{h}]
+    \end{equation*}
+    which is what was what was wanted.
 \end{proof}
 
 \begin{theorem}[Leibnitz rule]
@@ -133,18 +171,24 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
     \end{equation*}
 \end{theorem}
 
-%TODO: do the proof
 \begin{proof}
-    Consider the following points
-    \begin{align*}
-        \bar{a}^k & = (a_1, \dots , a_k, a_{k+1} + h_{k+1}, \dots , a_n + h_n), & \bar{a}^0 = a + h , \bar{a}^n = a  \\
-        \bar{b}^k & = (a_1, \dots a_k, h_{k+1},a_{k+2}, \dots, a_n)             & \bar{b}^0 = (h_1, a_2, \dots, a_n)
-    \end{align*}
-    for a fixed \(\epsilon > 0\) we have
-    %\begin{align*}
-    %   \norm[\func{f}{a + h} - \func{f}{a} - \operatorFunc{\func{\DiffOperator f}{a}}{h}]_W & \leq \sum_{i = 1}^n \norm[\func{f}{\bar{a}^{i-1}} -\func{f}{\bar{a}^i} - \func{f}{\bar{b}^{k-1}}]_W                          \\
-    %                                                                                       & = \sum_{i = 1}^n \norm[\func{f}{a_1, \dots, a_{i-1},h_i, a_{i+1} + h_{i + 1} , \dots a_n + h_n} - \func{f}{\bar{b}^{k-1}}]_W
-    %\end{align*}
+    we have that
+    \begin{equation*}
+        \func{f}{a + h} = \sum_{\xi_i \in \set{a_i,h_i}} \func{f}{\xi_1, \dots , \xi_n}
+    \end{equation*}
+    therefore
+    \begin{equation*}
+        \func{f}{a + h} - \func{f}{a} - \sum_{i = 1}^{n} \func{f}{a_1, \dots, a_{i-1}, h_i, a_{i+1}, \dots , a_n} = \sum_{\substack{\xi_i \in \set{a_i,h_i} \\ \text{at least two \(h_i\)}}} \func{f}{\xi_1, \dots , \xi_n}
+    \end{equation*}
+    Let \(\delta = 1\) then  \(\norm[h] = \sum \norm[h_i] < 1\) also \(i,j, \; \norm[h_i]\norm[h_j] \leq \norm[h]^2\). Hence if we define
+    \begin{equation*}
+        A = \max \set[\prod_{i \in I} \norm[a_i]]{I \subset \Naturals_n}
+    \end{equation*}
+    then
+    \begin{equation*}
+        \sum_{\substack{\xi_i \in \set{a_i,h_i} \\ \text{at least two \(h_i\)}}} \func{f}{\xi_1, \dots , \xi_n} \leq (2^n - n - 1)A \norm[h]^2
+    \end{equation*}
+    and letting \(\delta = \min \set{1 , \dfrac{\epsilon}{(2^n - n - 1)(A + 1)}}\) we arrive at the conclusion.
 \end{proof}
 
 \begin{example}
@@ -294,7 +338,7 @@ Assume the following lemma
     continuity implies there are balls, compactness implies there are finite balls, take minimum
 \end{proof}
 
-\subsection{}
+\subsection{Inverse function theorem}
 
 \begin{definition}[Local convergence]
     A functional sequence \(f_n\) is \textbf{locally convergent} if for each \(x \in U\)  there exists a open set \(x \in V \subset U\) such that \(\left. f_n \right|_V\) is uniformly convergent.
@@ -318,6 +362,71 @@ Assume the following lemma
     apply MVT here and make the bounds smaller using (2). Then prove the differentiability with e/3. To prove (3) use open/close argument.
 \end{proof}
 
-\begin{corollary}
+contraction fixed point theorem.
 
-\end{corollary}
+\begin{theorem}[Inverse function theorem]
+    Let \(V,W\) be finite dimensional normed vector space such that \(\dim V = \dim W\) and \(U \subset V\) is open. If \(f : U \to W\) is continuously differentiable and for some \(a \in U\), \(\DiffOperator \func{f}{a}\) is invertible. Then, there are open set \(S \subset V\) and \(T \subset E\) that \(a \in V \subset U\) and \(\func{f}{a} \in T\) such that \(f|_S\) is bijective and \((f|_S)^{-1} = g\) where \(g \in \CalC^1\) and
+    \begin{equation*}
+        \DiffOperator \func{g}{\func{f}{x}} = \left(\DiffOperator \func{f}{x}\right)^{-1}
+    \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    Let \(S\) be an open convex set around \(a\) such that for all \(x \in S\)
+    \begin{equation*}
+        \norm[\DiffOperator \func{f}{x} - \DiffOperator \func{f}{x}] < \dfrac{1}{2} \norm[\DiffOperator \func{f^{-1}}{a}]^{-1}
+    \end{equation*}
+    hence \(\DiffOperator \func{f}{x}\) is invertible. Let \(T = \func{f}{S}\) then we shall prove the following
+    \begin{enumerate}
+        \item \(f|_S\) is bijective.
+
+              Let \(\psi : S \to V\) with
+              \begin{align*}
+                  \func{\psi}{x}                                & = x - \left(\DiffOperator \func{f}{a}\right)^{-1}(\func{f}{x})                                                                 \\
+                  \implies \DiffOperator \func{\psi}{x }        & = \DSOne_V - \left(\DiffOperator \func{f}{a}\right)^{-1} \circ \DiffOperator \func{f}{x}                                       \\
+                                                                & = \left(\DiffOperator \func{f}{a}\right)^{-1} \circ \left( \DiffOperator \func{f}{a} - \DiffOperator \func{f}{x} \right)       \\
+                  \implies \norm[\DiffOperator \func{\psi}{x }] & \leq \norm[\left(\DiffOperator \func{f}{a}\right)^{-1}] \norm[\DiffOperator \func{f}{a} - \DiffOperator \func{f}{x}]           \\
+                                                                & < \dfrac{1}{2} [\left(\DiffOperator \func{f}{a}\right)^{-1}] [\left(\DiffOperator \func{f}{a}\right)^{-1}]^{-1} = \dfrac{1}{2}
+              \end{align*}
+              therefore by mean value theorem
+              \begin{equation*}
+                  \norm[\func{\psi}{x_1} - \func{\psi}{x_2}] \leq \dfrac{1}{2} \norm[x_1 - x_2]
+              \end{equation*}
+              then by \Cref{th:LinearInvertibility} if
+              \begin{equation*}
+                  \norm[x_1 - x_2] \leq K \norm[\func{f}{x_1} - \func{f}{x_2}]
+              \end{equation*}
+              we are done. To do so, note that
+              \begin{align*}
+                  \norm[(x_1 - x_2) - \left(\DiffOperator \func{f}{a}\right)^{-1}(\func{f}{x_1} - \func{f}{x_2})]                & \leq \norm[x_1 - x_2]                                                                           \\
+                  \implies \norm[x_1 - x_2] - \norm[ \left(\DiffOperator \func{f}{a}\right)^{-1}(\func{f}{x_1} - \func{f}{x_2})] & \leq \dfrac{1}{2}\norm[x_2 - x_1]                                                               \\
+                  \implies \norm[x_1 - x_2]                                                                                      & \leq 2 \norm[\left(\DiffOperator \func{f}{a}\right)^{-1}] \norm[\func{f}{x_1} - \func{f}{x_2})]
+              \end{align*}
+
+        \item \(T\) is open.
+
+              For each \(y \in W\) define
+              \begin{equation*}
+                  \func{f_y}{x} = x + \left(\DiffOperator \func{f}{a}\right)^{-1} (y - \func{f}{x})
+              \end{equation*}
+              Since \(\func{f_y}{x} \in \CalC^1\) then
+              \begin{align*}
+                  \DiffOperator \func{f_y}{x}                 & = \DSOne_V - \left(\DiffOperator \func{f}{a}\right)^{-1} \circ \DiffOperator \func{f}{x}                                              \\
+                  \implies \norm[\DiffOperator \func{f_y}{x}] & \leq \norm[ \left(\DiffOperator \func{f}{a}\right)^{-1}] \norm[ \DiffOperator \func{f}{a} - \DiffOperator \func{f}{x}] < \dfrac{1}{2} \\
+                  \implies \norm[\func{f_y}{x_1} - \func{f_y}{x_2}] \leq \dfrac{1}{2} \norm[x_1 - x_2]
+              \end{align*}
+              Now for each \(\func{f}{x_0} = y_0 \in T\) we wish to prove there exist a \( \sigma > 0\) such that \(\func{B_\sigma}{y_0}\) is contained in \(T\). In other words, \(\forall y \in \func{B_\sigma}{y_0}\)
+              \begin{align*}
+                  \exists x \in S, \; \func{f}{x} = y \iff \func{f_y}{x} = x
+              \end{align*}
+              now to apply the contraction fixed point we must find complete metric space \(X\) such that \(\func{f}{X} = X\). Consider \(\overline{\func{B_\rho}{x_0}} \in S\) which is a complete metric space, and \(y\) such that \(\norm[y - y_0] < \dfrac{r \rho}{2}\) where \(r = \norm[\left(\DiffOperator \func{f}{a}\right)^{-1}]^{-1}\). Lastly, we show that \(x \in \overline{\func{B_\rho}{x_0}}\implies \func{f_y}{x} \in \overline{\func{B_\rho}{x_0}}\).
+              \begin{align*}
+                  \norm[\func{f_y}{x}  - x_0] \leq \norm[\func{f_y}{x} - \func{f_y}{x_0}] + \norm[\func{f_y}{x_0} - x_0] \\
+                   & \leq  \dfrac{1}{2} \norm[x - x_0] + \dfrac{\rho}{2}  \leq \rho
+              \end{align*}
+              therefore there exist a unique \(x \in \overline{\func{B_\rho}{x_0}}\) such that \(\func{f_y}{x} = x\).
+        \item \(g = (f|_V)^{-1} : T \to T\) is continuously differentiable.
+
+
+    \end{enumerate}
+\end{proof}
