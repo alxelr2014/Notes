@@ -6,3 +6,5 @@
 \contentsline {subsection}{\numberline {1.2.1}Mean value theorem}{15}{}%
 \contentsline {subsection}{\numberline {1.2.2}Fundamental theorem of calculus}{17}{}%
 \contentsline {subsection}{\numberline {1.2.3}Inverse function theorem}{18}{}%
+\contentsline {subsection}{\numberline {1.2.4}Implicit function}{19}{}%
+\contentsline {subsection}{\numberline {1.2.5}Higher derivative}{20}{}%

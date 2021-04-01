@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  1 APR 2021 00:00
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  1 APR 2021 22:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -544,18 +544,18 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 Chapter 1.
 (./Chapters/Multivariable/LinearAlgebra.tex
 LaTeX Font Info:    Trying to load font information for U+bbold on input line 5.
- (c:/texlive/2020/texmf-dist/tex/latex/bbold/Ubbold.fd) [3] [4] [5] [6] [7] [8] [9] [10] [11]) (./Chapters/Multivariable/Derivative.tex [12] [13] [14] [15] [16] [17] [18]))
+ (c:/texlive/2020/texmf-dist/tex/latex/bbold/Ubbold.fd) [3] [4] [5] [6] [7] [8] [9] [10] [11]) (./Chapters/Multivariable/Derivative.tex [12] [13] [14] [15] [16] [17] [18] [19]))
 \tf@thm=\write4
 \openout4 = `main.thm'.
 
- [19] (./main.aux) ) 
+ [20] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 7869 strings out of 477454
- 126673 string characters out of 5840441
- 470439 words of memory out of 5000000
- 27228 multiletter control sequences out of 15000+600000
+ 7874 strings out of 477454
+ 126775 string characters out of 5840441
+ 470434 words of memory out of 5000000
+ 27233 multiletter control sequences out of 15000+600000
  541624 words of font info for 69 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 80i,12n,87p,652b,486s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 80i,12n,87p,693b,486s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (19 pages, 215924 bytes).
+Output written on main.xdv (20 pages, 238012 bytes).

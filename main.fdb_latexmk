@@ -1,12 +1,12 @@
 # Fdb version 3
-["xdvipdfmx"] 1617219053 "main.xdv" "main.pdf" "main" 1617219055
-  "main.xdv" 1617219053 215924 7e4280991639e4e5173e41846f3b5273 "xelatex"
+["xdvipdfmx"] 1617299865 "main.xdv" "main.pdf" "main" 1617299867
+  "main.xdv" 1617299865 238012 d7eae083e3d6b668812cad2830073b83 "xelatex"
   (generated)
   "main.pdf"
-["xelatex"] 1617219050 "c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex" "main.xdv" "main" 1617219055
+["xelatex"] 1617299863 "c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex" "main.xdv" "main" 1617299867
   "Chapters/Multivariable.tex" 1617105534 155 de70c5518800d6d43ee5e511421805c3 ""
-  "Chapters/Multivariable/Derivative.tex" 1617219046 28561 ab69baa387b2bf8be44b80d8164e9c0f ""
-  "Chapters/Multivariable/LinearAlgebra.tex" 1617201927 24267 baff150eaa21f539bb9054d99552cace ""
+  "Chapters/Multivariable/Derivative.tex" 1617299857 32788 cedb590f75aa757eb192aaa200ff979f ""
+  "Chapters/Multivariable/LinearAlgebra.tex" 1617299859 25410 319042544aa7ce8c901a3310695fa0e0 ""
   "c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex" 1617206544 1125 aaa770f9d8cb31d772293f09a0408e91 ""
   "c:/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1603845147 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1603839313 1004 54797486969f23fa377b128694d548df ""
@@ -81,14 +81,14 @@
   "c:/texlive/2020/texmf-dist/web2c/texmf.cnf" 1603846868 39451 15a3ebee027466ecb89701aa91dfebaf ""
   "c:/texlive/2020/texmf-var/web2c/xetex/xelatex.fmt" 1603855220 4917463 ec99407bfeaeb7c7e4981fa16e994423 ""
   "c:/texlive/2020/texmf.cnf" 1603855010 673 4ae7b2f49cee444c5343a45b5d0f169c ""
-  "c:/texlive/texmf-local/tex/latex/local/common/common.sty" 1617117581 4409 0e0d95aacca414f18966f0110c800748 ""
+  "c:/texlive/texmf-local/tex/latex/local/common/common.sty" 1617288343 4402 0c4e3ce8f45c9f03bf8575c60dcb1d62 ""
   "c:/texlive/texmf-local/tex/latex/local/english-theorems/english-theorems.sty" 1613403733 4968 3b54db98576bacad74958d08701ceb3d ""
-  "main.aux" 1617219053 10697 838e0a38c4e20d2a112d740649629754 "xelatex"
+  "main.aux" 1617299865 11872 8036034b76fa5bcea1a0fd3b47ebb2e1 "xelatex"
   "main.tex" 1617206544 1125 aaa770f9d8cb31d772293f09a0408e91 ""
-  "main.toc" 1617219053 562 3af341a3a4e9e35af45fdac38ed4d2dd "xelatex"
+  "main.toc" 1617299865 706 870650e0d433bdea71bef4fccbb8810b "xelatex"
   (generated)
+  "main.toc"
   "main.log"
+  "main.thm"
   "main.aux"
   "main.xdv"
-  "main.thm"
-  "main.toc"

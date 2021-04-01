@@ -411,9 +411,9 @@ contraction fixed point theorem.
               \end{equation*}
               Since \(\func{f_y}{x} \in \CalC^1\) then
               \begin{align*}
-                  \DiffOperator \func{f_y}{x}                 & = \DSOne_V - \left(\DiffOperator \func{f}{a}\right)^{-1} \circ \DiffOperator \func{f}{x}                                              \\
-                  \implies \norm[\DiffOperator \func{f_y}{x}] & \leq \norm[ \left(\DiffOperator \func{f}{a}\right)^{-1}] \norm[ \DiffOperator \func{f}{a} - \DiffOperator \func{f}{x}] < \dfrac{1}{2} \\
-                  \implies \norm[\func{f_y}{x_1} - \func{f_y}{x_2}] \leq \dfrac{1}{2} \norm[x_1 - x_2]
+                  \DiffOperator \func{f_y}{x}                       & = \DSOne_V - \left(\DiffOperator \func{f}{a}\right)^{-1} \circ \DiffOperator \func{f}{x}                                              \\
+                  \implies \norm[\DiffOperator \func{f_y}{x}]       & \leq \norm[ \left(\DiffOperator \func{f}{a}\right)^{-1}] \norm[ \DiffOperator \func{f}{a} - \DiffOperator \func{f}{x}] < \dfrac{1}{2} \\
+                  \implies \norm[\func{f_y}{x_1} - \func{f_y}{x_2}] & \leq \dfrac{1}{2} \norm[x_1 - x_2]
               \end{align*}
               Now for each \(\func{f}{x_0} = y_0 \in T\) we wish to prove there exist a \( \sigma > 0\) such that \(\func{B_\sigma}{y_0}\) is contained in \(T\). In other words, \(\forall y \in \func{B_\sigma}{y_0}\)
               \begin{align*}
@@ -421,12 +421,73 @@ contraction fixed point theorem.
               \end{align*}
               now to apply the contraction fixed point we must find complete metric space \(X\) such that \(\func{f}{X} = X\). Consider \(\overline{\func{B_\rho}{x_0}} \in S\) which is a complete metric space, and \(y\) such that \(\norm[y - y_0] < \dfrac{r \rho}{2}\) where \(r = \norm[\left(\DiffOperator \func{f}{a}\right)^{-1}]^{-1}\). Lastly, we show that \(x \in \overline{\func{B_\rho}{x_0}}\implies \func{f_y}{x} \in \overline{\func{B_\rho}{x_0}}\).
               \begin{align*}
-                  \norm[\func{f_y}{x}  - x_0] \leq \norm[\func{f_y}{x} - \func{f_y}{x_0}] + \norm[\func{f_y}{x_0} - x_0] \\
+                   & \norm[\func{f_y}{x}  - x_0] \leq \norm[\func{f_y}{x} - \func{f_y}{x_0}] + \norm[\func{f_y}{x_0} - x_0] \\
                    & \leq  \dfrac{1}{2} \norm[x - x_0] + \dfrac{\rho}{2}  \leq \rho
               \end{align*}
               therefore there exist a unique \(x \in \overline{\func{B_\rho}{x_0}}\) such that \(\func{f_y}{x} = x\).
         \item \(g = (f|_V)^{-1} : T \to T\) is continuously differentiable.
-
-
     \end{enumerate}
 \end{proof}
+
+\subsection{Implicit function}
+\begin{theorem}
+    Let \(V,W\) be finite dimensional normed vector spaces and \(U \subset V \times W\) is open. If \(f: U \to W\), \(f \in \CalC^1\) where \(\func{f}{a,b} = 0\) and \(\operatorFunc{\DiffOperator f|_{\set{a} \times W}}{a,b}\) is invertible then there exist open set \(S\) are \(a\) and \(T\) around \(b\) such that \(S \times T \subset U\), and a continuously differentiable function \(\phi: S \to T\) such that \(\func{\phi}{a} = b\) and \(\func{f^{-1}}{0} \cap (S \times T)\) is the graph of \(\phi\).
+\end{theorem}
+
+\begin{proof}
+    To apply the inverse function theorem, we need a function whose domain and range have the same dimension. So define, \(F: U \to V \times W\)
+    \begin{equation*}
+        \func{F}{x,y} = (x,\func{f}{x,y})
+    \end{equation*}
+    Then
+    \begin{equation*}
+        \DiffOperator \func{F}{a,b} = \left[\begin{array}{c|c}
+                I_n                                                     & \DSZero_n                                               \\ \hline
+                \operatorFunc{\DiffOperator f|_{\set{b} \times U}}{a,b} & \operatorFunc{\DiffOperator f|_{\set{a} \times W}}{a,b}
+            \end{array}\right]
+    \end{equation*}
+    Since \(I_n\) and \(\operatorFunc{\DiffOperator f|_{\set{a} \times W}}{a,b}\) are both invertible then \(\DiffOperator \func{F}{a,b}\) is invertible as well. By inverse function theorem there are open set \(\Omega_1\) around \((a,b)\) and \(\Omega_2\) around \((a,0)\) such that \(F|_{\Omega_1}\) is \(\CalC^1\) diffeomorphism from \(\Omega_1\) to \(\Omega_2\). Let \(G: \Omega_2 \to \Omega_1\) be the local inverse of \(F\) andv \(S,T\) be such that \(V \times W \subset \Omega_1\). Let \(\phi : S \to T\)
+    \begin{equation*}
+        \func{f}{x} = \operatorFunc{ \pi_2 \circ G}{x,0}
+    \end{equation*}
+\end{proof}
+
+%TODO: proof  
+\begin{corollary}
+    \(U \subset \Reals^n\) is open and \(f : U \to \Reals^k\) is continuously differentiable, \(n \geq k\), \(\func{f}{a} = 0\), are the rank of \(\DiffOperator \func{f}{a}\) is equal to \(k\). Then, there exists an open set \(V\) around \(a\) such that \(\func{f^{-1}}{0} \cap V\) is the graph of \(\CalC^1\) function from a coordinate subspace \(n - k\) of \(\Reals^n\) to its complement.
+\end{corollary}
+
+\begin{proof}
+
+\end{proof}
+
+\subsection{Higher derivative}
+Let \(V,W\) be finite dimensional normed vector spaces with \((e_1, \dots , e_n)\) is an ordered basis for \(V\). Consider \(U \subset V\) is an open set and \(f: U \to W\). If \(f\) is differentiable then its partial derivatives
+\begin{equation*}
+    \DiffOperator_i f: U \to E \quad \text{with} \quad \operatorFunc{\DiffOperator_i f}{x} = \operatorFunc{\DiffOperator \func{f}{x}}{e_i}
+\end{equation*}
+Then, clearly if \(\DiffOperator_i f\) is differentiable one can define its partial derivatives \(\operatorFunc{\DiffOperator_j}{\DiffOperator_i f}\) also denoted by
+\begin{equation*}
+    \operatorFunc{\DiffOperator_j}{\DiffOperator_i f}=  \dfrac{\PDiffOperator^2 f}{\PDiffOperator x_j \PDiffOperator x_i} =\DiffOperator_{ji} f
+\end{equation*}
+
+For Fr\'{e}chet derivative, \(\DiffOperator f: U \to \func{\CalL}{V,W}\) if differentiable at \(x\), then \(f\) is twice differentiable and
+\begin{equation*}
+    \DiffOperator^2 \func{f}{x} = \operatorFunc{\func{\DiffOperator}{\DiffOperator f}}{x} : U \to \func{\CalL}{V,W}
+\end{equation*}
+therefore
+\begin{equation*}
+    \DiffOperator^2 f :  U \to \func{\CalL}{V,\CalL{V,W}}
+\end{equation*}
+which by the \Cref{pr:nLinearIsmorphicLinear} is equivalent to \(\func{\CalL^2}{V \times V, W}\) and one can define
+\begin{equation*}
+    \diffOperator^2 f : U  \to \func{\CalL^2}{V \times V, W}
+\end{equation*}
+where \(\diffOperator^2 = \func{T}{\DiffOperator^2}\) as defined in \Cref{pr:nLinearIsmorphicLinear}. With this definition, the higher order derivatives \(n \geq 2\)
+\begin{equation*}
+    \diffOperator^n : U \to \func{\CalL}{V^n, W}
+\end{equation*}
+
+\begin{example}
+    Let \(A : V \to W\) be a affine function \(\func{A}{x} = Lx + b\) where \(L\) is linear. Then, \(\DiffOperator \func{A}{x} = L\) and hence \(\DiffOperator^2 A = 0\).
+\end{example}
