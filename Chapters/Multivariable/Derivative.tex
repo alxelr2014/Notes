@@ -78,8 +78,8 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
     and the reverse is true as well.
 \end{remark}
 
-\begin{theorem}
-    \(f : V \to W\) has all of its partial derivative in a neighbourhood of \(u \in U\) and they're continuous at \(u\) then \(f\) is differentiable at \(u\). Especially, if \(\PDiff{f_i}{x_j}\) exist and are continuous at every point of \(u\) then \(f \in \CalC^1\).
+\begin{theorem} \label{th:DifferentiabilityCriteria}
+    \(f : V \to W\) has all of its partial derivative in a neighbourhood of \(u \in U\) and they're continuous at \(u\) then \(f\) is differentiable at \(u\). Especially, if \(\PDiff{f_i}{x_j}\) exist and are continuous at every point of \(U\) then \(f \in \CalC^1\).
 \end{theorem}
 
 \begin{proof}
@@ -122,7 +122,7 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
     \begin{enumerate}
         \item we have
               \begin{align*}
-                   & \norm[ \func{f + cg}{x + k} - \func{f + cg}{x} - \operatorFunc{\DiffOperator \func{f}{x} + c \DiffOperator \func{g}{x}}{k}]                                                          \\
+                   & \norm[ \operatorFunc{f + cg}{x + k} - \operatorFunc{f + cg}{x} - \operatorFunc{\DiffOperator \func{f}{x} + c \DiffOperator \func{g}{x}}{k}]                                          \\
                    & \leq \norm[ \func{f}{x + k} - \func{f}{x} - \operatorFunc{\DiffOperator \func{f}{x}}{h}] + \abs[c]\norm[\func{g}{x + k} - \func{g}{x} - \operatorFunc{\DiffOperator \func{g}{x}}{h}]
               \end{align*}
         \item we know that
@@ -161,7 +161,7 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
     \begin{equation*}
         \norm[ \func{f}{x_0 + h} - \func{f}{x_0} - \operatorFunc{\DiffOperator \func{f}{a}}{h}] = \sum_{i = 1}^n \norm[ \func{f_i}{x_0 + h} - \func{f_i}{x_0} - \operatorFunc{\DiffOperator \func{f_i}{a}}{h}]
     \end{equation*}
-    which is what was what was wanted.
+    and since every other norm is equivalent to the norm defined above, we are done.
 \end{proof}
 
 \begin{theorem}[Leibnitz rule]
@@ -182,7 +182,7 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
     \end{equation*}
     Let \(\delta = 1\) then  \(\norm[h] = \sum \norm[h_i] < 1\) also \(i,j, \; \norm[h_i]\norm[h_j] \leq \norm[h]^2\). Hence if we define
     \begin{equation*}
-        A = \max \set[\prod_{i \in I} \norm[a_i]]{I \subset \Naturals_n}
+        A = \max \set[\prod_{i \in I} {\norm[a_i]}]{I \subset \Naturals_n}
     \end{equation*}
     then
     \begin{equation*}
@@ -210,9 +210,19 @@ Or equivalently there exists a sublinear function \(\func{R}{h}\) such that
 \end{example}
 
 \subsection{Mean value theorem}
-in general doesnt work \(f(t) = (t^2,t^3)\) however it works on a convex domain to reals.
+Mean value theroem of 1-dimensional does not generalize very well. For example, the continuous function \(\func{f}{t} : \clcl{0}{1} \to \Reals^2\) with
+\begin{equation*}
+    t \mapsto (t^2, t^3)
+\end{equation*}
+is differentiable on \(\opop{0}{1}\), however
+\begin{align*}
+    \func{f}{1} - \func{f}{0} = (1,1) & = \DiffOperator \func{f}{c} (1 - 0) \\
+                                      & = (2c,3c^2)
+\end{align*}
+which has no solution for \(c \in \opop{0}{1}\).
+Although it must be said that for \(f: U \to \Reals\) where \(U \subset V\) is convex, the mean value theorem holds.
 
-\begin{theorem}
+\begin{theorem} \label{th:MultivariableMVT}
     Let \(V,W\) be normed finite dimensional vector spaces and \(f: U \to W\) is differentiable and \(A,B \in U\) are such that the line connecting in completely contained in \(U\) and for each \(p\) on that line
     \begin{equation*}
         \norm[\DiffOperator \func{f}{p}] \leq M
@@ -223,7 +233,6 @@ in general doesnt work \(f(t) = (t^2,t^3)\) however it works on a convex domain 
     \end{equation*}
 \end{theorem}
 First consider the following lemma:
-Assume the following lemma
 \begin{lemma} \label{lm:MeanValueTheoremLemma}
     If \(\phi: \clcl{0}{1} \to W\) is continuous, differentiable on \(\opop{0}{1}\) and \(\norm[\func{\phi'}{t}] \leq M\) for all \(t \in \opop{0}{1}\) then
     \begin{equation*}
@@ -234,13 +243,13 @@ Assume the following lemma
 \begin{prooflemma}
     We provide three proofs for the lemma
     \begin{enumerate}
-        \item Assuming the norm on \(W\) is induced by an inner product. Then, let \( e = \frac{\func{\phi}{1} - \func{\phi}{0}}{\norm[\func{\phi}{1} - \func{\phi}{0}]}\) be a unit vecor in \(W\) then \(\psi : \clcl{0}{1} \to \Reals\), \(\func{\psi}{t} = e \cdot \func{\phi}{t}\) is continuous and differentiable on \(\opop{0}{1}\). By the mean the value theorem
+        \item Assuming the norm on \(W\) is induced by an inner product. Then, let \( e = \frac{\func{\phi}{1} - \func{\phi}{0}}{\norm[\func{\phi}{1} - \func{\phi}{0}]}\) be a unit vector in \(W\) then \(\psi : \clcl{0}{1} \to \Reals\), \(\func{\psi}{t} = e \cdot \func{\phi}{t}\) is continuous and differentiable on \(\opop{0}{1}\). By the mean the value theorem
               \begin{align*}
                   \abs[\func{\psi}{1} - \func{\psi}{0}]                        & = \abs[\func{\psi'}{t_0}]       \\
                   \abs[e \cdot \left( \func{\phi}{1} - \func{\phi}{0} \right)] & = \abs[e \cdot \func{\phi'}{t}] \\
                   \norm[\func{\phi}{1} - \func{\phi}{0}]                       & \leq M
               \end{align*}
-        \item Using the Hahn-Banach theorem, that is for a finite dimensional vector space \(V\) and \(e \in V\) with \(\norm[v] = 1\) then there exists a linear function \(\theta : V \to \Reals\) such that \(\norm[\theta] = 1\) and \(\func{\theta}{e} = 1\). Now let \(\func{\psi} = \func{\theta}{\func{\phi}{t}}\) then
+        \item Using the Hahn-Banach theorem, that is for a finite dimensional vector space \(V\) and \(e \in V\) with \(\norm[e] = 1\) there exists a linear function \(\theta : V \to \Reals\) such that \(\norm[\theta] = 1\) and \(\func{\theta}{e} = 1\). Now let \(\func{\psi}{t} = \func{\theta}{\func{\phi}{t}}\) and take \(e\) as defined above then
               \begin{align*}
                   \abs[\func{\psi}{1} - \func{\psi}{0}]                & = \abs[\func{\psi'}{t_0}]                                                             \\
                   \abs[\func{\theta}{\func{\phi}{1} - \func{\phi}{0}}] & = \operatorFunc{\DiffOperator \func{\theta}{\func{\phi}{t_0}}}{\func{\phi'}{t_0}}     \\
@@ -250,7 +259,7 @@ Assume the following lemma
               \begin{equation*}
                   T_\epsilon = \set[t \in \clcl{0}{1}]{\forall s, \; 0 \leq s \leq t, \; \norm[\func{\phi}{s} - \func{\phi}{0}] \leq(M + \epsilon)s + \epsilon}
               \end{equation*}
-              first note that \(T_\epsilon = \clcl{0}{c}\) and \(c > 0\) because for \(s = 0\) the inequality is strict and both sides are continuous with respect to \(s\). We claim that \(c = 1\) because otherwise \(c < 1\) we have, by differentiability of \(\phi\), there exists a \(\delta < 1 - c\) such that if
+              first note that \(T_\epsilon = \clcl{0}{c}\) for some \(c > 0\) because for \(s = 0\) the inequality is strict and both sides are continuous with respect to \(s\). We claim that \(c = 1\) because otherwise \(c < 1\) and by differentiability of \(\phi\), there exists a \(\delta < 1 - c\) such that if
               \begin{align*}
                   \norm[h] < \delta \implies \norm[\func{\phi}{c + h} - \func{\phi}{c} - \operatorFunc{\DiffOperator \func{\phi}{c}}{h}] & \leq \epsilon \norm[h]                                        \\
                   \implies \norm[\func{\phi}{c + h} - \func{\phi}{c}]                                                                    & \leq\norm[h] \left( \epsilon + \norm[\func{\phi'}{c}] \right) \\
@@ -264,7 +273,7 @@ Assume the following lemma
 \end{prooflemma}
 
 \begin{proof}
-    Let \(\sigma : \clcl{0}{1} \to U\) is the parameterization of the line connecting \(A\) to \(B\), \(\func{\sigma}{t} = (1 - t) A + tB\). Let \(\phi = f \circ \sigma\) then clearly \(\phi\) is continuous on \(\clcl{0}{1}\) and differentiable on \(\opop{0}{1}\) and we have
+    Let \(\sigma : \clcl{0}{1} \to U\) be a parameterization of the line connecting the point \(A\) to point \(B\), \linebreak \(\func{\sigma}{t} = (1 - t) A + tB\). Let \(\phi = f \circ \sigma\), then clearly \(\phi\) is continuous on \(\clcl{0}{1}\) and differentiable on \(\opop{0}{1}\) and we have
     \begin{align*}
         \func{\phi'}{t}                 & = \operatorFunc{\DiffOperator \func{f}{\func{\sigma}{t}}}{\func{\sigma'}{t} }         \\
                                         & = \operatorFunc{\DiffOperator \func{f}{\func{\sigma}{t}}}{B - A}                      \\
@@ -274,19 +283,40 @@ Assume the following lemma
     \begin{equation*}
         \norm[\func{f}{B} - \func{f}{A}]_W = \norm[\func{\phi}{1} - \func{\phi}{0}]_W \leq M \norm[B-A]_V
     \end{equation*}
+    which concludes the proof.
 \end{proof}
 
-\begin{corollary}
+\begin{corollary} \label{cr:derivativeZeroConstant}
     Let \(U \subset V\) is connected and open and \(f: U \to W\) is differentiable and \(\DiffOperator \func{f}{u} = 0\) for all \(u \in U\) then \(f\) is constant.
 \end{corollary}
 
 \begin{proof}
-    closedness easy, openness from the MVT.
+    Let \(p \in U\) and \( S = \set[q \in U]{\func{f}{q} = \func{f}{p}} \). \(S\) is closed because \(f\) is continuous and hence the pre-image closed set \(\set{\func{f}{p}}\) is closed. For each \(q \in S\) there exists \(r > 0\) such that \(\func{B_r}{q} \subset U\) and since \(\func{B_r}{q}\) is convex then for each \( l \in \func{B_r}{q}\) we apply the \Cref{th:MultivariableMVT}
+    \begin{equation*}
+        \norm[\func{f}{l} - \func{f}{q}] \leq \sup \norm[\DiffOperator \func{f}{t}] \norm[l - q] = 0
+    \end{equation*}
+    which implies that \(\func{f}{l} = \func{f}{q} = \func{f}{p}\) hence \(S\) is open in \(U\) which by the connectedness of \(U\) means \(S = U\). Therefore, \(f\) is constant on \(U\).
 \end{proof}
 
 \begin{corollary}
     Let \(V_1, V_2, W\) be finite dimensional normed vector space and \(U \subset V_1 \times V_2\) is open such that for every \(y \in V_2\) the intersection \((V_1 \times \set{y}) \cap U\) is connected. Assumne \(f : U \to W\) is differentiable and \(\DiffOperator_{V_1} \func{f}{x,y} = 0\) for all \((x,y) \in U\) then for any two point \((x_1,y), (x_2,y) \in U\),\(\func{f}{x_1,y} = \func{f}{x_2,y}\).
 \end{corollary}
+
+\begin{proof}
+    Fix \(y \in V_2\) and define the function \(g : V_1 \to W\)
+    \begin{equation*}
+        \func{g}{x} = \func{f}{x,y}
+    \end{equation*}
+    therefore
+    \begin{equation*}
+        \DiffOperator \func{g}{x} = \DiffOperator_{V_1} \func{f}{x,y} = 0
+    \end{equation*}
+    and since \((V_1 \times \set{y}) \cap U\), the domain of \(g\) is connected. Hence by applying the \Cref{cr:derivativeZeroConstant} we get that
+    \begin{equation*}
+        \func{g}{x} = c \implies \func{f}{x_1,y} = \func{f}{x_2,y}
+    \end{equation*}
+    for all \(y \in V_2\).
+\end{proof}
 
 \subsection{Fundamental theorem of calculus}
 \begin{theorem}
@@ -296,26 +326,50 @@ Assume the following lemma
     \end{equation*}
     where \(T\) is
     \begin{equation*}
-        T = \int_{0}^{1} \DiffOperator f \circ \func{\sigma}{t} \diffOperator t
+        T = \int_{0}^{1} \DiffOperator \func{f}{ \func{\sigma}{t}} \diffOperator t
     \end{equation*}
 \end{theorem}
 
-%TODO: do the proof
 \begin{proof}
-    look at a matrix, integrate with respect to each element and apply
+    Let \(g_i : \clcl{0}{1} \to \Reals\) be
+    \begin{equation*}
+        \func{g_i}{t} = \pi_i \circ \func{f}{\func{\sigma}{t}}
+    \end{equation*}
+    is continuously differentiable then by the fundamental theorem of calculus for the real-valued functions we have
+    \begin{align*}
+        \func{g}{1} - \func{g}{0}                                   & = \int_{0}^{1} \func{g'}{t} \diffOperator t                                                                        \\
+                                                                    & = \int_{0}^{1} \pi_i \circ \DiffOperator \func{f}{\func{\sigma}{t}} \diffOperator t                                \\
+                                                                    & = \pi_i \circ \int_{0}^{1} \DiffOperator \func{f}{\func{\sigma}{t}} \DiffOperator \func{\sigma}{t} \diffOperator t \\
+                                                                    & = \pi_i \circ \int_{0}^{1} \DiffOperator \func{f}{\func{\sigma}{t}} (B - A) \diffOperator t                        \\
+        \implies \pi_i \circ \left(\func{f}{B} - \func{f}{A}\right) & = \pi_i \circ \func{T}{B- A}                                                                                       \\
+        \implies \func{f}{B} - \func{f}{A}                          & =\func{T}{B- A}
+    \end{align*}
+    which was what was wanted.
 \end{proof}
 
 \begin{theorem}
-    Consider the \(T: U \times U \to \func{\CalL}{V,W}\) is continuous and such that
+    Consider the continuous function \(T: U \times U \to \func{\CalL}{V,W}\) which is such that
     \begin{equation*}
         \func{f}{B} - \func{f}{A} = \operatorFunc{\func{T}{A,B}}{B-A}
     \end{equation*}
     then \(f \in \CalC^1\) and \(\DiffOperator \func{f}{A} = \func{T}{A,A}\)
 \end{theorem}
 
-%TODO: do the proof
 \begin{proof}
-    only need to proof \(f\) is differentiable and equals to that shit.
+    We have
+    \begin{equation*}
+        \func{f}{A + h} - \func{f}{A} = \operatorFunc{\func{T}{A+h,A}}{h}
+    \end{equation*}
+    hence
+    \begin{align*}
+        \norm[\func{f}{A + h} - \func{f}{A} - \operatorFunc{\func{T}{A,A}}{h}] & = \norm[ \operatorFunc{\func{T}{A+h,A}}{h} - \operatorFunc{\func{T}{A,A}}{h}] \\
+                                                                               & \leq \norm[\func{T}{A+h,A} - \func{T}{A,A}]\norm[h]
+    \end{align*}
+    now by continuity of \(T\), there exists a \(\delta > 0\) such that
+    \begin{equation*}
+        \norm[(h,k)] < \delta \implies \norm[\func{T}{A+h,A+k} - \func{T}{A,A}] < \epsilon
+    \end{equation*}
+    By letting \(k = 0\) we get \(\DiffOperator \func{f}{A} = \func{T}{A,A}\). Since \(T\) is continuous then \(f \in \CalC^1\) as well.
 \end{proof}
 
 \begin{corollary}
@@ -325,7 +379,7 @@ Assume the following lemma
     \end{equation*}
     is continuous then
     \begin{equation*}
-        \func{F}{y} \int_{a}^{b} \func{f}{x,y} \diffOperator x
+        \func{F}{y} = \int_{a}^{b} \func{f}{x,y} \diffOperator x
     \end{equation*}
     is continuous. Furthermore, if \(\PDiff{f}{y_i}\) exists and is continuous then \(\PDiff{F}{y_i}\) exists and is continuous as well.
     \begin{equation*}
@@ -333,9 +387,45 @@ Assume the following lemma
     \end{equation*}
 \end{corollary}
 
-%TODO: do the proof
 \begin{proof}
-    continuity implies there are balls, compactness implies there are finite balls, take minimum
+    Firstly, we want to show that there exists a \(\delta > 0\) such that for each \(y \in U\)
+    \begin{equation*}
+        \norm[h] < \delta \implies  \norm[\func{F}{y + h} - \func{F}{y}] < \epsilon
+    \end{equation*}
+    we have that
+    \begin{align*}
+        \norm[\func{F}{y + h} - \func{F}{y}] & =  \norm[\int_{a}^{b} \func{f}{x,y+ h} \func{f}{x,y} \diffOperator x]    \\
+                                             & \leq (b-a) \sup_{x \in \clcl{a}{b}} \set{\func{f}{x,y+ h} \func{f}{x,y}}
+    \end{align*}
+    note that from the continuity of \(f\) for each \(x \in \clcl{a}{b}\) and \(y \in U\) there are open balls \(I_{x,y}\) around \(x\) and \(J_{x,y}\) around \(y\) such that
+    \begin{equation*}
+        x' \in I_{x,y}, \; y' \in J_{x,y} \implies \norm[\func{f}{x',y'} - \func{f}{x,y}] < \dfrac{\epsilon}{b - a}
+    \end{equation*}
+    Fix \(y_0\), then \(\cup I_{x,y_0} \supset \clcl{a}{b}\) which by the compactness of the interval implies that there is a finite family of there open set the covers \(\clcl{a}{b}\). Setting \(\delta\) to the minimum radius of \(J_{x,y_0}\) yields the result.
+    Secondly, we show that there exists a \(\delta > 0 \) such that
+    \begin{equation*}
+        \abs[h] < \delta \implies \norm[\dfrac{\func{F}{y + he_i} - \func{F}{y}}{h}] < \epsilon
+    \end{equation*}
+    and we have that
+    \begin{align*}
+        \dfrac{\func{F}{y + he_i} - \func{F}{y}}{h} & = \dfrac{1}{h}  \int_{a}^{b} \func{f}{x,y+ he_i} - \func{f}{x,y} \diffOperator x   \\
+                                                    & =  \dfrac{1}{h}  \int_{a}^{b} \func{\PDiff{f}{y_i}}{x,y + the_i}h  \diffOperator x \\
+                                                    & = \int_{a}^{b} \func{\PDiff{f}{y_i}}{x,y + the_i}  \diffOperator x
+    \end{align*}
+    from the previous part we know that we can make
+    \begin{equation*}
+        \norm[\func{\PDiff{f}{y_i}}{x,y'} - \func{\PDiff{f}{y_i}}{x,y}]
+    \end{equation*}
+    as small as we want by making \(\norm[y - y'] < \delta\) small independently of \(x\). Therefore, there exist a \(\delta > 0\) such that if \(\abs[th] < \abs[h] < \delta\) then
+    \begin{equation*}
+        \norm[\func{\PDiff{f}{y_i}}{x,y'} - \func{\PDiff{f}{y_i}}{x,y}] < \frac{\epsilon}{b-a}
+    \end{equation*}
+    hence
+    \begin{equation*}
+        \norm[\dfrac{\func{F}{x,y + he_i} - \func{F}{x,y}}{h} - \int_{a}^{b} \func{\PDiff{f}{y_i}}{x,y} \diffOperator x] = \norm[\int_{a}^{b} \func{\PDiff{f}{y_i}}{x,y + the_i} - \func{\PDiff{f}{y_i}}{x,y}  \diffOperator x]
+        < \frac{\epsilon}{b - a}
+    \end{equation*}
+    and the continuity of \(\PDiff{F}{y_i}\) comes as a result of applying the first part to \(\PDiff{f}{y_i}\).
 \end{proof}
 
 \subsection{Inverse function theorem}
@@ -471,23 +561,186 @@ Then, clearly if \(\DiffOperator_i f\) is differentiable one can define its part
     \operatorFunc{\DiffOperator_j}{\DiffOperator_i f}=  \dfrac{\PDiffOperator^2 f}{\PDiffOperator x_j \PDiffOperator x_i} =\DiffOperator_{ji} f
 \end{equation*}
 
-For Fr\'{e}chet derivative, \(\DiffOperator f: U \to \func{\CalL}{V,W}\) if differentiable at \(x\), then \(f\) is twice differentiable and
+For Fr\'{e}chet derivative, if \(\DiffOperator f: U \to \func{\CalL}{V,W}\) is differentiable at \(x\), then \(f\) is twice differentiable and
 \begin{equation*}
-    \DiffOperator^2 \func{f}{x} = \operatorFunc{\func{\DiffOperator}{\DiffOperator f}}{x} : U \to \func{\CalL}{V,W}
+    \DiffOperator^2 \func{f}{x} = \operatorFunc{\func{\DiffOperator \,}{\DiffOperator f}}{x} : U \xrightarrow{\text{linear map}} \func{\CalL}{V,W}
 \end{equation*}
-therefore
+is a linear map. Therefore,
 \begin{equation*}
-    \DiffOperator^2 f :  U \to \func{\CalL}{V,\CalL{V,W}}
+    \DiffOperator^2 f :  U \to \func{\CalL}{V,\func{\CalL}{V,W}}
 \end{equation*}
 which by the \Cref{pr:nLinearIsmorphicLinear} is equivalent to \(\func{\CalL^2}{V \times V, W}\) and one can define
 \begin{equation*}
     \diffOperator^2 f : U  \to \func{\CalL^2}{V \times V, W}
 \end{equation*}
-where \(\diffOperator^2 = \func{T}{\DiffOperator^2}\) as defined in \Cref{pr:nLinearIsmorphicLinear}. With this definition, the higher order derivatives \(n \geq 2\)
+where \(\diffOperator^2 = \func{T}{\DiffOperator^2}\) as defined in \Cref{pr:nLinearIsmorphicLinear}. With this definition, for the higher order derivatives \(n \geq 2\)
 \begin{equation*}
-    \diffOperator^n : U \to \func{\CalL}{V^n, W}
+    \diffOperator^n : U \to \func{\CalL^n}{V^n, W}
 \end{equation*}
 
 \begin{example}
     Let \(A : V \to W\) be a affine function \(\func{A}{x} = Lx + b\) where \(L\) is linear. Then, \(\DiffOperator \func{A}{x} = L\) and hence \(\DiffOperator^2 A = 0\).
 \end{example}
+
+\begin{example}
+    Let \(\beta : V \times V \to W\) be a bilinear function. By the Leibnitz rule
+    \begin{equation*}
+        \operatorFunc{\DiffOperator \func{\beta}{x_1,x_2}}{h_1,h_2} = \func{\beta}{x_1,h_2} + \func{\beta}{h_1,x_2}
+    \end{equation*}
+    therefore \(\DiffOperator \beta: V \times V \to \func{\CalL}{V \times V, W}\) is a linear a function itself, since
+    \begin{equation*}
+        \operatorFunc{\DiffOperator \func{\beta}{x_1 + x'_1,x_2 + x'_2}}{h_1,h_2} = \func{\beta}{x_1,h_2} + \func{\beta}{x'_1,h_2} + \func{\beta}{x_1,h_2} + \func{\beta}{b_1,x'_2}
+    \end{equation*}
+    which means \(\operatorFunc{\func{\DiffOperator \,}{\DiffOperator \beta}}{x} = \DiffOperator \beta\) independent of \(x\).
+\end{example}
+
+\begin{theorem}
+    If \(f\) is twice differentiable at \(p\) then its second partial derivatives exist at \(p\). Conversely, if its second partial derivatives exist at a neighbourhood of \(p\) and they are continuous, then \(f\) is differentiable.
+\end{theorem}
+
+\begin{proof}
+    Assume that \(\DiffOperator^2 \func{f}{p}\) exists. Then
+    \begin{align*}
+        \func{\DiffOperator_j \,}{\DiffOperator_i \func{f}{p}} & = \lim_{h \to 0} \dfrac{\operatorFunc{\DiffOperator \func{f}{p + he_j}}{e_i} - \operatorFunc{\DiffOperator \func{f}{p}}{e_i} }{h} \\
+                                                               & = \operatorFunc{ \lim_{h \to 0} \dfrac{\DiffOperator \func{f}{p + he_j} - \DiffOperator \func{f}{p}}{h} }{e_i}
+    \end{align*}
+    which exists sincce \(\DiffOperator f\) is differentiable at \(p\). Conversely, assume that the second partials exist and are continuous at \(p\). Then
+    \begin{equation*}
+        \operatorFunc{\func{\DiffOperator \,}{\DiffOperator f}}{p} = \begin{bmatrix}
+            \func{\PDiff{\DiffOperator f}{x_1}}{p} & \dots & \func{\PDiff{\DiffOperator f}{x_n}}{p}
+        \end{bmatrix}
+    \end{equation*}
+    note that each \(\func{\PDiff{\DiffOperator f}{x_i}}{p}\) is in \(\func{\CalL}{V,W}\). In fact, since
+    \begin{equation*}
+        \DiffOperator f = \begin{bmatrix}
+            \PDiff{f}{x_1} & \dots & \PDiff{f}{x_n}
+        \end{bmatrix}
+    \end{equation*}
+    then
+    \begin{equation*}
+        \PDiff{\DiffOperator f}{x_i} =  \begin{bmatrix}
+            \dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_1} & \dots & \dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_n}
+        \end{bmatrix}
+    \end{equation*}
+    which is continuous at \(p\) and hence \(\func{\PDiff{\DiffOperator f}{x_i}}{p}\) is continuous and by \Cref{th:DifferentiabilityCriteria}, \(\DiffOperator f\) is differentiable at \(p\).
+\end{proof}
+
+In general, one can show that \(f \in \CalC^r\) is equivalent to its partial being in \(\CalC^r\).
+
+Let \(f: U \to \Field\) then \(\DiffOperator f: U \to \func{\CalL}{V,\Field}\) which is the topological dual space \(V^\ast\) therefore
+\begin{equation*}
+    \DiffOperator f = \sum_{i = 1}^n \PDiff{f}{x_i} e^\ast_i
+\end{equation*}
+then for the second derivative of \(f\), \(\DiffOperator^2 \func{f}{x} : U \to V^\ast\)
+\begin{align*}
+    \DiffOperator^2 \func{f}{x}                                                  & = \sum_{i = 1}^n \func{\PDiff{\DiffOperator f}{x_i}}{x} e^\ast_i                                                     \\
+                                                                                 & = \sum_{i = 1}^n \func{\PDiff{\sum_{j = 1}^n \PDiff{f}{x_j}}{x_i}}{x}  e^\ast_j e^\ast_i                             \\
+                                                                                 & =  \sum_{i = 1}^n \sum_{j = 1}^n \dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_j} e^\ast_j e^\ast_i \\
+    \implies \operatorFunc{\operatorFunc{\DiffOperator^2 \func{f}{x}}{e_i}}{e_j} & = \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_j}}{x}                                        \\
+    \implies \func{\diffOperator^2 \func{f}{x}}{e_i,e_j}                         & = \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_j}}{x}
+\end{align*}
+
+\begin{definition}[Hessian matrix]
+    If for a function \(f : U \to \Field\) all of its second partial derivatives exist then \textbf{hessian matrix} is
+    \begin{equation*}
+        \begin{bmatrix}
+            \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_1^2}}{x}                  & \dots  & \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_1 \PDiffOperator x_n}}{x} \\
+            \vdots                                                                      & \ddots & \vdots                                                                      \\
+            \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_n \PDiffOperator x_1}}{x} & \dots  & \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_n^2}}{x}
+        \end{bmatrix}
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    If \(f\) is twice differentiable at \(x\), \(\diffOperator^2 \func{f}{x}\) is symmetric. That is,
+    \begin{equation*}
+        \func{\diffOperator^2 \func{f}{x}}{h,k} = \func{\diffOperator^2 \func{f}{x}}{k,h}
+    \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    Let \(\norm[h]\) and \(\norm[k]\) are sufficiently small such that \(a + h, a+  k , a+ h + l\) and the lines connecting them stays in \(U\). Consider
+    \begin{equation*}
+        \func{\Delta}{h,k} = \func{f}{a + h + k} - \func{f}{a + h} - \func{f}{a  + k} + \func{f}{a }
+    \end{equation*}
+    Assuming \(f\) is a real-valued twice differentiable function then
+    \begin{equation*}
+        \dfrac{\operatorFunc{\diffOperator^2 \func{f}{a}}{h,k} - \func{\Delta}{h,k}}{h^2 + k^2} \to 0
+    \end{equation*}
+    as \((h,k) \to (0,0)\).
+\end{proof}
+
+\begin{theorem}
+    The \(k_\cardinalTH\) of a \(k\)-times differentiable function is a symmetric \(k\)-linear function.
+\end{theorem}
+\begin{proposition}
+    If \(f,g \in \CalC^r\) are two functions then \(f \circ g \in \CalC^r\).
+\end{proposition}
+
+\begin{proof}
+    Let \(f: V' \to V''\) and \(g: V \to V'\) be two \(\CalC^r\) functions and  \(\beta : \func{\CalL}{V',V''} \times \func{\CalL}{V,V'} \to \func{\CalL}{V,V''}\) is a bilinear function such that
+    \begin{equation*}
+        \func{\beta}{\phi,\psi} = \phi \circ \psi
+    \end{equation*}
+    Now note that
+    \begin{align*}
+        \operatorFunc{\func{\DiffOperator \,}{ f \circ g}}{a} & = \operatorFunc{\DiffOperator f \circ g}{a}\circ \DiffOperator \func{g}{a}            \\
+                                                              & = \func{\beta }{\operatorFunc{\DiffOperator f \circ g}{a}, \DiffOperator \func{g}{a}}
+    \end{align*}
+    Consider the following functions
+    \begin{equation*}
+        a \xmapsto[\CalC^\infty]{\Delta} (a,a) \xmapsto[\CalC^{r-1}]{(\DiffOperator f \circ g, \DiffOperator g)} (\operatorFunc{\DiffOperator f \circ g}{a}, \DiffOperator \func{g}{a}) \xmapsto[\CalC^\infty]{\beta}  \operatorFunc{\func{\DiffOperator \,}{ f \circ g}}{a}
+    \end{equation*}
+    therefore \(\func{\DiffOperator \,}{ f \circ g} \in \CalC^{r-1}\) and hence \(f \circ g \in \CalC^{r}\).
+\end{proof}
+
+\begin{example}
+    The inverse operator \(i : \func{\GL}{V} \to \func{\CalL}{V,V}\) is in \(C^\infty\). Remember that
+    \begin{equation*}
+        \operatorFunc{\operatorFunc{\DiffOperator i}{A}}{M} = - A^{-1}M A^{-1}
+    \end{equation*}
+    Let \(\gamma : \func{\CalL}{V,V} \times \func{\CalL}{V,V} \to \func{\CalL}{\func{\CalL}{V,V} , \func{\CalL}{V,V}}\) with
+    \begin{equation*}
+        \operatorFunc{\func{\gamma}{A,B}}{M} = - AMB
+    \end{equation*}
+    is a bilinear function. Therefore
+    \begin{equation*}
+        \operatorFunc{\operatorFunc{\DiffOperator i}{A}}{M} = \operatorFunc{\func{\gamma}{A^{-1},A^{-1}}}{M}
+    \end{equation*}
+    now
+    \begin{equation*}
+        A \xmapsto{i} A^{-1} \xmapsto[\CalC^\infty]{\Delta} (A^{-1}, A^{-1}) \xmapsto[\CalC^\infty]{\gamma} \operatorFunc{\DiffOperator i}{A}
+    \end{equation*}
+    Since we have proved that \(i\) is differentiable then \(\DiffOperator i\) is differentiable which means \(i\) is twice differentiable and so on. Hence \(i \in C^{\infty}\).
+\end{example}
+
+\subsection{Rank theorem}
+A generalization of \(PAQ = \begin{bmatrix}
+    I_r & 0 \\
+    0   & 0 \\
+\end{bmatrix}\)
+\begin{theorem}
+    Let \(f: U \to W\) be of class \(\CalC^1\) and
+    \begin{equation*}
+        \forall x \in U, \; \rank \DiffOperator \func{f}{x} = k
+    \end{equation*}
+    then for each \(p \in U\) there exist open subsets \(p \in U_0\) and \(\func{f}{p} \in W_0\) and diffeomorphisms
+    \begin{align*}
+        \alpha & : U_0 \to U'_0 \\
+        \beta  & : V_0 \to V'_0
+    \end{align*}
+    such that
+    \begin{equation*}
+        \func{ \beta \circ f \circ a^{-1} }{x_1, \dots, x_n} = (x_1, \dots , x_k, 0 , \dots, 0)
+    \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    Let \(A = \DiffOperator \func{f}{p}\) then there are invertible matrices \(P,Q\) such that
+    \begin{equation*}
+        Q A P^{-1} = \begin{bmatrix}
+            I_r & 0 \\
+            0   & 0 \\
+        \end{bmatrix}
+    \end{equation*}
+\end{proof}

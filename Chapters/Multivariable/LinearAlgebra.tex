@@ -248,6 +248,45 @@ Another proof of \Cref{pr:FiniteIsBanach}
     \end{equation*}
 \end{remark}
 
+\begin{definition}[Dual space]
+    Let \(V\) be a normed space over the normed field \(\Field\), then the \textbf{topological/continuous dual space} of the normed space \(V\) is
+    \begin{equation*}
+        V^\ast  = \func{\CalL}{V,\Field}
+    \end{equation*}
+    elements of \(V^\ast\) are called \textbf{bounded functionals} on \(V\).
+\end{definition}
+
+\begin{remark}
+    Dual space is defined for all vector spaces, however, in analysis we study the topological dual space which only in the finite dimensional case coincide with the algebraic dual space.
+\end{remark}
+
+\begin{proposition}
+    For a finite dimensional normed vector space \(V\), \(\dim V^\ast = \dim V\).
+\end{proposition}
+
+\begin{proof}
+    Let \(\set{e_1, \dots , e_n}\) be a basis for \(V\) then, consider the following linear functions
+    \begin{equation*}
+        e^\ast_1, \dots , e^\ast_n \in V^\ast
+    \end{equation*}
+    where
+    \begin{equation*}
+        \func{e^\ast_i}{e_j} = \begin{cases}
+            1 & i = j    \\
+            0 & i \neq j
+        \end{cases}
+    \end{equation*}
+    we claim that \(\set{e^\ast_1, \dots , e^\ast_n}\) is a basis for \(V^\ast\). It is easy to see that they are as for each \(j\)
+    \begin{equation*}
+        \left[\sum_{i = 1}^n c_i e^\ast_i\right] e_j = c_j
+    \end{equation*}
+    and for each \(\phi \in \func{\CalL}{V,\Field}\) we have
+    \begin{equation*}
+        \func{\phi}{e_j} = \alpha_i =  \sum_{i = 1}^n \alpha_i \func{e^\ast_o}{e_i}\\
+    \end{equation*}
+    hence \(\dim V^\ast = n = \dim V\).
+\end{proof}
+
 \begin{theorem}
     For two normed vector spaces \(V,W\), \(\normedSpace{\func{\CalB}{V,W}}{\norm[T]}\) is a normed vector space. Moreover, it is a Banach space when \(W\) is a Banach space.
 \end{theorem}
