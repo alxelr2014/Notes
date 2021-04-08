@@ -1,0 +1,44 @@
+\chapter{Datapath}
+\begin{definition}[Datapath]
+    A functional unit used to operate on or hold data within a processor. \textbf{Contorl unit} is an FSM that schedules data movement in datapath.
+\end{definition}
+
+\begin{example}
+    Some datapath elements in MIPS
+    \begin{enumerate}
+        \item Instruction memory
+        \item Data memory
+        \item Register file
+        \item ALU
+        \item Adders
+    \end{enumerate}
+\end{example}
+
+PC gets updated automatically which needs another adder so that it always points to the next instruction.
+\section{Datapath elements}
+\subsetction{Instruction fetch unit}
+Contains PC which supplies the address for the memory. plus the adder plus the jump adder
+
+\subsection{Instruction memory}
+Cause it is slow, we put a cache. takes address from PC and returns an instruction. puts it on IR (note that for a single-cycle it is not a register )
+decoding happens at the end.
+
+\subsection{Register file}
+Also called general purpose registers. Takes 3 indices, two for reading and one for writting, and data to write which is controlled by a signal. returns two data from the reading of the reading indices.
+
+\subsection{ALU}
+takes two input from RF (or IR in case of immediate) and returns the result of the operation which is determined be 4-bit select.
+
+\subsection{Data memory}
+Also known as D-Cache. two signals for reading and writting. one address input and data writting. returns data read if enabled.
+
+D-cache and I-cache can be :
+\begin{enumerate}
+    \item completely separate components
+    \item seperate components but share bus
+    \item shared component and bus
+\end{enumerate}
+the first case it is easy.
+
+\subsection{Branch unit}
+for branching which includes sign extend unit, a shifter, and an adder.
