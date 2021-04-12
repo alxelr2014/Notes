@@ -473,12 +473,32 @@ We denote  the set of all \(n\)-linear functions from \(V_1 \times \dots \times 
         \func{\alpha}{(v_1)(v_2) \dots (v_n)} = \func{\func{T}{\alpha}}{v_1,v_2, \dots, v_n}
     \end{equation*}
     First note that \(T\) is linear. Then if \(\func{T}{\alpha} = 0\) implies \(\alpha  = 0\), thus \(T\) is injective and hence bijective.
-
 \end{proof}
+
+\begin{definition}[Positive definite]
+    Matrix \(A \in \SquareMatrices[\Reals]{n}\) is \textbf{positive definite} whenever \(A\) is symmetric and 
+    \begin{equation*}
+        \forall x \in \Reals^n \backslash \set{0}, \ x^T A x > 0
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+     Every positive definite matrix \(A\) is diagonizable. In face, there exists an orthognal matrix \(P\) such that 
+     \begin{equation*}
+         PAP^T = \begin{bmatrix}
+             \lambda_1 & 0&\dots & 0 \\
+             0 & \lambda_2 & \dots & 0\\
+             \vdots & \ddots & & \vdots\\
+             0 & \dots & 0 & \lambda_n
+         \end{bmatrix}
+     \end{equation*}
+     where \(\lambda_i > 0\) for each \(i\).
+\end{theorem}
 
 {\Large\textbf{Exercises}}
 \begin{enumerate}
     \item Show that for a linear transformation \(T\), \(\norm[T] = \sup_{\norm[v]_V \leq 1} \norm[Tv]_W\).
+    \item Prove or disprove that if \(x^T A x = x^T A^T x\) for all \(x \in \Reals^n \backslash \set{0}\) then \(A = A^T\).
 \end{enumerate}
 \newpage
 

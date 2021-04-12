@@ -2,10 +2,10 @@
 \contentsline {section}{\numberline {1.1}Linear Algebra}{3}{}%
 \contentsline {subsection}{\numberline {1.1.1}Vector Spaces}{3}{}%
 \contentsline {subsection}{\numberline {1.1.2}Linear Maps}{5}{}%
-\contentsline {section}{\numberline {1.2}Derivative}{12}{}%
-\contentsline {subsection}{\numberline {1.2.1}Mean value theorem}{15}{}%
-\contentsline {subsection}{\numberline {1.2.2}Fundamental theorem of calculus}{17}{}%
-\contentsline {subsection}{\numberline {1.2.3}Inverse function theorem}{20}{}%
-\contentsline {subsection}{\numberline {1.2.4}Implicit function}{21}{}%
-\contentsline {subsection}{\numberline {1.2.5}Higher derivative}{22}{}%
-\contentsline {subsection}{\numberline {1.2.6}Rank theorem}{25}{}%
+\contentsline {section}{\numberline {1.2}Derivative}{13}{}%
+\contentsline {subsection}{\numberline {1.2.1}Mean value theorem}{16}{}%
+\contentsline {subsection}{\numberline {1.2.2}Fundamental theorem of calculus}{18}{}%
+\contentsline {subsection}{\numberline {1.2.3}Higher derivative}{21}{}%
+\contentsline {subsection}{\numberline {1.2.4}Inverse function theorem}{26}{}%
+\contentsline {subsection}{\numberline {1.2.5}Implicit function}{28}{}%
+\contentsline {subsection}{\numberline {1.2.6}Rank theorem}{29}{}%

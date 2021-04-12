@@ -427,7 +427,314 @@ First consider the following lemma:
     \end{equation*}
     and the continuity of \(\PDiff{F}{y_i}\) comes as a result of applying the first part to \(\PDiff{f}{y_i}\).
 \end{proof}
+\subsection{Higher derivative}
+Let \(V,W\) be finite dimensional normed vector spaces with \((e_1, \dots , e_n)\) is an ordered basis for \(V\). Consider \(U \subset V\) is an open set and \(f: U \to W\). If \(f\) is differentiable then its partial derivatives
+\begin{equation*}
+    \DiffOperator_i f: U \to E \quad \text{with} \quad \operatorFunc{\DiffOperator_i f}{x} = \operatorFunc{\DiffOperator \func{f}{x}}{e_i}
+\end{equation*}
+Then, clearly if \(\DiffOperator_i f\) is differentiable one can define its partial derivatives \(\operatorFunc{\DiffOperator_j}{\DiffOperator_i f}\) also denoted by
+\begin{equation*}
+    \operatorFunc{\DiffOperator_j}{\DiffOperator_i f}=  \dfrac{\PDiffOperator^2 f}{\PDiffOperator x_j \PDiffOperator x_i} =\DiffOperator_{ji} f
+\end{equation*}
 
+For Fr\'{e}chet derivative, if \(\DiffOperator f: U \to \func{\CalL}{V,W}\) is differentiable at \(x\), then \(f\) is twice differentiable and
+\begin{equation*}
+    \DiffOperator^2 \func{f}{x} = \operatorFunc{\func{\DiffOperator \,}{\DiffOperator f}}{x} : U \xrightarrow{\text{linear map}} \func{\CalL}{V,W}
+\end{equation*}
+is a linear map. Therefore,
+\begin{equation*}
+    \DiffOperator^2 f :  U \to \func{\CalL}{V,\func{\CalL}{V,W}}
+\end{equation*}
+which by the \Cref{pr:nLinearIsmorphicLinear} is equivalent to \(\func{\CalL^2}{V \times V, W}\) and one can define
+\begin{equation*}
+    \diffOperator^2 f : U  \to \func{\CalL^2}{V \times V, W}
+\end{equation*}
+where \(\diffOperator^2 = \func{T}{\DiffOperator^2}\) as defined in \Cref{pr:nLinearIsmorphicLinear}. With this definition, for the higher order derivatives \(n \geq 2\)
+\begin{equation*}
+    \diffOperator^n : U \to \func{\CalL^n}{V^n, W}
+\end{equation*}
+
+\begin{example}
+    Let \(A : V \to W\) be a affine function \(\func{A}{x} = Lx + b\) where \(L\) is linear. Then, \(\DiffOperator \func{A}{x} = L\) and hence \(\DiffOperator^2 A = 0\).
+\end{example}
+
+\begin{example}
+    Let \(\beta : V \times V \to W\) be a bilinear function. By the Leibnitz rule
+    \begin{equation*}
+        \operatorFunc{\DiffOperator \func{\beta}{x_1,x_2}}{h_1,h_2} = \func{\beta}{x_1,h_2} + \func{\beta}{h_1,x_2}
+    \end{equation*}
+    therefore \(\DiffOperator \beta: V \times V \to \func{\CalL}{V \times V, W}\) is a linear a function itself, since
+    \begin{equation*}
+        \operatorFunc{\DiffOperator \func{\beta}{x_1 + x'_1,x_2 + x'_2}}{h_1,h_2} = \func{\beta}{x_1,h_2} + \func{\beta}{x'_1,h_2} + \func{\beta}{x_1,h_2} + \func{\beta}{b_1,x'_2}
+    \end{equation*}
+    which means \(\operatorFunc{\func{\DiffOperator \,}{\DiffOperator \beta}}{x} = \DiffOperator \beta\) independent of \(x\).
+\end{example}
+
+\begin{theorem}
+    If \(f\) is twice differentiable at \(p\) then its second partial derivatives exist at \(p\). Conversely, if its second partial derivatives exist at a neighbourhood of \(p\) and they are continuous, then \(f\) is differentiable.
+\end{theorem}
+
+\begin{proof}
+    Assume that \(\DiffOperator^2 \func{f}{p}\) exists. Then
+    \begin{align*}
+        \func{\DiffOperator_j \,}{\DiffOperator_i \func{f}{p}} & = \lim_{h \to 0} \dfrac{\operatorFunc{\DiffOperator \func{f}{p + he_j}}{e_i} - \operatorFunc{\DiffOperator \func{f}{p}}{e_i} }{h} \\
+                                                               & = \operatorFunc{ \lim_{h \to 0} \dfrac{\DiffOperator \func{f}{p + he_j} - \DiffOperator \func{f}{p}}{h} }{e_i}
+    \end{align*}
+    which exists sincce \(\DiffOperator f\) is differentiable at \(p\). Conversely, assume that the second partials exist and are continuous at \(p\). Then
+    \begin{equation*}
+        \operatorFunc{\func{\DiffOperator \,}{\DiffOperator f}}{p} = \begin{bmatrix}
+            \func{\PDiff{\DiffOperator f}{x_1}}{p} & \dots & \func{\PDiff{\DiffOperator f}{x_n}}{p}
+        \end{bmatrix}
+    \end{equation*}
+    note that each \(\func{\PDiff{\DiffOperator f}{x_i}}{p}\) is in \(\func{\CalL}{V,W}\). In fact, since
+    \begin{equation*}
+        \DiffOperator f = \begin{bmatrix}
+            \PDiff{f}{x_1} & \dots & \PDiff{f}{x_n}
+        \end{bmatrix}
+    \end{equation*}
+    then
+    \begin{equation*}
+        \PDiff{\DiffOperator f}{x_i} =  \begin{bmatrix}
+            \dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_1} & \dots & \dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_n}
+        \end{bmatrix}
+    \end{equation*}
+    which is continuous at \(p\) and hence \(\func{\PDiff{\DiffOperator f}{x_i}}{p}\) is continuous and by \Cref{th:DifferentiabilityCriteria}, \(\DiffOperator f\) is differentiable at \(p\).
+\end{proof}
+
+\begin{remark}
+    In general, one can show that \(f \in \CalC^r\) is equivalent to its partial being in \(\CalC^r\).
+\end{remark}
+
+Let \(f: U \to \Field\) then \(\DiffOperator f: U \to \func{\CalL}{V,\Field}\) which is the topological dual space \(V^\ast\) therefore
+\begin{equation*}
+    \DiffOperator f = \sum_{i = 1}^n \PDiff{f}{x_i} e^\ast_i
+\end{equation*}
+then for the second derivative of \(f\), \(\DiffOperator^2 \func{f}{x} : U \to V^\ast\)
+\begin{align*}
+    \DiffOperator^2 \func{f}{x}                                                  & = \sum_{i = 1}^n \func{\PDiff{\DiffOperator f}{x_i}}{x} e^\ast_i                                                     \\
+                                                                                 & = \sum_{i = 1}^n \func{\PDiff{\sum_{j = 1}^n \PDiff{f}{x_j}}{x_i}}{x}  e^\ast_j e^\ast_i                             \\
+                                                                                 & =  \sum_{i = 1}^n \sum_{j = 1}^n \dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_j} e^\ast_j e^\ast_i \\
+    \implies \operatorFunc{\operatorFunc{\DiffOperator^2 \func{f}{x}}{e_i}}{e_j} & = \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_j}}{x}                                        \\
+    \implies \func{\diffOperator^2 \func{f}{x}}{e_i,e_j}                         & = \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_j}}{x}
+\end{align*}
+
+\begin{definition}[Hessian matrix]
+    If for a function \(f : U \to \Field\) all of its second partial derivatives exist then \textbf{hessian matrix} is
+    \begin{equation*}
+        \begin{bmatrix}
+            \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_1^2}}{x}                  & \dots  & \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_1 \PDiffOperator x_n}}{x} \\
+            \vdots                                                                      & \ddots & \vdots                                                                      \\
+            \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_n \PDiffOperator x_1}}{x} & \dots  & \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_n^2}}{x}
+        \end{bmatrix}
+    \end{equation*}
+\end{definition}
+
+%TODO: needs better proof
+\begin{theorem}
+    If \(f\) is twice differentiable at \(x\), \(\diffOperator^2 \func{f}{x}\) is symmetric. That is,
+    \begin{equation*}
+        \func{\diffOperator^2 \func{f}{x}}{h,k} = \func{\diffOperator^2 \func{f}{x}}{k,h}
+    \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    Let \(\norm[h]\) and \(\norm[k]\) be sufficiently small such that \(a + th, a+  tk , a+th + tk\) and the lines connecting them stays in \(U\) for some \(t \in \Reals\). Consider
+    \begin{equation*}
+        \func{\Delta}{t,h,k} = \func{f}{a + th + tk} - \func{f}{a + th} - \func{f}{a  + tk} + \func{f}{a}
+    \end{equation*}
+    Assuming \(f\) is a real-valued twice differentiable function then if we prove
+    \begin{equation*}
+        \operatorFunc{\diffOperator^2 \func{f}{x}}{h,k} = \lim_{t \to 0} \dfrac{\func{\Delta}{t,h,k}}{t^2}
+    \end{equation*}
+    we are done since, \(\Delta\) is symmetric with respect to \(h\) and \(k\). Now consider
+    \begin{equation*}
+        \func{g}{s} = \func{f}{a + th + tsk} - \func{f}{a  + tsk}
+    \end{equation*}
+    then by the the Mean value theorem
+    \begin{align*}
+        \func{\Delta}{t,h,k} = \func{g}{1} - \func{g}{0} & = \func{g'}{\xi}                                                                                                       \\
+                                                         & =\operatorFunc{ \DiffOperator \func{f}{a + th + t\xi k}}{tk} - \operatorFunc{ \DiffOperator \func{f}{a  + t\xi k}}{tk}
+    \end{align*}
+    and since \(\DiffOperator f\) is differentiable then by definition
+    \begin{align*}
+        \implies \DiffOperator \func{f}{a+x} & = \DiffOperator \func{f}{a} + \operatorFunc{\DiffOperator^2 \func{f}{a}}{x} - \func{R}{x}
+    \end{align*}
+    therefore
+    \begin{multline*}
+        \func{\Delta}{t,h,k} = t\operatorFunc{\DiffOperator \func{f}{a } + \operatorFunc{\DiffOperator^2 \func{f}{a}}{th + t\xi k} - \func{R}{th + t\xi k}}{k} \\- t\operatorFunc{\DiffOperator \func{f}{a} + \operatorFunc{\DiffOperator^2 \func{f}{a}}{t\xi k} - \func{R}{t\xi k}}{k}
+    \end{multline*}
+    then
+    \begin{align*}
+        \func{\Delta}{t,h,k}                       & = t \operatorFunc{\operatorFunc{\DiffOperator^2 \func{f}{a}}{th + t\xi k}-\operatorFunc{\DiffOperator^2 \func{f}{a}}{t\xi k} }{k} - t \operatorFunc{ \func{R}{t\xi k} -\func{R}{th + t\xi k}}{k}               \\
+                                                   & = t^2 \operatorFunc{\operatorFunc{\DiffOperator^2 \func{f}{a}}{h}}{k} - t \operatorFunc{ \func{R}{t\xi k} -\func{R}{th + t\xi k}}{k}                                                                           \\
+        \implies \dfrac{\func{\Delta}{t,h,k}}{t^2} & = \operatorFunc{\operatorFunc{\DiffOperator^2 \func{f}{a}}{h}}{k} - \dfrac{ \operatorFunc{ \func{R}{t\xi k} -\func{R}{th + t\xi k}}{k}}{t} \to \operatorFunc{\operatorFunc{\DiffOperator^2 \func{f}{a}}{h}}{k}
+    \end{align*}
+    which is what we wanted.
+\end{proof}
+
+%TODO: needs proof
+\begin{theorem}
+    The \(k_\cardinalTH\) derivative of a \(k\)-times differentiable function is a symmetric \(k\)-linear function.
+\end{theorem}
+
+\begin{proof}
+    it's generalization of above.
+\end{proof}
+
+\begin{proposition}
+    If \(f,g \in \CalC^r\) are two functions then \(f \circ g \in \CalC^r\).
+\end{proposition}
+
+\begin{proof}
+    Let \(f: V' \to V''\) and \(g: V \to V'\) be two \(\CalC^r\) functions and  \(\beta : \func{\CalL}{V',V''} \times \func{\CalL}{V,V'} \to \func{\CalL}{V,V''}\) is a bilinear function such that
+    \begin{equation*}
+        \func{\beta}{\phi,\psi} = \phi \circ \psi
+    \end{equation*}
+    Now note that
+    \begin{align*}
+        \operatorFunc{\func{\DiffOperator \,}{ f \circ g}}{a} & = \operatorFunc{\DiffOperator f \circ g}{a}\circ \DiffOperator \func{g}{a}            \\
+                                                              & = \func{\beta }{\operatorFunc{\DiffOperator f \circ g}{a}, \DiffOperator \func{g}{a}}
+    \end{align*}
+    Consider the following functions
+    \begin{equation*}
+        a \xmapsto[\CalC^\infty]{\Delta} (a,a) \xmapsto[\CalC^{r-1}]{(\DiffOperator f \circ g, \DiffOperator g)} (\operatorFunc{\DiffOperator f \circ g}{a}, \DiffOperator \func{g}{a}) \xmapsto[\CalC^\infty]{\beta}  \operatorFunc{\func{\DiffOperator \,}{ f \circ g}}{a}
+    \end{equation*}
+    therefore \(\func{\DiffOperator \,}{ f \circ g} \in \CalC^{r-1}\) and hence \(f \circ g \in \CalC^{r}\).
+\end{proof}
+
+\begin{example}
+    The inverse operator \(i : \func{\GL}{V} \to \func{\CalL}{V,V}\) is in \(C^\infty\). Remember that
+    \begin{equation*}
+        \operatorFunc{\operatorFunc{\DiffOperator i}{A}}{M} = - A^{-1}M A^{-1}
+    \end{equation*}
+    Let \(\gamma : \func{\CalL}{V,V} \times \func{\CalL}{V,V} \to \func{\CalL}{\func{\CalL}{V,V} , \func{\CalL}{V,V}}\) with
+    \begin{equation*}
+        \operatorFunc{\func{\gamma}{A,B}}{M} = - AMB
+    \end{equation*}
+    is a bilinear function. Therefore
+    \begin{equation*}
+        \operatorFunc{\operatorFunc{\DiffOperator i}{A}}{M} = \operatorFunc{\func{\gamma}{A^{-1},A^{-1}}}{M}
+    \end{equation*}
+    now
+    \begin{equation*}
+        A \xmapsto{i} A^{-1} \xmapsto[\CalC^\infty]{\Delta} (A^{-1}, A^{-1}) \xmapsto[\CalC^\infty]{\gamma} \operatorFunc{\DiffOperator i}{A}
+    \end{equation*}
+    Since we have proved that \(i\) is differentiable then \(\DiffOperator i\) is differentiable which means \(i\) is twice differentiable and so on. Hence \(i \in C^{\infty}\).
+\end{example}
+
+As a matter of notation if \(\phi : V_1 \times \dots \times V_n\) be an \(n\)-linear then
+\begin{equation*}
+    \phi \cdot h_1\dots h_n := \func{\phi}{h_1, \dots , h_n}
+\end{equation*}
+particularly if \(V_1 = \dots = V_n\)
+\begin{equation*}
+    \phi \cdot h^n := \func{\phi}{h, \dots , h}
+\end{equation*}
+Now one can describe a homogeneous polynomial of degree \(k\) with a symmetric \(k\)-linear function
+\begin{align*}
+    \func{p}{x} = \phi \cdot x^k
+\end{align*}
+Then, \(\func{p}{x}\) is differentiable since
+\begin{equation*}
+    x \xmapsto[\CalC^\infty]{\Delta} (x,\dots,x) \xmapsto[\CalC^\infty]{\phi} p
+\end{equation*}
+and
+\begin{align*}
+    \operatorFunc{\DiffOperator \func{p}{x}}{h} & = \operatorFunc{\DiffOperator \func{\phi}{\func{\Delta}{x}} \circ \DiffOperator \func{\Delta}{x}}{h} \\
+                                                & = \DiffOperator \phi \cdot x^n \circ \func{\Delta}{h}                                                \\
+                                                & = k \phi \cdot x^{k-1}h                                                                              \\
+    \implies \DiffOperator \func{p}{x}          & = k \phi \cdot x^{k-1}
+\end{align*}
+
+\begin{theorem}[Taylor approximation]
+    Let \(f : U \to W\) be \(k\)-times differentiable at \(a\), then
+    \begin{equation*}
+        \func{p_k}{x} = \func{f}{a} + \diffOperator \func{f}{a} \cdot (x-a) + \dfrac{1}{2!} \diffOperator^2 \func{f}{a} \cdot (x-a)^2 + \dots + \dfrac{1}{k!} \diffOperator^k \func{f}{a} (x-a)^k
+    \end{equation*}
+    is \(k_\cardinalTH\) degree \textbf{Taylor} polynomial. Then the followings hold
+    \begin{enumerate}
+        \item
+              \begin{equation*}
+                  \lim_{x \to a} \dfrac{\func{f}{x} - \func{p_k}{x}}{\norm[x-a]^{k}} = 0
+              \end{equation*}
+        \item \(\func{p_k}{x}\) is the only \(k_\cardinalTH\) degree polynomial with such property.
+        \item Additionally, if \(f\) is \((k + 1)\)-times differentiable in a neighbourhood of \(a\) then the remainder
+              \begin{equation*}
+                  \func{R}{x} = \func{f}{x} - \func{p_k}{x}
+              \end{equation*}
+              can be estimated with
+              \begin{equation*}
+                  \norm[\func{R}{b}] \leq \dfrac{1}{(k+1)!} \sup \set{\norm [\DiffOperator^{k+1} \func{f}{\xi}]} \norm[b-a]^{k+1}
+              \end{equation*}
+              where \(\xi\) is on line connecting \(a\) to \(b\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof} \leavevmode
+    \begin{enumerate}
+        \item for \(k = 1\) it is equivalent to differentiability of \(f\). By induction, assume it is true for \(k = n -1\) and let \(\func{g}{x} = \func{f}{x} - \func{p_k}{x}\) then  \footnote{Differentiablity of order \(k\) implies differentiability of order \(k-1\) in a neighbourhood. }
+              \begin{align*}
+                  \DiffOperator \func{g}{x}        & = \DiffOperator \func{f}{x} - \DiffOperator \func{p_k}{x}                                                                                                                                           \\
+                                                   & = \diffOperator \func{f}{x} - \DiffOperator\left[\func{f}{a} + \diffOperator \func{f}{a} \cdot (x-a)  + \dots + \dfrac{1}{n!} \diffOperator^n \func{f}{a} (x-a)^n \right]                           \\
+                                                   & = \diffOperator \func{f}{x} - \left[ \diffOperator \func{f}{a}  + \dfrac{1}{1!} \diffOperator^2 \func{f}{a} \cdot (x-a) + \dots + \dfrac{1}{(n-1)!} \diffOperator^n \func{f}{a} (x-a)^{n-1} \right] \\
+                  \intertext{which is equivalent to the proposition at \(n-1\) for \(\diffOperator \func{f}{a}\) and hence there exists a \(\delta > 0 \) such that if \(\norm[x-a] < \delta\)}
+                  \norm[\DiffOperator \func{g}{x}] & \leq \epsilon \norm[x-a]^{n-1}
+              \end{align*}
+              by the \Cref{th:MultivariableMVT} we have
+              \begin{align*}
+                  \norm[\func{g}{x}] & = \norm[\func{g}{x} - \func{g}{a}] \leq \norm[x-a] \sup \norm[\DiffOperator \func{g}{\xi}] \\
+                                     & \leq \epsilon \norm[x-a] \norm[\xi - a]^{k-1}                                              \\
+                                     & \leq \norm[x-a]^{k}
+              \end{align*}
+        \item If there were two such polynomial \(p_1, p_2\) then for \(q = p_1 - p_2\) we have that
+              \begin{equation*}
+                  \lim_{x \to a} \dfrac{\func{q}{x}}{\norm[x-a]^k} = 0
+              \end{equation*}
+              then one can show that \(\func{q}{x} \equiv 0\). %TODO: do the rest
+        \item Define \(g: \clcl{0}{1} \to W\) as such
+              \begin{equation*}
+                  \func{g}{t} = \func{f}{a + t(b-a)}
+              \end{equation*}
+              therefore
+              \begin{equation*}
+                  \func{g^{(n)}}{t} = \diffOperator^k \func{f}{a + t(b-a)} \cdot (b-a)^k
+              \end{equation*}
+              For each component of \(g\) we apply the single variable Taylor's approximation
+              \begin{equation*}
+                  \func{g_i}{1} - \sum_{n = 0}^{k} \dfrac{\func{g^{(n)}_i}{0}}{n!} = \dfrac{\func{g^{(k+1)}_i}{\xi_i}}{(k+1)!}
+              \end{equation*}
+              or equivalently
+              \begin{multline*}
+                  \norm[\func{R}{b}] =\norm[ \func{f}{b} - \sum_{n = 0}^{k} \dfrac{\diffOperator^n \func{f}{a} \cdot (b-a)^n}{n!} ] \\= \dfrac{1}{(k+1)!} \norm[ {\begin{bmatrix}
+                                  \diffOperator^{k+1} \func{f_1}{a + \xi_1(b-a)} \cdot (b-a)^k & \dots & \diffOperator^{k+1} \func{f}{a + \xi_m(b-a)} \cdot (b-a)^k
+                              \end{bmatrix}} ] %TODO: needs clearification.
+              \end{multline*}
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Let \(f : U \to \Reals\) and \(p\) is an extremum of the function then
+    \begin{equation*}
+        \forall h, \ \operatorFunc{\DiffOperator \func{f}{p}}{h} = 0
+    \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    For all \(h\) define \(g_h : \opop{-\epsilon}{\epsilon} \to \Reals\)
+    \begin{equation*}
+        \func{g_h}{t} = \func{f}{p + th}
+    \end{equation*}
+    then \(\func{g'_h}{0} = 0\).
+\end{proof}
+
+%TODO: needs proof
+\begin{theorem}
+    Let \(f : U \to \Reals\) be of \(\CalC^2\), \(p\) be a critical point of \(f\), and \(\DiffOperator^2 \func{f}{p}\) be positive definite. Then, \(p\) is a local minimum of \(f\).
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
 \subsection{Inverse function theorem}
 
 \begin{definition}[Local convergence]
@@ -551,168 +858,7 @@ contraction fixed point theorem.
 
 \end{proof}
 
-\subsection{Higher derivative}
-Let \(V,W\) be finite dimensional normed vector spaces with \((e_1, \dots , e_n)\) is an ordered basis for \(V\). Consider \(U \subset V\) is an open set and \(f: U \to W\). If \(f\) is differentiable then its partial derivatives
-\begin{equation*}
-    \DiffOperator_i f: U \to E \quad \text{with} \quad \operatorFunc{\DiffOperator_i f}{x} = \operatorFunc{\DiffOperator \func{f}{x}}{e_i}
-\end{equation*}
-Then, clearly if \(\DiffOperator_i f\) is differentiable one can define its partial derivatives \(\operatorFunc{\DiffOperator_j}{\DiffOperator_i f}\) also denoted by
-\begin{equation*}
-    \operatorFunc{\DiffOperator_j}{\DiffOperator_i f}=  \dfrac{\PDiffOperator^2 f}{\PDiffOperator x_j \PDiffOperator x_i} =\DiffOperator_{ji} f
-\end{equation*}
 
-For Fr\'{e}chet derivative, if \(\DiffOperator f: U \to \func{\CalL}{V,W}\) is differentiable at \(x\), then \(f\) is twice differentiable and
-\begin{equation*}
-    \DiffOperator^2 \func{f}{x} = \operatorFunc{\func{\DiffOperator \,}{\DiffOperator f}}{x} : U \xrightarrow{\text{linear map}} \func{\CalL}{V,W}
-\end{equation*}
-is a linear map. Therefore,
-\begin{equation*}
-    \DiffOperator^2 f :  U \to \func{\CalL}{V,\func{\CalL}{V,W}}
-\end{equation*}
-which by the \Cref{pr:nLinearIsmorphicLinear} is equivalent to \(\func{\CalL^2}{V \times V, W}\) and one can define
-\begin{equation*}
-    \diffOperator^2 f : U  \to \func{\CalL^2}{V \times V, W}
-\end{equation*}
-where \(\diffOperator^2 = \func{T}{\DiffOperator^2}\) as defined in \Cref{pr:nLinearIsmorphicLinear}. With this definition, for the higher order derivatives \(n \geq 2\)
-\begin{equation*}
-    \diffOperator^n : U \to \func{\CalL^n}{V^n, W}
-\end{equation*}
-
-\begin{example}
-    Let \(A : V \to W\) be a affine function \(\func{A}{x} = Lx + b\) where \(L\) is linear. Then, \(\DiffOperator \func{A}{x} = L\) and hence \(\DiffOperator^2 A = 0\).
-\end{example}
-
-\begin{example}
-    Let \(\beta : V \times V \to W\) be a bilinear function. By the Leibnitz rule
-    \begin{equation*}
-        \operatorFunc{\DiffOperator \func{\beta}{x_1,x_2}}{h_1,h_2} = \func{\beta}{x_1,h_2} + \func{\beta}{h_1,x_2}
-    \end{equation*}
-    therefore \(\DiffOperator \beta: V \times V \to \func{\CalL}{V \times V, W}\) is a linear a function itself, since
-    \begin{equation*}
-        \operatorFunc{\DiffOperator \func{\beta}{x_1 + x'_1,x_2 + x'_2}}{h_1,h_2} = \func{\beta}{x_1,h_2} + \func{\beta}{x'_1,h_2} + \func{\beta}{x_1,h_2} + \func{\beta}{b_1,x'_2}
-    \end{equation*}
-    which means \(\operatorFunc{\func{\DiffOperator \,}{\DiffOperator \beta}}{x} = \DiffOperator \beta\) independent of \(x\).
-\end{example}
-
-\begin{theorem}
-    If \(f\) is twice differentiable at \(p\) then its second partial derivatives exist at \(p\). Conversely, if its second partial derivatives exist at a neighbourhood of \(p\) and they are continuous, then \(f\) is differentiable.
-\end{theorem}
-
-\begin{proof}
-    Assume that \(\DiffOperator^2 \func{f}{p}\) exists. Then
-    \begin{align*}
-        \func{\DiffOperator_j \,}{\DiffOperator_i \func{f}{p}} & = \lim_{h \to 0} \dfrac{\operatorFunc{\DiffOperator \func{f}{p + he_j}}{e_i} - \operatorFunc{\DiffOperator \func{f}{p}}{e_i} }{h} \\
-                                                               & = \operatorFunc{ \lim_{h \to 0} \dfrac{\DiffOperator \func{f}{p + he_j} - \DiffOperator \func{f}{p}}{h} }{e_i}
-    \end{align*}
-    which exists sincce \(\DiffOperator f\) is differentiable at \(p\). Conversely, assume that the second partials exist and are continuous at \(p\). Then
-    \begin{equation*}
-        \operatorFunc{\func{\DiffOperator \,}{\DiffOperator f}}{p} = \begin{bmatrix}
-            \func{\PDiff{\DiffOperator f}{x_1}}{p} & \dots & \func{\PDiff{\DiffOperator f}{x_n}}{p}
-        \end{bmatrix}
-    \end{equation*}
-    note that each \(\func{\PDiff{\DiffOperator f}{x_i}}{p}\) is in \(\func{\CalL}{V,W}\). In fact, since
-    \begin{equation*}
-        \DiffOperator f = \begin{bmatrix}
-            \PDiff{f}{x_1} & \dots & \PDiff{f}{x_n}
-        \end{bmatrix}
-    \end{equation*}
-    then
-    \begin{equation*}
-        \PDiff{\DiffOperator f}{x_i} =  \begin{bmatrix}
-            \dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_1} & \dots & \dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_n}
-        \end{bmatrix}
-    \end{equation*}
-    which is continuous at \(p\) and hence \(\func{\PDiff{\DiffOperator f}{x_i}}{p}\) is continuous and by \Cref{th:DifferentiabilityCriteria}, \(\DiffOperator f\) is differentiable at \(p\).
-\end{proof}
-
-In general, one can show that \(f \in \CalC^r\) is equivalent to its partial being in \(\CalC^r\).
-
-Let \(f: U \to \Field\) then \(\DiffOperator f: U \to \func{\CalL}{V,\Field}\) which is the topological dual space \(V^\ast\) therefore
-\begin{equation*}
-    \DiffOperator f = \sum_{i = 1}^n \PDiff{f}{x_i} e^\ast_i
-\end{equation*}
-then for the second derivative of \(f\), \(\DiffOperator^2 \func{f}{x} : U \to V^\ast\)
-\begin{align*}
-    \DiffOperator^2 \func{f}{x}                                                  & = \sum_{i = 1}^n \func{\PDiff{\DiffOperator f}{x_i}}{x} e^\ast_i                                                     \\
-                                                                                 & = \sum_{i = 1}^n \func{\PDiff{\sum_{j = 1}^n \PDiff{f}{x_j}}{x_i}}{x}  e^\ast_j e^\ast_i                             \\
-                                                                                 & =  \sum_{i = 1}^n \sum_{j = 1}^n \dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_j} e^\ast_j e^\ast_i \\
-    \implies \operatorFunc{\operatorFunc{\DiffOperator^2 \func{f}{x}}{e_i}}{e_j} & = \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_j}}{x}                                        \\
-    \implies \func{\diffOperator^2 \func{f}{x}}{e_i,e_j}                         & = \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_i \PDiffOperator x_j}}{x}
-\end{align*}
-
-\begin{definition}[Hessian matrix]
-    If for a function \(f : U \to \Field\) all of its second partial derivatives exist then \textbf{hessian matrix} is
-    \begin{equation*}
-        \begin{bmatrix}
-            \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_1^2}}{x}                  & \dots  & \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_1 \PDiffOperator x_n}}{x} \\
-            \vdots                                                                      & \ddots & \vdots                                                                      \\
-            \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_n \PDiffOperator x_1}}{x} & \dots  & \func{\dfrac{\PDiffOperator^2 f}{\PDiffOperator x_n^2}}{x}
-        \end{bmatrix}
-    \end{equation*}
-\end{definition}
-
-\begin{theorem}
-    If \(f\) is twice differentiable at \(x\), \(\diffOperator^2 \func{f}{x}\) is symmetric. That is,
-    \begin{equation*}
-        \func{\diffOperator^2 \func{f}{x}}{h,k} = \func{\diffOperator^2 \func{f}{x}}{k,h}
-    \end{equation*}
-\end{theorem}
-
-\begin{proof}
-    Let \(\norm[h]\) and \(\norm[k]\) are sufficiently small such that \(a + h, a+  k , a+ h + l\) and the lines connecting them stays in \(U\). Consider
-    \begin{equation*}
-        \func{\Delta}{h,k} = \func{f}{a + h + k} - \func{f}{a + h} - \func{f}{a  + k} + \func{f}{a }
-    \end{equation*}
-    Assuming \(f\) is a real-valued twice differentiable function then
-    \begin{equation*}
-        \dfrac{\operatorFunc{\diffOperator^2 \func{f}{a}}{h,k} - \func{\Delta}{h,k}}{h^2 + k^2} \to 0
-    \end{equation*}
-    as \((h,k) \to (0,0)\).
-\end{proof}
-
-\begin{theorem}
-    The \(k_\cardinalTH\) of a \(k\)-times differentiable function is a symmetric \(k\)-linear function.
-\end{theorem}
-\begin{proposition}
-    If \(f,g \in \CalC^r\) are two functions then \(f \circ g \in \CalC^r\).
-\end{proposition}
-
-\begin{proof}
-    Let \(f: V' \to V''\) and \(g: V \to V'\) be two \(\CalC^r\) functions and  \(\beta : \func{\CalL}{V',V''} \times \func{\CalL}{V,V'} \to \func{\CalL}{V,V''}\) is a bilinear function such that
-    \begin{equation*}
-        \func{\beta}{\phi,\psi} = \phi \circ \psi
-    \end{equation*}
-    Now note that
-    \begin{align*}
-        \operatorFunc{\func{\DiffOperator \,}{ f \circ g}}{a} & = \operatorFunc{\DiffOperator f \circ g}{a}\circ \DiffOperator \func{g}{a}            \\
-                                                              & = \func{\beta }{\operatorFunc{\DiffOperator f \circ g}{a}, \DiffOperator \func{g}{a}}
-    \end{align*}
-    Consider the following functions
-    \begin{equation*}
-        a \xmapsto[\CalC^\infty]{\Delta} (a,a) \xmapsto[\CalC^{r-1}]{(\DiffOperator f \circ g, \DiffOperator g)} (\operatorFunc{\DiffOperator f \circ g}{a}, \DiffOperator \func{g}{a}) \xmapsto[\CalC^\infty]{\beta}  \operatorFunc{\func{\DiffOperator \,}{ f \circ g}}{a}
-    \end{equation*}
-    therefore \(\func{\DiffOperator \,}{ f \circ g} \in \CalC^{r-1}\) and hence \(f \circ g \in \CalC^{r}\).
-\end{proof}
-
-\begin{example}
-    The inverse operator \(i : \func{\GL}{V} \to \func{\CalL}{V,V}\) is in \(C^\infty\). Remember that
-    \begin{equation*}
-        \operatorFunc{\operatorFunc{\DiffOperator i}{A}}{M} = - A^{-1}M A^{-1}
-    \end{equation*}
-    Let \(\gamma : \func{\CalL}{V,V} \times \func{\CalL}{V,V} \to \func{\CalL}{\func{\CalL}{V,V} , \func{\CalL}{V,V}}\) with
-    \begin{equation*}
-        \operatorFunc{\func{\gamma}{A,B}}{M} = - AMB
-    \end{equation*}
-    is a bilinear function. Therefore
-    \begin{equation*}
-        \operatorFunc{\operatorFunc{\DiffOperator i}{A}}{M} = \operatorFunc{\func{\gamma}{A^{-1},A^{-1}}}{M}
-    \end{equation*}
-    now
-    \begin{equation*}
-        A \xmapsto{i} A^{-1} \xmapsto[\CalC^\infty]{\Delta} (A^{-1}, A^{-1}) \xmapsto[\CalC^\infty]{\gamma} \operatorFunc{\DiffOperator i}{A}
-    \end{equation*}
-    Since we have proved that \(i\) is differentiable then \(\DiffOperator i\) is differentiable which means \(i\) is twice differentiable and so on. Hence \(i \in C^{\infty}\).
-\end{example}
 
 \subsection{Rank theorem}
 A generalization of \(PAQ = \begin{bmatrix}
@@ -744,3 +890,12 @@ A generalization of \(PAQ = \begin{bmatrix}
         \end{bmatrix}
     \end{equation*}
 \end{proof}
+
+{\Large\textbf{Exercises}}
+\begin{enumerate}
+    \item Using l'Hopital's rule show that
+          \begin{equation*}
+              \lim_{t \to 0} \dfrac{\func{\Delta}{t,h,k}}{t^2} = \dfrac{\operatorFunc{\diffOperator \func{f}{a}}{h,k} + \operatorFunc{\diffOperator \func{f}{a}}{k,h}}{2}
+          \end{equation*}
+\end{enumerate}
+\newpage

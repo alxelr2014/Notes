@@ -44,58 +44,68 @@
 \contentsline {proof}{{Proof}{13}{}}{11}{}%
 \contentsline {proposition}{{Proposition}{1.{16}}{}}{11}{}%
 \contentsline {proof}{{Proof}{14}{}}{11}{}%
-\contentsline {example}{{Example}{1.{3}}{}}{12}{}%
-\contentsline {example}{{Example}{1.{4}}{}}{12}{}%
-\contentsline {proposition}{{Proposition}{1.{17}}{}}{12}{}%
-\contentsline {proof}{{Proof}{15}{}}{12}{}%
-\contentsline {proposition}{{Proposition}{1.{18}}{}}{12}{}%
-\contentsline {proof}{{Proof}{16}{}}{12}{}%
-\contentsline {definition}{{Definition}{9}{Directional derivative}}{13}{}%
-\contentsline {remark}{{Remark}{6}{}}{13}{}%
-\contentsline {remark}{{Remark}{7}{}}{13}{}%
-\contentsline {theorem}{{Theorem}{1.{19}}{}}{13}{}%
-\contentsline {proof}{{Proof}{17}{}}{13}{}%
-\contentsline {proposition}{{Proposition}{1.{20}}{}}{13}{}%
-\contentsline {proof}{{Proof}{18}{}}{14}{}%
+\contentsline {definition}{{Definition}{9}{Positive definite}}{12}{}%
+\contentsline {theorem}{{Theorem}{1.{17}}{}}{12}{}%
+\contentsline {example}{{Example}{1.{3}}{}}{13}{}%
+\contentsline {example}{{Example}{1.{4}}{}}{13}{}%
+\contentsline {proposition}{{Proposition}{1.{18}}{}}{13}{}%
+\contentsline {proof}{{Proof}{15}{}}{13}{}%
+\contentsline {proposition}{{Proposition}{1.{19}}{}}{13}{}%
+\contentsline {proof}{{Proof}{16}{}}{13}{}%
+\contentsline {definition}{{Definition}{10}{Directional derivative}}{14}{}%
+\contentsline {remark}{{Remark}{6}{}}{14}{}%
+\contentsline {remark}{{Remark}{7}{}}{14}{}%
+\contentsline {theorem}{{Theorem}{1.{20}}{}}{14}{}%
+\contentsline {proof}{{Proof}{17}{}}{14}{}%
 \contentsline {proposition}{{Proposition}{1.{21}}{}}{14}{}%
-\contentsline {proof}{{Proof}{19}{}}{14}{}%
-\contentsline {theorem}{{Theorem}{1.{22}}{Leibnitz rule}}{14}{}%
-\contentsline {proof}{{Proof}{20}{}}{15}{}%
-\contentsline {example}{{Example}{1.{5}}{}}{15}{}%
-\contentsline {example}{{Example}{1.{6}}{}}{15}{}%
-\contentsline {theorem}{{Theorem}{1.{23}}{}}{16}{}%
-\contentsline {lemma}{{Lemma}{1.{24}}{}}{16}{}%
-\contentsline {prooflemma}{{Proof}{2}{}}{16}{}%
-\contentsline {proof}{{Proof}{21}{}}{17}{}%
-\contentsline {corollary}{{Corollary}{1.{25}}{}}{17}{}%
-\contentsline {proof}{{Proof}{22}{}}{17}{}%
-\contentsline {corollary}{{Corollary}{1.{26}}{}}{17}{}%
-\contentsline {proof}{{Proof}{23}{}}{17}{}%
-\contentsline {theorem}{{Theorem}{1.{27}}{}}{17}{}%
-\contentsline {proof}{{Proof}{24}{}}{18}{}%
+\contentsline {proof}{{Proof}{18}{}}{15}{}%
+\contentsline {proposition}{{Proposition}{1.{22}}{}}{15}{}%
+\contentsline {proof}{{Proof}{19}{}}{15}{}%
+\contentsline {theorem}{{Theorem}{1.{23}}{Leibnitz rule}}{15}{}%
+\contentsline {proof}{{Proof}{20}{}}{16}{}%
+\contentsline {example}{{Example}{1.{5}}{}}{16}{}%
+\contentsline {example}{{Example}{1.{6}}{}}{16}{}%
+\contentsline {theorem}{{Theorem}{1.{24}}{}}{17}{}%
+\contentsline {lemma}{{Lemma}{1.{25}}{}}{17}{}%
+\contentsline {prooflemma}{{Proof}{2}{}}{17}{}%
+\contentsline {proof}{{Proof}{21}{}}{18}{}%
+\contentsline {corollary}{{Corollary}{1.{26}}{}}{18}{}%
+\contentsline {proof}{{Proof}{22}{}}{18}{}%
+\contentsline {corollary}{{Corollary}{1.{27}}{}}{18}{}%
+\contentsline {proof}{{Proof}{23}{}}{18}{}%
 \contentsline {theorem}{{Theorem}{1.{28}}{}}{18}{}%
-\contentsline {proof}{{Proof}{25}{}}{18}{}%
-\contentsline {corollary}{{Corollary}{1.{29}}{}}{18}{}%
-\contentsline {proof}{{Proof}{26}{}}{19}{}%
-\contentsline {definition}{{Definition}{10}{Local convergence}}{20}{}%
-\contentsline {theorem}{{Theorem}{1.{30}}{}}{20}{}%
-\contentsline {proof}{{Proof}{27}{}}{20}{}%
-\contentsline {theorem}{{Theorem}{1.{31}}{Inverse function theorem}}{20}{}%
-\contentsline {proof}{{Proof}{28}{}}{20}{}%
-\contentsline {theorem}{{Theorem}{1.{32}}{}}{21}{}%
-\contentsline {proof}{{Proof}{29}{}}{22}{}%
-\contentsline {corollary}{{Corollary}{1.{33}}{}}{22}{}%
-\contentsline {proof}{{Proof}{30}{}}{22}{}%
-\contentsline {example}{{Example}{1.{7}}{}}{22}{}%
-\contentsline {example}{{Example}{1.{8}}{}}{23}{}%
-\contentsline {theorem}{{Theorem}{1.{34}}{}}{23}{}%
-\contentsline {proof}{{Proof}{31}{}}{23}{}%
-\contentsline {definition}{{Definition}{11}{Hessian matrix}}{24}{}%
-\contentsline {theorem}{{Theorem}{1.{35}}{}}{24}{}%
-\contentsline {proof}{{Proof}{32}{}}{24}{}%
-\contentsline {theorem}{{Theorem}{1.{36}}{}}{24}{}%
-\contentsline {proposition}{{Proposition}{1.{37}}{}}{24}{}%
-\contentsline {proof}{{Proof}{33}{}}{24}{}%
-\contentsline {example}{{Example}{1.{9}}{}}{25}{}%
-\contentsline {theorem}{{Theorem}{1.{38}}{}}{25}{}%
-\contentsline {proof}{{Proof}{34}{}}{25}{}%
+\contentsline {proof}{{Proof}{24}{}}{19}{}%
+\contentsline {theorem}{{Theorem}{1.{29}}{}}{19}{}%
+\contentsline {proof}{{Proof}{25}{}}{19}{}%
+\contentsline {corollary}{{Corollary}{1.{30}}{}}{19}{}%
+\contentsline {proof}{{Proof}{26}{}}{20}{}%
+\contentsline {example}{{Example}{1.{7}}{}}{21}{}%
+\contentsline {example}{{Example}{1.{8}}{}}{21}{}%
+\contentsline {theorem}{{Theorem}{1.{31}}{}}{21}{}%
+\contentsline {proof}{{Proof}{27}{}}{21}{}%
+\contentsline {remark}{{Remark}{8}{}}{22}{}%
+\contentsline {definition}{{Definition}{11}{Hessian matrix}}{22}{}%
+\contentsline {theorem}{{Theorem}{1.{32}}{}}{22}{}%
+\contentsline {proof}{{Proof}{28}{}}{23}{}%
+\contentsline {theorem}{{Theorem}{1.{33}}{}}{23}{}%
+\contentsline {proof}{{Proof}{29}{}}{23}{}%
+\contentsline {proposition}{{Proposition}{1.{34}}{}}{23}{}%
+\contentsline {proof}{{Proof}{30}{}}{23}{}%
+\contentsline {example}{{Example}{1.{9}}{}}{24}{}%
+\contentsline {theorem}{{Theorem}{1.{35}}{Taylor approximation}}{24}{}%
+\contentsline {proof}{{Proof}{31}{}}{25}{}%
+\contentsline {theorem}{{Theorem}{1.{36}}{}}{26}{}%
+\contentsline {proof}{{Proof}{32}{}}{26}{}%
+\contentsline {theorem}{{Theorem}{1.{37}}{}}{26}{}%
+\contentsline {proof}{{Proof}{33}{}}{26}{}%
+\contentsline {definition}{{Definition}{12}{Local convergence}}{26}{}%
+\contentsline {theorem}{{Theorem}{1.{38}}{}}{26}{}%
+\contentsline {proof}{{Proof}{34}{}}{26}{}%
+\contentsline {theorem}{{Theorem}{1.{39}}{Inverse function theorem}}{27}{}%
+\contentsline {proof}{{Proof}{35}{}}{27}{}%
+\contentsline {theorem}{{Theorem}{1.{40}}{}}{28}{}%
+\contentsline {proof}{{Proof}{36}{}}{28}{}%
+\contentsline {corollary}{{Corollary}{1.{41}}{}}{28}{}%
+\contentsline {proof}{{Proof}{37}{}}{28}{}%
+\contentsline {theorem}{{Theorem}{1.{42}}{}}{29}{}%
+\contentsline {proof}{{Proof}{38}{}}{29}{}%
