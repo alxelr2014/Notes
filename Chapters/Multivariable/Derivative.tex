@@ -729,13 +729,62 @@ and
 
 %TODO: needs proof
 \begin{theorem}
-    Let \(f : U \to \Reals\) be of \(\CalC^2\), \(p\) be a critical point of \(f\), and \(\DiffOperator^2 \func{f}{p}\) be positive definite. Then, \(p\) is a local minimum of \(f\).
+    Let \(f : U \to \Reals\) be of \(\CalC^2\), \(p\) be a critical point of \(f\), and \(\DiffOperator^2 \func{f}{p}\) be positive definite. Then, \(p\) is a local minimum of \(f\). (If \(\DiffOperator^2 \func{f}{p}\) is negative definite then \(p\) is local maxima.)
+\end{theorem}
+Assuming the following lemma
+\begin{lemma} \label{lm:ContinuityOfPositiveDefinite}
+    If \(\DiffOperator^2 f\) is continuous and positive definite at point \(p\) then it is positive definite in a neighbourhood of \(p\).
+\end{lemma}
+\begin{proof}
+    We wish to prove that there exists a \(\delta > 0\) for all unit vectors in \(V\), \(e\), \( 0 < t < \delta\)
+    \begin{equation*}
+        \func{f}{p} \leq \func{f}{p + te}
+    \end{equation*}
+    To do so, define \(g_e : \opop{0}{\delta} \to \Reals\)
+    \begin{equation*}
+        \func{g_e}{t} = \func{f}{p + te}
+    \end{equation*}
+    then by the Taylor's theorem
+    \begin{equation*}
+        \func{g_e}{t} = \func{g}{0}  + \func{g'}{0}t + \dfrac{\func{g''}{\xi}}{2!}t^2
+    \end{equation*}
+    where \(\xi \in \opop{0}{t}\). Equivalently
+    \begin{align*}
+        \func{f}{p + te} & = \func{f}{p} + \operatorFunc{\DiffOperator \func{f}{p}}{e} + \dfrac{\diffOperator^2 \func{f}{p + t\xi} \cdot e^2}{2}t^2 \\
+                         & = \func{f}{p} +  \dfrac{\diffOperator^2 \func{f}{p + t\xi} \cdot e^2}{2}t^2
+    \end{align*}
+    Using the \Cref{lm:ContinuityOfPositiveDefinite} there exists a neighbourhood of \(p\) such that
+    \begin{equation*}
+        \diffOperator^2 \func{f}{p + t\xi} \cdot h^2 > 0
+    \end{equation*}
+    for all \(h\) in the neighbourhood. Therefore,
+    \begin{equation*}
+        \func{f}{p + te} > \func{f}{p}
+    \end{equation*}
+    which is what we wanted.
+\end{proof}
+
+\subsection{Smoothness Classes}
+
+Let \(f \in \CalC^r\) then one can define the norm
+\begin{equation*}
+    \norm[f]_r = \max \set{\sup_{x \in U}\norm[\func{f}{x}], \dots , \sup_{x \in U}\norm[\DiffOperator^r \func{f}{x}]}
+\end{equation*}
+and let the set of all such \(f\) with \(\norm[f]_r < \infty\) be denoted as \(\func{\CalC^r}{U,W}\).
+
+%TODO: needs proof
+\begin{theorem}
+    Uniform convergence in \(\CalC^r\) is equivalent to Cauchy.
 \end{theorem}
 
 \begin{proof}
 
 \end{proof}
-\subsection{Inverse function theorem}
+
+\begin{theorem}
+    \( \func{\CalC^r}{U,W}\) under \(\norm_r\) is a Banach space.
+\end{theorem}
+
 
 \begin{definition}[Local convergence]
     A functional sequence \(f_n\) is \textbf{locally convergent} if for each \(x \in U\)  there exists a open set \(x \in V \subset U\) such that \(\left. f_n \right|_V\) is uniformly convergent.
@@ -759,10 +808,43 @@ and
     apply MVT here and make the bounds smaller using (2). Then prove the differentiability with e/3. To prove (3) use open/close argument.
 \end{proof}
 
-contraction fixed point theorem.
+\subsection{Inverse function theorem}
+Consider a function \(f\), we wish to find all the solutions to the equation
+\begin{equation*}
+    \func{f}{x} = y_0
+\end{equation*}
+To do so, we can define another function \(F_{y_0}\) such that
+\begin{equation*}
+    \func{F_{y_0}}{x} = x - \func{f}{x} + y_0
+\end{equation*}
+then if \(x\) is a solution to the equation, it is a fixed point of \(F_{y_0}\).
+
+\begin{theorem} [Banach fixed point] \label{th:BanachFixedPoint}
+    Let \(\metricSpace{X}{d}\) be a complete metric space and \(f : X \to X\) is such that for some \(0 \leq \lambda < 1\)
+    \begin{equation*}
+        \forall x,y \in X, \ \func{d}{\func{f}{x},\func{f}{y}} \leq \lambda \func{d}{x,y}
+    \end{equation*}
+    Then for each \(x \in X\) the sequence \(\set{\func{f^n}{x}}\) is convergent to \(p \in X\) such that \(\func{f}{p} = p \).
+\end{theorem}
+
+\begin{proof}
+    Let \(x_n = \func{f^n}{x}\) for \(n \geq 0\) then
+    \begin{equation*}
+        \func{d}{x_n,x_{n+1}} \leq \lambda \func{d}{x_{n-1},x_{n}} \leq \lambda^n \func{d}{x_0,x_1}
+    \end{equation*}
+    thereofore
+    \begin{equation*}
+        \func{d}{x_n,x_m} \leq \sum_{i = n}^{m-1} \lambda^i \func{d}{x_0,x_1} \leq \func{d}{x_0,x_1} \dfrac{\lambda^n}{1 - \lambda}
+    \end{equation*}
+    hence \(\set{\func{f^n}{x}}\) is Cauchy and it is convergent to a point \(p\). Lastly,
+    \begin{align*}
+        \func{d}{\func{f}{p},p} & \leq \func{d}{\func{f}{p},\func{f}{x_n}} + \func{d}{\func{f}{x_n},p} \\
+                                & \leq \lambda \func{d}{p,x_n} + \func{d}{x_{n+1},p} < \epsilon
+    \end{align*}
+\end{proof}
 
 \begin{theorem}[Inverse function theorem]
-    Let \(V,W\) be finite dimensional normed vector space such that \(\dim V = \dim W\) and \(U \subset V\) is open. If \(f : U \to W\) is continuously differentiable and for some \(a \in U\), \(\DiffOperator \func{f}{a}\) is invertible. Then, there are open set \(S \subset V\) and \(T \subset E\) that \(a \in V \subset U\) and \(\func{f}{a} \in T\) such that \(f|_S\) is bijective and \((f|_S)^{-1} = g\) where \(g \in \CalC^1\) and
+    Let \(V,W\) be finite dimensional normed vector space such that \(\dim V = \dim W\) and \(U \subset V\) is open. If \(f : U \to W\) is continuously differentiable and for some \(a \in U\), \(\DiffOperator \func{f}{a}\) is invertible. Then, there are open set \(S \subset V\) and \(T \subset W\)such that \(a \in S  \subset U\) and \(\func{f}{a} \in T\) such that \(f|_S\) is bijective and \((f|_S)^{-1} = g\) where \(g \in \CalC^1\) and
     \begin{equation*}
         \DiffOperator \func{g}{\func{f}{x}} = \left(\DiffOperator \func{f}{x}\right)^{-1}
     \end{equation*}
@@ -771,7 +853,7 @@ contraction fixed point theorem.
 \begin{proof}
     Let \(S\) be an open convex set around \(a\) such that for all \(x \in S\)
     \begin{equation*}
-        \norm[\DiffOperator \func{f}{x} - \DiffOperator \func{f}{x}] < \dfrac{1}{2} \norm[\DiffOperator \func{f^{-1}}{a}]^{-1}
+        \norm[\DiffOperator \func{f}{x} - \DiffOperator \func{f}{a}] < \dfrac{1}{2} \norm[\DiffOperator \func{f^{-1}}{a}]^{-1}
     \end{equation*}
     hence \(\DiffOperator \func{f}{x}\) is invertible. Let \(T = \func{f}{S}\) then we shall prove the following
     \begin{enumerate}
@@ -779,50 +861,56 @@ contraction fixed point theorem.
 
               Let \(\psi : S \to V\) with
               \begin{align*}
-                  \func{\psi}{x}                                & = x - \left(\DiffOperator \func{f}{a}\right)^{-1}(\func{f}{x})                                                                 \\
-                  \implies \DiffOperator \func{\psi}{x }        & = \DSOne_V - \left(\DiffOperator \func{f}{a}\right)^{-1} \circ \DiffOperator \func{f}{x}                                       \\
-                                                                & = \left(\DiffOperator \func{f}{a}\right)^{-1} \circ \left( \DiffOperator \func{f}{a} - \DiffOperator \func{f}{x} \right)       \\
-                  \implies \norm[\DiffOperator \func{\psi}{x }] & \leq \norm[\left(\DiffOperator \func{f}{a}\right)^{-1}] \norm[\DiffOperator \func{f}{a} - \DiffOperator \func{f}{x}]           \\
-                                                                & < \dfrac{1}{2} [\left(\DiffOperator \func{f}{a}\right)^{-1}] [\left(\DiffOperator \func{f}{a}\right)^{-1}]^{-1} = \dfrac{1}{2}
+                  \func{\psi_y}{x}                                & = x - \left(\DiffOperator \func{f}{a}\right)^{-1} (\func{f}{x} - y)                                                            \\
+                  \implies \DiffOperator \func{\psi_y}{x }        & = \DSOne_V - \left(\DiffOperator \func{f}{a}\right)^{-1} \DiffOperator \func{f}{x}                                             \\
+                                                                  & = \left(\DiffOperator \func{f}{a}\right)^{-1} \circ \left( \DiffOperator \func{f}{a} - \DiffOperator \func{f}{x} \right)       \\
+                  \implies \norm[\DiffOperator \func{\psi_y}{x }] & \leq \norm[\left(\DiffOperator \func{f}{a}\right)^{-1}] \norm[\DiffOperator \func{f}{a} - \DiffOperator \func{f}{x}]           \\
+                                                                  & < \dfrac{1}{2} [\left(\DiffOperator \func{f}{a}\right)^{-1}] [\left(\DiffOperator \func{f}{a}\right)^{-1}]^{-1} = \dfrac{1}{2}
               \end{align*}
               therefore by mean value theorem
               \begin{equation*}
-                  \norm[\func{\psi}{x_1} - \func{\psi}{x_2}] \leq \dfrac{1}{2} \norm[x_1 - x_2]
+                  \norm[\func{\psi_y}{x_1} - \func{\psi_y}{x_2}] \leq \dfrac{1}{2} \norm[x_1 - x_2]
               \end{equation*}
-              then by \Cref{th:LinearInvertibility} if
+              which follows that \(\psi_y\) has at most one fixed point because
               \begin{equation*}
-                  \norm[x_1 - x_2] \leq K \norm[\func{f}{x_1} - \func{f}{x_2}]
+                  \norm[\func{\psi_y}{x_1} - \func{\psi_y}{x_2}] = \norm[x_1 - x_2] \leq  \dfrac{1}{2} \norm[x_1 - x_2]
               \end{equation*}
-              we are done. To do so, note that
-              \begin{align*}
-                  \norm[(x_1 - x_2) - \left(\DiffOperator \func{f}{a}\right)^{-1}(\func{f}{x_1} - \func{f}{x_2})]                & \leq \norm[x_1 - x_2]                                                                           \\
-                  \implies \norm[x_1 - x_2] - \norm[ \left(\DiffOperator \func{f}{a}\right)^{-1}(\func{f}{x_1} - \func{f}{x_2})] & \leq \dfrac{1}{2}\norm[x_2 - x_1]                                                               \\
-                  \implies \norm[x_1 - x_2]                                                                                      & \leq 2 \norm[\left(\DiffOperator \func{f}{a}\right)^{-1}] \norm[\func{f}{x_1} - \func{f}{x_2})]
-              \end{align*}
-
-        \item \(T\) is open.
-
-              For each \(y \in W\) define
+              is a contradiction, and for that fixed point
               \begin{equation*}
-                  \func{f_y}{x} = x + \left(\DiffOperator \func{f}{a}\right)^{-1} (y - \func{f}{x})
+                  \func{\psi_y}{x} = x - \left(\DiffOperator \func{f}{a}\right)^{-1} (\func{f}{x} - y) = x \implies y = \func{f}{x}
               \end{equation*}
-              Since \(\func{f_y}{x} \in \CalC^1\) then
+              which means \(f\) is injective. By the definition of \(T\), \(f\) is surjective as well.
+
+        \item  \(T\) is open.
+
+              We wish to prove that for each \(\func{f}{x_0} = y_0 \in T\) we wish to prove there exist a \( \sigma > 0\) such that \(\func{B_\sigma}{y_0}\) is contained in \(T\). In other words, \(\forall y \in \func{B_\sigma}{y_0}\)
               \begin{align*}
-                  \DiffOperator \func{f_y}{x}                       & = \DSOne_V - \left(\DiffOperator \func{f}{a}\right)^{-1} \circ \DiffOperator \func{f}{x}                                              \\
-                  \implies \norm[\DiffOperator \func{f_y}{x}]       & \leq \norm[ \left(\DiffOperator \func{f}{a}\right)^{-1}] \norm[ \DiffOperator \func{f}{a} - \DiffOperator \func{f}{x}] < \dfrac{1}{2} \\
-                  \implies \norm[\func{f_y}{x_1} - \func{f_y}{x_2}] & \leq \dfrac{1}{2} \norm[x_1 - x_2]
+                  \exists x \in S, \; \func{f}{x} = y \iff \func{\psi_y}{x} = x
               \end{align*}
-              Now for each \(\func{f}{x_0} = y_0 \in T\) we wish to prove there exist a \( \sigma > 0\) such that \(\func{B_\sigma}{y_0}\) is contained in \(T\). In other words, \(\forall y \in \func{B_\sigma}{y_0}\)
+              To apply the contraction fixed point we must find complete metric space \(X\) such that \(\func{\psi_y}{X} = X\). Choose \(\rho\) as small as needed that \(\overline{\func{B_\rho}{x_0}} \subset S\), which makes a complete metric space. Let \(\sigma =  \dfrac{r \rho}{2}\) where \(r = \norm[\left(\DiffOperator \func{f}{a}\right)^{-1}]^{-1}\). Lastly, we show that for each \(y \in \overline{\func{B_\sigma}{y_0}}\), \(\func{\psi_y}{ \overline{\func{B_\rho}{x_0}} }=  \overline{\func{B_\rho}{x_0}}\). That is, \(x \in \overline{\func{B_\rho}{x_0}}\) implies that \( \func{\psi_y}{x} \in \overline{\func{B_\rho}{x_0}}\).
               \begin{align*}
-                  \exists x \in S, \; \func{f}{x} = y \iff \func{f_y}{x} = x
+                   & \norm[\func{\psi_y}{x}  - x_0] \leq \norm[\func{\psi_y}{x} - \func{\psi_y}{x_0}] + \norm[\func{\psi_y}{x_0} - x_0]                              \\
+                   & \leq  \dfrac{1}{2} \norm[x - x_0] +  \norm[\left(\DiffOperator \func{f}{a}\right)^{-1}(y - y_0)]  \leq \dfrac{\rho}{2} + \dfrac{\rho}{2} = \rho
               \end{align*}
-              now to apply the contraction fixed point we must find complete metric space \(X\) such that \(\func{f}{X} = X\). Consider \(\overline{\func{B_\rho}{x_0}} \in S\) which is a complete metric space, and \(y\) such that \(\norm[y - y_0] < \dfrac{r \rho}{2}\) where \(r = \norm[\left(\DiffOperator \func{f}{a}\right)^{-1}]^{-1}\). Lastly, we show that \(x \in \overline{\func{B_\rho}{x_0}}\implies \func{f_y}{x} \in \overline{\func{B_\rho}{x_0}}\).
+        \item \(g = (f|_S)^{-1} : T \to S\) is continuously differentiable. Writting the differentiability criteria
+              \begin{equation*}
+                  \norm[\func{g}{y + h} - \func{g}{y} - \operatorFunc{\DiffOperator \func{g}{y}}{h}] \leq \epsilon \norm[h]
+              \end{equation*}
+              Let \(y = \func{f}{x}\) and \(y + h = \func{f}{x + k}\) then \(h = \func{f}{x + k} - \func{f}{x}\) and note
+              \begin{equation*}
+                  \norm[\func{\psi_y}{x + k} - \func{\psi_y}{x}] = \norm[k - \operatorFunc{\left(\DiffOperator \func{f}{a}\right)^{-1}}{h}] \leq \dfrac{1}{2} \norm[k]
+              \end{equation*}
+              which implies
+              \begin{equation*}
+                  \dfrac{1}{2}\norm[k] \leq \norm[\operatorFunc{\left(\DiffOperator \func{f}{a}\right)^{-1}}{h}] \leq \dfrac{3}{2} \norm[k]
+              \end{equation*}
               \begin{align*}
-                   & \norm[\func{f_y}{x}  - x_0] \leq \norm[\func{f_y}{x} - \func{f_y}{x_0}] + \norm[\func{f_y}{x_0} - x_0] \\
-                   & \leq  \dfrac{1}{2} \norm[x - x_0] + \dfrac{\rho}{2}  \leq \rho
+                  \norm[k - \operatorFunc{\left(\DiffOperator \func{f}{x}\right)^{-1}}{\func{f}{x + k} - \func{f}{x}}] & =                                                                                                             \norm[\operatorFunc{\left(\DiffOperator \func{f}{x}\right)^{-1}}{\operatorFunc{\DiffOperator \func{f}{x}}{k} - \func{f}{x + k} - \func{f}{x}}] \\
+                                                                                                                       & \leq \norm[\left(\DiffOperator \func{f}{x}\right)^{-1}] \norm[\func{f}{x + k} - \func{f}{x} - \operatorFunc{\DiffOperator \func{f}{x}}{k}]                                                                                                                   \\
+                                                                                                                       & \leq \norm[\left(\DiffOperator \func{f}{x}\right)^{-1}] \epsilon \norm[k]                                                                                                                                                                                    \\
+                                                                                                                       & \leq 2 \norm[\left(\DiffOperator \func{f}{x}\right)^{-1}] \norm[\left(\DiffOperator \func{f}{a}\right)^{-1}] \epsilon
               \end{align*}
-              therefore there exist a unique \(x \in \overline{\func{B_\rho}{x_0}}\) such that \(\func{f_y}{x} = x\).
-        \item \(g = (f|_V)^{-1} : T \to T\) is continuously differentiable.
+              which proves the differentiability of \(g\) as \(\norm[\left(\DiffOperator \func{f}{x}\right)^{-1}]\) is bounded in \(S\). As shown, the inverse operator is \(i\) is continuous and therefore if \(\DiffOperator f\) is continuous, then \(\func{i}{\DiffOperator f}\) is continuous. In fact, if \(f \in C^k\) then \(g \in C^k\) as well.
     \end{enumerate}
 \end{proof}
 

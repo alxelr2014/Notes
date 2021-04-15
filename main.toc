@@ -6,6 +6,7 @@
 \contentsline {subsection}{\numberline {1.2.1}Mean value theorem}{16}{}%
 \contentsline {subsection}{\numberline {1.2.2}Fundamental theorem of calculus}{18}{}%
 \contentsline {subsection}{\numberline {1.2.3}Higher derivative}{21}{}%
-\contentsline {subsection}{\numberline {1.2.4}Inverse function theorem}{26}{}%
-\contentsline {subsection}{\numberline {1.2.5}Implicit function}{28}{}%
-\contentsline {subsection}{\numberline {1.2.6}Rank theorem}{29}{}%
+\contentsline {subsection}{\numberline {1.2.4}Smoothness Classes}{27}{}%
+\contentsline {subsection}{\numberline {1.2.5}Inverse function theorem}{27}{}%
+\contentsline {subsection}{\numberline {1.2.6}Implicit function}{29}{}%
+\contentsline {subsection}{\numberline {1.2.7}Rank theorem}{30}{}%
