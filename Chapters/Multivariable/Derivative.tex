@@ -914,9 +914,28 @@ then if \(x\) is a solution to the equation, it is a fixed point of \(F_{y_0}\).
     \end{enumerate}
 \end{proof}
 
+\begin{corollary}
+    If \(f\) is continuously differentiable and \(\DiffOperator \func{f}{x}\) is invertible for every \(x \in U\), then for any open set \(S\), \(\func{f}{S}\) is an open set as well.
+\end{corollary}
+
+\begin{proof}
+    By the inverse function theorem for each \(x \in S\) there is an open set \(U_x\) in \(S\) and \(V_x\) in \(W\) such that \(\func{f}{U_x} = V_x\), therefore
+    \begin{equation*}
+        \func{f}{S} =  \func{f}{\bigcup U_x} = \bigcup \func{f}{U_x} = \bigcup V_x
+    \end{equation*}
+    which is an open set.
+\end{proof}
+
 \subsection{Implicit function}
 \begin{theorem}
-    Let \(V,W\) be finite dimensional normed vector spaces and \(U \subset V \times W\) is open. If \(f: U \to W\), \(f \in \CalC^1\) where \(\func{f}{a,b} = 0\) and \(\operatorFunc{\DiffOperator f|_{\set{a} \times W}}{a,b}\) is invertible then there exist open set \(S\) are \(a\) and \(T\) around \(b\) such that \(S \times T \subset U\), and a continuously differentiable function \(\phi: S \to T\) such that \(\func{\phi}{a} = b\) and \(\func{f^{-1}}{0} \cap (S \times T)\) is the graph of \(\phi\).
+    Let \(V,W\) be finite dimensional normed vector spaces and \(U \subset V \times W\) is open. If \(f: U \to W\), \(f \in \CalC^1\) where \(\func{f}{x_0,y_0} = z_0\) and \(\operatorFunc{\DiffOperator f|_{\set{x_0} \times W}}{x_0,y_0}\) is invertible then there exist open set \(S\) around \(x_0\) and \(T\) around \(y_0\) that \(S \times T \subset U\), such that for each \(x \in S\) there exists a unique \(y \in T\) with
+    \begin{equation*}
+        \func{f}{x,y} = z_0
+    \end{equation*}
+    hence there is a continuously differentiable function \(\phi: S \to T\) such that \(\func{\phi}{x} = y\) where \(\func{f}{x,y} = z_0\) and
+    \begin{equation*}
+        \DiffOperator \phi = - \left(\DiffOperator_y f\right)^{-1} \DiffOperator_x f
+    \end{equation*}
 \end{theorem}
 
 \begin{proof}
@@ -926,26 +945,28 @@ then if \(x\) is a solution to the equation, it is a fixed point of \(F_{y_0}\).
     \end{equation*}
     Then
     \begin{equation*}
-        \DiffOperator \func{F}{a,b} = \left[\begin{array}{c|c}
-                I_n                                                     & \DSZero_n                                               \\ \hline
-                \operatorFunc{\DiffOperator f|_{\set{b} \times U}}{a,b} & \operatorFunc{\DiffOperator f|_{\set{a} \times W}}{a,b}
+        \DiffOperator \func{F}{x_0,y_0} = \left[\begin{array}{c|c}
+                I_n                                                           & \DSZero                                                       \\ \hline
+                \operatorFunc{\DiffOperator f|_{\set{y_0} \times U}}{x_0,y_0} & \operatorFunc{\DiffOperator f|_{\set{x_0} \times W}}{x_0,y_0}
             \end{array}\right]
     \end{equation*}
-    Since \(I_n\) and \(\operatorFunc{\DiffOperator f|_{\set{a} \times W}}{a,b}\) are both invertible then \(\DiffOperator \func{F}{a,b}\) is invertible as well. By inverse function theorem there are open set \(\Omega_1\) around \((a,b)\) and \(\Omega_2\) around \((a,0)\) such that \(F|_{\Omega_1}\) is \(\CalC^1\) diffeomorphism from \(\Omega_1\) to \(\Omega_2\). Let \(G: \Omega_2 \to \Omega_1\) be the local inverse of \(F\) andv \(S,T\) be such that \(V \times W \subset \Omega_1\). Let \(\phi : S \to T\)
+    Since \(I_n\) and \(\operatorFunc{\DiffOperator f|_{\set{x_0} \times W}}{x_0,y_0}\) are both invertible then \(\DiffOperator \func{F}{x_0,y_0}\) is invertible as well. By inverse function theorem there are open set \(\Omega_1\) around \((x_0,y_0)\) and \(\Omega_2\) around \((x_0,z_0)\) such that \(F|_{\Omega_1}\) is \(\CalC^1\) diffeomorphism from \(\Omega_1\) to \(\Omega_2\). Let \(S = \set[x]{(x,z_0) \in \Omega_2}\) and the set \(T = \set[y]{(x,y) \in \Omega_1}\) , then we shall prove that for each \(x \in S\) there exists exactly one \(y \in T\) \footnote{show that they are open}. If \(x \in S\) then there exists \((x,y) \in \Omega_1\) such that \(\func{F}{x,y} = (x,z_0)\), suppose that there are two such \(y\), \(y_1\) and \(y_2\) for \(x\)
     \begin{equation*}
-        \func{f}{x} = \operatorFunc{ \pi_2 \circ G}{x,0}
+        \func{F}{x,y_1} = (x,\func{f}{x,y_1}) = (x,z_0) = (x,\func{f}{x,y_2}) = \func{F}{x,y_2}
     \end{equation*}
+    which since \(F|_{\Omega_1}\) is injective then \(y_1 = y_2\).
+
+    Let \(G: \Omega_2 \to \Omega_1\) be the local inverse of \(F\) and \(\phi : S \to T\)
+    \begin{equation*}
+        \func{\phi}{x} = \operatorFunc{ \pi_2 \circ G}{x,z_0}
+    \end{equation*}
+    which implies that \(\phi\) is continuously differentiable. Lastly,
+    \begin{align*}
+        \DiffOperator \func{f}{x,\func{\phi}{x}} & = \DiffOperator \func{f}{x,\func{\phi}{x}} \circ (I, \DiffOperator \func{\phi}{x})                                         \\
+                                                 & = \DiffOperator_x \func{f}{x,\func{\phi}{x}} + \DiffOperator_y  \func{f}{x,\func{\phi}{x}}\DiffOperator \func{\phi}{x} = 0 \\
+        \implies  \DiffOperator \phi             & = - \left(\DiffOperator_y f\right)^{-1} \DiffOperator_x f
+    \end{align*}
 \end{proof}
-
-%TODO: proof  
-\begin{corollary}
-    \(U \subset \Reals^n\) is open and \(f : U \to \Reals^k\) is continuously differentiable, \(n \geq k\), \(\func{f}{a} = 0\), are the rank of \(\DiffOperator \func{f}{a}\) is equal to \(k\). Then, there exists an open set \(V\) around \(a\) such that \(\func{f^{-1}}{0} \cap V\) is the graph of \(\CalC^1\) function from a coordinate subspace \(n - k\) of \(\Reals^n\) to its complement.
-\end{corollary}
-
-\begin{proof}
-
-\end{proof}
-
 
 
 \subsection{Rank theorem}
@@ -970,12 +991,35 @@ A generalization of \(PAQ = \begin{bmatrix}
 \end{theorem}
 
 \begin{proof}
-    Let \(A = \DiffOperator \func{f}{p}\) then there are invertible matrices \(P,Q\) such that
+    Without loss of generality, assume \(V = \Reals^n\), \(W = \Reals^m\), with a transition \(p = 0 \in \Reals^n\), \(\func{f}{p} = 0 \in \Reals^m\), and with a change of basis,
     \begin{equation*}
-        Q A P^{-1} = \begin{bmatrix}
-            I_r & 0 \\
+        \DiffOperator \func{f}{p} = \begin{bmatrix}
+            I_k & 0 \\
             0   & 0 \\
         \end{bmatrix}
+    \end{equation*}
+    Suppose
+    \begin{equation*}
+        \func{f}{x,y} = (\func{f_1}{x,y}, \func{f_2}{x,y})
+    \end{equation*}
+    where \(x \in \Reals^k\), \(y \in \Reals^{n-k}\), \(\func{f_1}{x,y} \in \Reals^k\), and \(\func{f_2}{x,y} \in \Reals^{m-k}\). Then
+    \begin{equation*}
+        \DiffOperator \func{f}{0,0} = \begin{bmatrix}
+            I_k     & \DSZero \\
+            \DSZero & \DSZero
+        \end{bmatrix}
+    \end{equation*}
+    Let \(\func{H}{x,y,u} := u - \func{f_1}{x,y}\), where \(u \in \Reals^k\). Note that \(H \in \CalC^1\) and \(\DiffOperator_x H = -\DiffOperator_x f_1\) is invertible at \((0,0,0)\). Therefore, there are open set \(\Omega_1\) around \((0,0) \in \Reals^{k} \times \Reals^{n-k}\) and \(\Omega_2\) around \(0 \in \Reals^k\) such that \(H|_{\Omega_1}\) is bijective and there exists a function \(\phi: \Omega_1 \to \Omega_2\) such that
+    \begin{equation*}
+        x = \func{\phi}{u,y}
+    \end{equation*}
+    whenever \(\func{H}{x,y,u} = 0\). Then let \(\alpha^{-1} : \Omega_1 \to \Reals^n\) be
+    \begin{equation*}
+        \func{\alpha^{-1}}{u,y} = (\func{\phi}{u,y},y)
+    \end{equation*}
+    which is a diffeomorphism around \((0,0)\) and
+    \begin{equation*}
+        \func{f \circ \alpha^{-1}}{u,y} = (\func{f_1}{\func{\phi}{u,y},y}, \func{f_2}{\func{\phi}{u,y},y}) = (u, \func{\eta}{u,y})
     \end{equation*}
 \end{proof}
 

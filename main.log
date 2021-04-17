@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  15 APR 2021 23:40
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  17 APR 2021 10:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -306,7 +306,9 @@ Package: common
  (c:/texlive/2020/texmf-dist/tex/latex/bbold/bbold.sty
 Package: bbold 1994/04/06 Bbold symbol package
 LaTeX Font Info:    Redeclaring math alphabet \mathbb on input line 42.
-)) (c:/texlive/texmf-local/tex/latex/local/english-theorems/english-theorems.sty
+) (c:/texlive/2020/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+Package: xparse 2020-10-05 L3 Experimental document command parser
+ (c:/texlive/2020/texmf-dist/tex/latex/l3packages/xparse/xparse-generic.tex))) (c:/texlive/texmf-local/tex/latex/local/english-theorems/english-theorems.sty
 Package: english-theorems 
  (c:/texlive/2020/texmf-dist/tex/latex/ntheorem/ntheorem.sty
 Style `ntheorem', Version 1.33 <2011/08/15>
@@ -544,18 +546,18 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 Chapter 1.
 (./Chapters/Multivariable/LinearAlgebra.tex
 LaTeX Font Info:    Trying to load font information for U+bbold on input line 5.
- (c:/texlive/2020/texmf-dist/tex/latex/bbold/Ubbold.fd) [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]) (./Chapters/Multivariable/Derivative.tex [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30]))
+ (c:/texlive/2020/texmf-dist/tex/latex/bbold/Ubbold.fd) [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]) (./Chapters/Multivariable/Derivative.tex [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31]))
 \tf@thm=\write4
 \openout4 = `main.thm'.
 
  (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 7919 strings out of 477454
- 127603 string characters out of 5840441
- 471542 words of memory out of 5000000
- 27269 multiletter control sequences out of 15000+600000
+ 7957 strings out of 477454
+ 128744 string characters out of 5840441
+ 471139 words of memory out of 5000000
+ 27303 multiletter control sequences out of 15000+600000
  543292 words of font info for 81 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 80i,16n,87p,804b,492s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 80i,16n,87p,938b,492s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (30 pages, 348084 bytes).
+Output written on main.xdv (31 pages, 357924 bytes).

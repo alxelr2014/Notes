@@ -8,5 +8,5 @@
 \contentsline {subsection}{\numberline {1.2.3}Higher derivative}{21}{}%
 \contentsline {subsection}{\numberline {1.2.4}Smoothness Classes}{27}{}%
 \contentsline {subsection}{\numberline {1.2.5}Inverse function theorem}{27}{}%
-\contentsline {subsection}{\numberline {1.2.6}Implicit function}{29}{}%
+\contentsline {subsection}{\numberline {1.2.6}Implicit function}{30}{}%
 \contentsline {subsection}{\numberline {1.2.7}Rank theorem}{30}{}%
