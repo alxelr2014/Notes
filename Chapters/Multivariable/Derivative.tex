@@ -994,8 +994,8 @@ A generalization of \(PAQ = \begin{bmatrix}
     Without loss of generality, assume \(V = \Reals^n\), \(W = \Reals^m\), with a transition \(p = 0 \in \Reals^n\), \(\func{f}{p} = 0 \in \Reals^m\), and with a change of basis,
     \begin{equation*}
         \DiffOperator \func{f}{p} = \begin{bmatrix}
-            I_k & 0 \\
-            0   & 0 \\
+            I_k     & \DSZero \\
+            \DSZero & \DSZero \\
         \end{bmatrix}
     \end{equation*}
     Suppose
@@ -1009,17 +1009,52 @@ A generalization of \(PAQ = \begin{bmatrix}
             \DSZero & \DSZero
         \end{bmatrix}
     \end{equation*}
+
     Let \(\func{H}{x,y,u} := u - \func{f_1}{x,y}\), where \(u \in \Reals^k\). Note that \(H \in \CalC^1\) and \(\DiffOperator_x H = -\DiffOperator_x f_1\) is invertible at \((0,0,0)\). Therefore, there are open set \(\Omega_1\) around \((0,0) \in \Reals^{k} \times \Reals^{n-k}\) and \(\Omega_2\) around \(0 \in \Reals^k\) such that \(H|_{\Omega_1}\) is bijective and there exists a function \(\phi: \Omega_1 \to \Omega_2\) such that
     \begin{equation*}
         x = \func{\phi}{u,y}
     \end{equation*}
-    whenever \(\func{H}{x,y,u} = 0\). Then let \(\alpha^{-1} : \Omega_1 \to \Reals^n\) be
+    whenever \(\func{H}{x,y,u} = 0\). Then let \(\alpha^{-1} : \Omega_1 \to \Omega_2 \times \Reals^{n-k}\) be
     \begin{equation*}
         \func{\alpha^{-1}}{u,y} = (\func{\phi}{u,y},y)
     \end{equation*}
-    which is a diffeomorphism around \((0,0)\) and
+    which is a diffeomorphism around \((0,0) \in \Reals^{k} \times \Reals^{n-k}\) and
     \begin{equation*}
         \func{f \circ \alpha^{-1}}{u,y} = (\func{f_1}{\func{\phi}{u,y},y}, \func{f_2}{\func{\phi}{u,y},y}) = (u, \func{\eta}{u,y})
+    \end{equation*}
+    \(\DiffOperator_y \eta \equiv 0\) that is \(\func{\eta}{u,y} = \func{\eta}{u,0}\) since, \(\func{\rank}{\DiffOperator \func{f \circ \alpha^{-1}}{u,y}} = \func{\rank}{\DiffOperator \func{f}{u,y}}\) and thus
+    \begin{equation*}
+        \DiffOperator \func{f \circ \alpha^{-1}}{u,y} = \begin{bmatrix}
+            I_k                  & \DSZero              \\
+            \DiffOperator_u \eta & \DiffOperator_y \eta
+        \end{bmatrix}
+    \end{equation*}
+    Let \(\beta : \Reals^k \times \Reals^{m-k} \to \Reals^k \times \Reals^{m-k}\)
+    \begin{equation*}
+        \func{\beta}{u,z} = (u,z - \func{\eta}{u,z})
+    \end{equation*}
+    which is clear diffeomorphism around \((0,0) \in \Reals^k \times \Reals^{m-k}\) which means that
+    \begin{equation*}
+        \func{ \beta \circ f \circ \alpha^{-1} }{x,y} = (x,0)
+    \end{equation*}
+\end{proof}
+
+\section{Lagrange Multiplier}
+\begin{theorem}
+    Let \(f: U \subset \Reals^n \to \Reals\) is differentiable and \(g : U \to \Reals\) is continuously differentiable, \(S = \func{g^{-1}}{0} \subset U\) and \(\nabla \func{g}{s} \neq 0\), \(\forall s \in S\). Assume \(x_0 \in S\) 
+    \begin{equation*}
+        \max_{x \in S} \func{f}{x} = \func{f}{x_0}
+    \end{equation*}
+    then there exists \(\lambda \in \Reals\) such that 
+    \begin{equation*}
+        \nabla f|_{x_0} = \lambda \nabla g|_{x_0}
+    \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    Since \(\rank \DiffOperator g = 1\) everywhere, then there are diffeomorphism \(\alpha,\beta\) such that 
+    \begin{equation*}
+        \func{\beta \circ g \circ \alpha^{-1}}{t_1, \dots ,t_n} = t_n
     \end{equation*}
 \end{proof}
 

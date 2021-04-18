@@ -1,11 +1,11 @@
 # Fdb version 3
-["xdvipdfmx"] 1618639889 "main.xdv" "main.pdf" "main" 1618639892
-  "main.xdv" 1618639889 357924 e0f4f19c9f00a5d4415e517da303b52d "xelatex"
+["xdvipdfmx"] 1618677077 "main.xdv" "main.pdf" "main" 1618677078
+  "main.xdv" 1618677077 359612 212a39646da51c6734b7c45ff017ba60 "xelatex"
   (generated)
   "main.pdf"
-["xelatex"] 1618639884 "c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex" "main.xdv" "main" 1618639892
+["xelatex"] 1618677074 "c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex" "main.xdv" "main" 1618677078
   "Chapters/Multivariable.tex" 1617105534 155 de70c5518800d6d43ee5e511421805c3 ""
-  "Chapters/Multivariable/Derivative.tex" 1618639881 66225 76ec095434cceac8526b0411eb238c7d ""
+  "Chapters/Multivariable/Derivative.tex" 1618677073 67160 ff83b070440cd38f5941f600f10f0f30 ""
   "Chapters/Multivariable/LinearAlgebra.tex" 1618257608 27865 d63df4212269dc5edfa1479a04cde8c6 ""
   "c:/Users/emadz/Desktop/School/Books/Semester IV/Real Analysis/Notes/main.tex" 1617206544 1125 aaa770f9d8cb31d772293f09a0408e91 ""
   "c:/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1603845147 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -88,12 +88,12 @@
   "c:/texlive/2020/texmf.cnf" 1603855010 673 4ae7b2f49cee444c5343a45b5d0f169c ""
   "c:/texlive/texmf-local/tex/latex/local/common/common.sty" 1618567509 4993 25187a860c53fed6bebb1db0479e7896 ""
   "c:/texlive/texmf-local/tex/latex/local/english-theorems/english-theorems.sty" 1613403733 4968 3b54db98576bacad74958d08701ceb3d ""
-  "main.aux" 1618639889 15863 f2da2eda8dfaf845df3799bccbb9d4a9 "xelatex"
+  "main.aux" 1618677077 15863 f2da2eda8dfaf845df3799bccbb9d4a9 "xelatex"
   "main.tex" 1617206544 1125 aaa770f9d8cb31d772293f09a0408e91 ""
-  "main.toc" 1618639889 846 6544d5308c22c3b24e64725a0d3656e5 "xelatex"
+  "main.toc" 1618677077 846 6544d5308c22c3b24e64725a0d3656e5 "xelatex"
   (generated)
+  "main.xdv"
+  "main.toc"
   "main.log"
   "main.aux"
-  "main.xdv"
   "main.thm"
-  "main.toc"
