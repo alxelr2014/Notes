@@ -1,0 +1,53 @@
+\chapter{Multi-cycle}
+The process
+\begin{definition}
+    \item [Cycle 1: IF]
+    \begin{itemize}
+        \item IR <= Mem[PC]
+        \item PC <= PC + 4
+    \end{itemize}
+    \item [Cycle 2:ID \& RF]
+    \begin{itemize}
+        \item Calculating control unit
+        \item A <= GPR[IR[25..21]]
+        \item B <= GPR[IR[20..16]]
+        \item ALUout <= PC + (sign-extend(IR[15..0]) << 2)
+    \end{itemize}
+    \item [Cycle 3: Execute]
+    \begin{itemize}
+        \item For BEQ instruction
+              \begin{itemize}
+                  \item A and B are compared and if zero is set jump is taken by updating PC.
+              \end{itemize}
+        \item For R-type instruction
+              \begin{itemize}
+                  \item ALUout <= A op B
+              \end{itemize}
+        \item For Load and store
+              \begin{itemize}
+                  \item ALUout <= A + sign-extend(IR[15..0])
+              \end{itemize}
+    \end{itemize}
+    \item [Cycle 4: Execute]
+    \begin{itemize}
+        \item for R-type instruction
+              \begin{itemize}
+                  \item GPR[IR[15..10]] <= ALUout
+              \end{itemize}
+        \item For store
+              \begin{itemize}
+                  \item Mem[ALUout] = B
+              \end{itemize}
+        \item For load
+              \begin{itemize}
+                  \item MDR = Mem[ALUout]
+              \end{itemize}
+    \end{itemize}
+    \item [Cycle 5: Execute]
+    \begin{itemize}
+        \item For load
+              \begin{itemize}
+                  \item GPR[IR[20..16]] = MDR
+              \end{itemize}
+    \end{itemize}
+\end{definition}
