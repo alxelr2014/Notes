@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  17 MAR 2021 10:34
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  4 MAY 2021 20:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -211,7 +211,17 @@ Package: common
  (c:/texlive/2020/texmf-dist/tex/latex/bbold/bbold.sty
 Package: bbold 1994/04/06 Bbold symbol package
 LaTeX Font Info:    Redeclaring math alphabet \mathbb on input line 42.
-)) (c:/texlive/texmf-local/tex/latex/local/english-theorems/english-theorems.sty
+) (c:/texlive/2020/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (c:/texlive/2020/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2020-10-05 L3 programming layer (loader) 
+ (c:/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+File: l3backend-xetex.def 2020-09-24 L3 backend support: XeTeX
+\g__graphics_track_int=\count275
+\l__pdf_internal_box=\box53
+\g__pdf_backend_object_int=\count276
+\g__pdf_backend_annotation_int=\count277
+))
+Package: xparse 2020-10-05 L3 Experimental document command parser
+ (c:/texlive/2020/texmf-dist/tex/latex/l3packages/xparse/xparse-generic.tex))) (c:/texlive/texmf-local/tex/latex/local/english-theorems/english-theorems.sty
 Package: english-theorems 
  (c:/texlive/2020/texmf-dist/tex/latex/ntheorem/ntheorem.sty
 Style `ntheorem', Version 1.33 <2011/08/15>
@@ -250,8 +260,8 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 \thm@topsep=\skip72
 \thm@topsepadd=\skip73
 Package ntheorem Info: Option `thmmarks' loaded on input line 1175.
-\c@endNonectr=\count275
-\c@currNonectr=\count276
+\c@endNonectr=\count278
+\c@currNonectr=\count279
 \mysavskip=\skip74
 Package ntheorem Info: Standard config file ntheorem.std used on input line 1184.
  (c:/texlive/2020/texmf-dist/tex/latex/ntheorem/ntheorem.std (c:/texlive/2020/texmf-dist/tex/latex/base/latexsym.sty
@@ -260,116 +270,110 @@ Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
 LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
 (Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
 )
-\c@currTheoremctr=\count277
-\c@endTheoremctr=\count278
-\c@Theorem=\count279
-\c@currtheoremctr=\count280
-\c@endtheoremctr=\count281
-\c@theorem=\count282
-\c@currSatzctr=\count283
-\c@endSatzctr=\count284
-\c@Satz=\count285
-\c@currsatzctr=\count286
-\c@endsatzctr=\count287
-\c@satz=\count288
-\c@currPropositionctr=\count289
-\c@endPropositionctr=\count290
-\c@Proposition=\count291
-\c@currpropositionctr=\count292
-\c@endpropositionctr=\count293
-\c@proposition=\count294
-\c@currLemmactr=\count295
-\c@endLemmactr=\count296
-\c@Lemma=\count297
-\c@currlemmactr=\count298
-\c@endlemmactr=\count299
-\c@lemma=\count300
-\c@currKorollarctr=\count301
-\c@endKorollarctr=\count302
-\c@Korollar=\count303
-\c@currkorollarctr=\count304
-\c@endkorollarctr=\count305
-\c@korollar=\count306
-\c@currCorollaryctr=\count307
-\c@endCorollaryctr=\count308
-\c@Corollary=\count309
-\c@currcorollaryctr=\count310
-\c@endcorollaryctr=\count311
-\c@corollary=\count312
-\c@currExamplectr=\count313
-\c@endExamplectr=\count314
-\c@Example=\count315
-\c@currexamplectr=\count316
-\c@endexamplectr=\count317
-\c@example=\count318
-\c@currBeispielctr=\count319
-\c@endBeispielctr=\count320
-\c@Beispiel=\count321
-\c@currbeispielctr=\count322
-\c@endbeispielctr=\count323
-\c@beispiel=\count324
-\c@currBemerkungctr=\count325
-\c@endBemerkungctr=\count326
-\c@Bemerkung=\count327
-\c@currbemerkungctr=\count328
-\c@endbemerkungctr=\count329
-\c@bemerkung=\count330
-\c@currAnmerkungctr=\count331
-\c@endAnmerkungctr=\count332
-\c@Anmerkung=\count333
-\c@curranmerkungctr=\count334
-\c@endanmerkungctr=\count335
-\c@anmerkung=\count336
-\c@currRemarkctr=\count337
-\c@endRemarkctr=\count338
-\c@Remark=\count339
-\c@currremarkctr=\count340
-\c@endremarkctr=\count341
-\c@remark=\count342
-\c@currDefinitionctr=\count343
-\c@endDefinitionctr=\count344
-\c@Definition=\count345
-\c@currdefinitionctr=\count346
-\c@enddefinitionctr=\count347
-\c@definition=\count348
-\c@currProofctr=\count349
-\c@endProofctr=\count350
-\c@Proof=\count351
-\c@currproofctr=\count352
-\c@endproofctr=\count353
-\c@proof=\count354
-\c@currBeweisctr=\count355
-\c@endBeweisctr=\count356
-\c@Beweis=\count357
-\c@currbeweisctr=\count358
-\c@endbeweisctr=\count359
-\c@beweis=\count360
+\c@currTheoremctr=\count280
+\c@endTheoremctr=\count281
+\c@Theorem=\count282
+\c@currtheoremctr=\count283
+\c@endtheoremctr=\count284
+\c@theorem=\count285
+\c@currSatzctr=\count286
+\c@endSatzctr=\count287
+\c@Satz=\count288
+\c@currsatzctr=\count289
+\c@endsatzctr=\count290
+\c@satz=\count291
+\c@currPropositionctr=\count292
+\c@endPropositionctr=\count293
+\c@Proposition=\count294
+\c@currpropositionctr=\count295
+\c@endpropositionctr=\count296
+\c@proposition=\count297
+\c@currLemmactr=\count298
+\c@endLemmactr=\count299
+\c@Lemma=\count300
+\c@currlemmactr=\count301
+\c@endlemmactr=\count302
+\c@lemma=\count303
+\c@currKorollarctr=\count304
+\c@endKorollarctr=\count305
+\c@Korollar=\count306
+\c@currkorollarctr=\count307
+\c@endkorollarctr=\count308
+\c@korollar=\count309
+\c@currCorollaryctr=\count310
+\c@endCorollaryctr=\count311
+\c@Corollary=\count312
+\c@currcorollaryctr=\count313
+\c@endcorollaryctr=\count314
+\c@corollary=\count315
+\c@currExamplectr=\count316
+\c@endExamplectr=\count317
+\c@Example=\count318
+\c@currexamplectr=\count319
+\c@endexamplectr=\count320
+\c@example=\count321
+\c@currBeispielctr=\count322
+\c@endBeispielctr=\count323
+\c@Beispiel=\count324
+\c@currbeispielctr=\count325
+\c@endbeispielctr=\count326
+\c@beispiel=\count327
+\c@currBemerkungctr=\count328
+\c@endBemerkungctr=\count329
+\c@Bemerkung=\count330
+\c@currbemerkungctr=\count331
+\c@endbemerkungctr=\count332
+\c@bemerkung=\count333
+\c@currAnmerkungctr=\count334
+\c@endAnmerkungctr=\count335
+\c@Anmerkung=\count336
+\c@curranmerkungctr=\count337
+\c@endanmerkungctr=\count338
+\c@anmerkung=\count339
+\c@currRemarkctr=\count340
+\c@endRemarkctr=\count341
+\c@Remark=\count342
+\c@currremarkctr=\count343
+\c@endremarkctr=\count344
+\c@remark=\count345
+\c@currDefinitionctr=\count346
+\c@endDefinitionctr=\count347
+\c@Definition=\count348
+\c@currdefinitionctr=\count349
+\c@enddefinitionctr=\count350
+\c@definition=\count351
+\c@currProofctr=\count352
+\c@endProofctr=\count353
+\c@Proof=\count354
+\c@currproofctr=\count355
+\c@endproofctr=\count356
+\c@proof=\count357
+\c@currBeweisctr=\count358
+\c@endBeweisctr=\count359
+\c@Beweis=\count360
+\c@currbeweisctr=\count361
+\c@endbeweisctr=\count362
+\c@beweis=\count363
 )) (c:/texlive/2020/texmf-dist/tex/latex/cleveref/cleveref.sty
 Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
 Package cleveref Info: `ntheorem' support loaded on input line 3055.
 Package cleveref Info: `listings' support loaded on input line 3131.
 )
-\c@currotheoremctr=\count361
-\c@endotheoremctr=\count362
-\c@otheorem=\count363
-\c@curroexamplectr=\count364
-\c@endoexamplectr=\count365
-\c@oexample=\count366
-\c@currnotectr=\count367
-\c@endnotectr=\count368
-\c@note=\count369
-\c@currprooflemmactr=\count370
-\c@endprooflemmactr=\count371
-\c@prooflemma=\count372
-\c@currresultsctr=\count373
-\c@endresultsctr=\count374
-\c@results=\count375
-) (c:/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
-File: l3backend-xetex.def 2020-09-24 L3 backend support: XeTeX
-\g__graphics_track_int=\count376
-\l__pdf_internal_box=\box53
-\g__pdf_backend_object_int=\count377
-\g__pdf_backend_annotation_int=\count378
+\c@currotheoremctr=\count364
+\c@endotheoremctr=\count365
+\c@otheorem=\count366
+\c@curroexamplectr=\count367
+\c@endoexamplectr=\count368
+\c@oexample=\count369
+\c@currnotectr=\count370
+\c@endnotectr=\count371
+\c@note=\count372
+\c@currprooflemmactr=\count373
+\c@endprooflemmactr=\count374
+\c@prooflemma=\count375
+\c@currresultsctr=\count376
+\c@endresultsctr=\count377
+\c@results=\count378
 ) (./main.aux)
 \openout1 = `main.aux'.
 
@@ -482,18 +486,18 @@ File: lstlang1.sty 2020/03/24 1.8d listings language file
 File: lstlang2.sty 2020/03/24 1.8d listings language file
 ) (c:/texlive/2020/texmf-dist/tex/latex/listings/lstlang3.sty
 File: lstlang3.sty 2020/03/24 1.8d listings language file
-) [7])
+) [7] [8] [9] [10] [11] [12] [13])
 \tf@thm=\write4
 \openout4 = `main.thm'.
 
- [8] (./main.aux) ) 
+ [14] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 8547 strings out of 477454
- 137555 string characters out of 5840441
- 777464 words of memory out of 5000000
- 27903 multiletter control sequences out of 15000+600000
+ 8707 strings out of 477454
+ 140045 string characters out of 5840441
+ 872734 words of memory out of 5000000
+ 28057 multiletter control sequences out of 15000+600000
  540171 words of font info for 65 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 71i,11n,74p,523b,1199s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 78i,12n,86p,523b,1674s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (8 pages, 81788 bytes).
+Output written on main.xdv (14 pages, 254912 bytes).

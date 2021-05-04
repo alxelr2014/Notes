@@ -1,4 +1,5 @@
 \chapter{Verilog}
+\section{Behavioral and structural design}
 \lstset{language = Verilog}
 
 Behavioral design describes circuit as an algorithm and structural design describes explicit circuit elements. A behavioral example for a full adder.
@@ -46,7 +47,7 @@ for example
 
 
 
-\subsection{4-value logic}
+\section{4-value logic}
 The set of value are \(\{0,1,x,z\}\). \(x\) is for unknown and \(z\) is for high impedence.
 Signal strengths are (in order):
 \begin{enumerate}
@@ -63,6 +64,7 @@ Signal strengths are (in order):
 wire is used to represent connections between hardware elements (default = z).
 reg for hardware as well but it retains its value until next assignment (default = x).
 
+\section{Wire and Reg}
 \begin{enumerate}
     \item Syntax
 
@@ -71,12 +73,12 @@ reg for hardware as well but it retains its value until next assignment (default
 \end{lstlisting}
     \item Example
           \begin{lstlisting}
-        wire a;
-        wire [7:0] bus;
-        wire [31:0] busA, busB, busC;
-        reg clock;
-        reg [0:40] virtual_addr;
-    \end{lstlisting}
+    wire a;
+    wire [7:0] bus;
+    wire [31:0] busA, busB, busC;
+    reg clock;
+    reg [0:40] virtual_addr;
+\end{lstlisting}
 \end{enumerate}
 
 modules are models of hardware. internals not visible to enviroment. internals can be changed as long as the interface (ports) is not changed.
@@ -95,9 +97,317 @@ Ports are the terminals (pins) which have three types (in, out, inout). For port
 \end{lstlisting}
 In a module, inputs are always of type net but output can be reg as well. inout can be of type net only.
 We can implement delays as such
+\section{Delay}
 \begin{lstlisting}
     and #(delay-time) a1 (out,i1,i2);
     and #(rise-val,fall-val) a1 (out,i1,i2);
     and #(min:typ:max,min:typ:max) a1 (out,i1,i2);
     bufif0 #(rise-val,fall-val,turnoff-val) a1 (out,in,control);
 \end{lstlisting}
+
+\section{Data types}
+\subsection{Integer}
+signed numbers.
+\begin{lstlisting}
+    integer [7:0] tmp;
+\end{lstlisting}
+
+\subsection{Real}
+default value is zero
+\begin{lstlisting}
+    real delta;
+    delta=4e10;
+    delta=2.13;
+\end{lstlisting}
+
+\subsection{Time}
+at least 64 bit and \textit{\$time} is a system function that gives current simulation time.
+\begin{lstlisting}
+    time save_sim_time;
+    initial 
+        save_sim_time = $time;
+\end{lstlisting}
+
+\section{Vector and array}
+\subsection{Vectors}
+\begin{lstlisting}
+    wire/reg [msb_index : lsb_index] data_id;
+
+    wire a; //single bit 
+    wire [7:0] bus; //8-bit vector
+    wire [31:0] busA, busB, busC;
+    reg clock;
+    reg [0:40] virtual_addr;
+\end{lstlisting}
+
+\subsection{Arryas}
+only one-dimensional and allowed for \textbf{reg,integer,time}
+\begin{lstlisting}
+    <data_type> <var_name> [start_idx : end_idx];
+
+    integer count[0:7];
+    reg bool[31:0];
+    time chk_point[1:100];
+    reg [4:0] port_id[0:7];
+    integer matrix[4:0][4:0]; // illegal
+\end{lstlisting}
+
+\section{Assignments}
+\subsection{Continuous assignments}
+assigns values to nets, happens whenever simulation causes the value of the right-hand side to change. used for combinational logic. can happen outside of any blocks and cant be used in \textbf{always} or \textbf{initial}
+
+\begin{lstlisting}
+    wire [15:0] sum, a, b; // declaration of 16-bit vector nets
+    wire cin, cout; // declaration of 1-bit (scalar) nets
+    assign {cout, sum} = a + b + cin;
+\end{lstlisting}
+
+\subsection{Procedural Assignments}
+drive value to \textbf{reg}. holds value of the assignment until the next assignment. occur in blocks. In \textbf{initial} block it is only executed once, but in \textbf{always} is repeated continuously. for combinational and sequential.
+
+\begin{lstlisting}
+    reg Clock, Enable, Load, Reset;
+    reg [7:0] Data;
+    parameter HalfPeriod = 5;
+    initial
+        begin 
+            Clock = 0;
+            #(HalfPeriod) Clock = ~Clock;
+        end
+\end{lstlisting}
+
+\section{Delay}
+\subsection{Inertial Delay}
+Like the delay induced by combinational elements. delayed evaluation
+\begin{lstlisting}
+module testbench;
+    reg a,b;
+    always @(a)
+    begin
+        $display($time);
+        #10 b=~a;
+    end
+    initial
+    begin
+        a=1'b0;
+        #15 a=1'b1;
+        #3 a=1'b0;
+        #15 a=1'b1;
+        #11 a=1'b0;
+    end
+endmodule
+\end{lstlisting}
+
+\subsection{Transport Delay}
+Delayed assignment
+
+\begin{lstlisting}
+module testbench;
+    reg a,b,c;
+    always @(a)
+    begin
+        $display($time);
+        b <= #10 ~a;
+    end
+    initial
+    begin
+        a=1'b0;
+        #15 a=1'b1;
+        #3 a=1'b0;
+        #15 a=1'b1;
+        #11 a=1'b0;
+    end
+endmodule
+\end{lstlisting}
+
+In combinational if
+\begin{definition}
+    \item [No dalay] use blocking
+    \item [Interial delay] use blocking
+    \item [Transport delay] use non-blocking
+\end{definition}
+
+In sequential logic if
+\begin{definition}
+    \item [No dalay] use non-blocking
+    \item [with delay] use non-blocking and transport delay.
+\end{definition}
+
+\section{More keywords}
+\subsection{wait}
+wait for a certain condition to be true and is level-sensitive.
+\begin{lstlisting}
+always
+    wait (CountEnable) #20 count = count+1;
+\end{lstlisting}
+
+\subsection{case}
+
+\begin{lstlisting}
+reg [1:0] alu_control;
+case (alu_control)
+    2'd0 : y = x + z;
+    2'd1 : y = x - z;
+    2'd2 : y = x * z;
+    default : $display("Invalid ALU control signal");
+endcase
+\end{lstlisting}
+
+\begin{lstlisting}
+module mux4-to-1 (out, i0, i1, i2, i3, s1, s0);
+    output out;
+    input i0, i1, i2, i3;
+    input s1, s0;
+    reg out;
+    always @(s1 or s0 or i0 or i1 or i2 or i3)
+        case ({s1, s0}) 
+        2'd0 : out = i0;
+        2'd1 : out = i1;
+        2'd2 : out = i2;
+        2'd3 : out = i3;
+        default: $display("Invalid control signals");
+        //default is selected when s1(or s2)=x or z 
+    endcase
+endmodule
+\end{lstlisting}
+
+casez treats all z values as don't cares. casex treats all z and x values as don't cares.
+
+\begin{lstlisting}
+module test;
+    reg s1, s0;
+    reg out;
+    initial
+    begin
+        s1 = 1’b0;
+        s0 = 1’bx;
+        casex ({s1, s0}) 
+        2'b01 : $display("01"); 
+        2'bx1 : $display("x1");
+        2'b0x : $display("0x"); 
+        //this alternative is executed
+        2'b00 : $display("00");
+        default: $display("Default");
+        endcase
+    end 
+endmodule
+\end{lstlisting}
+
+\subsection{repeat and forever}
+used only for modeling
+
+\begin{lstlisting}
+initial
+begin
+    count = 0;
+    repeat (128)
+    begin
+    $display("Count = %d", count);
+    count = count + 1;
+    // count: from 0 to 127
+    end
+end
+initial
+begin
+    clock = 1'b0;
+    forever #10 clock = ~clock; //best clock practice
+en
+\end{lstlisting}
+
+\subsection{function}
+no timing control and returns a single value and has at least an input. can be called in behavioral and structural models.
+\begin{lstlisting}
+module parity;
+    reg [31:0] addr;
+    reg parity;
+    always @(addr)
+    begin
+        parity = calcparity(addr); 
+        $display("Parity calculated = %b", calcparity(addr));
+    end
+    function calcparity;
+        input [31:0] address;
+        begin
+            calcparity = ^address; 
+        end
+    endfunction
+endmodule   
+\end{lstlisting}
+\begin{example}
+    A recursive example which needs the keyword \underline{automatic}.
+    \begin{lstlisting}
+module function_auto ();
+    function automatic [7:0] factorial;
+        input [7:0] i_Num; 
+        begin
+            if (i_Num == 1)
+            factorial = 1; 
+            else
+            factorial = i_Num * factorial(i_Num-1);
+        end
+    endfunction
+    initial
+    begin
+        $display("Factorial of 1 = %d", factorial(1));
+        $display("Factorial of 2 = %d", factorial(2));
+        $display("Factorial of 3 = %d", factorial(3));
+        $display("Factorial of 4 = %d", factorial(4));
+        $display("Factorial of 5 = %d", factorial(5));
+    end
+endmodule
+    \end{lstlisting}
+\end{example}
+
+\subsection{task}
+must be used if the procdure has any timing control, zero or more than one output argument. must be called within behavioral bodies.
+\begin{lstlisting}
+module operation;
+    reg [15:0] A, B;
+    reg [15:0] AB_AND, AB_OR, AB_XOR;
+    always @(A or B) 
+    begin
+        bitwise_oper(AB_AND, AB_OR, AB_XOR, A, B);
+        //Argument passing by name not yet supported
+    end
+    //define task bitwise_oper
+    task bitwise_oper;
+    output [15:0] ab_and, ab_or, ab_xor; 
+    input [15:0] a, b; 
+        begin
+        #10 ab_and = a & b;
+        ab_or = a | b;
+        ab_xor = a ^ b;
+        end
+    endtask
+endmodule
+\end{lstlisting}
+\section{Generate Statement}
+\subsection{Generate Conditional Statement}
+synthesize different hardware based on conditions that resolve in compile. only one hardware gets synthesized.
+\begin{lstlisting}
+//This module implements a parametrized multiplier
+module multiplier (product, a0, a1);
+    // Parameter Declaration. This can be redefined
+    parameter a0_width = 8; // 8-bit bus by default
+    parameter a1_width = 8; // 8-bit bus by default
+    // Local Parameter declaration.
+    // This parameter cannot be modified with defparam or
+    // with module instance # statement.
+    localparam product_width = a0_width + a1_width;
+    // Port declarations
+    output [product_width -1:0] product;
+    input [a0_width-1:0] a0;
+    input [a1_width-1:0] a1;
+    // Instantiate the type of multiplier conditionally.
+    // Depending on the value of the a0_width and a1_width
+    // parameters at the time of instantiation, the appropriate
+    // multiplier will be instantiated.
+    generate
+        if (a0_width <8) || (a1_width < 8)
+            cla_multiplier #(a0_width, a1_width) m0 (product, a0, a1);
+        else
+            tree_multiplier #(a0_width, a1_width) m0 (product, a0, a1);
+    endgenerate //end of the generate block
+endmodule
+\end{lstlisting}
+\subsection{Generate a unit multiple times}
