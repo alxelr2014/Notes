@@ -413,5 +413,13 @@ INPUT ./Chapters/MultiCycle.tex
 INPUT Chapters/MultiCycle.tex
 INPUT ./Chapters/MultiCycle.tex
 INPUT Chapters/MultiCycle.tex
+INPUT ./Chapters/Pipeline.tex
+INPUT Chapters/Pipeline.tex
+INPUT ./Chapters/Pipeline.tex
+INPUT Chapters/Pipeline.tex
+INPUT ./Chapters/Memory.tex
+INPUT Chapters/Memory.tex
+INPUT ./Chapters/Memory.tex
+INPUT Chapters/Memory.tex
 OUTPUT main.thm
 INPUT main.aux
