@@ -17,3 +17,6 @@
 \contentsline {chapter}{\numberline {4}Multi-cycle}{11}{}%
 \contentsline {chapter}{\numberline {5}Pipeline}{13}{}%
 \contentsline {chapter}{\numberline {6}Memory}{15}{}%
+\contentsline {section}{\numberline {6.1}Principle of Locality}{15}{}%
+\contentsline {subsection}{\numberline {6.1.1}Temporal locality}{15}{}%
+\contentsline {subsection}{\numberline {6.1.2}Spatial locality}{15}{}%
