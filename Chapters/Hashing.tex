@@ -1,0 +1,5 @@
+\chapter{Hashing}
+\section{Direct-Address}
+works well for relatively small number keys which are unique. Each address is key of the object.
+\section{Hashing function}
+To reduce the memory usage of the direct-address, we devise a function \(h : U \to \set{0,\dots, m-1}\) where \(m\) is relatively smaller than \(n =\abs[U]\). To avoid collision each address points to linked list. A good hash function sets the keys uniformly to the \(\set{0, \dots, m-1}\). Given a good hash function and the fact that \(k\) keys have already put in the table, then on average searching for a key takes \(\bigO{1 + \alpha}\) where  \(\alpha = \frac{k}{m}\).
