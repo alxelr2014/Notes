@@ -20,3 +20,8 @@
 \contentsline {section}{\numberline {6.1}Principle of Locality}{15}{}%
 \contentsline {subsection}{\numberline {6.1.1}Temporal locality}{15}{}%
 \contentsline {subsection}{\numberline {6.1.2}Spatial locality}{15}{}%
+\contentsline {section}{\numberline {6.2}Cache Structure}{15}{}%
+\contentsline {subsection}{\numberline {6.2.1}Block placement}{15}{}%
+\contentsline {subsection}{\numberline {6.2.2}Block identification}{16}{}%
+\contentsline {subsection}{\numberline {6.2.3}Block replacement}{16}{}%
+\contentsline {subsection}{\numberline {6.2.4}Write strategy}{16}{}%

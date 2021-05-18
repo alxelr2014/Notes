@@ -417,9 +417,9 @@ INPUT ./Chapters/Pipeline.tex
 INPUT Chapters/Pipeline.tex
 INPUT ./Chapters/Pipeline.tex
 INPUT Chapters/Pipeline.tex
-INPUT ./Chapters/Memory.tex
-INPUT Chapters/Memory.tex
-INPUT ./Chapters/Memory.tex
-INPUT Chapters/Memory.tex
+INPUT ./Chapters/MemoryCache.tex
+INPUT Chapters/MemoryCache.tex
+INPUT ./Chapters/MemoryCache.tex
+INPUT Chapters/MemoryCache.tex
 OUTPUT main.thm
 INPUT main.aux

@@ -1,16 +1,16 @@
 # Fdb version 3
-["xdvipdfmx"] 1620389984 "main.xdv" "main.pdf" "main" 1620389985
-  "main.xdv" 1620389984 84404 4aee8a4c602d23c8919def5c2b86e731 "xelatex"
+["xdvipdfmx"] 1621357780 "main.xdv" "main.pdf" "main" 1621357781
+  "main.xdv" 1621357780 96016 f5a581b53a945d4a2d815bdf61c5a138 "xelatex"
   (generated)
   "main.pdf"
-["xelatex"] 1620389982 "c:/Users/emadz/Desktop/School/Books/Semester IV/Computer Architecture/Notes/main.tex" "main.xdv" "main" 1620389985
+["xelatex"] 1621357778 "c:/Users/emadz/Desktop/School/Books/Semester IV/Computer Architecture/Notes/main.tex" "main.xdv" "main" 1621357781
   "Chapters/ControlPath.tex" 1618759402 198 506f2d9952aa936452741a169ca3f463 ""
   "Chapters/DataPath.tex" 1618756548 1805 0ea6b93e38dc7b1bf0031ea19f2c0ce1 ""
-  "Chapters/Memory.tex" 1620389981 1048 c76ea3835fbf2331f3f7b5664e5e03dd ""
+  "Chapters/MemoryCache.tex" 1621357777 2472 d9278e1f8e684fbccf45eafa2f5f2882 ""
   "Chapters/MicroArchitecture.tex" 1614951547 6258 b472d4c42a63321ad5262681ae489631 ""
   "Chapters/MultiCycle.tex" 1619555224 1667 15bc66b5588be3cad925f77c80c2cecf ""
   "Chapters/Pipeline.tex" 1620258441 258 2f6648708e0a6c38cdaba48767d09bb4 ""
-  "c:/Users/emadz/Desktop/School/Books/Semester IV/Computer Architecture/Notes/main.tex" 1620309293 1083 2641b34da71d9e9378301aa1beee3e5b ""
+  "c:/Users/emadz/Desktop/School/Books/Semester IV/Computer Architecture/Notes/main.tex" 1621350417 1088 6353aab94d21e8f06bb4c6c83fb30774 ""
   "c:/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1603845147 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1603839313 1004 54797486969f23fa377b128694d548df ""
   "c:/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1603839313 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -74,14 +74,14 @@
   "c:/texlive/2020/texmf-dist/web2c/texmf.cnf" 1603846868 39451 15a3ebee027466ecb89701aa91dfebaf ""
   "c:/texlive/2020/texmf-var/web2c/xetex/xelatex.fmt" 1603855220 4917463 ec99407bfeaeb7c7e4981fa16e994423 ""
   "c:/texlive/2020/texmf.cnf" 1603855010 673 4ae7b2f49cee444c5343a45b5d0f169c ""
-  "c:/texlive/texmf-local/tex/latex/local/common/common.sty" 1620333537 5284 c4372280dfa309b643ee505310717052 ""
+  "c:/texlive/texmf-local/tex/latex/local/common/common.sty" 1621341936 5457 fd1c748572ee19a60c98478ccfcad36a ""
   "c:/texlive/texmf-local/tex/latex/local/english-theorems/english-theorems.sty" 1613403733 4968 3b54db98576bacad74958d08701ceb3d ""
-  "main.aux" 1620389984 3291 edd950f21e2ffbba8f11b7dd98ea5a7d "xelatex"
-  "main.tex" 1620309293 1083 2641b34da71d9e9378301aa1beee3e5b ""
-  "main.toc" 1620389984 1424 5ae1dc86a0c41925234abcfbf025002e "xelatex"
+  "main.aux" 1621357780 3847 c650a00377a8d3293f81c59e1bdea4f5 "xelatex"
+  "main.tex" 1621350417 1088 6353aab94d21e8f06bb4c6c83fb30774 ""
+  "main.toc" 1621357780 1775 34180222292ce4dc66252aea75c6abf4 "xelatex"
   (generated)
+  "main.aux"
   "main.thm"
   "main.xdv"
-  "main.aux"
   "main.log"
   "main.toc"

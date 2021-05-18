@@ -1,0 +1,49 @@
+\chapter{Memory}
+We want a fast, large, and a cheap memory. but ofc that is not possible.
+Principle of locality gets us closer to our goal.
+\section{Principle of Locality}
+\subsection{Temporal locality}
+if you accessed a part of memory, it is very likely you access the same part soon.
+\subsection{Spatial locality}
+if you accessed a part of memory, it is very likely you access the nearby parts soon.
+To achieve our goal, we use memory hierarchy, from the big and slow to smaller and faster.
+\begin{center}
+    \begin{tabular}{c|c|c}
+        Type                      & Speed(ns) & Size(byte) \\ \hline
+        Registers                 & 1s        & 100s       \\\hline
+        On-Chip Cache             & 10s       & Ks         \\\hline
+        Second Level Cache (SRAM) & 10s       & Ks         \\\hline
+        Main Memory (DRAM)        & 100s      & Ms         \\\hline
+        Secondary Storage (Disk)  & 10s (ms)  & Gs         \\\hline
+        Tertiary Storage (Tape)   & 10s (sec) & Ts
+    \end{tabular}
+\end{center}
+
+\begin{center}
+    CPU Time = (CPU execution CC + Memory stall CC) \(\times\) Clock cycle time
+\end{center}
+\begin{center}
+    Memory stall CC = reads \(\times\) read miss rate \(\times\) read miss penalty + writes \(\times\) write miss rate \(\times\) write miss penalty
+
+    = Memory accesses \(\times\) miss rate \(\times\) miss penalty
+\end{center}
+\begin{center}
+    AMAT = Hit time + (Miss Rate \(\times \) Miss penalty)
+\end{center}
+\section{Cache Structure}
+\subsection{Block placement}
+where a block from a lower level will be placed in the upper level.
+\begin{description}
+    \item[Fully associative] a block can go anywhere. needs to save the whole address in tag.
+    \item[Direct mapped]  a block goes the mod. needs to save \( \lg \!\left(\frac{\text{lower size}}{\text{upper size}}\right)\) bits of the address in tag.
+    \item[Set associative] a block can go anywhere in a set.  needs to save \( \lg \!\left(\frac{\text{lower size}}{\text{set size}}\right)\) bits of the address in tag. If each set has 4 block then it is 4-way, if 2, then it is 2-way.
+\end{description}
+\subsection{Block identification}
+how is a block found if it is in upper level. it is dependent on block placement.
+\begin{center}
+    index = \(\lg \#\)sets
+\end{center}
+\subsection{Block replacement}
+which block should be replaced on a miss.
+\subsection{Write strategy}
+what happens in a write instruction.
