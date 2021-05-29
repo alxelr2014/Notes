@@ -1,0 +1,60 @@
+\chapter{Timing}
+\section{Delay}
+we define the following delays for CMOS NOT gate:
+\begin{definition}
+    [\(t_{pHL}\)] is the high to low propogation delay, measured from when the input has gained at least 50\%(half-way from 0 to 1) until output has lost at least 50\%(half-way from 1 to 0).
+        [\(t_{pLH}\)] is the low to high propogation delay, measured from when the input has lost at least 50\%(half-way from 1 to 0) until output has gained at least 50\%(half-way from 0 to 1).
+        [\(t_{f}\)] is the fall delay, measured from when the output is at 90\% until the output is at 10\% (from 1 to 0).
+        [\(t_{l}\)] is the fall delay, measured from when the output is at 10\% until the output is at 90\% (from 0 to 1).
+        [\(t_{cd}\)] is the contamination delay, measured from when the input changes until the output changes (not necessarily settles).
+\end{definition}
+Since CMOS is symmetric then \(t_{pd} = t_{pHL} = t_{pLH}\).
+
+For a sequential delays:
+\begin{definition}
+    [\(t_{CQ}\)] is the propogation delay, measured from a change in the clk input until the output settles.
+        [\(t_{CQ}\)] is the contamination delay, measured from from a change in the clk input until the output changes(not necessarily settles).
+        [\(t_{ts}\)] is the setup time delay, is the amount of time needed for the data input to be stable before clock edge.
+        [\(t_{th}\)] is the hold time delay, is the amount of time needed for the data input to be stable after the clock edge.
+\end{definition}
+Therefore the minimum cycle time for a simple sequential design is \(t_{CQ} + t_{\text{combinational}} + t_{st}\). where \(t_{CQ}\) is for the first flip flops and \(t_{st}\) is for the second flip flops. Also it is necessary that \(t_{CQ,CD} + t_{\text{combinational},cd} > t_{th}\). If the inequality didnt hold then add some NOTs so the hold inequality holds and this is called Hold-fix.
+
+\section{Timing analysis}
+\begin{itemize}
+    \item Gate delay increases in proportion to number of fanouts as the capacitance increases.
+\end{itemize}
+\subsection{Static Timing analysis}
+turns the circuit into a DAG (super cool eh). gate function and inputs is ignored. worst-case scenario of delays, takes into account the fanout.
+
+For combinational ciruits:
+\begin{itemize}
+    \item At the first step levelize the cirucuits. the first level is the gates the only have primary inputs and so on. at the second step determine the output arrival times of the gates in level order. At the third step, trace the critical path.
+\end{itemize}
+
+\section{Clock Non-idealities}
+\begin{definition}
+    [Clock Skew] spiatial variation in temporally equivalent clock edges.
+        [Clock jitter] temporal variation in consecutive edges of the clock signal.
+\end{definition}
+Usually to fix skew we must consider some constant. Sources of clock uncertainties
+\begin{enumerate}
+    \item Clock generation - some impurity or something in the crystal.
+    \item Devices
+    \item Power Supply
+    \item Interconnect
+    \item Capacitive load
+    \item Temperature
+    \item Coupling to adjacent lines
+    \item Mechanical shock
+\end{enumerate}
+\section{Metastability adn Synchronizers}
+Metastability almost always settles (less than a clock cycle \(t_{mdf}\)) to a stable output and depends on the technology. Happens when the data input changes happen in setup or hold (aperture) time
+\begin{enumerate}
+    \item data is asynchronous. (Synchronizers)
+    \item clock skew is more than tolerable.
+    \item when clock domain crossing in the second domain. (Synchronizers)
+    \item problems with combinational delay.
+\end{enumerate}
+Metastability uses a lot of power and even may cause break the flip flops :(
+\section{Clock Domain Crossing and Synchronizers}
+when the source and destination clocks have no frequency relationship. A synchronize to eliminate the chances of metastability in CDC. it comprises of two ffs with destination clock. Metastability can happen in the first ff but never (probably) in the second ff and therefore we will always get the right result after the second clock .

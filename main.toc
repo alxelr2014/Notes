@@ -30,3 +30,10 @@
 \contentsline {section}{\numberline {3.10}Generate Statement}{14}{}%
 \contentsline {subsection}{\numberline {3.10.1}Generate Conditional Statement}{14}{}%
 \contentsline {subsection}{\numberline {3.10.2}Generate a unit multiple times}{14}{}%
+\contentsline {chapter}{\numberline {4}Timing}{15}{}%
+\contentsline {section}{\numberline {4.1}Delay}{15}{}%
+\contentsline {section}{\numberline {4.2}Timing analysis}{15}{}%
+\contentsline {subsection}{\numberline {4.2.1}Static Timing analysis}{15}{}%
+\contentsline {section}{\numberline {4.3}Clock Non-idealities}{16}{}%
+\contentsline {section}{\numberline {4.4}Metastability adn Synchronizers}{16}{}%
+\contentsline {section}{\numberline {4.5}Clock Domain Crossing and Synchronizers}{16}{}%
