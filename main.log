@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  30 MAY 2021 01:42
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  18 JUN 2021 02:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -488,24 +488,24 @@ File: lstlang2.sty 2020/03/24 1.8d listings language file
 File: lstlang3.sty 2020/03/24 1.8d listings language file
 ) [7] [8] [9] [10] [11] [12] [13]) (./Chapters/Timing.tex [14]
 Chapter 4.
-LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 5.
-LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 5.
 [15
 
-])
+]) (./Chapters/DesignFlow.tex [16] [17] [18
+
+]
+Chapter 5.
+)
 \tf@thm=\write4
 \openout4 = `main.thm'.
 
- [16] (./main.aux) ) 
+ [19] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 8752 strings out of 477454
- 140693 string characters out of 5840441
- 873220 words of memory out of 5000000
- 28089 multiletter control sequences out of 15000+600000
- 543046 words of font info for 75 fonts, out of 8000000 for 9000
+ 8736 strings out of 477454
+ 140560 string characters out of 5840441
+ 873237 words of memory out of 5000000
+ 28080 multiletter control sequences out of 15000+600000
+ 540171 words of font info for 65 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 78i,12n,86p,543b,1674s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 78i,12n,86p,637b,1674s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (16 pages, 296832 bytes).
+Output written on main.xdv (19 pages, 312148 bytes).

@@ -32,8 +32,11 @@
 \contentsline {subsection}{\numberline {3.10.2}Generate a unit multiple times}{14}{}%
 \contentsline {chapter}{\numberline {4}Timing}{15}{}%
 \contentsline {section}{\numberline {4.1}Delay}{15}{}%
-\contentsline {section}{\numberline {4.2}Timing analysis}{15}{}%
-\contentsline {subsection}{\numberline {4.2.1}Static Timing analysis}{15}{}%
+\contentsline {section}{\numberline {4.2}Timing analysis}{16}{}%
+\contentsline {subsection}{\numberline {4.2.1}Static Timing analysis}{16}{}%
 \contentsline {section}{\numberline {4.3}Clock Non-idealities}{16}{}%
 \contentsline {section}{\numberline {4.4}Metastability adn Synchronizers}{16}{}%
-\contentsline {section}{\numberline {4.5}Clock Domain Crossing and Synchronizers}{16}{}%
+\contentsline {section}{\numberline {4.5}Clock Domain Crossing and Synchronizers}{17}{}%
+\contentsline {chapter}{\numberline {5}Design Flow}{19}{}%
+\contentsline {subsection}{\numberline {5.0.1}Architecture Design}{19}{}%
+\contentsline {subsection}{\numberline {5.0.2}Analog Design flow}{19}{}%

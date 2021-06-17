@@ -1,0 +1,25 @@
+\chapter{Design Flow}
+it starts with a conceptual design and market research. then the design needs a specification. Specification specifies
+\begin{itemize}
+    \item General functionality and Input/Output
+    \item Operating enviroment
+    \item Electrical characteristics
+    \item Mechanical characteristics
+    \item Limitation (mechanical, electrical, thermal,\dots)
+    \item Deliverables
+    \item Standards
+\end{itemize}
+\subsection{Architecture Design}
+Computer Architecture is a set of rules and methods that describe the functionality, organization, and implementation of computer systems:
+\begin{itemize}
+    \item ISA
+    \item \(\mu\)arch
+    \item System design: all the other hardware components within in a computing system.
+\end{itemize}
+
+then comes the RTL coding, functional verification, and synthesis (minimize area) which conclude the logical design. Physical design starts with floorplaning (optimal). Placement is the process of placing the logical gates to minimize wiring and delay. In the clock tree synthesis we wire up the clock which aims to reduce clock skew. At the last comes routing in which we determine optimal wiring between ffs and gates. Out of all these comes the GDSII file which will be sent to manufacturer.
+
+In the synthesis we must get the library from the manufacturer (by bypassing the sanction :)))
+
+\subsection{Analog Design flow}
+does analog shit and then gets combined with digital design and we do some more routing, simulation and checking at the end.
