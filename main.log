@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  17 MAY 2021 22:36
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.28)  8 JUL 2021 17:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -351,7 +351,7 @@ Package cleveref Info: `ntheorem' support loaded on input line 3055.
 \c@currresultsctr=\count368
 \c@endresultsctr=\count369
 \c@results=\count370
-) (./main.aux (./Chapters/Hashing.aux))
+) (./main.aux (./Chapters/Hashing.aux) (./Chapters/OrderStatistics.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
@@ -456,26 +456,31 @@ Chapter 2.
 
  (./Chapters/Hashing.tex
 Chapter 3.
-)
-Overfull \hbox (1.87144pt too wide) in paragraph at lines 5--41
-\TU/lmr/m/n/12 To reduce the memory usage of the direct-address, we devise a function $\OML/cmm/m/it/12 h \OT1/cmr/m/n/12 : \OML/cmm/m/it/12 U \OMS/cmsy/m/n/12 ! []$
- []
-
-[7
+) [7
 
 
 ]
+\openout2 = `Chapters/OrderStatistics.aux'.
+
+ (./Chapters/OrderStatistics.tex [8
+
+
+
+
+]
+Chapter 4.
+) [9]
 \tf@thm=\write4
 \openout4 = `main.thm'.
 
- (./main.aux (./Chapters/Hashing.aux)) ) 
+ (./main.aux (./Chapters/Hashing.aux) (./Chapters/OrderStatistics.aux)) ) 
 Here is how much of TeX's memory you used:
- 7184 strings out of 477454
- 118300 string characters out of 5840441
- 444710 words of memory out of 5000000
- 26554 multiletter control sequences out of 15000+600000
+ 7216 strings out of 477454
+ 118733 string characters out of 5840441
+ 444935 words of memory out of 5000000
+ 26579 multiletter control sequences out of 15000+600000
  542164 words of font info for 73 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 78i,11n,86p,603b,512s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 78i,11n,86p,551b,512s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (7 pages, 44276 bytes).
+Output written on main.xdv (9 pages, 59416 bytes).

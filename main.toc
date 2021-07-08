@@ -9,3 +9,7 @@
 \contentsline {chapter}{\numberline {3}Hashing}{7}{}%
 \contentsline {section}{\numberline {3.1}Direct-Address}{7}{}%
 \contentsline {section}{\numberline {3.2}Hashing function}{7}{}%
+\contentsline {section}{\numberline {3.3}Open hashing}{7}{}%
+\contentsline {chapter}{\numberline {4}Order Statistics}{9}{}%
+\contentsline {section}{\numberline {4.1}Quicksort}{9}{}%
+\contentsline {section}{\numberline {4.2}Ford-Johnson}{9}{}%

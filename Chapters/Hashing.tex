@@ -2,4 +2,17 @@
 \section{Direct-Address}
 works well for relatively small number keys which are unique. Each address is key of the object.
 \section{Hashing function}
-To reduce the memory usage of the direct-address, we devise a function \(h : U \to \set{0,\dots, m-1}\) where \(m\) is relatively smaller than \(n =\abs[U]\). To avoid collision each address points to linked list. A good hash function sets the keys uniformly to the \(\set{0, \dots, m-1}\). Given a good hash function and the fact that \(k\) keys have already put in the table, then on average searching for a key takes \(\bigO{1 + \alpha}\) where  \(\alpha = \frac{k}{m}\).
+To reduce the memory usage of the direct-address method of hashing , we devise a hashing function \(h : U \to \set{0,\dots, m-1}\) where \(m\) is relatively smaller than \(n =\abs[U]\).
+To avoid collision each address points to linked list. A good hash function sets the keys uniformly to the \(\set{0, \dots, m-1}\).
+Given a good hash function and the fact that \(k\) keys have already put in the table, then on average searching for a key takes \(\bigO{1 + \alpha}\) where  \(\alpha = \frac{k}{m}\).
+\section{Open hashing}
+when we want each cell to have at most one object. One possible hash function
+\begin{equation*}
+    h : U \times \set{0, \dots , m-1} \to \set{0 , \dots , m-1}, \func{h}{k,i} = k + i \mod{m}
+\end{equation*}
+or
+\begin{equation*}
+    \func{h}{k,i} = \func{h_1}{k} + c_1 i + c_2 i^2 \mod{m}
+\end{equation*}
+Suppose we have \(n\) full cells and \(m\) cells with \(n \leq m\). Then the complexity of an unsuccessful search is \(\littleO{\frac{1}{1 - \alpha}}\) where \(\alpha = \frac{n}{m}\). and a successful search is
+\(\bigO{\frac{1}{\alpha} \lg \frac{1}{1 - \alpha}}\).

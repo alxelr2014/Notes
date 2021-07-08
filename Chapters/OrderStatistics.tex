@@ -1,0 +1,15 @@
+\chapter{Order Statistics}
+finding a maximum or minimum from a \(n\) keys takes at least \(n-1\) operation. If we search minimum and maximum we can do it in several ways but the best is \(3 \ceil{\frac{n}{2}} - 2\). (dividing in pairs).
+To find \(k_\cardinalTH\) order statistics, we choose a random index and sort the array with respect to that element. If the element is the \(m_\cardinalTH\) then the complexity is given by
+\begin{equation*}
+    \func{T}{n} = \max \set{\func{T}{m}, \func{T}{n-m}} + \bigO{n}
+\end{equation*}
+Therefore the expected run time
+\begin{equation*}
+    \func{\bar{T}}{n} = \dfrac{1}{n} \sum \max \set{\func{T}{m}, \func{T}{n-m}} + \bigO{n}
+\end{equation*}
+which is linear. A deterministic a way is to find the median (or something close to it) in \(\bigO{n}\) and then apply the above algorithm. The way to do this is divide into groups 5 and find the median of each. Then find the median of the medians.
+\section{Quicksort}
+pick a random element, partition and apply the Quicksort on each part.
+\section{Ford-Johnson}
+
