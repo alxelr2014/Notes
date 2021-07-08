@@ -25,3 +25,6 @@
 \contentsline {subsection}{\numberline {6.2.2}Block identification}{16}{}%
 \contentsline {subsection}{\numberline {6.2.3}Block replacement}{16}{}%
 \contentsline {subsection}{\numberline {6.2.4}Write strategy}{16}{}%
+\contentsline {section}{\numberline {6.3}L1 Cache configuration}{16}{}%
+\contentsline {subsection}{\numberline {6.3.1}Split Cache}{16}{}%
+\contentsline {subsection}{\numberline {6.3.2}Unified}{16}{}%

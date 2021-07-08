@@ -47,3 +47,15 @@ how is a block found if it is in upper level. it is dependent on block placement
 which block should be replaced on a miss.
 \subsection{Write strategy}
 what happens in a write instruction.
+\begin{description}
+    \item[Write-through] cache and memory get updated. it is simpler to implement and no need for dirty bit. however it is slower but can be mitigated using write buffers. When allocate-on-write if it is not in the cache gets it and then update both the cache and memory which is faster. No-allocate-on-Write updates the memory if it is not in the cache.
+    \item  [Write-back] combines the writes and then write to memory. more complex, needs to implement cache coherency.
+\end{description}
+
+\section{L1 Cache configuration}
+\subsection{Split Cache}
+two indepent caches one for instructions and one for data. easier to read data and instruction at the same time.
+\subsection{Unified}
+One unified L1 Cache. One can adjust the proportion of instructions and data to fit the program and thus better the hit ratio.
+
+
