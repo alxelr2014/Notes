@@ -1,0 +1,24 @@
+\chapter{Introduction}
+\section{Supervised learning}
+Given a dataset of pair
+\begin{equation}
+    \CalD_n = \set{(x^{(1)}, y^{(1)}) , \dots , (x^{(n)}, y^{(n)})}
+\end{equation}
+we wish to establish a relationship between \(x^{(i)} \) and \(y^{(i)}\). Typically, \(x^{(i)} \in \Reals^d\) is a representation of input, \textbf{feature representation}. Based on the format of the output we can have different types of supervised learning:
+\begin{description}
+    \item [Classification] when the set of possible values of \(y^{(i)}\) is discrete (small finite set). If there two possible values then the classification problem is \textit{binary} otherwise, it is called \textit{multi-class}.
+    \item [Regression] when the set of possible values of \(y^{(i)}\) is continuous (or a large finite set). That is, \(y^{(i)} \in \Reals^k\).
+\end{description}
+
+\section{Unsupervised learning}
+Given a dataset we wish to find some patterns or structures in it. There are several types of unsupervised learning
+\begin{description}
+    \item [Density estimation] The data is i.i.d from some distribution \(\func{p_X}{x}\). The goal is to predict the probability \(\func{p_X}{x^{(n+1)}}\).
+    \item [Clustering] the goal is to find a partitioning of the sample data that groups together samples that are similiar. Clustering is sometimes used in density estimation.
+    \item [Dimensionality reduction] the goal is to re-represent the same data in \(\Reals^l\) where \(l < d\).
+\end{description}
+
+\section{Reinforcement learning}
+The goal is to learn a mapping from input values to output values without a direct supervision signal. There is no training set specified \textit{a priori}. Instead, the learning problem is framed as an agent interacting with an environment. Looking at input as our states and output as a transition between states, we can assign a reward value \(r^{(i,j)}\) to each such transition. We aim to find a policy \(\pi\) that maximizes the long-term sum or average od rewards.
+
+

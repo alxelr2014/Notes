@@ -1,0 +1,145 @@
+\chapter{Supervised learning}
+To predict, we come up with a \textbf{hypothesis}. A hypothesis is a parametrized function that maps input to output
+\begin{equation*}
+    y = \func{h}{x ; \theta} , \qquad h \in \CalH, \theta \in \Theta
+\end{equation*}
+we then wish to find the parameters \(\theta\) that matches our data well. One way to evaluate how well our hypothesis predicts is to introduce a \textbf{loss function} (or \textit{cost function}), \(\func{L}{a,a_h}\) where \(a,a_h\) are in the members output set and function assigns a value to how close our prediction \(a_h\) when the actual value is \(a\). We wish that our hypothesis to have the least loss on new data.
+\begin{equation*}
+    \func{\CalE_n}{h} = \dfrac{1}{n'} \sum_{i = n + 1}^{n + n'} \func{L}{\func{h}{x^{(i)} ; \theta }, y^{(i)}}
+\end{equation*}
+One way to do this is minimize the loss function on the training data
+\begin{equation*}
+    \func{\CalE_n}{h} = \dfrac{1}{n} \sum_{i = 1}^n \func{L}{\func{h}{x^{(i)} ; \theta }, y^{(i)}}
+\end{equation*}
+There are several types of loss function
+\begin{description}
+    \item[0-1 Loss]
+          \begin{equation*}
+              \func{L}{a,a_h} = \begin{cases}
+                  0 & \text{if} a = a_h \\
+                  1 & \text{otherwise}
+              \end{cases}
+          \end{equation*}
+    \item[Squared loss]
+          \begin{equation*}
+              \func{L}{a,a_h} = (a - a_h)^2
+          \end{equation*}
+    \item[Linear loss]
+          \begin{equation*}
+              \func{L}{a,a_h} = \abs[a - a_h]
+          \end{equation*}
+    \item[Asymmetric loss]
+\end{description}
+The model we use, typically, select \(h\) and we need to minimize the loss (or any other optimization) on the \(\theta\) so that our prediction \textit{fits} data. To determine a good \(\theta\) we need algorithms, \textit{learning algorithms}.
+\section{Linear classifiers}
+A linear classifier has the following form
+\begin{equation*}
+    \func{h}{x; \theta , \theta_0} = \func{\sign}{\theta^T x + \theta_0} \qquad \theta \in \Reals^d , \theta_0 \in \Reals
+\end{equation*}
+
+\subsection{Random linear classifier}
+\begin{algorithm}[H]
+    \DontPrintSemicolon
+    \For{$j= 1 \to k$}{
+        $\theta^{(j)} = Random(\Reals^d)$ \;
+        $\theta^{(j)}_0 = Random(\Reals)$ \;
+    }
+    $j^\ast = \argmin_{\substack{1 \leq j \leq k}} \func{\CalE}{\func{h}{x, \theta^{(j)} , \theta^{(j)}_0}}$
+
+    \Return{$(\theta^{(j^\ast)} , \theta^{(j^\ast)}_0)$}
+    \caption{ rand\_lin\_classifier $(\CalD , k )$}
+\end{algorithm}
+
+\subsection{Perceptron}
+\begin{algorithm}[H] \label{algo:perceptron}
+    \DontPrintSemicolon
+    $\theta = 0 $\;
+    $\theta_0 = 0 $\;
+    \For{$t= 1 \to T$}{
+        \For{$i = 1 \to n$}{
+            \If{ $y^{(i)} (\theta^T x^{(i)}) + \theta_0 \leq 0$}{
+                $\theta = \theta +  y^{(i)} x^{(i)}$ \;
+                $\theta_0 = \theta_0 + y^{(i)} $\;
+            }
+        }
+    }
+
+    \Return{$(\theta , \theta_0)$}
+    \caption{ perceptron $(\CalD , T )$}
+\end{algorithm}
+
+
+By adding another dimension to our data set we can simplify our prediction to pass through the origin
+\begin{align*}
+    x'       & = \begin{bmatrix}
+        x_1 & \dots & x_n & 1
+    \end{bmatrix}, \qquad \theta' = \begin{bmatrix}
+        \theta & \theta_0
+    \end{bmatrix} \\
+    \implies & \theta^{'T} x' = \theta^T x + \theta_0
+\end{align*}
+
+Therefore, one can also simplify the \Cref{algo:perceptron} to the following
+
+\begin{algorithm}[H]
+    \DontPrintSemicolon
+    $\theta = 0 $\;
+    \For{$t= 1 \to T$}{
+        \For{$i = 1 \to n$}{
+            \If{ $y^{(i)} (\theta^T x^{(i)}) + \theta_0 \leq 0$}{
+                $\theta = \theta +  y^{(i)} x^{(i)}$ \;
+            }
+        }
+    }
+
+    \Return{$\theta $}
+    \caption{ perceptron $(\CalD , T )$}
+\end{algorithm}
+A dataset \(\CalD\) is \textbf{linearly separable}-through the origin if there is some \(\theta\) such that
+\begin{equation*}
+    y^{(i)} \theta^T x^{(i)} > 0 \quad \forall i
+\end{equation*}
+
+The \textbf{margin} of a labeled data point \((x,y)\) with respect to a seperator (hyperplane) \(\theta, \theta_0\) is
+\begin{equation*}
+    y \cdot \dfrac{\theta^T x +  \theta_0}{\norm[\theta]}
+\end{equation*}
+which basically quantifies how we \(\theta\) approximates the data point \((x,y)\) in a data set \(\CalD\). Also the margin of \(\CalD\) w.r.t \(\theta, \theta_0\) is
+the minimum of all margins:
+\begin{equation*}
+    \min_i     y^{(i)} \cdot \dfrac{\theta^T x^{(i)} + \theta_0}{\norm[\theta]}
+\end{equation*}
+
+\begin{theorem} [Perceptron convergence theorem]
+    If there exists a \(\theta^\ast\) such that the margin of database with respect to \(\theta^\ast\) is greater than \(\gamma > 0\) and then norm \(\norm[x^{(i)}] \leq R\) for some \(R\) then perceptron will make at most \(\left(\dfrac{R}{\gamma} \right)^2\) updates/mistakes.
+\end{theorem}
+
+\begin{proof}
+    put a increasing lower bound on the cosine of the angle.
+\end{proof}
+
+\section{Features}
+\subsection{Transformation}
+As we saw we can transform linearly separable dataset to another linearly seperable dataset but without an offset. What happens if the original dataset is not linear seperable? For example, \textit{xor dataset}:
+\begin{equation*}
+    \CalD = \set{((-1,-1),-1), ((-1,1), 1) , ((1,-1),-1) , ((1,1),1)}
+\end{equation*}
+is not linearly seperable in 2 dimensions. A transformation that might be applicable here is \textbf{polynomial basis}. A polynomial basis transformation of order \(k\), transforms a feature \(x \in \Reals^d\) to
+\begin{equation*}
+    \func{\phi}{x} = ( x_1^{\alpha_1} \dots x_d^{\alpha_d}) , \quad \sum_{i = 1}^d \alpha_i = k , \forall i, \alpha_i \geq 0
+\end{equation*}
+which has \(\binom{k + d - 1}{d - 1}\) dimension.
+
+\subsection{Representation}
+we can represent a discrete feature as
+\begin{enumerate}
+    \item numeric
+    \item thermometer code (a vector of \(m\) booleans where \(1\dots j\) bits are on and the rest or off)
+    \item one-hot (a vector of \(m\) booleans where \(j_{\cardinalTH}\) bit is on adn the rest are off)
+    \item factoring (group information of a feature based its structure maybe)
+\end{enumerate}
+
+For numeric feature we would like to standardized as follow
+\begin{equation*}
+    \tilde{x_j}  = \dfrac{x_j - \bar{x_j}}{\sigma}
+\end{equation*}
