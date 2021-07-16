@@ -1,0 +1,15 @@
+\chapter{Logistic Regression}
+In machine learning we wish to optimize a function like \(\func{J}{\Theta}\). Usually a function in form 
+\begin{align*}
+    \func{J}{\Theta} &= \left(\dfrac{1}{n} \sum_{i = 1}^n \func{\CalL}{\func{h}{x^{(i)}; \theta} , y^{(i)}} \right) + \lambda \func{R}{\theta} \\
+    &= \CalE_n + \func{R}{\theta}
+\end{align*}
+where \(R\) is the \textbf{regularization function} and \(\lambda\) is a hyperparameter.
+
+\section{Linear logistic classifier}
+The problem of minimizing 0-1 Loss problem is NP-hard. A problem with sign is that incremental change are hard find because of the discrete nature of the function hence, to smooth out the sign function we use \text{sigmoid} function 
+\begin{equation*}
+    \func{\sigma}{x} = \dfrac{1}{1 + e^{-x}}
+\end{equation*}
+
+Equivalently, we want to make classifier that predict \(+1\) when \(\func{\simga}{\that^T x+ \theta_0} > 0.5\) and \(-1\) otherwise.
