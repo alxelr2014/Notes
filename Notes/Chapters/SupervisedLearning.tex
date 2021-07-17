@@ -14,20 +14,20 @@ One way to do this is minimize the loss function on the training data
 There are several types of loss function
 \begin{description}
     \item[0-1 Loss]
-          \begin{equation*}
-              \func{L}{a,a_h} = \begin{cases}
-                  0 & \text{if} a = a_h \\
-                  1 & \text{otherwise}
-              \end{cases}
-          \end{equation*}
+        \begin{equation*}
+            \func{L}{a,a_h} = \begin{cases}
+                0 & \text{if} a = a_h \\
+                1 & \text{otherwise}
+            \end{cases}
+        \end{equation*}
     \item[Squared loss]
-          \begin{equation*}
-              \func{L}{a,a_h} = (a - a_h)^2
-          \end{equation*}
+        \begin{equation*}
+            \func{L}{a,a_h} = (a - a_h)^2
+        \end{equation*}
     \item[Linear loss]
-          \begin{equation*}
-              \func{L}{a,a_h} = \abs[a - a_h]
-          \end{equation*}
+        \begin{equation*}
+            \func{L}{a,a_h} = \abs[a - a_h]
+        \end{equation*}
     \item[Asymmetric loss]
 \end{description}
 The model we use, typically, select \(h\) and we need to minimize the loss (or any other optimization) on the \(\theta\) so that our prediction \textit{fits} data. To determine a good \(\theta\) we need algorithms, \textit{learning algorithms}.
@@ -111,7 +111,7 @@ the minimum of all margins:
 \end{equation*}
 
 \begin{theorem} [Perceptron convergence theorem]
-    If there exists a \(\theta^\ast\) such that the margin of database with respect to \(\theta^\ast\) is greater than \(\gamma > 0\) and then norm \(\norm[x^{(i)}] \leq R\) for some \(R\) then perceptron will make at most \(\left(\dfrac{R}{\gamma} \right)^2\) updates/mistakes.
+    If there exists a vector \(\theta^\ast\) such that the margin of database with respect to \(\theta^\ast\) is greater than \(\gamma > 0\) and then norm \(\norm[x^{(i)}] \leq R\) for some \(R\) then perceptron will make at most \(\left(\dfrac{R}{\gamma} \right)^2\) updates/mistakes.
 \end{theorem}
 
 \begin{proof}

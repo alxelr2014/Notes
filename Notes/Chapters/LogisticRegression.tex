@@ -2,7 +2,7 @@
 In machine learning we wish to optimize a function like \(\func{J}{\Theta}\). Usually a function in form 
 \begin{align*}
     \func{J}{\Theta} &= \left(\dfrac{1}{n} \sum_{i = 1}^n \func{\CalL}{\func{h}{x^{(i)}; \theta} , y^{(i)}} \right) + \lambda \func{R}{\theta} \\
-    &= \CalE_n + \func{R}{\theta}
+    &= \CalE_n + \lambda \func{R}{\theta}
 \end{align*}
 where \(R\) is the \textbf{regularization function} and \(\lambda\) is a hyperparameter.
 
@@ -12,4 +12,37 @@ The problem of minimizing 0-1 Loss problem is NP-hard. A problem with sign is th
     \func{\sigma}{x} = \dfrac{1}{1 + e^{-x}}
 \end{equation*}
 
-Equivalently, we want to make classifier that predict \(+1\) when \(\func{\simga}{\that^T x+ \theta_0} > 0.5\) and \(-1\) otherwise.
+Equivalently, we want to make classifier that predict \(+1\) when \(\func{\sigma}{\theta^T x+ \theta_0} > 0.5\) and \(-1\) otherwise. 
+
+Loss on all data is inversely related to the probability that \(\theta , \theta_0\) assign to the data. Assuming that points in data set are independent.
+
+\begin{align*}
+    g^{(i)} &=  \func{\sigma}{\theta^T x + \theta_0} \\
+    p^{(i)} &= \begin{cases}
+        g^{(i)} & \text{if} \quad y^{(i)} = 1\\
+        1 - g^{(i)} & \text{if} \quad y^{(i)} = 0\\
+    \end{cases} 
+\end{align*}
+and we wish to maximize the probability
+\begin{align*}
+    \prod_{i = 1}^n p^{(i)} &= \prod_{i = 1}^n (g^{(i)})^{y^{(i)}} ( 1 - g^{(i)})^{(1 - y^{(i)})} \\
+    \intertext{Using the log-likelihood}
+    \implies \func{\CalL_{LL}}{p} &= \sum_{i = 1}^n y^{(i)} \func{\log}{g^{(i)}} + (1 - y^{(i)}) \func{\log}{1 - g^{(i)}} 
+\end{align*}
+\section{Gradient descent}
+\begin{algorithm}[H]
+    \DontPrintSemicolon
+    $\theta^{(0)} = \theta_{\mathrm{init}} $\;
+    $t = 0 $\;
+    
+    \Repeat{$\abs[\func{f}{\theta^{(t)}} - \func{f}{\theta^{(t - 1)}}] < \epsilon $}{
+        $ \theta^{(t)} = \theta^{(t-1)} - \eta \func{\nabla f}{\theta^{(t-1)}} $\;
+    }
+
+    \Return{$\theta $}
+    \caption{ gradient descent $(f, \nabla f, \theta_{\mathrm{init}} , \eta , \epsilon )$}
+\end{algorithm}
+
+\begin{theorem}
+    If \(f\) is convex, for any desired accuracy \(\epsilon\) there is some \(\eta\) such that gradient descent will converge to \(\theta\) within \(\epsilon\) of the optimum.
+\end{theorem}
