@@ -1,17 +1,18 @@
 \chapter{Introduction}
+Some kinds of learning include;
 \section{Supervised learning}
 Given a dataset of pair
 \begin{equation}
     \CalD_n = \set{(x^{(1)}, y^{(1)}) , \dots , (x^{(n)}, y^{(n)})}
 \end{equation}
-we wish to establish a relationship between \(x^{(i)} \) and \(y^{(i)}\). Typically, \(x^{(i)} \in \Reals^d\) is a representation of input, \textbf{feature representation}. Based on the format of the output we can have different types of supervised learning:
+we wish to establish a relationship between \(x^{(i)} \) and \(y^{(i)}\). Typically, \(x^{(i)} \in \Reals^d\) is a representation of input, called \textbf{feature representation}. Based on the format of the output we can have different types of supervised learning:
 \begin{description}
     \item [Classification] when the set of possible values of \(y^{(i)}\) is discrete (small finite set). If there two possible values then the classification problem is \textit{binary} otherwise, it is called \textit{multi-class}.
     \item [Regression] when the set of possible values of \(y^{(i)}\) is continuous (or a large finite set). That is, \(y^{(i)} \in \Reals^k\).
 \end{description}
 
 \section{Unsupervised learning}
-Given a dataset we wish to find some patterns or structures in it. There are several types of unsupervised learning
+Given a dataset we wish to find some patterns or structures in it. There are several types of unsupervised learning:
 \begin{description}
     \item [Density estimation] The data is i.i.d from some distribution \(\func{p_X}{x}\). The goal is to predict the probability \(\func{p_X}{x^{(n+1)}}\).
     \item [Clustering] the goal is to find a partitioning of the sample data that groups together samples that are similiar. Clustering is sometimes used in density estimation.

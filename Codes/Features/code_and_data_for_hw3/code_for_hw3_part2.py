@@ -187,11 +187,11 @@ def positive(x, th, th0):
 def score(data, labels, th, th0):
     return np.sum(positive(data, th, th0) == labels)
 
-def eval_classifier(learner, data_train, labels_train, data_test, labels_test):
-    th, th0 = learner(data_train, labels_train)
+def eval_classifier(learner, data_train, labels_train, data_test, labels_test , params = {}):
+    th, th0 = learner(data_train, labels_train, params)
     return score(data_test, labels_test, th, th0)/data_test.shape[1]
 
-def xval_learning_alg(learner, data, labels, k):
+def xval_learning_alg(learner, data, labels, k, params ={}):
     _, n = data.shape
     idx = list(range(n))
     np.random.seed(0)
@@ -208,7 +208,7 @@ def xval_learning_alg(learner, data, labels, k):
         data_test = np.array(s_data[i])
         labels_test = np.array(s_labels[i])
         score_sum += eval_classifier(learner, data_train, labels_train,
-                                              data_test, labels_test)
+                                              data_test, labels_test , params)
     return score_sum/k
 
 ######################################################################
