@@ -57,14 +57,28 @@ Loss on all data is inversely related to the probability that \((\theta , \theta
         1 - g^{(i)} & \text{if} \quad y^{(i)} = 0 \\
     \end{cases}
 \end{align*}
-and we wish to maximize the probability
-\begin{align*}
-    \func{p}{\Theta ; \CalD_n} = \prod_{i = 1}^n p^{(i)}       & = \prod_{i = 1}^n (g^{(i)})^{y^{(i)}} ( 1 - g^{(i)})^{(1 - y^{(i)})}                   \\
-    \intertext{Using the log-likelihood}
-    \implies \func{\CalL_{LL}}{p} & = \sum_{i = 1}^n \func{\CalL_{LL}}{g^{(i)} , y^{(i)}}\\
-    \intertext{then our loss function would be}
-    \func{L}{\func{h}{x^{(i)}, \Theta} , y^{(i)}} &= - \func{\CalL_{LL}}{g^{(i)} , y^{(i)}} =\func{\CalL_{NLL}}{g^{(i)} , y^{(i)}} 
-\end{align*}
+and we wish to maximize the probability (\(\Theta\) here means \((\theta, \theta_0)\)):
+\begin{equation*}
+    \func{p}{\Theta ; \CalD_n} = \prod_{i = 1}^n p^{(i)} = \prod_{i = 1}^n (g^{(i)})^{y^{(i)}} ( 1 - g^{(i)})^{(1 - y^{(i)})}                   \\
+\end{equation*}
+
+Using the log-likelihood
+\begin{equation*}
+    \implies \func{\CalL_{LL}}{p} = \sum_{i = 1}^n \func{\CalL_{LL}}{g^{(i)} , y^{(i)}} =\sum_{i = 1}^n  y^{(i)} \func{\ln}{g^{(i)}} + \left(1 - y^{(i)} \right) \func{\ln}{ 1 - g^{(i)}} 
+\end{equation*}
+then our loss function would be
+\begin{equation*}
+    \func{L}{\func{h}{x^{(i)}, \Theta} , y^{(i)}} = - \func{\CalL_{LL}}{g^{(i)} , y^{(i)}} =\func{\CalL_{NLL}}{g^{(i)} , y^{(i)}} 
+\end{equation*}
+
+hence we wish to minimize the 
+
+\begin{equation*}
+    \func{J}{\Theta}  = \left(\dfrac{1}{n} \sum_{i = 1}^n \func{\CalL_{NLL}}{ \func{\sigma}{\theta^T x^{(i)} + \theta_0} , y^{(i)}} \right) + \lambda \norm[\theta]^2
+\end{equation*}
+
+note that we didn't include \(\theta_0\) in the regularizer as we don't want to punish large \(\theta_0\). 
+
 \section{Gradient descent}
 \begin{algorithm}[H]
     \DontPrintSemicolon
@@ -82,3 +96,109 @@ and we wish to maximize the probability
 \begin{theorem}
     If \(f\) is convex, for any desired accuracy \(\epsilon\) there is some \(\eta\) such that gradient descent will converge to \(\theta\) within \(\epsilon\) of the optimum.
 \end{theorem}
+
+Let derive the closed form of gradient descent for the logistic regression \(J\) function. 
+\begin{equation*}
+    \nabla \func{J}{\Theta} = \left(\dfrac{1}{n} \sum_{i = 1}^n \nabla \func{\CalL_{NLL}}{ \func{\sigma}{\theta^T x^{(i)} + \theta_0} , y^{(i)}} \right) + \lambda \nabla \norm[\theta]^2
+\end{equation*}
+we have that 
+\begin{align*}
+    \PDiff{\func{\CalL_{NLL}}{g^{(i)} , y^{(i)}}}{\theta_j} &= - \dfrac{y^{(i)}}{g^{(i)}} \PDiff{g^{i}}{\theta_j} + \dfrac{1- y^{(i)}}{1 - g^{(i)}} \PDiff{g^{i}}{\theta_j}\\
+    &= \dfrac{g^{(i)} - y^{(i)}}{g^{i} \left( 1 - g^{(i)} \right)} \ODiff{\sigma(z)}{z} \PDiff{z}{\theta_j} \\
+    \intertext{for simplicity assume \(x^{(i)}_0 = 1\)}
+    &= \dfrac{g^{(i)} - y^{(i)}}{g^{i} \left( 1 - g^{(i)} \right)} \left(g^{(i)} - \left(g^{(i)}\right)^2 \right) x^{(i)}_j\\
+    &= \left(g^{(i)} - y^{(i)}\right) x^{(i)}_j \\
+    \implies \nabla \func{\CalL_{NLL}}{g^{(i)} , y^{(i)}} &=\left(g^{(i)} - y^{(i)}\right) x^{(i)} \\
+    \intertext{also for the regularizer}
+    \PDiff{\norm[\theta]^2}{\theta_j} &= \begin{cases}
+        2 \theta_j & j \neq 0\\
+        0 & j = 0
+    \end{cases}
+\end{align*}
+
+Therefore, 
+
+\begin{align*}
+    \nabla_{\theta} \func{J}{\Theta} &= \left(\dfrac{1}{n} \sum_{i = 1}^n \left(g^{(i)} - y^{(i)}\right) x^{(i)} \right) + 2\lambda \theta\\
+    \nabla_{\theta_0} \func{J}{\Theta} &= \dfrac{1}{n} \sum_{i = 1}^n g^{(i)} - y^{(i)} 
+\end{align*}
+
+\subsection{Stochastic gradient descent}
+Suppose we want to minimize \(\func{f}{\Theta}\) which can be written as a sum of some \(\func{f_i}{\Theta}\)
+\begin{equation*}
+    \func{f}{\Theta} = \sum_{i = 1}^n \func{f_i}{\Theta}
+\end{equation*}
+Instead of adding up the gradient for each part every iteration, we can choose one of the functions and apply the gradient descent for that function only. We expect that running this algorithm for long enough gives us the optimum solution just like the gradient descent.
+
+\begin{algorithm}[H]
+    \DontPrintSemicolon
+    $\Theta^{(0)} = \Theta_{\mathrm{init}} $\;
+    \For{$t = 1 \to T $}{
+        $i = $Random$(\set{1, \dots , n})$\; 
+        $ \Theta^{(t)} = \Theta^{(t-1)} - \func{\eta}{t} \func{\nabla f_i}{\theta^{(t-1)}} $\;
+    }
+
+    \Return{$\theta $}
+    \caption{stochastic gradient descent $(f, \nabla f_1 , \dots,  \nabla f_n, \Theta_{\mathrm{init}} , \eta , T )$}
+\end{algorithm}
+
+\begin{theorem}
+    If \(f\) is convex and \(\func{\eta}{t}\) is sequence satisfying 
+    \begin{equation*}
+        \sum_{i= 1}^n \func{\eta}{t} = \infty \quad \mathrm{and} \quad \sum_{i= 1}^n \func{\eta^2}{t} < \infty
+    \end{equation*}
+    Then SGD converges almost sure to the optimal \(\Theta\).
+\end{theorem}
+
+\section{Regression}
+In regression our output is a real number as oppose to a discrete value. Typically, we use \textit{squared error} for loss function.
+
+\begin{equation*}
+    \func{L}{g^{(i)}, y^{(i)}} = \left(g^{(i)} - y^{(i)}\right)^2
+\end{equation*}
+
+and hence our \(J\) function will be the \textit{mean squared error} 
+
+\begin{equation*}
+    \func{J}{\Theta} = \dfrac{1}{n} \sum_{i = 1}^n \left( g^{(i)} - y^{(i)} \right)^2 + \lambda \func{R}{\Theta}
+\end{equation*}
+
+Discarding \(\theta_0\) and the regularizer term and assuming our hypothesis \(h\) is a linear classifer \_ that is \(g^{(i)} = \func{h}{x^{i}; \theta} = \theta^T x\)\_, we can easily arrive at a closed form optimal solution. To do this consider the following definitions 
+\begin{equation*}
+    X = \begin{bmatrix}
+        x^{(1)}_1 & \dots & x^{(1)}_d \\
+        \vdots & \ddots & \vdots\\
+        x^{(n)}_1 & \dots & x^{(n)}_d
+    \end{bmatrix} \qquad Y = \begin{bmatrix}
+        y^{(1)}\\
+        \vdots \\
+        y^{(n)} 
+    \end{bmatrix}
+\end{equation*}
+
+then we can write \(\func{J}{\theta}\) as
+
+\begin{equation*}
+    \func{J}{\theta} = \frac{1}{n} (X\theta - Y)^T (X\theta-Y)
+\end{equation*}
+taking the gradient gives 
+\begin{align*}
+    \nabla \func{J}{\theta} &= \dfrac{2}{n} X^T (X\theta - Y) = 0\\
+    \implies  X^T X\theta &= X^T Y \implies \theta = \left(X^T X\right)^{-1} X^T Y
+\end{align*}
+Assuming the invertibility of \(X^TX\), this minimizes the \(J\) function. However, we will run into the problem of \textit{overfitting}. By adding the regularizer back we can solve the problem of invertibility and overfitting at the same time. Consider the following \(J_{\mathrm{ridge}}\) function, 
+\begin{align*}
+    \func{J_{\mathrm{ridge}}}{\theta} &= \frac{1}{n} (X\theta - Y)^T (X\theta-Y) + \lambda \theta^T \theta \\
+     \implies \nabla \func{J_{\mathrm{ridge}}}{\theta} &= \dfrac{2}{n} X^T (X\theta - Y) + 2\lambda \theta  = 0\\ 
+     \implies  (X^TX + n \lambda I) \theta &= X^T Y \implies \theta  = (X^TX + n \lambda I )^{-1} X^T Y
+\end{align*}
+
+A faster way of computing the optimal solution is using the SGD or normal GD which since the \(J_{\mathrm{ridge}}\) is convex has only one minimum.
+
+\section{Regularizers}
+\subsection{Errors}
+There are two kinds of way that a hypothesis might contribute to the error on test data.
+\begin{description}
+    \item [Structural error] There is no hypothesis in our class that performs well with the training data.
+    \item [Estimation error] The training data was not a good representaion of the test data and hence our hypothesis is not as good.
+\end{description}
