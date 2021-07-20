@@ -10,3 +10,5 @@
 *.thm
 *.toc
 *.xdv
+*.md5
+*.auxlock

@@ -1,40 +1,76 @@
 \chapter{Logistic Regression}
-In machine learning we wish to optimize a function like \(\func{J}{\Theta}\). Usually a function in form 
+In machine learning we wish to optimize a function like \(\func{J}{\theta}\). Usually a function in form
 \begin{align*}
-    \func{J}{\Theta} &= \left(\dfrac{1}{n} \sum_{i = 1}^n \func{\CalL}{\func{h}{x^{(i)}; \theta} , y^{(i)}} \right) + \lambda \func{R}{\theta} \\
-    &= \CalE_n + \lambda \func{R}{\theta}
+    \func{J}{\theta} & = \left(\dfrac{1}{n} \sum_{i = 1}^n \func{L}{\func{h}{x^{(i)}; \theta} , y^{(i)}} \right) + \lambda \func{R}{\theta} \\
+                     & = \CalE_n + \lambda \func{R}{\theta}
 \end{align*}
-where \(R\) is the \textbf{regularization function} and \(\lambda\) is a hyperparameter.
+where \(R\) is the \textbf{regularization function} and \(\lambda\) is a hyperparameter. A common regularizer is
+\begin{equation*}
+    \func{R}{\theta} = \norm[\theta - \theta_{\mathrm{prior}}]^2
+\end{equation*}
+where \(\theta_{\mathrm{prior}}\) is the value that we want \(\theta\) to be close to.
 
 \section{Linear logistic classifier}
-The problem of minimizing 0-1 Loss problem is NP-hard. A problem with sign is that incremental change are hard find because of the discrete nature of the function hence, to smooth out the sign function we use \text{sigmoid} function 
+The problem of minimizing 0-1 Loss problem is NP-hard. A problem with sign is that incremental change are hard to find because of the discrete nature of the function hence, to smooth out the sign function we use \text{sigmoid} function
 \begin{equation*}
     \func{\sigma}{x} = \dfrac{1}{1 + e^{-x}}
 \end{equation*}
+\tikzsetnextfilename{Chapters/graphics/sigmoid/sigmoid_function}
+\begin{center}\begin{tikzpicture}
+        \begin{axis}[
+                axis lines = center,
+                xlabel = \(x\),
+                ylabel = {\(\func{\sigma}{x}\)},
+                xmin = -5, xmax = 5,
+                ymin = -0.5 , ymax = 1.5,
+                xtick ={-5,0,5},
+                ytick = {-0.5,0,0.5,1}
+            ]
+            \addplot [
+                line width = 1.5,
+                domain=-5:5,
+                samples=100,
+                color=black,
+            ]
+            {1/(1 + e^(-x))};
+            \definecolor{grey}{rgb}{0.635, 0.674, 0.690}   
+            \addplot [
+                line width = 0.8,
+                domain= -5:5,
+                samples = 100,
+                color = grey,
+                dashed, 
+                ]{1.0};
+        \end{axis}
+\end{tikzpicture}
+\end{center}
 
-Equivalently, we want to make classifier that predict \(+1\) when \(\func{\sigma}{\theta^T x+ \theta_0} > 0.5\) and \(-1\) otherwise. 
 
-Loss on all data is inversely related to the probability that \(\theta , \theta_0\) assign to the data. Assuming that points in data set are independent.
+Equivalently, we want to make classifier that predict \(+1\) when \(\func{\sigma}{\theta^T x+ \theta_0} > p = 0.5\) and \(-1\) otherwise. The value \(p\) is called the \textbf{prediction threshold}
+
+Loss on all data is inversely related to the probability that \((\theta , \theta_0)\) assigns to the data. Assuming that points in data set are independent.
 
 \begin{align*}
-    g^{(i)} &=  \func{\sigma}{\theta^T x + \theta_0} \\
-    p^{(i)} &= \begin{cases}
-        g^{(i)} & \text{if} \quad y^{(i)} = 1\\
-        1 - g^{(i)} & \text{if} \quad y^{(i)} = 0\\
-    \end{cases} 
+    g^{(i)} & =  \func{\sigma}{\theta^T x + \theta_0} \\
+    p^{(i)} & = \begin{cases}
+        g^{(i)}     & \text{if} \quad y^{(i)} = 1 \\
+        1 - g^{(i)} & \text{if} \quad y^{(i)} = 0 \\
+    \end{cases}
 \end{align*}
 and we wish to maximize the probability
 \begin{align*}
-    \prod_{i = 1}^n p^{(i)} &= \prod_{i = 1}^n (g^{(i)})^{y^{(i)}} ( 1 - g^{(i)})^{(1 - y^{(i)})} \\
+    \func{p}{\Theta ; \CalD_n} = \prod_{i = 1}^n p^{(i)}       & = \prod_{i = 1}^n (g^{(i)})^{y^{(i)}} ( 1 - g^{(i)})^{(1 - y^{(i)})}                   \\
     \intertext{Using the log-likelihood}
-    \implies \func{\CalL_{LL}}{p} &= \sum_{i = 1}^n y^{(i)} \func{\log}{g^{(i)}} + (1 - y^{(i)}) \func{\log}{1 - g^{(i)}} 
+    \implies \func{\CalL_{LL}}{p} & = \sum_{i = 1}^n \func{\CalL_{LL}}{g^{(i)} , y^{(i)}}\\
+    \intertext{then our loss function would be}
+    \func{L}{\func{h}{x^{(i)}, \Theta} , y^{(i)}} &= - \func{\CalL_{LL}}{g^{(i)} , y^{(i)}} =\func{\CalL_{NLL}}{g^{(i)} , y^{(i)}} 
 \end{align*}
 \section{Gradient descent}
 \begin{algorithm}[H]
     \DontPrintSemicolon
     $\theta^{(0)} = \theta_{\mathrm{init}} $\;
     $t = 0 $\;
-    
+
     \Repeat{$\abs[\func{f}{\theta^{(t)}} - \func{f}{\theta^{(t - 1)}}] < \epsilon $}{
         $ \theta^{(t)} = \theta^{(t-1)} - \eta \func{\nabla f}{\theta^{(t-1)}} $\;
     }

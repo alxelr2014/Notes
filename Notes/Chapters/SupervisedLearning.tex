@@ -181,9 +181,15 @@ the minimum of all margins:
 
 \section{Features}
 \subsection{Transformation}
-As we saw we can transform linearly separable dataset to another linearly seperable dataset but without an offset. What happens if the original dataset is not linear seperable? For example, \textit{xor dataset}:
+As we saw we can transform linearly separable dataset to another linearly seperable dataset but without an offset. What happens if the original dataset is not linearly seperable? For example, \textit{xor dataset}:
+\begin{figure*}[!ht]
+    \centering
+    \includegraphics{Chapters/graphics/xor_dataset.png}
+    \caption{XOR dataset}
+\end{figure*}
+
 \begin{equation*}
-    \CalD = \set{((-1,-1),-1), ((-1,1), 1) , ((1,-1),-1) , ((1,1),1)}
+    \CalD = \set{((-1,-1),1), ((-1,1), -1) , ((1,-1),-1) , ((1,1),1)}
 \end{equation*}
 is not linearly seperable in 2 dimensions. A transformation that might be applicable here is \textbf{polynomial basis}. A polynomial basis transformation of order \(k\), transforms a feature \(x \in \Reals^d\) to
 \begin{equation*}
@@ -191,6 +197,12 @@ is not linearly seperable in 2 dimensions. A transformation that might be applic
 \end{equation*}
 which has \(\binom{k + d }{d }\) dimension.
 
+For example, the transformation \(\func{\phi}{x_1, x_2} = (x_1,x_2,x_1x_2)\) makes the xor dateset linearly seperable-through the origin.
+\begin{figure*}[!ht]
+    \centering
+    \includegraphics{Chapters/graphics/xor_3d.png}
+    \caption{Transformed XOR dataset}
+\end{figure*}
 \subsection{Representation}
 we can represent a discrete feature as
 \begin{enumerate}
