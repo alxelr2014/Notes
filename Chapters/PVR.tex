@@ -21,7 +21,7 @@ A \textbf{numeraire} date should be picked, typically \(t = 0\), then cashflows 
 \end{equation*}
 then the \textbf{net present value} is
 \begin{equation*}
-    \func{V_0}{\text{CF}_0 , \text{CF}_{1} , \dots} = \text{CF}_1 \left(\dfrac{\$_1}{\$_0} \right)\times \text{CF}_1  +  \dots
+    \func{V_0}{\text{CF}_0 , \text{CF}_{1} , \dots} = \text{CF}_0 +  \left(\dfrac{\$_1}{\$_0} \right)\times \text{CF}_1  +  \dots
 \end{equation*}
 \begin{enumerate}
     \item when there is up front investment \(\text{CF}_0\) is negative.
@@ -36,3 +36,56 @@ then the \textbf{net present value} is
 \end{align*}
 
 where \(r\) is \textbf{opportunity cost of capital} and \(\frac{\$_t}{\$_0}\) is called the \textbf{discount factor}.
+
+\section{Perpetuity}
+It is a paper that pays \(C\) cashflow annually till the end of time. The present value of a perpetuity is calculated as follow, assuming the interest rate is constant \(r\) and the perpetuity pays from the first year:
+\begin{align*}
+    \mathrm{PV} &= \dfrac{C}{r + 1} + \dots + \dfrac{C}{(r + 1)^n} + \dots \\
+    &= \dfrac{C}{r + 1} \dfrac{1}{1 - \frac{1}{r + 1}} = \dfrac{C}{r + 1} \dfrac{r + 1}{r} \\
+    &= \dfrac{C}{r}
+\end{align*}
+
+Now suppose \(C\) grows with grows rate \(g\), then the present value is 
+
+\begin{align*}
+    \mathrm{PV} &= \dfrac{C}{r + 1}  + \dfrac{C (1+g)}{(1+r)^2}+ \dots + \dfrac{C (1 + g)^{n-1}}{(r + 1)^n} + \dots \\
+    &= \dfrac{C}{r + 1} \dfrac{1}{1 - \frac{1 + g}{r + 1}} = \dfrac{C}{r + 1} \dfrac{r + 1}{r - g} \\
+    &= \dfrac{C}{r - g} , \quad r > g
+\end{align*}
+
+\section{Annuity}
+It is a paper that pays a cashflow \(C\) for a period \(T\). Assuming the assumption made above, for the present value of annuity is 
+
+\begin{align*}
+    \mathrm{PV} &= \dfrac{C}{r + 1} + \dots + \dfrac{C}{(r + 1)^T}\\
+    &= \dfrac{C}{r + 1} \dfrac{1 - \dfrac{1}{(r + 1)^T}}{1 - \frac{1}{r + 1}} \\
+    &= \dfrac{C}{r} - \dfrac{C}{r (1 + r)^T}
+\end{align*}
+
+It is like holding out to perpetuity for \(T\) days and then selling. Equivalently, buy a perpetuity today and give a perpetuity at time \(T\). 
+
+\section{Compound}
+Let \(r\) be the \textbf{Annual Percentage Rate} amd \(n\) be the periods of compounding. Then, out of convention, \(\frac{r}{n}\) is the per-period rate for each period and thus the \textbf{Effective Annual Rate} is 
+\begin{equation*}
+    r_{\mathrm{EAR}} = \left( 1+ \dfrac{r}{n} \right)^n - 1
+\end{equation*}
+Also, continuous compounding happens when you let \(n \to \infty\) which means 
+\begin{equation*}
+    r_{\mathrm{EAR}} =e^r - 1
+\end{equation*}
+
+\section{Inflation}
+ measures the purchasing value of money. Different from time-value of money which says that money will be worth less over time. Hence, inflation also depends on the price of goods. Suppose you have wealth \(W_0\) today and \(W_t\) at time \(t\) and the inflation changes at a constant rate of \(\pi\). Then 
+ \begin{equation*}
+    \left(1+ r_{\mathrm{nominal}} \right)^k = \dfrac{W_t}{W_0}
+ \end{equation*}
+
+ is the \textbf{nominal} return, which tells how much your money changed in this period as a number. But to figure out how much it actually changed, that is how much more/less you can consume, we have 
+ \begin{align*}
+    \left( 1+ r_{\mathrm{real}} \right)^k &= \dfrac{W_t}{W_0} \dfrac{1}{(1 + \pi)^k} \\
+    &= \dfrac{(1+ r_{\mathrm{nominal}})^k}{(1 + \pi)^k} \\
+    \implies  r_{\mathrm{real}} &= \dfrac{1+ r_{\mathrm{nominal}}}{1 + \pi} - 1 \\
+    & \simeq r_{\mathrm{nominal}} - \pi
+ \end{align*}
+ 
+ which is the \textbf{real} return. 
