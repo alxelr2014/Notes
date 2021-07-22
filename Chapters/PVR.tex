@@ -1,0 +1,38 @@
+\chapter{Present value relations}
+\section{Cashflows and Assets}
+Cashflow is the flow of cash :). Asset is a sequence of cashflows.
+\begin{equation*}
+    \text{Asset}_t = \set{\text{CF}_t , \text{CF}_{t+1} , \dots }
+\end{equation*}
+The value of an asset is a function of its cashflows.
+\begin{equation*}
+    \text{Value of asset}_t = \func{V_t}{\text{CF}_t , \text{CF}_{t+1} , \dots}
+\end{equation*}
+
+There are two distinct cases we valuating an assets
+\begin{itemize}
+    \item with no uncertainty; all the cashflows are known
+    \item with uncertainty;
+\end{itemize}
+\subsection{No uncertainty}
+A \textbf{numeraire} date should be picked, typically \(t = 0\), then cashflows are converted to \textbf{present value}
+\begin{equation*}
+    \func{V_0}{\text{CF}_1 , \text{CF}_{2} , \dots} = \left(\dfrac{\$_1}{\$_0} \right)\times \text{CF}_1  + \left(\dfrac{\$_2}{\$_0} \right)\times \text{CF}_2 + \dots
+\end{equation*}
+then the \textbf{net present value} is
+\begin{equation*}
+    \func{V_0}{\text{CF}_0 , \text{CF}_{1} , \dots} = \text{CF}_1 \left(\dfrac{\$_1}{\$_0} \right)\times \text{CF}_1  +  \dots
+\end{equation*}
+\begin{enumerate}
+    \item when there is up front investment \(\text{CF}_0\) is negative.
+    \item Note that any \(\text{CF}_t\) can be negative (future costs).
+\end{enumerate}
+
+\begin{align*}
+    \$_0 & = (1 + r) \$_1   \\
+    \$_0 & = (1 + r)^2 \$_2 \\
+         & \vdots           \\
+    \$_0 & = (1 + r)^T \$_T \\
+\end{align*}
+
+where \(r\) is \textbf{opportunity cost of capital} and \(\frac{\$_t}{\$_0}\) is called the \textbf{discount factor}.

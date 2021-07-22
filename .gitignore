@@ -1,0 +1,14 @@
+*.idea
+*__pycache__
+*.xml
+*.log
+*.aux
+*.fdb_latexmk
+*.fls
+*.files
+*.synctex.gz
+*.thm
+*.toc
+*.xdv
+*.md5
+*.auxlock
