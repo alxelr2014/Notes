@@ -200,5 +200,14 @@ A faster way of computing the optimal solution is using the SGD or normal GD whi
 There are two kinds of way that a hypothesis might contribute to the error on test data.
 \begin{description}
     \item [Structural error] There is no hypothesis in our class that performs well with the training data.
+    \begin{equation*}
+        \min \expected{(y - w^Tx)^2}
+    \end{equation*}
     \item [Estimation error] The training data was not a good representaion of the test data and hence our hypothesis is not as good.
+    \begin{align*}
+        \min &\; \expected{(w^{\ast T} x - \hat{w}^T x)^2}\\
+        w^\ast &= \argmin \expected{(y - w^Tx)^2}\\
+        \hat{w} &= \argmin \sum_{i= 1}^{n} (y^{(i)} - w^T x^{(i)})^2 
+    \end{align*}
+    \item [Expected error] is the sum of the structural error and estimation error.
 \end{description}

@@ -1,0 +1,108 @@
+\chapter{Neural Network}
+\section{Introduction}
+A neural network consists of basic units called \textbf{neuron} - it is also called a \textit{unit} or a \textit{node}. A node takes an input \(x \in \Reals^m\) and outputs a single value \(a \in \Reals\) as such 
+\begin{equation*}
+    a = \func{f}{\sum_{i = 1}^m x_iw_i + w_0}
+\end{equation*}
+
+where \(w = (w_1 , \dots , w_m)\) are the \textit{weights}, \(w_0\) is the \textit{offset}, and \(f : \Reals \to \Reals\) is called the \textit{activation function} which is not necessarily linear. The pair \((w,w_0)\) are the parameters that we need to tune to minimize the objective function 
+\begin{equation*}
+    \func{J}{w, w_0} = \sum_{i = 1}^n \func{L}{\func{NN}{x^{(i)}; w,w_0}, y^{(i)}}
+\end{equation*}
+
+We will consider the \textit{feed-forward} networks where the ouptu does not feed back in to input. We will organize the network into \textit{layers} of parallel nodes. Thus, a layer takes an input \(x \in \Reals^m\) and outputs \(A \in \Reals^n\) as such 
+\begin{equation*}
+    A = \func{f}{Z} = \func{f}{W^T x + W_0}
+\end{equation*}
+where \(W \in \Matrices[\Reals]{m}{n}\) is the weight matrix, \(W_0 \in \Reals^n\) is the offset vector, and is the \textit{pre-activation} vector. Note that, the activation function is applied element-wise. Lets denote the weight matrix, offset vector, pre-activation vector, and output of \(l_\cardinalTH\) layers as \(W^{l}, W_0^l, Z^l, A^l\) and let \(A^0 = X\) then 
+\begin{equation*}
+    A^l = \func{f}{Z^l} = \func{f}{W^{l^T} A^{l-1} + W_0^l}
+\end{equation*}
+
+\subsection{Activation function}
+It is obvious that letting \(f\) be linear function makes \(A^1\) a linear function of \(X = A^0\) and hence \(A^L\), the last layer, will a linear function of \(X\) which is equivalent to a linear classification or linear regression problem. Some good non-linear functions are 
+\begin{description}
+    \item[Step function] 
+    \begin{equation*}
+        \func{\mathrm{step}}{x} = \begin{cases}
+            1 & x > 0 \\
+            0 & x \leq 0
+        \end{cases}
+    \end{equation*} 
+    \item[Rectified linear unit]
+    \begin{equation*}
+        \func{\mathrm{ReLU}}{x} = \func{\max}{0 ,x} = \begin{cases}
+            x & x > 0 \\
+            0 & x \leq 0
+        \end{cases} 
+    \end{equation*} 
+    \item[Sigmoid]
+    \begin{equation*}
+        \func{\sigma}{x} = \dfrac{1}{1 + e^{-x}}
+    \end{equation*} 
+    \item[Hyperbolic tangent]
+    \begin{equation*}
+        \func{\tanh}{x} = \dfrac{e^x - e^{-x}}{e^x + e^{-x}} = 2 \func{\sigma}{2x}  -1
+    \end{equation*} 
+    \item[Softmax function]  is a function of \(\Reals^n \to \Reals^n\) with output \(Y \in [0,1]^n\)  that has the property \(\sum Y_i = 1\) 
+    \begin{equation*}
+        \func{\mathrm{softmax}}{X} = \begin{bmatrix}
+            \frac{\func{\exp \;}{x_1}}{\sum \func{\exp \;}{x_i}} \\
+            \vdots \\
+            \frac{\func{\exp \;}{x_n}}{\sum \func{\exp \;}{x_i}}
+        \end{bmatrix}
+    \end{equation*} 
+\end{description}
+ReLU is common in internal, \textit{hidden}, layers, sigmoid is used in the last layer for binary classification and softmax is used for multiclass classification.
+\subsection{Error back-propagation}
+We wish to use the gradient descent methods to minimize our objective function. To this, we need to compute the \(\nabla_W \func{L}{\func{NN}{x ; W},y}\) where \(W\) represents the all weights \(W^l , W^l_0\) for \(l \in \set{1, \dots , L}\).
+\begin{align*}
+    \PDiff{L}{W^l} &= A^{l - 1} \left(\PDiff{L}{Z^l}\right)^T\\
+    \PDiff{L}{Z^l} &= \PDiff{L}{Z^{l+1}} \PDiff{Z^{l+ 1}}{A^l} \PDiff{A^l}{Z^l}\\
+    \PDiff{L}{Z^L} &= \PDiff{L}{A^L} \PDiff{A^L}{Z^L}     
+\end{align*}
+
+\begin{description}
+    \item [\(\PDiff{L}{A^L}\)] is \(n^L \times 1\) and depends on particular loss function.
+    \item [\(\PDiff{Z^{l}}{A^{l - 1}}\)] is \(m^l \times n^l\) and is just \(W^l\).
+    \item [\(\PDiff{A^l}{Z^l}\)] is \(n^l \times n^l\) is equal to \(\left[\PDiff{A^l_i}{Z^l_j}\right]\) and therefore it is a diagonal matrix whose elements are equal to \(f^{l'}(Z^l_i)\).
+\end{description}
+
+\section{Training}
+Using the SGD, with initial values that are small enough - since the gradient of activation function tends to zero at larger values- we have
+
+\begin{algorithm}[H]
+    \DontPrintSemicolon
+
+    \For{$l = 1 \to L$}{
+        $W^l \sim \func{\NormalDist}{0, \left(\frac{1}{m^l} \right)^2} $\;
+        $W_0^l \sim \func{\NormalDist}{0, 1} $\;
+    }
+    \For{$t = 1 \to T$}
+    {
+        $i = $ Random$(\set{1, \dots ,n })$\;
+        $A^0 = x^{(i)} $\;
+        
+        \For(\tcp*[f]{forward feed} ){$l = 1 \to L$}{
+            $Z^l = W^{l^T}A^{l -1} + W_0^l $\;
+            $A^l = \func{f^l}{Z^l} $\;
+        }
+        loss = $\func{L}{A^L, y^{(i)}}$ \;
+        $\PDiff{L}{A^L} = \PDiff{L}{A^L}$(loss)\;
+       
+        \For(\tcp*[f]{error back propagation}) {$l = L \to 1 $}{
+            \If{$l = L$}{
+                $\PDiff{L}{Z^l} = \PDiff{L}{A^L} \PDiff{A^L}{Z^L}$ \;
+            }
+            \Else{
+                $\PDiff{L}{Z^l} = \PDiff{L}{Z^{l+ 1}} W^{l+1} \PDiff{A^l}{Z^l}$ \;
+            }
+            $\PDiff{L}{W^l} = \PDiff{L}{Z^l} \PDiff{Z^L}{W^L}$ \;
+            $\PDiff{L}{W_0^l} = \PDiff{L}{Z^l} \PDiff{Z^L}{W_0^L}$ \;
+
+            $W^l = W^l - \func{\eta}{t} \PDiff{L}{W^l} $\;
+            $W^l_0 = W^l_0 - \func{\eta}{t} \PDiff{L}{W^l_0} $\;
+        }
+    }
+    \caption{SGD neural nework $(\CalD_n, T , L , \eta , (m^1 , \dots , m^L) , (f^1 , \dots , f^L) )$}
+\end{algorithm}
