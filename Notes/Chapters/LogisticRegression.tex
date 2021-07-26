@@ -46,7 +46,7 @@ The problem of minimizing 0-1 Loss problem is NP-hard. A problem with sign is th
 \end{center}
 
 
-Equivalently, we want to make classifier that predict \(+1\) when \(\func{\sigma}{\theta^T x+ \theta_0} > p = 0.5\) and \(-1\) otherwise. The value \(p\) is called the \textbf{prediction threshold}
+Equivalently, we want to make classifier that predict \(+1\) when \(\func{\sigma}{\theta^T x+ \theta_0} > p = 0.5\) and \(-1\) otherwise. The value \(p\) is called the \textbf{prediction threshold}.
 
 Loss on all data is inversely related to the probability that \((\theta , \theta_0)\) assigns to the data. Assuming that points in data set are independent.
 
@@ -80,6 +80,7 @@ hence we wish to minimize the
 note that we didn't include \(\theta_0\) in the regularizer as we don't want to punish large \(\theta_0\). 
 
 \section{Gradient descent}
+\subsection{Batch gradient descent}
 \begin{algorithm}[H]
     \DontPrintSemicolon
     $\theta^{(0)} = \theta_{\mathrm{init}} $\;
@@ -90,14 +91,14 @@ note that we didn't include \(\theta_0\) in the regularizer as we don't want to 
     }
 
     \Return{$\theta $}
-    \caption{ gradient descent $(f, \nabla f, \theta_{\mathrm{init}} , \eta , \epsilon )$}
+    \caption{batch gradient descent $(f, \nabla f, \theta_{\mathrm{init}} , \eta , \epsilon )$}
 \end{algorithm}
 
 \begin{theorem}
-    If \(f\) is convex, for any desired accuracy \(\epsilon\) there is some \(\eta\) such that gradient descent will converge to \(\theta\) within \(\epsilon\) of the optimum.
+    If \(f\) is convex, for any desired accuracy \(\epsilon\) there is some \(\eta\) such that batch gradient descent will converge to \(\theta\) within \(\epsilon\) of the optimum.
 \end{theorem}
 
-Let derive the closed form of gradient descent for the logistic regression \(J\) function. 
+Lets derive the closed form of gradient descent for the logistic regression \(J\) function. 
 \begin{equation*}
     \nabla \func{J}{\Theta} = \left(\dfrac{1}{n} \sum_{i = 1}^n \nabla \func{\CalL_{NLL}}{ \func{\sigma}{\theta^T x^{(i)} + \theta_0} , y^{(i)}} \right) + \lambda \nabla \norm[\theta]^2
 \end{equation*}
@@ -150,9 +151,8 @@ Instead of adding up the gradient for each part every iteration, we can choose o
     Then SGD converges almost sure to the optimal \(\Theta\).
 \end{theorem}
 
-\section{Regression}
+\section{Linear regression}
 In regression our output is a real number as oppose to a discrete value. Typically, we use \textit{squared error} for loss function.
-
 \begin{equation*}
     \func{L}{g^{(i)}, y^{(i)}} = \left(g^{(i)} - y^{(i)}\right)^2
 \end{equation*}
@@ -163,7 +163,8 @@ and hence our \(J\) function will be the \textit{mean squared error}
     \func{J}{\Theta} = \dfrac{1}{n} \sum_{i = 1}^n \left( g^{(i)} - y^{(i)} \right)^2 + \lambda \func{R}{\Theta}
 \end{equation*}
 
-Discarding \(\theta_0\) and the regularizer term and assuming our hypothesis \(h\) is a linear classifer \_ that is \(g^{(i)} = \func{h}{x^{i}; \theta} = \theta^T x\)\_, we can easily arrive at a closed form optimal solution. To do this consider the following definitions 
+\subsection{Linear hypothesis}
+Discarding \(\theta_0\) (for simplicity) and the regularizer term and by allowing our hypothesis \(h\) to be linear --- that is \(g^{(i)} = \func{h}{x^{(i)}; \theta} = \theta^T x\)---, we can easily arrive at a closed form optimal solution. To do this consider the following definitions 
 \begin{equation*}
     X = \begin{bmatrix}
         x^{(1)}_1 & \dots & x^{(1)}_d \\
@@ -183,19 +184,67 @@ then we can write \(\func{J}{\theta}\) as
 \end{equation*}
 taking the gradient gives 
 \begin{align*}
-    \nabla \func{J}{\theta} &= \dfrac{2}{n} X^T (X\theta - Y) = 0\\
-    \implies  X^T X\theta &= X^T Y \implies \theta = \left(X^T X\right)^{-1} X^T Y
+    \nabla \func{J}{\hat{\theta}} &= \dfrac{2}{n} X^T (X\hat{\theta} - Y) = 0\\
+    \implies  X^T X\hat{\theta} &= X^T Y \implies \hat{\theta} = \left(X^T X\right)^{-1} X^T Y
 \end{align*}
 Assuming the invertibility of \(X^TX\), this minimizes the \(J\) function. However, we will run into the problem of \textit{overfitting}. By adding the regularizer back we can solve the problem of invertibility and overfitting at the same time. Consider the following \(J_{\mathrm{ridge}}\) function, 
 \begin{align*}
     \func{J_{\mathrm{ridge}}}{\theta} &= \frac{1}{n} (X\theta - Y)^T (X\theta-Y) + \lambda \theta^T \theta \\
-     \implies \nabla \func{J_{\mathrm{ridge}}}{\theta} &= \dfrac{2}{n} X^T (X\theta - Y) + 2\lambda \theta  = 0\\ 
-     \implies  (X^TX + n \lambda I) \theta &= X^T Y \implies \theta  = (X^TX + n \lambda I )^{-1} X^T Y
+     \implies \nabla \func{J_{\mathrm{ridge}}}{\hat{\theta}} &= \dfrac{2}{n} X^T (X\hat{\theta} - Y) + 2\lambda \hat{\theta}  = 0\\ 
+     \implies  (X^TX + n \lambda I) \hat{\theta} &= X^T Y \implies \hat{\theta}  = (X^TX + n \lambda I )^{-1} X^T Y
 \end{align*}
 
-A faster way of computing the optimal solution is using the SGD or normal GD which since the \(J_{\mathrm{ridge}}\) is convex has only one minimum.
+A faster way of computing the optimal solution is using the SGD or BGD, which since the \(J_{\mathrm{ridge}}\) is convex will converge.
+\subsection{Non-linear hypothesis}
+A simple generalization to the non-linear case can be achieved by transforming the data using basis functions, \(\phi_i : \Reals^d \to \Reals\)  
+\begin{equation*}
+    \func{h}{x; \theta } = \theta_0 + \sum_{i = 1}^m \theta_i \func{\phi_i}{x}
+\end{equation*}
 
+Some examples of basis function include 
+\begin{description}
+    \item[Polynomial (univariate)] \(\func{\phi_i}{x} = x^i\) for \(i = 1, \dots, m\)
+    \begin{equation*}
+        \func{h}{x; \theta } =  \sum_{i = 0}^m \theta_i x^i
+    \end{equation*}
+    \item[Gaussian] preddiction based on similarity to \textit{prototypes}, \(\mu_1 , \dots , \mu_m\), where \(\sigma_i^2\) control how quickly it vanished as a function of the distance to the prototype.
+    \begin{equation*}
+        \func{\phi_i}{x} = \func{\exp}{-\dfrac{(x - \mu_i)^2}{2 \sigma_i^2}}
+    \end{equation*} 
+    \item[Sigmoid]
+    \begin{equation*}
+        \func{\phi_i}{x} = \func{\sigma}{\dfrac{\norm[x - \mu_i]}{\sigma_i}}
+    \end{equation*} 
+    \item[Fourier basis]
+\end{description}
+
+Deriving the optimal solution is like that case of linear hypothesis. Lets define the following matrices 
+\begin{equation*}
+    \Phi = \begin{bmatrix}
+        1 & \func{\phi_1}{x^{(1)}} & \dots & \func{\phi_m}{x^{(1)}} \\
+        1 & \func{\phi_1}{x^{(1)}}  & \dots & \func{\phi_m}{x^{(2)}} \\
+        \vdots& \vdots & \ddots & \vdots\\
+        1 & \func{\phi_1}{x^{(n)}}  & \dots & \func{\phi_m}{x^{(n)}} \\
+
+    \end{bmatrix} \qquad Y = \begin{bmatrix}
+        y^{(1)}\\
+        \vdots \\
+        y^{(n)} 
+    \end{bmatrix} 
+\end{equation*}
+Then our objective \(\func{J}{\theta}\) can be written as 
+\begin{align*}
+    \func{J_{\mathrm{ridge}}}{\theta} &= \frac{1}{n} (\Phi\theta - Y)^T (\Phi\theta-Y) + \lambda \theta^T \theta \\
+     \implies \nabla \func{J_{\mathrm{ridge}}}{\hat{\theta}} &= \dfrac{2}{n} \Phi^T (\Phi\hat{\theta} - Y) + 2\lambda \hat{\theta}  = 0\\ 
+     \implies  (\Phi^T\Phi + n \lambda I) \hat{\theta} &= \Phi^T Y \implies \hat{\theta}  = (\Phi^T\Phi + n \lambda I )^{-1} \Phi^T Y
+\end{align*}
 \section{Regularizers}
+\subsection{Overfitting}
+Overfitting occurs when our hypothesis is tuned to the training data but it fails to generalize. Two main causes of overfitting are \textit{model complexity} and low number of training data. Therefore, one way to solve overfitting is to increase training data size. Some other systematic solutions to the overfitting problem inclue 
+\begin{itemize}
+    \item Selection of suitable model complexity and good parameters. One way to  evaluate a good model is \textit{hold-out} method, where we divide data into training and validation sets then we train a set of models and evaluated their performance on the validation set. However, this method is very wasteful of data and a small validation set obtains relatively noisy estimate of performance. A better method is the previously discussed cross validation.
+    \item Adding a regularizer term. As discussed, a regularizer encourages the parameter to closer to some special value \(\theta_{\mathrm{prior}}\). When increase \(\lambda\) we tend to increase structural error but decrease estimation error and vice versa.
+\end{itemize}
 \subsection{Errors}
 There are two kinds of way that a hypothesis might contribute to the error on test data.
 \begin{description}
@@ -211,3 +260,5 @@ There are two kinds of way that a hypothesis might contribute to the error on te
     \end{align*}
     \item [Expected error] is the sum of the structural error and estimation error.
 \end{description}
+\subsection{Bias-variance trade-off}
+need more, chapter 1.1 , 1.3 , 3.1, 3.2 and chapter 2.3, 3.2, 3.4
