@@ -1,7 +1,6 @@
-import timeit
-
 import code_and_data_for_hw3.code_for_hw3_part2 as supplement
 import time
+
 
 def auto_test():
     possible_T = [1, 10, 50]
@@ -36,6 +35,7 @@ def auto_test():
 def review_test():
     review_data = supplement.load_review_data("C:/Users/emadz/Desktop/School/Books/Summer II/Machine "
                                               "Learning/Workspace/Codes/Features/code_and_data_for_hw3/reviews.tsv")
+    # seperates the data
     review_texts, review_label_list = zip(*((sample['text'], sample['sentiment']) for sample in review_data))
 
     # The dictionary of all the words for "bag of words"
@@ -46,16 +46,27 @@ def review_test():
     review_labels = supplement.rv(review_label_list)
 
     possible_T = [1, 10, 50]
-    for t in possible_T:
-        start = time.time()
-        print(supplement.xval_learning_alg(supplement.perceptron, review_bow_data, review_labels, 10, params={'T': t}))
-        end = time.time()
-        print(end - start)
-        start = time.time()
-        print(supplement.xval_learning_alg(supplement.averaged_perceptron, review_bow_data, review_labels, 10, params={'T': t}))
-        end = time.time()
-        print(end - start)
-        print()
+
+    # for t in possible_T:
+    #     start = time.time()
+    #     print(supplement.xval_learning_alg(supplement.perceptron,
+    #     review_bow_data, review_labels, 10, params={'T': t}))
+    #     end = time.time()
+    #     print(end - start)
+    #     start = time.time()
+    #     print(supplement.xval_learning_alg(supplement.averaged_perceptron, review_bow_data, review_labels, 10,
+    #                                        params={'T': t}))
+    #     end = time.time()
+    #     print(end - start)
+    #     print()
+
+    bestTh, bestTh0 = supplement.averaged_perceptron(review_bow_data, review_labels, params={'T': 10})
+    sorted_th = sorted([(x, i) for (i, x) in enumerate(bestTh)], reverse=True)
+    # print(sorted_th)
+    positive_words = [list(dictionary.keys())[list(dictionary.values()).index(i)] for (x, i) in sorted_th[:10]]
+    print(positive_words)
+    negative_words = [list(dictionary.keys())[list(dictionary.values()).index(i)] for (x, i) in sorted_th[-10:]]
+    print(negative_words)
 
 
 review_test()
