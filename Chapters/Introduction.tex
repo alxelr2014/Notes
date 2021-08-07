@@ -1,0 +1,72 @@
+\chapter{Introduction}
+\section{Algebra of Complex Numbers}
+We define complex numbers to be all the pairs of real numbers \((x,y)\) with following addition and multiplication:
+\[(x_1,y_1) +' (x_2,y_2) = (x_1 + x_2 , y_1 + y_2)\]
+\[ (x_1,y_1) \cdot' (x_2,y_2) = (x_1x_2 - y_1y_2, x_1y_2 + x_2y_1)\]
+where \(+\) and \(\cdot\) are real addition and multiplication, respectively.
+We denote the set of complex numbers with \(\Complex\).
+It is easy to check that addition and multiplication defined above have the following:
+\begin{enumerate}
+        \item Addition and multiplication are commutitive:
+              \[z + w = w + z \quad z,w \in \Complex\]
+              \[ z.w = w.z \quad z,w \in \Complex\]
+
+        \item Addition and multiplication are associative:
+              \[(z + w) + u = z + (w + u) \quad z,w,u \in \Complex\]
+              \[ (z.w).u = z.(w.u) \quad z,w,u \in \Complex\]
+        \item Addition and multiplication are distributive:
+              \[(z + w) . u = z.u + w.u \quad z,w,u \in \Complex\]
+        \item Addition and multiplication have unique identity elements \(0 = (0,0)\) and \(1 = (1,0)\), respectively.
+        \item Every complex number \(z\) has a unique addition inverse. Denoted by \(-z\).
+        \item Every non-zero complex number \(z\) has a unique multiplication inverse. Denoted by \(z^{-1}\) or \(\dfrac{1}{z}\).
+\end{enumerate}
+Which means \(\Complex\) is a field. 
+
+We can represent in many other forms. Two of the most commonly for \(z = (x,y)\) used are :
+\[ z = x + iy \quad \text{where} \; i = (0,1)\]
+\[ z = re^{i\theta} \quad r \geq 0 \,, \theta \in \Reals \]
+\[ z = \begin{bmatrix}
+                x & -y \\
+                y & x
+        \end{bmatrix} \]
+It is easy to see that \(i^2 = -1\). We also define the functions \(\Re(z) = x\) and \(\Im(z) = y\). In the second representation \(r\) is the distance from origin and \(\theta\) is the angle between the positive real axis and the ray passing through \(z\). One can also view complex number as an extension of real numbers in which every polynomial has a root.
+
+\begin{theorem}
+      If \(K\) is field such that every odd degree polynomial has at a least a root and for all \(a \in K\), either \(x^2 = a\) or \(x^2 = -a\) has a root then it is sufficient to \textit{add} the root of \(x^2 = -1\) to \(K\) so that every polynomial has a root.
+\end{theorem}
+
+For every complex number \(z = x + iy\) there exists the mapping \(\bar{z}: \Complex \to \Complex\) where \(\bar{z} = x - iy\) and is called the \(\emph{conjugate}\) of \(z\).
+\begin{proposition}
+        The following properties are satisfied.
+        \begin{enumerate}
+                \item \(\overline{z + w} = \bar{z} + \bar{w}\).
+                \item \(\overline{zw} = \bar{z}\bar{w}\).
+                \item \(z = \bar{\bar{z}}\).
+                \item \(z = \bar{z}\) if and only if \(z \in \mathbb{R}\).
+                \item The following relations hold:
+                      \[ \Re(z) = \dfrac{z + \bar{z}}{2} \quad,\quad \Im(z) = \dfrac{z - \bar{z}}{2i}\]
+        \end{enumerate}
+\end{proposition}
+Another mapping is the \(\emph{norm}\) or \(\emph{modulus}\) function, \(|z|: \Complex \to \Reals \) where \(|z| = \sqrt{x^2 + y^2}\). Geometrically speaking the norm of \(z\) gives the distance of \(z\) form origin.
+\begin{proposition}
+        The following properties are satisfied.
+        \begin{enumerate}
+                \item \(|z| \geq 0 \quad \forall z \in \Complex\) and especially \(|z| = 0\) if and only if \(z = 0\)
+                \item \(|zw| = |z||w|\).
+                \item \(|z|^2 = z\bar{z}\).
+                \item \(|z| = |-z| = |\bar{z}|\)
+                \item The following inequalities hold:
+                      \[ -|z| \leq \Re(z) \:,\: \Im(z) \leq |z|\]
+                \item Triangle inequality:
+                      \[ |z + w | \leq |z| + |w| \]
+                      \[ \big||z| - |w|\big| \leq |z - w| \]
+        \end{enumerate}
+\end{proposition}
+
+\section{Sequences and Convergence}
+A Sequence \(\{z_n\}_{n \in \Naturals}\) is said to be convergent to \(z \in \Complex\) if:
+\[ \lim_{n \to \infty} |z_n - z| = 0 \quad \text{which we write as} \quad z = \lim_{n \to \infty} z_n\]
+
+\begin{proposition}
+      If \(z_n = a_n + i b_n\) and \(z = a + ib\) then \(z_n \to z\) if and only if \(b_n \to b\) and \(a_n \to a\)
+\end{proposition}
