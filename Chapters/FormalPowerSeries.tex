@@ -1,1 +1,110 @@
 \chapter{Formal Power Series}
+\section{Algbraic definitions}
+\subsection*{Monoid}
+A set \(S\) equipped with a binary operation \(\cdot\) is a \textbf{monoid} if it satisfies the following properties:
+\begin{itemize}
+    \item For all \(a,b,c \in S\), \(a\cdot (b\cdot c) = (a\cdot b) \cdot c\).
+    \item There exists \(e \in S\) such that for each \(a \in S\), \(a \cdot e = e \cdot a = a\).
+\end{itemize}
+\subsection*{Group}
+A set \(S\) equipped with a binary operation \(\cdots\) is a \textbf{group} if it satisfies the folloing properties:
+\begin{itemize}
+    \item For all \(a,b,c \in S\), \(a\cdot (b\cdot c) = (a\cdot b) \cdot c\).
+    \item There exists \(e \in S\) such that for each \(a \in S\), \(a \cdot e = e \cdot a = a\).
+    \item For each element \(a \in S\), there exists \(b \in S\) such that \(a \cdot b = b \cdot a = e\).
+\end{itemize}
+If \(\cdot\) is commutative then the group is an \textit{Abelian group}.
+\subsection*{Ring}
+A set \(S\) equipped with binary operations \(+\) and \(\cdots\) is a \textbf{ring} if it satisfies the folloing properties:
+\begin{enumerate}
+    \item \(S\) is an Abelian group under \(+\).
+    \item \(S\) is a monoid under \(\cdot\).
+    \item \(\cdot\) distributes over \(+\).
+\end{enumerate}
+If \(\cdot\) is commutative then the ring is called a \textit{commutative ring}.
+\subsection*{Integral domain}
+It is commutative ring with property that 
+\begin{equation*}
+    ab =  0 \implies a= 0  \lor b = 0
+\end{equation*}
+
+\subsection*{Field}
+A commutative ring that each non-zero \(a \in S\) has a multiplicative inverse.
+
+\begin{example}
+    A field is an integral domain because if \(ab = 0\) and \(a\) is non-zero then 
+    \begin{equation*} 
+    a^{-1}ab = b = 0
+    \end{equation*}
+\end{example}
+\section{Introduction}
+Let \(K\) be a commutative ring. Then the set of formal power series over \(K\) is 
+\begin{equation*}
+    \FieldFormalSeries{X} = \set[a_i \in K]{a_0 + a_1x + a_2x^2 + \dots}
+\end{equation*}
+The addition and multiplication can be generalized from \(\FieldPolynomial{X}\), the set of polynomials in \(K\).
+\begin{definition}[Order]
+    Let \(S \in \FieldFormalSeries{X}\) then \(\func{\omega}{S}\) is the least \(n \geq 0\) such that \(a_n \neq 0\). Furthermore, \(\func{\omega}{0} = \infty\). 
+\end{definition}
+
+\begin{definition}[Summability]
+    Let \(I\) be a set of indices then the family \(\set{S_i}_{i \in I}\) is \textbf{summable} if for each \(k \geq 0\), \(\func{w}{S_i} \geq k\) for all \(S_i\) except only a finite number of them. Then we can define \(S\) to be the sum of this family 
+    \begin{equation*}
+        S = \sum_{i \in I} S_i = \sum_{i \in I} \sum_{j} a^{(i)}_j x^j
+    \end{equation*}
+    which is sensible since only a finite number of \(a^{(i)}_j\) are non-zero.
+\end{definition}
+
+
+\begin{proposition} \label{th:orderOfMultiplication}
+    Let \(K\) be an integral domain, then for any two formal series 
+    \begin{equation*}
+        \func{\omega}{ST} = \func{\omega}{S} + \func{\omega}{T} 
+    \end{equation*}
+    Asume that \(\infty + k = \infty\) for any finite number \(k\) and \(\infty + \infty = \infty\).
+\end{proposition}
+
+\begin{proof}
+    If either of \(S\) or \(T\) is zero then the proposition is true. Otherwise, both \(n = \func{\omega}{S}\) and \(m = \func{\omega}{T}\) are finite. Equivalently \(a_n \neq 0 \) and \(b_m \neq 0\) while \(a_k = 0, b_l = 0\) for \(k < n, l < m\). Therefore, 
+    \begin{equation*}
+        ST = \sum_i \sum_{j = 0}^i a_{j}b_{i - j} x^i = \sum_i c_i x^i
+    \end{equation*}
+    for \(i < m + n\), \(c_i = 0\) and \(c_{m+n} = a_nb_m\) which is non-zero as \(K\) is an integral domain which was what was wanted.
+\end{proof}
+
+\begin{corollary}
+    For an integral domain \(K\), the ring \(\FieldFormalSeries{X}\) is an integral domain.
+\end{corollary}
+For simplicity from now on assume \(K\) is either an integral domain or a field.
+
+Consider two formal series 
+\begin{equation*}
+    S = \sum_n a_nx^n , \qquad T = \sum_m b_m x^m
+\end{equation*}
+with \(b_0 = 0\). Then we can define the composition \(S \circ T\) as follow 
+\begin{equation*}
+    S \circ T = \sum_n a_n T^n
+\end{equation*}
+
+To show that it is well defined we need to show that only a finite number of \(T^n\) have degree less than \(k\) for all \(k \geq 0\). Which is clear implied by the fact that \(\func{\omega}{T} \geq 1\) and by \Cref{th:orderOfMultiplication}, \(\func{\omega}{T^n} \geq n\). It can easily be shown that 
+\begin{equation*}
+    \begin{cases}
+        (S_1 + S_2) \circ T &= S_1 \circ T + S_2 \circ T\\
+        (S_1 \cdot S_2) \circ T &= (S_1 \circ T) (S_2 \circ T)
+    \end{cases}
+\end{equation*}
+Moreover, if \(\set{S_i}\) is a summable family of formal series then 
+\begin{equation*}
+    (\sum_i S_i)\circ T = \sum_i (S_i \circ T)
+\end{equation*}
+
+\begin{proposition}
+    For three formal series \(S, T,\) and \(U\) with \(\func{\omega}{T},\func{\omega}{U} \geq 1\)
+    \begin{equation*}
+        (S \circ T) \circ U = S \circ (T \circ U)
+    \end{equation*}
+\end{proposition}
+
+\begin{proposition}
+    A formal series \(S = \sum_i a_i x^i\) has a multiplicative if and only if \(a_0 \neq 0\).
+\end{proposition}
