@@ -1,0 +1,26 @@
+\chapter{Support Vector Machine}
+In SVM we want to optimize the margin of the classifier as well. Assuming the dataset is linearly-separable, the objective of SVM is 
+\begin{equation*}
+    \max_{\theta, \theta_0} \min_{i} y^{(i)} \dfrac{\theta^T x^{(i)} + \theta_0}{\norm[\theta]}
+\end{equation*}
+since \(\func{\gamma}{k \theta, k \theta_0} = k \func{\gamma}{\theta, \theta_0}\) for all \(k\),
+\begin{equation*}
+    \max_{\theta, \theta_0} \dfrac{2}{\norm[\theta]}  \quad \suchThat \, \min_{i} y^{(i)} \dfrac{\theta^T x^{(i)} + \theta_0}{\norm[\theta]} = 1
+\end{equation*}
+or equivalently 
+\begin{equation*}
+    \min_{\theta, \theta_0} \dfrac{1}{2}\norm[\theta]^2  \quad \suchThat \, \forall i, y^{(i)} \dfrac{\theta^T x^{(i)} + \theta_0}{\norm[\theta]} \geq 1 
+\end{equation*}
+which can be solve using quadratic programming.
+
+\section{Dual formulation}
+In general, we have: 
+\begin{equation*}
+    d^{\ast} = \max_x \min_y \func{h}{x,y} \leq \min_y \max_x \func{h}{x,y} = p^{\ast}
+\end{equation*}
+The \(p^{\ast}\) is called the primal problem and \(d^{\ast}\) is called the dual problem. Then, by incorporating the constraints through Lagrangian multipliers, we will have 
+\begin{equation*}
+    \min_{\theta, \theta_0} \max_{\alpha_i \geq 0} \dfrac{1}{2} \norm[\theta]^2 + \sum_{i = 1}^n \alpha_n \left[ 1 - y^{(i)} \left( \theta^T x^{(i)} + \theta_0 \right) \right]
+\end{equation*}
+
+Then dual problem can be solved using quadratic programming.

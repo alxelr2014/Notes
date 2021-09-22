@@ -261,4 +261,38 @@ There are two kinds of way that a hypothesis might contribute to the error on te
     \item [Expected error] is the sum of the structural error and estimation error.
 \end{description}
 \subsection{Bias-variance trade-off}
+Suppose \(h\) is the target function that minimizes the expected error, that is 
+\begin{equation*}
+    \func{h}{x} = \condExp{Y}{X}
+\end{equation*}
+then the error on our learned function \(f_{\CalD}\) is 
+\begin{align*}
+    \func{E_{true}}{f_D} &=\expected[x,y]{(\func{f_{\CalD}}{x} - y)^2}\\
+    &= \expected[x,y]{(\func{f_{\CalD}}{x} - \func{h}{x} + \func{h}{x} - y)^2}\\
+    &= \expected[x]{(\func{f_{\CalD}}{x} - \func{h}{x})^2} + \expected[x,y]{(\func{h}{x} - y)^2} + 2\expected[x,y]{(\func{f_{\CalD}}{x} - \func{h}{x})(\func{h}{x} - y)^2}\\
+    &= \expected[x]{(\func{f_{\CalD}}{x} - \func{h}{x})^2} + \expected[x,y]{(\func{h}{x} - y)^2} \\ &\qquad \quad + 2\expected[x]{(\func{f_{\CalD}}{x} - \func{h}{x}) \condExp{(\func{h}{x} - y)^2}{X}}\\
+    &= \expected[x]{(\func{f_{\CalD}}{x} - \func{h}{x})^2} + \expected[x,y]{(\func{h}{x} - y)^2}
+\end{align*}
+The right term \(\expected[x,y]{(\func{h}{x} - y)^2}\) is the noise. To understand the first term, consider the following 
+\begin{equation*}
+    \expected[\CalD]{(\func{f_{\CalD}}{x} - \func{h}{x})^2}
+\end{equation*}
+and let \(\func{\overline{f_{\CalD}}}{x} = \expected[\CalD]{f_{\CalD}}\) be the average hypothesis, then 
+\begin{equation*}
+    \func{\overline{f_{\CalD}}}{x} \simeq \dfrac{1}{K} \sum_{k = 1}^K \func{f_{\CalD^(k)}}{x}
+\end{equation*}
+
+Where the training data is divided into \(K\) chunks. Then, 
+
+\begin{align*}
+    \expected[\CalD]{(\func{f_{\CalD}}{x} - \func{h}{x})^2} &= \expected[\CalD]{(\func{f_{\CalD}}{x} - \func{\overline{f_{\CalD}}}{x} + \func{\overline{f_{\CalD}}}{x} - \func{h}{x})^2} \\
+    &= \expected[\CalD]{(\func{f_{\CalD}}{x} - \func{\overline{f_{\CalD}}}{x})^2} + \expected[\CalD]{(\func{\overline{f_{\CalD}}}{x} - \func{h}{x})^2}\\
+    &= \variance{x} + \func{\Bias}{x} \\ 
+    \implies \expected[x]{\expected[\CalD]{(\func{f_{\CalD}}{x} - \func{h}{x})^2}} &= \text{var} + \text{bias}
+\end{align*}
+
+Bias measure how close can we get on average to the target function. So if the bias is high it tells us that our hypothesis class can not approximate the target function well. The variance term averages the closeness of the learned function to average on the whole space. If it is high it means that there is a lot variability and with each training data we might get a different result and hence our function wouldn't generalize well.
+
+Adding a regularizer term we can decrease the variance with little harm done to bias. 
+
 need more, chapter 1.1 , 1.3 , 3.1, 3.2 and chapter 2.3, 3.2, 3.4

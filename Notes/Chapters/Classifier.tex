@@ -16,7 +16,7 @@ There are several types of loss function
     \item[0-1 Loss]
         \begin{equation*}
             \func{L}{a,a_h} = \begin{cases}
-                0 & \text{if} a = a_h \\
+                0 & \text{if} \quad a = a_h \\
                 1 & \text{otherwise}
             \end{cases}
         \end{equation*}
@@ -66,7 +66,7 @@ One way to select the parameters \(\theta\) and \(\theta_0\) is to randomly sele
 \end{algorithm}
 
 \subsection{Perceptron}
-A more intelligent way of finding the parameters is to update when we encounter a mistake. The simplest update rule is the \textbf{perceptron}, which is as follows
+A more intelligent way of finding the parameters is to update when we encounter a mistake. The simplest update rule is the \textbf{perceptron} \footnote{the perceptron algorithm introduced here is the stochastic version, the batch version can be easily arrived.}, which is as follows
 \begin{equation*}
     \theta' ,\; \theta_0' \gets \theta + y^{(i)}x^{(i)} ,\; \theta_0 + y^{(i)}
 \end{equation*}
@@ -128,11 +128,11 @@ To examine the convergence of the perceptron algorithm we need the following def
 \begin{equation*}
     y^{(i)} \theta^T x^{(i)} > 0 \quad \forall i
 \end{equation*}
-and similary it is linearly seperable if there are some \(\theta , \theta_0\) such that 
+and similary it is linearly separable if there are some \(\theta , \theta_0\) such that 
 \begin{equation*}
     y^{(i)} \cdot \left( \theta^T x^{(i)}  + \theta_0 \right) > 0 \quad \forall i
 \end{equation*}
-The \textbf{margin} of a labeled data point \((x,y)\) with respect to a seperator (hyperplane) \(\theta, \theta_0\) is
+The \textbf{margin} of a labeled data point \((x,y)\) with respect to a separator (hyperplane) \(\theta, \theta_0\) is
 \begin{equation*}
     y \cdot \dfrac{\theta^T x +  \theta_0}{\norm[\theta]}
 \end{equation*}
@@ -142,7 +142,7 @@ the minimum of all margins:
     \min_i     y^{(i)} \cdot \dfrac{\theta^T x^{(i)} + \theta_0}{\norm[\theta]}
 \end{equation*}
 
-\begin{theorem} [Perceptron convergence theorem]
+\begin{theorem} [Perceptron convergence theorem] \footnote{also applys to batch version}
     If there exists a vector \(\theta^\ast\) such that the margin of database with respect to \(\theta^\ast\) is greater than \(\gamma > 0\) and then norm \(\norm[x^{(i)}] \leq R\) for some \(R\) then perceptron will make at most \(\left(\frac{R}{\gamma} \right)^2\) updates/mistakes.
 \end{theorem}
 
@@ -177,11 +177,66 @@ the minimum of all margins:
         k \leq \left(\dfrac{R}{\gamma}\right)^2 
     \end{equation*}
     mistakes.
+    For a linearly inseparable we can remember the best \(\Theta\) and after some iteration return that.
  \end{proof}
+
+ \section{Linear Discriminant Analysis}
+ In Fisher's LDA we are looking for a vector that when the samples are projected on that vector, they are well separated. One objective could be maximizing the distance of average positions of the classes from each other. Assuming the norm of the vector  \(\norm[\theta] = 1\) then our the average position of projected samples for each class is 
+ \begin{align*}
+     \mu_1 &= \dfrac{\sum_{x^{(i)} \in \CalC_1} x^{(i)}}{\abs[\CalC_1]}\\
+     \mu_2 &=\dfrac{\sum_{x^{(i)} \in \CalC_2} x^{(i)}}{\abs[\CalC_2]}\\
+     \psi_1 &=  \theta^T \mu_1 , \quad \psi_2 = \theta^T \mu_2
+ \end{align*}
+ Then mathematically our objective is 
+ \begin{equation*}
+     \max_{\theta} \func{J}{\theta} = \max_{\theta} (\psi_1 - \psi_2)^2
+ \end{equation*}
+ Solving this analytically using the Lagrange multiplies gives 
+
+\begin{equation*}
+    \nabla_{\theta} \func{J}{\theta} + \lambda (\norm[\theta] - 1) = 2 (\psi_1 - \psi_2)(\mu_1 - \mu_2) - \lambda \theta = 0
+\end{equation*}
+Therefore \(\theta\) is in the same direction as \(\mu_1 - \mu_2\) hence it must be  
+\begin{align*}
+    \theta &= \dfrac{\mu_1 - \mu_2}{\mu_1 - \mu_2}
+\end{align*}
+
+The problem with this approach is that it doesn't consider the variance of the samples. Hence, it is possible that even though our separator maximizes the distance between the two averages, it still misclassifies a lot of points. In order to take variance into account we change our objective to the following
+
+\begin{equation*}
+    \func{J}{\theta} = \dfrac{(\psi_1 - \psi_2)^2}{\sigma_1^2 + \sigma_2^2}
+\end{equation*}
+where 
+\begin{align*}
+    \sigma_1^2 &= \sum_{x^{(i)} \in \CalC_1} \left(\theta^T x^{(i)} - \theta^T \mu_1 \right)\\
+    \sigma_2^2 &= \sum_{x^{(i)} \in \CalC_2} \left(\theta^T x^{(i)} - \theta^T \mu_2 \right)
+\end{align*}
+
+We can simplify our objective to have the following form
+\begin{equation*}
+    \func{J}{\theta} = \dfrac{\theta^T S_B \theta}{\theta^T S_W \theta }
+\end{equation*}
+where 
+\begin{align*}
+    S_B &= (\mu_1 - \mu_2) (\mu_1 - \mu_2)^T\\
+    S_W &= \sum_{x^{(i)} \in \CalC_1} (x^{(i)} - \mu_1)(x^{(i)} - \mu_1)^T + \sum_{x^{(i)} \in \CalC_2} (x^{(i)} - \mu_2)(x^{(i)} - \mu_2)
+\end{align*}
+Which are between-class scatter matrix and within-class scatter matrix respectively. Taking the derivative with respect to \(\theta\) and setting it to zero 
+\begin{equation*}
+    S_B \theta = \lambda S_w w
+\end{equation*}
+for some constant \(\lambda\). Note that 
+\begin{equation*}
+    S_B \theta = (\mu_1 - \mu_2) (\mu_1 - \mu_2)^T \theta = a (\mu_1 - \mu_2)
+\end{equation*}
+hence 
+\begin{equation*}
+    w = b S_W^{-1} (\mu_1 - \mu_2)
+\end{equation*}
 
 \section{Features}
 \subsection{Transformation}
-As we saw we can transform linearly separable dataset to another linearly seperable dataset but without an offset. What happens if the original dataset is not linearly seperable? For example, \textit{xor dataset}:
+As we saw we can transform linearly separable dataset to another linearly separable dataset but without an offset. What happens if the original dataset is not linearly separable? For example, \textit{xor dataset}:
 \begin{figure*}[!ht]
     \centering
     \includegraphics{Chapters/graphics/xor_dataset.png}
@@ -191,13 +246,13 @@ As we saw we can transform linearly separable dataset to another linearly sepera
 \begin{equation*}
     \CalD = \set{((-1,-1),1), ((-1,1), -1) , ((1,-1),-1) , ((1,1),1)}
 \end{equation*}
-is not linearly seperable in 2 dimensions. A transformation that might be applicable here is \textbf{polynomial basis}. A polynomial basis transformation of order \(k\), transforms a feature \(x \in \Reals^d\) to
+is not linearly separable in 2 dimensions. A transformation that might be applicable here is \textbf{polynomial basis}. A polynomial basis transformation of order \(k\), transforms a feature \(x \in \Reals^d\) to
 \begin{equation*}
     \func{\phi}{x} = ( x_1^{\alpha_1} \dots x_d^{\alpha_d}) , \quad \sum_{i = 1}^d \alpha_i \leq k , \forall i, \alpha_i \geq 0
 \end{equation*}
 which has \(\binom{k + d }{d }\) dimension.
 
-For example, the transformation \(\func{\phi}{x_1, x_2} = (x_1,x_2,x_1x_2)\) makes the xor dateset linearly seperable-through the origin.
+For example, the transformation \(\func{\phi}{x_1, x_2} = (x_1,x_2,x_1x_2)\) makes the xor dateset linearly separable-through the origin.
 \begin{figure*}[!ht]
     \centering
     \includegraphics{Chapters/graphics/xor_3d.png}
@@ -215,4 +270,11 @@ we can represent a discrete feature as
 For numeric feature we would like to standardized as follow
 \begin{equation*}
     \tilde{x_j}  = \dfrac{x_j - \bar{x_j}}{\sigma}
+\end{equation*}
+
+\section{Multi-class classification}
+One way is to reduce the problem to multiple binary classification problem. However, this method can lead to regions in which classification is ambiguous.
+Another way to solve the multi-class classification is to design a function \(f_i\) for each class \(\CalC_i\) then classifiying new data could be done using 
+\begin{equation*}
+    y = \argmax_i \func{f_i}{x}
 \end{equation*}
