@@ -23,4 +23,73 @@ Primary markets
     P_t &= \dfrac{\expected{D_{t+1}}}{1 + r_{t+1}}+ \dfrac{\expected{D_{t+2}}}{(1 + r_{t+2})^2} + \dots \\
     &= \sum_{k = 1}^{\infty} \dfrac{\expected{D_{t+k}}}{(1 + r_{t+k})^k}
 \end{align*}
-Where \(P_t\) is the price , \(D_t\) cash divident, \(\expected{\cdot}\) the expectation operator, \(r_t\) risk-adjusted discount rate for cashflow, all at time \(t\).
+Where \(P_t\) is the price , \(D_t\) cash divident, \(\expected{\cdot}\) the expectation operator, \(r_t\) risk-adjusted discount rate for cashflow, all at time \(t\). Note that the price does not depend on previous or future price. In other word
+\begin{equation*}
+    \func{PV}{\text{share of stock}} = \func{PV}{\text{expected future dividends per share}}
+\end{equation*}
+A basic model is the \textit{Gordon growth model} in which we assume 
+\begin{equation*}
+    r_{t+k} = r \qquad \expected{D_{t+k}} = D (1 + g)^{k-1}
+\end{equation*}
+Then 
+\begin{equation*}
+    P_t = \sum_{i = 1}^{\infty} \dfrac{\expected{D_{t+k}}}{(1 + r_{t+k})^k} = \sum_{i = 1}^{\infty} \dfrac{D (1+g)^{k-1}}{(1 + r)^k} = \dfrac{D}{r - g}
+\end{equation*}
+Then the discount rate, in this case called \textit{market capitalization rate} and \textit{cost of equity capital} is 
+\begin{equation*}
+    r = \underbrace{\dfrac{D}{P_t}}_{\text{divident yield}} + g = \dfrac{D_0 (1 +g)}{P_t} + g
+\end{equation*}
+
+However, it is clear that growth can not continue indefinitely (unless under inflationary circumstances) and therefore firms may have multiple stages of growth. 
+\begin{description}
+    \item[Growth stage] : rapidly expanding sales, high profit margins, and 
+    abnormally high growth in earnings per share, many new investment 
+    opportunities, low dividend payout ratio
+    \item[Transition stage] growth rate and profit margin reduced by 
+    competition, fewer new investment opportunities, high payout ratio
+    \item[Mature stage] earnings growth, payout ratio and average return on 
+    equity stabilizes for the remaining life of the firm
+\end{description}
+
+\section{Dividend forecast}
+\begin{description}
+    \item [Earning] is the total profit, net income. 
+    \item [Earning per share]
+    \begin{equation*}
+        EPS = \dfrac{\text{Net Income} - \text{Preferred dividend}}{\text{Number of outstanding share}}
+    \end{equation*}
+    \item [Payout ratio] is the ratio of dividend to EPS 
+    \begin{equation*}
+        \text{Payout Ratio} = \dfrac{DIV}{EPS}
+    \end{equation*}
+    \item[Plowback Ratio] 
+    \begin{equation*}
+        \text{Plow back ratio} = 1 - \text{payout ratio} = 1 - \dfrac{DIV}{EPS}
+    \end{equation*} 
+    \item[Retain Earnings] 
+    \begin{equation*}
+        \text{Retained Earning} = \text{Earning} - \text{Dividends}
+    \end{equation*}
+    \item[Book value] cumulative retain earnings.
+    \item[Return on book equity]  
+    \begin{equation*}
+        ROE = \dfrac{\text{Earning}}{\text{Book value}}
+    \end{equation*}
+    \item[P/E] 
+    \begin{equation*}
+        P/E = \dfrac{\text{Market Capitalization}}{\text{Earning}} = \dfrac{\text{Price}}{EPS}
+    \end{equation*}
+    Forward P/E ratio is 
+    \begin{equation*}
+        \dfrac{\text{Price}}{EPS (\text{estimated})}
+    \end{equation*}
+    for next year usually and the Trailing P/E ratio is calculated as 
+    \begin{equation*}
+        \dfrac{\text{Price}}{EPS(TTM)}
+    \end{equation*}
+    trailing tweleve month. 
+\end{description}
+If the growth rate of the firm is higher than the interest rate then investor pay for that growth that is 
+\begin{equation*}
+    P_0 = PVNG + PVGO = \dfrac{EPS_1}{r}
+\end{equation*}
