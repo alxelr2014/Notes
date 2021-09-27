@@ -1,1 +1,56 @@
 \chapter{Introduction}
+A stochastic process is set of indexed random variables. More formally, a stochastic process maps each sample to a sequence of random variables. 
+\begin{equation*}
+    X : \Omega \to \Reals^{\TimeDomain}, \quad \func{X}{\omega} = \set<\operatorFunc{\func{X}{t}}{\omega}>{t \in \TimeDomain}
+\end{equation*}
+Usually, \(\TimeDomain\) is interpreted as a set of time. Similarly, a stochastic process can be thought of a function time and sample to real numbers.
+\begin{equation*}
+    X : \Omega \times \TimeDomain \to \Reals
+\end{equation*}
+Some definitions regarding stochastic processes are listed below
+\begin{description}
+    \item[Discrete-time] when \(\TimeDomain\) is discrete.
+    \item[Continuous-time] when \(\TimeDomain\) is continuous.
+    \item[Discrete-state] when \(\func{X}{t}\) are discrete.
+    \item[Continuous-state] when \(\func{X}{t}\) are continuous.
+    \item[Equality] Two stochastic processes are equal if 
+    \begin{equation*}
+        \func{X}{\omega,t} = \func{Y}{\omega,t}, \quad \forall \omega \in \Omega, t \in \TimeDomain
+    \end{equation*} 
+    Equality in minimum squared sense is defined as 
+    \begin{equation*}
+        \expected{\bracket{\func{X}{t} - \func{Y}{t}}^2} = 0, \quad \forall t
+    \end{equation*}
+\end{description}
+
+\section{Order distribution}
+The first order distribution of a stochastic process \(X\) is defined as 
+\begin{equation*}
+    \func{F}{x;t} = \prob{\func{X}{t} \leq x}
+\end{equation*}
+Morever, the \(n_{\cardinalTH}\) distribution of \(X\) is 
+\begin{equation*}
+    \func{F}{x_1 , \dots , x_n ; t_1 , \dots , t_n} = \prob{\func{X}{t_1} \leq x_1 , \dots , \func{X}{t_n} \leq x_n }
+\end{equation*}
+the \(n_{\cardinalTH}\) density of \(X\) is partials of distribution with respected \(x\).
+\begin{equation*}
+    \func{f}{x_1 , \dots , x_n ; t_1 , \dots , t_n} = \dfrac{\PDiffOperator^n \func{F}{x_1 , \dots , x_n ; t_1 , \dots , t_n}}{\PDiffOperator x_1 \dots \PDiffOperator x_n}
+\end{equation*}
+To determine all statistical properties of a stochastic process we need every \(n_{\cardinalTH}\) distribution or density. However mostly, we need certain averages which are calculated using the first and second densities. These averages inclue 
+\begin{description}
+    \item[Mean]
+    \begin{equation*}
+        \func{\eta}{t} = \expected{\func{X}{t}} = \int_{-\infty}^{\infty} x \func{f}{x;t} \diffOperator x
+    \end{equation*}
+    \item[Autocorrelation]
+    \begin{align*}
+        \func{R}{t_1, t_2}  &= \expected{\func{X}{t_1} \func{X}{t_2}} \\
+        &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x_1 x_2 \func{f}{x_1 , x_2;t_1 , t_2} \diffOperator x_2 \diffOperator x_1
+    \end{align*}
+    The value of autocorrelation on \(t_1 = t_2\) is the average power of \(\func{X}{t}\).
+    \item[Autocovariance]   
+    \begin{align*}
+        \func{C}{t_1, t_2}  &= \func{R}{t_1, t_2} - \func{\eta}{t_1} \func{\eta}{t_2}
+    \end{align*}
+    The value of autocovariance on \(t_1 = t_2\) is called the variance of \(\func{X}{t}\).
+\end{description}
