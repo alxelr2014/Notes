@@ -1,0 +1,45 @@
+\chapter{Introduction}
+Cryptography is the art and science of encrypting and decrypting a message. 
+\section{Symmetric cipher}
+A symmetric cipher scheme \(\Pi\) can be viewed as a triplet \(\bracket{\Gen, \Enc , \Dec}\) of algorithms. Suppose \(\Messages\) be the set of all possible messages and \(\Keys\) be the set of all keys. \(\Gen\) chooses a key \(k \in \Keys\) and then \(\Enc : \Messages \times \Keys \to \Ciphers\) encrypts the message \(m\) with key \(k\) and returns the cipher \(c\). Lastly, \(\Dec: \Ciphers \times \Keys \to \Messages \cup \but\) decrypts the cipher \(c\) with key \(k\) and returns either a message or an error, denoted as \(\but\). Without loss of generality we can assume that \(\Gen\) picks \(k\) uniformly from \(\Keys\). Futhermore, \(\Enc\) can be randomized, however \(\Dec\) is deterministic and for every message \(m\) and key \(k\) we must have 
+\begin{equation*}
+    \func{\Dec_k}{\func{\Enc_k}{m}} = m
+\end{equation*}
+
+\section{Kerckhoff's principle}
+Kerckhoff's principle assumes the following for every encryption scheme 
+\begin{enumerate}
+    \item The encryption and decryption is known to everyone.
+    \item The security of the scheme is only dependent on the key.
+\end{enumerate}
+
+\section{Prefectly secret encryption}
+Let \(K\) and \(M\) be two random variables, where \(K\) is the result of \(\Gen\) and \(M\) is the message. We can assume that they are independent. Furthermore, \( C = \func{\Enc_K}{M}\) is also a random varible. By the Kerckhoff's principle, we assume that the distribution on \(M\) and \(\Enc\) is known and only \(K\) is unknown. 
+
+\begin{definition}[Perfectly secure encrption]
+    An encryption scheme is perfectly secure if for all \(c \in \Ciphers\) with \(\prob{C = c} > 0\):
+    \begin{equation}
+        \forall m \in \Messages, \quad \condProb{M = m}{C = c} = \prob{M = m}
+    \end{equation}
+ \end{definition} 
+
+ \begin{proposition}
+     An encryption scheme \(\Pi\) is perfectly secure if and only if 
+     \begin{equation}
+         \forall m,m' \in \Messages, \quad \prob{\func{\Enc_K}{m} = c} = \prob{\func{\Enc_K}{m'} = c}
+     \end{equation}
+ \end{proposition}
+
+ \begin{proof}
+     Suppose \(\Pi\) is perfectly secure then (assuming that \(\prob{M = m} > 0\))
+     \begin{align*}
+         \prob{\func{\Enc_K}{m} = c} &=  \condProb{C = c}{M = m} = \dfrac{\condProb{M = m}{C = c} \prob{C = c}}{\prob{M = m}}\\
+         &= \dfrac{\prob{M = m} \prob{C= c}}{\prob{M= m}} = \prob{C = c}
+     \end{align*}
+     Now if the equation holds for \(\Pi\) then (again assuming that \(\prob{M = m} > 0 \))
+     \begin{align*}
+        \condProb{M = m}{C = c} &= \dfrac{\condProb{C = c}{M = m} \prob{M = m}}{\prob{C = c}}\\
+        &= \dfrac{\func{\Enc_K}{m} \prob{M = m}}{\sum_{m^{\ast}} \condProb{C = c}{M = m^{\ast}} \prob{M = m^{\ast}}}\\
+        &= \dfrac{\prob{M = m}}{\sum_{m^{\ast}} \prob{M = m^{\ast}}} = \prob{M = m}
+     \end{align*}
+ \end{proof}
