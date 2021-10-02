@@ -9,13 +9,13 @@ It is easy to check that addition and multiplication defined above have the foll
 \begin{enumerate}
         \item Addition and multiplication are commutitive:
               \[z + w = w + z \quad z,w \in \Complex\]
-              \[ z.w = w.z \quad z,w \in \Complex\]
+              \[ z\cdot w = w \cdot z \quad z,w \in \Complex\]
 
         \item Addition and multiplication are associative:
               \[(z + w) + u = z + (w + u) \quad z,w,u \in \Complex\]
-              \[ (z.w).u = z.(w.u) \quad z,w,u \in \Complex\]
+              \[ (z \cdot w) \cdot u = z \cdot (w \cdot u) \quad z,w,u \in \Complex\]
         \item Addition and multiplication are distributive:
-              \[(z + w) . u = z.u + w.u \quad z,w,u \in \Complex\]
+              \[(z + w) \cdot u = z \cdot u + w \cdot u \quad z,w,u \in \Complex\]
         \item Addition and multiplication have unique identity elements \(0 = (0,0)\) and \(1 = (1,0)\), respectively.
         \item Every complex number \(z\) has a unique addition inverse. Denoted by \(-z\).
         \item Every non-zero complex number \(z\) has a unique multiplication inverse. Denoted by \(z^{-1}\) or \(\dfrac{1}{z}\).
@@ -29,7 +29,7 @@ We can represent in many other forms. Two of the most commonly for \(z = (x,y)\)
                 x & -y \\
                 y & x
         \end{bmatrix} \]
-It is easy to see that \(i^2 = -1\). We also define the functions \(\Re(z) = x\) and \(\Im(z) = y\). In the second representation \(r\) is the distance from origin and \(\theta\) is the angle between the positive real axis and the ray passing through \(z\). One can also view complex number as an extension of real numbers in which every polynomial has a root.
+It is easy to see that \(i^2 = -1\). We also define the functions \(\func{\Re}{z} = x\) and \(\func{\Im}{z} = y\). In the second representation \(r\) is the distance from origin and \(\theta\) is the angle between the positive real axis and the ray passing through \(z\). One can also view complex number as an extension of real numbers in which every polynomial has a root.
 
 \begin{theorem}
       If \(K\) is field such that every odd degree polynomial has at a least a root and for all \(a \in K\), either \(x^2 = a\) or \(x^2 = -a\) has a root then it is sufficient to \textit{add} the root of \(x^2 = -1\) to \(K\) so that every polynomial has a root.
@@ -44,29 +44,138 @@ For every complex number \(z = x + iy\) there exists the mapping \(\bar{z}: \Com
                 \item \(z = \bar{\bar{z}}\).
                 \item \(z = \bar{z}\) if and only if \(z \in \mathbb{R}\).
                 \item The following relations hold:
-                      \[ \Re(z) = \dfrac{z + \bar{z}}{2} \quad,\quad \Im(z) = \dfrac{z - \bar{z}}{2i}\]
+                      \[ \func{\Re}{z} = \dfrac{z + \bar{z}}{2} \quad,\quad \func{\Im}{z} = \dfrac{z - \bar{z}}{2i}\]
         \end{enumerate}
 \end{proposition}
-Another mapping is the \(\emph{norm}\) or \(\emph{modulus}\) function, \(|z|: \Complex \to \Reals \) where \(|z| = \sqrt{x^2 + y^2}\). Geometrically speaking the norm of \(z\) gives the distance of \(z\) form origin.
+Another mapping is the \(\emph{norm}\) or \(\emph{modulus}\) function, \(\abs{z}: \Complex \to \Reals \) where \(\abs{z} = \sqrt{x^2 + y^2}\). Geometrically speaking the norm of \(z\) gives the distance of \(z\) form origin.
 \begin{proposition}
         The following properties are satisfied.
         \begin{enumerate}
-                \item \(|z| \geq 0 \quad \forall z \in \Complex\) and especially \(|z| = 0\) if and only if \(z = 0\)
-                \item \(|zw| = |z||w|\).
-                \item \(|z|^2 = z\bar{z}\).
-                \item \(|z| = |-z| = |\bar{z}|\)
+                \item \(\abs{z} \geq 0 \quad \forall z \in \Complex\) and especially \(\abs{z} = 0\) if and only if \(z = 0\)
+                \item \(\abs{zw} = \abs{z}\abs{w}\).
+                \item \(\abs{z}^2 = z\bar{z}\).
+                \item \(\abs{z} = \abs{-z} = |\bar{z}|\)
                 \item The following inequalities hold:
-                      \[ -|z| \leq \Re(z) \:,\: \Im(z) \leq |z|\]
+                      \[ -\abs{z} \leq \func{\Re}{z} \:,\: \func{\Im}{z} \leq \abs{z}\]
                 \item Triangle inequality:
-                      \[ |z + w | \leq |z| + |w| \]
-                      \[ \big||z| - |w|\big| \leq |z - w| \]
+                      \[ \abs{z + w} \leq \abs{z} + \abs{w} \]
+                      \[ \abs{\abs{z} - \abs{w}} \leq \abs{z- w}\]
         \end{enumerate}
 \end{proposition}
 
-\section{Sequences and Convergence}
-A Sequence \(\{z_n\}_{n \in \Naturals}\) is said to be convergent to \(z \in \Complex\) if:
-\[ \lim_{n \to \infty} |z_n - z| = 0 \quad \text{which we write as} \quad z = \lim_{n \to \infty} z_n\]
+The point at infinity, \(\infty\), is informally a point that is unboundedly far from the origin. The extended complex plane is defined as \(\Complex \cup \set{\infty}\). Every line passes through \(\infty\) but no half plane contains it.
 
-\begin{proposition}
-      If \(z_n = a_n + i b_n\) and \(z = a + ib\) then \(z_n \to z\) if and only if \(b_n \to b\) and \(a_n \to a\)
-\end{proposition}
+\section{Riemann sphere}
+\textbf{Riemann sphere} is a unit sphere centered at the origin complex plane. We can map every point (except \(\bracket{0,0,1}\)) on the sphere to a point in complex plane by the following bijective transformation.
+\begin{equation*}
+      \func{\phi}{z} = \bracket{x_1, x_2, x_3}= \bracket{\dfrac{z + \bar{z}}{1 + \abs{z}^2} , \dfrac{z - \bar{z}}{i \bracket{1 + \abs{z}^2}} , \dfrac{ \abs{z}^2 - 1}{\abs{z}^2 + 1} }
+\end{equation*}
+Geometrically, this transformation maps every point \(z\) to the interestion of the line connecting it to the \(\bracket{0,0,1}\) and the sphere. Furthermore, we can define \(\func{\phi{\infty}} = \bracket{0,0,1}\).
+
+\section{Limits and continuity}
+
+Let \(f : U \to \Complex\), \(\alpha\) be an adherent point of \(U\), and \(w\) be a complex number. Then 
+\begin{equation*}
+      w = \lim_{z \to \alpha} \func{f}{z} 
+\end{equation*}
+when 
+\begin{equation*}
+      \forall \epsilon > 0, \; \exists \delta > 0 \ \suchThat \ z \in U , \abs{z - \alpha} < \delta \implies \abs{\func{f}{z} - w} < \epsilon
+\end{equation*}
+By defining the \(\epsilon-\)neighbourhood of \(\infty\) to the 
+\begin{equation*}
+      \set<z>{\dfrac{1}{z} < \epsilon}
+\end{equation*}
+we can extend the defintion of limit to when \(\alpha\) or \(w\) are \(\infty\).
+We say that \(f\) is continuous at \(\alpha\) if 
+\begin{equation*}
+      \lim_{z \to \alpha} \func{f}{z} = \func{f}{\alpha}
+\end{equation*}
+
+\begin{definition}
+      A function \(f\) is said to be uniformly continuous if 
+      \begin{equation*}
+            \forall \epsilon > 0 , \; \exists \delta > 0 \ \suchThat \ z,w \in S , \abs{z - w} < \delta \implies \abs{\func{f}{z} - \func{f}{w}}
+      \end{equation*}
+\end{definition}
+
+\section{Sequences and convergence}
+A Sequence \(\set{z_n}_{n \in \Naturals}\) is said to be convergent to \(z\) if:
+\begin{equation*} 
+      \forall \epsilon > 0 , \; \exists N \ \suchThat \ n \geq N \implies \abs{z - z_n} < \epsilon
+\end{equation*}
+and it is denoted as 
+\begin{equation*}
+      z = \lim_{n \to \infty} z_n
+\end{equation*}
+
+A sequence \(\set{z_n}\) is a \textbf{Cauchy sequence} if 
+\begin{equation*}
+      \forall \epsilon, \; \exists N \ \suchThat \ n,m \geq N \implies \abs{z_m - z_n} < \epsilon
+\end{equation*}
+If we write \(z_n = x_n + iy_n\), since \(\abs{z_n - z_m} = \sqrt{(x_n - x_m)^2 + (y_n - y_m)^2}\) and \(\abs{x_n - x_m}\leq \abs{z_n - z_m} \), \( \abs{y_n - y_m} \leq \abs{z_n - z_m}\), we can conclude that \(\set{z_n}\) is Cauchy if and only if \(\set{x_n}\) and \(\set{y_n}\) are Cauchy sequences. Thus, since for real sequences a Cauchy sequence is convergent then, a complex Cauchy sequence is convergent as well.
+
+Due to similarities between the definition given above and their real counterpart, most results dealing with limits can be easily extended to complex numbers.
+
+\section{Compact sets}
+\begin{definition}[Point of accumulation]
+      point \(v\) is a \textbf{point of accumulation} for the sequence \(\set{z_n}\) if for given \(\epsilon > 0\) there exists infinitely many \(n\) such that 
+      \begin{equation*}
+            \abs{z_n - v} < \epsilon
+      \end{equation*}
+      Similarly, a point of accumulation of an infinite set \(S\) is a point \(v\) that for each open set \(U\) containing \(v\) there are infinitely many elements of \(S\).
+\end{definition}
+
+\begin{theorem}[Weierstrass-Bolzano theorem]
+      If \(S\) is an infinite bounded set of real numbers, then \(S\) has a point of accumulation.
+\end{theorem}
+
+\begin{definition}
+      A \textbf{compact} set \(S\) is a set that every sequence of its elements has a point of accumulation in \(S\). The following defintions are equivalent 
+      \begin{enumerate}
+            \item Every infinite subset of \(S\) has a point of accumulation in \(S\).
+            \item Every sequence of elements of \(S\) has a convergent subsequent whose limit is in \(S\).
+      \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+      A complex set is compact if and only if it is closed and bounded.
+\end{theorem}
+
+\begin{theorem}
+      Let \(S_1 \supset S_2 \supset \dots\) be a sequence of non-empty closed subsets of a compact set \(S\). Then, the interestion of all \(S_n\) is not empty.
+\end{theorem}
+
+\begin{theorem}
+      Let \(S\) be a compact set and \(f\) be continuous function on \(S\). Then the image of \(f\) is compact.
+\end{theorem}
+
+\begin{theorem}
+      Let \(S\) be a compact set and \(f\) be continuous function on \(S\). Then  \(f\) is uniformly continuous.
+\end{theorem}
+
+
+\begin{definition}
+      Let \(A,B\) be two sets of complex numbers. The \textbf{distance} between them is 
+      \begin{equation*}
+            \func{d}{A,B} = \min_{\substack{\alpha \in A \\ \beta \in B}} \abs{\alpha - \beta}
+      \end{equation*}
+\end{definition}
+
+\begin{theorem}
+      Let \(S\) be a closed set and let \(v\) be a complex number. There exists a point \(w \in S\) such that 
+      \begin{equation*}
+            \func{d}{S,\set{v}} = \abs{w - v}
+      \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+      Let \(K\) be a compact set and let be \(S\) a closed set. Then, there are elements \(\alpha \in K\) and \(\beta \in S\) such that 
+      \begin{equation*}
+            \func{d}{K,S} = \abs{\alpha - \beta}
+      \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+      Let \(K\) be compact. Let \(r\) be a real number greater than zero. There exists a finite number of discs of radius \(r\) whose union contains \(K\).
+\end{theorem}

@@ -1,0 +1,136 @@
+\chapter{Complex Analysis}
+\section{Riemann view}
+\begin{definition}[Holomorph] \label{eq:complexHolomorphism}
+    A function \(f: U \overset{open}{\subset} \Complex \to \Complex\) is a holomorph function if it is complex differentiable in every point in \(U\). That is, 
+    \begin{equation*}
+        \lim_{h \to 0} \dfrac{\func{f}{z_0 + h} - \func{f}{z_0}}{h}
+    \end{equation*}
+    exists. Equivalently, there exists a \(c \in \Complex\) such that 
+    \begin{equation} 
+        \func{f}{z_0 + h} - \func{f}{z_0} - hc = \littleO{h} 
+    \end{equation}
+\end{definition}
+Consdering \(f\) as a function of \(\Reals^2\) to \(\Reals^2\) 
+\begin{equation*}
+    \func{f}{x,y} =  \func{u}{x,y}+ i\func{v}{x,y} \sim \left(\func{u}{x,y}, \func{v}{x,y}\right)
+\end{equation*}
+implies that if \(f\) is differentiable then \(u\) and \(v\) are differentiable. Which means
+\begin{equation*}
+    \begin{cases}
+        \func{u}{x + h_1 , y + h_2} - \func{u}{x,y} - \func{\PDiff{u}{x}}{x,y}h_1 - \func{\PDiff{u}{y}}{x,y}h_2 &= \littleO{h}\\
+        \func{v}{x + h_1 , y + h_2} - \func{v}{x,y} - \func{\PDiff{v}{x}}{x,y}h_1 - \func{\PDiff{v}{y}}{x,y}h_2 &= \littleO{h}\\
+    \end{cases}
+\end{equation*}
+therefore 
+\begin{equation*}
+    \func{f}{z + h} - \func{f}{z} - \begin{bmatrix*} 
+        u_x & u_y\\
+        v_x & v_y
+    \end{bmatrix*} \begin{bmatrix*}
+         h_1 \\
+          h_2 
+    \end{bmatrix*}= \littleO{h}\\
+\end{equation*}
+Comparing the equation above with \Cref{eq:complexHolomorphism} implies that 
+\begin{equation*}
+    u_x =v_y \quad \land \quad u_y = - v_x
+\end{equation*}
+Which are called \textbf{Cauchy-Riemann relations}. This means that, for a complex to be holomorphic, it must be differentiable in \(\Reals^2\) sense and its partials follow the Cauchy-Riemann relation. By Leboman-Menchove, we can replace differentiablity with the existence of partial derivatives. From a geometric prespective, a complex number can be written as 
+\begin{equation*}
+    \begin{bmatrix*}
+        a& -b\\
+        b & a
+    \end{bmatrix*} = \sqrt{a^2 + b^2} \begin{bmatrix*}
+        \cos \phi& - \sin \phi\\
+        \sin \phi &  \cos \phi
+    \end{bmatrix*}
+\end{equation*}
+for some angle \(\phi\). Then, the complex derivative of a function can be seen as a rotation and a scaling, which are both \textbf{conformal} (keeps the angle and direction) transformation. Hence, a holomorphic function is a function that is differentiable in \(\Reals^2\) sense and it is conformal at every point.
+One can easily verify complex differentiation follows the same rule as real differentiation, for addition, multiplication, and division. Furthermore, the Chain rule holds even if the first function is a curve.
+\section{Weirstrass view}
+\begin{definition}[Analytical]
+    A function \(f: U \overset{open}{\subset} \Complex \to \Complex \) is analytical if for each \(z_0 \in U\) there exists a \(r > 0\) such that the open ball with radius \(r\) ceneterd at \(z_0\) remains in \(U\) and the power series 
+    \begin{equation*}
+        \func{f}{z} = \sum_{n = 0}^\infty c_n (z - z_0)^n
+    \end{equation*}
+    for all \(z\) that \(\abs[z - z_0] < r\).
+\end{definition}
+
+\begin{lemma}
+    For any power series there exists a \(0 \leq \rho \leq \infty\) such that if \(\abs{z - z_0} < \rho\) then the series is convergent and if \(\abs{z- z_0} > \rho\) it is divergent. Furthermore, if \(K\) is a compact subset of \(\set<z>{\abs{z - z_0} < \rho}\), then the series is uniformly and absolutely convergent in \(K\).
+\end{lemma}
+
+
+\begin{theorem}
+    Suppose \(\func{f}{z} = \sum_n c_n (z - z_0)^n\) is power series with \(\rho > 0\) then, \(f\) is complex differentiable in the circle of convergence and 
+        \begin{equation*}
+            \func{f'}{z} = \sum_{n= 0}^\infty n c_n (z - z_0)^{n-1}
+        \end{equation*}
+        and the radius of convergence doesn't change. Therefore, \(f \in \CalC^\infty\). Furthermore, 
+        \begin{equation*}
+            c_n = \dfrac{\func{f^{(n)}}{z_0}}{n!}
+        \end{equation*}
+\end{theorem}
+
+The above theorem shows that every analytical function is also holomorphic. 
+
+Let \(\gamma : \clcl{a}{b} \to U \overset{open}{\subset} \Complex\) is a continuous piecewise continuously differentiable (at endpoints assume one-sided differentiablity) and \(f : U \to \Complex\)  is a continuous function. Then 
+\begin{equation*}
+    \int_{\gamma} \func{f}{z} \diffOperator z = \int_{\gamma} u \diffOperator x - v \diffOperator y + i \int_{\gamma} v \diffOperator x + u \diffOperator y
+\end{equation*}
+
+Now suppose \(f'\) is continuous. Then 
+\begin{equation*}
+    \int_{\gamma} \func{f'}{z} \diffOperator z = \func{f}{\func{\gamma}{b}} -  \func{f}{\func{\gamma}{a }}
+\end{equation*}
+
+\begin{example}
+    Let \(\func{\gamma}{t} = R \cos t + i R \sin t\), for \(0 \leq t \leq 2\pi\) then 
+    \begin{equation*}
+        \int_{\gamma} z^n = \begin{cases}
+            0 & n \neq -1\\
+            2\pi i & n = -1
+        \end{cases}
+    \end{equation*}
+\end{example}
+
+\begin{definition}
+An open connected set \(U \subset \Complex\) is \textbf{simply connected} if for any two points \(P,Q\) and two piecewise \(\CalC^1\) curves, \(\alpha,\beta : \clcl{0}{1} \to U\) with \(\func{\alpha}{0} = \func{\beta}{0} = P \) and \(\func{\alpha}{1} = \func{\beta}{1} = Q\) there exists a continuous function \(H: \clcl{0}{1} \times \clcl{0}{1} \to U\) such that 
+\begin{equation*}
+    \func{H}{0,t} = \func{\alpha}{t}, \quad \func{H}{1,t} = \func{\beta}{t}
+\end{equation*}
+and for each \(s\), \(\func{H}{s,t}\) a function of \(t\) is a piecewise \(\CalC^1\) curves that \(\func{H}{s,0} = P\) and \(\func{H}{s,1} = Q\). Equivalently, if \(\alpha\) is a closed curves, then there exist a continuous \(H : \clcl{0}{1} \times \clcl{0}{1} \to U\) such that for each \(s\), \(\func{H}{s,t}\) is a piecewise \(\CalC^1\) closed curve and \(\func{H}{1,t} = \func{\alpha}{0}\).
+\end{definition}
+
+\begin{theorem}[Greene's Theorem]
+    If \(U\) is a simply connected region and \(D \subset U\) is such that the border of \(D\) is in \(U\) and it is a piecewise \(\CalC^1\) curve. Let \(P,Q\) be two continuously differentiable function on \(U\) then 
+    \begin{equation*}
+        \int_{\PDiffOperator D} P \diffOperator x + Q \diffOperator y = \iint_{D} \PDiff{Q}{x} - \PDiff{P}{y} \diffOperator x \diffOperator y
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Cauchy integral]
+    Suppose \(f: U \to \Complex\) is a holomorph function with continuous derivative, where \(U\) is simply connected region. Let \(\gamma : \clcl{a}{b} \to U\) be a simple closed piecewise \(\CalC^1\) then 
+    \begin{equation*}
+        \int_{\gamma} \func{f}{z} \diffOperator z = 0
+    \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    \begin{align*}
+        \int_{\gamma} \func{f}{z} \diffOperator z &=  \int_{\gamma} u \diffOperator x - v \diffOperator y + i \int_{\gamma} v \diffOperator x + u \diffOperator y \\
+        &= \iint_{D} \left(-\PDiff{v}{x} - \PDiff{u}{y}\right) \diffOperator x \diffOperator y +  i\iint_{D} \left(\PDiff{u}{x} - \PDiff{v}{y}\right) \diffOperator x \diffOperator y \\
+        &= 0
+    \end{align*}
+    By the Cauchy-Riemann relations.
+\end{proof}
+
+\begin{theorem}[Cauchy's integral formula]
+    Let \(U\) be a connected simple region and \(\gamma\) is a simple closed piecewise \(\CalC^1\). Let \(z\) be a point in the region surrounded by \(\gamma\) then
+    \begin{equation*}
+        \func{f}{z} = \frac{1}{2 \pi} \int_{\gamma} \frac{\func{f}{\zeta}}{\zeta - z} \diffOperator \zeta
+    \end{equation*}
+    \(\gamma\) is counter clock wise.
+\end{theorem}
+
+Using this one can show that any holomorphic function is also analytical. Interestingly, for any \(R > 0\) that \(\abs[z - z_0] = R\) remains in \(U\), \(f\) has power series representation.
