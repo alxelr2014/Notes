@@ -179,3 +179,94 @@ Due to similarities between the definition given above and their real counterpar
 \begin{theorem}
       Let \(K\) be compact. Let \(r\) be a real number greater than zero. There exists a finite number of discs of radius \(r\) whose union contains \(K\).
 \end{theorem}
+
+We say that a family of open set \(\set{U_i}\) covers a set \(S\) when for every \(z \in S\), \(z \in U_i\) for some \(i\) as well. A subcovering of \(S\) is a covering of \(S\) with a subfamily of \(\set{U_i}\). If that subfamily is finite we say that it is a finite subcovering of \(S\). \(S\) is \textbf{covering compact} if every open convering can reduce to a finite subcovering.
+
+\begin{theorem}
+      Let \(S\) be a set then \(S\) is sequentially comapct if and only if covering compact.
+\end{theorem}
+
+\section{Differentiability}
+Let \(f: U \overset{open}{\subset} \Complex \to \Complex\) and \(z\) be a point in \(U\). \(f\) is said to be complex differentiable at \(z\) if the following limit exists.
+\begin{equation*}
+      \func{f'}{z} = \lim_{h \to 0} \dfrac{\func{f}{z + h} - \func{f}{z}}{h}
+\end{equation*}
+Equivalently, there exists a \(c \in \Complex\) such that 
+    \begin{equation} 
+        \func{f}{z_0 + h} - \func{f}{z_0} - hc = \littleO{h} 
+\end{equation}
+Differentiation rules are similar to real differentiation and are proved the same way. 
+
+\(f\) is \textbf{holomorphic} if it is differentiable at every point of \(U\). Taking the limit along the real and imaginary axes and equating them gives the \textbf{Cauchy-Riemann equations}
+
+\begin{equation*}
+      \PDiff{u}{x} = \PDiff{v}{y} ,\quad \PDiff{u}{y} = - \PDiff{v}{x}
+\end{equation*}
+
+Assuming that \(u\) and \(v\) are twice differentiable, we can see that 
+\begin{align*}
+      \Delta u &= \dfrac{\PDiffOperator^2 u}{\PDiffOperator x^2} + \dfrac{\PDiffOperator^2 u}{\PDiffOperator y^2}\\
+      &= \dfrac{\PDiffOperator^2 v}{\PDiffOperator x \PDiffOperator y} - \dfrac{\PDiffOperator v}{\PDiffOperator y \PDiffOperator x} = 0
+\end{align*}
+Which means that \(u,v\) satisfy the \textit{Laplace's equation} and thus are harmonic functions. 
+
+\begin{theorem}
+      If \(u,v\) and have continuous first order partial and satisfy the Cauchy-Riemann equations then \(\func{f}{z} = \func{u}{x,y} + \func{v}{x,y}\) is analytic with continuous derivative.
+\end{theorem}
+
+\section{Polynomials and rational functions}
+
+\begin{theorem}
+      If all zero's of a polynomial \(P\) lie in a half plane (convex polygon), the all zero's of the derivative \(P'\) lie in the same half plane (convex polygon).
+\end{theorem}
+
+A \textbf{ration function} \(\func{R}{z}\) is the quotient of two polynomials
+\begin{equation*}
+      \func{R}{z} = \dfrac{\func{P}{z}}{\func{Q}{z}} = \dfrac{a_m x^m + \dots + a_0}{b_n x^n + \dots + b_0}
+\end{equation*}
+We can assume that \(P\) and \(Q\) have no factor in common. In that case, the zeros of \(P\) are the zeros of \(R\) and the zeros of \(Q\) are called the \textit{poles} of \(R\). We can further define \(\func{R}{\infty}\) to be \(\func{S_R}{0}\) where \(\func{S_R}{z} = \func{R}{\frac{1}{z}}\). 
+\begin{equation*}
+      \func{S_R}{z} = z^{n-m} \dfrac{a_m + \dots + a_0 x^m}{b_n + \dots + b_0 x^n}
+\end{equation*}
+Then if \(n > m\) we say that \(R\) has roots at \(\infty\) with multiplicity of \(n - m\), if \(n < m\) then \(R\) has poles at \(\infty\) with multiplicity of \(m  - n\). If \(n = m\) then \(\func{R}{\infty} = \frac{a_m}{b_n}\). It is now easy to see that the number of roots and poles of \(R\) - including \(\infty\) - is the greater of \(m,n\) and it is called the \textit{degree} of \(R\). 
+
+We can write \(R\) in the following form 
+\begin{equation*}
+      \func{R}{z} = \func{G}{z} + \func{H}{z}
+\end{equation*}
+where \(G\) is a polynomial with no constant term, by carrying out the division. Now let \(\beta_1 , \dots , \beta_k\) be distinct poles of \(R\). Then \(\func{S_j}{\xi} = \func{R}{\beta_j + \frac{1}{\xi}}\) is a rational function of \(\xi\) and it can be written as 
+\begin{equation*}
+      \func{S_j}{\xi} = \func{G_j}{\xi} + \func{H_j}{\xi} \implies \func{R}{z}= \func{G_j}{\dfrac{1}{z - \beta_j}} + \func{H_j}{\dfrac{1}{z - \beta_j}}
+\end{equation*}
+note that \(\func{G_j}{\frac{1}{z - \beta_j}}\) has pole(s) only at \(\beta_j\). Now consider 
+\begin{equation*}
+      \func{S}{z} = \func{R}{z} - \func{G}{z} - \sum_{j = 1}^k \func{G_j}{\dfrac{1}{z - \beta_j}}
+\end{equation*}
+It can have poles only at \(\beta_1 , \dots , \beta_k\) and \(\infty\). \(R\) and \(G_j\) have poles at \(z = \beta_j\), however their difference if finite. \(R\) and \(G\) have poles at \(\infty\) but their difference is finite as well. Hence \(S\) has no poles and thus must be a constant. Incorporating the constant into \(G\) allows us to write \(R\) as 
+\begin{equation*}
+      \func{R}{z} = \func{G}{z} + \sum_{j = 1}^k \func{G_j}{\dfrac{1}{z - \beta_j}}
+\end{equation*}
+which is its \textit{partial fraction decomposition}.
+
+\section{Conformal maps}
+A \textbf{conformal map} is a transformation that conserves angle and direction. For example every linear \(\Reals^2\) transformation of the form 
+\begin{equation*}
+      \begin{bmatrix}
+            a & -b\\
+            b & a
+      \end{bmatrix} = \sqrt{a^2 + b^2} \begin{bmatrix}
+            \cos \theta & -\sin \theta\\
+            \sin \theta & \cos \theta
+      \end{bmatrix} 
+\end{equation*}
+is a conformal mapping since it is a scaling and a rotation, both of which conserve the angle and direction. 
+Let \(U\) be an open set in \(\Complex\) and \(\gamma,\eta : \clcl{a}{b} \to U\)  be two complex valued curves. Suppose that \(z_1 = \func{\gamma}{t_1} = \func{\eta}{t_2}\) then the angle between \(\gamma\) and \(\eta\) at \(z_1\) is defined as the angle between \(\func{\gamma'}{t_1}\) and \(\func{\eta'}{t_2}\), provided that they are nonvanishing. Let \(f: U \to \Complex\) be a holomorphic function then by chain rule 
+\begin{equation*}
+      \ODiff{\func{f}{\func{\gamma}{t}}}{t} = \func{f'}{\func{\gamma}{t}} \func{\gamma'}{t}
+\end{equation*}
+Viewing \(w = \func{f'}{\func{\gamma}{t}}\) as a \(\Reals^2\) linear transformation, we can deduce that \(f\) is conformal. 
+\begin{align*}
+      \ODiff{\func{f}{\func{\gamma}{t_1}}}{t} &= \func{f'}{z_1} \func{\gamma'}{t_1}\\
+      \ODiff{\func{f}{\func{\eta}{t_2}}}{t} &= \func{f'}{z_1} \func{\eta'}{t_2}
+\end{align*}
+Thus given that \(\func{f'}{z_1} \neq 0\) the angle between \(\gamma\) and \(\eta\) at \(z_1\) is the same as \(f \circ \gamma\) and \(f \circ \eta\).
