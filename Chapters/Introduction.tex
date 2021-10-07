@@ -1,0 +1,105 @@
+\chapter{Introduction}
+\section{Entropy}
+Let \(X\) be a random variable with probability mass function \(\func{p}{x}\), then the \textbf{entropy} of \(X\) is defined as 
+\begin{equation*}
+      \func{H}{X} = \expected{- \func{\log}{\func{p}{X}}} = - \sum_{x \in \calX} \func{p}{x} \func{\log}{\func{p}{x}}
+\end{equation*}
+which intuitively measures the uncertainty of a single variable. Depending one the base of the logarithm, the entropy is measured in bits, for base 2, nats, for base \(e\). Entropy can also be viewed as the average amount information revealed after sampling \(X\). We can define conditional entropy of \(X\) given that \(Y = y\) to be 
+\begin{equation*}
+      \func{H}{X | Y = y} = - \sum_{x \in \calX} \func{p_{X|Y}}{x|y} \func{\lg}{ \dfrac{\func{p_{XY}}{x,y}} {\func{p_Y}{y}} }
+\end{equation*}
+and conditional entropy of \(X\) given \(Y\) is 
+\begin{align*}
+      \func{H}{X | Y} &= \sum_{y \in \calY} \func{p_Y}{y} \func{H}{X | Y = y}\\
+      &= - \sum_{y} \sum_{x} \func{p_{XY}}{x,y} \func{\lg}{ \dfrac{\func{p_{XY}}{x,y}}{\func{p_Y}{y}}}
+\end{align*}
+Lastly, the joint entropy to variables is defineds
+\begin{equation*}
+      \func{H}{X,Y} = \expected[X,Y]{-\func{\log}{\func{p_{XY}}{X,Y}}} =- \sum_{x,y} \func{p_{XY}}{x,y} \func{\lg}{\func{p_{XY}}{x,y}}
+\end{equation*}
+From now on we omit the subscript for the PMFs unless it can not be inferred from the context.
+
+\begin{proposition}[Chain rule for entropy]
+      For any two random variables \(X\) and \(Y\)
+      \begin{equation*}
+            \func{H}{X,Y} = \func{H}{X} + \func{H}{Y|X}
+      \end{equation*}
+      furthermore if \(Z\) is another random variable then 
+      \begin{equation*}
+            \func{H}{X,Y|Z} = \func{H}{X|Z} + \func{H}{Y|X,Z}
+      \end{equation*}
+      which then can be used to generalize the chain rule
+      \begin{equation*}
+            \func{H}{X_1, \dots , X_n} = \sum{i = 1}^n \func{H}{X_i | X_{i-1} , \dots , \func{H}{X_1}}
+      \end{equation*}
+\end{proposition}
+
+\begin{proof}
+      For the conditional case 
+      \begin{align*}
+            \func{H}{X|Z} &= - \sum_{x,z} \func{p}{x,z} \func{\lg}{\dfrac{\func{p}{x,z}}{\func{p}{z}}}\\
+            \func{H}{Y|X,Z} &= - \sum_{x,y,z} \func{p}{x,y,z} \func{\lg}{\dfrac{\func{p}{x,y,z}}{\func{p}{x,z}}}\\
+            \implies  \func{H}{X|Z} +  \func{H}{Y|X,Z} &= -\sum_{x,y,z} \func{p}{x,y,z} \func{\lg}{\dfrac{\func{p}{x,y,z}}{\func{p}{z}}}\\
+            &= \func{H}{X,Y|Z}
+      \end{align*}
+\end{proof}
+
+\section{Mutual information}
+Mutual information is the reduction in entropy due to another random variable. 
+\begin{align*}
+      \func{I}{X;Y} &= \func{H}{X} - \func{H}{X|Y} \\
+      &= \expected[x,y]{\func{\lg}{\dfrac{\func{p}{X,Y}}{\func{p}{X} \func{p}{Y}}}}\\
+      &= \sum_{x} \sum_y \func{p}{x,y} \func{\lg}{\dfrac{\func{p}{x,y}}{\func{p}{x} \func{p}{y}}}\\
+      &= \func{H}{Y} - \func{H}{Y|X} = \func{I}{Y;X}
+\end{align*}
+
+\begin{proposition}
+      \(\func{I}{X;Y}\) is zero if and only if \(X\) and \(Y\) are independent.
+\end{proposition}
+For conditional mutual information we have 
+\begin{equation*}
+      \func{I}{X;Y | Z} = \func{H}{X|Z} - \func{H}{X|Y,Z}
+\end{equation*}
+
+\begin{proposition}[Chain rule for mutual information]
+      For a random variable \(Y\) and random variables \(X_1, \dots , X_n\) we have 
+      \begin{equation*}
+            \func{I}{X_1, \dots , X_n ; Y} = \sum_{i = 1}^n \func{I}{X_i;Y | X_{i-1} , \dots , X_1}
+      \end{equation*}
+\end{proposition}
+\begin{proof}
+      We have 
+      \begin{align*}
+            \func{I}{X_1, \dots ,X_n ; Y} &= \func{H}{X_1, \dots, X_n} - \func{H}{X_1, \dots , X_n | Y}\\
+            &= \sum_{i = 1}^n \func{H}{X_i | X_{i-1} , \dots , X_1} - \func{H}{X_i | X_{i - 1} , \dots , X_1, Y}\\
+            &= \sum_{i=1}^n \func{I}{X_i ; Y | X_{i-1}, \dots , X_1}
+      \end{align*}
+\end{proof}
+
+\section{Channel Capacity}
+A \textit{communication channel} is a system in which output depends probabilistically on its input. It is characterized by a probability transition matrix \(\func{p}{y|x}\). \textbf{Capacity} of a communication channel with input \(X\) and output \(Y\) is defined as 
+\begin{equation*}
+      C = \max_{\func{p}{x}} \func{I}{X;Y}
+\end{equation*}
+
+\section{Relative entropy}
+\textbf{Relative entropy} or  \textit{Kullback–Leibler divergence} measures how one probability distribution differs from another. 
+\begin{equation*}
+      \func{D}{p || q}= \expected[\func{p}{x}]{\func{\lg}{\frac{\func{p}{X}}{\func{q}{X}}}} = \sum_{x} \func{p}{x} \func{\lg}{\frac{\func{p}{x}}{\func{q}{x}}}
+\end{equation*}
+Even though it is not a metric, if \(\func{D}{p || q} = 0 \implies p = q\).
+
+Note that 
+\begin{equation*}
+      \func{I}{X;Y} = \sum_{x,y} \func{p}{x,y} \func{\lg}{\frac{\func{p}{x,y}}{\func{p}{x} \func{p}{y}}} = \func{D}{\func{p}{x,y} || \func{p}{x} \func{p}{y}}
+\end{equation*}
+
+Conditional relative entropy is defined as 
+\begin{align*}
+      \func{D}{ \func{p}{y|x} || \func{q}{y|x} } &= \expected[\func{p}{x,y}]{\func{\lg}{\frac{\func{p}{Y|X}}{\func{q}{Y|X}}}}\\
+      &= \sum_{x} \func{p}{x} \sum_{y} \func{p}{y|x} \func{\lg}{\frac{\func{p}{y|x}}{\func{q}{y|x}}}
+\end{align*}
+Similarly we define the following chain rule 
+\begin{equation*}
+      \func{D}{ \func{p}{x,y} || \func{q}{x,y} } = \func{D}{ \func{p}{x} || \func{q}{x} } + \func{D}{ \func{p}{y|x} || \func{q}{y|x} }
+\end{equation*}
