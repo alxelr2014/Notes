@@ -103,3 +103,276 @@ Similarly we define the following chain rule
 \begin{equation*}
       \func{D}{ \func{p}{x,y} || \func{q}{x,y} } = \func{D}{ \func{p}{x} || \func{q}{x} } + \func{D}{ \func{p}{y|x} || \func{q}{y|x} }
 \end{equation*}
+
+\section{Convex function and inequalities}
+A function \(f\) is said to be convex over an interval \(\clcl{a}{b}\) if for every \(x_1,x_2 \in \opop{a}{b}\) and \(0 \leq \lambda \leq 1\)
+\begin{equation*}
+      \func{f}{\lambda x_1 + \bracket{1 - \lambda} x_2} \leq \lambda \func{f}{x_1} + \bracket{1 - \lambda} \func{f}{x_2}
+\end{equation*}
+\(f\) is said to be strictly convex if equality holds only if \(\lambda = 0,1\).
+
+\begin{theorem}
+      If \(f\) is twice differentiable and has non-negative (positive) second derivative over an interval, then \(f\) is convex (strictly convex) over that interval.
+ \end{theorem}
+
+ \begin{theorem}[Jensen's inequality]
+       If \(f\) is a convex function and \(X\) is a random variable
+       \begin{equation*}
+            \func{f}{\expected{X}} \leq \expected{\func{f}{X}} 
+       \end{equation*}
+       Moreover, if \(f\) is strictly convex, the equality implies that \(X = \expected{X}\) with probability 1.
+ \end{theorem}
+
+ \begin{corollary}
+       The followings can be shown using the Jensen's inequality
+       \begin{enumerate}
+            \item For non-negative numbers \(a_1, \dots , a_n\) and \(b_1 , \dots , b_n\) 
+            \begin{equation*}
+                  \sum a_i \func{\log}{\dfrac{a_i}{b_i}} \geq \bracket{\sum a_i} \func{\log}{\dfrac{\sum b_i}{\sum a_i}}
+            \end{equation*}
+            equality holds if and only \(\frac{a_i}{b_i} = c, \quad \forall i\). This is called \textit{log sum inequality}.
+             \item \(\func{D}{p || q} \geq 0\) and equality holds when  \(p = q\).
+             \item \(\func{I}{X;Y} \geq 0\) and equality holds when \(X\) and \(Y\) are independent.
+             \item \(\func{D}{\func{p}{y|x} || \func{q}{y|x}} \geq 0\) and equality holds when \(\func{p}{y|x} = \func{q}{y|x}\) for all \(x\) and \(y\) such that \(\func{p}{x} > 0\).
+             \item \(\func{I}{X;Y|Z} \geq 0\) and equality holds when \(X\) and \(Y\) are conditionally independent given \(Z\).
+       \end{enumerate}
+ \end{corollary}
+
+ \begin{proof}
+       \begin{enumerate}
+            \item Suppose \(\lambda_i = b_i\), \(x_i = \frac{a_i}{b_i}\), and \(\func{f}{x} = x \log x\) then 
+            \begin{align*}
+                  \dfrac{\sum \lambda_i \func{f}{x_i}}{\sum \lambda_i} &= \dfrac{\sum a_i \log \frac{a_i}{b_i}}{\sum b_i}\\
+                  &\geq \dfrac{\sum a_i}{\sum b_i}\func{\log}{\dfrac{\sum a_i}{\sum b_i}} \\
+                  \implies \sum a_i \func{\log}{\dfrac{a_i}{b_i}} &\geq \bracket{\sum a_i} \func{\log}{\dfrac{\sum b_i}{\sum a_i}}
+            \end{align*}
+            For the Jensen inequality, equality holds when \(x_1 = \dots = x_n\) and thus \(\frac{a_i}{b_i} = c, \forall i\).
+            \item Using the log sum inequality for \(a_i = \func{p}{x_i}\) and \(b_i = \func{q}{x_i}\) 
+            \begin{align*}
+                  \sum_i \func{p}{x_i} \func{\log}{\dfrac{\func{p}{x_i}}{\func{q}{x_i}}} &\geq \bracket{\sum \func{p}{x_i}}\func{\log}{\dfrac{\sum \func{p}{x_i}}{\sum \func{q}{x_i}}}\\
+                  &= 0
+            \end{align*}
+            equality holds when \(\func{p}{x} = c \func{q}{x}\), and since both are PMFs \(c = 1\).
+            \item we know that
+            \begin{equation*}
+                  \func{I}{X;Y} = \func{D}{\func{p}{x,y} || \func{p}{x} \func{p}{y}} \geq 0
+            \end{equation*}
+            and equality holds when \(\func{p}{x,y} = \func{p}{x} \func{p}{y}\) which means \(X\) and \(Y\) are independent.
+            \item Using the log sum inequality for \(a_i = \func{p}{y_i |x}\) and \(b_i = \func{q}{y_i|x}\) 
+            \begin{align*}
+                  \sum_x \func{p}{x} \sum_{y_i} \func{p}{y_i | x} \func{\log}{\dfrac{\func{p}{y_i | x}}{\func{q}{y_i | x}}} &\geq \sum_x \func{p}{x}\bracket{\sum \func{p}{y|x_i}}\func{\log}{\dfrac{\sum \func{p}{y|x_i}}{\sum \func{q}{y_i | x}}}\\
+                  &= 0
+            \end{align*}
+            equality holds when \(\func{p}{y|x} =\func{q}{y|x}\) for all \(y\) and \(x\) with \(\func{p}{x} > 0\).
+            \item Since 
+            \begin{equation*}
+                  \func{I}{X;Y | Z} = \func{D}{\func{p}{x,y|z} || \func{p}{x|z} \func{p}{y|z}} \geq 0
+            \end{equation*}
+            and equality holds when \(X\) and \(Y\) are independent given \(Z\).
+       \end{enumerate}
+ \end{proof}
+
+ \begin{theorem}
+       For any random variable \(X\)
+       \begin{equation*}
+             \func{H}{X} \leq \log \abs{X}
+       \end{equation*}
+       with equality if and only if \(X\) has a uniform distribution.
+ \end{theorem}
+
+ \begin{proof}
+       Let \(\func{u}{X}\) be the uniform distribution on \(X\). Then 
+       \begin{align*}
+             \func{D}{p || u} &= \sum \func{p}{x} \func{\log}{\dfrac{\func{p}{x}}{\func{u}{x}}}\\
+             &= \sum \func{p}{x} \func{\log}{\func{p}{x}} + \func{\log}{\abs{X}}\\
+             &= -\func{H}{X} + \log \abs{X} \geq 0\\
+             \implies \log \abs{X} &\geq \func{H}{X}
+       \end{align*}
+ \end{proof}
+
+ \begin{theorem}[Conditioning reduces entropy]
+      \begin{equation*}
+            \func{H}{X|Y} \geq \func{H}{X}
+      \end{equation*}
+      However this is on average. That is, \(\func{H}{X|Y = y}\) might be greater than \(\func{H}{X}\).
+ \end{theorem}
+ \begin{proof}
+      Mutual information \(\func{I}{X;Y}\) is greater than zero.
+ \end{proof}
+
+ \begin{corollary}[Independence bound on entropy]
+      \begin{equation*}
+            \func{H}{X_1, \dots , X_n} \leq \sum_{i=1}^n \func{H}{X_i}
+      \end{equation*}
+ \end{corollary}
+
+ \begin{theorem}[Convexity of relative entroy]
+      For any two pairs probability mass functions \(\bracket{p_1, q_1}\) and \(\bracket{p_2, q_2}\)
+      \begin{equation*}
+            \func{D}{\lambda p_1 + \bracket{1 - \lambda} p_1 ||\lambda q_1 + \bracket{1 - \lambda} q_1 } \leq \lambda \func{D}{p_1 || q_1} + \bracket{1 - \lambda} \func{D}{p_2 || q_2}
+      \end{equation*}
+      for all \(0 \leq \lambda \leq 1\).
+ \end{theorem}
+ \begin{proof}
+      Note that using the log sum inequality on each term 
+      \begin{equation*}
+            \bracket{\lambda p_1 + \bracket{1 - \lambda} p_2} \func{\log}{\frac{\lambda p_1 + \bracket{1 - \lambda} p_2}{\lambda q_1 + \bracket{1 - \lambda} q_2}} \leq \lambda p_1 \log \dfrac{p_1}{q_1} + \bracket{1 - \lambda} \log \dfrac{p_2}{q_2}
+      \end{equation*} 
+ \end{proof}
+ \begin{theorem}[Concavity of entropy]
+       \(\func{H}{X}\) is a concave function of its distribution, \(\func{p}{x}\).
+ \end{theorem}
+ \begin{proof}
+      \begin{equation*}
+            \func{H}{X} = \log \abs{X} - \func{D}{p || u}
+      \end{equation*}
+ \end{proof}
+
+ \begin{theorem}
+      The mutual information \(\func{I}{X;Y}\) is a concave function of \(\func{p}{x}\) for fixed \(\func{p}{y|x}\) and a convex
+      function of \(\func{p}{y|x}\) for fixed \(\func{p}{x}\)
+ \end{theorem}
+
+ \begin{definition}[Markov chain]
+       Let \(X,Y,Z\) be random variables are said to form a Markov chain in that order \(X \to Y \to Z\) if the conditional distribution of \(Z\) depends only \(Y\) and is conditionally independent of \(X\). Specifically
+       \begin{equation*}
+             \func{p}{x,y,z} = \func{p}{x} \func{p}{y|x} \func{p}{z|y}
+       \end{equation*}
+ \end{definition}
+ For example \(Z = \func{f}{Y}\) then \(X \to Y \to Z\) is a Markov chain. Note that 
+ \begin{equation*}
+       X \to Y \to Z \implies Z \to Y \to Z 
+ \end{equation*}
+ and hence we can write \(X \leftrightarrow Y \leftrightarrow Z\). 
+ \begin{theorem}[Data processing inequality]
+       If \(X \to Y \to Z\) is a Markov chain, then
+       \begin{equation*}
+             \func{I}{X;Y} \geq \func{I}{X;Z}
+       \end{equation*}
+       equality happens if \(\func{I}{X;Y|Z} = 0\) which implies \(X \to Z \to Y\).
+ \end{theorem}
+
+ \section{Sufficient statistics}
+ Let \(\set{\func{f_\theta}{x}}_{\theta}\) be a family of PMSs and let \(X\) be a sample from a distribution in this family. Let \(\func{T}{X}\) be any statistics. Then, \(\theta \to X \to \func{T}{X}\) is Markov chain and hence 
+ \begin{equation*}
+       \func{I}{\theta; X} \geq \func{I}{\theta; \func{T}{X}}
+ \end{equation*}
+ \(\func{T}{X}\) is sufficient statistics for parameter \(\theta\) if the conditional distribution of \(X\) given \(\func{T}{X}\) does not depend on \(\theta\). Therefore, for a sufficient statistics \(\theta \to \func{T}{X} \to X\) and thus the data processing inequality becomes an equality 
+ \begin{equation*}
+       \func{I}{\theta ; X} = \func{I}{\theta ; \func{T}{X}}
+ \end{equation*}
+
+ A statistics \(\func{T}{X}\) is a minimal sufficient statistics relative to \(\set{\func{f_\theta}{x}}\) if it is a function of every other sufficient statistics \(U\). Equivalently 
+ \begin{equation*}
+       \theta \to \func{T}{X} \to \func{U}{X} \to X
+ \end{equation*}
+
+ We observe a random variable \(Y\) and we guess the correlated variable \(X\) using \(\hat{X} =\func{f}{Y}\) for some function \(f\). Then we wish to know the probability of error 
+ \begin{equation*}
+       P_e = \prob{X \neq \hat{X}}
+ \end{equation*}
+ Fano's inequality gives bound on \(P_e\).
+ \begin{theorem}[Fano's inequality]
+       For any estimator \(\hat{X}\) such that \(X \to Y \to \hat{X}\) with \(P_e = \prob{X \neq \hat{X}}\) we have 
+       \begin{equation*}
+             \func{H}{P_e} + P_e \lg\abs{X} \geq \func{H}{X|\hat{X}} \geq \func{H}{X|Y}
+       \end{equation*}
+       and thus 
+       \begin{align*}
+             1 + P_e \lg\abs{X} &\geq \func{H}{X|Y} \\
+             \implies P_e \geq \dfrac{\func{H}{X|Y} - 1}{\lg \abs{X}}
+       \end{align*}
+ \end{theorem}
+ Intuitively, this inequality says that if \(Y\) does not give much information about \(X\) then \(P_e\) is greater than when \(Y\) has a lot information about \(X\).
+
+\begin{proof}
+      Let \(E\) be the random variable with 
+      \begin{equation*}
+            E = \begin{cases}
+                  1 & X = \hat{X}\\
+                  0 & X \neq \hat{X}
+            \end{cases}
+      \end{equation*}
+      then 
+      \begin{align*}
+            \func{H}{E,X|\hat{X}} &= \func{H}{E|\hat{X}} + \func{H}{X|E,\hat{X}}\\
+            &= \func{H}{X| \hat{X}} + \func{H}{E|X , \hat{X}} = \func{H}{X | \hat{X}}
+      \end{align*}
+      therefore 
+      \begin{align*}
+            \func{H}{X | \hat{X}} &= \func{H}{E|\hat{X}} + \func{H}{X|E,\hat{X}}\\
+            &\leq \func{H}{E} + \func{H}{X| E = 0, \hat{X}}\prob{E = 0} + \func{H}{X|E = 1, \hat{X}} \prob{E = 1}\\
+            &\leq \func{H}{P_e} + P_e \func{H}{X} \\
+            &\leq \func{H}{P_e} + P_e \lg \abs{X}
+      \end{align*}
+      and by data processing inequality 
+      \begin{equation*}
+            \func{H}{X| \hat{X}} \geq \func{H}{X | Y}
+      \end{equation*}
+\end{proof}
+
+\begin{corollary}
+      For any two random variables \(X,Y\) let \(p = \prob{X \neq Y}\) then 
+      \begin{equation*}
+            \func{H}{p} + p \lg\abs{X} \geq \func{H}{X|Y}
+      \end{equation*}
+\end{corollary}
+\begin{proof}
+      Let \(\hat{X} = Y\) in Fano's inequality.
+\end{proof}
+
+\begin{corollary}
+      Let \(P_e = \prob{X \neq \hat{X}}\) where \(\hat{X} : \calY \to \calX\) then 
+      \begin{equation*}
+            \func{H}{P_e} + P_e \func{\lg}{\abs{X} - 1} \geq \func{H}{X|Y}
+      \end{equation*}
+\end{corollary}
+
+\begin{lemma}
+      If \(X,X'\) are i.i.d with entropy \(\func{H}{X}\) then 
+      \begin{equation*}
+            \prob{X = X'} \geq 2^{-\func{H}{X}}
+      \end{equation*}
+\end{lemma}
+
+\begin{proof}
+      \begin{align*}
+            \prob{X = X'} = \sum_x \func{p^2}{x} = \sum_x \func{p}{x} 2^ {\lg\func{p}{x}} \geq 2^{\sum \func{p}{x} \lg \func{p}{x}} = 2^{-\func{H}{X}}
+      \end{align*}
+\end{proof}
+
+\begin{corollary}
+      Let \(X,X'\) be independent variables with \(X \sim \func{p}{x}\) and \(X' \sim \func{r}{x}\), \(x,x' \in \calX\) then 
+      \begin{align*}
+            \prob{X = X'} &\geq 2^{-\func{H}{p} - \func{D}{p || r}}\\
+            &\geq 2^{- \func{H}{r} - \func{D}{r || p}}
+      \end{align*}
+\end{corollary}
+
+\begin{example}
+      We will prove the fact there are infinitely many primes. Let 
+      \begin{equation*}
+            \func{\pi}{x} = \abs{\set<p \leq x>{p \ \text{is a prime}}}
+      \end{equation*}
+      Let \(N \sim \Uniform \set{1,\dots , n}\) then by the prime factorization theorem 
+      \begin{equation*}
+            N = \prod_{i = 1}^{\func{\pi}{n}} p_i^{X_i}
+      \end{equation*}
+      where \(X_i\) are random variables. 
+      \begin{equation*}
+            2^{X_i} \leq p_i^{X_i} \leq N \leq n \implies X_i \leq \lg n
+      \end{equation*}
+      Furthemore 
+      \begin{equation*}
+            \func{H}{N} = \func{H}{X_1, \dots , X_{\func{\pi}{n}}} \leq \sum_{i = 1}^{\func{\pi}{n}} \func{H}{X_i}
+      \end{equation*}
+      therefore 
+      \begin{equation*}
+            \lg n \leq \sum_{i = 1}^{\func{\pi}{n}}  \func{H}{X_i} \leq \func{\pi}{n} \func{\lg}{\lg n + 1}
+      \end{equation*}
+      implying that 
+      \begin{equation*}
+            \func{\pi}{n} \geq \dfrac{\lg n}{\func{\lg}{\lg n + 1}}
+      \end{equation*}
+      hence \(\func{\pi}{n} \to \infty\) as \(n \to \infty\).
+\end{example}
