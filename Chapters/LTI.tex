@@ -1,0 +1,21 @@
+\chapter{Linear Time Invariant Signals}
+\section{Discrete signals}
+Let \(\squareFunc{x}{n}\) be a discrete signal then it can be written as
+\begin{equation*}
+    \squareFunc{x}{n} = \sum_{k = -\infty}^{\infty} \squareFunc{x}{k} \squareFunc{\delta}{n -k} = \squareFunc{x}{n} \ast \squareFunc{\delta}{n}
+\end{equation*}
+which is called \textit{sifting property}. Consider a discrete LTI system \(\squareFunc{x}{n} \to \squareFunc{y}{n}\), by sifting property
+\begin{equation*}
+    \squareFunc{y}{n} = \squareFunc{x}{n} \ast \squareFunc{h}{n}
+\end{equation*}
+where \(\squareFunc{h}{n}\) is the response to \(\squareFunc{\delta}{n}\). Hence a LTI system can be completely characterized by its response to \(\squareFunc{\delta}{n}\).
+
+\section{Continuous signal}
+Similarly we can write the sifting propery as 
+\begin{equation*}
+    \func{x}{t} = \int_{-\infty}^{\infty} \func{x}{\tau} \func{\delta}{t - \tau} \diffOperator \tau = \func{x}{t} \ast \func{\delta}{t}
+\end{equation*}
+and a continuous LTI system \(\func{x}{t} \to \func{y}{t}\) can be written in terms of its response \(\func{h}{t}\) to unit impluse \(\func{\delta}{t}\)
+\begin{equation*}
+    \func{y}{t} = \func{x}{t} \ast \func{h}{t}
+\end{equation*}

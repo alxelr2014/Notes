@@ -6,27 +6,27 @@ A system responds to applies input signals, and its response is described in ter
 \begin{definition}
     The energy of a continuous signal over interval \(\clcl{t_1}{t_2}\) is defined as 
     \begin{equation*}
-        \int_{t_1}^{t_2} \abs[\func{x}{t}]^2 \diffOperator t
+        \int_{t_1}^{t_2} \abs{\func{x}{t}}^2 \diffOperator t
     \end{equation*}
     and similarly for a discrete signal over interval \(n_1 \leq n \leq n_2\)
     \begin{equation*}
-        \sum_{n = n_1}^{n_2} \abs[\squareFunc{x}{n}]^2 
+        \sum_{n = n_1}^{n_2} \abs{\squareFunc{x}{n}}^2 
     \end{equation*}
     The power of signal is the time averaged energy of that signal. The total energy of signal is defined to be 
     \begin{equation*}
-        E_{\infty} = \lim_{T \to \infty} \int_{-T}{T} \abs[\func{x}{t}]^2 \diffOperator t
+        E_{\infty} = \lim_{T \to \infty} \int_{-T}{T} \abs{\func{x}{t}}^2 \diffOperator t
     \end{equation*}
     for a continuous time signal and 
     \begin{equation*}
-        E_{\infty} =\lim_{N \to \infty}\sum_{n = -N}^{N} \abs[\squareFunc{x}{n}]^2 
+        E_{\infty} =\lim_{N \to \infty}\sum_{n = -N}^{N} \abs{\squareFunc{x}{n}}^2 
     \end{equation*}
     Lastly, the total power of a signal is 
     \begin{equation*}
-        P_{\infty} = \lim_{T \to \infty} \dfrac{1}{T} \int_{-T}{T} \abs[\func{x}{t}]^2 \diffOperator t
+        P_{\infty} = \lim_{T \to \infty} \dfrac{1}{T} \int_{-T}{T} \abs{\func{x}{t}}^2 \diffOperator t
     \end{equation*}
     and 
     \begin{equation*}
-        P_{\infty} =\lim_{N \to \infty} \dfrac{1}{2N + 1} \sum_{n = -N}^{N} \abs[\squareFunc{x}{n}]^2
+        P_{\infty} =\lim_{N \to \infty} \dfrac{1}{2N + 1} \sum_{n = -N}^{N} \abs{\squareFunc{x}{n}}^2
     \end{equation*}
 \end{definition}
 
@@ -72,3 +72,56 @@ A system responds to applies input signals, and its response is described in ter
         \func{x_1}{t} = \func{x_2}{t} \implies \func{x_1}{t} - \func{x_2}{t} = 0 \implies \func{y_1}{t} - \func{y_2}{t} = 0 \implies \func{y_1}{t} = \func{y_2}{t} , \quad \forall t \leq t_0
     \end{equation*} 
  \end{proof}
+
+ \section{Properties of convolution and LTI}
+ For simplicity we only bring the continuous, however, the equivalent discrete form also holds.
+ \begin{description}
+     \item [Commutative] \(\func{x}{t} \ast \func{y}{t} = \func{y}{t}\ast \func{x}{t}\).
+     \item [Distributive] \(\func{x}{t} \ast \bracket{\func{y}{t} + \func{z}{t}} = \func{x}{t}\ast \func{y}{t} + \func{x}{t}\ast \func{z}{t}\).
+     \item [Associative] \(\func{x}{t} \ast \bracket{\func{y}{t} \ast \func{z}{t}} = \bracket{\func{x}{t} \ast \func{y}{t}} \ast \func{z}{t}\).
+ \end{description}
+
+ \begin{itemize}
+     \item LTI is memoryless if \(\func{h}{t} = 0\) for \(t \neq 0 \implies \func{h}{t} = K \func{\delta}{t} \implies \func{y}{t} = K \func{x}{t}\).
+     \item LTI system is invertible if there exists \(\func{g}{t}\) such that \(\func{h}{t} \ast \func{g}{t} = \func{\delta}{t}\).
+     \item LTI system is causal if \(\func{h}{t} = 0\) for \(t  < 0\).
+     \item LTI is stable iff 
+     \begin{equation*}
+         \int_{-\infty}^{\infty} \abs{\func{h}{\tau}} \diffOperator \tau < \infty
+     \end{equation*} 
+ \end{itemize}
+
+ \section{Singularity functions}
+ We can view the unit impluse as a short signal that has integral of \(1\) and hence signals with such property are similar. Consider the LTI system 
+ \begin{equation*}
+     \func{y}{t} = \dfrac{\diffOperator^n \func{x}{t}}{\diffOperator t^n}
+ \end{equation*}
+ Then the unit impluse response is \(\func{u_n}{t}\) such that 
+ \begin{equation*}
+     \func{y}{t} = \func{x}{t} \ast \func{u_n}{t} = \bracket{\func{x}{t} \ast \func{u_{n-1}}{t}} \ast \func{u_1}{t}
+ \end{equation*}
+ and therefore 
+ \begin{equation*}
+     \func{u_n}{t} = \underbrace{\func{u_1}{t} \ast \func{u_1}{t} \ast \dots \ast \func{u_1}{t}}_n
+ \end{equation*}
+\(\func{u_1}{t}\) is called the unit doublet and it is defined 
+\begin{equation*}
+    \func{u_1}{t} = \ODiff{\func{\delta}{t}}{t}
+\end{equation*}
+Similarly for integral 
+\begin{equation*}
+    \func{u_{-1}}{t} = \func{u}{t} = \int_{-\infty}^t \func{\delta}{\tau} \diffOperator \tau \implies \func{x}{t} \ast \func{u}{t} = \int_{-\infty}^t \func{x}{\tau} \diffOperator \tau
+\end{equation*}
+for the double integral 
+\begin{equation*}
+    \func{u_{-2}}{t} = \func{u_{-1}}{t}  \func{u_{-1}}{t} = \int_{-\infty}^t \func{u_{-1}}{\tau} \diffOperator \tau
+\end{equation*}
+similarly for higher order integrals 
+\begin{equation*}
+    \func{u_{-n}}{t} = \underbrace{\func{u_{-1}}{t} \ast \func{u_{-1}}{t} \ast \dots \ast \func{u_{-1}}{t}}_n
+\end{equation*}
+Lastly we can denote \(\func{\delta}{t} = \func{u_0}{t}\) to then arrive at 
+\begin{equation*}
+    \func{u_r}{t} \ast \func{u_s}{t} = \func{u_{r + s}}{t}
+\end{equation*}
+for all \(u,s \in \Integers\).
