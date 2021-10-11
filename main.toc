@@ -1,4 +1,0 @@
-\contentsline {chapter}{\numberline {1}Logic}{3}{}%
-\contentsline {section}{\numberline {1.1}Proposition Logic}{3}{}%
-\contentsline {section}{\numberline {1.2}Operators}{3}{}%
-\contentsline {section}{\numberline {1.3}Predicate Logic}{4}{}%
