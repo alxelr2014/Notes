@@ -1,6 +1,6 @@
 # Real Analysis 1
 
-As tought by _prof. Ranjbar Motlagh_ in 20-21 Fall semester at **Sharif University of Technology**
+As taught by _prof. Ranjbar Motlagh_ in 20-21 Fall semester at **Sharif University of Technology**
 
 Supplementary resources:
 
@@ -10,7 +10,7 @@ Supplementary resources:
 
 # Real Analysis 2
 
-As tought by _prof. Ranjbar Motlagh_ in 21-22 Spring semester at **Sharif University of Technology**
+As taught by _prof. Ranjbar Motlagh_ in 21-22 Spring semester at **Sharif University of Technology**
 
 Supplementary resources:
 
