@@ -1,0 +1,16 @@
+\chapter{Problems}
+\subsection{}
+Let \(U\) be any random variable and \(V\) be any other non-negative random variable. Show that \(U + V\) is stochastically larger then \(U\), that is 
+\begin{equation}
+    \func{F_{U+V}}{t} \leq \func{F_U}{t}, \quad \forall t
+\end{equation}
+\begin{proof}
+    Let
+    \begin{equation*}
+        A_1 = \set<\omega>{U + V \leq t} , \quad A_2 = \set<\omega>{U \leq t}
+    \end{equation*}
+    since \(U + V \geq U\) then \(A_1 \subset A_2\) and hence 
+    \begin{equation*}
+        \prob{A_1} = \func{F_{U+V}}{t} \leq \func{F_U}{t} = \prob{A_2}
+    \end{equation*}
+\end{proof}
