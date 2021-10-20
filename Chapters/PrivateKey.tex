@@ -198,3 +198,95 @@ where the first probability is taken over uniform \(k \in \set{0,1}^n\) and \(D\
         \abs{\prob{\func{D^{\func{F_k}{\cdot}, \func{F_k^{-1}}{\cdot}}}{1^n} = 1} - \prob{\func{D^{\func{f}{\cdot}, \func{f^{-1}}{\cdot}}}{1^n} = 1}} \leq \func{negl}{n}
     \end{equation*}
 \end{definition}
+
+\begin{definition}
+    Block ciphers are secure instances of strong pseudorandom permutations with some fixed key length and block length.
+\end{definition}
+
+--Construction of pseudorandom generators and stream ciphers from pseudorandom functions.
+
+\begin{definition}
+    CPA encryption with pseudorandom function can be achieved with 
+    \begin{itemize}
+        \item \(\Gen\) takes \(1^n\) and outputs \(k \in \set{0,1}^n\) uniformly.
+        \item \(\Enc\) chooses uniform \(r \in \set{0,1}^n\) and outputs \(c = \angleBracket{r,\func{F_k}{r} \oplus m}\), where \(F\) is a pseudorandom function.
+        \item \(\Dec\) takes \(k\) and \(c = \angleBracket{r,s}\) and outputs 
+        \begin{equation*}
+            m = \func{F_k}{r} \oplus s
+        \end{equation*}
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}
+    If \(F\) is a pseudorandom function, then the above Construction is a CPA-secure for messages of length \(n\).
+\end{theorem}
+
+\section{Modes of operation}
+\subsection{Stream cipher}
+\subsubsection{Synchronized mode}
+It is good for single communication and messages that are send and recieved in order without being loss. 
+-- insert shape
+Let \(\func{G_{\infty}}{s , l}\) where \(s\) is the seed and \(l\) is the desired length, then
+\begin{equation*}
+    c = \func{G_{\infty}}{k,1^{\abs{m}}} \oplus m , \quad m = c \oplus \func{G_{\infty}}{k,1^{\abs{m}}}
+\end{equation*}
+Note that the message \(m\) can be composed of \(m_1 || m_2 || \dots \) and then we can calculate \(c\) by XORing the corresponding portion of \(G_{\infty}\) with \(m_i\). 
+\begin{proposition}
+    If stream cipher is indistinguishable this is EAV-secure.
+\end{proposition}
+\subsection{Unsynchronized mode}
+We let \(G_{\infty}\) to take an initialization vector \(IV \in \set{0,1}^n\) as well. Note that \(IV\) and \(k\) are uniformly chosen. 
+\begin{equation*}
+    c = \angleBracket{IV, \func{G_{\infty}}{k,IV, 1^{\abs{m}}} \oplus m}
+\end{equation*}
+\begin{proposition}
+    If there exists a weak pseudorandom function such that 
+    \begin{equation*}
+        \func{F_K}{IV} = \func{G_{\infty}}{k , IV, 1^l}
+    \end{equation*}
+    then the unsynchronized mode is CPA-secure.
+\end{proposition}
+
+\subsection{Block-cipher}
+Let \(F\) be a block cipher with length \(n\). We assume that \(\abs{m}\) is a multiple of \(n\). That is \(m = m_1 || \dots || m_l\) with \(m_i \in \set{0,1}^n\)\_ if not we can append 1 followed by sufficiently many zeros.
+
+\subsubsection{Electronic Code Block mode (EBC)}
+\begin{align*}
+    c &= \angleBracket{\func{F_K}{m_1}, \dots , \func{F_K}{m_l}}\\
+    m &= \angleBracket{\func{F_K^{-1}}{c_1}, \dots , \func{F_K^{-1}}{c_l}}
+\end{align*}
+it is not even EAV-secure, because of repeated portions.
+
+\subsubsection{Cipher Block Chaining (CBC)}
+\begin{align*}
+    c &= \angleBracket{c_0 = IV \in \set{0,1}^n , \func{F_K}{m_1 \oplus c_0}, \dots , \func{F_K}{m_l \oplus c_{l-1}}}\\
+    m &= \angleBracket{\func{F_K^{-1}}{c_1} \oplus c_0 , \dots , \func{F_K^{-1}}{c_l} \oplus c_{l-1}}
+\end{align*}
+\begin{proposition}
+    If \(F\) is a pseudorandom permutation then this is CPA secure.
+\end{proposition}
+Then chained (stateful) CBC variant uses that last \(c_l\) for encryption of new message \(m'\) instead of a fresh new \(IV\). However, chained CBC is vulenrable to CPA. Consider the following scheme 
+\begin{enumerate}
+    \item Attacker knows \(m_1 \in \set{m_1^0 , m_1^1}\).
+    \item Attacker observes \(\angleBracket{IV,c_1,c_2,c_3}\).
+    \item Attacker chooses \(m_4 = IV \oplus m_1^0 \oplus c_3\) and observes \(c_4\).
+    \item \(m_1 = m_0^1 \iff c_1 = c_4\).
+\end{enumerate}
+
+\subsubsection{Output feedback mode (OFB)}
+\begin{equation*}
+    c = \angleBracket{IV,m_1 \oplus \func{F_K}{IV}, m_2 \oplus \func{F_K}{\func{F_K}{IV}} , \dots , m_l \oplus \func{F_K^{(l)}}{IV}}
+\end{equation*}
+\begin{proposition}
+    OFB is CPA-secure if \(F\) is a pseudorandom function. To improve the efficiency we can calculate \(\func{F_K^{(n)}}{IV}\) ahead of time. Stateful variant is secure as well.
+\end{proposition}
+
+\subsubsection{Counter mode (CTR)}
+Let \(ctr \in \set{0,1}^n\) be a uniformly chosen number then
+\begin{equation*}
+    c = \angleBracket{ctr, m_1 \oplus \func{F_K}{ctr + 1} , \dots , m_l \oplus \func{F_K}{ctr + l}}
+\end{equation*}
+\begin{proposition}
+    CTR is CPA-secure if \(F\) is a pseudorandom function. 
+\end{proposition}
+Stateful version is secure as well. It can be parallelized.
