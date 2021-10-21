@@ -1,0 +1,84 @@
+\chapter{Learning via Uniform Convergence}
+\begin{definition}
+    A training set \(S\) is called \(\epsilon\)-representative (w.r.t domain \(Z\), hypothesis class \(\calH\), loss function \(l\), and distribution \(\calZ\)) if 
+    \begin{equation*}
+        \forall h \in \calH, \quad \abs{\func{L_S}{h} - \func{L_{\calZ}}{h}} < \epsilon 
+    \end{equation*}
+\end{definition}
+\begin{lemma}
+    Suppose \(S\) is \(\frac{\epsilon}{2}\)-representative. Then, any output of \(h_S = \func{ERM_{\calH}}{S}\) satisfies 
+    \begin{equation*}
+        \func{L_{\calZ}}{h_S} \leq \min_{h \in \calH} \func{L_{\calZ}}{h} + \epsilon
+    \end{equation*}
+\end{lemma}
+
+\begin{proof}
+    Let \(h_{\calZ}\) be the \(\argmin_{h} \func{L_{\calZ}}{h}\) then 
+    \begin{align*}
+        \abs{\func{L_{\calZ}}{h_S} - \func{L_{\calZ}}{h_{\calZ}}} &= \func{L_{\calZ}}{h_S} - \func{L_{\calZ}}{h_{\calZ}}\\
+        &= \abs{\func{L_{\calZ}}{h_S} - \func{L_S}{h_S}} + \abs{\func{L_S}{h_{\calZ}} - \func{L_{\calZ}}{h_{\calZ}}} + \abs{\func{L_S}{h_S} - \func{L_S}{h_{\calZ}}}\\
+        &= \dfrac{\epsilon}{2} + \dfrac{\epsilon}{2} + 0 = \epsilon
+    \end{align*}
+    Another way to prove the statement 
+    \begin{equation*}
+        \func{L_{\calZ}}{h_S} \leq \func{L_S}{h_S} + \frac{\epsilon}{2} \leq \func{L_S}{h} + \frac{\epsilon}{2} \leq \func{L_{\calZ}}{h} + \epsilon, \quad \forall h \in \calH
+    \end{equation*}
+\end{proof}
+
+\begin{definition}
+    \(\calH\) has uniform convergence property (w.r.t domain \(Z\) and loss function \(l\)) if there exists a \(m^{UC}_{\calH}: \opop{0}{1}^2 \to \Naturals\) such that for all \(\epsilon, \delta \in \opop{0}{1}\), for every distribution \(\calZ\) over \(Z\), if \(\abs{S} \geq \func{m^{UC}_{\calH}}{\epsilon,\delta}\) and \(S\) is i.i.d, then with probability at least \(1 - \delta\), \(S\) is \(\epsilon\)-representative.
+\end{definition}
+
+\begin{proposition}
+    If \(\calH\) has uniform convergent property with sample complexity \(m^{UC}_{\calH}\), then it is agnostically PAC learnable with sample complexity \(\func{m_{\calH}}{\epsilon,\delta} \leq \func{m^{UC}_{\calH}}{\frac{\epsilon}{2}, \delta}\). Futhermore, in that case the \(ERM_h\) paradigm is a successful agnostic learner for \(\calH\).
+\end{proposition}
+
+\begin{theorem}
+    Every finite class has uniform convergence property and thus it is agnostic PAC learnable. 
+\end{theorem}
+\begin{proof}
+    Fix \(\epsilon, \delta\), we need to show that for any distribution \(\calZ\) 
+    \begin{equation*}
+        \prob{\set<S>{\forall h, \abs{\func{L_S}{h} - \func{L_{\calZ}}{h}} \leq \epsilon }} \geq 1- \delta
+    \end{equation*}
+    Equivalently 
+    \begin{align*}
+        &\prob{\set<S>{\exists h, \abs{\func{L_S}{h} - \func{L_{\calZ}}{h}} > \epsilon }} \leq \delta\\
+        &= \prob{\bigcup_{h \in \calH} \set<S>{\abs{\func{L_S}{h} - \func{L_{\calZ}}{h}} > \epsilon }} \leq \sum_{h \in \calH} \prob{\set<S>{\abs{\func{L_S}{h} - \func{L_{\calZ}}{h}} > \epsilon }}
+    \end{align*}
+    Note that \(\forall h\)
+    \begin{equation*}
+        \expected{\func{L_S}{h}} = \dfrac{1}{m} \sum_{i = 1}^m \expected{\func{l}{h,Z_i}} = \expected{\func{l}{h,Z_1}} = \func{L_{\calZ}}{h}
+    \end{equation*}
+    and recall that by Hoeffding inequality, if \(X_1, \dots , X_n\) are i.i.d. random variable with \(\expected{X} = \mu\) and \(X \in \clcl{a}{b}\) then for any \(\epsilon > 0\)
+    \begin{equation*}
+        \prob{\abs{\bar{X} - \mu} > \epsilon} \leq 2 \func{\exp}{-\dfrac{2n\epsilon^2}{\bracket{b-a}^2}}
+    \end{equation*}
+    Let \(X_i = \func{l}{h,Z_i}\) then \(\bar{X} = \func{L_S}{h}\) and \(\expected{X} = \func{L_{\calZ}}{h}\) and assume that range of \(l\) is \(\clcl{0}{1}\), By Hoeffding inequality 
+    \begin{equation*}
+        \prob{\set<S>{\abs{\func{L_S}{h} - \func{L_{\calZ}}{h}} > \epsilon }} \leq 2 e^{-2m\epsilon^2}
+    \end{equation*}
+    hence 
+    \begin{align*}
+        \prob{\set<S>{\exists h, \abs{\func{L_S}{h} - \func{L_{\calZ}}{h}} > \epsilon}} & \leq \sum_{h \in \calH} 2 e^{-2m\epsilon^2}\\
+        &= 2 \abs{\calH} e^{-2m \epsilon^2} 
+    \end{align*}
+    which implies for 
+    \begin{equation*}
+        \func{m^{UC}_{\calH}}{\epsilon, \delta} \geq \dfrac{\func{\log }{2\abs{\calH} / \delta}}{2\epsilon^2}
+    \end{equation*}
+    proves that any finite \(\calH\) has the uniform convergence property.
+\end{proof}
+
+\begin{corollary}
+    Let \(\calH\) be a finite class, let \(Z\) be a domain and let \(l:\calH \times Z \to \clcl{0}{1}\) be a loss function. Then, \(\calH\) is uniformly convergent with sample complexity 
+    \begin{equation*}
+        \func{m^{UC}_{\calH}}{\epsilon, \delta} \leq \ceil{\dfrac{\func{\log }{2\abs{\calH} / \delta}}{2\epsilon^2}}
+    \end{equation*}
+    Furthermore, it is agnostically PAC learnable using \(ERM\) algorithm with sample complexity 
+    \begin{equation*}
+        \func{m_{\calH}}{\epsilon,\delta} \leq \func{m^{UC}_{\calH}}{\frac{\epsilon}{2}, \delta} \leq \ceil{\dfrac{2\func{\log }{2\abs{\calH} / \delta}}{\epsilon^2}}
+    \end{equation*}
+\end{corollary}
+
+Glivenko-Cantelli Classes.
