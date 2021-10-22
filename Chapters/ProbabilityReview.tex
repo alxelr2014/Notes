@@ -1,0 +1,126 @@
+\chapter{Probability}
+\section{Convergence}
+\begin{enumerate}
+    \item Convergence in probability.
+    \begin{equation*}
+        T_n \xrightarrow{\Probability} T \iff \prob{\abs{T_n - T} \geq \epsilon} \xrightarrow[n \to \infty]{} 0 \quad \forall \epsilon > 0
+    \end{equation*}
+    \item Almost surely convergence.
+    \begin{equation*}
+        T_n \xrightarrow{\almosure} T \iff \prob{\set<\omega>{\func{T_n}{\omega} \to \func{T}{\omega}}} = 1
+    \end{equation*}
+    \item Convergence in distribution.
+    \begin{equation*}
+        T_n \xrightarrow{(d)} T \iff \prob{T_n \leq x} \xrightarrow[n \to \infty]{} \prob{T \leq x}
+    \end{equation*}
+    for all \(x\) at which \(F_T\) is continuous.
+    \item \(\calL^p\) Convergence.
+    \begin{equation}
+        T_n \xrightarrow{\cal:^p} T \iff \expected{\abs{T_n - T}^p} \xrightarrow[n \to \infty]{} 0 
+    \end{equation}
+    For \(p \geq 1\).
+\end{enumerate}
+
+\begin{theorem}[Weak/Strong law of large numbers]
+    Let \(X_1, \dots , X_n\) be i.i.d. with \(\mu = \expected{X}\) and \(\sigma^2 = \variance{X}\) both finite. Then 
+    \begin{equation*}
+        \bar{X_n} = \dfrac{1}{n} \sum_{k = 1}^n X_k \xrightarrow[n \to \infty]{\Probability/\almosure} \mu
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Central limit theorem]
+    Let \(X_1, \dots , X_n\) be i.i.d with \(\mu = \expected{X}\) and \(\sigma^2 = \variance{X}\) both finite. Then 
+    \begin{equation*}
+        \sqrt{n} \dfrac{\bar{X_n} - \mu}{\sigma} \xrightarrow[n \to \infty]{(d)} \func{\NormalDist}{0,1}
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Hoeffding inequality]
+    Let \(X_1, \dots , X_n\) be i.i.d with \(\mu = \expected{X}\), \(X \in \clcl{a}{b}\) then for all \(\epsilon > 0\)
+    \begin{equation*}
+        \prob{\abs{\bar{X_n} - \mu} \geq \epsilon} \leq 2 e^{-\frac{2n\epsilon^2}{\bracket{b-a}^2}}
+    \end{equation*}
+\end{theorem}
+
+\begin{proposition}
+    The followings are equivalent 
+    \begin{enumerate}
+        \item \(T_n \xrightarrow{(d)} T\).
+        \item \(\expected{\func{f}{T_n}} \xrightarrow[n \to \infty]{} \expected{\func{f}{T}}\) for all continuous and bounded \(f\).
+        \item \(\expected{e^{ix T_n}} \xrightarrow[n \to \infty]{} \expected{e^{ix T}}\) for all \(x\).
+    \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+    We have the following relationships 
+    \begin{equation*}
+        T_n \xrightarrow{\almosure} T \implies T_n \xrightarrow{\Probability} T \implies T_n \xrightarrow{(d)} T
+    \end{equation*}
+    and 
+    \begin{equation*}
+        T_n \xrightarrow{L^1} T \implies T_n \xrightarrow{\Probability} T
+    \end{equation*}
+    and 
+    \begin{equation*}
+        T_n \xrightarrow{L^p} T \implies T_n \xrightarrow{L^q} T , \quad \forall q \leq p 
+    \end{equation*}
+\end{proposition}
+
+\begin{proposition}
+    Let \(f\) be a continuous function then 
+    \begin{equation*}
+        T_n \xrightarrow{\almosure / \Probability / (d)} T \implies \func{f}{T_n} \xrightarrow{\almosure / \Probability / (d)} \func{f}{T} 
+    \end{equation*}
+\end{proposition}
+
+\begin{proposition}
+    If \(U_n \xrightarrow{\almosure / \Probability} U\) and \(V_n \xrightarrow{\almosure / \Probability} V\) then 
+    \begin{enumerate}
+        \item 
+    \begin{equation*}
+        U_n + V_n \xrightarrow{\almosure / \Probability} U + V
+    \end{equation*}
+    \item 
+    \begin{equation*}
+        U_n V_n \xrightarrow{\almosure / \Probability} U  V
+    \end{equation*}
+    \item 
+    \begin{equation*}
+        \frac{U_n}{V_n} \xrightarrow{\almosure / \Probability} \frac{U}{V}, \quad V \neq 0 \almosure
+    \end{equation*}
+\end{enumerate}
+    These propositions hold for convergence in distribution if the pair \(\pair{U_n}{V_n} \xrightarrow{(d)} \pair{U}{V}\).
+\end{proposition}
+
+\begin{theorem}[Slutsky's theorem]
+    Let \(X_n, Y_n\) be a sequence of random variable such that 
+    \begin{equation*}
+        X_n \xrightarrow{(d)} X \qquad Y_n \xrightarrow{\Probability} c
+    \end{equation*}
+    where \(c\) is a constant then \(\pair{X_n}{Y_n} \xrightarrow{(d)} \pair{X}{c}\). In particular
+    \begin{equation*}
+        X_n + Y_n \xrightarrow{(d)} X + c , \quad X_nY_n \xrightarrow{(d)} cX
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Delta method]
+    Let \(X_n\) be a sequence of random variable such that 
+    \begin{equation*}
+        \sqrt{n} \bracket{X_n - \mu} \xrightarrow{(d)} \func{\NormalDist}{0,\sigma^2}
+    \end{equation*}
+    where \(\mu\) and \(\sigma\) are finite valued constants. Then for any function \(g\) that \(\func{g'}{\mu}\) exists and is non-zero 
+    \begin{equation*}
+        \sqrt{n} \bracket{\func{g}{X_n} - \func{g}{\mu}} \xrightarrow{(d)} \func{\NormalDist}{0,\sigma^2 \bracket{\func{g'}{\mu}^2}}
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    By Taylor's polynomial, there exists \(\mu^{\ast}\) between \(X_n\) and \(\mu\) such that 
+    \begin{equation*}
+        \func{g}{X_n} - \func{g}{\mu} = \bracket{X_n - \mu} \func{g'}{\mu^{\ast}}
+    \end{equation*}
+    then since \(\func{g'}{\mu^{\ast}}\) convergers in probability -- because of weak law of large number, continuity of \(g'\), and continuous mapping theorem -- to \(\func{g'}{\mu}\), by Slutsky's theorem 
+    \begin{equation*}
+        \sqrt{n}\bracket{X_n - \mu} \func{g'}{\mu^{\ast}} \xrightarrow{(d)} \func{\NormalDist}{0,\sigma^2 \bracket{\func{g'}{\mu}}^2}
+    \end{equation*}
+    which proves the Delta method.
+\end{proof}
