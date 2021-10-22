@@ -1,0 +1,164 @@
+\chapter{Complex Numbers}
+\section{Algebra of Complex Numbers}
+We define complex numbers to be all the pairs of real numbers \((x,y)\) with following addition and multiplication:
+\[(x_1,y_1) +' (x_2,y_2) = (x_1 + x_2 , y_1 + y_2)\]
+\[ (x_1,y_1) \cdot' (x_2,y_2) = (x_1x_2 - y_1y_2, x_1y_2 + x_2y_1)\]
+where \(+\) and \(\cdot\) are real addition and multiplication, respectively.
+We denote the set of complex numbers with \(\Complex\).
+It is easy to check that addition and multiplication defined above have the following:
+\begin{enumerate}
+        \item Addition and multiplication are commutitive:
+              \[z + w = w + z \quad z,w \in \Complex\]
+              \[ z\cdot w = w \cdot z \quad z,w \in \Complex\]
+
+        \item Addition and multiplication are associative:
+              \[(z + w) + u = z + (w + u) \quad z,w,u \in \Complex\]
+              \[ (z \cdot w) \cdot u = z \cdot (w \cdot u) \quad z,w,u \in \Complex\]
+        \item Addition and multiplication are distributive:
+              \[(z + w) \cdot u = z \cdot u + w \cdot u \quad z,w,u \in \Complex\]
+        \item Addition and multiplication have unique identity elements \(0 = (0,0)\) and \(1 = (1,0)\), respectively.
+        \item Every complex number \(z\) has a unique addition inverse. Denoted by \(-z\).
+        \item Every non-zero complex number \(z\) has a unique multiplication inverse. Denoted by \(z^{-1}\) or \(\dfrac{1}{z}\).
+\end{enumerate}
+Which means \(\Complex\) is a field. 
+
+We can represent in many other forms. Two of the most commonly for \(z = (x,y)\) used are :
+\[ z = x + iy \quad \text{where} \; i = (0,1)\]
+\[ z = re^{i\theta} \quad r \geq 0 \,, \theta \in \Reals \]
+\[ z = \begin{bmatrix}
+                x & -y \\
+                y & x
+        \end{bmatrix} \]
+It is easy to see that \(i^2 = -1\). We also define the functions \(\func{\Re}{z} = x\) and \(\func{\Im}{z} = y\). In the second representation \(r\) is the distance from origin and \(\theta\) is the angle between the positive real axis and the ray passing through \(z\). One can also view complex number as an extension of real numbers in which every polynomial has a root.
+
+\begin{theorem}
+      If \(K\) is field such that every odd degree polynomial has at a least a root and for all \(a \in K\), either \(x^2 = a\) or \(x^2 = -a\) has a root then it is sufficient to \textit{add} the root of \(x^2 = -1\) to \(K\) so that every polynomial has a root.
+\end{theorem}
+
+For every complex number \(z = x + iy\) there exists the mapping \(\bar{z}: \Complex \to \Complex\) where \(\bar{z} = x - iy\) and is called the \(\emph{conjugate}\) of \(z\).
+\begin{proposition}
+        The following properties are satisfied.
+        \begin{enumerate}
+                \item \(\overline{z + w} = \bar{z} + \bar{w}\).
+                \item \(\overline{zw} = \bar{z}\bar{w}\).
+                \item \(z = \bar{\bar{z}}\).
+                \item \(z = \bar{z}\) if and only if \(z \in \mathbb{R}\).
+                \item The following relations hold:
+                      \[ \func{\Re}{z} = \dfrac{z + \bar{z}}{2} \quad,\quad \func{\Im}{z} = \dfrac{z - \bar{z}}{2i}\]
+        \end{enumerate}
+\end{proposition}
+Another mapping is the \(\emph{norm}\) or \(\emph{modulus}\) function, \(\abs{z}: \Complex \to \Reals \) where \(\abs{z} = \sqrt{x^2 + y^2}\). Geometrically speaking the norm of \(z\) gives the distance of \(z\) form origin.
+\begin{proposition}
+        The following properties are satisfied.
+        \begin{enumerate}
+                \item \(\abs{z} \geq 0 \quad \forall z \in \Complex\) and especially \(\abs{z} = 0\) if and only if \(z = 0\)
+                \item \(\abs{zw} = \abs{z}\abs{w}\).
+                \item \(\abs{z}^2 = z\bar{z}\).
+                \item \(\abs{z} = \abs{-z} = |\bar{z}|\)
+                \item The following inequalities hold:
+                      \[ -\abs{z} \leq \func{\Re}{z} \:,\: \func{\Im}{z} \leq \abs{z}\]
+                \item Triangle inequality:
+                      \[ \abs{z + w} \leq \abs{z} + \abs{w} \]
+                      \[ \abs{\abs{z} - \abs{w}} \leq \abs{z- w}\]
+        \end{enumerate}
+\end{proposition}
+
+The point at infinity, \(\infty\), is informally a point that is unboundedly far from the origin. The extended complex plane is defined as \(\Complex \cup \set{\infty}\). Every line passes through \(\infty\) but no half plane contains it.
+
+\section{Riemann sphere}
+\textbf{Riemann sphere} is a unit sphere centered at the origin complex plane. We can map every point (except \(\bracket{0,0,1}\)) on the sphere to a point in complex plane by the following bijective transformation.
+\begin{equation*}
+      \func{\phi}{z} = \bracket{x_1, x_2, x_3}= \bracket{\dfrac{z + \bar{z}}{1 + \abs{z}^2} , \dfrac{z - \bar{z}}{i \bracket{1 + \abs{z}^2}} , \dfrac{ \abs{z}^2 - 1}{\abs{z}^2 + 1} }
+\end{equation*}
+Geometrically, this transformation maps every point \(z\) to the interestion of the line connecting it to the \(\bracket{0,0,1}\) and the sphere. Furthermore, we can define \(\func{\phi{\infty}} = \bracket{0,0,1}\).
+
+\section{Limits and continuity}
+
+Let \(f : U \to \Complex\), \(\alpha\) be an adherent point of \(U\), and \(w\) be a complex number. Then 
+\begin{equation*}
+      w = \lim_{z \to \alpha} \func{f}{z} 
+\end{equation*}
+when 
+\begin{equation*}
+      \forall \epsilon > 0, \; \exists \delta > 0 \ \suchThat \ z \in U , \abs{z - \alpha} < \delta \implies \abs{\func{f}{z} - w} < \epsilon
+\end{equation*}
+By defining the \(\epsilon-\)neighbourhood of \(\infty\) to the 
+\begin{equation*}
+      \set<z>{\dfrac{1}{z} < \epsilon}
+\end{equation*}
+we can extend the defintion of limit to when \(\alpha\) or \(w\) are \(\infty\).
+We say that \(f\) is continuous at \(\alpha\) if 
+\begin{equation*}
+      \lim_{z \to \alpha} \func{f}{z} = \func{f}{\alpha}
+\end{equation*}
+
+\begin{definition}
+      A function \(f\) is said to be uniformly continuous if 
+      \begin{equation*}
+            \forall \epsilon > 0 , \; \exists \delta > 0 \ \suchThat \ z,w \in S , \abs{z - w} < \delta \implies \abs{\func{f}{z} - \func{f}{w}}
+      \end{equation*}
+\end{definition}
+
+\section{Sequences and convergence}
+A Sequence \(\set{z_n}_{n \in \Naturals}\) is said to be convergent to \(z\) if:
+\begin{equation*} 
+      \forall \epsilon > 0 , \; \exists N \ \suchThat \ n \geq N \implies \abs{z - z_n} < \epsilon
+\end{equation*}
+and it is denoted as 
+\begin{equation*}
+      z = \lim_{n \to \infty} z_n
+\end{equation*}
+
+A sequence \(\set{z_n}\) is a \textbf{Cauchy sequence} if 
+\begin{equation*}
+      \forall \epsilon, \; \exists N \ \suchThat \ n,m \geq N \implies \abs{z_m - z_n} < \epsilon
+\end{equation*}
+If we write \(z_n = x_n + iy_n\), since \(\abs{z_n - z_m} = \sqrt{(x_n - x_m)^2 + (y_n - y_m)^2}\) and \(\abs{x_n - x_m}\leq \abs{z_n - z_m} \), \( \abs{y_n - y_m} \leq \abs{z_n - z_m}\), we can conclude that \(\set{z_n}\) is Cauchy if and only if \(\set{x_n}\) and \(\set{y_n}\) are Cauchy sequences. Thus, since for real sequences a Cauchy sequence is convergent then, a complex Cauchy sequence is convergent as well.
+
+Due to similarities between the definition given above and their real counterpart, most results dealing with limits can be easily extended to complex numbers.
+
+A series \(\sum a_n\) is absolutely convergent if \(\sum \abs{a_n}\) is convergent. 
+\begin{proposition}
+      If the series \(\sum a_n\) is absolutely convergent then it can be summed in any order.
+\end{proposition}
+
+\begin{proposition}
+      If double sum \(\sum_m \sum_n a_{mn}\) is absolutely convergent then the summation order can be interchanged. 
+      \begin{equation*}
+            \sum_{m} \sum_n a_{mn} = \sum_n \sum_m a_{mn}
+      \end{equation*}
+      The resulting series obtained is absolutely convergent and converges to the same value.
+\end{proposition}
+
+\begin{definition}
+      Let \(\set{a_n}\) and \(\set{b_n}\) be two sequences of positive real numbers. Then 
+      \begin{equation*}
+            a_n \equiv b_n \qquad \text{for} \quad n \to \infty
+      \end{equation*} 
+      if for each \(n\), there exists a \(u_n \in \Reals^+\) such that \(\lim_{n \to \infty} u_n^{\frac{1}{n}} = 1\) and \(a_n = b_n u_n\).
+\end{definition}
+\section{Function spaces and power series}
+A family of functions \(\set{\func{f_n}{x} : X \to Y}\) converges uniformly to \(f : X \to Y\), denoted \(f_n \rightrightarrows f\)
+\begin{equation*}
+      \forall \epsilon, \; \exists N \ \suchThat \ n \geq N \implies \func{d_Y}{\func{f_n}{x} - \func{f}{x}} < \epsilon, \; \forall x
+\end{equation*}
+if \(Y\) is a complete metric space then Cauchy convergence becomes equivalent to uniform convergence 
+\begin{equation*}
+      \forall \epsilon, \; \exists N \ \suchThat \ n,m \geq N \implies \func{d_Y}{\func{f_n}{x} - \func{f_m}{x}} < \epsilon, \; \forall x
+\end{equation*}
+
+\(\sum \func{f_n}{x}\) converges uniformly if the partial sums \(s_m = \sum^m f_n\) converges uniformly.
+
+\begin{theorem}[Weierstrass M-test]
+      Suppose that \(\set{\func{f_n}{x}}\) is a sequence of real/complex-valued functions defined on a set \(X\), and there is a sequence of non-negative numbers \(M_n\) satisfying the conditions 
+      \begin{itemize}
+            \item \(\abs{\func{f_n}{x}} \leq M_n\) for all \(n \geq 1\) and all \(x \in X\)
+            \item \(\sum_{n = 1}^{\infty} M_n\) converges 
+      \end{itemize}
+      then the series \(\sum_{n=1}^{\infty} \func{f_n}{x}\) converges absolutely and uniformly on \(X\).
+\end{theorem}
+
+
+\begin{theorem}
+      Let \(\set{\func{f_n}{x}}\) be a sequence of continuous functions that \(f_n \rightrightarrows f\). Then \(f\) is continuous.
+\end{theorem}

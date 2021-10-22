@@ -1,0 +1,212 @@
+\chapter{Analytic Functions}
+\section{Differentiability}
+Let \(f: U \overset{open}{\subset} \Complex \to \Complex\) and \(z\) be a point in \(U\). \(f\) is said to be complex differentiable at \(z\) if the following limit exists.
+\begin{equation*}
+      \func{f'}{z} = \lim_{h \to 0} \dfrac{\func{f}{z + h} - \func{f}{z}}{h}
+\end{equation*}
+Equivalently, there exists a \(c \in \Complex\) such that 
+    \begin{equation} 
+        \func{f}{z_0 + h} - \func{f}{z_0} - hc = \littleO{h} 
+\end{equation}
+Differentiation rules are similar to real differentiation and are proved the same way. 
+
+\(f\) is \textbf{holomorphic} if it is differentiable at every point of \(U\). Taking the limit along the real and imaginary axes and equating them gives the \textbf{Cauchy-Riemann equations}
+
+\begin{equation*}
+      \PDiff{u}{x} = \PDiff{v}{y} ,\quad \PDiff{u}{y} = - \PDiff{v}{x}
+\end{equation*}
+
+Assuming that \(u\) and \(v\) are twice differentiable, we can see that 
+\begin{align*}
+      \Delta u &= \dfrac{\PDiffOperator^2 u}{\PDiffOperator x^2} + \dfrac{\PDiffOperator^2 u}{\PDiffOperator y^2}\\
+      &= \dfrac{\PDiffOperator^2 v}{\PDiffOperator x \PDiffOperator y} - \dfrac{\PDiffOperator^2 v}{\PDiffOperator y \PDiffOperator x} = 0
+\end{align*}
+Which means that \(u,v\) satisfy the \textit{Laplace's equation} and thus are harmonic functions. 
+
+\begin{theorem}
+      If \(u,v\) and have continuous first order partial derivatives and satisfy the Cauchy-Riemann equations then \(\func{f}{z} = \func{u}{x,y} + \func{v}{x,y}\) is analytic with continuous derivative.
+\end{theorem}
+
+\section{Linear transformation}
+A linear fractional transformation, also called \textit{M{\"o}bius transformation},  is a function in form of 
+\begin{equation*}
+    w = \func{S}{z} = \dfrac{az + b}{cz + d}
+\end{equation*}
+with \(ad - bc \neq 0\). If \(c \neq 0\) then \(\func{S}{\infty} = \frac{a}{c}\) and \(\func{S}{-\frac{d}{c}} = \infty\). The inverse of a linear fractional transformation is linear fractional itself and is equal to 
+\begin{equation*}
+    \func{S^{-1}}{w}= \frac{dw - b}{-cw + a}
+\end{equation*}
+If \(ad -bc = 1\) we say that \(S\) is normalized and since multiplying \(a,b,c,d\) by a non-zero factor does not change the function we can assume that all M{\"o}bius transformations are normalized. 
+
+\begin{theorem}
+    The set of all M{\"o}bius transformations \(\calM\) is a group under composition.
+    \begin{equation*}
+        \calM = \set<\dfrac{az + b}{cz + d}> {ad - bc = 1, a,b,c,d \in \Complex}
+    \end{equation*}
+\end{theorem}
+
+\begin{proposition}
+    Give 3 different points \(z_1,z_2,z_3\) there exists a linear transformation that takes to \(1, 0 , \infty\) in that order. If non of the point is \(\infty\) then 
+    \begin{equation*}
+        \func{S}{z} = \dfrac{z - z_2}{z - z_3} \dfrac{z_1 - z_3}{z_1 - z_3}
+    \end{equation*}
+    if one of them is \(\infty\) then 
+    \begin{equation*}
+        \func{S}{z} = \dfrac{z - z_2}{z - z_3} , \quad \func{S}{z} = \dfrac{z_1 - z_3}{z - z_3} , \quad \func{S}{z} = \dfrac{z - z_2}{z_1 - z_2}
+    \end{equation*}
+    for \(z_1 =\infty, z_2 = \infty, z_3 = \infty\) respectively.
+\end{proposition}
+\begin{proof}
+    It is clear that \(S\) as defined above is such a transformation. To prove \(S\) is unique, suppose there is another transformation \(T\) that satisfies the condition. Suppose that neither of the points is \(\infty\) and  
+    \begin{equation*}
+        \func{T}{z} = \dfrac{az + b}{cz + d}
+    \end{equation*}
+    for some \(a,b,c,d \in \Complex\) with \(ad - bc \neq 0\). Consider \(TS^{-1}\)
+    \begin{align*}
+        \func{TS^{-1}}{z} &= \dfrac{a\func{S^{-1}}{z} +b }{c \func{S^{-1}}{z} + d}\\
+        &= \dfrac{a \bracket{z - z_2}\bracket{z_1 - z_3}  + b \bracket{z - z_3}\bracket{z_1 - z_2}}{c \bracket{z - z_2}\bracket{z_1 - z_3}  + d \bracket{z - z_3}\bracket{z_1 - z_2}}\\
+        &= \dfrac{\bracket{az_1 + bz_1 - az_3 - bz_2} z + az_2z_3 - az_2z_1 + bz_3z_2 - bz_3z_1}{\bracket{cz_1 + dz_1 - cz_3 - dz_2} z + cz_2z_3 - cz_2z_1 + dz_3z_2 - dz_3z_1}
+    \end{align*}
+    We know that 
+    \begin{equation*}
+        \func{TS^{-1}}{1} = 1, \quad  \func{TS^{-1}}{1} = 1, \quad  \func{TS^{-1}}{\infty} = \infty, \quad 
+    \end{equation*}
+    which implies that 
+    \begin{equation*}
+        \begin{cases}
+            &az_2z_3 - az_2z_1 + bz_3z_2 - bz_3z_1 = 0\\
+            &cz_1 + dz_1 - cz_3 - dz_2 = 0\\
+            &az_1 + bz_1 - az_3 - bz_2 = cz_2z_3 - cz_2z_1 + dz_3z_2 - dz_3z_1
+        \end{cases}
+    \end{equation*}
+    hence 
+    \begin{equation*}
+        \func{TS^{-1}}{z} = \dfrac{\bracket{az_1 + bz_1 - az_3 - bz_2} z}{az_1 + bz_1 - az_3 - bz_2} = z
+    \end{equation*}
+    and thus \(TS^{-1}\) is the identity and we must have \(T = S\).
+\end{proof}
+In general we have the following 
+\begin{proposition}
+    For any two sets of distinct complex numbers \(z_1,z_2,z_3\) and \(w_1,w_2,w_3\) there exists a linear fractional transformation that takes \(z_i\) to \(w_i\) for \(i = 1,2,3\).
+\end{proposition}
+\begin{proof}
+    We first show that following lemma 
+    \begin{lemma}
+        Any linear fractional transformation has at most two fixed points unless it is the identity. 
+    \end{lemma}
+    \begin{prooflemma}
+        It is clear that 
+        \begin{equation*}
+            \frac{az + b}{cz + d} = z \implies cz^2 + \bracket{d-a}z + b = 0
+        \end{equation*}
+        has at most two solutions unless \(c = 0\) and \(d - a = 0\).
+    \end{prooflemma}
+    Then consider the following linear fractional transformation (interpreted appropriately if any of them is \(\infty\))
+    \begin{equation*}
+        S = w_1\frac{\bracket{z - z_2}\bracket{z - z_3}}{\bracket{z_1 - z_2} \bracket{z_1 - z_3}} + w_2\frac{\bracket{z - z_1}\bracket{z - z_3}}{\bracket{z_2 - z_1} \bracket{z_2 - z_3}} + w_3\frac{\bracket{z - z_1}\bracket{z - z_2}}{\bracket{z_3 - z_1} \bracket{z_3 - z_1}}
+    \end{equation*}
+    Clearly \(S\) the required property. Suppose there exists another linear fractional transformation \(T\) with such property. We have 
+    \begin{equation*}
+        TS^{-1} w_i = w_i , \quad i = 1,2,3
+    \end{equation*}
+    which means \(TS^{-1}\) is the identity and we must have \(T = S\).
+\end{proof}
+
+\begin{definition}[Cross ratio]
+    The cross ratio of \(\bracket{z_1,z_2;z_3,z_4}\) is the image of \(z_1\) under the transformation \(S\) that takes \(z_1,z_2,z_3\) to \(1,0,\infty\). That is 
+    \begin{equation*}
+        \bracket{z_1,z_2;z_3,z_3} =\frac{z_1 - z_3}{z_1 - z_4} \frac{z_2 - z_4}{z_2 - z_3}
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    Let \(z_1,z_2,z_3,z_4 \in \Complex\) and \(T\) is a linear fractional transformation. Then \(\bracket{Tz_1, Tz_2; Tz_3, Tz_4} = \bracket{z_1, z_2; z_3, z_3}\)
+\end{proposition}
+\begin{proof}
+    Suppose \(S = \bracket{z, z_2; z_3, z_4}\) and \(S' = \bracket{z, Tz_2; Tz_3, Tz_4}\). Note that 
+    \begin{equation*}
+        \func{ST}{z_2} = 1 , \quad \func{ST}{z_3} = 0 , \quad \func{ST}{z_4} = \infty
+    \end{equation*}
+    therefore \(S = S'T\) and for all \(z_1 \in \Complex\), \(Sz = S'Tz\).
+\end{proof}
+
+\begin{proposition}
+    Let \(r,c \in \Reals\) and \(k \in \Complex\), then the equation 
+    \begin{equation*}
+        r\abs{z}^2 + k\bar{z} + \bar{k}z + c = 0
+    \end{equation*}
+    represents a line if \(r = 0\), represents a circle if \(r \neq 0\) and \(\abs{k}^2 \geq rc\).
+\end{proposition}
+
+The locus of all the points of \(r\abs{z}^2 + k\bar{z} + \bar{k}z + c = 0\), if non-empty, is called a circline.
+\begin{proposition}
+    circlines correspond to circles on Riemann sphere.
+\end{proposition}
+
+\begin{proposition}
+    A linear transformation carries circlines to circlines.
+\end{proposition}
+
+\begin{proposition}
+    The cross ratio is real if and only if the four points lie in a circle or a straight line.
+\end{proposition}
+
+
+
+\section{Polynomials and rational functions}
+
+\begin{theorem}
+      If all zero's of a polynomial \(P\) lie in a half plane (convex polygon), the all zero's of the derivative \(P'\) lie in the same half plane (convex polygon).
+\end{theorem}
+
+A \textbf{rational function} \(\func{R}{z}\) is the quotient of two polynomials
+\begin{equation*}
+      \func{R}{z} = \dfrac{\func{P}{z}}{\func{Q}{z}} = \dfrac{a_m x^m + \dots + a_0}{b_n x^n + \dots + b_0}
+\end{equation*}
+We can assume that \(P\) and \(Q\) have no factor in common. In that case, the zeros of \(P\) are the zeros of \(R\) and the zeros of \(Q\) are called the \textit{poles} of \(R\). We can further define \(\func{R}{\infty}\) to be \(\func{S_R}{0}\) where \(\func{S_R}{z} = \func{R}{\frac{1}{z}}\). 
+\begin{equation*}
+      \func{S_R}{z} = z^{n-m} \dfrac{a_m + \dots + a_0 x^m}{b_n + \dots + b_0 x^n}
+\end{equation*}
+Then if \(n > m\) we say that \(R\) has roots at \(\infty\) with multiplicity of \(n - m\), if \(n < m\) then \(R\) has poles at \(\infty\) with multiplicity of \(m  - n\). If \(n = m\) then \(\func{R}{\infty} = \frac{a_m}{b_n}\). It is now easy to see that the number of roots and poles of \(R\) - including \(\infty\) - is the greater of \(m,n\) and it is called the \textit{degree} of \(R\). 
+
+We can write \(R\) in the following form 
+\begin{equation*}
+      \func{R}{z} = \func{G}{z} + \func{H}{z}
+\end{equation*}
+where \(G\) is a polynomial with no constant term, by carrying out the division. Now let \(\beta_1 , \dots , \beta_k\) be distinct poles of \(R\). Then \(\func{S_j}{\xi} = \func{R}{\beta_j + \frac{1}{\xi}}\) is a rational function of \(\xi\) and it can be written as 
+\begin{equation*}
+      \func{S_j}{\xi} = \func{G_j}{\xi} + \func{H_j}{\xi} \implies \func{R}{z}= \func{G_j}{\dfrac{1}{z - \beta_j}} + \func{H_j}{\dfrac{1}{z - \beta_j}}
+\end{equation*}
+note that \(\func{G_j}{\frac{1}{z - \beta_j}}\) has pole(s) only at \(\beta_j\). Now consider 
+\begin{equation*}
+      \func{S}{z} = \func{R}{z} - \func{G}{z} - \sum_{j = 1}^k \func{G_j}{\dfrac{1}{z - \beta_j}}
+\end{equation*}
+It can have poles only at \(\beta_1 , \dots , \beta_k\) and \(\infty\). \(R\) and \(G_j\) have poles at \(z = \beta_j\), however their difference if finite. \(R\) and \(G\) have poles at \(\infty\) but their difference is finite as well. Hence \(S\) has no poles and thus must be a constant. Incorporating the constant into \(G\) allows us to write \(R\) as 
+\begin{equation*}
+      \func{R}{z} = \func{G}{z} + \sum_{j = 1}^k \func{G_j}{\dfrac{1}{z - \beta_j}}
+\end{equation*}
+which is its \textit{partial fraction decomposition}.
+
+\section{Conformal maps}
+A \textbf{conformal map} is a transformation that conserves angle and direction. For example every linear \(\Reals^2\) transformation of the form 
+\begin{equation*}
+      \begin{bmatrix}
+            a & -b\\
+            b & a
+      \end{bmatrix} = \sqrt{a^2 + b^2} \begin{bmatrix}
+            \cos \theta & -\sin \theta\\
+            \sin \theta & \cos \theta
+      \end{bmatrix} 
+\end{equation*}
+is a conformal mapping since it is a scaling and a rotation, both of which conserve the angle and direction. 
+Let \(U\) be an open set in \(\Complex\) and \(\gamma,\eta : \clcl{a}{b} \to U\)  be two complex valued curves. Suppose that \(z_1 = \func{\gamma}{t_1} = \func{\eta}{t_2}\) then the angle between \(\gamma\) and \(\eta\) at \(z_1\) is defined as the angle between \(\func{\gamma'}{t_1}\) and \(\func{\eta'}{t_2}\), provided that they are nonvanishing. Let \(f: U \to \Complex\) be a holomorphic function then by chain rule 
+\begin{equation*}
+      \ODiff{\func{f}{\func{\gamma}{t}}}{t} = \func{f'}{\func{\gamma}{t}} \func{\gamma'}{t}
+\end{equation*}
+Viewing \(w = \func{f'}{\func{\gamma}{t}}\) as a \(\Reals^2\) linear transformation, we can deduce that \(f\) is conformal. 
+\begin{align*}
+      \ODiff{\func{f}{\func{\gamma}{t_1}}}{t} &= \func{f'}{z_1} \func{\gamma'}{t_1}\\
+      \ODiff{\func{f}{\func{\eta}{t_2}}}{t} &= \func{f'}{z_1} \func{\eta'}{t_2}
+\end{align*}
+Thus given that \(\func{f'}{z_1} \neq 0\) the angle between \(\gamma\) and \(\eta\) at \(z_1\) is the same as \(f \circ \gamma\) and \(f \circ \eta\).
+
