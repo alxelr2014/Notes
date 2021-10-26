@@ -1,0 +1,227 @@
+\chapter{Fourier Series Representation}
+\section{Eigenfunctions}
+For discrete and continuous LTI systems we have 
+\begin{align*}
+    \func{x}{t} = e^{st} \to \func{y}{t} = \func{H}{s} e^{st}, \; s \in \Complex \\
+    \squareFunc{x}{n} = z^n \to \squareFunc{y}{n} = \func{H}{x} z^n, \; z \in \Complex
+\end{align*}
+A signal for which the output signal of a system is a constant multiple of itself is called the \textbf{eigenfunction} of the system and the constant is called the \textbf{eigenvalue}. To show the above equations (we assume the convergence of the integral and the sum at the last steps.)
+\begin{align*}
+    \func{y}{t} &= \int_{-\infty}^{\infty} \func{h}{\tau} e^{s \bracket{t - \tau}} \diffOperator \tau = e^{st}  \int_{-\infty}^{\infty} \func{h}{\tau} e^{-s\tau} \diffOperator \tau = \func{H}{s} e^{st}\\
+    \squareFunc{y}{n} &= \sum_{k = -\infty}^{\infty} \squareFunc{h}{k} z^{n -k} = z^n \sum_{k = -\infty}^{\infty} \squareFunc{h}{k} z^{-k} = \func{H}{z} z^n
+\end{align*}
+
+\section{Fourier series representation}
+\subsection{Continuous-time}
+Suppose \(\func{x}{t}\) is a continuous-time periodic signal with period \(T\). The value \(\omega_0 = \frac{2\pi}{T}\) then we may be able to write \(\func{x}{t}\) in the form of 
+\begin{equation*}
+    \func{x}{t} = \sum_{-\infty}^{\infty} a_k e^{jk\omega_0 t}
+\end{equation*}
+Let \(\func{x}{t}\) be a real signal then \(\overline{x} = x\) hence 
+\begin{align*}
+    \func{x}{t} &= \sum_{-\infty}^{\infty} \overline{a_k} e^{-jk\omega_0 t}\\
+    &=  \sum_{-\infty}^{\infty} \overline{a_{-k}} e^{-jk\omega_0 t} \implies a_k = \overline{a_{-k}}\\
+    &= a_0 +\sum_{k = 1}^{\infty} a_k e^{jk\omega_0 t} + \overline{a_{-k}} e^{-jk\omega_0 t} \\
+    &= a_0 + 2 \sum_{k = 1}^{\infty}  \func{\Re}{a_k e^{jk\omega_0 t}}, \ a_k = r_k e^{j\theta_k} , a_k = b_k + jc_k\\
+    &= a_0 + 2 \sum_{k = 1}^{\infty}  r_k \func{\cos}{\theta_k + k \omega_0 t}\\
+    &=  a_0 + 2 \sum_{k = 1}^{\infty}  b_k \func{\cos}{k \omega_0 t} - c_k \func{\sin}{k \omega_0 t}\\
+\end{align*}
+The last two equation are the \textbf{Fourier series} representation of a real periodic signal \(\func{x}{t}\) \_ this is called synthesis in the context of Fourier series. We also have 
+\begin{align*}
+    \int_{0}^T \func{x}{t} e^{-jn\omega_0 t} \diffOperator t &= \int_{0}^T \sum_{-\infty}^{\infty} a_k e^{j\bracket{n-k }\omega_0 t}\diffOperator t\\
+    &=\sum_{-\infty}^{\infty} a_k \int_{0}^T  e^{j\bracket{n-k }\omega_0 t}\diffOperator t\\
+    &= a_n T
+\end{align*} 
+therefore 
+\begin{align*}
+    a_n &= \dfrac{\omega_0}{2\pi}  \int_{0}^T \func{x}{t} e^{-jn\omega_0 t} \diffOperator t = \dfrac{\omega_0}{2\pi} \int_{c}^{c +T} \func{x}{t} e^{-jn\omega_0 t} \diffOperator t\\
+    a_0 &= \dfrac{\omega_0}{2\pi}  \int_{0}^T \func{x}{t} \diffOperator t 
+\end{align*}
+we donote \(\int_{c}^{c + T}\) by \(\int_T\).
+
+\subsection{Convergence}
+A finite enery real signal \(\func{x}{t}\)
+\begin{equation*}
+    \int_{T} \abs{\func{x}{t}}^2 \diffOperator t < \infty
+\end{equation*}
+has a Fourier series representation if it satisfies the \textit{Dirichlet conditions}
+\begin{enumerate}
+    \item Over any period \(\func{x}{t}\) is absolutely intergrable which implies \(\abs{a_k} < \infty\).
+    \item In any finite interval, \(\func{x}{t}\) is of bounded variation \_ finite number of maximas and minimas.
+    \item Finite number of discontinuities in any finite interval, and the discontinuities can not be infinite.
+\end{enumerate}
+
+\subsection{Discrete-time}
+Let \(\squareFunc{x}{n}\) be a discrete signal with period \(N\) and fundamental frequence \(w_0 = \frac{2\pi}{N}\) and let  
+\begin{equation*}
+    \func{\phi_k}{n} = e^{jk\omega_0 n} \quad k \in \Integers
+\end{equation*}
+then since 
+\begin{equation*}
+    \func{\phi_k}{n} = \func{\phi_{rN + k}}{n}
+\end{equation*}
+we can write \(\squareFunc{x}{n}\) in form of 
+\begin{equation*}
+    \func{x}{n} = \sum_{k = \angleBracket{N}} a_k \func{\phi_k}{n}
+\end{equation*}
+where \(\angleBracket{N}\) is a set of \(N\) consecutive integers. Finding \(a_k\) requires solving a linear system 
+\begin{equation*}
+    a_k = \dfrac{1}{N} \sum_{k = \angleBracket{N}} \squareFunc{x}{n} e^{jk \omega_0 n}
+\end{equation*}
+
+\section{Properties of Fourier series}
+Suppose \(\func{x}{t}\) is a periodic signal with period \(T\) and \(\omega_0 = \frac{2 \pi}{T}\) then 
+\begin{equation*}
+    \func{x}{t} \xleftrightarrow{FS} a_k
+\end{equation*}
+where \(a_k\) is its Fourier series coefficients. Let \(\func{x}{t} \xleftrightarrow{FS} a_k\) and  \(\func{y}{t} \xleftrightarrow{FS} b_k\), then we have the following properties 
+\begin{definition}
+    \item[Linearity]
+    \begin{equation*}
+        \alpha \func{x}{t} + \beta \func{y}{t} \xleftrightarrow{FS} \alpha a_k + \beta b_k
+    \end{equation*}
+    \item[Time shifting]
+    \begin{equation*}
+        \func{x}{t - t_0}  \xleftrightarrow{FS} e^{-jk\omega_0 t_0} a_k
+    \end{equation*}
+    \item[Time reversal]
+    \begin{equation*}
+        \alpha \func{x}{-t} \xleftrightarrow{FS}  a_{-k}
+    \end{equation*}
+    \item[Time scaling]
+    \begin{equation*}
+        \alpha \func{x}{ct} \xleftrightarrow{FS} \sum_{k = -\infty}^{\infty} a_k e^{jk \bracket{c\omega_0} t}
+    \end{equation*}
+    It does not change the coefficients, but changes the whole thing.
+    \item[Multiplication]
+    \begin{equation*}
+        \func{x}{t}\func{y}{t} \xleftrightarrow{FS} c_k = \sum_{l = -\infty}^{\infty}  a_{l} +  b_{k-l}
+    \end{equation*} 
+    \item[Conjugate symmetry]
+    \begin{equation*}
+        \overline{ \func{x}{t}} \xleftrightarrow{FS}  \overline{a_{-k}}
+    \end{equation*}
+    \item[Parseval's relation]
+    \begin{equation*}
+        \int_T \abs{\func{x}{t}}^2 \diffOperator t = \sum_{k = -\infty}^{\infty} \abs{a_k}^2
+    \end{equation*}
+    \item[Period convolution]
+    \begin{equation*}
+        \int_T \func{x}{t}\func{y}{t - \tau} \diffOperator \tau \xleftrightarrow{FS} T\alpha a_k \beta b_k
+    \end{equation*}
+    \item[Frequency shifting]
+    \begin{equation*}
+        e^{jM\omega_0 t}\func{x}{t} \xleftrightarrow{FS}  a_{k - M}
+    \end{equation*}
+    \item[Differentiation]
+    \begin{equation*}
+        \ODiff{\func{x}{t}}{t}  \xleftrightarrow{FS} jk\omega_0\alpha a_k
+    \end{equation*}
+    and for discrete-time signals 
+    \begin{equation*}
+        \squareFunc{x}{n} - \squareFunc{x}{ n - 1} \xleftrightarrow{FS} \bracket{1 - e^{-jk\omega_0}} a_K
+    \end{equation*}
+    \item[Integeration]          
+    \begin{equation*}
+        \int_{\infty}^t \func{x}{\tau} \diffOperator \tau \xleftrightarrow{FS} \dfrac{a_k}{jk \omega_0 }
+    \end{equation*}
+\end{definition}
+
+\section{LTI systems}
+Consider a periodic signal \(\func{x}{t}\) with 
+\begin{equation*}
+    \func{x}{t} = \sum_{k = -\infty}^{\infty} a_k e^{jk \omega_0 t}
+\end{equation*}
+then for a LTI system \(\func{x}{t} \to \func{y}{t}\) with \(\func{\delta}{t} \to \func{h}{t}\)
+\begin{align*}
+    \func{y}{t} &= \sum_{k = -\infty}^{\infty} a_k \bracket{e^{jk\omega_0 t} \ast \func{h}{t}}\\
+    &= \sum_{k = -\infty}^{\infty} a_k \bracket{\int_{-\infty}^{\infty} e^{jk\omega_0 \bracket{t - \tau}}  \func{h}{\tau} \diffOperator \tau}\\
+    &=  \sum_{k = -\infty}^{\infty} a_k e^{jk\omega_0 t}\bracket{\int_{-\infty}^{\infty} e^{-jk\omega_0\tau}  \func{h}{\tau} \diffOperator \tau}\\
+    &= \sum_{k = -\infty}^{\infty} a_k \func{H}{jk\omega_0}e^{jk\omega_0 t}
+\end{align*}
+For a discrete time system \(\squareFunc{\delta}{n} \to \squareFunc{h}{n}\)
+\begin{align*}
+    \func{y}{n} &= \sum_{k = \angleBracket{N} } a_K \bracket{e^{jk\omega_0 n} \ast \func{h}{n}}\\
+    &=  \sum_{k = \angleBracket{N} } a_K \bracket{\bracket{e^{jk\omega_0}}^n \ast \func{h}{n}}\\
+    &=  \sum_{k = \angleBracket{N} } a_K \bracket{\sum_{m = -\infty}^{\infty} e^{jk\omega_0 \bracket{n-m}}\func{h}{m}}\\
+    &=  \sum_{k = \angleBracket{N} } a_K e^{jk \omega_0 n}\bracket{\sum_{m = -\infty}^{\infty} e^{-jk\omega_0 m}\func{h}{m}}\\
+    &=  \sum_{k = \angleBracket{N} } a_K \func{H}{e^{jk \omega_0}} e^{jk \omega_0 n}
+\end{align*}
+
+\section{Filtering}
+LTI systems the change frequency spectrum are called frequency-shaping filters. Systems that pass, eliminate, or attunate some frequencies are called frequency selective filters. Three types of frequency selective filters include 
+\subsection{Lowpass filter}
+Passes low frequencies around zero and attunates or eliminates, in the ideal case, high frequencies.
+\begin{equation*}
+    \abs{H}{j\omega} = \begin{cases}
+        1 & \abs{\omega} \leq \omega_c\\
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation*}
+--insert diagram 
+
+\subsection{Bandpass filter}
+Passes frequencies around certian frequncy and attunates or eliminates, in the ideal case, other frequencies.
+\begin{equation*}
+    \abs{H}{j\omega} = \begin{cases}
+        1 & \omega_{c_1} \leq \abs{\omega} \leq \omega_{c_2}\\
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation*}
+--insert diagram 
+\subsection{High pass filter}
+Passes high frequencies around zero and attunates or eliminates, in the ideal case, low frequencies.
+\begin{equation*}
+    \abs{H}{j\omega} = \begin{cases}
+        1 & \abs{\omega} \geq \omega_c\\
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation*}
+--insert diagram 
+
+\begin{example}
+    Take a simple RC circuit with input \(\func{V_s}{t}\). We have 
+    \begin{equation*}
+        \begin{cases}
+            &\func{V_R}{t} + \func{V_C}{t} = \func{V_s}{t}\\
+            & \func{V_R}{t} = R \func{i}{t} = RC \ODiff{\func{V_C}{t}}{t}
+        \end{cases}
+    \end{equation*}
+Since it is an LTI system, for input \(\func{V_s}{t} = e^{j\omega t}\) and output \(\func{V_C}{t} = \func{H}{j\omega}\) we have 
+\begin{align*}
+    RC \func{H}{j\omega}j \omega e^{j \omega t} + \func{H}{j \omega} e^{j\omega}&= e^{j \omega} \\
+    \implies \func{H}{j \omega} = \dfrac{1}{RC j \omega + 1}
+\end{align*}
+--insert diagram which is non-ideal lowpass filter. For output \(\func{V_R}{t} = \func{H}{j\omega}\) we have 
+\begin{align*}
+    RC \func{H}{j\omega}j \omega e^{j \omega t} + \func{H}{j \omega} e^{j\omega}&= RC j \omega e^{j \omega} \\
+    \implies \func{H}{j \omega} = \dfrac{j\omega }{RC j \omega + 1}
+\end{align*}
+--insert diagram which is non-ideal highpass filter.
+\end{example}
+\begin{example}[First order recursive discrete-time filter]
+    Consider 
+    \begin{equation*}
+        \squareFunc{y}{n} - a \squareFunc{y}{n-1}= \squareFunc{x}{n}
+    \end{equation*}
+    with input \(\squareFunc{x}{n} = e^{j\omega n}\) the output is of form \(\squareFunc{y}{n} = \func{H}{e^{j\omega}} e^{j \omega n}\) then 
+    \begin{align*}
+        \func{H}{e^{j\omega}} e^{j \omega n} + \func{H}{e^{j\omega}} e^{j \omega (n - 1)} &= e^{j \omega n}\\
+        \implies \func{H}{e^{j\omega}} \bracket{1 + e^{-j \omega}} &= 1\\
+        \implies \func{H}{e^{j\omega}} &= \dfrac{1}{1 + e^{-j\omega}}
+    \end{align*}
+    --insert diagram which is non-ideal lowpass filter for \(0 < a < 1\) and a non-ideal highpass filter for \(-1 < a < 0\).
+\end{example}
+
+\begin{example}[Non-recursive discrete-time filter]
+    Consider the following FIR
+    \begin{equation*}
+        \squareFunc{y}{n} = \sum_{k = -N}^{M} b_k \squareFunc{x}{n - k}, \quad b_k \ \text{are weights}
+    \end{equation*}
+    let \(b_k = \frac{1}{M + N  + 1} \) then 
+    \begin{align*}
+        \func{H}{e^{j\omega}} &= \dfrac{1}{N + M + 1} \sum_{k = -N}^M e^{j\omega (n-k)}\\
+        &= \dfrac{1}{N + M + 1} \dfrac{e^{j\omega (N + 1)} - e^{-j\omega M}}{e^{j\omega } - 1}
+    \end{align*}
+    which is a lowpass filter that approaches the ideal as \(N + M + 1 \to \infty\).
+\end{example}
