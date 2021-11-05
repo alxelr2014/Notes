@@ -24,6 +24,7 @@
 \usepackage{mathtools}
 \usepackage{xcolor}
 \usepackage{enumitem}
+\usepackage{tabularx}
 
 \usepackage{common}
 \usepackage{english-theorems}
@@ -36,7 +37,10 @@
 \ifodd\value{page}\else
 \thispagestyle{empty}
 \fi
+\part{Basics}
 \input{Chapters/Introduction.tex}
 \input{Chapters/LTI.tex}
+\part{Fourier}
 \input{Chapters/FourierSeries.tex}
+\input{Chapters/FourierTransform.tex}
 \end{document}
