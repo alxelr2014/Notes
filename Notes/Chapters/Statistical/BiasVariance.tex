@@ -1,0 +1,85 @@
+\chapter{Bias-Variance Tradeoff}
+\section{No-Free-Lunch theorem}
+\begin{theorem}[No-Free-Lunch]
+    Let \(\calA\) be any learning algorithm for task of binary classification w.t.r 0-1 loss over a domain \(\calX\). Let \(m\) be any number smaller than \(\frac{\abs{\calX}}{2}\), representing the training set size, Then, there exists a distribution \(\calJ\) on \(\calX \times \set{0,1}\) such that 
+    \begin{enumerate}
+        \item There exists a function \(f: \calX \to \set{0,1}\) with \(\func{L_{\calJ}}{f}  = 0\).
+        \item Then probability taken over the choice of \(S \sim \calJ^m\) 
+        \begin{equation*}
+            \prob{\func{L_{\calJ}}{\func{\calA}{S}} \geq \dfrac{1}{8}} \geq \dfrac{1}{7}
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Intuitively, if \(C \subset X\) with \(\abs{C} = 2m\), then we want a distribution that with knowning the labeling one half of \(C\), \(\calA\) can not label the other half correctly. Let \(T = 2^{2m}\) --- the number of binary functions from \(C\)--- and \(f_i : C \to {0,1}, \quad i = 1 , \dots , T\) and let \(\calJ_i\) be distributions over \(C \times \set{0,1}\) such that 
+    \begin{equation*}
+        \func{J_i}{x,y} = \begin{cases}
+            \frac{1}{\abs{C}} & \text{if} \quad y = \func{f_i}{x}\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    We claim that for all \(\calA\) that receives \(m\) samples of \(C\)
+    \begin{equation} \label{eq:NFLTstatement}
+        \max_{i \in \Naturals_T} \expected[S \sim \calJ_i^m]{\func{L_{\calJ_i}}{\func{\calA}{S}}} \geq \dfrac{1}{4} \tag{*}
+    \end{equation}
+    Then for every algorithm \(\calA'\) that receives \(m\) samples of \(X\), there exists \(\calJ\) and \(f\) such with \(\func{L_{\calJ}}{f} = 0\) and 
+    \begin{equation*}
+        \expected[S \sim \calJ^m]{\func{L_{\calJ}}{\func{\calA'}{S}}} \geq \dfrac{1}{4}
+    \end{equation*}
+    To do this, consider and extension set \(C\) for that \(m\) samples and consider the \(\calJ_i\) and \(f_i\) on that set. Then, by Markov inequality we have 
+    \begin{align*}
+        \prob{\func{L_{\calJ}}{\func{\calA'}{S}} < \dfrac{1}{8}} &= \prob{1 - \func{L_{\calJ}}{\func{\calA'}{S}} > \dfrac{7}{8} }\\
+        &\leq 8\dfrac{\expected{1 - \func{L_{\calJ}}{\func{\calA'}{S}}}}{7} \\
+        &\leq \dfrac{8}{7} - \dfrac{2}{7} = \dfrac{6}{7}
+        \implies \prob{\func{L_{\calJ}}{\func{\calA'}{S}} \geq \dfrac{1}{8}} \geq  1- \dfrac{6}{7} = \dfrac{1}{7}
+    \end{align*}
+    Let \(K = (2m)^m\) be the number of sequences of examples of \(C\) (with replacement) and \(S_j\) for \(j = 1, \dots , K\) be these sequences. Define 
+    \begin{equation*}
+        S_j^i = \bracket{(x_1 , \func{f_i}{x_1}), \dots , (x_m , \func{f_i}{x_m})}    
+    \end{equation*}
+    to be the sequence \(S_j\) labeled by \(f_i\). If \(\calJ_i\) is the distribution and \(\calA\) receives \(S_1^i , \dots , S_K^i\) with equal probability then 
+    \begin{equation*}
+        Q_i = \expected[S \sim \calJ^{i}]{\func{L_{\calJ_i}}{\func{\calA}{S}}} = \dfrac{1}{K} \sum_{j = 1}^K \func{L_{\calJ_i}}{\func{\calA}{S^i_j}}
+    \end{equation*}
+    which implies 
+    \begin{align*}
+        \max_{i \in \Naturals_T} Q_i &\geq \average_{i \in \Naturals} Q_i = \dfrac{1}{T} \sum_{i = 1}^{T} \bracket{\dfrac{1}{K} \sum_{j = 1}^K \func{L_{\calJ_i}}{\func{\calA}{S^i_j}}}\\
+        &= \average_{j \in \Naturals_K} \dfrac{1}{T} \sum_{i = 1}^T \func{L_{\calJ_i}}{\func{\calA}{S^i_j}}\\
+        &\geq \min_{j \in \Naturals_K} \dfrac{1}{T} \sum_{i = 1}^T \func{L_{\calJ_i}}{\func{\calA}{S^i_j}}
+    \end{align*}
+    Fix \(j\) and let \(v_1, \dots , v_p \in S\) but not in \(S_j\) --- \(p \geq m\). Then for every \(h : C \to \set{0,1}\) and every \(i\)
+    \begin{align*}
+        \func{L_{\calJ_i}}{h} &= \dfrac{1}{2m} \sum_{x \in C} \DSOne_{\squareBracket{\func{h}{x} \neq \func{f_i}{x}}}\\
+        &\geq \dfrac{1}{2m} \sum_{r = 1}^p \DSOne_{\squareBracket{\func{h}{v_r} \neq \func{f_i}{v_r}}}\\
+        &\geq \dfrac{1}{2p} \sum_{r = 1}^p \DSOne_{\squareBracket{\func{h}{v_r} \neq \func{f_i}{v_r}}}\\
+    \end{align*}
+    Therefore, 
+    \begin{equation*}
+        \dfrac{1}{T} \sum_{i = 1}^T \func{L_{\calJ_i}}{\func{\calA}{S^i_j}} \geq \dfrac{1}{2} \min_{r \in \Naturals_p}  \dfrac{1}{T} \sum_{i = 1}^T \DSOne_{\squareBracket{\func{\func{\calA}{S^i_j}}{v_r} \neq \func{f_i}{v_r}}}
+    \end{equation*}
+    For some \(r \in \Naturals\) partition \(f_1 , \dots , f_T\) into \(T/2\) disjoint pairs \(f_i, f_{i'}\) where 
+    \begin{equation*}
+        \forall c \in C, \; \func{f_i}{c} \neq \func{f_{i'}}{c} \iff c = v_r
+    \end{equation*} 
+    For any such pair, we must have \(S^i_j = S^{i'}_j\) since \(v_r \notin S_j\), it follows that 
+    \begin{align*}
+        &\DSOne_{\squareBracket{\func{\func{\calA}{S^i_j}}{v_r} \neq \func{f_i}{v_r}}}  + \DSOne_{\squareBracket{\func{\func{\calA}{S^{i'}_j}}{v_r} \neq \func{f_i}{v_r}}} = 1 \\
+        \implies & \dfrac{1}{T} \sum_{i = 1}^T \DSOne_{\squareBracket{\func{\func{\calA}{S^i_j}}{v_r} \neq \func{f_i}{v_r}}} = \dfrac{1}{T} \; \cdot \; \dfrac{T}{2} = \dfrac{1}{2}
+    \end{align*}
+    to conclude 
+    \begin{equation*}
+        \max_{i \in \Naturals_T} Q_i \geq \min_{j \in \Naturals_K} \dfrac{1}{T} \sum_{i = 1}^T \func{L_{\calJ_i}}{\func{\calA}{S^i_j}} \geq \min_{j \in \Naturals_K}\dfrac{1}{2} \min_{r\in \Naturals_p} \dfrac{1}{2} = \dfrac{1}{4}
+    \end{equation*}
+\end{proof}
+
+\begin{corollary}
+    Let \(\calX\) be an infinite domain set and \(\calH\) be the set of all functions \(f: \calX \to \set{0,1}\). Then \(\calH\) is not PAC leanrable.
+\end{corollary}
+
+\section{Error decomposition}
+Let \(h_S \in ERM_{\calH}\) then we can write the risk of \(h_S\) as
+\begin{equation*}
+    \func{L_{\calJ}}{h_S} = \epsilon_{app} + \epsilon_{est}
+\end{equation*}
+where \(\epsilon_{app} = \min_{h \in \calH} \func{L_{\calJ}}{h}\). Intuitively, \(\epsilon_{app}\) is the \textit{approximation error} -- also called \textit{inductive bias} -- which is the minimum error achieved by \(\calH\) and \(\epsilon_{est}\) is the \textit{estimation error} which is due to the fact that \(ERM_{\calH}\) depends on \(m\) and the complexity of \(\calH\). Hence, this is called bias-complexity or bias-variance tradeoff. 

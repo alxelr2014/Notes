@@ -1,0 +1,91 @@
+\chapter{VC Dimension}
+\section{VC Dimension}
+\begin{definition}
+    Let \(\calH\) be a class of functions from \(\calX \to \set{0,1}\) and let \(C = \set{c_1, \dots ,c_m} \subset \calX\). The \textit{restriction} of \(\calH\) to \(C\) is the set of functions from \(C\) to \(\set{0,1}\) that can be derived from \(\calH\).
+    \begin{equation*}
+        \calH_C = \set<\bracket{\func{h}{c_1} , \dots , \func{h}{c_m}}>{h \in \calH}
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    A hypothesis class \(\calH\) \textit{shatters} a finite set \(C \subset \calX\) if the restriction of \(\calH\) to \(C\) is the set of all functions from \(C\) to \(\set{0,1}\). That is, \(\abs{\calH_C} = 2^{\abs{C}}\).
+\end{definition}
+
+Going back to the proof of No-Free-Lunch theorem, if \(C\) is shattered by \(\calH\) then adversary is not restricted by \(\calH\) and can construct any target function from \(C\) to \(\set{0,1}\). Formally,
+
+\begin{corollary}
+    Let \(\calH\) be a hypothesis class from \(\calX\) to \(\set{0,1}\). Let \(m\) be the size of the training set. Assume there exists a set \(C \subset \calX\) with size \(2m\) that is shattered by \(\calH\). Then, for any learning algorithm, \(\calA\), there exist a distribution \(\calJ\) on \(\calX \times \set{0,1}\) and a predictor \(h \in \calH\) such that 
+    \begin{equation*}
+        \func{L_{\calJ}}{h} = 0 \ \text{but} \ \prob{\func{L_{\calJ}}{\func{\calA}{S}} \geq \dfrac{1}{8}} \geq \dfrac{1}{7}
+    \end{equation*}
+    Intuitively, if \(\calH\) shatters \(C\), knowing \(m\) elements of does not give much information on the other \(m\) elements. 
+\end{corollary}
+
+\begin{definition}
+    The \textit{VC dimension} of \(\calH\) denoted by \(\VCdim \calH\) is the maximal size of a set \(C \subset \calX\) that can be shattered by \(\calH\). If \(\calH\) can shatter set of arbitrarily large size, we say \(\calH\) has infinite VC-dimension. 
+\end{definition}
+
+\begin{theorem}
+    Let \(\calH\) be a class of infinite VC dimension. Then, \(\calH\) is not PAC learnable. 
+\end{theorem}
+
+Note that, not all infinite \(\calH\) has infinite VC dimension. For example, the hypothesis class \(\calH = \set<h = \DSOne_{\squareBracket{x < a}}>{a \in \Reals}\) is PAC learnable using the ERM rule with sample complexity of \(m_{\calH} \leq \ceil{\frac{\log 2 - \log \delta}{\epsilon}}\). 
+
+Read the examples afterward, I'm tired right now, again :)).
+
+\begin{theorem}[Fundamental theorem of statistical learning]
+    Let \(\calH\) be a hypothesis class from \(\calX\) to \(\set{0,1}\) with 0-1 loss. Then, the following are equivalent
+    \begin{enumerate}
+        \item \(\calH\) has uniform convergence property.
+        \item Any ERM rule a successful agnostic PAC learner for \(\calH\).
+        \item \(\calH\) is agnostic PAC learnable.
+        \item \(\calH\) is PAC leanrable.
+        \item Any ERM rule is a successful PAC learner for \(\calH\).
+        \item \(\calH\) has a finite VC dimension.
+    \end{enumerate}
+\end{theorem}
+Similar theorems can be proved for other learning problems such as regression with absolute value or square loss. 
+
+\begin{corollary}
+    Assume that \(\VCdim \calH = d < \infty\), then there are \(C_1, C_2\) constants such that 
+    \begin{enumerate}
+        \item \(\calH\) is uniform convergence property with sample complexity
+        \begin{equation*}
+            C_1 \dfrac{d + \log \frac{1}{\delta}}{\epsilon ^2} \leq \func{m_{\calH}^{UC}}{\epsilon, \delta} \leq C_2 \dfrac{d + \log \frac{1}{\delta}}{\epsilon ^2}
+        \end{equation*}
+        \item \(\calH\) is agnostic PAC learnable with sample complexity
+        \begin{equation*}
+            C_1 \dfrac{d + \log \frac{1}{\delta}}{\epsilon ^2} \leq \func{m_{\calH}}{\epsilon, \delta} \leq C_2 \dfrac{d + \log \frac{1}{\delta}}{\epsilon ^2}
+        \end{equation*}
+        \item \(\calH\) is PAC learnable with sample complexity
+        \begin{equation*}
+            C_1 \dfrac{d + \log \frac{1}{\delta}}{\epsilon ^2} \leq \func{m_{\calH}}{\epsilon, \delta} \leq C_2 \dfrac{d + \log \frac{1}{\delta}}{\epsilon ^2}
+        \end{equation*}
+    \end{enumerate}
+\end{corollary}
+
+\section{Saur's lemma}
+\begin{definition}
+    The growth function of \(\calH\) denoted by \(\tau_{\calH} : \Naturals \to \Naturals\) is defined as 
+    \begin{equation*}
+        \func{\tau_{\calH}}{m} = \max_{\substack{C \subset \calX \\ \abs{C} = m}} \abs{\calH_C}
+    \end{equation*} 
+\end{definition}
+
+\begin{lemma}[Saur, Shelah, Parles] 
+    Let \(\calH\) be a hypothesis class with \(\VCdim \calH \leq d < \infty\). Then, for all \(m\)
+    \begin{equation*}
+        \func{\tau_{\calH}}{m} \leq \sum_{i = 1}^d \binom{m}{i}
+    \end{equation*}
+    In particular of \(m > d + 1\) then 
+    \begin{equation*}
+        \func{\tau_{\calH}}{m} \leq \bracket{\dfrac{em}{d}}^d
+    \end{equation*}
+\end{lemma}
+
+\begin{theorem}
+    Let \(\calH\) be a hypothesis class of with \(\tau_{\calH}\). Then, for every \(\calJ\) and for every \(\delta \in \opop{0}{1}\)
+    \begin{equation*}
+        \prob{\abs[[\Big]]{\func{L_{\calJ}}{h} - \func{L_S}{h}} \geq \dfrac{4 + \sqrt{\func{\log}{\func{\tau_{\calH}}{2m}}}}{\delta \sqrt{2m}}} \geq 1 - \delta
+    \end{equation*}
+\end{theorem}
