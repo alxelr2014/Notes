@@ -376,3 +376,30 @@ A function \(f\) is said to be convex over an interval \(\clcl{a}{b}\) if for ev
       \end{equation*}
       hence \(\func{\pi}{n} \to \infty\) as \(n \to \infty\).
 \end{example}
+
+\section{Shearer inequality}
+Let \((X_1, \dots , X_n)\) be a random vector and let \(A_1 , \dots , A_k \subset \Naturals_n\) be such that every integer \(i \in \Naturals_n\) lies in at least \(r\) of them . Then 
+\begin{equation*}
+      \func{H}{X_1, \dots , X_n} \geq \dfrac{1}{r} \sum_{i = 1}^n \func{H}{(X_j)_{j \in A_i}}
+\end{equation*}
+
+\begin{example}
+      Let \(S\) be a set of distincts points in \(\Reals^3\). 
+      \begin{itemize}
+            \item \(n_1\) be the number distinct point after projection onto \(x = 0\) plane.
+            \item \(n_2\) be the number distinct point after projection onto \(y = 0\) plane.
+            \item \(n_3\) be the number distinct point after projection onto \(z = 0\) plane.
+      \end{itemize}
+      Then, 
+      \begin{equation*}
+            n^2 \leq n_1 n_2 n_3
+      \end{equation*}
+\end{example}
+
+\begin{example}
+      Let \(\func{G}{V,E}\) be an undirected graph and let \(t\) be the number of triangles in \(G\). Then 
+      \begin{equation*}
+            t \leq \dfrac{1}{6} \bracket{2l}^{\frac{3}{2}}
+      \end{equation*}
+      where \(l = \abs{E}\).
+\end{example}

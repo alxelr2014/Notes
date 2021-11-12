@@ -1,0 +1,263 @@
+\chapter{Source Coding}
+We have an information source modeled by a random variable \(\calX \ni X \sim p_X\). A source code \(C\) is a function from \(\calX \to D^{\ast}\) where \(D^{\ast}\) us the set of all finite length strings over the alphabet \(D\). 
+\begin{example}
+    Let \(\calX = \set{\text{red}, \text{blue}}\) and \(D = \set{0,1}\). A possible source code might be 
+    \begin{equation*}
+        \func{C}{\text{red}} = 00 \quad \func{C}{\text{blue}} = 110
+    \end{equation*}
+\end{example}
+\begin{definition}
+    Length of the codeword of \(x \in \calX\) is 
+    \begin{equation*}
+        \func{l}{x} = \abs{\func{C}{x}}
+    \end{equation*}
+    and the average length of code \(C\) 
+    \begin{equation*}
+        \func{L}{C} = \expected{\func{l}{X}} = \sum_{x \in \calX} \func{p}{x} \func{l}{x}
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    \(C\) is non-singular if 
+    \begin{equation*}
+        \func{C}{x_1} = \func{C}{x_2} \implies x_1 = x_2
+    \end{equation*}
+\end{definition}
+We want a source code \(C\) to be invertible with minimum average length. Furthermore, we usually want to code a sequence \(x_1, \dots ,x_n\). One way to this is to introduce a character `,' that is not in \(D\) then 
+\begin{equation*}
+    \func{C}{x_1, \dots , x_n} = \func{C}{x_1}, \func{C}{x_2} , \dots , \func{C}{x_n}
+\end{equation*}
+Another way is to use instantaneous codes -- also called prefix-free codes.
+\begin{definition}
+    Extension of \(C\) is 
+    \begin{equation*}
+        \func{C^{\ast}}{x_1, \dots , x_n} = \func{C}{x_1} \dots \func{C}{x_n}
+    \end{equation*}
+    Then \(C\) is uniquely decodable if for each pair of different sequences \(x_1,\dots, x_n \neq y_1,\dots , y_m\)
+    \begin{equation*}
+        \func{C^{\ast}}{x_1,\dots ,x_n} \neq \func{C^{\ast}}{y_1, \dots ,y_m}
+    \end{equation*}
+    Equivalently, \(C^{\ast}\) is non-singular.
+\end{definition}
+Note that, decoding a uniquely decodable code might not be possible until the very end of stream, which is problematic. To do away with we introduce the prefix-free codes.
+\begin{definition}
+    A prefix-free code \(C\) is such that no codeword is a prefix of another codeword, 
+\end{definition}
+
+\begin{example}
+    Let \(\calX = \set{1,2,3,4}\) and \(D = \set{0,1}\). Consider
+    \begin{equation*}
+        C_1 = \begin{bmatrix}
+            0\\
+            0\\
+            0\\
+            0
+        \end{bmatrix} \quad C_2 = \begin{bmatrix}
+            0\\
+            010\\
+            01\\
+            10
+        \end{bmatrix} \quad C_3 = \begin{bmatrix}
+            10\\
+            00\\
+            11\\
+            110
+        \end{bmatrix} \quad C_4 = \begin{bmatrix}
+            0\\
+            10\\
+            110\\
+            111
+        \end{bmatrix}
+    \end{equation*}
+    then \(C_1\) is a singular code, \(C_2\) is non-singular but it is not uniquely decodable, \(C_3\) is non-singular and uniquely decodable but it is not prefix-free, lastly, \(C_4\) is a non-singular prefix-free code. 
+\end{example}
+
+\section{Kraft inequality}
+\begin{theorem}
+    For any instantaneous code over alphabet \(D\) with size \(d\) that has codeword length \(l_1 , l_2 , \dots , l_m\)
+    \begin{equation*}
+        \sum_{i = 1}^m d^{-l_i} \leq 1
+    \end{equation*}
+    Conversely, if \(l_1, \dots ,l_m\) satisfy the equation above, then there exists an instantaneous code with those codeword length.
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{remark}
+    If \(m\) is inifinte but countable the Kraft inequality and its converse still hold.
+\end{remark}
+
+\section{Minimizing the average length}
+\begin{align*}
+    \bar{L}_{opt} &= \min_{C \in PF} \func{L}{C}\\
+    &= \min_{C \in PF} \sum_{x} \func{p}{x} \func{l}{x} \\
+    &= \min_{\func{l}{x}} \sum_{x} \func{p}{x} \func{l}{x} \ & &\text{subject to} \ \begin{cases}
+        l : \calX \to \Naturals &\\
+        \sum d^{-\func{l}{x}} \leq 1 & 
+    \end{cases} \\
+    &= \min_{\func{q}{x}} -\sum_{x} \func{p}{x} \func{\log_d}{\func{q}{x}} \ & &\text{subject to} \ \begin{cases}
+        q : \calX \to \set{\frac{1}{d} , \frac{1}{d^2} , \dots } &\\
+        \sum \func{q}{x} \leq 1 & 
+    \end{cases}\\
+    &\geq \min_{\func{q}{x}} -\sum_{x} \func{p}{x} \func{\log_d}{\func{q}{x}} = A \ & &\text{subject to} \ \begin{cases}
+        \func{q}{x} \geq 0 &\\
+        \sum \func{q}{x} \leq 1 & 
+    \end{cases} 
+    \intertext{let \(B\) be }
+    B &= \min_{\func{q^{\ast}}{x}} -\sum_{x} \func{p}{x} \func{\log_d}{\func{q^{\ast}}{x}} \ & & \text{subject to} \ \begin{cases}
+        \func{q^{\ast}}{x} \geq 0 &\\
+        \sum \func{q^{\ast}}{x} \leq 1 & 
+    \end{cases}
+    \intertext{It is clear that \(A \leq B\). We claim that \(B \leq A\) and hence \(A = B\). Let \(\func{S}{q} = \sum \func{q}{x}\) and then let \(\func{q^{\ast}}{x} = \frac{\func{q}{x}}{\func{S}{q}}\). Then}
+    A &= \min_{\func{q}{x}} -\sum_{x} \func{p}{x} \func{\log_d}{\func{q}{x}}  \ & &\text{subject to} \ \begin{cases}
+        \func{q}{x} \geq 0 &\\
+        \sum \func{q}{x} \leq 1 & 
+    \end{cases} \\
+    &= \min_{\func{q^{\ast}}{x}} -\sum_{x} \func{p}{x} \func{\log_d}{\func{q^{\ast} \func{S}{q}}{x}}  \ & &\text{subject to} \ \begin{cases}
+        \func{q^{\ast}}{x} \geq 0 &\\
+        \sum \func{q^{\ast}}{x} = 1 & 
+    \end{cases} \\
+    &= \min_{\func{q^{\ast}}{x}} -\func{S}{q} -\sum_{x} \func{p}{x} \func{\log_d}{\func{q^{\ast}}{x}}  \ & &\text{subject to} \ \begin{cases}
+        \func{q^{\ast}}{x} \geq 0 &\\
+        \sum \func{q^{\ast}}{x} = 1 & 
+    \end{cases} \\
+    &= B - \func{S}{q} \geq B
+    \intertext{Therefore, }
+    \bar{L}_{opt} &\geq B \\
+    &= \min_{\func{q}{x}} -\sum_{x} \func{p}{x} \func{\log_d}{\func{q}{x}} \ & & \text{subject to} \ \begin{cases}
+        \func{q}{x} \geq 0 &\\
+        \sum \func{q}{x} \leq 1
+    \end{cases}\\
+    &= \min_{\func{q}{x}} \sum_{x} \func{p}{x} \bracket{ \func{\log}{\frac{\func{p}{x}}{\func{q}{x}}} - \func{\log_d}{\func{q^{\ast}}{x}}} \\
+    &= \min_{\func{q}{x}} \func{D}{p || q} + \func{H_d}{X} \\
+\end{align*}
+Since \(\func{D}{p || q} \geq 0\) therefore 
+\begin{equation*}
+    \bar{L}_{opt} \geq \func{H_d}{X}
+\end{equation*}
+and the equality holds iff 
+\begin{equation*}
+        \func{l}{x} = - \func{\log}{\func{p}{x}} \in \Naturals  \implies \func{p}{x} = \set{\dfrac{1}{d}, \dfrac{1}{d^2} , \dots} 
+\end{equation*}
+To get an upperbound for \(\bar{L}_{opt}\) consider Shannon-Fano code. Shannon-Fano code assigns a codeword of length \(\func{l}{x} = \ceil{-\log_d \func{p}{x}}\). Shannon-Fano code satisfy the Kraft's inequality 
+\begin{align*}
+    \sum_{x \in \calX} d^{-\func{l}{x}} &=  \sum_{x \in \calX} d^{- \ceil{-\log_d \func{p}{x}}}\\
+    &= \sum_{x \in \calX} d^{\floor{\log_d \func{p}{x}}} \leq \sum_{x \in \calX} d^{\log_d \func{p}{x}} = 1
+\end{align*}
+Hence, there exists a prefix-free code \(C_{Sh-F}\) with such a codeword lengths. 
+\begin{align*}
+    - \log_d \func{p}{x} &\leq \ceil{- \log_d \func{p}{x}} < \log_d \func{p}{x}\\
+    \func{H_d}{X} &\leq \func{L}{C_{Sh-F}} < \func{H_d}{X} + 1\\ 
+    \implies \func{H_d}{X} &\leq \bar{L}_{opt} \leq \func{L}{C_{Sh-F}} < \func{H_d}{X} + 1\\ 
+\end{align*}
+In multishot coding, we encode a block input as oppose to only one sample. Let \(\underbar{x} \in \calX^n\) be a block of length \(n\) then 
+\begin{equation*}
+    \func{H_d}{\underbar{X}} = \func{H_d}{X_1, \dots , X_n} \leq \bar{L}^{(n)}_{opt} < \func{H_d}{X_1, \dots , X_n} + 1 
+\end{equation*}
+assuming that the source is i.i.d. 
+\begin{equation*}
+    \func{H_d}{X} \leq \dfrac{1}{n} \bar{L}^{(n)}_{opt} < \func{H_d}{X_1, \dots , X_n} + \dfrac{1}{n}
+\end{equation*}
+Therefore, as \(n \to \infty\) the average length for each input symbol approaches the entopy.
+\begin{example}
+    Let \(\calX = \set{A,B,C}\) with distribution \(\func{p}{A} = \func{p}{B} = \func{p}{C} = \frac{1}{3}\) and \(D = \set{0,1}\) then 
+    \begin{equation*}
+        \func{H}{X} \simeq 1.58
+    \end{equation*}
+    for Shannon-Fano code, all the codewords have length 2. Hence 
+    \begin{equation*}
+        C_{Sh-F} = \set{00,01,10} \implies \func{L}{C_{Sh-F}} = 2
+    \end{equation*}
+    Huffman code which will be described later produces 
+    \begin{equation*}
+        C_{Huff} = \set{0,10,11} \implies \func{L}{C_{Huff}} = 1.67
+    \end{equation*}
+    Note that Huffman code is optimal but Shannon-Fano code is not as Multishot Huffman codes approaches the value of entropy of \(X\).
+\end{example}
+\section{Kraft's inequality for uniquely decodable}
+\begin{theorem}
+    The set of code lengths of unique decodable over an alphabet \(D\) with size \(d\) satisfy 
+    \begin{equation*}
+        \sum_{x \in \calX} d^{-\func{l}{x}}
+    \end{equation*}
+    The converse is implied by the converse of Kraft's inequality for prefix-free codes.
+\end{theorem}
+
+\section{Huffman Code}
+The algorithm is 
+\begin{enumerate}
+    \item Sort the PMF in the decreasing order.
+    \item combine the least two.
+    \item continue until you have two symbols.
+    \item assign 0 to the left one and assign 1 to right one.
+    \item Backtrack and for each two symbol combined, append 0 to the left one and append 1 to the one. 
+\end{enumerate}
+For Huffman algorithm to work for  \(d \geq 3\) we must have 
+\begin{equation*}
+    m =  1 + k (d- 1)
+\end{equation*}
+we can add symbols with 0 probability. 
+
+\begin{example}
+    We wish to guess \(x \in \calX\) with the least number of question of form `` is \(x \in S\) for some subset of \(\calX\)''. We also know the distribution \(p_X\). 
+    \begin{lemma}
+        Every uniquely decodable code is a sequence of questions and vice versa.
+    \end{lemma}
+\end{example}
+\subsection{Optimality of Huffman code}
+\begin{lemma}
+    For an optimal code we must have 
+    \begin{itemize}
+        \item \(\func{p}{x} \geq \func{p}{y} \implies \func{l}{x} \leq \func{l}{y}\).
+        \item for an instantaneous, the longest two codes have the same length.
+    \end{itemize}
+    Furthermore, there exists an instantaneous such that the longest two codes differ in the last bit.
+\end{lemma}
+\begin{proof}
+    1) do algebra, 2) and  3) prefix tree
+\end{proof}
+A code that satisfy the preceding properties is called cannonical code. Let \(\calX\) be some alphabet with size \(m\) and PMF \(\Probability = (p_1, \dots ,p_m)\) with \(p_1 \geq \dots \geq p_m\).  Consider the Huffman reduction algorithm
+\begin{equation*}
+    \Probability' = (p_1, \dots , p_{m-2} , p_{m-1} + p_m)
+\end{equation*}
+definde over \(\calX'\) with \(\abs{\calX'} = m- 1\). Suppose, \(\func{C^{(m)}_{can}}{\Probability}\) is a cannonical code over \(\calX\) and \(\func{C^{(m-1)}_{opt}}{\Probability'}\) be an optimal code over \(\calX'\). 
+\begin{table}
+    \centering 
+    \begin{tabular}{c|c|c}
+        \(\func{C^{(m-1)}_{opt}}{\Probability'}\) & & \(C_{ext}\) \\\hline 
+        \(p_1 \to c_1' , l_1'\) & & \(p_1 \to c_1', l_1'\)\\ \hline
+         \(p_2 \to c_2' , l_2'\) & & \(p_2 \to c_2', l_2'\)\\ \hline
+         \(\vdots\) & \(\xrightarrow{extend}\) & \(\vdots\) \\ \hline
+         \(p_{m-1} + p_{m} \to c_{m-1}' , l_{m-1}'\) & & \(p_{m-1} \to c_{m-1}' || 0, l_{m-1}' + 1\)\\ 
+         & & \(p_{m} \to c_{m}' || 1, l_{m-1}' + 1\)\\ 
+    \end{tabular}
+\end{table}
+Therefore, 
+\begin{equation*}
+    \func{L}{C_{ext}} = \func{L}{C^{(m-1)}_{opt}} + \bracket{p_{m-1} + p_m}
+\end{equation*}
+similarly for merging 
+\begin{table}
+    \centering 
+    \begin{tabular}{c|c|c}
+        \(\func{C^{(m)}_{can}}{\Probability}\) & & \(C_{mrg}\) \\\hline 
+        \(p_1 \to c_1 , l_1\) & & \(p_1 \to c_1, l_1\)\\ \hline
+         \(p_2 \to c_2 , l_2\) & & \(p_2 \to c_2, l_2\)\\ \hline
+         \(\vdots\) & \(\xrightarrow{merge}\) & \(\vdots\) \\ \hline
+         \(p_{m - 1} \to c_{m-1} , l_{m-1}\) & & \(p_{m-1} + p_{m} \to c_m[1:l_m - 1], l_{m} - 1\)\\ 
+         \(p_{m} \to c_{m} , l_{m} = l_{m-1}\)& & \\ 
+    \end{tabular}
+\end{table}
+Thus, 
+\begin{equation*}
+    \func{L}{C_{mrg}} = \func{L}{C^{(m)}_{can}} - \bracket{p_{m-1} + p_m}
+\end{equation*}
+hence 
+\begin{align*}
+    &\func{L}{C_{mrg}}+  \func{L}{C_{ext}} = \func{L}{C^{(m-1)}_{opt}}+ \func{L}{C^{(m)}_{can}} \\ 
+    \implies & \bracket{\func{L}{C_{ext}} - \func{L}{C^{(m-1)}_{opt}}} + \bracket{\func{L}{C_{mrg}} - \func{L}{C^{(m)}_{can}}} = 0
+\end{align*}
+but both terms are greater than zero(by Optimality and cannonical). Therefore, \(\func{L}{C_{ext}} = \func{L}{C^{(m-1)}_{opt}}\) and \(\func{L}{C_{mrg}} = \func{L}{C^{(m)}_{can}}\).
+Huffman code is like merging and then extending. Therefore, Huffman code is an optimal uniquely decodable code. 
