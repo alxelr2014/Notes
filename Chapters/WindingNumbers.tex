@@ -1,0 +1,160 @@
+\chapter{Winding Numbers}
+\section{Winding number}
+\begin{definition}
+    Winding number of a closed path \(\gamma\) with respect to a point \(\alpha \) is 
+    \begin{equation*}
+        \func{W}{\gamma, \alpha} = \dfrac{1}{2 \pi i } \int_{\gamma} \dfrac{1}{z - \alpha} \diffOperator z = \dfrac{1}{2 \pi i} \int_{a}^b \dfrac{\func{\gamma' }{t}}{\func{\gamma}{t} - \alpha} \diffOperator t
+    \end{equation*}
+    provided that \(\gamma\) does not pass through \(\alpha\).
+\end{definition}
+
+\begin{lemma}
+    If \(\gamma\) is a closed path, then \(\func{W}{\gamma, \alpha}\) is an integer.
+\end{lemma} 
+\begin{proof}
+    Consider a the integral and compare it to \(\func{\gamma}{t} - \alpha\).
+\end{proof}
+
+\begin{lemma}
+    Let \(\gamma\) be a path. Then, the function of \(\alpha\) defined by 
+    \begin{equation*}
+        \alpha \mapsto \int_{\gamma} \dfrac{1}{z - \alpha} \diffOperator z
+    \end{equation*}
+    for \(\alpha\) no on the path, is a continuous function of \(\alpha\).
+\end{lemma}
+
+\begin{lemma}
+    Let \(\gamma\) be a closed path and \(S\) a connected set not intersecting \(\gamma\). Then, 
+    \begin{equation*}
+        \alpha \mapsto \int_{\gamma} \dfrac{1}{z - \alpha} \diffOperator z
+    \end{equation*}
+    is a constant for \(\alpha\) in \(S\). If \(S\) is not bounded, then this constant is zero.
+\end{lemma}
+
+\begin{definition}
+    A closed path \(\gamma\) in \(U\) is homologous to 0 in \(U\) if 
+    \begin{equation*}
+        \int_{\gamma} \dfrac{1}{z - \alpha} \diffOperator = 0
+    \end{equation*}
+    for every point \(\alpha\) not in \(U\). Equivalently, 
+    \begin{equation*}
+        \func{W}{\gamma, \alpha} = 0 \quad \forall \alpha \in U^c
+    \end{equation*}
+    Furthermore, two closed paths \(\gamma, \eta\) are homologous in \(U\) if 
+    \begin{equation*}
+        \func{W}{\gamma, \alpha} = \func{W}{\eta, \alpha} \quad \forall \alpha \in U^c
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    \begin{enumerate}
+        \item If \(\gamma, \eta\) are closed paths in \(U\) and homotopic then they are homologous. Converse is true if their inside is contained in \(U\).
+        \item If \(\gamma, \eta\) are closed paths and close together in \(U\) then they are homologous.
+    \end{enumerate}
+\end{theorem}
+
+\begin{definition}
+    Let \(\gamma_1, \dots , \gamma_n\) be a sequence of curves and let \(m_1, \dots , m_n\) be integers. The formal sum 
+    \begin{equation*}
+        \gamma = m_1 \gamma_1 + \dots + m_n \gamma_n = \sum_{i = 1}^n m_i \gamma_i
+    \end{equation*}
+    is called a chain. We define 
+    \begin{equation*}
+        \int_{\gamma} f = \sum_{i = 1}^n m_i \int_{\gamma_i} f
+    \end{equation*}
+    and thus 
+    \begin{equation*}
+        \func{W}{\gamma , \alpha} = \dfrac{1}{2 \pi i } \int_{\gamma} \frac{1}{z - \alpha} \diffOperator z = \sum_{i = 1}^n m_i \func{W}{\gamma_i, \alpha}
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    If \(\gamma, \eta\) are closed chains in \(U\) then 
+    \begin{equation*}
+        \func{W}{\gamma + \eta, \alpha} = \func{W}{\gamma, \alpha} + \func{W}{\eta, \alpha}
+    \end{equation*}
+\end{proposition}
+
+\(\gamma\) and \(\eta\) are homologous in \(U\) if 
+\begin{equation*}
+    func{W}{\gamma, \alpha} = \func{W}{\eta, \alpha} \quad \forall \alpha \in U^c
+\end{equation*}
+
+\section{Cauchy's formula}
+\begin{theorem}[Cauchy's theorem]
+    Let \(\gamma\) be a closed chain an open set \(U\) such that \(\gamma\) is homologous to zero in \(U\). Let \(f\) be holomorphic in \(U\). Then 
+    \begin{equation*}
+        \int_{\gamma} f = 0
+    \end{equation*}
+\end{theorem}
+
+\begin{corollary}
+    If \(\gamma, \eta\) are closed chains in \(U\) then 
+    \begin{equation*}
+        \int_{\gamma} f = \int_{\eta} f
+    \end{equation*}
+\end{corollary}
+ 
+\begin{theorem}
+    Let \(U\) be an open set and \(\gamma\) be a closed chain in \(U\) homologous to zero. Let \(z_1, \dots , z_n\) be finite number of distinct points of \(U\). Let \(\gamma_i\) be the boundary of closed disc \(\bar{D}_i\) contained in \(U\), containing \(z_i\), and oriented counter-clockwise. We assume that \(\bar{D}_i\) does not intersect \(\bar{D}_j\) if \(i \neq j\). Let 
+    \begin{equation*}
+        m_i = \func{W}{\gamma , z_i}
+    \end{equation*}
+    Let \(U^{\ast}\) be the set \(U\) without \(\set{z_1 ,\dots ,z_n}\). Then \(\gamma\) is homologous to \(\sum m_i \gamma_i \) in \(U^{\ast}\).
+\end{theorem}
+
+\begin{theorem}[Cauchy's formula]
+    Let \(\gamma\) be a closed chain in open set \(U\) homologous to zero in \(U\). Let \(f\) be an analytic function on \(U\) and \(z_0 \in U\) not on \(\gamma\) 
+    \begin{equation*}
+        \frac{1}{2 \pi i} \int_{\gamma} \frac{\func{f}{z}}{z - z_0} \diffOperator z = \func{W}{\gamma , z_0} \func{f}{z_0}
+    \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    use analytic
+\end{proof}
+
+\begin{proof}
+    Dixon, define \(g:  U \times U \)
+    \begin{equation*}
+        \bracket{w,z} \mapsto \begin{cases}
+            \dfrac{\func{f}{w} - \func{f}{z}}{w- z} & w \neq z \\
+            \func{f'}{z} & w= z
+        \end{cases}
+    \end{equation*}
+    for each \(w\), \(z \mapsto \func{g}{w,z}\) is analytic. \(g\) is continuous, define a bounded entire function.
+\end{proof}
+
+\subsection{Artin's proof}
+\begin{lemma}
+    Let \(\gamma\) be a path in open \(U\). Then, there exists a rectangular path \(\eta\) with the same endpoints such that \(\gamma\) and \(\eta\) are close together. In particular, \(\gamma\) and \(\eta\) are homologous in \(U\) and for any holomorphic function \(f\) on \(U\) we have 
+    \begin{equation*}
+        \int_{\gamma} f= \int_{\eta} f
+    \end{equation*}
+\end{lemma}
+This lemma reduces Cauchy's formula to the case when \(\gamma\) is rectangular.
+
+\begin{definition}
+    Let \(\gamma_i = \func{\gamma}{\clcl{a_i}{a_{i+1}}}\) then the chain 
+    \begin{equation*}
+        \gamma_1 + \dots + \gamma_n
+    \end{equation*}
+    is a subdivision of \(\gamma\). If \(\eta_i\) are obtained by a reparameterization of \(\gamma_i\) the
+    \begin{equation*}
+        \eta_1 + \dots + \eta_n
+    \end{equation*}
+    are also subdivision of \(\gamma\).
+\end{definition}
+
+\begin{theorem}
+    Let \(\gamma\) be a rectangular closed chain in \(U\) and homologous to zero. Then there exists rectangles \(R_1 , \dots , R_N\) contained in \(U\) such that if \(\partial R_i\) is the boundary of \(R_i\) oriented in counter-clockwise then 
+    \begin{equation*}
+        \sum_{i = 1}^N m_i \partial R_i
+    \end{equation*}
+    for some integers \(m_i\) is a subdivision of \(\gamma\). 
+\end{theorem}
+
+\begin{proof}
+    \(m_i = \func{W}{\gamma,\alpha_i}\) , \(\alpha_i \in R_i\). If \(m_i \neq 0\) for \(R_i\) then \(R_i \subset U\). \(\sum m_i \partial R_i\) is a subdivision.
+\end{proof} 
+

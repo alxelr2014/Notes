@@ -1,0 +1,378 @@
+\chapter{Complex Integrals}
+\section{Integrals over paths}
+Path is a sequence of regular curves 
+\begin{equation*}
+    \gamma = \set{\gamma_1 , \dots , \gamma_n}
+\end{equation*}
+such that 
+\begin{equation*}
+    \func{\gamma_j}{b_j} = \func{\gamma_{j+1}}{a_{j+1}}
+\end{equation*}
+
+\begin{theorem}
+    Suppose \(U\) is a connected open set and \(f\) is holomorphic on \(U\). If \(f' = 0\) then \(f\) is constant on \(U\).
+\end{theorem}
+
+\begin{definition}
+    If \(f\) is a function on an open set \(\Omega\) and \(g\) is a holomorphic function on \(\Omega\), such that \(g' = f\), then \(g\) is called a \textit{primitive} if \(f\) on \(\Omega\).
+\end{definition}
+
+\begin{corollary}
+    On an connected open set \(U\), the primitives of are determined up to a constant.
+\end{corollary}
+
+\begin{theorem}
+    Suppose \(U\) is a connected open set then 
+    \begin{enumerate}
+        \item If \(f\) is analytic on \(U\) and not constant, the set of zeroes of \(f\) on \(U\) is discrete.
+        \item \(f,g\) are analytic on \(U\) and \(S = \set<z>{\func{f}{z} = \func{g}{z}}\) is not discrete then \(f = g\) on \(U\).
+    \end{enumerate}
+\end{theorem}
+
+Let \(f:\clcl{a}{b} \to \Complex\) be a continuous function with 
+\begin{equation*}
+    \func{f}{t} = \func{u}{t} + i \func{v}{t}
+\end{equation*}
+then 
+\begin{equation*}
+    \int \func{f}{t} \diffOperator t = \int \func{u}{t} \diffOperator t + i \int \func{v}{t} \diffOperator t
+\end{equation*}
+and by the Fundamental theorem of calculus 
+\begin{equation*}
+    \func{G}{t} = \int_a^t \func{F}{\tau} \diffOperator \tau
+\end{equation*}
+is differentiable with \(\func{G'}{t} = \func{F}{t}\).
+We can then expand the notion of complex integrability to continuous complex function \(f: U \to \Complex\), where \(U\) is an open subset of \(\Complex\) using regular curves such as \(\gamma:\clcl{a}{b} \to U\). The integral of \(f\) along \(\gamma\) is 
+\begin{equation*}
+    \int_{\gamma} \func{f}{t} = \int_a^b \func{f}{\func{\gamma}{t}} \func{\gamma'}{t} \diffOperator t
+\end{equation*}
+This definition of integral is invariant to substitution. To see this, let \(g:\clcl{a}{b} \to \clcl{c}{d}\) be a \(\calC^1\) function and \(\gamma = \psi \circ g\)
+\begin{align*}
+    \int_{\gamma} f &= \int_a^b \func{f}{\func{\gamma}{t}} \func{\gamma'}{t} \diffOperator t\\
+    &= \int_a^b \func{f}{\func{\psi}{\func{g}{t}}} \func{\psi'}{\func{g}{t}} \func{g' }{t} \diffOperator t\\
+    &= \int_c^d \func{f}{\func{\psi}{\tau}} \func{\psi'}{\tau} \diffOperator \tau \\
+    &= \int_{\psi} f
+\end{align*}
+We can further expand this notion to paths \(\gamma = \set{\gamma_1, \dots , \gamma_n}\) as follow 
+\begin{equation*}
+    \int_{\gamma} f = \sum_{i = 1}^n \int_{\gamma_i} f
+\end{equation*}
+
+\begin{theorem}
+    Let \(f\) be a continuous function on open set \(U\) with primitive \(g\). Let \(\gamma:\clcl{a}{b} \to U\) be a path with \(\alpha= \func{\gamma}{a}\) and \(\beta = \func{\gamma}{b}\) then 
+    \begin{equation*}
+        \int_{\gamma} f = \func{g}{\beta} - \func{g}{\alpha}
+    \end{equation*}
+\end{theorem}
+
+\begin{corollary}
+    If \(\gamma\) is a closed path in \(U\) then 
+    \begin{equation*}
+        \int_{\gamma} f = 0
+    \end{equation*}
+\end{corollary}
+
+\begin{theorem}
+    Let \(U\) be a connected open set and \(f\) a continuous function \(U\). If for any closed path \(\gamma\) on \(U\), the integral of \(f\) along \(\gamma\) is zero , \(\int_{\gamma} f = 0 \), then \(f\) has a primitive \(g\) on \(U\).
+\end{theorem}
+
+\begin{proof}
+    Pick \(z_0 \in U\) and define 
+    \begin{equation*}
+        \func{g}{z} = \int_{z_0}^z  f
+    \end{equation*}
+    where the integral is taken over any path from \(z_0\) to \(z\). Let \(\gamma, \eta\) be two curves from \(z_0\) to \(z\) and let \(\eta^-\) be the reverse of \(\eta\). Since 
+    \begin{equation*}
+        \int_{\gamma} f + \int_{\eta^{-}} f =0 \implies \int_{\gamma} f = \int_{\eta} f 
+    \end{equation*}
+    and hence \(g\) is well-defined. Consider the difference quotient 
+    \begin{equation*}
+        \dfrac{\func{g}{z + h} - \func{g}{z}}{h} = \dfrac{1}{h} \int_z^{z+h} f
+    \end{equation*}
+    where the integral can be taken along any segments. Furthermore, we can write 
+    \begin{equation*}
+        \func{f}{\xi} = \func{f}{z} + \func{\phi}{\xi}
+    \end{equation*}
+    where \(\lim_{\xi \to z} \func{\phi}{\xi} = 0\). Then, 
+    \begin{align*}
+        \dfrac{1}{h} \int_z^{z+h} \func{f}{\xi} \diffOperator \xi &= \dfrac{1}{h} \int_z^{z+h} \func{f}{z} \diffOperator \xi + \dfrac{1}{h} \int_z^{z+h} \func{\phi}{\xi} \diffOperator \xi \\
+        &= \func{f}{z} \dfrac{1}{h} \int_z^{z+h} \func{\phi}{\xi} \diffOperator \xi \\
+        &\leq \func{f}{z} + \max_{\xi} \abs{\func{\phi}{x}} \xrightarrow{h \to 0} \func{f}{z}\\
+        \implies g' =f 
+    \end{align*}
+\end{proof}
+
+Let \(\gamma:\clcl{a}{b} \to \Complex\) be a regular curve. The \textit{speed} is of \(\gamma\) is defined as \(\abs{\gamma'}^2\) and the length of \(\gamma\) is 
+\begin{equation*}
+    \func{l}{\gamma} = \int_{a}^b \abs{\func{\gamma'}{t}} \diffOperator t
+\end{equation*}
+and for a path \(\gamma = \set{\gamma_1, \dots , \gamma_n}\) 
+\begin{equation*}
+    \func{l}{\gamma} = \sum_{i = 1}^n \func{l}{\gamma_i}
+\end{equation*}
+and sup norm of \(f\) on a set \(S\) 
+\begin{equation*}
+    \norm{f} = \sup_{z \in S} \abs{f}
+\end{equation*}
+and over a curve \(\gamma\) the sup-norm of \(f\) is 
+\begin{equation*}
+    \norm{f}_{\gamma} = \sup_{t \in \clcl{a}{b}} \abs{\func{f}{\func{\gamma}{t}}}
+\end{equation*}
+
+\begin{proposition}{ML inequality}
+    Let \(f\) be a continuous function on \(U\) and \(\gamma\) be a path in \(U\) them 
+    \begin{equation*}
+        \abs{\int_{\gamma} f} \leq \norm{f}_{\gamma} \func{l}{\gamma}
+    \end{equation*}
+\end{proposition}
+
+\begin{theorem}
+    Let \(\set{f_n}\) be a sequence of continuous functions on \(U\) with \(f_n \rightrightarrows f\) then 
+    \begin{equation*}
+        \lim_{n \to \infty} \int_{\gamma} f_n = \int_{\gamma} f
+    \end{equation*}
+    and if \(\sum f_n\) is a series of continuous function which converges uniformly on \(U\)
+    \begin{equation*}
+        \int_{\gamma} \sum f_n = \sum \int_{\gamma} f_n
+    \end{equation*}
+\end{theorem}
+
+\section{Local primitive for a holomorphic function}
+\begin{theorem}[Goursat]
+    Let \(R\) be a rectangle, and let \(f\) be a holomorphic function on \(R\) then 
+    \begin{equation*}
+        \int_{\partial R} f = 0
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+    Let \(U\) be a disc centered at a point \(z_0\) and \(f\) a continuous function on \(U\). Assume that for any rectangle \(R \subset U\)
+    \begin{equation*}
+        \int_{\partial R} f = 0
+    \end{equation*}
+    For each point \(z\) in disk define 
+    \begin{equation*}
+        \func{g}{z} = \int_{z_0}^z f
+    \end{equation*}
+    where the integral is taken over a rectangle \(R\) whose opposite vertices are \(z_0\) and \(z\). Then, \(g\) is holomorphic on \(U\) and is a primitive for \(f\).
+\end{theorem}
+
+\begin{theorem}
+    Let \(U\) be a disc and \(f\) be a holomorphic function on \(U\). Then, \(f\) has a primitive on \(U\) and the integral of \(f\) along any closed path in \(U\) is zero.
+\end{theorem}
+
+\section{Path integrals for continuous curves}
+Knowing that local primitive exists for holomorphic functions allows us to describe their integral along a path in a way which makes no use of differentiability of the path and applys to continuous paths.z
+
+\begin{lemma}
+    Let \(\gamma: \clcl{a}{b} \to U\) be a continuous curve in an open set \(U\). Then, there exists some positive number \(r > 0\) such that every point on the curve lies at distance \(\geq r\) from the complement of \(U\).
+\end{lemma}
+
+\begin{proof}
+    Consider 
+    \begin{equation*}
+        \func{\phi}{t} = \min_{w \in U^c} \abs{\func{\gamma}{t} - w}
+    \end{equation*}
+    \(\abs{\func{\gamma}{t} - w}\) is continuous in terms of \(w\) by considering a sufficiently large disc that contains \(U\) we can bound the domain of \(w\) to the intersection of this disc and \(U^c\). Thus, due to compactness of the intersection, \(\abs{\func{\gamma}{t} - w}\) achieves its minimum. Moreover, since \(\func{\phi}{t}\) is continuous and its domain is compact then, it has a minimum and the minimum is non-zero since \(U\) is open.
+\end{proof}
+
+\begin{definition}
+    Let \(P = \set{a_0, \dots , a_n}\) be a partition of \(\clcl{a}{b}\) and \(\set{D_0, \dots , D_n}\) be a sequence of discs. This sequence is \textit{connected} by curve along the partition \(P\) if \(D_i\) contains \(\func{\gamma}{\clcl{a_i}{a_{i+1}}}\).
+\end{definition}
+
+Let \(\epsilon < \frac{r}{2}\) where \(r\) is the same as preceding lemma. Since \(\gamma\) is uniformly continuous, there exists a \(\delta\) such that 
+\begin{equation*}
+    \forall t,s \in \clcl{0}{1}, \ \abs{t-s} < \delta \implies  \abs{\func{\gamma}{t} - \func{\gamma}{s}} < \epsilon
+\end{equation*}
+Consider a partition \(P\) on \(\clcl{a}{b}\) such that \(\norm{P} < \delta\). Then, the \(\func{\gamma}{\clcl{a_i}{ a_{i+1}}}\) lies in the disc \(D_i = \func{B_{\epsilon}}{a_i}\). Let \(f\) be a holomorphic function on \(U\). 
+\begin{equation*}
+    \int_{\gamma} f = \sum_{i = 0}^{n-1 } \int_{\gamma_i} f  \qquad \qquad \gamma_i = \func{\gamma}{\clcl{a_i}{a_{i+1}}}
+\end{equation*}
+Let \(z_i = \func{\gamma}{a_i}\) and \(g_i\) be a primitive of \(f\) on disc \(D_i\). If each \(\gamma_i \in \calC^1\) then we know that 
+\begin{equation*}
+    \int_{\gamma} f = \sum_{i = 0}^{n-1} \func{g_i}{z_{i+1}} - \func{g_i}{z_{i}}
+\end{equation*} 
+By considering the following lemma, we can relax the regularity condition for \(\gamma\) and reduce it to continuity. 
+\begin{lemma}
+    Let \(U\) be an open set and \(\gamma:\clcl{a}{b} \to U\) be a continuous curver. Let 
+    \begin{equation*}
+        a = a_0 \leq a_1 \leq \dots \leq a_n = b
+    \end{equation*}
+    be a partition on \(\clcl{a}{b}\) such that \(\func{\gamma}{\clcl{a_i}{ a_{i+1}}}\) is contained in a disc \(D_i\) which itself is contained in \(U\). Let \(f\) be a holomorphic function on \(U\), \(g_i\) be a primitive of \(f\) on \(D_i\), and \(z_i = \func{\gamma}{a_i}\), then 
+    \begin{equation*}\label{eq:continuousPathIntegral}
+        \sum_{i = 0}^{n-1} \func{g_i}{z_{i+1}} - \func{g_i}{z_{i}}
+    \end{equation*}
+    is independent of the choices of partition, discs \(D_i\), and primitives \(g_i\) on \(D_i\) subjected to stated condition. Therefore, \Cref{eq:continuousPathIntegral} depends only on \(\gamma\) and hence the integral on continuous path is well-defined. 
+
+\end{lemma}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{definition}
+    Let \(\gamma, \eta\) be two paths defined on \(\clcl{a}{b}\). We say that they are \textit{close} together if there exists a partition 
+\begin{equation*}
+    a = a_0 \leq a_1 \leq \dots \leq a_n = b
+\end{equation*}
+and for each \(i = 0, \dots , n- 1\) there exists a disc \(D_i\) contained in \(U\) such that 
+\begin{equation*}
+    \func{\gamma}{\clcl{a_i}{a_{i+1}}}, \func{\eta}{\clcl{a_i}{a_{i+1}}} \subset D_i
+\end{equation*}
+\end{definition}
+
+\begin{lemma}
+    Let \(\gamma, \eta\) be continuous paths on open set \(U\), that are close together and have the same endpoints. Let \(f\) be holomorphic on \(U\) 
+    \begin{equation*}
+        \int_{\gamma} f = \int_{\eta} f
+    \end{equation*}
+\end{lemma}
+
+\begin{proof}
+    
+\end{proof}
+
+\section{Homotopy}
+Let \(\gamma, \eta: \clcl{a}{b} \to U\)  be two paths. \(\gamma\) is \textit{homotopic} to \(\eta\), if there eists a continuous function 
+\begin{equation*}
+    \Psi : \clcl{a}{b} \times \clcl{c}{d} \to U
+\end{equation*}
+such that 
+\begin{equation*}
+    \func{\Psi}{t,c} = \func{\gamma}{t} \qquad \func{\Psi}{t,c} = \func{\eta}{t}
+\end{equation*}
+for all \(t \in \clcl{a}{b}\). Intuitively, \(\Psi\) is a continuous deformation of \(\gamma\) to \(\eta\). \(\Psi\) \textit{leave the end point fixed} if we have 
+\begin{equation*}
+    \func{\Psi}{a,s} = \func{\gamma}{a} \qquad \func{\Psi}{b,s} = \func{\gamma}{b}
+\end{equation*}
+for all \(s \in \clcl{c}{d}\). Similarly, we assume that a homotopy of two closed paths is such that each path \(\func{\Psi}{\; \cdot \;, s}\) is a closed path. 
+
+\begin{theorem}
+    Let \(\gamma, \eta\) be two homotopic continuous paths on open set \(U\) with the same endpoints and \(f\) be a holomorphic function on \(U\). 
+    \begin{equation*}
+        \int_{\gamma} f = \int_{\eta} f
+    \end{equation*} 
+    In particular, if \(\gamma, \eta\) are closed paths and homotopic to a point in \(U\) then 
+    \begin{equation*}
+        \int_{\gamma} f = \int_{\eta} f = 0
+    \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    Let \(\Psi:\clcl{a}{b} \times \clcl{c}{d} \to U\) be the homotopy of the closed paths \(\gamma,\eta\). Since \(\Psi\) is a continuous function on a compact domain, the image of \(\Psi\) is compact and hence it has a positive distance \(r\) from \(U^c\). Similarly, by considering the uniform continuity we can have partitions \(P = \set{a_1, \dots , a_n}\) on \(\clcl{a}{b}\) and \(Q = \set{c_1, \dots , c_m}\) on \(\clcl{c}{d}\) and
+    \begin{equation*}
+        S_{ij} = \clcl{a_i }{ a_{i+1}} \times \clcl{c_j }{ c_{j + 1}}
+    \end{equation*}
+    such that \(\func{\Psi}{S_{ij}}\) is contained in \(D_{ij}\) which itself is contained in \(U\). Let \(\Psi_j\) 
+    \begin{equation*}
+        \func{\Psi_j}{t} = \func{\Psi}{t,c_j}
+    \end{equation*}
+    Then \(\Psi_j\) and \(\Psi_{j+1}\) are closed together and by applying the preceding lemma we get 
+    \begin{equation*}
+        \int_{\gamma} f = \int_{\Psi_0} f = \int_{\Psi_1} f = \dots = \int_{\Psi_m} f = \int_{\eta} f
+    \end{equation*}
+\end{proof}
+
+A set \(S\) of complex numbers is conex, if for any \(z,w \in S\) the segment \(\clcl{z,w} \subset S\). For examples, discs and rectangles are convex. 
+\begin{lemma}
+    Let \(S\) be a convex set and \(\gamma, \eta\) continuous closed curves in \(S\). Then, \(\gamma, \eta\) are homotopic in \(S\).
+\end{lemma}
+
+\begin{proof}
+    \begin{equation*}
+        \func{\Psi}{t,s} = s \func{\gamma }{t} + \bracket{1-s} \func{\eta}{t}
+    \end{equation*}
+\end{proof}
+
+Open set \(U\) is simply connected if it is connected and every closed path is homotopic to a point in \(U\). By the preceding lemma, every convec set is simply connected, as path connectednes implies connectedness.
+
+\section{Existence of global primitives}
+\begin{theorem}
+    Let \(f\) be a holomorphic function on a simply connected open set \(U\) and let \(z_0 \in  U\). For an \(z \in U\)
+    \begin{equation*}
+        \func{g}{z} = \int_{z}^{z_0} \func{f}{\xi} \diffOperator \xi
+    \end{equation*}
+    is independent of the path in \(U\) and \(g\) is a primitive for \(f\).
+\end{theorem}
+
+\begin{example}
+    Let \(U\) be a simply connected open set not containing \(0\). Pick \(z_0 \in U\) and \(w_0\) such that \(e^{w_0} = z_0\), define 
+    \begin{equation*}
+        \log z = w_0 +  \int_{z_0}^z \dfrac{1}{\xi} \diffOperator \xi
+    \end{equation*}
+    Then, \(\log\) is a primitive for \(\frac{1}{z}\). If \(\func{L}{z}\) is another primitive for \(\frac{1}{z}\) on \(U\) such that \(e^{\func{L}{z}}  = z\), then there exists an integer \(k\) such that 
+    \begin{equation*}
+        \func{L}{z} = \log z + 2\pi i k
+    \end{equation*}
+\end{example}
+
+\section{Local Cauchy formula}
+\begin{theorem}[Local Cauchy formula]
+    Let \(\bar{D}\) be a closed disc of positive radius and \(f\) holomorphic on \(\bar{D}\) (open disc \(U\) containing \(\bar{D}\)). Let \(\gamma\) be the circle with is the boundary of \(\bar{D}\). Then, for every \(z_0 \in D\)
+    \begin{equation*}
+        \func{f}{z_0} = \dfrac{1}{2\pi i} \int_{\gamma} \frac{\func{f}{\xi}}{\xi - z_0} \diffOperator \xi
+    \end{equation*}
+ \end{theorem}
+
+ \begin{theorem}
+     Let \(f\) be holomorphic on open set \(U\) then \(f\) is analytic on \(U\).
+ \end{theorem}
+
+ \begin{theorem}
+     Let \(f\) be holomorphic on closed disc \(\func{\bar{B}_R}{z_0}\), \(R > 0\). Let \(C_R\) be the circle bounding the disc. Then, \(f\) has a power series expansion 
+     \begin{equation*}
+         \func{f}{z} = \sum_{n = 0}^{\infty} a_n \bracket{z - z_0 }^n
+     \end{equation*}
+     whose coefficients are given by the formula 
+     \begin{equation*}
+         a_n = \dfrac{1}{n!} \func{f^{(n)}}{z_0} = \dfrac{1}{2 \pi i} \int_{C_R} \frac{\func{f}{\xi}}{\bracket{\xi - z_0}^{n+1}} \diffOperator \xi
+     \end{equation*}
+     Furthermore, if \(\norm{f}_{C_R}\) denotes the sup-norm of \(f\) on \(C_R\) then 
+     \begin{equation*}
+       \abs{a_n} = \dfrac{\norm{f}_{C_R}}{R^n}  
+    \end{equation*}
+    in particular, the radus of convergence of the series is greater than \(R\).
+ \end{theorem}
+ The preceding theorems imply that a function is analytic if and only if it is holomorphic.
+
+ \begin{definition}
+     A function \(f\) is entire if it is holomorphic on all \(\Complex\). Hence, entire functions have convergence radius of \(\infty\).
+ \end{definition}
+
+ \begin{corollary}
+     Let \(f\) be entire and \(\norm{f}_R\) be its sup-norm on the circle of radius \(R\). Suppose that there exists a constant \(C\) and a positive integer \(k\) such that 
+     \begin{equation*}
+         \norm{f}_R = CR^k
+     \end{equation*}
+     for arbitrarily large \(R\). Then, \(f\) is a polynomial of degree \(\leq k\).
+ \end{corollary}
+
+ \begin{theorem}[Liouville's theorem]
+     A bounded entire function os constant.
+ \end{theorem}
+
+ \begin{corollary}
+     A polynomial over complex number which does not have root in \(\Complex\) is constant.
+ \end{corollary}
+
+ \begin{theorem}
+     Let \(\gamma\) be a path in an oopen set \(U\) and \(g\) be a continuous function on \(\gamma\). If \(z\) is not on \(\gamma\) define 
+     \begin{equation*}
+         \func{f}{z} = \int_{\gamma} \dfrac{\func{g}{\xi}}{\xi - z} \diffOperator \xi
+     \end{equation*}
+     Then \(f\) is analytic on the complement of \(\gamma\) in \(U\) and its derivatives are given by 
+     \begin{equation*}
+         \func{f^{(n)}}{z} = n! \int_{\gamma} \frac{\func{g}{\xi}}{\bracket{\xi - z}^{n+1}} \diffOperator \xi
+     \end{equation*}
+ \end{theorem}
+
+ \begin{corollary}
+     Let \(f\) be an analytic function on closed disc \(\func{\bar{B}_R}{z_0}\) with \(R > 0\). Let \(0 < R_1 < R\) and denote the sup-norm of \(f\) on the circle of radius \(R\) by \(\norm{f}_R\). For \(z \in \func{\bar{B}_R}{z_0}\)
+     \begin{equation*}
+         \abs{\func{f^{(n)}}{z}} \leq \dfrac{n! R}{\bracket{R - R_1}^{n+1}} \norm{f}_R
+     \end{equation*}
+ \end{corollary}
+
+ \begin{theorem}[Morera's theorem]
+     Let \(U\) be an open set in \(\Complex\) and let be continuous on \(U\). Assume that the integral of \(f\) along the boundary of every rectangle in \(U\) is zero. Then, \(f\) is analytic.
+ \end{theorem}
