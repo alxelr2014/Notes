@@ -1,0 +1,99 @@
+\section{Uninformed search}
+In Tree seach algorithms, every node responds to a state and the path to get to that node from the root, plan. A strategy is defined by picking the order of node expansion. A strategy is evaluated by following factors
+\begin{description}
+    \item[Completeness] always finds a solution.
+    \item[Time complexity] number of nodes expanded
+    \item[Space complexity] maximum number of nodes in memory
+    \item[Optimality] finds the best solution
+\end{description}
+Time and space complexity are measured in terms of
+\begin{description}
+    \item[\(b\)] maximum branching factor of search tree
+    \item[\(d\)] depth of the least-cost solution.
+    \item[\(m\)] maximum depth of the state space
+\end{description}
+Uninformed startegies use only the information available in the problem definition. In tree search we expend current state and generate new set of states. In graph search visited nodes are not added to frontier, instead added to explored sets.
+\begin{description}
+    \item [Breadth-first search] expand the shallowest unexpanded node
+              \begin{description}
+                  \item[Complete] yes (if \(b,d\) are finite).
+                  \item[Time] \(\bigO{b^{d+1}}\).
+                  \item[Space] \(\bigO{b^{d+1}}\), keeps every node in memory.
+                  \item[Optimal] Yes (if cost = 1 per step or non-decreasing function of depth), not optimal in general
+              \end{description}
+    \item [Uninform-cost search] Cost function is \(\sum_{i = root}^{node} c_i\)
+              \begin{description}
+                  \item[Complete] yes (if step cost \(\geq \epsilon\)).
+                  \item[Time] \(\bigO{b^{1 + \floor{C^\ast / \epsilon}}}\), \(C^\ast\) is the cost of the optimal solution. This can be worse than BFS.
+                  \item[Space] \(\bigO{b^{1 + \floor{C^\ast / \epsilon}}}\).
+                  \item[Optimal] Yes- nodes expanded in increasing order of cost.
+              \end{description}
+
+    \item [Depth-first search] expand the deepest unexpanded node.
+              \begin{description}
+                  \item[Complete] no fails in infinite-depth spaces, or spaces with loops.
+                  \item[Time] \(\bigO{b^{m}}\).
+                  \item[Space] \(\bigO{bm}\) and by backtracking it can be reduced to \(\bigO{m}\).
+                  \item[Optimal] No.
+              \end{description}
+    \item [Depth-limited search] is combination of BFS and DFS. A DFS with a depth limit \(l\).
+        \begin{description}
+            \item[Complete] yes if \(d \leq l\)
+            \item[Time] \(\bigO{b^l}\) 
+            \item[Space] \(\bigO{bl}\) and by backtracking it can be reduced to \(\bigO{l}\).
+            \item[Optimal] probably not.
+        \end{description}
+    \item [Iterative deepening search] gradually increasing the depth limit in DLS.
+              \begin{description}
+                  \item[Complete] Like BFS if \(b,d\) are finite. no fails in infinite-depth spaces, or spaces with loops.
+                  \item[Time] \(\bigO{b^{d}}\).
+                  \item[Space] \(\bigO{bd}\).
+                  \item[Optimal] No (like BFS the cost function needs to be non-decreasing), but it can be modified to explore uniform-cost (Iterative lengthening).
+              \end{description}
+\end{description}
+In graph search we visit each state once, however the closed list space can become exponential.
+
+\section{Informed search}
+Also, a \textbf{heuristic} is given to us. A heuristic is an estimate of how close a state is to a goal.
+\subsection{best-first search, greedy} 
+Cost function is applied to each node. Heuristic function, estimated cost of the cheapest path from state at node \(n\) to a goal state. It is a component of \(f\). \(\func{h}{n} = \func{f}{n}\)
+\begin{description} 
+    \item[Complete] Not really, might get stuck in a dead end
+    \item[Time] \(\bigO{b^m}\).
+    \item[Space] \(\bigO{b^m}\).
+    \item[Optimal] Not really.
+\end{description}
+\subsection{\(A^\ast\) search}
+A best-first seach with  \(\func{f}{n} = \func{g}{n} + \func{h}{n}\) where \(\func{g}{n}\) is the sum of costs from start to \(n\) and \(\func{h}{n}\) is the estimate of lowest cost path \(n\), the heuristic.
+\begin{description}
+    \item[Complete] If \(h\) satisfies the following condition.
+    \item[Optimal] If \(h\) satisfies the following condition.
+\end{description}
+\begin{enumerate}
+    \item \(\func{h}{n}\) is admissible: never over-estimates the cost to get to the goal. Hence \(\func{f}{n}\) never overestimates as \(g\) is the actual cost.
+    \item \(\func{h}{n}\) must be consistent, that is for any node 
+    \begin{equation*}
+        \func{h}{n} \leq \func{c}{n,a,n'} + \func{h}{n'}
+    \end{equation*}
+    for all actions \(a\) from node \(n\) to any of its successor \(n'\).
+\end{enumerate}
+\begin{proposition}
+    consistency \(\implies\) admissibility.
+\end{proposition}
+\subsubsection{Optimality of \(A^{\ast}\)}
+On tree \(\func{h}{n}\) must be admissible and on graph \(\func{h}{n}\) it must be consistent. To prove the second proposition consider the followings 
+\begin{itemize}
+    \item \(\func{f}{n}\) is increasing on any graph 
+    \begin{equation*}
+        \func{f}{n'} = \func{h}{n'} + \func{g}{n'} = \func{h}{n'} + \func{c}{n,a,n'} + \func{g}{n} \geq \func{h}{n} + \func{g}{n} = \func{f}{n}
+    \end{equation*}
+    \item Whenever \(A^{\ast}\) selects a node for expansion, the optimal path for that node is found; if not true the must have been a cheaper path to \(n\) and thus there need to be \(n'\) in the frontier on another path from root to \(n\). But by the lemmes \(\func{f}{n'} \leq \func{f}{n}\) so it must have been expanded before \(n\). In fact, \(A^{\ast}\) expands all nodes with \(\func{f}{n} < C^{\ast}\) and might expand some of the nodes with \(\func{f}{n} = C^{\ast}\).
+\end{itemize}
+\subsubsection{Completeness of \(A^{\ast}\)}
+It is equivalent to the finiteness of \(\set<n>{\func{f}{n} \leq C^{\ast}}\) which means step costs are greater than some \(\epsilon\) and \(b\) is finite.
+\section{Memory-bounded heuristic search}
+\begin{description}
+    \item[Iterative deepening \(A^{\ast}\)] cutoff for \(\func{f}{n}\) instead of depth.
+    \item[Recursive best-first search] limited DFS (Recursive).
+    \item[MA\(^{\ast}\)] caches the nodes and deletes the ``worst'' when it is full.   
+\end{description}
