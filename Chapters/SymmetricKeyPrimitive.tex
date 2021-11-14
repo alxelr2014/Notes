@@ -1,0 +1,96 @@
+\chapter{Symmetric Key Primitive}
+\section{Stream cipher}
+\subsection{LFSR}
+A \textit{linear feedback shift register} is a collection of \(n\) registers with some feedback rule. The value of the register at any given time is
+-- insert diagram
+\begin{align*}
+    s_i^{(t+1)} &= s_i^{(t)} \quad i = 0, \dots, n -2\\
+    s_{n-1}^{(t+1)} &= \bigoplus_{i = 0}^{n-1} c_i s_i^{(t)}
+\end{align*}
+Note that the feedback goes into the last register \(s_{n-1}\). The outputs are given by 
+\begin{align*}
+    y_i &= s_{i-1}^{0} \quad i = 1 , \dots n \\
+    y_i &= \bigoplus_{j = 0}^{n-1} c_j y_{i-n+j-1} 
+\end{align*}
+\begin{proposition}
+    Solving LFSR coefficients takes \(2n\) bits.
+\end{proposition}
+To make LFSRs better and more secure we may consider a non-linear alternative where 
+\begin{align*}
+    s_i^{(t+1)} &= s_i^{(t)} \quad i = 0, \dots, n -2\\
+    s_{n-1}^{(t+1)} &= \func{g}{s_{0}^{(t)} , \dots , s_{n-2}^{(t)}}
+\end{align*}
+where \(g\) is a non-linear balanced function, that is, \(\prob{\func{g}{s_0 , \dots , s_{n-1}}} \simeq \frac{1}{2}\). Instead of using non-linear functions, we can combine multiple LFSR -- usually of different length/degree --. 
+\subsection{Trivium}
+It is a combination of 3 LFSR with an intertwined feedback rule. 
+--insert diagram 
+
+The INIT algorithm 
+\begin{enumerate}
+    \item load 80 bits of seed into leftmost bits of A - 0 for the remaining bits.
+    \item load 80 bits of IV into leftmost bits of B - 0 for the remaining bits.
+    \item Set all bits C to 1.
+    \item Run for \(4 \times 288\) times.
+\end{enumerate}
+
+\subsection{RC4}
+\begin{algorithm}
+    \DontPrintSemicolon
+    %\SetAlgoVlined
+    \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+    \Input{16 byte key \(k\)}
+    \Output{ Initial state \((S,i,j)\)}
+    \tcc{\(S\) contains a permutation of \(\set{0,1, \dots , 255}\).}
+    \tcc{Key \(k\) is expanded to holds 256 byte.}
+    \For{\(i = 0 \to 255\)}{
+        \(S[i] = i\)\;
+        \(k[i] = k[i \mod{16}]\)\;
+    }
+    \(j = 0\)\;
+    \For{\(i = 0 \to 255\)}{
+        \(i = j + S[i] + k[i]\)\;
+        Swap \(S[i]\) and \(S[j]\)\;
+    }
+    \(i = 0, j = 0\)\;
+    \Return{\((S,i,j)\)}
+    \caption{INIT algorithm}
+\end{algorithm}
+
+\begin{algorithm}
+    \DontPrintSemicolon
+    \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+    \Input{Current state \((S,i,j)\)}
+    \Output{Byte \(y\) and next state \((S,i,j)\)}
+    \tcc{\(S\) contains a permutation of \(\set{0,1, \dots , 255}\)}
+    \(i = i + 1\)\; 
+    \(j = j + S[i]\)\;
+    Swap \(S[i]\) and \(S[j]\)\;
+    \(t = S[i] + S[j]\)
+    \(y = S[t]\)
+    \Return{\((y,(S,i,j))\)}
+    \tcc{Every member gets swapped at least once every 256 iteration, ensuring a good mixing of the permutation of \(S\).}
+    \caption{GetBit algorithm}
+\end{algorithm}
+To incorporate iV we add it to the key \(k\)-- used in Wired Equivalent Principle. In unsynchronized mode IV is sent to reciever which leads to attack. 
+There is a way of attacking RC4. Let \(S_t\) be the array \(S\) after \(t\) generation of GetBit and consider \(S_0\) to be uniform. Therefore, 
+\begin{equation*}
+    \prob{S_0[2] = 0 \land S_0[1] \neq 2} = \dfrac{1}{256} - \dfrac{1}{256 \times 255} \simeq \dfrac{1}{256}
+\end{equation*}
+Let \(X = S_0[1]\) then, in the first generation, \(j = X\) and \(S[1]\) gets swapped with \(S[X]\) therefore 
+\begin{equation*}
+    S_1[X] = S_0[1] = X \qquad S_1[1] = S_0[X]
+\end{equation*}
+In the second generation, \(j = X + S_1[2] = X\) and \(S[2]\) gets swapped with \(S[X]\) therfore 
+\begin{equation*}
+    S_2[X] = S_1[2] = 0 \qquad S_2[2] = S_1[X] = X
+\end{equation*}
+and 
+\begin{equation*}
+    y_2 = S_2[S_2[X] + S_2[2]] = S_2[X] = 0
+\end{equation*}
+Note that when \(S_0[2] \neq 0\) the second byte \(y_2\) is uniform, hence 
+\begin{align*}
+    \prob{y_2 = 0} &= \prob{S_0[2] = 0 \land S_0[1] \neq 2} + \dfrac{1}{256} \bracket{1 - \prob{S_0[2] = 0 \land S_0[1] \neq 2}}\\
+    &= \dfrac{1}{256} - \dfrac{1}{256 \times 255} + \dfrac{1}{256} - \dfrac{1}{(256)^2 255} \simeq \dfrac{2}{256}  
+\end{align*}
+which is twice the uniform case, and we are able to extract information.

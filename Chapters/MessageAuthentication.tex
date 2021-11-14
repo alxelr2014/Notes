@@ -1,0 +1,225 @@
+\chapter{Message Authenticatiion}
+\section{Message authentication codes (MAC)}
+\begin{definition}
+    Message authentication code \(\func{\Pi}{\Gen,\Mac, \Vrfy}\) works as follows 
+    \begin{enumerate}
+        \item \(k \gets \func{\Gen}{1^n}\) with \(\abs{k} \geq n\).
+        \item \(t \gets \func{\Mac_k}{m}\).
+        \item 
+        \begin{equation*}
+        \func{\Vrfy_k}{m,t} = \begin{cases}
+            1 & \text{valid}\\
+            0 & \text{invalid}
+        \end{cases}
+        \end{equation*}
+    \end{enumerate}
+    Furthermore, for all \(k\) and \(m\) we must have 
+    \begin{equation*}
+        \func{\Vrfy_k}{m , \func{\Mac_k}{m}} = 1
+    \end{equation*}
+\end{definition}
+Consider MAC existentially unforgeable (can not forge a tag) under an adaptive chosen message attack(knows the tag for arbitrary messages). \(\func{\MacForge_{\Adversary, \Pi}}{n}\):
+\begin{enumerate}
+    \item \(k \gets \func{\Gen}{1^n}\).
+    \item \(\Adversary\) is given \(1^n\) and given access to \(\func{\Mac_k}{\cdot}\). Adversary outputs \((m,t)\). Let \(\calQ\) be the set of queried messages.
+    \item \(\Adversary\) succeeds if \(\func{\Vrfy_k}{m,t} = 1\) and \(m \notin \calQ\).
+\end{enumerate}
+
+\begin{definition}
+    \(\func{\Pi}{\Gen,\Mac, \Vrfy}\) is \textit{existentially unforgeable under an adaptive chosen message attack} or simply \textit{secure} if for all PPT adversaries \(\Adversary\) there exists a negligible function 
+    \begin{equation*}
+        \prob{\func{\MacForge_{\Adversary,\Pi}}{n} = 1} \leq \func{\negl}{n}
+    \end{equation*}
+\end{definition}
+
+A stronger version MAC-security, \(\func{\MacsForge_{\Adversary, \Pi}}{n}\):
+\begin{enumerate}
+    \item \(k \gets \func{\Gen}{1^n}\).
+    \item \(\Adversary\) is given \(1^n\) and given access to \(\func{\Mac_k}{\cdot}\). Adversary outputs \((m',t')\). Let \(\calQ\) be the set of queried messages and their tag \((m,t)\).
+    \item \(\Adversary\) succeeds if \(\func{\Vrfy_k}{m',t'} = 1\) and \((m',t') \notin \calQ\).
+\end{enumerate}
+
+\begin{definition}
+    \(\func{\Pi}{\Gen,\Mac, \Vrfy}\) is \textit{strongly secure} or \textit{strong} MAC, if for all PPT adversaries \(\Adversary\) there exists a negligible function 
+    \begin{equation*}
+        \prob{\func{\MacsForge_{\Adversary,\Pi}}{n} = 1} \leq \func{\negl}{n}
+    \end{equation*}
+\end{definition}
+
+In canonical verification, \(\Vrfy\) checks if \(t = \func{\Mac_k}{m}\). Clearly, \(\Mac\) must be deterministic. 
+\begin{proposition}
+    If \(\Pi\) is a secure MAC that uses canonical verification then \(\Pi\) is a strong MAC. Furthermore, a strong MAC remains strongly secure with \(\Vrfy\) oracle.
+\end{proposition}
+
+\section{Construction of secure MAC}
+Let \(F\) be a PRF and consider the following construction. 
+\begin{itemize}
+    \item \(\func{\Mac_k}{m} = \func{F_k}{m}\). If \(\abs{m} \neq \abs{k}\) it outputs nothing.
+    \item \(\func{\Vrfy_k}{m,t} = 1\) if \(t = \func{F_k}{m}\) and \(0\) otherwise.
+\end{itemize}
+\begin{theorem}
+    If \(F\) is a PRF, then the construction above is a secure fixed length MAC.
+\end{theorem}
+
+\section{Domain extension for MAC}
+To extend the length of MAC we will consider the following ideas. Let \(m = m_1 || \dots || m_d\) and \(\Pi'\) be a secure fixed length MAC. 
+\begin{itemize}
+    \item \(t_i = \func{\Mac_k'}{m_i}\) is susceptible to re-ordering attacks.
+    \item \(t_i = \func{\Mac_k'}{i || m_i}\) is susceptible to truncation attacks. The length of \(m_i\) is decreased.
+    \item \(t_i = \func{\Mac_k'}{l|| i || m_i}\) is susceptible to max-and-match attacks. The length of \(m_i\) is decreased.
+\end{itemize}
+Now consider the following construction.
+\begin{enumerate}
+    \item \(k \gets \func{\Gen}{1^n}\)
+    \item \(\Mac:\) takes \(k \in \set{0,1}^n\) and \(m \in \set{0,1}^{\ast}\) with length less than \(2^{n/4}\). \(m = m_1 || \dots || m_d\) with each \(\abs{m_i}= n/4\), the last block might need to be padded with zero. \(r \in \set{0,1}^{n/4}\) chosen uniformly. \(t_i \gets \func{\Mac_k}{r||l||i||m_i}\). \(t = \angleBracket{r,t_1, \dots ,t_d}\).
+    \item \(\Vrfy:\) takes \(k \in \set{0,1}^n\), \(m \in \set{0,1}^{\ast}\) with length less than \(2^{n/4}\). \(m = m_1 || \dots || m_d\) with each \(\abs{m_i}= n/4\), the last block might need to be padded with zero, and \(t = \angleBracket{r,t_1, \dots , t_d'}\). 
+    \begin{equation*}
+        \func{\Vrfy_k}{m,t} = \begin{cases}
+            1 & d = d' \land \func{\Vrfy_k}{r || l ||i|| m_i, t_i} = 1 \forall i\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*} 
+\end{enumerate}
+
+\begin{theorem}
+    If \(\Pi'\) is secure MAC, then the construction above is secure MAC.
+\end{theorem}
+
+\section{CBC-MAC}
+Let \(F\) be a PRF with \(\func{l}{n} > )\). Then basic CBC is as follows:
+\begin{enumerate}
+    \item \(\Mac:\) takes \(k \in \set{0,1}^n\) and \(\abs{m} = n \func{l}{n}\), \(m = m_1 || \dots || m_l\) with \(\abs{m_i} = n\). \(t_0 = 0^n\) and \(t_i = \func{F_k}{t_{i-1} \oplus m_i}\) for \(i = 1\) to \(l\). Outputs \(t = t_l\).
+    \item \(\Vrfy:\) takes \(k \in \set{0,1}^n\) and \(m,t\).
+    \begin{equation*}
+        \func{\Vrfy_k}{m,t} = \begin{cases}
+            1 & \text{if} \ \abs{m} = n \func{l}{n} \ \land \ t= \func{\Mac_k}{n}\\ 
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+\end{enumerate}
+
+\begin{theorem}
+    Let \(l\) be a polynomial and \(F\) be a PRF, then the construction is a secure MAC for messages of length \(n \func{l}{n}\).
+\end{theorem}
+
+\section{Authenticated Messages}
+Let \(\Pi\) be a private key encryption. The unforgeable encryption experiment \(\func{\EncForge_{\Adversary, \Pi}}{n}\).
+\begin{enumerate}
+    \item \(k \gets \func{\Gen}{1^n}\).
+    \item \(\Adversary\) is given \(1^n\) and \(\func{\Enc_k}{\cdot}\). Adversary outputs ciphertext \(c\).
+    \item Let \(m =  \func{\Dec_k}{c}\) and let \(\calQ\) be the set of all queried messages. \(\Adversary\) succeeds if 
+    \begin{equation*}
+        \func{\EncForge_{\Adversary, \Pi}}{n} = \begin{cases}
+            1 & m \neq \but , m \notin \calQ \\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+\end{enumerate}
+
+\begin{definition}
+    A private key scheme \(\Pi\) is unforgeable if for all PPT \(\Adversary\) there is a negligible function such that 
+    \begin{equation*}
+        \prob{\func{\EncForge_{\Adversary,\Pi}}{n} = 1} \leq \func{\negl}{n}
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    A private key encryption scheme is an authenticated encryption scheme if it is CCA-secure and unforgeable.
+\end{definition}
+
+Using different schemes for authenticated encryption: Let \(\Pi_E\) be CPA-secure and \(\Pi_M\) be a secure MAC. 
+\begin{enumerate}
+    \item Encrypt and Authenticate 
+    \begin{equation*}
+        c \gets \func{\Enc_{k_E}}{m} \quad t \gets \func{\Mac_{k_M}}{m}
+    \end{equation*}
+    and send \(\angleBracket{c,t}\). Secure-MAC does not guarantee secrecy therefore this scheme leaks information abot \(m\). Using deterministic MAC implies no CPA-security.
+    \item Authenticate then encrypt
+    \begin{equation*}
+        t \gets \func{\Mac_{k_M}}{m} \quad c \gets \func{\Enc_{k_E}}{m || t}
+    \end{equation*}
+    and send \(c\). If \(\Pi\) is CBC-mode-with-padding, then we can have two error, ``bad padding'' and ``MAC tag'' which means attacker can apply some CCA. 
+    \item Encrypt then Authenticate
+    \begin{equation*}
+         c \gets \func{\Enc_{k_E}}{m} \quad t \gets \func{\Mac_{k_M}}{c} 
+    \end{equation*}
+    send \(\angleBracket{c,t}\). This approach is ok as long as MAC is strongly secure. CCA-security reduces to CPA-security of \(\Pi_E\) since sMAC-security implies it can not generate valid ciphertext.
+\end{enumerate}
+
+\begin{theorem}
+    Let \(\Pi_E\) be a CPA-secure private key encryption scheme and \(\Pi_M\) be a strongly secure MAC. Then encrypt-then-authenticate method is an authenticated encryption scheme.
+\end{theorem}
+
+\section{Secure communication session}
+Let \(\Pi\) be an authenticated encryption scheme: The following attacks are possible.
+\begin{enumerate}
+    \item Re-ordering attacks. use counters.
+    \item Reply attacks. use counters.
+    \item Reflection attacks. use directionaly bit
+\end{enumerate}
+hence we can improve these by \(c \gets \func{\Enc}{b_{A,B} || ctr_{A,B} || m }\).
+
+\begin{remark}
+    CCA-security for encryption only is different than CCA-security for authenticated encryption. But in real world most construction that satisfy the former, also satisfy the latter.
+\end{remark}
+
+\section{Information theoretic MAC}
+The one time message authentication experiment \(\func{\MacForge_{\Adversary,\Pi}^{1-time}}{n}\)
+\begin{enumerate}
+    \item \(k \gets \func{\Gen}{1^n}\).
+    \item \(\Adversary\) outputs \(m'\) and in return is give a tag \(t' \gets \func{\Mac_k}{m'}\).
+    \item \(\Adversary\) outputs \(m,t\).
+    \item \(\Adversary\) succeeds if 
+    \begin{equation*}
+        \func{\MacForge_{\Adversary,\Pi}^{1-time}}{n} = \begin{cases}
+            1 & \func{\Vrfy_k}{m,t} = 1 \land m \neq m' \\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+\end{enumerate}
+
+\begin{definition}
+    \(\Pi\) is one-time \(\epsilon\)-secure if for all adversaries \(\Adversary\)
+    \begin{equation*}
+        \prob{\func{\MacForge_{\Adversary,\Pi}^{1-time}}{n} = 1} \leq \epsilon
+    \end{equation*}
+\end{definition}
+\subsection{Construction of IT-MAC}
+\begin{definition}
+    \(h: \Keys \times \Messages \to \calT\) is strongly universal if for all distinct \(m,m' \in \Messages\) and all \(t,t' \in \calT\) 
+    \begin{equation*}
+        \prob{\func{h_k}{m} =t \land \func{h_k}{m'} = t'} = \dfrac{1}{\abs{\calT}^2}
+    \end{equation*}
+    The probability is taken over uniform choice of \(k\).
+\end{definition}
+
+Let \(h:\Keys \times \Messages \to \calT\) be strongly universal function. 
+\begin{enumerate}
+    \item \(k \gets \func{\Gen}{1^n}\).
+    \item \(\func{\Mac_k}{m} = \func{h_k}{m}\).
+    \item 
+    \begin{equation*}
+        \func{\Vrfy}{m,t} = \begin{cases}
+            1 & t= \func{h_k}{m} \land m \in \Messages\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+\end{enumerate}
+
+\begin{theorem}
+    Construction above is \(\frac{1}{\abs{\calT}}\)-secure MAC for messages in \(\Messages\).
+\end{theorem}
+
+Let \(\Messages,\calT = \Integers_p,\Keys = \Integers_p \times \Integers_p\) and 
+\begin{equation*}
+    \func{h_{a,b}}{m} = am + b \mod{p}
+\end{equation*}
+
+\begin{theorem}
+    For any prime \(p\) the function \(h\) is strongly universal.
+\end{theorem}
+
+\subsection{Bounds on IT-MAC}
+\begin{theorem}
+    \(\Pi\) be \(2^{-n}\) secure MAC where all keys outputed by \(\Gen\) are the same length. Then the keys of \(Gen\) have length at least \(2n\).
+\end{theorem}
