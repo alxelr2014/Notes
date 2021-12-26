@@ -16,14 +16,25 @@ Attributes can have \textit{null} value. We can consider a domain of values \_ a
 
 A set of entities that have similar attribute like STUDENT is called an \textit{entity type}. An important attributes of the entities in an entity type is their \textit{key/identifier attribute} which uniquely determines the specific entity. Some entity types might have more than on key attribute, For example a STUDENT can be determined via its "Student Number" or "Social Security Number".
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.9\textwidth]{Graphics/entity.jpg}
+\end{figure}
 \section{Relationship}
 The interaction between two or more entities is a \textit{relationship}. Mathematically, a relationship is a Cartesian product \(n\) entity types. \(E_1, \dots , E_n\) said to \textit{participate} in a relationship type \(R = E_1 \times \dots \times E_n\) and individual entities \(e_1, \dots , e_n\) are said to \textit{paraticipate} in a relationshiple instance \(r = \bracket{e_1, \dots ,e_n}\). The degree of a relationship is the number of entity types that participate in it. Binary relationship are relationship with two entity types. Binary relationship can have different \textit{cardinality ratios}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.9\textwidth]{Graphics/relationship.jpg}
+\end{figure}
 \begin{description}
     \item [Many-to-Many] denoted as \(M:N\). For example each STUDENT can enroll in multiple COURSEs and each COURSE has many STUDENT enrolled in it.
     \item [One-to-Many] denoted as \(N:1\). Each DEPARTMENT has many FACULTY but each FACULTY has only one DEPARTMENT. 
     \item [One-to-One] denoted as \(1:1\). Each DEPARTMENT has one DEAN and each DEAN belongs to one DEPARTMENT.
-\end{description}
-
+\end{description}[H]
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.9\textwidth]{Graphics/cardinality.jpg}
+\end{figure}
 \textit{Total participation} or \textit{existence dependecy} is when each entity in the first entity type must be in a relationship with another entity in the second entity type. For example, each FACULTY must have a DEPARTMENT. In \textit{partial participation} some of the entities in the first entity type are in a relationship with the entities in the second entity type. For example, not every FACULTY is a DEAN. 
 
 A relationship might have attributes for itself. For instance, a DEAN \textit{MANAGES} a DEPARTMENT from a starting time to some other time. 
@@ -32,7 +43,10 @@ A relationship might have attributes for itself. For instance, a DEAN \textit{MA
 An entity type that does not have a key attribute is called a \textit{weak entity}. Those entities that have a key attribute are called \textit{strong entity}. In real world, a weak entity is an entity that is depedent on the existence of another entity, called \textit{identifying/owner entity type}. In ER model we can model this relationship by a total participation relationship which is called \textit{identifying relationship}. A weak entity type normal has one or more \textit{partial key} attributes that distinguish it from the other related weak entities to the same owner entity. For example, a COURSEGROUP entity has the "Semester", "Year", and the "Group Number" attributes of a COURSE entity. Every COURSEGROUP entity must be related to a COURSE entity and here, each of its attributes are partial keys.
 
 By adding weak entities we can reduce the order of a relationship to two and even remove attributes of the relationship and give it to the weak entity.
-
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.9\textwidth]{Graphics/weak entity.jpg}
+\end{figure}
 \section{ER notation and diagrams}
 Insert the corresponding diagrams :)
 
@@ -40,24 +54,30 @@ Insert the corresponding diagrams :)
 \subsection{Inheritance}
 For inheritance we need a \textit{supertpye} and \textit{subtype} which inherits attributes of the supertype.
 We show the concept of inheritance in EER model through \textit{specialization} and \textit{generalization}. Specialization is the process of defining a set of subclasses of an entity type. Generalization is the process of finding common attributes and creating a supertype. A specialization has the following characteristics 
-\begin{definition}
+\begin{description}
     \item [Total] every entity of the supertype must be an instance of at least one one the subtypes.
     \item [Partial] opposite of total.
     \item [Disjoint] every entity of the supertype belongs to at most one of the subtypes.
     \item [Overlapping] opposite of disjoint.
-\end{definition}
+\end{description}
 Totalness and disjointness are indepedent of each other and hence we can have four combinations. 
---insert diagram 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.9\textwidth]{Graphics/inheritance.jpg}
+\end{figure}
 Multiple inheritance can occure when a subtype inherites attributes of one or more supertypes. For example, a TEACHING-ASSISTANT is both a STUDENT and an EMPLOYEE.
 
 \subsection{Union-Type (Category)}
 When we want to combine different entities, we use Union types. For example, a VEHICLE can be a CAR or a  TRUCK. 
-\begin{definition}
+\begin{description}
     \item [Total] every entity of the subtype is one the supertype.
     \item [Partial] opposite of total.
-\end{definition}
---insert diagram 
+\end{description}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.5\textwidth]{Graphics/union.jpg}
+\end{figure}
 
 If the keys of the supertpyes are from the same domain, then we can have the same key for the subtype. But, it is better to have different key. Also note that, total union type is equivalent to disjoint total inheritance. 
 
@@ -72,12 +92,22 @@ We need to represent membershipe/being a component/containment relationships as 
     \item E has F.
     \item F is a member of E.
 \end{itemize}
-
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.4\textwidth]{Graphics/has}
+\end{figure}
 We can also view relationships as an entity (i literally have no fucking clue why they dont make a science out of it and standardize it with better capabilities).
-
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.9\textwidth]{Graphics/aggregation.jpg}
+\end{figure}
 \section{Traps}
 There are two traps 
 \begin{definition}
     \item [Loop trap] thinking that \((i,s), (s,p) , (p,i) \implies (i,s,p)\) is wrong.
     \item [Chasm trap] failing to model correctly that in a chain of 1:N relationship, the last entity is "connected" to the first entity, because the participation is not total. (If it is ambiguous, let me tell that i have seen a million examples and still dont fucking understand, it is so fucking dumb \_ or maybe i am :\textbackslash).
 \end{definition}
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.9\textwidth]{Graphics/looptrap.jpg}
+\end{figure}

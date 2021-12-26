@@ -18,12 +18,47 @@
     \fancyhf{}
 }
 
-
+\usepackage{float}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{xcolor}
 \usepackage{enumitem}
+
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{dkpink}{rgb}{0.91,0.1,0.4}
+\definecolor{ltgray}{rgb}{0.5,0.5,0.5}
+
+\usepackage{listings}
+\lstset{%
+  	backgroundcolor=\color{white},
+  	basicstyle=\ttfamily,
+  	breakatwhitespace=false,
+  	breaklines=true,
+  	captionpos=b,
+  	commentstyle=\color{dkgreen},
+  	deletekeywords={...},
+  	escapeinside={\%*}{*)},
+  	extendedchars=true,
+  	frame=single,
+  	keepspaces=true,
+  	keywordstyle=\color{dkpink},
+  	language=SQL,
+  	morekeywords={*,modify,MODIFY,...},
+  	numbers=none,
+  	numbersep=15pt,
+  	numberstyle=\tiny,
+  	rulecolor=\color{ltgray},
+  	showspaces=false,
+  	showstringspaces=false, 
+  	showtabs=false,
+  	stepnumber=1,
+  	tabsize=4,
+  	title=\lstname
+}
+
 
 \usepackage{common}
 \usepackage{english-theorems}
@@ -37,4 +72,6 @@
 \fi
 \input{Chapters/Introduction.tex}
 \input{Chapters/ER.tex}
+\input{Chapters/LogicalDesign.tex}
+\input{Chapters/SQL.tex}
 \end{document}

@@ -1,0 +1,117 @@
+\chapter{SQL}
+\section{Creating table}
+\begin{lstlisting}[language=sql]
+CREATE TABLE stt(
+    stid    CHAR(8) PRIMARY KEY,
+    stname  VARCHAR(20) NOT NULL,
+    stlev   CHAR(2) DEFAULT 'BS',
+    stssn   CHAR(10) UNIQUE NOT NULL,
+    CHECK (stlev IN ('BS', 'MS', 'PD'))
+)
+\end{lstlisting}
+\begin{lstlisting}[language=sql]
+CREATE TABLE stcot(
+    stid    CHAR(8),
+    coid  VARCHAR(20) NOT NULL,
+    qtr   SMALLINT,
+    yr   CHAR(5),
+    grade DECIMAL(4,2),
+    PRIMARY KEY (stid, coid),
+    FOREIGN KEY (stid) REFERENCES stt(stid),
+    FOREIGN KEY (coid) REFERENCES cot(coid)
+)
+\end{lstlisting}
+
+\section{Remove table}
+\begin{lstlisting}[language=sql]
+CREATE TABLE stt [CASCADE | RESTRICT]
+\end{lstlisting}
+
+\section{Update table}
+\begin{lstlisting}[language=sql]
+ALTER TABLE stt 
+    ADD COLUMN stdepid INT;
+
+ALTER TABLE stt
+    DROP COLUMN stssn [CASCADE | RESTRICT];
+
+ALTER TABLE stt
+    ALTER COLUMN stlev SET DEFAULT 'BS';
+
+ALTER TABLE stt
+    ADD CONSTRAINT con1 CHECK(stdepid  BETWEEN 11 AND 45);
+
+ALTER TABLE stt
+	DROP CONSTRAINT con1;
+\end{lstlisting}
+\begin{lstlisting}[language=sql]
+INSERT INTO stt (stid,stname,stlev,stdepid)
+    VALUES ('999','ali','BS',4);
+
+INSERT INTO stt 
+    VALUES ('888','mohsel','BS',5);
+
+DELETE FROM stt WHERE
+    stid = '999' AND stname = 'ali';
+
+DELETE FROM stt WHERE TRUE;
+-- is the same as
+TRUNCATE TABLE stt;
+
+\end{lstlisting}
+In case we may want to delete a foreign key or what have you, we can determine the action in defintion 
+
+\begin{lstlisting}[language=sql]
+CREATE TABLE stcot(
+    stid    CHAR(8),
+    coid  VARCHAR(20) NOT NULL,
+    qtr   SMALLINT,
+    yr   CHAR(5),
+    grade DECIMAL(4,2),
+    PRIMARY KEY (stid, coid),
+    FOREIGN KEY (stid) REFERENCES stt(stid) ON [DELETE| UPDATE] [RESTRICT | CASCADE | SET NULL | SET DEFAULT | NO ACTION],
+    FOREIGN KEY (coid) REFERENCES cot(coid)
+    -- on default is RESTRICT
+)
+\end{lstlisting}
+
+\section{Retrieving information}
+\begin{lstlisting}[language=sql]
+SELECT * FROM stt;
+SELECT stid FROM stt;
+SELECT stid,stlev FROM stt WHERE stdepid = 11;
+SELECT stid FROM stt WHERE stdepid IS [NOT] NULL;
+SELECT stid FROM stt 
+    WHERE stname [NOT] LIKE ['%N','M^%', '--A--'];
+-- '%N' : ends with N
+-- '^M%': does not start with M
+-- '--[A-D]--' : exactly 5 characters and the third is A
+SELECT * FROM stt ORDER BY stid [ASCENDING | DESCENDING];
+
+-- We also have INTERSECT, UNION, UNION ALL, EXCEPT between two tables
+
+SELECT stid FROM stt as T1 WHERE T1.stid = '98999';
+-- Other keywords ANY, IN, NOT IN, ALL , EXISTS
+
+SELECT [COUNT(*), MAX(grade), MIN(grade), SUM(grade * 2 ), SUM(grade)] FROM stcot
+        WHERE qtr = 1
+    GROUP BY (stid)
+    HAVING COUNT(DISTINCT(COID)) > 10;
+
+-- First WHERE is executed the GROUP By
+-- When using GROUP BY, only the grouped entities and accumulative function are allowed to be queried
+
+SELECT * FROM stt,stcot 
+    WHERE stt.stid = stcot = stid;
+
+SELECT * FROM stt [INNER | [LEFT | RIGHT | FULL] OUTER] JOIN stcot [ON stt.stid = stcot.stid] [USING(stid)]
+
+-- LEFT OUTER if there is no row in stcot corresponding to the row in stt
+-- RIGHT OUTER if there is no row in stt for some row in setcounter
+
+WITH RECURSIVE rec_table(
+    (SELECT ...)
+    UNION [ALL]
+    (SELECT ...)
+)
+\end{lstlisting}
