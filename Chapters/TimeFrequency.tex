@@ -1,0 +1,120 @@
+\chapter{Time Frequency Characterization}
+\section{Magnitude-phase representation of Fourier Transform}
+\(\angle \func{X}{j\omega}\) is the relative phase and \(\frac{1}{2\pi}\abs{\func{X}{j\omega}}^2 \diffOperator \omega \) is the energy of \(\func{x}{t}\) in \(\opop{\omega}{ \omega + \diffOperator \omega}\). Obviously, the magnitude matters but also phase matters depending on the context. 
+\section{Magnitude-phase representation of the frequency response of LTI systems}
+In an LTI system 
+\begin{equation*}
+    \func{Y}{j\omega} = \func{H}{j\omega} \func{X}{j\omega} \implies \begin{cases}
+        \abs{Y} &= \abs{H} \abs{X} \\
+        \angle Y &= \angle H + \angle X
+    \end{cases}
+\end{equation*}
+where the \(\abs{H}\) is called the gain and \(\angle H\) is the phase shift. 
+\subsection*{Linear and non-linear phase}
+For unit gain all-pass \(\func{H}{j\omega} = 1\) with linear phase \(\angle \func{H}{j\omega} = t_0 \omega\). Then, 
+\begin{equation*}
+    \func{y}{t} = \func{x}{t - t_0}
+\end{equation*}
+\subsubsection*{Group delay}
+Suppose \(\func{X}{j\omega}\) is zero outside a narrow band around \(\omega = \omega_0\). Then, a non-linear phase can be approximated by a linear phase 
+\begin{align*}
+    \angle \func{H}{j\omega} &\simeq - \phi - \alpha \\
+    \implies \func{Y}{j\omega} &= \func{X}{j\omega} \abs{\func{H}{j\omega}} e^{j\phi} e^{j \omega \alpha}
+\end{align*}
+\(\alpha\) seconds delay. The group delay is defined as 
+\begin{equation*}
+    \func{\tau}{\omega} = - \dfrac{\diffOperator}{\diffOperator \omega} \angle \func{H}{j\omega}
+\end{equation*}
+but this might be discontinuous at \(2\pi k\). So we use the un-wrapped phase 
+\begin{equation*}
+    \func{\tau}{\omega} = - \dfrac{\diffOperator}{\diffOperator \omega} \squareBracket{\angle \func{H}{j\omega}}
+\end{equation*}
+
+\subsection*{Log-magnitude and Bode plots}
+\(dB = 20 \log_{10} \abs{\func{H}{j\omega}}\). If \(\omega\)-axis is logarithmic \(\log_{10} \omega\) as well then it is called Bode plot.
+
+\section{Time-Domain properties of ideal frequency selective filter}
+a frequency selective filter 
+\begin{equation*}
+    \abs{\func{H}{j \omega}} = \begin{cases}
+        1 & \abs{\omega} \leq \omega_c \\
+        0 & \abs{\omega} > \omega_c
+    \end{cases}
+\end{equation*}
+With linear phase (\(\alpha\) seconds delay)
+\begin{equation*}
+    \angle \func{H}{j\omega} = -\alpha \omega 
+\end{equation*}
+
+\section{Time-domain and frequency aspects of non-ideal filters}
+add images in pg 175
+
+\section{First and second order CT system}
+\subsection*{First order continuous-time system}
+
+\begin{equation*}
+    \tau \dfrac{\diffOperator y}{\diffOperator t} + u = \func{x}{t} \implies \func{H}{j\omega} = \dfrac{1}{j \omega \tau + 1}
+\end{equation*}
+which then implies that 
+\begin{align*}
+    \func{h}{t} &= \dfrac{1}{\tau} e^{-\frac{t}{\tau}} \func{u}{t}\\
+    \func{s}{t} &= \bracket{ 1 - e^{-\frac{t}{\tau}}} \func{u}{t}
+\end{align*}
+
+\subsection*{Second order continuous-time system}
+\begin{equation*}
+    \dfrac{\diffOperator^2 y}{\diffOperator t^2} + 2 \xi \omega_n  \dfrac{\diffOperator y}{\diffOperator t} + \omega_n^2 \func{y}{t} = \omega_n^2 \func{x}{t}
+\end{equation*}
+then 
+\begin{align*}
+    \func{H}{j\omega} &= \dfrac{\omega_n^2}{\bracket{j\omega}^2 + 2 \xi \omega_n j \omega + \omega_n^2}\\
+    &= \dfrac{\omega_n^2}{\bracket{j\omega - c_1} \bracket{j\omega - c_2}}
+\end{align*}
+where \(c_1 = - \xi \omega_n + \omega_n \sqrt{\xi^2 - 1}\) and \(c_2 = - \xi \omega_n + \omega_n \sqrt{\xi^2 - 1}\). If \(\xi \neq 1\) then 
+\begin{align*}
+    \func{H}{j\omega} &= \dfrac{M}{j\omega - c_1} - \dfrac{M}{j\omega - c_2} \qquad \qquad M = \dfrac{\omega_n}{2 \sqrt{\xi^2 - 1}}\\
+    \implies \func{h}{t} &= M \bracket{e^{c_1 t} - e^{c_2 t}}\func{u}{t}
+\end{align*}
+and if \(\xi = 1\) then 
+\begin{equation*}
+    \func{H}{j\omega} = \dfrac{\omega_n^2}{\bracket{j\omega + \omega_n}^2} \implies \func{h}{t} = \omega_n^2 t e^{-\omega_n t} \func{u}{t}
+\end{equation*}
+\(\xi\) is called the damping ratio and \(\omega_n\) is the undamped natural frequency. 
+\begin{itemize}
+    \item For \(0 < \xi < 1\) the response is underdamped which will overshoot and rings in step function. 
+    \item For \(\xi = 1\) the response is critically damped which will have the fastest settling time. 
+    \item For \(\xi > 1\) the response is overdamped which will imply it has slow settling time.
+\end{itemize}
+
+\section{First order and second order discrete-time system}
+\section{First order}
+\begin{align*}
+    \squareFunc{y}{n} - a \squareFunc{y}{n - 1} = \squareFunc{x}{n} \implies \func{H}{e^{j\omega}} &= \dfrac{1}{1 - a e^{j\omega}} \\
+    \squareFunc{h}{n} &= a^n \func{u}{n} \\
+    \squareFunc{s}{n} &= \dfrac{1 - a^{n+1}}{1 - a} \func{u}{n}
+\end{align*}
+\section{Second order}
+\begin{equation*}
+    \squareFunc{y}{n} - 2r \cos \theta \squareFunc{y}{n - 1} + r^2 \squareFunc{y}{n - 2} = \squareFunc{x}{n}
+\end{equation*}
+\begin{align*}
+    \func{H}{e^{j\omega}} &= \dfrac{1}{1 - 2r \cos \theta e^{-j\omega} + r^2 e^{-2j\omega}} \\
+    &= \dfrac{1}{\bracket{1 - re^{j\theta} e^{-j\omega}}\bracket{1 - re^{=j\theta} e^{-j\omega}}}
+\end{align*}
+
+If \(\theta \neq 0,\pi\) then 
+\begin{equation*}
+    \func{H}{e^{j\omega}} = \dfrac{A}{1 -re^{j\theta} e^{-j\omega}} + \dfrac{B}{1 -re^{-j\theta} e^{-j\omega}}
+\end{equation*}
+where
+\begin{equation*}
+    A = \dfrac{e^{j\theta}}{2j \sin \theta} \qquad B = \dfrac{e^{-j\theta}}{2j \sin\theta}
+\end{equation*}
+if \(\theta = 0\)
+\begin{equation*}
+    \func{H}{e^{j\omega}} = \dfrac{1}{\bracket{1 - re^{-j\omega}}^2} \implies \squareFunc{h}{n} = (n + 1)r^n \squareFunc{u}{n} 
+\end{equation*}
+and for \(\theta = \pi\)
+\begin{equation*}
+    \func{H}{e^{j\omega}} = \dfrac{1}{\bracket{1 + re^{-j\omega}}^2} \implies \squareFunc{h}{n} = (n + 1)(-r)^n \squareFunc{u}{n} 
+\end{equation*}

@@ -1,0 +1,144 @@
+\chapter{Sampling}
+\section{Sampling theorem}
+\subsection*{Sampling with impluse train}
+Let \(T\) be the sampling period and \(\omega_s = \frac{2\pi}{T}\) be the sampling frequency. The train impluse 
+\begin{equation*}
+    \func{p}{t} = \sum_{n = -\infty}^{\infty} \func{\delta}{t - nT}
+\end{equation*}
+and hence the sampled signal
+\begin{equation*}
+    \func{x_p}{t} = \func{x}{t} \func{p}{t} = \sum_{n = -\infty}^{\infty} \func{x}{nT} \func{\delta}{t - nT}
+\end{equation*}
+has the Fourier transform 
+\begin{equation*}
+    \func{X_p}{j\omega} = \dfrac{1}{2\pi} \int_{-\infty}^{\infty} \func{X}{j\theta} \func{P}{j\omega - j \theta} \diffOperator \theta = \dfrac{1}{2\pi} \func{X}{j\omega} \ast \func{P}{j\omega}
+\end{equation*}
+with 
+\begin{equation*}
+    \func{P}{j\omega} = \dfrac{2\pi}{T} \sum_{k = -\infty}^{\infty} \func{\delta}{\omega - k \omega_s}
+\end{equation*}
+and hence 
+\begin{align*}
+    \func{X_p}{j\omega} &= \dfrac{\omega_s}{2\pi} \func{X}{j\omega} \ast \sum_{k = -\infty}^{\infty} \func{\delta}{\omega - k \omega_s}\\
+    &= \dfrac{\omega_s}{2\pi}   \sum_{k = -\infty}^{\infty} \func{X}{j\omega - jk\omega_s}
+\end{align*}
+
+\begin{theorem}
+    Let \(\func{x}{t}\) be a band-limited signal with \(\func{X}{j\omega} = 0\) for \(\abs{\omega} > \omega_M\). Then, \(\func{x}{t}\) is uniquely determined by its samples \(\func{x}{nT}\) if \(\omega_s > 2 \omega_M\), i.e. we can reconstructed \(\func{x}{t}\) from its samples.
+\end{theorem}
+
+\begin{proof}
+    Construct \(\func{X_p}{j\omega}\) as above. Note that is has a period of \(\omega_s\). Therefore, by the fact that \(\func{X}{j\omega}\) is band-limited, if \(\omega_M < \omega_s - \omega_M\) or equivalently \(\omega_s > 2 \omega_M\) then we can reconstruct \(\func{X}{j\omega}\) by applying a lowpass filter with \(\omega_M < \omega_c < \omega_s - \omega_M\).
+\end{proof}
+
+\begin{definition}
+    \(2\omega_M\) is called the Nyquist rate.
+\end{definition}
+
+\subsection*{Sampling with zero-order hold}
+it is the same as impulse train by we hold the last sample until the new sample. -- add images pg 178
+where 
+\begin{equation*}
+    \func{H_0}{j\omega} = e^{-j\omega T/2} \bracket{\dfrac{2 \sin \frac{\omega T}{2}}{\omega}}
+\end{equation*}
+and therfore to have \(\func{x}{t} = \func{r}{t}\) we must have 
+\begin{equation*}
+    \func{H_r}{j\omega} = \dfrac{\func{H}{j\omega}}{\func{H_0}{j\omega}}
+\end{equation*}
+where \(\func{H}{j\omega}\) is the ideal lowpass needed to convert impulse train to original signal.
+
+\section{Reconstruction of signal from its samples using interpolation}
+first-order hold is the linear interpolation. Has the following filter -- inset image pg 178
+
+\section{Effect of undersampling (Aliasing)}
+Do the example with a \(\cos \omega_0t\) and conclude that undersampling turns high frequencies into low frequencies. Stroboscopic effect 
+
+\section{Discrete-time processing of continuous time signals}
+First we must transform continuous to discrete (C/D conversion , Analog to digital), then process the discrete signal and lastly convert it back to continuous time (D/C conversion, Digital to Analog).
+\subsection*{C/D conversion}
+it can be effectively by impulse train.
+\begin{equation*}
+    \func{x_p}{t} = \begin{cases}
+        \func{x_c}{nT} & t = nT\\
+        0 & \text{otherwise}
+    \end{cases} \qquad \qquad \squareFunc{x_d}{n} = \func{x_p}{nT}
+\end{equation*}
+then 
+\begin{align*}
+    \func{X_d}{e^{j\Omega}} &= \sum_{k = -\infty}^{\infty} \squareFunc{x_d}{k} e^{-j\Omega k} \\ 
+    &= \sum_{k = -\infty}^{\infty} \func{x_p}{nT} e^{-j\Omega k} \\
+    &= \sum_{k = -\infty}^{\infty} \func{x_c}{nT} e^{-j\Omega k} \\
+    &= \func{X_p}{j\dfrac{\Omega}{T}} \\
+    \implies \func{X_d}{e^{j\Omega}} &= \dfrac{\omega_s}{2\pi}   \sum_{k = -\infty}^{\infty} \func{X_c}{j\frac{\Omega}{T} - jk\omega_s}
+\end{align*}
+
+\subsection*{D/C Conversion}
+we just reverse back. we turn discrete time into impulse train and then apply a lowpass filter to get the continuous signal.
+
+\subsection*{The system}
+give a sufficiently band limited input and sampling theorem conditions hold is LTI.
+\begin{equation*}
+    \func{H_c}{j\omega} = \begin{cases}
+        \func{H_d}{e^{j\omega T}} & \abs{\omega} < \dfrac{\omega_s}{2}\\
+        0 &\text{otherwise}
+    \end{cases}
+\end{equation*}
+
+\subsection*{Half-sample delay}
+suppose we want to do 
+\begin{equation*}
+    \func{y_c}{t} = \func{x_c}{t - \Delta}
+\end{equation*}
+Then 
+\begin{equation*}
+    \func{Y_c}{j\omega} = e^{-j \omega \Delta} \func{X_c}{j\omega}
+\end{equation*}
+implying that 
+\begin{equation*}
+    \func{H_c}{j\omega} = \begin{cases}
+        e^{-j\omega \Delta} & \abs{\omega} < \omega_c \\ 
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation*}
+and 
+\begin{equation*}
+    \func{H_d}{e^{j\Omega}} = e^{-j\Omega \frac{\Delta}{T}}
+\end{equation*}
+given that \(\frac{\Delta}{T}\) is an integer 
+\begin{equation*}
+    \squareFunc{y_d}{n} = \squareFunc{x_d}{n - \dfrac{\Delta}{T}}
+\end{equation*}
+
+\section{Sampling of discrete-time signal}
+\subsection*{Implust train signal}
+\begin{equation*}
+    \squareFunc{x_p}{n} = \begin{cases}
+        \func{x}{n} & N | n \\
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation*}
+where \(N\) is the sampling period. THen, 
+\begin{align*}
+    \squareFunc{x_p}{n} &= \squareFunc{x}{n} \squareFunc{p}{n}\\
+    &= \sum_{k = -\infty}^{\infty} \squareFunc{x}{kN} \squareFunc{\delta}{n - kN}\\ 
+    \func{P}{e^{j\omega}} &= \dfrac{2\pi}{N} \sum_{k = -\infty}^{\infty} \func{\delta}{\omega - k\omega_s}\\
+    \implies \func{X_p}{e^{j\omega}} &= \dfrac{1}{2\pi} \int_{2\pi} \func{P}{e^{j\theta}} \func{X}{e^{j(\omega - \theta)}} \diffOperator \theta \\
+    &= \dfrac{1}{N} \int_{0}^{2\pi} \func{X}{e^{j(\omega - \theta)}} \sum_{k = -\infty}^{\infty}\func{\delta}{\theta - k\omega_s} \diffOperator \theta\\
+    &= \dfrac{1}{N} \sum_{k = 0}^{N-1} \int_{0}^{2\pi} \func{X}{e^{j(\omega - \theta)}} \func{\delta}{\theta - k\omega_s} \diffOperator \theta\\
+    &= \dfrac{1}{N} \sum_{k = 0}^{N-1} \func{X}{e^{j(\omega - k\omega_s)}}
+\end{align*}
+again no aliasing if \(\omega_s > 2\omega_M\).
+\subsection*{Discrete-time decimation}
+it is unnecessary to keep all the zeros. 
+\begin{equation*}
+    \squareFunc{x_b}{n} = \squareFunc{x_p}{nN} = \squareFunc{x}{nN}
+\end{equation*}
+therefore 
+\begin{align*}
+    \func{X_b}{e^{j\omega}} &= \sum_{k = -\infty}^{\infty} \squareFunc{x_b}{k} e^{-j\omega k}\\
+    &= \sum_{k = -\infty}^{\infty} \squareFunc{x_p}{kN} e^{-j\omega k}\\
+    &= \sum_{k = -\infty}^{\infty} \squareFunc{x_p}{k} e^{-j\omega/N k}\\
+    &= \func{X_p}{e^{j \omega/N}}
+\end{align*}
+\subsection{upsampling or interpolation}
+adding zeros \(\squareFunc{x_b}{n} \to \squareFunc{x_p}{n} \to \squareFunc{x}{n}\) and then apply low-pass filter.

@@ -1,0 +1,113 @@
+\chapter{Discrete Fourier Transform}
+Let \(\squareFunc{x}{n}\) be a finite duration signal and \(\squareFunc{\tilde{x}}{n}\) be the periodic form of \(\squareFunc{x}{n}\), Then, as \(N \to \infty\) \(\squareFunc{\tilde{x}}{n} \to \squareFunc{x}{n}\). 
+\begin{align*}
+    \squareFunc{\tilde{x}}{n} &= \sum_{\angleBracket{N}} a_k e^{j\omega_0 kn} \qquad \omega_0 = \dfrac{2\pi}{n} \\
+    \implies a_k &= \dfrac{1}{N} \sum_{\angleBracket{N}} \squareFunc{\tilde{x}}{n} e^{-j\omega_0 kn}\\
+    &= \dfrac{1}{N} \sum_{n =-N_1}^{N_2} \squareFunc{x}{n} e^{-j\omega_0 kn}\\
+    &= \dfrac{1}{N} \sum_{n =-\infty}^{\infty} \squareFunc{x}{n} e^{-j\omega_0 kn} \\
+    &= \dfrac{1}{N} \func{X}{e^{j\omega_0 k}} 
+\end{align*}
+which implies that 
+\begin{align*}
+    \squareFunc{\tilde{x}}{n} &= \sum_{\angleBracket{N}} \dfrac{1}{N} \func{X}{e^{j\omega_0 k}}  e^{j\omega_0 kn}\\
+    \implies \squareFunc{x}{n} &= \lim_{\omega_0 \to \infty} \dfrac{1}{2\pi} \sum_{0}^{\frac{2\pi}{n}} \func{X}{e^{j\omega_0 k}}  e^{j\omega_0 kn} \omega_0\\
+    &= \dfrac{1}{2\pi} \int_{2\pi} \func{X}{e^{j\omega}} e^{j\omega n} \diffOperator \omega
+\end{align*}
+For convergence we need the followings to hold 
+\begin{enumerate}
+    \item \(\squareFunc{x}{n}\) is absolutely summable 
+    \begin{equation*}
+        \sum_{n =-\infty}^{\infty} \abs{\squareFunc{x}{n}} < \infty
+    \end{equation*}
+    or has finite energy 
+    \begin{equation*}
+        \sum_{n =-\infty}^{\infty} \abs{\squareFunc{x}{n}}^2 < \infty
+    \end{equation*}
+\end{enumerate}
+\section{DFT of periodic signal}
+Let \(\squareFunc{x}{n} = e^{j\omega_0 n}\) then 
+\begin{align*}
+    \func{X}{e^{j\omega}} &= \sum_{n = -\infty}^{\infty} e^{j \omega_0 n} e^{-j \omega n} = 2 \pi \sum_{l = -\infty}^{\infty} \func{\delta}{\omega - \omega_0 - 2\pi l}\\
+    \implies \squareFunc{x}{n} &= \sum_{\angleBracket{N}} a_k e^{jk \omega_0 n}\\
+    \implies \func{X}{e^{j\omega}} &= 2 \pi \sum_{k = -\infty}^{\infty} a_k \func{\delta}{\omega - k\omega_0}
+\end{align*}
+
+\section{Properties}
+\begin{description}
+    \item[Periodic] It has a period of \(2\pi\).
+    \begin{equation*}
+        \func{\Fourier{\squareFunc{x}{n}}}{\omega + 2\pi} =\func{\Fourier{\squareFunc{x}{n}}}{\omega}
+    \end{equation*} 
+    \item[Linear]
+    \begin{equation*}
+        \Fourier{a\squareFunc{x}{n} + b \squareFunc{y}{n}} = a\Fourier{\squareFunc{x}{n}} + b\Fourier{\squareFunc{y}{n}}
+    \end{equation*} 
+    \item[Time shifting] \(n_0\) must be an integer.
+    \begin{equation*}
+        \Fourier{\squareFunc{x}{n - n_0}} = e^{-j\omega n_0} \Fourier{\squareFunc{x}{n}}
+    \end{equation*}
+    \item[Frequency shifting]
+    \begin{equation*}
+        \Fourier{e^{j\omega_0 n}\squareFunc{x}{n}} = \func{\Fourier{\squareFunc{x}{n}}}{\omega - \omega_0}
+    \end{equation*}
+    \item[Conjugate symmetry] 
+    \begin{equation*}
+        \Fourier{\overline{\squareFunc{x}{n}}}  = \overline{\func{\Fourier{\squareFunc{x}{n}}}{-\omega}}
+    \end{equation*}
+    and if \(\squareFunc{x}{n}\) is real
+    \begin{align*}
+        \implies \Fourier{\squareFunc{x}{n}} &= \overline{\func{\Fourier{\squareFunc{x}{n}}}{-\omega}}\\
+        \implies \Fourier{\func{Ev}{\squareFunc{x}{n}}} &= \Re \Fourier{\squareFunc{x}{n}}\\
+        \implies \Fourier{\func{Od}{\squareFunc{x}{n}}} &= j \Im \Fourier{\squareFunc{x}{n}}
+    \end{align*}
+    \item[Differencing]
+    \begin{equation*}
+        \Fourier{\squareFunc{x}{n} - \squareFunc{x}{n - 1}} = \bracket{1 - e^{-j\omega}} \Fourier{\squareFunc{x}{n}}
+    \end{equation*}
+    \item[Accumulation]
+    \begin{equation*}
+        \Fourier{\sum_{m = -\infty}^n \squareFunc{x}{m}} = \dfrac{1}{ 1 - e^{-j\omega}} \Fourier{\squareFunc{x}{n}} + \pi \func{\Fourier{\squareFunc{x}{n}}}{0} \sum_{k = -\infty}^{\infty} \func{\delta}{\omega - 2\pi k}
+    \end{equation*} 
+    \item[Time Rerversal]
+    \begin{equation*}
+        \Fourier{\squareFunc{x}{-n}} = \func{\Fourier{\squareFunc{x}{n}}}{-\omega}
+    \end{equation*}
+    \item[Time Expansion]
+    \begin{equation*}
+        \Fourier{\squareFunc{x_{(k)}}{n}} = \func{\Fourier{\squareFunc{x}{n}}}{k\omega}
+    \end{equation*}
+    where 
+    \begin{equation*}
+        \squareFunc{x_{(k)}}{n} = \begin{cases}
+            \squareFunc{x}{\frac{n}{k}} & k| n\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    \item 
+    \begin{equation*}
+        \InvFourier{j \dfrac{\diffOperator \Fourier{\squareFunc{x}{n}}}{\diffOperator \omega}} = n \squareFunc{x}{n}
+    \end{equation*}
+    \item[Parsevals']
+    \begin{equation*}
+        \sum_{n = -\infty}^{\infty} \abs{\squareFunc{x}{n}}^2 = \dfrac{1}{2\pi} \int_{2\pi} \abs{\Fourier{\squareFunc{x}{n}}}^2 \diffOperator \omega 
+    \end{equation*}
+    \item[Convolution] 
+    \begin{equation*}
+        \Fourier{\squareFunc{x}{n} \ast \squareFunc{y}{n}} = \Fourier{\squareFunc{x}{n}} \Fourier{\squareFunc{y}{n}}
+    \end{equation*}
+    \item[Multiplication] 
+    \begin{equation*}
+        \Fourier{\squareFunc{x}{n} \squareFunc{y}{n}}  = \dfrac{1}{2\pi} \int_{2\pi} \func{\Fourier{\squareFunc{x}{n}}}{\theta} \func{\Fourier{\squareFunc{y}{n}}}{\omega - \theta } \diffOperator \theta
+    \end{equation*}
+\end{description}
+
+\section{Linear constant coefficient difference equation}
+\begin{equation*}
+    \sum_{k = 0}^N a_k \squareFunc{y}{n - k} = \sum_{m = 0}^M b_m \squareFunc{x}{n -m}
+\end{equation*}
+it is the impluse response has the following form 
+\begin{equation*}
+    \func{H}{e^{j\omega}} = \dfrac{\sum_{m = 0}^M b_m e^{-j\omega m }}{ \sum_{k = 0}^N a_k e^{j\omega k}}
+\end{equation*}
+
+Some fourier analysis would not be bad :)
