@@ -1,0 +1,209 @@
+\chapter{Number Theory}
+\section{Preliminaries}
+\begin{itemize}
+    \item Divisiblilty and Euclidean algorithm (EEA).
+    \item Modular arithmetic. \(b\) is invertible modulu \(N\) if there exists \(c\) such that \(bc \equiv 1 \mod N\). This implies that, \(\func{\gcd}{b,N} = 1\).
+\end{itemize} 
+\section{Group}
+\((G,\circ)\) is a group if 
+\begin{enumerate}
+    \item \(G\) is closed under \(\circ\).
+    \item There exists \(e \in G\) such that \(\forall g \in G,\; g \circ e = e \circ g = g\).
+    \item For all \(g \in G\) there exists \(h \in G\) such that \(h \circ g = g \circ h = e\).
+    \item \(\forall g_1,g_2,g_3 \in G\) we have \((g_1 \circ g_2) \circ g_3 = g_1 \circ (g_2 \circ g_3)\). 
+\end{enumerate}
+Also if \(\circ\) is commutative, that is \(h \circ g = g \circ h\) for any two elements \(g,h \in G\), then the group is abelian group. If \(G\) is finite, \(\abs{G}\) denotes the order of the group. \(H \subset G\) forms a subgroup of \(G\) if \((H,\circ)\) is a group. \(G\) and \(\set{e}\) are both subgroups of \(G\). \(H\) is a strict subgroup of \(G\) if \(H \neq G\). 
+\begin{lemma} \label{lm:subtraction}
+    Let \(a,b,c \in G\). If \(a \circ c = b \circ c\) then \(a = b\).
+\end{lemma}
+\begin{proof}
+    Let \(d \in G\) be the inverse of \(c\). Then, 
+    \begin{align*}
+        &(a \circ c) \circ d = a \circ (c \circ d) = a \circ e = a\\
+        &(b \circ c) \circ d = b \circ (c \circ d) = b \circ e = b\\
+    \end{align*}
+    Thus 
+    \begin{equation*}
+        a \circ c = b \circ c \implies (a \circ c) \circ d = (b \circ c) \circ d \implies a = b
+    \end{equation*}
+\end{proof}
+
+Suppose \(m\) is a positive integer then \(\forall g \in G\) 
+\begin{equation*}
+    g^m =  \underbrace{g \circ \dots \circ g}_m
+\end{equation*}
+and if \(m\) is a negative integer and \(h\) is the inverse of \(g\) then 
+\begin{equation*}
+    g^{m} = \underbrace{g \circ \dots \circ g}_m
+\end{equation*}
+we also define \(g^0 = e\). In this way, for any two integers \(m,n\) we have \(g^{m + n} = g^m \circ g^n\). 
+
+Let \(H\) be a subgroup of \(G\). Left cosets of \(H\) are the sets obtained by multiplying each element of \(H\) by a fixed element \(g \in G\). 
+\begin{equation*}
+    gH = \set<g \circ h>{h \in H}
+\end{equation*}
+Similarly, right cosets of \(H\) are the sets obtained by multiplying \(g\) by each element of \(H\) 
+\begin{equation*}
+    Hg = \set<h \circ g>{h \in H}
+\end{equation*}
+
+\begin{proposition}
+    For two \(g_1,g_2 \in G\) either \(g_1H = g_2H\) or \(g_1H \cap g_2H = \emptyset\).
+\end{proposition}
+\begin{proposition}
+    Suppose \(a \in g_1H, g_2H\). Then, there are \(h_1,h_2 \in H\) such that \(a = g_1 \circ h_1 = g_2 \circ h_2\). It follows that \(g_2 = g_1 \circ h_1 \circ h_2^{-1} = g_1 \circ h_3\) for some \(h_3 \in H\). Thus, any element of \(g_2H\) is in \(g_1H\) and similarly we can show that \(g_1H \subset g_2H\). Therefore, \(g_1H = g_2H\) if they have a common element. 
+\end{proposition}
+
+\begin{proposition}
+    Every left/right costs of \(H\) have the same cardinality as \(H\).
+\end{proposition}
+\begin{proof}
+    Let \(a,b \in gH\) henc there are \(h_1,h_2 \in H\) such that \(a = g\circ h\) and \(b = g \circ h_2\). It follows that \(h_1 = g^{-1} \circ a\) and \(h_2 = g^{-1} \circ b\). By \ref{lm:subtraction} and its converse \(a = b \implies h_1 = h_2\) and hence \(\abs{gH} = \abs{H}\).
+\end{proof}
+The number of left/right cosets of \(H\) is known as the index of \(H\) in \(G\), denoted by \(\squareBracket{G:H}\).
+\begin{theorem}[Largrange's theorem]
+    If \(H\) is subgroup of \(G\) then 
+    \begin{equation*}
+        \abs{G} = \squareBracket{G:H} \abs{H}
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Note that since \(e \in H\) then for all \(g \in G\) there exists a left coset of \(H\) that contains \(g\), namely \(g \in gH\). Since the number of distinct cosets of \(H\) are disjoint and they contain all the element of \(G\) we must have 
+    \begin{equation*}
+        \abs{G} = \squareBracket{G:H} \abs{H}
+    \end{equation*}
+    Equivalently, cosets of \(H\) define an equivalence class on \(G\).
+\end{proof}
+
+For any \(g \in G\) we can form a subgroup of all its integer power \(\angleBracket{g} = \set<g^k>{k \in \Integers}\). Note that, 
+\begin{itemize}
+    \item \(\angleBracket{g}\) is closed under \(\circ\) since \(g^m \circ g^n= g^{m + n} \in \angleBracket{g}\).
+    \item \(g^0 = e \in \angleBracket{g}\).
+    \item For any \(m\), \(g^{-m}\) is the inverse of \(g^m\).
+    \item Associativity holds as it holds for \(G\).
+\end{itemize}
+\begin{proposition}
+    If \(G\) has order of \(m\) then for any \(g \in G\), \(g^m = e\).
+\end{proposition}
+\begin{proof}
+    By Largrange's theorem 
+    \begin{equation*}
+        \abs{G} =  \squareBracket{G:\angleBracket{g}} \abs{\angleBracket{g}}
+    \end{equation*}
+    Let \(\ord g\) be the smallest positive integer \(n\) such that \(g^n = e\). Then \(\ord g = \abs{\angleBracket{g}}\). Therefore, \(\ord g \mid \abs{G} \implies g^m = g^{nk} = e^k = e\).
+\end{proof}
+
+\begin{corollary}
+    Let \(G\) be a finite group with \(\abs{G} > 1\). Let \(n > 0\) be an integer and define \(f_n : G \to G\) by \(\func{f_n}{g} = g^n\). If \(\func{\gcd}{n,m} = 1\) then, \(f_n\) is bijective. Moreover, if \(k \equiv n^{-1} \mod m\) then \(f_k\) is the inverse of \(f_n\).
+\end{corollary}
+\begin{proof}
+    \(f_n\) is bijective if and only if \(f_n\) has an inverse. This implies that second part implies the first part. Then, note that 
+    \begin{align*}
+        &\func{f_k}{\func{f_n}{g}}= \func{f_k}{g^n} = g^{kn} = g^1 = g
+        &\func{f_n}{\func{f_k}{g}}= \func{f_n}{g^k} = g^{nk} = g^1 = g
+    \end{align*}
+\end{proof}
+
+\(\Integers_N^{\ast}\) is the multiplicative group of \(\Integers_N\). In fact, \(\Integers_N^{\ast} = \set<b>{b \in \Integers_n , \func{\gcd}{b,N} = 1}\). Euler toutient function \(\phi\) is defined as \(\func{\phi}{N} = \abs{\Integers_N^{\ast}}\).
+\begin{proposition}
+    If \(N = \prod_{i = 1}^n p_i^{\alpha_i}\) then \(\func{\phi}{N} = \prod_{i =1}^n p_i^{\alpha_i - 1} (p_i - 1)\). 
+\end{proposition}
+\begin{proposition}
+    This is implied by the \ref{th:chinese_remainder} and the fact that \(\func{\phi}{p^{\alpha}} = p^{\alpha - 1} (p - 1)\).
+\end{proposition}
+
+\begin{corollary}
+    Let \(N > 1\) and \(n > 0\) and \(f_n : \Integers_N^{\ast} \to \Integers_N^{\ast}\) defined by \(\func{f_n}{x} = x^n \mod N\). If \(\func{\gcd}{n,\func{phi}{N}} = 1\) then, \(f_n\) is a permutation. Moreover if \(m = n^{-1} \mod \func{\phi}{N}\) then \(f_m\) is the inverse of \(f_n\).
+\end{corollary}
+
+Two groups \(G,H\) are isomorphic, denoted by \(G \simeq H\), if there exists a bijective map \(f : G \to H\) such that 
+\begin{equation*}
+    \func{f}{g_1 \circ_G g_2} = \func{f}{g_1} \circ_H \func{f}{g_2}
+\end{equation*}
+
+\begin{theorem}[Chinese remainder theorem]\label{th:chinese_remainder}
+    Let \(c = ab\) where \(a,b\) are relatively prime then 
+    \begin{equation*}
+        \Integers_c \simeq \Integers_a \times \Integers_b \quad \text{and} \quad \Integers_c^{\ast} \simeq \Integers_a^{\ast}  \times \Integers_b^{\ast}  
+    \end{equation*}
+\end{theorem}
+
+\section{Primes and RSA}
+\begin{algorithm}
+    \DontPrintSemicolon
+    \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+    \Input{\(n,t\)}
+    \Output{A uniform \(n\)-bit prime}
+    \For{\(i = 1 \to t\)}{
+        \(p' \gets \set{0,1}^{n-1}\)\; 
+        \(p = 1 || p'\)
+        \If{\(p\) is prime}{
+            \Return{\(p\)}
+        }
+    }
+    \Return{\(\perp\)}
+    \caption{Generating random primes}
+\end{algorithm}
+To see this algorithm is probabilistic polynomial time in \(n\) we need to know 
+\begin{enumerate}
+    \item prime distribution. to know the probability that an \(n\)-bit uniform integer is prime. 
+    \item Efficient primality test.
+\end{enumerate}
+\subsection{Prime distribution}
+\begin{theorem}[Bertrand's Postulate] 
+    For any \(n > 1\), the fraction of \(n\)-bit integers that are primes is at least \(\frac{1}{3n}\).
+\end{theorem}
+Therefore, by setting \(t = 3n^2\) probability of failing is 
+\begin{equation*}
+    \bracket{1 - \dfrac{1}{3n}}^t = \bracket{\bracket{1 - \dfrac{1}{3n}}^{3n}}^n \leq e^{-n}
+\end{equation*}
+which is negligible. 
+\subsection{Primality test}
+Deterministic poly-time algorithm for primality test exist but they are slower than probabilistic ones. 
+\begin{algorithm}
+    \DontPrintSemicolon
+    \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+    \Input{\(p,t\)}
+    \Output{``prime'' or ``composite''}
+    \If{\(p\) is even}{\Return{``composite''} }
+    \If{\(p\) is perfect power}{\Return{``composite''} }
+    Compute \(r,u\) with \(N - 1 = 2^r u\) where \(r \geq 1\) and \(u\) is odd\;
+    \For{\(i = 1 \to t\)}{
+        \(a \gets \set{1,\dots,p-1}\)\; 
+        \If{\(a\) is a strong witness that \(p\) is composite}{
+            \Return{``composite''}
+        }
+    }
+    \Return{``prime''}
+    \caption{Miller-Robin primality test}
+\end{algorithm}
+
+\begin{theorem}\label{th:Miller-Robin_test}
+    If \(p\) is prime, then Miller-Robin test always outputs ``prime'' and if \(p\) is composite, the algorithm outputs ``composite'' except with probability at most \(2^{-t}\)
+\end{theorem}
+
+First consider the following two lemmas 
+\begin{lemma}
+    If \(H \subset G\), \(H\) is non-empty, and for all \(a,b \in H\), \(a \circ b \in H\). Then, \(H\) is a subgroup of \(G\).
+\end{lemma}
+\begin{lemma}
+    If \(H\) is a strict subgroup of \(G\). Then \(\abs{H} \leq \frac{\abs{G}}{2}\).
+\end{lemma}
+
+We say that \(a\) is a witness that \(N\) is composite if \(a \in \Integers_N^{\ast}\) but \(a^{N - 1} \not \equiv 1 \mod N\). 
+\begin{theorem}
+    Suppose there is a witness that \(N\) is composite. Then, at least half of the element of \(\Integers_{N}^{\ast}\) are witness that \(N\) is composite. 
+\end{theorem}
+
+Carmicheal numbers are composite numbers which do not have any witness. So let \(N - 1 = 2^r u \) where \(r\geq 1\) and \(u\) is odd. Consider the sequence that \(a^u, a^{2^1 u}, \dots , a^{2^{r}u}\) all modulu \(N\). Then, \(a \in \Integers_N^{\ast}\) is a strong witness that \(N\) is composite if
+\begin{enumerate}
+    \item \(a^{u} \not \equiv \pm 1 \mod N\). 
+    \item \(a^{2^i u} \not \equiv -1 \mod N\).
+\end{enumerate}
+If \(a\) is not a strong witness then it is not a witness neither. Thus, if \(a\) is a witness it is also a strong witness. If \(N\) is a prime then \(N\) does not have any strong witness.
+
+\begin{theorem}
+    Let \(N\) be an odd number that is not a prime power. Then, at least half of the elements of \(\Integers_N^{\ast}\) are strong witnesses that \(N\) is composite.
+\end{theorem}
+
+Putting all these theorems and lemmas together gives us a proof for \ref{th:Miller-Robin_test}.

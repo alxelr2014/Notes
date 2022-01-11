@@ -1,0 +1,120 @@
+\chapter{Hash functions}
+\section{Collision Resistance}
+\begin{definition}
+    A hash function with output (digest) length \(l\) is a pair of probabilistic polynomial-time algorithms \((\Gen,H)\) satisfying 
+    \begin{enumerate}
+        \item \(s \gets \func{\Gen}{1^n}\).
+        \item \(x \in \set{0,1}^{\ast}, \func{H^s}{x} \in \set{0,1}^{\func{l}{n}}\)
+    \end{enumerate}
+    If \(H^s\) is only defined for \(x \in \set{0,1}^{\func{l'}{n}}\) and \(\func{l'}{n} > \func{l}{n}\) then \((\Gen,H)\) is a fixed-length function for input length \(l'\). \(H\) is also called a compression function.
+\end{definition}
+The collision finding experiment \(\func{\HashColl_{\Adversary,\Pi}}{n}\):
+\begin{enumerate}
+    \item \(s \gets \func{\Gen}{1^n}\).
+    \item \(\Adversary\) is given \(s\) and outputs \(x,x'\).
+    \item The result of the experiment is 1 if \(\func{H^s}{x} = \func{H^s}{x'}\) and \(x \neq x'\) and 0 otherwise.
+\end{enumerate}
+
+\begin{definition}
+    A hash function \(\Pi = (\Gen,H)\) is collision resistant if for all PPT adversary \(\Adversary\) there is a negligible function such that 
+    \begin{equation*}
+        \prob{\func{\HashColl_{\Adversary,\Pi}}{n} = 1} \neq \func{\negl}{n}
+    \end{equation*}
+\end{definition}
+\begin{definition}
+    Weaker notions of security for a hash function 
+    \begin{itemize}
+        \item second-preimage or target collision resistance assumes that given \(s\) and uniform \(x\) it is infeasible for a PPT adversary \(\Adversary\) to find \(x' \neq x\) such that \(\func{H^s}{x'} = \func{H^s}{x}\).
+        \item preimage resistance assumes that given \(s\) and uniform \(y\) it is infeasible for a PPT adversary to find \(x\) such that \(\func{H^s}{x} = y\) (one-wayness).
+    \end{itemize}
+    collision resistance implies second preimage implies preimage.
+\end{definition}
+
+\section{Domain extension}
+Merkle-Damgard construction 
+Let \((\Gen,h)\) be a fixed-length hash function with input \(2n\) and output \(n\). Construct \((\Gen,H)\) as follow 
+\begin{itemize}
+    \item \(\Gen\) remains unchange.
+    \item Give \(s\) and \(x \in \set{0,1}^{\ast}\) of length \(L < 2^n\). 
+    \begin{enumerate}
+        \item Set \(B = \ceil{\frac{L}{n}}\) and pad \(x\) with zeros so it is a multiple of \(n\). Let \(x = x_1\dots x_B\) and \(x_{B+1} = L\) as \(n\)-bit binary number. 
+        \item Set \(z_0 = 0^n\) (IV can be some other constant)
+        \item For \(i = 1, \dots, B+1\) computer \(z_i = \func{h^s}{z_{i-1}||x_i}\).
+        \item Output \(z_{B+1}\). 
+    \end{enumerate}
+\end{itemize}
+
+\begin{theorem}
+    If \((\Gen,h)\) is a collision resistant hash function then \((\Gen,H)\) its Merkle-Damgard transform is collision resistant as well.
+\end{theorem}
+\section{Hash and message authentication}
+\subsection{Hash and MAC}
+Construction: 
+Let \(\Pi_M = (\Gen,\Mac,\Vrfy)\) be MAC for messages of length \(\func{l}{n}\) and let \(\Pi_H = (\Gen_H,H)\) be a hash function with output length \(\func{l}{n}\). Construct \(\Pi = (\Gen',\Mac',\Vrfy')\) for arbitrary length messages as follows 
+\begin{description}
+    \item [\(\Gen'\)] \(k \gets \func{\Gen}{1^n}\) and \(s \gets \func{\Gen_H}{1^n}\) then return \(k' = \angleBracket{k,s}\).
+    \item [\(\Mac'\)] takes \(k'\) and \(m \in \set{0,1}^{\ast}\) then \(t \gets \func{\Mac_{k}}{\func{H^s}{m}}\).
+    \item [\(\Vrfy'\)] on input \(k',m \in \set{0,1}^{\ast},t\) 
+    \begin{equation*}
+        \func{\Vrfy'_{k'}}{m,t} = \func{\Vrfy_k}{\func{H^s}{m},t}
+    \end{equation*}
+\end{description}
+\begin{theorem}
+    If \(\Pi_M\) is a secure MAC and \(\Pi_H\) is a collision resistant hash function then, the above construction is a secure MAC.
+\end{theorem}
+
+\subsection{HMAC}
+Construction:
+Let \((\Gen_H,H)\) be a hash function constructed by applying Merkle-Damgard transform to a compression function \(\Gen_H,h\) taking input of length \(n + n'\). Let \(opad\) and \(ipad\) be fixed constants of length \(n'\).
+\begin{description}
+    \item [\(\Gen\)] Let \(s \gets \func{\Gen_H}{1^n}\) and \(k\) is chosen uniformly from \(\set{0,1}^{n'}\) then, output \(\angleBracket{k,s}\).
+    \item [\(\Mac\)] on input \(\angleBracket{k,s}\) and \(m \in \set{0,1}^{\ast}\) output 
+    \begin{equation*}
+        t = \func{H^s}{\bracket{k \oplus opad} || \func{H^s}{\bracket{k \oplus ipad }|| m}}
+    \end{equation*}
+    \item [\(\Vrfy\)] is the canonical verify on \(\angleBracket{k,s},m,t\).
+\end{description}
+Let 
+\begin{equation*}
+    \func{G^s}{k} = \func{h^s}{IV || \bracket{k \oplus opad} || \func{h^s}{IV ||\bracket{k \oplus ipad}}} = k_{out} || k_{in}
+\end{equation*}
+If \(G^s\) is a pseudorandom generator for \(s\) then, \(k_{out}\) and \(k_{in}\) can be treated as independent and uniform keys when \(k\) is uniform.
+
+\begin{theorem}
+    Assume \(G^s\) is a pseudorandom generator for any \(s\), 
+    \begin{equation*}
+        \func{\Mac_k}{y} = \func{h^s}{k||\hat{y}}
+    \end{equation*}
+    is a secure fixed-length MAC, and \((\Gen_H,H)\) is weakly collision resistant. Then, HMAC is a secure MAC for arbitrary-length messages.
+\end{theorem}
+\section{Generic Attacks}
+\subsection{Birthday attacks for find collisions}
+Let \(H: \set{0,1}^{\ast} \to \set{0,1}^l\) be a hash function. \(y_1, \dots , y_q\) are chosen uniformly from \(\set{1,\dots , N}\) then, \(\prob{collision} = \frac{1}{2}\) when \(q = \bigTheta{\sqrt{N}}\).
+small space birthday attack pg 168,169 and finding meaningful collisions. 
+
+\section{Random-oracle model}
+Instead of having keyed hash function, we use a random oracle as a substitute. This is purely theoretical. In random-oracle model we assume that 
+\begin{enumerate}
+    \item \(H\) is chosen randomly ``on the fly''.
+    \item Nobody knows what queries have already been made except those made by themselves.
+\end{enumerate}
+This model has the following useful properties 
+\begin{enumerate}
+    \item If \(x\) has not been queried  to \(H\), then \(\func{H}{x}\) is uniform.
+    \item If \(\Adversary\) queries \(x\) to \(H\), the reduction can see this query and learn \(x\), ``extractablility''.
+    \item The reduction can set the value of \(\func{H}{x}\) to a value of its choice as long as this value is correctly distribute. ``programmablility''
+\end{enumerate}
+\subsection{Simple illustration of attacks}
+Suppose oracle gets \(l_{in}\)-bit input and gives \(l_{out}\)-bit output, where \(l_{in},l_{out} < n\). 
+\begin{itemize}
+    \item For \(l_{out} > l_{in}\) random oracle can be used as a pseudorandom generator.
+    \item For \(l_{out} < l_{in}\) random oracle is a collision resistant hash function. read Appendix A4 
+\end{itemize}
+Construction of PRF from random oracle: Suppose \(l_{in} = 2n\) and \(l_{out} = n\). Then, \(\func{F_k}{x} = \func{H}{k||X}\) is a PRF. Above claims work even when the adversary is computationally unbounded but only makes polynomial calls to oracle. 
+
+\section{Addition Application of hash functions}
+\subsection{Fingerprinting and duplication}
+\subsection{Merkle Trees}
+\begin{theorem}
+    Let \(\Gen_H,H\) be collision resistent. Then, \((\Gen_H,\calM\calT_t)\) is also collision resistant for fixed \(t\).
+\end{theorem}
