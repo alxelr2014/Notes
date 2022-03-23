@@ -61,14 +61,14 @@ Note that, if the least upper bound exists, it must be unique.
     For convenience we let \(A\) represent the pair \((A,B)\) as \(A\) completely determines \(B\).
     We define \(+\), \(\cdot\), and \( > \) as follows:
     \begin{flalign*}
-        A + B &= \{ a + b : a \in A, b\in B\} &&\\
-        \DSZero &= \{ a : a < 0\}&& \\
-        -A &= \{a' : \forall a \in A, a' < -a \}&&
+        A + B &= \set< a + b >{ a \in A, b\in B} &&\\
+        \textcal{0} &= \set< a>{ a < 0}&& \\
+        -A &= \set<a'>{\forall a \in A, a' < -a }&&
         \intertext{For \(\cdot\), we first take two set \(A\) and \(B\) that have some positive elements.}
-        A \cdot B &= \{ a \cdot b : a \in A \land a \leq 0, b\in B \land b \leq 0 \} \: \cup \: \DSZero &&\\
+        A \cdot B &= \set< a \cdot b >{a \in A \land a \leq 0, b\in B \land b \leq 0 } \: \cup \: \textcal{0} &&\\
         \intertext{If \(A\) or \(B\) did not have any positive elements, we first take the negative of the set, and then multiply the two sets and take the negative of the product. Similarly, we define the reciprocal of \(A\) if \(A\) has a positive element.}
-        \DSOne &= \{a : a < 1\}&&\\
-        A^{-1} &= \{ a' :\forall a \in A, a > 0, a' < \dfrac{1}{a} \} &&
+        \textcal{1} &= \set<a >{ a < 1}&&\\
+        A^{-1} &= \set< a' >{\forall a \in A, a > 0, a' < \dfrac{1}{a} } &&
         \intertext{Lastly:}
         A &> B \text{ if } A \supset B &&
     \end{flalign*}
@@ -76,13 +76,13 @@ Note that, if the least upper bound exists, it must be unique.
 
     The set of real numbers is unique in sense that if \((\Reals, + , \cdot, >)\) and \((\Reals',+',\cdot', >')\) both satisify the axioms, then there exists bijective mapping \(\alpha : \Reals \to \Reals'\) such that:
     \begin{flalign*}
-        \alpha(x + y) &= \alpha(x) +' \alpha(y) &&\\
-        \alpha(0) &= 0'&&\\
-        \alpha(x\cdot y) &= \alpha(x)\cdot'\alpha(y)&&\\
-        \alpha(1) &= 1' &&\\
-        x < y &\iff \alpha(x) <' \alpha(y) &&
+        \func{\alpha}{x + y} &= \func{\alpha}{x} +' \func{\alpha}{y} &&\\
+        \func{\alpha}{0} &= 0'&&\\
+        \func{\alpha}{x\cdot y} &= \func{\alpha}{x}\cdot'\func{\alpha}{y}&&\\
+        \func{\alpha}{1} &= 1' &&\\
+        x < y &\iff \func{\alpha}{x} <' \func{\alpha}{y} &&
     \end{flalign*}
-    Lastly, if \(S\) is a non-empty set in \(\Reals\) and \( \alpha(S) = \{\alpha(x) : x \in S\} \), then \(S\) is has an upper bound if and only if \(\alpha(S)\) has an upper bound. Furthermore \( \alpha(\sup{S}) = \sup{\alpha(S)}\).
+    Lastly, if \(S\) is a non-empty set in \(\Reals\) and \( \func{\alpha}{S} = \set<\func{\alpha}{x}>{ x \in S} \), then \(S\) is has an upper bound if and only if \(\func{\alpha}{S}\) has an upper bound. Furthermore \( \func{\alpha}{\sup{S}} = \sup{\func{\alpha}{S}}\).
 \end{proof}
 \begin{results}
     \leavevmode
@@ -93,7 +93,7 @@ Note that, if the least upper bound exists, it must be unique.
               then \(x = 0\).
         \item (Archimedean Property) For all \(a,b > 0\) there exists \(n \in \Naturals\):
               \[ na > b\]
-        \item Consider \(I_n = [a_n,b_n] \;\forall n \in \Naturals \) such that \(I_1 \supset I_2 \supset \dots\;\). Then \(\cap{I_n}\) is not empty. Moreover, if for each \(e > 0\) there exists \( n\) such that \(b_n - a_n < e\), then \(\cap{I_n}\) is a single point.
+        \item Consider \(I_n = \clcl{a_n}{b_n} \;\forall n \in \Naturals \) such that \(I_1 \supset I_2 \supset \dots\;\). Then \(\cap{I_n}\) is not empty. Moreover, if for each \(e > 0\) there exists \( n\) such that \(b_n - a_n < e\), then \(\cap{I_n}\) is a single point.
         \item \(\sqrt{2} \in \Reals\). In addition, for all \(p > 0\), there is a positive real number \(q \) such that \(q^2 = p\)
     \end{enumerate}
 \end{results}
@@ -107,9 +107,9 @@ Note that, if the least upper bound exists, it must be unique.
     \item Show that if \(x > -1\) and \(n \in \Naturals\):
           \[(1 + x)^n \geq 1 + nx\]
           and equality only holds when \(n = 1\).
-    \item Let \(F_p = \{ 0, 1, \dots, p -1 \}\) where \(p\) is a prime number. Define \(+\) and \(\cdot\) to be the modular addition and product modulus \(p\), respectively. Investigate whether if \(F_p\) can be ordered.
+    \item Let \(F_p = \set{ 0, 1, \dots, p -1 }\) where \(p\) is a prime number. Define \(+\) and \(\cdot\) to be the modular addition and product modulus \(p\), respectively. Investigate whether if \(F_p\) can be ordered.
     \item Consider the set of all rational polynomials \(\Rationals[x]\):
-          \[\Rationals[x] = \left\{ \frac{a_m x^m + \dots + a_1 x + a_0}{b_n x^n + \dots + b_1 x + b_0}: a_i, b_j \in \Rationals, b_n \neq 0\right\}\]
-          Show that \(\Rationals[x]\) under the normal addition and multiplication is a field. Furthermore, show that \(\Rationals^+[x] = \{ q \in \Rationals[x] : a_m \cdot b_n > 0 \}\) constitutes an ordering on \(\Rationals[x]\).
+          \[\Rationals[x] = \set< \frac{a_m x^m + \dots + a_1 x + a_0}{b_n x^n + \dots + b_1 x + b_0}>{ a_i, b_j \in \Rationals, b_n \neq 0}\]
+          Show that \(\Rationals[x]\) under the normal addition and multiplication is a field. Furthermore, show that \(\Rationals^+[x] = \set< q \in \Rationals[x] >{ a_m \cdot b_n > 0 }\) constitutes an ordering on \(\Rationals[x]\).
 \end{enumerate}
 

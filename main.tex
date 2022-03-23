@@ -31,17 +31,26 @@
 \usepackage{english-theorems}
 \setcounter{tocdepth}{1}
 
+\newcommand{\scdot}{\; \cdot \;}
+
+\newcommand*{\textcal}[1]{%
+  % family qzc: Font TeX Gyre Chorus (package tgchorus)
+  % family pzc: Font Zapf Chancery (package chancery)
+  \textit{\Large{{\fontfamily{pzc}\selectfont#1}}}%
+}
+
 \begin{document}
 \tableofcontents
 \clearpage
 \ifodd\value{page}\else
 \thispagestyle{empty}
 \fi
-%\input{Chapters/RealNumbers.tex}
-%\input{Chapters/MetricSpaces}
+\input{Chapters/RealNumbers.tex}
+\input{Chapters/MetricSpaces}
 %\input{Chapters/Differentiation}
 %\input{Chapters/Integral}
 %\input{Chapters/Series}
 %\input{Chapters/FunctionSpaces}
-\input{Chapters/Multivariable.tex}
+
+% \input{Chapters/Multivariable.tex}
 \end{document}

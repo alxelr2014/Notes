@@ -2,38 +2,38 @@
 \subsection{Vector Spaces}
 
 \begin{definition}[Normed vector space]
-    Let \(V\) be a vector space. A \textbf{norm} is a real valued function \(\norm: V \to \Reals\) which has the following properties
+    Let \(V\) be a vector space. A \textbf{norm} is a real valued function \(\norm{ \scdot }: V \to \Reals\) which has the following properties
     \begin{enumerate}
-        \item \(\forall x \in V, \; \norm[x] > 0\).
-        \item \(\norm[x] = 0 \implies x = 0\).
-        \item \(\forall x \in V \; \forall \alpha \in \Field, \; \norm[\alpha x] = \abs[\alpha] \norm[x]\).
-        \item \(\forall x,y \in V \; \norm[x+y] \leq \norm[x] + \norm[y]\).
+        \item \(\forall x \in V, \; \norm{x} > 0\).
+        \item \(\norm{x} = 0 \implies x = 0\).
+        \item \(\forall x \in V \; \forall \alpha \in \Field, \; \norm{\alpha x} = \abs{\alpha} \norm{x}\).
+        \item \(\forall x,y \in V \; \norm{x+y} \leq \norm{x} + \norm{y}\).
     \end{enumerate}
 \end{definition}
 
-Each normed vector space induces a metric space \(\metricSpace{V}{d}\) where \(\func{d}{x,y} = \norm[y - x]\).
+Each normed vector space induces a metric space \(\metricSpace{V}{d}\) where \(\func{d}{x,y} = \norm{y - x}\).
 
 \begin{theorem}
-    In every normed space \(\normedSpace{V}{\norm}\) we have
+    In every normed space \(\normedSpace{V}{\norm{\scdot}}\) we have
     \begin{equation*}
-        \abs[ {\norm[v] - \norm[w]}] \leq \norm[v - w]
+        \abs{ {\norm{v} - \norm{w}}} \leq \norm{v - w}
     \end{equation*}
     Hence the norm is Lipschitz continuous.
 \end{theorem}
 
 
 \begin{definition}
-    Assume \(V\) is a vector space and let \(\norm_1, \; \norm_2\) be two norms for \(V\). They are said to be equivalent when
+    Assume \(V\) is a vector space and let \(\norm{\scdot}_1, \; \norm{\scdot}_2\) be two norms for \(V\). They are said to be equivalent when
     \begin{equation*}
-        \exists c_1,c_2 > 0 \; \forall x : \qquad c_1 \norm[x]_1 \leq \norm[x]_2 \leq c_2 \norm[x]
+        \exists c_1,c_2 > 0 \; \forall x : \qquad c_1 \norm{x}_1 \leq \norm{x}_2 \leq c_2 \norm{x}
     \end{equation*}
 \end{definition}
 
 To check if the above definition is indeed an equivalence relation, we must show that following:
 \begin{description}
-    \item [Reflexive] \(\norm_1 \sim \norm_1\).
-    \item [Symmetric] \(\norm_1 \sim \norm_2 \implies \norm_2 \sim \norm_1\).
-    \item [Transitive] \( \norm_1 \sim \norm_2 , \; \norm_2 \sim \norm_3 \implies \norm_1 \sim \norm_3\).
+    \item [Reflexive] \(\norm{\scdot}_1 \sim \norm{\scdot}_1\).
+    \item [Symmetric] \(\norm{\scdot}_1 \sim \norm{\scdot}_2 \implies \norm{\scdot}_2 \sim \norm{\scdot}_1\).
+    \item [Transitive] \( \norm{\scdot}_1 \sim \norm{\scdot}_2 , \; \norm{\scdot}_2 \sim \norm{\scdot}_3 \implies \norm{\scdot}_1 \sim \norm{\scdot}_3\).
 \end{description}
 
 \begin{remark}
@@ -47,11 +47,11 @@ To check if the above definition is indeed an equivalence relation, we must show
 \begin{proof}
     Let \(\norm\) be an arbitrary norm on \(V\) and \(\{e_1, e_2, \dots , e_n\} \) be a basis of \(V\). Let \(\norm_2\) be \(L_2\)-norm (Euclidean norm). It will suffice to show \(\norm \sim \norm_2\). Let
     \begin{equation*}
-        M = \max \! \left( \norm[e_1], \dots , \norm[e_n] \right)
+        M = \max \! \left( \norm{e_1}, \dots , \norm{e_n} \right)
     \end{equation*}
     Take \(x \in V\), writing \(x = \sum_{i = 1}^n {\xi_i e_i}\) we have:
     \begin{equation*}
-        \norm[x] = \norm[\sum_{i = i}^n {\xi_i e_i}] \leq \sum_{i = 1}^n \abs[\xi_i] \norm[e_i] \leq M \sqrt{n} \norm[x]_2
+        \norm{x} = \norm{\sum_{i = i}^n {\xi_i e_i}} \leq \sum_{i = 1}^n \abs{\xi_i} \norm{e_i} \leq M \sqrt{n} \norm{x}_2
     \end{equation*}
     Taking \(c_2 = M \sqrt{n}\) proves the right inequality. For the left inequality we need the following lemma
     \begin{lemma} \label{lm:ContinuityOfNorm}
@@ -59,15 +59,15 @@ To check if the above definition is indeed an equivalence relation, we must show
     \end{lemma}
 
     \begin{prooflemma}
-        Let \(x_0 \in V\) and \(M\) be defined as above. For any \(\epsilon > 0\) consider \(\delta = \frac{\epsilon}{M \sqrt{n}}\) then if \(\norm[x - x_0]_2 < \delta\)
+        Let \(x_0 \in V\) and \(M\) be defined as above. For any \(\epsilon > 0\) consider \(\delta = \frac{\epsilon}{M \sqrt{n}}\) then if \(\norm{x - x_0}_2 < \delta\)
         \begin{equation*}
-            \abs[{\norm[x] - \norm[x_0]}] \leq \norm[x - x_0] \leq M \sqrt{n} \norm[x - x_0] \leq \epsilon
+            \abs{{\norm{x} - \norm{x_0}}} \leq \norm{x - x_0} \leq M \sqrt{n} \norm{x - x_0} \leq \epsilon
         \end{equation*}
     \end{prooflemma}
 
-    Now consider the sphere of radius \(r = 1\) centered at \(0\), \(\func{S_1}{0} = S_1 = \{x \in V : \norm[x]_2 = 1\}\). One can show that \(S\) is compact (\Cref{th:CompactnessOfFiniteDimensional}). Therefore, \(\norm[x]\) assumes its minimum on \(S\). Let \( a = \norm[x_0]\) be the minimum. Since \(0 \notin S\) then \(a > 0\). By letting \(y = x / \norm[x]_2 \), we have \(y \in S\) and thus \(a \leq \norm[y]\) which is
+    Now consider the sphere of radius \(r = 1\) centered at \(0\), \(\func{S_1}{0} = S_1 = \{x \in V : \norm{x}_2 = 1\}\). One can show that \(S\) is compact (\Cref{th:CompactnessOfFiniteDimensional}). Therefore, \(\norm{x}\) assumes its minimum on \(S\). Let \( a = \norm{x_0}\) be the minimum. Since \(0 \notin S\) then \(a > 0\). By letting \(y = x / \norm{x}_2 \), we have \(y \in S\) and thus \(a \leq \norm{y}\) which is
     \begin{equation*}
-        a \norm[x]_2 \leq \norm[x]
+        a \norm{x}_2 \leq \norm{x}
     \end{equation*}
     Taking \(c_1 = a\) proves the theorem.
 \end{proof}
@@ -86,24 +86,24 @@ To check if the above definition is indeed an equivalence relation, we must show
     \Cref{it:COFD_2} \(\implies\) \Cref{it:COFD_3}: Trivial.
 
     \Cref{it:COFD_3} \(\implies\) \Cref{it:COFD_1}: Requires the following lemma:
-    \begin{lemma} [Riesz's lemma] \label{lm:RieszsLemma}
-        If \(V\) is a normed vector space and \(W\) is a closed proper subspace of \(V\) and \(\alpha \in \Reals\) with \(0 < \alpha < 1\), then there exists an \(v \in V\) with \(\norm[v] = 1\) such that \(\norm[v- w] \geq \alpha \) for all \(w \in W\)
+    \begin{lemma} [Riesz's lemma} \label{lm:RieszsLemma}
+        If \(V\) is a normed vector space and \(W\) is a closed proper subspace of \(V\) and \(\alpha \in \Reals\) with \(0 < \alpha < 1\), then there exists an \(v \in V\) with \(\norm{v} = 1\) such that \(\norm{v- w} \geq \alpha \) for all \(w \in W\)
     \end{lemma}
-    Now suppose \(V\) were to be an infinite dimensional vector space. Then by the \Cref{lm:RieszsLemma} there is sequence of unit vectors \({x_n}\) such that \(\forall m,n \in \Naturals, \; \norm[x_n - x_m] > \alpha\) for some \(0 <\alpha < 1\). Which implies that no subsequence of \(\set{x_n}\) is convergent and hence the closed unit ball can not be compact.
+    Now suppose \(V\) were to be an infinite dimensional vector space. Then by the \Cref{lm:RieszsLemma} there is sequence of unit vectors \({x_n}\) such that \(\forall m,n \in \Naturals, \; \norm{x_n - x_m} > \alpha\) for some \(0 <\alpha < 1\). Which implies that no subsequence of \(\set{x_n}\) is convergent and hence the closed unit ball can not be compact.
 \end{proof}
 
 \begin{example}
-    The closed unit ball in the infinite dimensional vector space \(\func{C}{\clcl{0}{1},\Reals}\) with \(\norm[f] = \max \func{f}{x}\) is not compact.  Take \(\func{f_n}{x} = x^n\). Obviously \(\norm[f_n] = 1\), however \(f_n\) doesn't uniformly converge and hence \(f_n\) doesn't have a limit in \(\func{C}{\clcl{0}{1},\Reals}\) with the \(\max\) norm. Consider the following norm
+    The closed unit ball in the infinite dimensional vector space \(\func{C}{\clcl{0}{1},\Reals}\) with \(\norm{f} = \max \func{f}{x}\) is not compact.  Take \(\func{f_n}{x} = x^n\). Obviously \(\norm{f_n} = 1\), however \(f_n\) doesn't uniformly converge and hence \(f_n\) doesn't have a limit in \(\func{C}{\clcl{0}{1},\Reals}\) with the \(\max\) norm. Consider the following norm
     \begin{equation*}
-        \norm[f]_I = \int_0^1 \abs[\func{f}{x}] \diffOperator x
+        \norm{f}_I = \int_0^1 \abs{\func{f}{x}} \diffOperator x
     \end{equation*}
     Note that \(\norm_I\) and \(\norm_{\max} \) are not equivalent. Let \(\func{g}{x} = 0\) for all \(x \in \clcl{0}{1}\). Then
     \begin{equation*}
-        \norm[f_n - g]_I = \dfrac{1}{n+1} \to 0 \quad \text{as} n \to \infty.
+        \norm{f_n - g}_I = \dfrac{1}{n+1} \to 0 \quad \text{as} n \to \infty.
     \end{equation*}
 \end{example}
 
-\begin{definition}[Banach space]
+\begin{definition}[Banach space}
     A normed vector space \(V\) that is complete is a \textbf{Banach space}. A \textbf{Hilbert Space} is a Banach space whose norm is induced by an inner product.
 \end{definition}
 
@@ -113,9 +113,9 @@ To check if the above definition is indeed an equivalence relation, we must show
 \end{proposition}
 
 \begin{proof}
-    Let \(\set{v_i} \in V\) be a Cauchy sequence, and \(\set{e_1, \dots ,e_n}\) be a basis for \(V\) with the norm \(L^1\), that is if \(v = (\xi^1 , \dots ,\xi^n)\) then \(\norm[v] = \sum_{m = 1}^n \abs[\xi^m]\). Then if \(v_i = (\xi^1_i , \dots , \xi^n_i)\)
+    Let \(\set{v_i} \in V\) be a Cauchy sequence, and \(\set{e_1, \dots ,e_n}\) be a basis for \(V\) with the norm \(L^1\), that is if \(v = (\xi^1 , \dots ,\xi^n)\) then \(\norm{v} = \sum_{m = 1}^n \abs{\xi^m}\). Then if \(v_i = (\xi^1_i , \dots , \xi^n_i)\)
     \begin{equation*}
-        \abs[\xi^m_i - \xi^m_j] \leq \sum_{m=1}^n \abs[\xi^m_i - \xi^m_j] \leq \norm[v_i - v_j] < \epsilon
+        \abs{\xi^m_i - \xi^m_j} \leq \sum_{m=1}^n \abs{\xi^m_i - \xi^m_j} \leq \norm{v_i - v_j} < \epsilon
     \end{equation*}
     then \(\set{\xi^m_i}_i\) are a Cauchy sequence in \(\Field\) and hence they converge \(\xi^m_i \to \xi^m\). Then, clearly \(v_i \to v = (\xi^1 , \dots , \xi^n)\) as each component converges.
 \end{proof}
@@ -138,80 +138,80 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 \begin{definition}
     Let \(\normedSpace{V}{\norm_V}\) and \(\normedSpace{W}{\norm_W}\) be normed spaces then, a linear transformation \(T : V \to W\) is \textbf{bounded} if there exists a constant \(C > 0\) such that
     \begin{equation*}
-        \norm[Tv]_W \leq C \norm[v]_V
+        \norm{Tv}_W \leq C \norm{v}_V
     \end{equation*}
-    for all \(v \in V\). We denote the set of all linear map from \(V \to W\) as \(\func{\CalL}{V,W}\) and the set of all bounded linear maps as \(\func{\CalB}{V,W}\). If \(T \in \func{\CalL}{V,W}\) is bijective such that \(T^{-1} \in \func{\CalL}{V,W}\), then \(T\) is called an \textbf{isomorphism} and \(V,W\) are \textbf{isomorphic}. An operator \(T \in \func{\CalL}{V,W}\) is called \textbf{isometric} if \(\norm[Tv]_W = \norm[v]_V\) for all \(v \in V\).
+    for all \(v \in V\). We denote the set of all linear map from \(V \to W\) as \(\func{\CalL}{V,W}\) and the set of all bounded linear maps as \(\func{\CalB}{V,W}\). If \(T \in \func{\CalL}{V,W}\) is bijective such that \(T^{-1} \in \func{\CalL}{V,W}\), then \(T\) is called an \textbf{isomorphism} and \(V,W\) are \textbf{isomorphic}. An operator \(T \in \func{\CalL}{V,W}\) is called \textbf{isometric} if \(\norm{Tv}_W = \norm{v}_V\) for all \(v \in V\).
 \end{definition}
 
 \begin{definition}
     If \(\normedSpace{V}{\norm_V},\normedSpace{W}{\norm_W}\) are normed spaces then the \textbf{operator norm} of a linear transformation \(T : V \to W\) is
     \begin{equation*}
-        \norm[T] = \sup \left\{\dfrac{\norm[Tv]_W}{\norm[v]_V} \middle| v \neq 0 \right\}
+        \norm{T} = \sup \left\{\dfrac{\norm{Tv}_W}{\norm{v}_V} \middle| v \neq 0 \right\}
     \end{equation*}
 \end{definition}
 
 \begin{proposition}
     Let \(T : U \to V\) and \(T' : V \to W\) be two linear transformations.
     \begin{equation*}
-        \norm[T' \circ T] \leq \norm[T] \norm[T']
+        \norm{T' \circ T} \leq \norm{T} \norm{T'}
     \end{equation*}
 \end{proposition}
 
 \begin{proof}
     for an arbitrary non-zero \(x \in U\)
     \begin{equation*}
-        \norm[\func{T' \circ T}{x}]_W \leq \norm[T'] \norm[Tx]_V \leq \norm[T'] \norm[T] \norm[x]_U
+        \norm{\func{T' \circ T}{x}}_W \leq \norm{T'} \norm{Tx}_V \leq \norm{T'} \norm{T} \norm{x}_U
     \end{equation*}
     which implies
     \begin{equation*}
-        \norm[T' \circ T] \leq \norm[T] \norm[T']
+        \norm{T' \circ T} \leq \norm{T} \norm{T'}
     \end{equation*}
 \end{proof}
 
 \begin{theorem} \label{th:linearTransformation}
     Let \(\normedSpace{V}{\norm_V}\) and \(\normedSpace{W}{\norm_W}\) be normed spaces and \(T: V \to W\) be a linear transformation. The following are equivalent
     \begin{enumerate}
-        \item \(\norm[T]\) is finite. \label{it:LT_1}
+        \item \(\norm{T}\) is finite. \label{it:LT_1}
         \item \(T\) is bounded. \label{it:LT_2}
         \item \(T\) is Lipschitz continuous. \label{it:LT_3}
         \item \(T\) is continuous at a point. \label{it:LT_4}
-        \item \(\sup_{\norm[v]_V = 1} \norm[Tv]_W < \infty\). \label{it:LT_5}
+        \item \(\sup_{\norm{v}_V = 1} \norm{Tv}_W < \infty\). \label{it:LT_5}
     \end{enumerate}
 \end{theorem}
 
 \begin{proof}
     \cref{it:LT_1} \(\Rightarrow\) \cref{it:LT_2}: Obviously
     \begin{align*}
-        \dfrac{\norm[Tv]_W}{\norm[v]_V} & \leq \norm[T]            \\
-        \implies \norm[Tv]_W            & \leq \norm[T] \norm[v]_V
+        \dfrac{\norm{Tv}_W}{\norm{v}_V} & \leq \norm{T}            \\
+        \implies \norm{Tv}_W            & \leq \norm{T} \norm{v}_V
     \end{align*}
     note that if \(v = 0\) then \(Tv = 0\) as well and thus the last inequality holds for all \(v \in V\).
 
     \cref{it:LT_2} \(\Rightarrow\) \cref{it:LT_3}:
     \begin{equation*}
-        \norm[Tv - Tu]_W = \norm[T(u - v)]_W \leq C \norm[u - v]_V
+        \norm{Tv - Tu}_W = \norm{T(u - v)}_W \leq C \norm{u - v}_V
     \end{equation*}
 
     \cref{it:LT_3} \(\Rightarrow\) \cref{it:LT_4}: Trivial.
 
     \cref{it:LT_4} \(\Rightarrow\) \cref{it:LT_5}: Let \(T\) be continuous at \(u \in V\). Then there is  a \(\delta > 0 \) such that
     \begin{equation*}
-        \norm[v-u] < \delta \implies \norm[Tv - Tu]_W = \norm[T(v-u)]_W < 1
+        \norm{v-u} < \delta \implies \norm{Tv - Tu}_W = \norm{T(v-u)}_W < 1
     \end{equation*}
     Now for an arbitrary non-zero \(v\) we have
     \begin{equation*}
-        \norm[\left( \dfrac{\delta v}{2\norm[v]_V} + u \right) - u]_V < \delta
+        \norm{\left( \dfrac{\delta v}{2\norm{v}_V} + u \right) - u}_V < \delta
     \end{equation*}
     Therefore
     \begin{align*}
-         & \norm[\func{T}{\dfrac{\delta v}{2\norm[v]_V}}]_W  < 1         \\
-         & \norm[\func{T}{\dfrac{v}{\norm[v]_V}}]_W  < \dfrac{2}{\delta}
+         & \norm{\func{T}{\dfrac{\delta v}{2\norm{v}_V}}}_W  < 1         \\
+         & \norm{\func{T}{\dfrac{v}{\norm{v}_V}}}_W  < \dfrac{2}{\delta}
     \end{align*}
 
     \cref{it:LT_5} \(\Rightarrow\) \cref{it:LT_1}: Let \(v \in V\) be an arbitrary vector. Then
     \begin{align*}
-                 & \sup \norm[\func{T}{\dfrac{v}{\norm[v]_V}}]_W < \infty \\
-        \implies & \sup \dfrac{\norm[Tv]_W}{\norm[v]_W} < \infty
+                 & \sup \norm{\func{T}{\dfrac{v}{\norm{v}_V}}}_W < \infty \\
+        \implies & \sup \dfrac{\norm{Tv}_W}{\norm{v}_W} < \infty
     \end{align*}
 
 \end{proof}
@@ -224,11 +224,11 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 \end{theorem}
 
 \begin{proof}
-    Since \(V\) is finite dimensional, according to \Cref{th:normsEquivalent}, any two norms are equivalent. Hence, take \(\norm_2\) to be Euclidean norm over a basis \(\{e_1, \dots , e_n\}\). Let \(x\) be such that \(\norm[x]_2 < \delta\) for some \(\delta > 0\). Therefore, \(\abs[\xi_i] < \delta^2\)
+    Since \(V\) is finite dimensional, according to \Cref{th:normsEquivalent}, any two norms are equivalent. Hence, take \(\norm_2\) to be Euclidean norm over a basis \(\{e_1, \dots , e_n\}\). Let \(x\) be such that \(\norm{x}_2 < \delta\) for some \(\delta > 0\). Therefore, \(\abs{\xi_i} < \delta^2\)
     \begin{equation*}
-        \norm[Tx]_W = \norm[\sum_{i = 1}^n \xi_i \func{T}{e_i}]_W \leq \sum_{i = 1}^n \abs[\xi_i] \norm[\func{T}{e_i}]_W \leq \delta^2 K
+        \norm{Tx}_W = \norm{\sum_{i = 1}^n \xi_i \func{T}{e_i}}_W \leq \sum_{i = 1}^n \abs{\xi_i} \norm{\func{T}{e_i}}_W \leq \delta^2 K
     \end{equation*}
-    where \(K = \max \norm[\func{T}{e_i}]_W \). By letting \(\delta = \sqrt{\frac{\epsilon}{K}}\) we proved continuity at \(0\) and hence the continuity by \Cref{th:linearTransformation}.
+    where \(K = \max \norm{\func{T}{e_i}}_W \). By letting \(\delta = \sqrt{\frac{\epsilon}{K}}\) we proved continuity at \(0\) and hence the continuity by \Cref{th:linearTransformation}.
 \end{proof}
 
 Another proof of \Cref{pr:FiniteIsBanach}
@@ -236,7 +236,7 @@ Another proof of \Cref{pr:FiniteIsBanach}
 \begin{proof}
     Let \(\{e_1, \dots , e_n\}\) be a basis for \(V\) and \(\phi : V \to \Field^n\) be the representation map for the basis. Since \(\phi\) is a linear map and a bijection then \(\phi\) is homeomorphism. Consider a Cauchy sequence \(\set{v_k} \in V\) and let \(x_k = \func{\phi}{v_k}\) then by continuity of \(\phi\) and \(\phi^{-1}\) we have
     \begin{equation*}
-        \abs[x_i - x_j] = \abs[\func{\phi}{v_i} - \func{\phi}{v_j}] \leq \norm[\phi] \norm[v_i - v_j] \leq \norm[\phi] \norm[\func{\phi^{-1}}{x_i} - \func{\phi^{-1}}{x_j}] \leq \norm[\phi] \norm[\phi^{-1}] \abs[x_i - x_j]
+        \abs{x_i - x_j} = \abs{\func{\phi}{v_i} - \func{\phi}{v_j}} \leq \norm{\phi} \norm{v_i - v_j} \leq \norm{\phi} \norm{\func{\phi^{-1}}{x_i} - \func{\phi^{-1}}{x_j}} \leq \norm{\phi} \norm{\phi^{-1}} \abs{x_i - x_j}
     \end{equation*}
     hence \(\set{x_k}\) are Cauchy in \(\Field^n\) which by completeness of \(\Field\) implies that they are convergent, \(x_k \to x\). Let \(v = \func{\phi^{-1}}{x}\) then by the right side of the inequality \(v_k \to v\).
 \end{proof}
@@ -244,11 +244,11 @@ Another proof of \Cref{pr:FiniteIsBanach}
 \begin{remark}
     As seen in the last proof, for a bijective linear transformation \(T\)
     \begin{equation*}
-        1 \leq \norm[T] \norm[T^{-1}]
+        1 \leq \norm{T} \norm{T^{-1}}
     \end{equation*}
 \end{remark}
 
-\begin{definition}[Dual space]
+\begin{definition}[Dual space}
     Let \(V\) be a normed space over the normed field \(\Field\), then the \textbf{topological/continuous dual space} of the normed space \(V\) is
     \begin{equation*}
         V^\ast  = \func{\CalL}{V,\Field}
@@ -278,7 +278,7 @@ Another proof of \Cref{pr:FiniteIsBanach}
     \end{equation*}
     we claim that \(\set{e^\ast_1, \dots , e^\ast_n}\) is a basis for \(V^\ast\). It is easy to see that they are as for each \(j\)
     \begin{equation*}
-        \left[\sum_{i = 1}^n c_i e^\ast_i\right] e_j = c_j
+        \left[\sum_{i = 1}^n c_i e^\ast_i\right} e_j = c_j
     \end{equation*}
     and for each \(\phi \in \func{\CalL}{V,\Field}\) we have
     \begin{equation*}
@@ -288,46 +288,46 @@ Another proof of \Cref{pr:FiniteIsBanach}
 \end{proof}
 
 \begin{theorem}
-    For two normed vector spaces \(V,W\), \(\normedSpace{\func{\CalB}{V,W}}{\norm[T]}\) is a normed vector space. Moreover, it is a Banach space when \(W\) is a Banach space.
+    For two normed vector spaces \(V,W\), \(\normedSpace{\func{\CalB}{V,W}}{\norm{T}}\) is a normed vector space. Moreover, it is a Banach space when \(W\) is a Banach space.
 \end{theorem}
 
 
 \begin{proof}
-    Clearly \(\func{\CalB}{V,W}\) is a vector space. For its norm \(\norm[T]\) we have
+    Clearly \(\func{\CalB}{V,W}\) is a vector space. For its norm \(\norm{T}\) we have
     \begin{enumerate}
-        \item \(\norm[T] \geq 0\) by definition.
+        \item \(\norm{T} \geq 0\) by definition.
         \item if \(\alpha \in \Field_W\) then
               \begin{equation*}
-                  \norm[\alpha T] = \sup \left\{ \dfrac{\norm[(\alpha T)v]_W}{\norm[v]_V} \middle| v \neq 0 \right\} = \abs[\alpha] \sup \left\{ \dfrac{\norm[Tv]_W}{\norm[v]_V} \middle| v \neq 0 \right\} = \abs[\alpha] \norm[T]
+                  \norm{\alpha T} = \sup \left\{ \dfrac{\norm{(\alpha T)v}_W}{\norm{v}_V} \middle| v \neq 0 \right\} = \abs{\alpha} \sup \left\{ \dfrac{\norm{Tv}_W}{\norm{v}_V} \middle| v \neq 0 \right\} = \abs{\alpha} \norm{T}
               \end{equation*}
         \item for the triangle inequality
               \begin{align*}
-                  \norm[T_1 + T_2] & = \sup \left\{ \dfrac{\norm[(T_1 + T_2)v]_W}{\norm[v]_V} \right\}                                                     \\
-                                   & \leq \sup \left\{ \dfrac{\norm[T_1v]_W + \norm[T_2v]_W}{\norm[v]_V} \right\}                                          \\
-                                   & = \sup \left\{ \dfrac{\norm[T_1v]_W}{\norm[v]_V} \right\} + \sup \left\{ \dfrac{\norm[ T_2 v]_W}{\norm[v]_V} \right\} \\
-                                   & = \norm[T_1] + \norm[T_2]
+                  \norm{T_1 + T_2} & = \sup \left\{ \dfrac{\norm{(T_1 + T_2)v}_W}{\norm{v}_V} \right\}                                                     \\
+                                   & \leq \sup \left\{ \dfrac{\norm{T_1v}_W + \norm{T_2v}_W}{\norm{v}_V} \right\}                                          \\
+                                   & = \sup \left\{ \dfrac{\norm{T_1v}_W}{\norm{v}_V} \right\} + \sup \left\{ \dfrac{\norm{ T_2 v}_W}{\norm{v}_V} \right\} \\
+                                   & = \norm{T_1} + \norm{T_2}
               \end{align*}
     \end{enumerate}
     Suppose \(W\) is a Banach space and \(\{T_i\} \in \func{\CalB}{V,W}\) is a Cauchy sequence. Then for all \(v \in V\)
     \begin{equation*}
-        \forall \epsilon \, \exists N \; \suchThat \; m,n > N \implies \norm[T_m v - T_n v]_W \leq \norm[T_m - T_n]\norm[v]_V < \epsilon
+        \forall \epsilon \, \exists N \; \suchThat \; m,n > N \implies \norm{T_m v - T_n v}_W \leq \norm{T_m - T_n}\norm{v}_V < \epsilon
     \end{equation*}
     \(\{T_i v\}\) is a Cauchy sequence. Since \(W\) is complete then \(T_i v \to Tv\) for some function \(T\). We claim that \(T\) is a bounded linear map and is the limit of \(T_i \to T\).
     \begin{align*}
         \func{T}{v + cu} & = \lim_{i \to \infty} \func{T_i}{v + cu} = \lim_{i \to \infty} T_i v + c T_i u \\
                          & = Tv + c Tu
     \end{align*}
-    Note that  \( \abs[{\norm[T_m] - \norm[T_n]}] \leq \norm[T_m - T_n]\) and hence \(\norm[T_i]\) is a Cauchy in sequence in \(\Reals\) that has a limit \(t\). There exists a \(N\) such that \(\abs[{\norm[T_n] - t}] < 1\) for all \(n \geq N\).
+    Note that  \( \abs{{\norm{T_m} - \norm{T_n}}} \leq \norm{T_m - T_n}\) and hence \(\norm{T_i}\) is a Cauchy in sequence in \(\Reals\) that has a limit \(t\). There exists a \(N\) such that \(\abs{{\norm{T_n} - t}} < 1\) for all \(n \geq N\).
     \begin{equation*}
-        \dfrac{\norm[Tv]_W}{\norm[v]_V} = \lim_{i \to \infty}  \dfrac{\norm[T_i v]_W}{\norm[v]_V} < t + 1
+        \dfrac{\norm{Tv}_W}{\norm{v}_V} = \lim_{i \to \infty}  \dfrac{\norm{T_i v}_W}{\norm{v}_V} < t + 1
     \end{equation*}
     hence \(T\) is bounded and \(T \in \func{\CalB}{V,W}\). Finally, we show that \(T_i \to T\). For an arbitrary \(v \neq 0\) and \(\epsilon > 0\) there exist \(N\) such that
     \begin{align*}
-        n \geq N \implies \norm[T_i v - Tv]_W < \epsilon \norm[v]_V
+        n \geq N \implies \norm{T_i v - Tv}_W < \epsilon \norm{v}_V
     \end{align*}
     which means that
     \begin{equation*}
-        \norm[T_i - T] = \sup \dfrac{\norm[T_i v - Tv]_W}{\norm[v]_V} < \epsilon
+        \norm{T_i - T} = \sup \dfrac{\norm{T_i v - Tv}_W}{\norm{v}_V} < \epsilon
     \end{equation*}
     Therefore \(T_i \to T\) as desired.
 \end{proof}
@@ -344,63 +344,63 @@ Another proof of \Cref{pr:FiniteIsBanach}
 \begin{theorem} \label{th:LinearInvertibility}
     Let \(V,W\) be two finite dimensional normed vector spaces. \(T : V \to W\) linear transformation is invertible if and only if there exists a \(c\) such that:
     \begin{equation*}
-        c \norm[v]_V \leq \norm[Tv]_W
+        c \norm{v}_V \leq \norm{Tv}_W
     \end{equation*}
 \end{theorem}
 
 \begin{proof}
     If \(T\) is invertible then \(T^{-1} : W \to V \) is bounded and thus
     \begin{equation*}
-        \norm[T^{-1}w]_V \leq c \norm[w]_W
+        \norm{T^{-1}w}_V \leq c \norm{w}_W
     \end{equation*}
     and since \(T\) is bijective then there exists \(v\) such that \(w = Tv\) which implies
     \begin{equation*}
-        \norm[y]_V \leq c\norm[Ty]_W
+        \norm{y}_V \leq c\norm{Ty}_W
     \end{equation*}
-    If there exists such \(c\) then \(\norm[Tx] > 0\) for all non-zero \(x\) and hence \(\ker T  = 0\) which implies that \(T\) is a bijection and is invertible.
+    If there exists such \(c\) then \(\norm{Tx} > 0\) for all non-zero \(x\) and hence \(\ker T  = 0\) which implies that \(T\) is a bijection and is invertible.
 \end{proof}
 
 \begin{remark}
-    the supremum of such \(c\) is \(\norm[T^{-1}]^{-1}\) which is called the \textbf{conorm} of \(T\).
+    the supremum of such \(c\) is \(\norm{T^{-1}}^{-1}\) which is called the \textbf{conorm} of \(T\).
 \end{remark}
 
-\begin{definition}[General linear group]
+\begin{definition}[General linear group}
     The \textbf{general linear group} of a vector space, written \(\func{\GL}{V}\) is the set of all bijective linear transformation.
 \end{definition}
 
 \begin{proposition}
-    If \(V\) is a finite (also works for infinite) vector space then \(\func{\GL}{V}\) is open in \(\func{\CalL}{V,V}\), in fact, if \(f \in \func{\GL}{V}\) then the open ball centered at \(f\) with radius \(\norm[f^{-1}]^{-1}\) remains in \(\func{\GL}{V}\). Furthermore, the inverse operator \(i : \func{\GL}{V} \to \func{\GL}{V}\), \(\func{i}{T} = T^{-1}\) is continuous.
+    If \(V\) is a finite (also works for infinite) vector space then \(\func{\GL}{V}\) is open in \(\func{\CalL}{V,V}\), in fact, if \(f \in \func{\GL}{V}\) then the open ball centered at \(f\) with radius \(\norm{f^{-1}}^{-1}\) remains in \(\func{\GL}{V}\). Furthermore, the inverse operator \(i : \func{\GL}{V} \to \func{\GL}{V}\), \(\func{i}{T} = T^{-1}\) is continuous.
 \end{proposition}
 
 \begin{proof}
-    First assume \(f = \DSOne_V\) then we prove that any linear \(g\) that \(\norm[\DSOne_V - g] < 1\) is invertible which then implies bijectivity (true for linear maps). Let \(\norm[v] = 1\) then
+    First assume \(f = \DSOne_V\) then we prove that any linear \(g\) that \(\norm{\DSOne_V - g} < 1\) is invertible which then implies bijectivity (true for linear maps). Let \(\norm{v} = 1\) then
     \begin{equation*}
-        \abs[\norm[v] - \norm[gv]] \leq \norm[v - gv] \leq \norm[\DSOne_V - g] \norm[v] < 1
+        \abs{\norm{v} - \norm{gv}} \leq \norm{v - gv} \leq \norm{\DSOne_V - g} \norm{v} < 1
     \end{equation*}
     Therefore
     \begin{equation*}
-        0 < \norm[gv] < 2
+        0 < \norm{gv} < 2
     \end{equation*}
     which means \(\ker g = \set{0}\) and since \(V\) is finite then then \(g\) is invertible. For a general \(f\), we have that
     \begin{equation*}
-        \norm[1 - f^{-1} \circ g] \leq \norm[f^{-1}]\norm[f -g] < 1
+        \norm{1 - f^{-1} \circ g} \leq \norm{f^{-1}}\norm{f -g} < 1
     \end{equation*}
-    therefore \(f^{-1} \circ g\) is invertible and as a consequence \(g = f \circ f^{-1} \circ g\) is invertible. To prove inverse operator is continuous, fix \(\epsilon > 0\) then for a \(\delta > 0\) if \(\norm[T-S] < \delta\) then
+    therefore \(f^{-1} \circ g\) is invertible and as a consequence \(g = f \circ f^{-1} \circ g\) is invertible. To prove inverse operator is continuous, fix \(\epsilon > 0\) then for a \(\delta > 0\) if \(\norm{T-S} < \delta\) then
     \begin{align*}
-        \norm[\DSOne_V- T^{-1} \circ S]= \norm[T^{-1} \circ T  - T^{-1} \circ S]           & \leq \norm[T^{-1}] \norm[T-S] < \delta \norm[T^{-1}] \\
-        \implies  \norm[T^{-1} - S^{-1}] \leq \norm[T^{-1}\circ S - \DSOne_V]\norm[S^{-1}] & < \delta \norm[T^{-1}] \norm[S^{-1}]
+        \norm{\DSOne_V- T^{-1} \circ S}= \norm{T^{-1} \circ T  - T^{-1} \circ S}           & \leq \norm{T^{-1}} \norm{T-S} < \delta \norm{T^{-1}} \\
+        \implies  \norm{T^{-1} - S^{-1}} \leq \norm{T^{-1}\circ S - \DSOne_V}\norm{S^{-1}} & < \delta \norm{T^{-1}} \norm{S^{-1}}
     \end{align*}
-    note that by letting \(\delta = \norm[T^{-1}]^{-1}/2\) then
+    note that by letting \(\delta = \norm{T^{-1}}^{-1}/2\) then
     \begin{equation*}
-        \norm[S] > -\dfrac{\norm[T^{-1}]^{-1}}{2} + \norm[T] > \dfrac{\norm[T^{-1}]^{-1}}{2}
+        \norm{S} > -\dfrac{\norm{T^{-1}}^{-1}}{2} + \norm{T} > \dfrac{\norm{T^{-1}}^{-1}}{2}
     \end{equation*}
     also if for any invertible linear map \(R\)
     \begin{equation*}
-        \norm[R] > a \implies \norm[Rx] > a\norm[x] \implies \dfrac{\norm[y]}{a} = \dfrac{\norm[R\circ \func{R^{-1}}{y}]}{a} > \norm[R^{-1}y]
+        \norm{R} > a \implies \norm{Rx} > a\norm{x} \implies \dfrac{\norm{y}}{a} = \dfrac{\norm{R\circ \func{R^{-1}}{y}}}{a} > \norm{R^{-1}y}
     \end{equation*}
-    which means that \(\norm[S^{-1}] < 2 \norm[T^{-1}]\), hence by letting
+    which means that \(\norm{S^{-1}} < 2 \norm{T^{-1}}\), hence by letting
     \begin{equation*}
-        \delta = \min \set{\dfrac{\epsilon \norm[T^{-1}]^2}{2} , \dfrac{\norm[T^{-1}]^{-1}}{2}}
+        \delta = \min \set{\dfrac{\epsilon \norm{T^{-1}}^2}{2} , \dfrac{\norm{T^{-1}}^{-1}}{2}}
     \end{equation*}
     we proved the continuity.
 \end{proof}
@@ -417,7 +417,7 @@ Another proof of \Cref{pr:FiniteIsBanach}
         \item \(\phi\) is continuous at 0. \label{it:nLP_2}
         \item \(\phi\) is bounded, that is there exists a constant \(C > 0\) such that \label{it:nLP_3}
               \begin{equation*}
-                  \norm[\func{\phi}{v_1, \dots ,v_n}]_W \leq C \norm[v_1]_{V_1} \dots \norm[v_n]_{V_n}
+                  \norm{\func{\phi}{v_1, \dots ,v_n}}_W \leq C \norm{v_1}_{V_1} \dots \norm{v_n}_{V_n}
               \end{equation*}
     \end{enumerate}
 \end{proposition}
@@ -431,15 +431,15 @@ Another proof of \Cref{pr:FiniteIsBanach}
 
     \Cref{it:nLP_2} \(\implies\) \Cref{it:nLP_3}: For the sake of contradiction, suppose \Cref{it:nLP_3} is false. That is, for every \(k \in \Naturals\) there exists a point \(v_k = (v^1_k, \dots , v^n_k)\) such that
     \begin{equation*}
-        \norm[\func{\phi}{v^1_k, \dots , v^n_k}]_W > n^n \norm[v^1_k]_{V_1} \dots \norm[v^n_k]_{V_k}
+        \norm{\func{\phi}{v^1_k, \dots , v^n_k}}_W > n^n \norm{v^1_k}_{V_1} \dots \norm{v^n_k}_{V_k}
     \end{equation*}
     Note that \(v^m_k\) can not be zero for any \(k\) and \(m\), otherwise \(\func{\phi}{v_k} = 0 \). Define
     \begin{equation*}
-        w^m_k = \dfrac{v^m_k}{n\norm[v^m_k]_{V_k}} \to 0
+        w^m_k = \dfrac{v^m_k}{n\norm{v^m_k}_{V_k}} \to 0
     \end{equation*}
     which from the continuity at 0 implies that \(w_k = (w^1_k, \dots , w^n_k) \to 0\). However,
     \begin{equation*}
-        \norm[ \func{\phi}{w_k} - \func{\phi}{0}]_W > n^n \frac{1}{n} \dots \frac{1}{n} = 1
+        \norm{ \func{\phi}{w_k} - \func{\phi}{0}}_W > n^n \frac{1}{n} \dots \frac{1}{n} = 1
     \end{equation*}
     which is a contradiction.
 
@@ -447,14 +447,14 @@ Another proof of \Cref{pr:FiniteIsBanach}
     \begin{equation*}
         \bar{v}^m_k = (v^1 , \dots , v^m, v^{m+1}_k , \dots , v^n_k) , \qquad \bar{v}^0_k = v_k
     \end{equation*}
-    and \(\bar{v}^n_k = v\). Note that \(v^m_k\) are bounded for sufficiently large \(k \geq N_1\), therefore there exists \(M\) such that \(\forall m, \; \norm[v^m_k]_{V_m} \leq M\). Also, pick \(M\) such that \(\forall m, \; \norm[v^m]_{V_m} \leq M\) as well. Then
+    and \(\bar{v}^n_k = v\). Note that \(v^m_k\) are bounded for sufficiently large \(k \geq N_1\), therefore there exists \(M\) such that \(\forall m, \; \norm{v^m_k}_{V_m} \leq M\). Also, pick \(M\) such that \(\forall m, \; \norm{v^m}_{V_m} \leq M\) as well. Then
     \begin{align*}
-        \norm[\func{\phi}{v_k} - \func{\phi}{v}]_W & \leq \sum_{i = 1}^n \norm[\func{\phi}{\bar{v}^{i-1}_k  }- \func{\phi}{\bar{v}^i_k}]_W                                                              \\
-                                                   & = \sum_{i = 1}^n \norm[\func{\phi}{\bar{v}^{i - 1}_k - \bar{v}^{i}_k }]_W                                                                          \\
-                                                   & \leq \sum_{i = 1}^n C \norm[v^1]_{V_1} \dots \norm[v^{i-1}]_{V_{i-1}} \norm[v^i_k - v^i]_{V_i} \norm[v^{i+1}_k]_{V_{i+1}} \dots \norm[v^n_k]_{V_n} \\
-                                                   & \leq CM^{n-1} \sum_{i = 1}^n \norm[v^i_k - v^i]_{V_i}
-        \intertext{pick \(N_2\) such that for all \(k \geq N_2\), for each \(i, \; \norm[v^i_k - v^i]_{V_i} < \frac{\epsilon}{nCM^{n-1}}\) then}
-        \norm[\func{\phi}{v_k} - \func{\phi}{v}]_W & < CM^{n-1}  \sum_{i = 1}^n \frac{\epsilon}{nCM^{n-1}} = \epsilon
+        \norm{\func{\phi}{v_k} - \func{\phi}{v}}_W & \leq \sum_{i = 1}^n \norm{\func{\phi}{\bar{v}^{i-1}_k  }- \func{\phi}{\bar{v}^i_k}}_W                                                              \\
+                                                   & = \sum_{i = 1}^n \norm{\func{\phi}{\bar{v}^{i - 1}_k - \bar{v}^{i}_k }}_W                                                                          \\
+                                                   & \leq \sum_{i = 1}^n C \norm{v^1}_{V_1} \dots \norm{v^{i-1}}_{V_{i-1}} \norm{v^i_k - v^i}_{V_i} \norm{v^{i+1}_k}_{V_{i+1}} \dots \norm{v^n_k}_{V_n} \\
+                                                   & \leq CM^{n-1} \sum_{i = 1}^n \norm{v^i_k - v^i}_{V_i}
+        \intertext{pick \(N_2\) such that for all \(k \geq N_2\), for each \(i, \; \norm{v^i_k - v^i}_{V_i} < \frac{\epsilon}{nCM^{n-1}}\) then}
+        \norm{\func{\phi}{v_k} - \func{\phi}{v}}_W & < CM^{n-1}  \sum_{i = 1}^n \frac{\epsilon}{nCM^{n-1}} = \epsilon
     \end{align*}
 \end{proof}
 
@@ -475,8 +475,8 @@ We denote  the set of all \(n\)-linear functions from \(V_1 \times \dots \times 
     First note that \(T\) is linear. Then if \(\func{T}{\alpha} = 0\) implies \(\alpha  = 0\), thus \(T\) is injective and hence bijective.
 \end{proof}
 
-\begin{definition}[Positive definite]
-    Matrix \(A \in \SquareMatrices[\Reals]{n}\) is \textbf{positive definite} whenever \(A\) is symmetric and 
+\begin{definition}[Positive definite}
+    Matrix \(A \in \SquareMatrices[\Reals}{n}\) is \textbf{positive definite} whenever \(A\) is symmetric and 
     \begin{equation*}
         \forall x \in \Reals^n \backslash \set{0}, \ x^T A x > 0
     \end{equation*}
@@ -497,7 +497,7 @@ We denote  the set of all \(n\)-linear functions from \(V_1 \times \dots \times 
 
 {\Large\textbf{Exercises}}
 \begin{enumerate}
-    \item Show that for a linear transformation \(T\), \(\norm[T] = \sup_{\norm[v]_V \leq 1} \norm[Tv]_W\).
+    \item Show that for a linear transformation \(T\), \(\norm{T} = \sup_{\norm{v}_V \leq 1} \norm{Tv}_W\).
     \item Prove or disprove that if \(x^T A x = x^T A^T x\) for all \(x \in \Reals^n \backslash \set{0}\) then \(A = A^T\).
 \end{enumerate}
 \newpage
