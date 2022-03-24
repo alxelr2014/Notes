@@ -415,6 +415,18 @@ Setting \( N = \underset{1 \leq k \leq n}{\max}{N_k} \):
     It is clear that \(Y\) being closed is necessary for \(Y\) being a complete metric subspace. To show that is also sufficient, we need ot show that if \(Y\) is a complete metric subspace then it is closed. Assume the contrary, that is there exists an adherent point of \(Y\), \(a \notin Y\). Since \(a\) is an adherent point of \(Y\) then for all \(\rho > 0\) there exists a point \(x \in \func{B_\rho}{a}\) such that \(x \in Y\). For each \(n\) let \(\rho = \frac{1}{n}\) and choose a point \(x_n \in Y\)
     It is clear that \(\set{ x_n }\) is convergent to \(a\). From \Cref{ConvergenceCauchy} \(\set{ x_n }\) is a Cauchy sequence. Since \(Y\) is complete then \(a\) must be in \(Y\) which is a contradiction.
 \end{proof}
+
+\begin{theorem}[Baire Category Theorem]
+    Let \(X\) be a complete metric space and \(G_n\) be a sequence of dense open sets in \(X\). Then, \(\cap_{n = 1}^{\infty} G_n\) is dense in \(X\).
+\end{theorem}
+
+\begin{theorem}
+    Let \((X,d)\) be a complete metric space, and suppose that \(f:X \to X\) has the property that there exists \(\alpha < 1 \) such that 
+    \begin{equation*}
+        \func{d}{\func{f}{x}, \func{f}{y}} < \alpha \func{d}{x,y}
+    \end{equation*}
+    for all \(x,y \in X\). Then, there exists a unique point \(x \in X\) such that \(\func{f}{x} x\). Moreover, if \(x_0 \in X\), and \(x_{n+1} = \func{f}{x_n}\), then \(x = \lim_{n \to \infty} x_n\).
+\end{theorem}
 {\Large\textbf{Exercises}}
 \begin{enumerate}
     \item Show that if a sequence \(\set{ a_n }\) is convergent, then its limit is unique. That is, if \(a_n \to a \) and \(a_n \to b\) as \(n \to \infty\) then \(a = b\).
@@ -510,52 +522,150 @@ Equivalently, \(f\) is continuous at \(a\) if for all \(\epsilon > 0\), \(a\) is
           \end{flalign*}
           Where the metric of \(\Reals\) on the right hand side is the common Euclidean metric, and on the left hand side is any of the three metric.
 \end{enumerate}
+
 \newpage
+\section{Covering compactness}
+\begin{definition}
+    Let \(X\) be a topological space. A \textbf{covering} for s set \(E \subset X\) is a collection of \(U_\alpha\) of open subsets of \(X\) such that \(E \subset \bigcup U_\alpha \).
+\end{definition}
 
-\section{Compactness}
-A subset \(K \subset X\) is \textbf{compact} if for all sequence \(\{a_n\}\) in \(K\) there exists a subsequence of \(\{a_n\}\) that converges to \(a \in K\).
+\begin{definition}
+    A  \textbf{subcovering} of \(\scrU = \set<U_{\alpha}>{\alpha \in A}\) is a collection \(\scrV = \set<U_{\alpha}>{\alpha \in B}\) where \(B \subset A\) and \(\scrV\) covers the same set.
+\end{definition}
 
-\begin{corollary}
-    If \(K\) is compact then \(K\) must be closed and bounded.
-\end{corollary}
+\begin{definition}
+    A subset \(K\) of \(X\) is called \textbf{compact} if every open cover of \(K\) has a finite subcover.
+\end{definition}
 
-\begin{proof}
-    Obviously if \(K\) is not closed then there must be a limit point \(a \notin K\) such that the sequence \(\{a_n\}\) converges to \(a\). We have shown every subsequence of a convergent sequence converges to the same value, therefore \(K\) is not compact.
-    If \(K\) is unbounded then for each point \(a \in K\) for all \(n \in \Naturals\), the ball \(\func{B_n}{a}\) has a point other than \(a\) in \(K\). Then we can select \(a_n\) to be a point. Cleary no subsequence of \(\{a_n\}\) can be convergent.
-\end{proof}
+\begin{example}
+    \(\scrU = \set<\opop{x-1}{x+1}>{x \in \Reals}\) is covering for \(\Reals\). It Obviously has a countable subcovering, however, it does not have finite subcovering.
+\end{example}
 
 \begin{theorem}
-    If \(K \subset X\) is compact and \(C\) is a closed subset of \(X\) such that \(C \subset K\), then \(C\) is compact.
+    Closed and bounded intervals in \(\Reals\) are compact.
 \end{theorem}
 
-\begin{proof}
-    Take a sequence \(\{a_n\} \in C\). Since \(\{a_n\} \in K\) then it has a convergent subsequence \(b_k = a_{n_k}\). Let \(b \in K\) be the point of convergence of \(\{b_k\}\). Since \(\{b_k\} \in C\) and \(C\) is closed then \(b \in C\) and therefore \(C\) is compact.
-\end{proof}
-
 \begin{proposition}
-    A subset in \(\Reals^n\) is compact if and only if it is closed and bounded.
+    If \(X\) is a compact space and \(\set{K_n}\) is a sequence of non-empty closed subsets of \(X\), with \(K_{n+1} \subset K_n\) for all \(n\), then \(\bigcap_{n = 1}^{\infty} K_n\) is non-empty.
 \end{proposition}
 
-\begin{proof}
-    Using the same idea as \Cref{RealComplete} one can show the case for \(n = 1\). Assume the propsition is true for \(n = k - 1\) and let \(K \in \Reals^k\) be a closed and bounded set and \(\{a_n\} \in K\). Furthermore, let \(\{b_n\}\) be the projection of \(\{a_n\}\) onto \(\Reals^{k-1}\) and \(\{c_n\}\) be the projection of \(\{a_n\}\) on to \(k_{\cardinalTH}\) dimension. By induction, there exists a convergent subsequence \(\{b_{n_m}\}\). For \(\{c_{n_m}\}\) there exists a convergent subsequence \(\{c_{n_m}^i\}_i\) as well. It is easy to see that \(\{ a_{n_m}^i\}_i \) is a convergent subsequence of \(\{a_n\}\).
-\end{proof}
+\begin{proposition}
+    If \(E\) is an infinite subset of a compact set, then \(E\) has a limit point in \(K\).
+\end{proposition}
+
+\begin{proposition}
+    A subset of a topological space is compact if and only if it is compact in iteself with the relative topology.
+\end{proposition}
+
+\begin{proposition}
+    If \(X\) is a Hausdorff space and \(K \subset X\) is compact, then \(K\) is closed.
+\end{proposition}
+
+\begin{definition}
+    Let \(X\) be a metric space and \(E\) a subset of \(X\). The \textbf{diameter} of \(E\) is defined to be \(\diam E = \sup \set<\func{d}{x,y}>{x,y \in E}\). \(E\) is said to be bounded if its diameter is finite.
+\end{definition}
+
+\begin{definition}
+    Let \(E\) be subset of a metric space \(X\). \(E\) is \textbf{totally bounded} if for all \(\epsilon > 0\),  there exists a finite subset \(\set{x_1, \dots , x_n}\) of \(X\) such that \(E \subset \bigcup_{k= 1}^n \func{B_{\epsilon}}{x_k}\). A set \(F\) such that \(E \subset  \bigcup_{x \in F} \func{B_{\epsilon}}{x}\) is called an  \(\epsilon\)-\textbf{net} for \(E\).
+\end{definition}
+
+\begin{proposition}
+    If \(E\) is totally bounded, then:
+    \begin{enumerate}
+        \item \(E\) is bounded.
+        \item \(\closure E\) is totally bounded.
+        \item Any subset of \(E\) is totally bounded.
+    \end{enumerate}
+\end{proposition}
+
+\begin{theorem}
+    A metric space \(X\) is complete if and only if \(X\) is complete and totally bounded.
+\end{theorem}
+
+\begin{definition}
+    A subset \(E\) of topological space is \textbf{relatively compact} or \textbf{precompact} if \(\closure E\) is compact.
+\end{definition}
 
 \begin{corollary}
-    \([a,b]\) is compact in \(\Reals\).
+    A subset of a complete metric space is relatively compact if and only if it is totally bounded.
 \end{corollary}
 
-Let \(\{a_n\}\) be a sequence in \(\Reals\). We define:
-\[ \limsup a_n = \overline{\lim} \; a_n = \lim_{n \to \infty}{\Big(\sup{\{a_k : k\geq n\}}\Big)}\]
-\[ \liminf a_n = \underline{\lim} \; a_n = \lim_{n \to \infty}{\Big(\inf{\{a_k : k\geq n\}}\Big)}\]
+\begin{theorem}
+    A set \(E\) in \(\Reals^k\) is closed and bounded  if and only if it is compact.
+\end{theorem}
+
+\begin{note}
+    This is generally not true for other metric spaces.
+\end{note}
+
+\begin{theorem}[Weierstrass]
+    Every bounded infinite subset of \(\Reals^k\) has a limit point in \(\Reals^k\).
+\end{theorem}
+
+{\Large\textbf{Exercises}}
+\begin{enumerate}
+    \item Show that \(\mathbb{Q} \cap [0,1]\) is not covering compact, directly from the definition.
+\end{enumerate}
+
+
+\newpage
+\section{Sequential compactness}
+
+A subset \(K \subset X\) is \textbf{compact} if it has the Boltzano-Weierstrass property, if for all sequences \(\set{a_n}\) in \(K\) there exists a subsequence of \(\set{a_n}\) that converges to a point\(a \in K\).
+
+\begin{theorem}
+    Compactness is equivalent to the existence a finite subcovering for every covering.
+\end{theorem}
+\begin{proof}
+    To prove the theorem, let us define:
+
+    We will show for metric spaces compactness is equivalent to covering compact.
+    lebegue number
+\end{proof}
+
+% \begin{corollary}
+%     If \(K\) is compact then \(K\) must be closed and bounded.
+% \end{corollary}
+
+% \begin{proof}
+%     Obviously if \(K\) is not closed then there must be a limit point \(a \notin K\) such that the sequence \(\{a_n\}\) converges to \(a\). We have shown every subsequence of a convergent sequence converges to the same value, therefore \(K\) is not compact.
+%     If \(K\) is unbounded then for each point \(a \in K\) for all \(n \in \Naturals\), the ball \(\func{B_n}{a}\) has a point other than \(a\) in \(K\). Then we can select \(a_n\) to be a point. Cleary no subsequence of \(\{a_n\}\) can be convergent.
+% \end{proof}
+
+% \begin{theorem}
+%     If \(K \subset X\) is compact and \(C\) is a closed subset of \(X\) such that \(C \subset K\), then \(C\) is compact.
+% \end{theorem}
+
+% \begin{proof}
+%     Take a sequence \(\{a_n\} \in C\). Since \(\{a_n\} \in K\) then it has a convergent subsequence \(b_k = a_{n_k}\). Let \(b \in K\) be the point of convergence of \(\{b_k\}\). Since \(\{b_k\} \in C\) and \(C\) is closed then \(b \in C\) and therefore \(C\) is compact.
+% \end{proof}
+
+% \begin{proposition}
+%     A subset in \(\Reals^n\) is compact if and only if it is closed and bounded.
+% \end{proposition}
+
+% \begin{proof}
+%     Using the same idea as \Cref{RealComplete} one can show the case for \(n = 1\). Assume the propsition is true for \(n = k - 1\) and let \(K \in \Reals^k\) be a closed and bounded set and \(\{a_n\} \in K\). Furthermore, let \(\{b_n\}\) be the projection of \(\{a_n\}\) onto \(\Reals^{k-1}\) and \(\{c_n\}\) be the projection of \(\{a_n\}\) on to \(k_{\cardinalTH}\) dimension. By induction, there exists a convergent subsequence \(\{b_{n_m}\}\). For \(\{c_{n_m}\}\) there exists a convergent subsequence \(\{c_{n_m}^i\}_i\) as well. It is easy to see that \(\{ a_{n_m}^i\}_i \) is a convergent subsequence of \(\{a_n\}\).
+% \end{proof}
+
+% \begin{corollary}
+%     \([a,b]\) is compact in \(\Reals\).
+% \end{corollary}
+
+Let \(\set{a_n}\) be a sequence in \(\Reals\). We define:
+\begin{align*}
+    \limsup a_n &= \overline{\lim} \; a_n = \lim_{n \to \infty} \bracket[[\Big]]{\sup{\{a_k : k\geq n\}}}\\
+    \liminf a_n &= \underline{\lim} \; a_n = \lim_{n \to \infty} \bracket[[\Big]]{\inf{\{a_k : k\geq n\}}}
+\end{align*}
 
 \begin{note}
     The limits, \(\limsup a_n \) and \(\liminf a_n\), always exists. Albeit they might be infinite.
 \end{note}
 
-Let \(\{a_n\}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of all limit points of all subsequence of  \(\{a_n\}\). We know that \(A^*\) is not empty and since  \(\{a_n\}\) is bounded and then \(A^*\) must be bounded as well. Thus, by completeness axiom, \(A^*\) has infimum and supremum. Moreover, \(\sup{A^*}, \inf(A^*) \in A^*\).
+Let \(\set{a_n}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of all limit points of all subsequence of  \(\set{a_n}\). We know that \(A^*\) is not empty and since  \(\set{a_n}\) is bounded and then \(A^*\) must be bounded as well. Thus, by completeness axiom, \(A^*\) has infimum and supremum. Moreover, \(\sup A^*, \inf A^* \in A^*\).
 
 \begin{proposition}
-    A bounded sequence \(\{a_n\}\) is convergent if and only if \(\;\limsup a_n = \liminf a_n\).
+    A bounded sequence \(\set{a_n}\) is convergent if and only if \(\;\limsup a_n = \liminf a_n\).
 \end{proposition}
 
 \begin{corollary}
@@ -563,7 +673,7 @@ Let \(\{a_n\}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of a
 \end{corollary}
 
 \begin{proof}
-    Since \(K\) is bounded then it has supremum and infimum in \(\Reals\). Obviously, there are convergent sequences \(\{a_n\}\) and \(\{b_n\}\) such that \(a_n \to m = \inf K\) and \(b_n \to M = \sup K\). By compactness of \(K\), \(M,m \in K\).
+    Since \(K\) is bounded then it has supremum and infimum in \(\Reals\). Obviously, there are convergent sequences \(\set{a_n}\) and \(\set{b_n}\) such that \(a_n \to m = \inf K\) and \(b_n \to M = \sup K\). By compactness of \(K\), \(M,m \in K\).
 \end{proof}
 
 \begin{theorem}
@@ -571,7 +681,7 @@ Let \(\{a_n\}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of a
 \end{theorem}
 
 \begin{proof}
-    Let \(\{y_n\} \in \func{f}{K}\) and \(\{x_n\} \in K\) are such that \(\func{f}{x_n} = y_n\). Since \(K\) is compact there is a convergent subsequence \(\{x_{n_k}\}\) and since \(f\) is continous \( \{ y_{n_k} = \func{f}{x_{n_k}}\}\) is also convergent. Hence \(\func{f}{K}\) is compact.
+    Let \(\set{y_n} \in \func{f}{K}\) and \(\set{x_n} \in K\) are such that \(\func{f}{x_n} = y_n\). Since \(K\) is compact there is a convergent subsequence \(\set{x_{n_k}}\) and since \(f\) is continous \( \set{ y_{n_k} = \func{f}{x_{n_k}}}\) is also convergent. Hence \(\func{f}{K}\) is compact.
 \end{proof}
 
 \begin{corollary}
@@ -584,11 +694,13 @@ Let \(\{a_n\}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of a
 
 \begin{definition} [Uniform continuity]
     Let \(\metricSpace{X}{d}\) and \(\metricSpace{X'}{d'}\) be metric spaces.  \(f :X \to X'\) is uniformly continuous if:
-    \[ \forall \epsilon > 0\; \exists \delta > 0, \; x,y \in X, \; \func{d}{x,y} < \delta \implies \func{d'}{\func{f}{x},\func{f}{y}} < \epsilon\]
+    \begin{equation*}
+        \forall \epsilon > 0\; \exists \delta > 0, \; x,y \in X, \; \func{d}{x,y} < \delta \implies \func{d'}{\func{f}{x},\func{f}{y}} < \epsilon
+    \end{equation*}
 \end{definition}
 
 \begin{proposition}
-    \(f: X \to X'\) is uniformly continous if and only if for every pair sequence \(\pair{x_n}{y_n}\) in \(X\) satisfying \(\func{d}{x_n,y_n} \to 0\) we have \(\func{d'}{\func{f}{x_n}, \func{f}{y_n}} \to 0\).
+    \(f: X \to X'\) is uniformly continous if and only if for every pair sequence \(\set{\pair{x_n}{y_n}}\) in \(X\) satisfying \(\func{d}{x_n,y_n} \to 0\) we have \(\func{d'}{\func{f}{x_n}, \func{f}{y_n}} \to 0\).
 \end{proposition}
 
 \begin{proof}
@@ -598,15 +710,16 @@ Let \(\{a_n\}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of a
          & \forall \delta \; \exists N \ \suchThat \ n \geq N \implies \func{d}{x,y} < \delta
     \end{align*}
     combining the two brings us at the conclusion.
+
     Sufficiency: Suppose for the sake of contradtion that:
     \begin{equation*}
         \exists \epsilon \; \forall \delta \; \exists x,y \in X  \ \suchThat \ \func{d}{x,y} < \delta \land \func{d'}{\func{f}{x}, \func{f}{y}} \geq \epsilon
     \end{equation*}
-    then let \(\delta = \frac{1}{n}\) and make the sequence pair \(\pair{x_n}{y_n}\). Clearly, \(\func{d}{x_n,y_n} \to 0\) therefore, \(\func{d'}{\func{f}{x}, \func{f}{y}} \to 0\). Which is a contradition since \(\func{d'}{\func{f}{x}, \func{f}{y}} \geq \epsilon \).
+    then let \(\delta = \frac{1}{n}\) and make the sequence pair \(\set{\pair{x_n}{y_n}}\). Clearly, \(\func{d}{x_n,y_n} \to 0\) therefore, \(\func{d'}{\func{f}{x}, \func{f}{y}} \to 0\). Which is a contradition since \(\func{d'}{\func{f}{x}, \func{f}{y}} \geq \epsilon \).
 \end{proof}
 
 \begin{proposition}
-    \(\metricSpace{X}{d}\) and \(\metricSpace{X'}{d'}\) are matric spaces and \(X\) is compact. If \(f: X \to X'\) is continuous then it is uniformly continous.
+    \(\metricSpace{X}{d}\) and \(\metricSpace{X'}{d'}\) are matric spaces and \(X\) is compact. If \(f: X \to X'\) is continuous then it is uniformly continuous.
 \end{proposition}
 
 \begin{proof}
@@ -614,89 +727,124 @@ Let \(\{a_n\}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of a
     \begin{equation*}
         \exists \epsilon \; \forall \delta \; \exists x,y \in X \ \suchThat \ \func{d}{x,y} < \delta \land \func{d'}{\func{f}{x}, \func{f}{y}} \geq \epsilon
     \end{equation*}
-    and let \(\delta = \frac{1}{n}\) and make the sequence pair \(\pair{x_n}{y_n}\). By compactness of \(X\), there are two convergent subsequence \(\{x_{n_k}\}\) and \(\{y_{n_k}\}\). Since \(\func{d}{x_n,y_n} \to 0\) then if \(x_{n_k} \to x\), \(y_{n_k} \to x\) as well. By continuity of \(f\), \(\func{f}{x_{n_k}} \to \func{f}{x}\) and \(\func{f}{y_{n_k}} \to \func{f}{x}\) and thus \(\func{d'}{\func{f}{x_{n_k}}, \func{f}{y_{n_k}}} \to 0 \). Which is a contradicition as for sufficiently large \(K\), \(k \geq K \implies \func{d'}{\func{f}{x}, \func{f}{y}} \geq \epsilon\)
+    and let \(\delta = \frac{1}{n}\) and make the sequence pair \(\pair{x_n}{y_n}\). By compactness of \(X\), there are two convergent subsequence \(\set{x_{n_k}}\) and \(\set{y_{n_k}}\). Since \(\func{d}{x_n,y_n} \to 0\) then if \(x_{n_k} \to x\), \(y_{n_k} \to x\) as well. By continuity of \(f\), \(\func{f}{x_{n_k}} \to \func{f}{x}\) and \(\func{f}{y_{n_k}} \to \func{f}{x}\) and thus \(\func{d'}{\func{f}{x_{n_k}}, \func{f}{y_{n_k}}} \to 0 \). Which is a contradicition as for sufficiently large \(K\), \(k \geq K \implies \func{d'}{\func{f}{x}, \func{f}{y}} \geq \epsilon\)
 \end{proof}
 
-Define the \textbf{diamter} of a set \(S\) to be:
-\[\diam{S} = \sup{\{d(s,s') : s,s' \in S\}}\]
-the cleary for bounded sets we have:
-\[\diam{S} < +\infty\]
+% Define the \textbf{diamter} of a set \(S\) to be:
+% \[\diam{S} = \sup{\{d(s,s') : s,s' \in S\}}\]
+% the cleary for bounded sets we have:
+% \[\diam{S} < +\infty\]
 
-\begin{proposition}
-    Let \(\metricSpace{X}{d}\) be a metric space and \(\{K_n\}\) is a sequence of compact subset of \(X\) with \(K_1 \supset K_2 \supset \dots\).
-    \begin{enumerate}
-        \item \(\bigcap K_n\) is not empty.
-        \item If \(\diam{K_n} \to 0\) then \(\bigcap K_n\) is a singular point.
-    \end{enumerate}
-\end{proposition}
+% \begin{proposition}
+%     Let \(\metricSpace{X}{d}\) be a metric space and \(\{K_n\}\) is a sequence of compact subset of \(X\) with \(K_1 \supset K_2 \supset \dots\).
+%     \begin{enumerate}
+%         \item \(\bigcap K_n\) is not empty.
+%         \item If \(\diam{K_n} \to 0\) then \(\bigcap K_n\) is a singular point.
+%     \end{enumerate}
+% \end{proposition}
 
-\begin{proof} \leavevmode
-    \begin{enumerate}
-        \item Consider the sequence \(\{a_n\}\) such that \(a_n \in K_n\). Since \(a_n \in K_1\) for all \(n\), then there is a convergent subsequence \(\{a_{n_k}\}\) with \(a_{n_k} \to a\). \(a \in K_1\), however, \(a \in K_2\) and so on, as well. Therefore \(a \in \bigcap K_n\).
-        \item Let \(a,b \in \bigcap K_n\). Then, \(a,b \in K_n\) for all \(n\) and we must have that \(\func{d}{a,b} \leq \diam K_n\). Therefore, \(a = b \).
-    \end{enumerate}
-\end{proof}
+% \begin{proof} \leavevmode
+%     \begin{enumerate}
+%         \item Consider the sequence \(\{a_n\}\) such that \(a_n \in K_n\). Since \(a_n \in K_1\) for all \(n\), then there is a convergent subsequence \(\{a_{n_k}\}\) with \(a_{n_k} \to a\). \(a \in K_1\), however, \(a \in K_2\) and so on, as well. Therefore \(a \in \bigcap K_n\).
+%         \item Let \(a,b \in \bigcap K_n\). Then, \(a,b \in K_n\) for all \(n\) and we must have that \(\func{d}{a,b} \leq \diam K_n\). Therefore, \(a = b \).
+%     \end{enumerate}
+% \end{proof}
 
 {\Large\textbf{Exercises}}
 \begin{enumerate}
-    \item Prove that \(\sqrt{\mid x \mid} :\Reals \to \Reals\) is uniformly continous.
+    \item Prove that \(\sqrt{\mid x \mid} :\Reals \to \Reals\) is uniformly continuous.
 \end{enumerate}
-\newpage
 
+\newpage
 \section{Connectedness}
 \begin{definition}
-    \(\metricSpace{X}{d}\) a metric space. \(X\) is disconnected if the open sets \(A, B\) are found such that:
-    \[A \neq \emptyset, \quad B \neq \emptyset, \quad A \bigcap B = \emptyset, \quad A \bigcup B = X\]
-    \(X\) is said to be connected if it is not disconnected.
-    \( S \subset X\) is connected if it is connected as a subspace of \(X\).
+    Let \(X\) be a topological space. \(X\) is \textbf{disconnected} if there are non-empty open sets \(A\) and \( B\) are found such that
+    \begin{equation*}
+        A \bigcap B = \emptyset, \quad A \bigcup B = X
+    \end{equation*}
+    \(X\) is said to be \textbf{connected} if it is not disconnected. A subset \(S\) of \(X\) is connected if it is connected when considering its relative topolgy.
+\end{definition}
+
+\begin{definition}
+    
 \end{definition}
 \begin{example}
     The following subsets of \(\Reals\) are disconnected:
     \begin{enumerate}
-        \item \(S = [-1,0[ \;\cup\; ]0,1]\)
-        \item \(\mathbb{Q}\)
-        \item \(S = [1,0] \cup [1,2]\)
+        \item \(S =\clop{-1}{0} \;\cup\; \opcl{0}{1}\).
+        \item \(\Rationals\).
+        \item \(S = \clcl{1}{0} \cup \clcl{1}{2}\).
     \end{enumerate}
 \end{example}
+
 \begin{definition}
-    \(S \subset \Reals\) is an interval if when \(a , c \in S\) and \(a < b < c\) then \(b \in S\).
+    Two sets \(A\) and \(B\) in a topological space \(X\) are said to be \textbf{separable} if \(A \cap \closure B = \closure A \cap B = \emptyset\).
+\end{definition}
+
+\begin{proposition}
+    \(X\) is connected if and only if it can not be written in form of two non-empty separable sets.
+\end{proposition}
+
+\begin{definition}
+    \(S \subset \Reals\) is an \textbf{intervals} if when \(a , c \in S\) and \(a < b < c\) then \(b \in S\).
 \end{definition}
 \begin{example}
     \(\Reals\) and its intervals are connected. In fact the only connected subsets of \(\Reals\) are its intervals.
 \end{example}
 \begin{theorem}
-    \(\metricSpace{X}{d}\) and \((X',d')\) are metric spaces. \(f : X \to X'\) is continuous and \(S\) is a connected subset of \(X\). Then, \(f(S)\) is connected in \(X'\).
+    Let \(X\) and \(X'\) be two topological spaces. Let \(f : X \to X'\) be continuous and \(S\) be a connected subset of \(X\). Then, \(\func{f}{S}\) is connected in \(X'\).
 \end{theorem}
+
 \begin{corollary} [Mean value theorem]
-    If \(f : [a,b] \to \Reals\) is a continous function and \(f(a) = A, f(b) = B\) then for every \(C\) between \(A\) and \(B\) there exists a \(c \in [a,b]\) such that \(f(c) = C\).
+    If \(f : \clcl{a}{b} \to \Reals\) is a continous function and \(\func{f}{a} = A, \func{f}{b} = B\) then for every \(C\) between \(A\) and \(B\) there exists a \(c \in \clcl{a}{b}\) such that \(\func{f}{c} = C\).
 \end{corollary}
 \begin{proposition}
     If \(S \subset X\) is a connected set then every \(S \subset T \subset \bar{S}\) is connected.
 \end{proposition}
+
+\begin{proposition}
+    Let \(\set{E_{\alpha}}\) be collection of connected sets with \(\cap_{\alpha} E_{\alpha} \neq \emptyset\). Then, \(\cap_{\alpha} E_{\alpha}\) is connected.
+\end{proposition}
+
 \begin{definition}
-    \(G_f : M \to M \times N\) to be the graph of \(f\), that is \(G_f = \{(x,f(x)) | x \in M\}\).
+    Let \(x\) be a point in a topological space \(X\). The \textbf{connected component} of \(x\), \(C_x\), is the union of the all the connected set including \(x\).
+\end{definition}
+
+\begin{proposition}
+    For any \(x,y \in X\)
+    \begin{enumerate}
+        \item \(C_x\) is connected and closed.
+        \item \(C_x\) and \(C_y\) are either disjoint or equal to each other.
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}
+    A topological space \(X\) is said to be \textbf{totally disconceted} if \(C_x = \set{x}\) for all \(x \in X\). A subset \(S\) of \(X\) is totally disconceted if it is totally disconceted when considering its relative topology.
+\end{definition}
+
+\begin{definition}
+    The \textit{graph} of a function \(f:M \to N\), \(G_f\), given by \(G_f = \set<(x,\func{f}{x})>{ x \in M}\).
 \end{definition}
 
 \begin{theorem}
     The graph of a continous function over a connected set is connected.
 \end{theorem}
 \begin{example}
-    topological curve is connected and also its closure is connected.
+    Topological curve is connected and also its closure is connected.
 \end{example}
-\begin{proposition}
-    Let \(\metricSpace{X}{d}\) be a metric space and \((S_\alpha)\) is a collection of connected sets in \(X\). If \(x \in S_\alpha \forall \alpha\) then the union of \(S_\alpha\) is connected.
-\end{proposition}
+
+
 \begin{definition}[Path connected]
-    \(S\) is path connected if for every pair of points \(p,q \in S\) there exists a continous function \(\gamma: [a,b] \to S\) such that \(\gamma(a) = p\) and \(\gamma(b) = q\).
+    A set \(S\) is path connected if for every pair of points \(p,q \in S\) there exists a continous function \(\gamma: \clcl{a}{b} \to S\) such that \(\func{\gamma}{a} = p\) and \(\func{\gamma}{b} = q\).
 \end{definition}
 \begin{theorem}
-    if a set \(S\) is path connected then it is connected but the inverse is not true.
+    If a set \(S\) is path connected, then it is connected but the inverse is not true.
 \end{theorem}
 \begin{example}
-    infinite broom is path connected but toplogical sine curve is not.
+    Infinite broom is path connected but toplogical sine curve is not.
 \end{example}
 \begin{proposition}
-    If \(f\) is continuous on a path connected set then the image of \(f\) is path connected.
+    If \(f\) is continuous function and \(S\) is a path connected set, then the image of \(S\) under \(f\) is path connected.
 \end{proposition}
 \begin{proposition}
     Every open set of \(\Reals\) is the union of countably many disjoint open intervals.
@@ -705,61 +853,32 @@ the cleary for bounded sets we have:
 \begin{enumerate}
     \item
 \end{enumerate}
-\newpage
-\section{Covering}
-\begin{definition}[Covering]
-    Let \(\metricSpace{X}{d}\) be a metric space. A covering for such space is a collection of \(U_\alpha\) of open subsets of \(X\) such that \(\bigcup U_\alpha = X\). Similarly, for \(S \subset X\), a covering is a collection of \(U_\alpha\) of open subsets of \(X\) such that \(S \subset \bigcup U_\alpha\).
-\end{definition}
 
-\begin{definition}[Sub covering]
-    A finite subcovering of \(\bigcup U_\alpha\) is a collection of finitely many \(U_\alpha\) such that their union covers the same space. That is, there exists a \(U_{\alpha_n}\) for \(n \leq k\) such that:
-    \[U_{\alpha_1} \cup U_{\alpha_2} \cup \dots U_{\alpha_k} = X\]
-\end{definition}
-\begin{example}
-    \(\Reals\) and covering \(U_x = ]x-1,x+1[\), no finite subcovering but countably many.
-\end{example}
-\begin{theorem}
-    Compactness is equivalent to the existence a finite subcovering for every covering.
-\end{theorem}
-\begin{proof}
-    To prove the theorem, let us define:
-    \begin{definition}
-        For a metric space \(\metricSpace{X}{d}\) is \textbf{covering compact} if every covering reduces to a finite subcovering.
-    \end{definition}
-    We will show for metric spaces compactness is equivalent to covering compact.
-    lebegue number
-\end{proof}
-\begin{example}
-    from definition show that \([a,b]\) is covering compact.
-\end{example}
 
-{\Large\textbf{Exercises}}
-\begin{enumerate}
-    \item Show that \(\mathbb{Q} \cap [0,1]\) is not covering compact, directly from the definition.
-\end{enumerate}
 \newpage
 
 
 \section{Cantor Set}
 \begin{definition}
-    define cantro set
+    define cantor set
 \end{definition}
-\begin{definition}[Perfect space]
-    define perfect set
-\end{definition}
+
 \begin{proposition}
-    Cantor set is a perfect space.
+    Cantor set is a perfect set.
 \end{proposition}
-\begin{definition}
-    Totally disconnected
-\end{definition}
+
 \begin{proposition}
     Cantor set is totally disconnected.
 \end{proposition}
 \begin{theorem}
-    Let \(K\) be a complete, totally disconnected, and compact metric space. Then \(K\) is homeomorphic to cantor set, in that, there is a continuous function \(h : K \to C\) such that \(h^{-1}\) is continuous as well.
+    Let \(K\) be a complete, totally disconnected, and compact metric space. Then, \(K\) is homeomorphic to Cantor set.
 \end{theorem}
+
+\begin{theorem}
+    Let \(P\) be a non-empty perfect set in \(\Reals^k\). Then, \(P\) is uncountable.
+\end{theorem}
+
 {\Large\textbf{Exercises}}
 \begin{enumerate}
-    \item Show that \(\mathbb{Q} \cap [0,1]\) is not covering compact, directly from the definition.
+    \item Show that \(\Rationals \cap \clcl{0}{1}\) is not covering compact, directly from the definition.
 \end{enumerate}
