@@ -1,0 +1,18 @@
+\chapter{Preliminary}
+\(R \subset A \times A\) is an equivalence relations if 
+\begin{description}
+    \item [Reflexive:] \(\forall a \in A, (a,a) \in R\).
+    \item [Symmetric:] \((a,b) \in R \implies (b,a) \in R\).
+    \item [Transitive:] \((a,b) \in R, (b,c) \in R \implies (a,c) \in R\).
+\end{description}
+
+A binary relations can be also denoted as \(aRb\) whenever \((a,b) \in R\).
+
+If \(A\) is a set and if \(\sim\) is an equivalence relation on \(A\), then the equivalence class of \(a \in A\) is the set \(\set<x \in A>{x \sim a}\) denoted by \(\EqClass{a}\).
+
+\begin{theorem}
+    Equivalence classes partition the set into mutually disjoint subsets and conversely, mutually disjoint subsets give rise to equivalence classes.
+\end{theorem}
+
+If \(S\) and \(T\) are non-empty sets, then a mapping from \(S\) to \(T\) is a subset \(M \subset S \times T\) such that for every \(s \in S\) there is a unique \(t \in T\) that \((s,t) \in M\). \(\sigma:S \to T\) maybe denoted as \(t = s \sigma\) or \(t = \func{\sigma}{s}\).
+

@@ -1,0 +1,151 @@
+\chapter{Group Theory}
+\section{Introduction}
+\begin{definition}
+    A non-empty set of elements \(G\) together with a binary operation \(\circ\) are said to be a \textbf{group} if 
+    \begin{description}
+        \item[Closure:] \(\forall a,b \in G, a \circ b \in G\).
+        \item[Associative:] \(\forall a,b,c \in G, (a \circ b ) \circ c = a \circ (b \circ c)\).
+        \item[Identity:] \(\exists e \in G\) such that \(\forall a\in G, a \circ e = e \circ a = a\).  
+        \item[Inverse:] \(\forall a \in G \; \exists b \in G\) such that \(a \circ b = b \circ a = e\).  
+    \end{description}
+\end{definition}
+
+\begin{definition}
+    A group \(G\) is said to be \textbf{abelian} or \textbf{commutative} if for any two element \(a\) and \(b\) commute. i.e. \(a \circ b = b \circ a\).
+\end{definition}
+
+\begin{definition}
+    The number of elements in a group is called the \textbf{order} of the group and it is denoted by \(\func{o}{G}\).
+\end{definition}
+
+\begin{definition}
+    Let \(\angleBracket{a} = \set<a^n>{n \in \Integers}\). If for some choice of \(a\), \(G = \angleBracket{a}\), then \(G\) is said to be a \textbf{cyclic group}. More generally, for a set \(W \subset G\), \(\angleBracket{W} = \bigcap{W \subset H \subset G} H\) where \(H\) is a subgroup of \(G\).
+\end{definition}
+
+\begin{lemma}
+    Given \(a,b \in G\) the equation \(ax = b\) and \(ya = b\) have unique solutions for \(x,y \in G\).
+\end{lemma}
+
+\section{Subgroup}
+\begin{definition}
+    A non-empty subset \(H\) of a group \(G\) is called a \textbf{subgroup} if under the product in \(G\), \(H\) itself forms a group.
+\end{definition}
+
+\begin{lemma}
+    \(H\) is a subgroup of \(G\) if and only if 
+    \begin{enumerate}
+        \item \(\forall a,b \in H, ab \in H\).
+        \item \(\forall a \in H, a^{-1} \in H\).
+    \end{enumerate}
+\end{lemma}
+
+\begin{prooflemma}
+  Add.  
+\end{prooflemma}
+
+\begin{lemma}
+    If \(H\) is a non-empty finite subset of a group \(G\) and \(H\) is closed under multiplication, then \(H\) is a subgroup of \(G\).
+\end{lemma}
+
+\begin{prooflemma}
+    Add.
+\end{prooflemma}
+
+\begin{definition}
+    Let \(G\) be a group and \(H\) a subgroup of \(G\). For \(a,b \in G\) we say that \(a\) is congruent to \(b \mod{H}\), written as \(a \equiv b \mod{H}\) if \(ab^{-1} \in H\).
+\end{definition}
+
+\begin{lemma}
+    The relation \(a \equiv b \mod{H}\) is an equivalence relation.
+\end{lemma}
+
+\begin{prooflemma}
+    Add.
+\end{prooflemma}
+
+\begin{definition}
+    If \(H\) is a subgroup of \(G\) and \(a \in G\), then \(Ha = \set<ha>{h \in H}\) is a \textbf{right coset} of \(H\) in \(G\). Similary, \(aH = \set<ah>{h \in H}\) is a \textbf{left coset} of \(H\) in \(G\).
+\end{definition}
+
+\begin{lemma}
+    For all \(a \in G\), 
+    \begin{equation*}
+        Ha = \set<x \in G>{a \equiv x \mod{H}}
+    \end{equation*}
+\end{lemma}
+
+\begin{prooflemma}
+    Suppose \(x \in G\) and \(x \equiv a \mod{H}\). That is, \(xa^{-1} = h\) for some \(h \in H\). Then, \(x = ha\). Suppose \(h \in H\) and \(x = ha\). Then, \(xa^{-1} = h\) and hence \(x \equiv a \mod{H}\).
+\end{prooflemma}
+
+This implies, two right/left coset of \(H\) are either identical or disjoint.
+
+\begin{lemma}
+    There is a one-to-one correspondence between any two right/left cosets of \(H\).
+\end{lemma}
+
+\begin{prooflemma}
+    Add.
+\end{prooflemma}
+
+\begin{theorem}[Lagrange's theorem]
+    If \(G\) is a finite group and \(H\) is a subgroup of \(G\), then \(\func{o}{H} \mid \func{o}{G}\).
+\end{theorem}
+
+\begin{proof}
+    Add.
+\end{proof}
+
+\begin{definition}
+    If \(H\) is a subgroup of \(G\), the \textbf{index} of \(H\) in \(G\) is the number of distince right cosets of \(H\), denoted by \([G:H]\) or \(\func{i_G}{H}\).
+\end{definition}
+
+\begin{definition}
+    Let \(G\) be a group and \(a \in G\), then the \textbf{order} or \textbf{period} of \(a\) is the least positive integer \(m\) such that \(a^m = e\). If no such integer exists we say that \(a\) is of infinite order. The order of \(a\) is denoted by \(\func{\ord_G}{a}\).
+\end{definition}
+
+\begin{corollary}
+    If \(G\) is a finite group, then 
+    \begin{enumerate}
+        \item \(\func{o}{G} = \func{i_G}{H} \func{o}{H}\).
+        \item \(\func{\ord_G}{a} \mid \func{o}{G}\).
+        \item \(a^{\func{o}{G}} = e\).
+        \item If \(\func{o}{G}\) is a prime, then \(G\) is cyclic.
+    \end{enumerate}
+\end{corollary}
+
+\section{A counting principle}
+Let \(H\) and \(K\) be two subgroups of \(G\), then 
+\begin{equation*}
+    HK = \set<hk>{h \in H, k \in K}
+\end{equation*}
+
+\begin{lemma}
+    \(HK\) is a subgroup of \(G\) if and only if \(HK = KH\).
+\end{lemma}
+\begin{corollary}
+    If \(H\) and \(K\) are subgroups of an abelian group \(G\), then \(HK\) is a subgroup of \(G\).
+\end{corollary}
+
+\begin{lemma}
+    If \(H\) and \(K\) are finite subgroups \(G\), then 
+    \begin{equation*}
+        \abs{HK} = \dfrac{\func{o}{H} \func{o}{K}}{\func{o}{H \cap K}}
+    \end{equation*}
+\end{lemma}
+
+\begin{prooflemma}
+    If \(h_1 \in H \cap K\) then \(hk = (hh_1)(h_1^{-1}k)\). Therefore, \(hk\) appears at least \(\func{o}{H \cap K}\) times. If \(hk = h'k'\), then \(h'^{-1}h = k' k^{-1} \in H \cap K\). Let \(u = h'^{-1}h\) then \(h' = hu^{-1}\) and \(k' = uk\). Thus, all duplicates are accounted for.
+\end{prooflemma}
+
+\begin{corollary}
+    If \(H\) and \(K\) are subgroups of \(G\) and \(\func{o}{H},\func{o}{K} > \sqrt{\func{o}{G}}\), then \(H \cap K \neq \set{e}\).
+\end{corollary}
+
+\begin{proof}
+    \(HK \subset G\) therefore, \(\abs{HK} \leq \func{o}{G}\) and 
+    \begin{equation*}
+        \func{o}{G} \geq \abs{HK}  = \dfrac{\func{o}{H} \func{o}{K}}{\func{o}{H \cap K}} > \dfrac{\func{o}{G}}{\func{o}{H \cap K}} 
+    \end{equation*}
+    which implies that \(\func{o}{H \cap K} > 1\).
+\end{proof}
