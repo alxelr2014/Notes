@@ -1,1 +1,109 @@
 \chapter{Information Theory}
+\begin{remark}
+    For a more complete and through treatment refer to the notes on the subject.
+\end{remark}
+\section{Measure of information}
+Information content of a message is inversely proportional to the likelihood of that message. Let \(m_1,m_2, \dots,m_q\) be \(q\) messages with probability \(p_1,p_2, \dots , p_q\) respectively, such that \(p_1 + \dots + p_q = 1\). Then, information content of \(m_k\), \(\func{I}{m_k}\) must satisfy the followings 
+\begin{enumerate}
+    \item \(\func{I}{m_k} > \func{I}{m_j}\) if \(m_k < m_j\).
+    \item \(\func{I}{m_k} \to 0\) as \(p_k \to 0\).
+    \item \(\func{I}{m_k} \geq 0\) when \(0 \leq p_k \leq 1\).
+\end{enumerate}
+Furthermore, for two independent messages \(m_1\) and \(m_2\) 
+\begin{equation*}
+    \func{I}{m_1, m_2} = \func{I}{m_1} + \func{I}{m_2}
+\end{equation*}
+One continuous function that satisfies these requirements is \(\func{I}{m_k} = - \log p_k\) where the base of the logarithm determines the unit of information, e.g. base \(e\) is nats, \(2\) is bit, \(10\) is Hartley/decit.
+
+\subsection{Average information content}
+For a statistically independent source that emits \(N\) symbols from a \(M\)-symbol alphabet i.i.d. 
+\begin{align*}
+    I_{tot} &= -N \sum_{i = 1}^M p_i \func{\log}{p_i}\\
+    H &= \dfrac{I_{tot}}{N} = -\sum_{i = 1}^M p_i \func{\log}{p_i}
+\end{align*}
+
+\begin{proposition}
+    For a source with an \(M\)-symbol alphabet, the maximum entropy is attained when the symbols are equiprobabilistic and \(H_{max} = \log M\).
+\end{proposition}
+
+Suppose \(r_s\) is the symbol rate of the source, measured in \(\). Then, average information rate \(R\) is 
+\begin{equation*}
+    R = r_sH 
+\end{equation*}
+
+\subsection{Statistically dependent source}
+\subsection{Entropy for Markov source}
+
+\section{Source encoding}
+\begin{definition}
+    The ratio of sourse information and the average encoded output bit rate is called \textit{coding efficiency}.
+\end{definition}
+\subsection{Shannon Algorithm}
+Let \(m_1,\dots,m_q\) be arranged in decreasing order of probability \(p_1 \leq \dots \leq p_q\). Let \(F_i = \sum_{k = 1}^{i - 1} p_k\) with \(F_1 = 0\). Let \(n_i = \ceil{-\lg p_i}\). Then, the code 
+\begin{equation*}
+    c_i = (F_i)_2 \qquad \text{binary fraction of \(F_i\) up to \(n_i\) bits.}
+\end{equation*}
+has the following properties 
+\begin{enumerate}
+    \item \(\func{l}{c_i} > \func{l}{c_j} \implies p_i < p_j\).
+    \item Codewords are all differnt. In fact, it is an instantaneous code.
+    \item \(G_N \leq \hat{H_N} < G_N + \frac{1}{N}\).
+    \item The efficiency rate is \(e = \frac{H}{\hat{H_n}}\).
+\end{enumerate}
+Important parameters in design od encoder/decoder 
+\begin{itemize}
+    \item rate efficiency
+    \item complexity of design
+    \item effects of error
+\end{itemize}
+\section{Communication channel}
+Insert image of pg 39
+\section{Discrete communication channel}
+Consider a discrete memoryless channel. Then, the channel may be described with conditional probability \(\func{p}{y|x}\). The average information rate is \(D_in = r_s \func{H}{X} \) and the average rate of information transmission is 
+\begin{equation*}
+    D_t = (\func{H}{X} - \func{H}{X|Y}) r_s = r_s \func{I}{X;Y}
+\end{equation*}
+The capacity of the channel is defined as \(C = \max_{\func{p}{x}} D_t\).
+
+\begin{theorem}
+    Let \(C\) be the capacity and \(H\) be the entropy. If \(r_sH \leq C\), then there exists an enconding scheme such that the output of the source can be transmitted over channel with an arbitrary small probability of error. Conversely, it is not possible to transmit information at a rate exceeding \(C\) without a positive frequency.
+\end{theorem}
+
+\begin{remark}
+    with memory and Gilbert
+\end{remark}
+
+\section{Continuous channels}
+\begin{remark}
+    additive and multiplicative noise
+\end{remark}
+
+\begin{itemize}
+    \item Modulator and demodulator are techniques to reduce guassian noise effect.
+    \item Impulse noise are modeled in the discrete portion.
+\end{itemize}
+
+\begin{theorem}[Shannon-Hartley theorem]
+    The capacity of a channel with bandwidth \(B\) and additive guassian band-limited white noise is 
+    \begin{equation*}
+        C = B \func{\lg}{1 + \dfrac{S}{N}}
+    \end{equation*}
+    where \(S\) and \(N\) are the average signal power and noise power at the output channel. \(N = \eta B\) if two sided spectral density of the noise is \(\frac{\eta}{2}\). 
+\end{theorem}
+
+Implications 
+\begin{enumerate}
+    \item Gives an upperlimit that can be reached
+    \item Exchange of \(S/N\) for bandwidth.
+    \item Bandwidth compression.
+    \item Noiseless channel has infinite capacity. For noisy channels, as bandwidth increases because the noise power increases as well, the capacity approaches a limit.
+\end{enumerate}
+
+Communication at transmitting information rate of \(B \func{\lg}{1 + S/N}\) is called \textit{ideal}.
+\begin{enumerate}
+    \item Most physical channels are approximately gaussian.
+    \item Guassian noise provides a lowerbound performace for all other types.
+\end{enumerate}
+\begin{remark}
+    CRT
+\end{remark}

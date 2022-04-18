@@ -1,0 +1,73 @@
+\chapter{Frequency Domain Analysis}
+\section{Fourier Series}
+For a periodic signal \(\func{x}{t}\):
+\begin{align*}
+    \func{x_{\pm}}{t} = \sum_{n = -\infty}^{\infty} x_n e^{2\pi j \frac{n}{T_0} t} & & x_n = \dfrac{1}{T_0} \int_{T_0} \func{x}{t} e^{-2 \pi j \frac{n}{T_0} t} \diffOperator t
+\end{align*}
+for angular frequency \(\omega_0 = 2\pi f_0\):
+\begin{align*}
+    \func{x_{\pm}}{t} = \sum_{n = -\infty}^{\infty} x_n e^{ j n \omega_0 t} & & x_n = \dfrac{\omega_0}{2\pi} \int_{T_0} \func{x}{t} e^{- j n \omega_0 t} \diffOperator t
+\end{align*}
+\section{Fourier Transform}
+For non-periodic signals \(\func{x}{t}\):
+\begin{align*}
+    \func{X}{f} &= \int_{-\infty}^{\infty} \func{x}{t} e^{-j 2\pi f t} \diffOperator t &  \func{x}{t} &= \int_{-\infty}^{\infty} \func{X}{f} e^{j 2\pi f t}\diffOperator f\\
+    \func{X}{f} &= \Fourier{\func{x}{t}}  & \func{x}{t} &= \InvFourier{\func{X}{f}}\\
+    \func{X}{\omega} &= \int_{-\infty}^{\infty} \func{x}{t} e^{-j \omega t} \diffOperator t & \func{x}{t} &= \dfrac{1}{2\pi} \int_{-\infty}^{\infty} \func{X}{f} e^{j \omega t}\diffOperator \omega
+\end{align*}
+\(\func{X}{f}\) is called the \textbf{spectrum} of \(\func{x}{t}\), or the \textbf{voltage spectrum}. From the relationship between the inverse Fourier transform of Fourier transform of a signal we define
+\begin{equation*}
+    \func{\delta}{t} = \int_{-\infty}^{\infty} e^{2\pi j f t}\diffOperator f = \dfrac{1}{2\pi} \int_{-\infty}^{\infty} e^{j \omega t}\diffOperator f
+\end{equation*}
+That is, all frequencies in \(\func{\delta}{t}\) are with unit magnitude and zero phase.
+\begin{align*}
+    \func{\delta}{t} = \InvFourier{1} & & \func{\delta}{f} = \Fourier{1}
+\end{align*}
+
+\section{Power and Energy}
+Define 
+\begin{align*}
+    \calE_x = \int_{-\infty}^{\infty} \abs{\func{x}{t}}^2 \diffOperator t & & \calP_x = \lim_{T \to \infty} \dfrac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} \abs{\func{x}{t}}^2 \diffOperator t
+\end{align*}
+A signal is \textbf{energy-type} if \(E_x < + \infty\) and it is \textbf{power-type} if \(0 < P_x < +\infty\). A signal can not be both, but it can be neither.
+\subsection{Energy-type}
+Let \(\func{x}{t}\) be a energy-type signal. The \textbf{autocorrelation} of \(\func{x}{t}\) is 
+\begin{align*}
+    \func{R_x}{\tau} &= \func{x}{\tau} \ast \overline{\func{x}{-\tau}} \\
+    &= \int_{-\infty}^{\infty} \func{x}{t} \overline{\func{x}{t - \tau}} \diffOperator t\\
+    \implies \calE_x &= \func{R_x}{0}
+\end{align*}
+By Rayleigh's property 
+\begin{equation*}
+    \calE_x = \int_{-\infty}^{\infty}
+\end{equation*}
+The \textbf{energy spectral density} \(\func{\calG}{f} = \Fourier{\func{R_x}{\tau}} = \abs{\func{X}{f}}^2\), represent energy per hertz of bandwidth. 
+\subsection{Power-type}
+Let \(\func{x}{t}\) be a power type signal. The \textbf{time average autocorrelation} function 
+\begin{align*}
+    \func{R_{x}}{\tau} &= \lim_{T \to \infty} \int_{-\frac{T}{2}}^{\frac{T}{2}} \func{x}{t} \overline{\func{x}{t - \tau}} \diffOperator t\\
+    \implies \calP_x &= \func{R_x}{0}
+\end{align*}
+The \textbf{power spectral density} \(\func{\calS}{f} = \Fourier{\func{R_x}{\tau}}\) and 
+\begin{equation*}
+    \calP_x = \int_{-\infty}^{\infty} \func{\calS}{f} \diffOperator f
+\end{equation*}
+
+Suppose \(\func{x}{t}\) is a power-type signal passing through a filter with impluse response \(\func{h}{t}\):
+\begin{align*}
+    \func{y}{t} &= \func{x}{t} \ast \func{h}{t}\\
+    \func{R_y}{\tau} &= \lim_{T \to \infty} \int_{-\frac{T}{2}}^{\frac{T}{2}} \func{y}{t} \overline{\func{y}{t - \tau}} \diffOperator t\\
+    &= \lim_{T \to \infty} \int_{-\frac{T}{2}}^{\frac{T}{2}}\bracket{\int_{-\infty}^{\infty} \func{h}{u} \func{x}{t - u} \diffOperator u} \bracket{\int_{\infty}^{\infty} \overline{\func{h}{v}} \overline{\func{x}{t - \tau - v}} \diffOperator v }  \diffOperator t\\
+    &= \lim_{T \to \infty} \int_{-\infty}^{\infty} \int_{\infty}^{\infty} \int_{-\frac{T}{2}}^{\frac{T}{2}}  \func{h}{u} \overline{\func{h}{v}}  \func{x}{t - u}  \overline{\func{x}{t - \tau - v}}  \diffOperator t \diffOperator u \diffOperator v\\
+    &= \int_{-\infty}^{\infty} \int_{\infty}^{\infty}  \func{h}{u} \overline{\func{h}{v}} \lim_{T \to \infty}  \int_{-\frac{T}{2} + u}^{\frac{T}{2} +u} \func{x}{w}   \overline{\func{x}{w + u - \tau - v}}  \diffOperator w \diffOperator u \diffOperator v\\
+    &= \int_{-\infty}^{\infty} \int_{\infty}^{\infty}  \func{h}{u} \overline{\func{h}{v}}\func{R_x}{v + \tau - u} \diffOperator u \diffOperator v\\
+    &=  \int_{-\infty}^{\infty}   \bracket{\func{R_x}{v + \tau }  \ast \func{h}{v + \tau}} \overline{\func{h}{v}}\diffOperator u \diffOperator v\\
+    &= \func{R_x}{\tau }  \ast \func{h}{\tau} \ast \overline{\func{h}{-\tau}}
+\end{align*}
+Which implies that 
+\begin{equation*}
+    \func{\calS_y}{f} = \func{\calS_x}{f} \func{H}{f} \overline{\func{H}{f}} = \func{\calS_x}{f} \abs{\func{H}{f}}^2
+\end{equation*}
+\section{Sampling of bandlimited signals}
+\(f_s = 2W\) is the \textbf{Nyquist rate} and \(f_s -  2W\) is \textbf{guard band}.
+\section{Bandpass signal}
