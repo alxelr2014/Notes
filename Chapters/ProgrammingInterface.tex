@@ -1,0 +1,83 @@
+\chapter{Programming Interface}
+what functionalities does the operating system provide applications 
+\begin{description}
+    \item[Process management:] start another process? wait for it to complete? signals?
+    \item[Input/Output:] How to communicate with devices? how to communicate with another process.
+    \item[Thread management:] multithreading? synchronization of data?
+    \item[Memory management:] how to allocate more/less memory? can it share memory with other processes?
+    \item[File system ans storage]
+    \item[Networking and distribute systems:] how to commuincate with other computers?
+    \item[Graphic and window management:] how to control its window? how to use graphical devices and accelerators?
+    \item[Authentication and security:] what permission does it have?        
+\end{description}
+
+where to implement functionalities
+\begin{itemize}
+    \item user-level program. e.g. user login
+    \item user-level library; linked to program. e.g. OS libs 
+    \item kernel; accessed through system call. e.g. low level file I/O
+    \item standalone server process; access through system calls and invoked by kernel. e.g. windows manager.
+\end{itemize}
+
+tradeoffs to consider 
+\begin{description}
+    \item[Flexibility:] easier if it is outside kernel.
+    \item[Safety:] protection must be implemented in kernel.
+    \item[Reliability:] keeping kernel minimal.
+    \item[Performance:] transferring control between kernel and user is expensive.    
+\end{description}
+\section{Process management}
+shell is a job control system. In Windows, processes are created by a system call.
+\begin{codeC}
+    CreateProcess()
+\end{codeC}
+
+In UNIX,
+\begin{codeC}
+    fork(); // copies parent process into child
+    exec(); // copies a new program and start running it.
+\end{codeC}
+\begin{enumerate}
+    \item UNIX fork 
+    \begin{itemize}
+        \item create and initialize PCB in kernel.
+        \item create a new address space.
+        \item initialize the address space with the copy of the entire contents of the address space of the parent.
+        \item inherit the execution context. e.g. file descriptors
+        \item inform scheduler that a new process is ready to run.
+        \item it returns twice; for parent it returns the pid of the child and for child it returns 0.
+    \end{itemize}
+    \item UNIX exec 
+    \begin{itemize}
+        \item load program into current address space.
+        \item copy args into memory in address space.
+        \item initialize hardware context to start execution at ``start''.
+    \end{itemize}
+    \item UNIX wait
+    \begin{itemize}
+        \item waits for a particular child.
+        \item running in background by appending an `\&'.
+    \end{itemize}
+\end{enumerate}
+\subsection{Input/Output}
+everything is a file. 
+\begin{description}
+    \item[Uniformity:] all I/O, file descriptors, IPC, etc use the same set of system calls.
+    \item[Open before use:] check access permissions and do some bookkeeping.
+    \item[Byte oriented:]  everything is accessed with byte arrays.
+    \item[Kernel buffered read/writes] 
+    \item[Explicit close] otherwise garbage collector.     
+\end{description}
+For IPC we need two or more system calls.
+\subsubsection*{Pipe}
+the pipe closes when either ends close the pipe or exit.
+\begin{itemize}
+    \item replace file descriptors with dup and dup2
+    \item wait for multiple reads with select, allows the server to wait for input from any of a set of file descriptors; it returns the file descriptors that has data but does not read the data.
+\end{itemize}
+
+\subsection{Operating system structure}
+\subsubsection*{Monolithic OS}
+most OS functionalities run in kernel. to improve portability adds hardware abstraction layer and dynamically loaded device drivers. HAL is a portable interface to machine specific operations. Dynamically installed device drivers decouples OS kernel from specific devices (90\% bugs are here rather than OS itself).
+\subsubsection*{Microkernel}
+minimal kernel

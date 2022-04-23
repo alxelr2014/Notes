@@ -24,11 +24,40 @@
 \usepackage{mathtools}
 \usepackage{xcolor}
 \usepackage{enumitem}
+\usepackage{listings}
 \usepackage[ruled,noline]{algorithm2e}
 \usepackage{graphicx}
 \usepackage{common}
 \usepackage{english-theorems}
 \setcounter{tocdepth}{1}
+
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\definecolor{Darkgreen}{rgb}{0,0.4,0}
+\lstdefinestyle{customc}{
+    backgroundcolor=\color{lbcolor},
+    tabsize=4,
+  language=C++,
+  captionpos=b,
+  tabsize=3,
+  frame=lines,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  breaklines=true,
+  showstringspaces=false,
+  basicstyle=\footnotesize,
+%  identifierstyle=\color{magenta},
+  keywordstyle=\color[rgb]{0,0,1},
+  commentstyle=\color{Darkgreen},
+  stringstyle=\color{red}
+}
+
+\lstnewenvironment{codeC}{
+ \lstset{escapechar=@,style=customc}\bgroup
+}{
+    \egroup
+}
 
 \begin{document}
 \tableofcontents
@@ -37,5 +66,6 @@
 \thispagestyle{empty}
 \fi
 \input{Chapters/KernelAbstraction.tex}
+\input{Chapters/ProgrammingInterface.tex}
 \input{Chapters/Slides.tex}
 \end{document}
