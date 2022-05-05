@@ -1,6 +1,11 @@
 \chapter{Group Theory}
 \section{Introduction}
 \begin{definition}
+    A set \(S\) equipped with an associative binary operation is a \textbf{semigroup}.
+\end{definition}
+A semigroup can have multiple left or right identities. However, if it has both left identity, \(e\), and right identity, \(f\), then those two are equal since \(e = ef = f\). Two sided identity are unique. We have the same story with inverses.
+
+\begin{definition}
     A non-empty set of elements \(G\) together with a binary operation \(\circ\) are said to be a \textbf{group} if 
     \begin{description}
         \item[Closure:] \(\forall a,b \in G, a \circ b \in G\).
@@ -26,12 +31,64 @@
     Given \(a,b \in G\) the equation \(ax = b\) and \(ya = b\) have unique solutions for \(x,y \in G\).
 \end{lemma}
 
+\begin{prooflemma}
+    Note that \(a^{-1}\) and \(b^{-1}\) are unique. Therefore, \(x = a^{-1}b\) and \(y = ba^{-1}\) are unique.
+\end{prooflemma}
+\ \\ 
+{\Large{\textbf{Exercises}}}
+\begin{enumerate}
+    \item Let \(S\) be a finite semi-group. Prove that there exists \(e \in S\) such that \(e^2 = e\).
+    \begin{proof}
+        Pick \(a \in S\) and consider \(a_i = a^{2^i}\) for \(i \geq 1\). After some point, \(a_i\)s repeat, by the pigeon hole principle. Let that point be \(a_j\). Therefore, for some \(m \geq 1\).
+        \begin{equation*}
+            a_j = (a_j)^{2^m}
+        \end{equation*}
+        Let \(e = a_j^{2^m - 1}\), then
+        \begin{equation*}
+            e^2 = a_j^{2^{m+1} - 2} = a_j^{2^{m}} a_j^{2^m - 2} = a_j a_j^{2^m - 2} = e
+        \end{equation*}
+        we are done.
+    \end{proof}
+    \item Show that if a group \(G\) is abelian, then for \(a,b \in G\) and any integer \(n\), \((ab)^n = a^n b^n\).
+    \begin{proof}
+        Induct over positive \(n\). It is trivially true for \(n = 1\). Suppose it is true for \(n = k\), then 
+        \begin{equation*}
+            (ab)^{k+1} = (ab)^k ab = a^k b^k a b = a^{k} a b^k b = a^{k+1}b^{k+1}
+        \end{equation*}
+        For negative \(n\), note that 
+        \begin{equation*}
+            (ab)^{-1} = b^{-1} a^{-1} = a^{-1} b^{-1} \implies (ab)^{n} = ((ab)^{-1})^{-n} = (a^{-1} b^{-1})^{-n} = a^{n} b^{n}
+        \end{equation*}
+        hence it is true for all integers \(n\).
+    \end{proof}
+    \item If a group has an even order, then there exists \(a \neq e\) such that \(a^2 = e\).
+    \begin{proof}
+        Let \(A = \set<g>{g \neq g^{-1}}\) and \(B = \set<g>{g = g^{-1}}\). Note that, \(\abs{A}\) is even since  \(g  \in A \implies g^{-1} \in A\). Moreover, \(\func{o}{G} = \abs{A} + \abs{B}\), therefore \(\abs{B}\) must be even and since \(e \in B\), \(\abs{B} \geq 2\).
+    \end{proof}
+    \item For any \(n > 2\) construct a non-abelian group of order \(2n\).
+    \begin{proof}
+        Consider \(\phi, \psi\) where \(\psi^n = \phi^2 = e \) and \(\psi \phi = \phi \psi^{-1}\). Then
+        \begin{equation*}
+            G = \set{I, \phi ,\psi, \psi^2, \dots ,\psi^{n-1}, \phi \psi, \dots , \phi \psi^{n-1}}
+        \end{equation*}
+        is a group of order \(2n\). Because, by the product rules defined, any combination of \(\psi\) and \(\phi\) can be reduced to \(\phi^b \psi^k\) where \(b = 0,1\) and \(k = 0,1 , \dots, n-1\). It is cleary non-abelian as well.
+    \end{proof}
+    \item Find the order of \(\func{\GL_2}{\Integers_p}\) and \(\func{\SL_2}{\Integers_p}\) for a prime \(p\).
+    \begin{proof}
+        \begin{align*}
+            \func{o}{\func{\GL_2}{\Integers_p}} &= (p+1) p (p-1)^2\\
+            \func{o}{\func{\SL_2}{\Integers_p}} &= (p+1) p (p-1)
+        \end{align*}
+        which be can be calculate with some basic casing.
+    \end{proof}
+\end{enumerate}
+
 \section{Subgroup}
 \begin{definition}
     A non-empty subset \(H\) of a group \(G\) is called a \textbf{subgroup} if under the product in \(G\), \(H\) itself forms a group.
 \end{definition}
 
-\begin{lemma}
+\begin{lemma}\label{lm:subgroupConditions}
     \(H\) is a subgroup of \(G\) if and only if 
     \begin{enumerate}
         \item \(\forall a,b \in H, ab \in H\).
@@ -40,7 +97,12 @@
 \end{lemma}
 
 \begin{prooflemma}
-  Add.  
+  If \(H\) is a subgroup, then the conditions hold. Suppose \(H\) is a subset of \(G\) that satisfies the conditions. Then, 
+  \begin{enumerate}
+      \item \(e \in H\) since \((a \in H \implies a^{-1} \in H) \implies e = a a^{-1} \in H\).
+      \item Associativity is inherited from \(G\).
+  \end{enumerate}
+  invertibility and closure are given from the conditions. Therefore, \(H\) is a subgroup.
 \end{prooflemma}
 
 \begin{lemma}
@@ -48,7 +110,7 @@
 \end{lemma}
 
 \begin{prooflemma}
-    Add.
+    Since \(H\) is non-empty there exists a \(a \in H\). By closure, \(a^n\) for positive integer \(n\), are also in \(H\). We know that for some \(N\), \(a^N = e\) and therefore \(a^{-1} = a^{N - 1} \in H\). By \href{lm:subgroupConditions}, \(H\) is a subgroup.
 \end{prooflemma}
 
 \begin{definition}
@@ -60,14 +122,19 @@
 \end{lemma}
 
 \begin{prooflemma}
-    Add.
+    We show the equivalence axioms:
+    \begin{enumerate}
+        \item for any \(a\), \(a \equiv a \mod H\) becuase, \(aa^{-1} = e \in H\).
+        \item for any \(a,b\), \(a \equiv b \mod H \implies b \equiv a \mod H\) since \(ab^{-1} \in H \) because of invertibility implies that \( (ab^{-1})^{-1} = ba^{-1} \in H\).
+        \item for any \(a,b,c\), \(a \equiv b \mod H, b \equiv c \mod H \implies a \equiv c \mod H\) since \(ab^{-1}, bc^{-1} \in H \) because of closure implies that \( ab^{-1} bc^{-1} = bc^{-1} \in H\).
+    \end{enumerate}
 \end{prooflemma}
 
 \begin{definition}
     If \(H\) is a subgroup of \(G\) and \(a \in G\), then \(Ha = \set<ha>{h \in H}\) is a \textbf{right coset} of \(H\) in \(G\). Similary, \(aH = \set<ah>{h \in H}\) is a \textbf{left coset} of \(H\) in \(G\).
 \end{definition}
 
-\begin{lemma}
+\begin{lemma}\label{lm:cosetsAreEquivalenceClasses}
     For all \(a \in G\), 
     \begin{equation*}
         Ha = \set<x \in G>{a \equiv x \mod{H}}
@@ -80,12 +147,12 @@
 
 This implies, two right/left coset of \(H\) are either identical or disjoint.
 
-\begin{lemma}
+\begin{lemma}\label{lm:cosetsHaveSameCardinality}
     There is a one-to-one correspondence between any two right/left cosets of \(H\).
 \end{lemma}
 
 \begin{prooflemma}
-    Add.
+    Let \(R_1,R_2\) be two right cosets of \(H\) with \(a_1 \in R_1\) and \(a_2 \in R_2\). Note that, \(R_1 = Ha_1\) and \(R_2 = Ha_2\), therefore the map \(g \mapsto ga_1^{-1} a_2\) is a bijective map from \(R_1\) to \(R_2\).
 \end{prooflemma}
 
 \begin{theorem}[Lagrange's theorem]
@@ -93,7 +160,7 @@ This implies, two right/left coset of \(H\) are either identical or disjoint.
 \end{theorem}
 
 \begin{proof}
-    Add.
+    By \href{lm:cosetsAreEquivalenceClasses} and \href{lm:cosetsHaveSameCardinality}, and from finiteness of \(G\), the order of \(G\) is equal to the number of right cosets multiplied by the cardinality of a right coset which is equal to the order of \(H\). Hence, \(\func{o}{H} \mid \func{o}{G}\)
 \end{proof}
 
 \begin{definition}
@@ -123,6 +190,27 @@ Let \(H\) and \(K\) be two subgroups of \(G\), then
 \begin{lemma}
     \(HK\) is a subgroup of \(G\) if and only if \(HK = KH\).
 \end{lemma}
+\begin{proof}
+    Suppose \(HK\) is a subgroup. If \(hk \in HK\), then
+    \begin{equation*}
+        k^{-1}h^{-1} \in HK \implies k^{-1} \in H, h^{-1} \in K \implies k \in H,h \in K \implies hk  \in KH 
+    \end{equation*}
+    hence \(HK \subset KH\). If \(kh \in KH\), then 
+    \begin{equation*}
+        hk \in HK  \implies k^{-1} \in H, h^{-1} \in K \implies k \in H,h \in K \implies kh \in HK 
+    \end{equation*}
+    thus \(HK = KH\). Suppose \(HK = KH\) with \(h_1k_1, h_2k_2 \in HK\).
+    \begin{enumerate}
+        \item for closure we have 
+        \begin{equation*}
+            h_1k_1 h_2 k_2 = h_1 k_1(k_2' h_2') = h_1 (k_1k_2') h_2' = h_1 (k^{\ast} h_2') = h_1 h_2'' k^{\ast'}
+        \end{equation*}
+        \item for inverse 
+        \begin{equation*}
+            (h_1k_1)^{-1} = k_1^{-1} h_1^{-1} = h_1' k_1'
+        \end{equation*}
+    \end{enumerate}
+\end{proof}
 \begin{corollary}
     If \(H\) and \(K\) are subgroups of an abelian group \(G\), then \(HK\) is a subgroup of \(G\).
 \end{corollary}
@@ -149,3 +237,198 @@ Let \(H\) and \(K\) be two subgroups of \(G\), then
     \end{equation*}
     which implies that \(\func{o}{H \cap K} > 1\).
 \end{proof}
+\ \\ 
+{\Large{\textbf{Exercises}}}
+\begin{enumerate}
+    \item Let \(G\) be a group such that the intersection of all of its subgroups that are different from \(\set{e}\) is different from \(\set{e}\). Prove that every element in \(G\) has finite order.
+    \begin{proof}
+        For the sake of contradiction, suppose \(a \in G\) has infinite order. Then, \(a^k\) are all different and 
+        \begin{equation*}
+            \bigcup_{k = 1}^{\infty} \angleBracket{a^k} = \set{e}
+        \end{equation*}
+        which is a contradiction.
+    \end{proof}
+    \item Show that there is one-to-one correspondence between the right and left cosets of a subgroup.
+    \item Suppose \(H\) and \(K\) are finite index subgroups in \(G\). Show that \(H \cap K\) is a finite subgroup in \(G\).
+    \begin{proof}
+        Let \(Ha_1, \dots , Ha_n\) be the right cosets of \(H\) in \(G\) and \(Kb_1, \dots , Kb_m\) be the right costs of \(K\) in \(G\). Then, 
+        \begin{equation*}
+            G = G \cap G = \bigcap_i Ha_i \cap \bigcap_j Kb_j = \bigcap_{i,j} Ha_i \cap Kb_j
+        \end{equation*}
+        Suppose \(Ha_i \cap Kb_j\) is not empty. Let \(g \in Ha_i \cap Kb_j\), then \(Hg = Ha_i\) and \(Kg = Kb_j\). Thus, 
+        \begin{equation*}
+            Ha_i \cap Kb_j = Hg \cap Kg = (H \cap K)g
+        \end{equation*}
+        Therefore, \(Ha_i \cap Kb_j\) are either empty or a right coset of \(H \cap K\). Since there finitely many \(Ha_i \cap Kb_j\), there finitely many right cosets of \(H \cap K\) in \(G\). Moreover, \(\squareBracket{G:H \cap K} \leq \squareBracket{G:H} \squareBracket{G:K}\) by this construction. Note that, \(H \cap K\) is finite index in \(H\), and let \((H \cap K)c_1, \dots , (H \cap K)c_l\) be the right cosets of \(H \cap K\) in \(H\). We claim that \((H \cap K)c_ra_i\) are the right cosets of \(H \cap K\) in \(G\). By definition, for each \(x \in G\), there exists \(i\) such that \(x \in Ha_i\)and hence \(x = ha_i\) for some \(h \in H\). Similary, there exists \(r\) such that \(h \in (H \cap K)c_r\) and hence \(h = fc_r\) for some \(f \in H \cap K\). Therefore, \(x = fc_ra_i\) and \(x \in (H \cap K)c_ra_i\). Lastly, we must show that \((H \cap K)c_ra_i\) are disjoint. Consider \((H \cap K)  c_{r_1}a_{i_1}\) and \((H \cap K)c_{r_2}a_{i_2}\). Since \((H \cap K)c_{r_1}, (H \cap K)c_{r_2} \subset H\), then 
+        \begin{align*}
+            (H \cap K)c_{r_1}a_{i_1} = (H \cap K)  c_{r_2}a_{i_2} &\implies a_{i_1} = a_{i_2}, (H \cap K)  c_{r_1} = (H \cap K)  c_{r_2}\\
+            &\implies a_{i_1} = a_{i_2}, c_{r_1} = c_{r_2}
+        \end{align*}
+        As a result, \(\squareBracket{G:H \cap K} = \squareBracket{G:H} \squareBracket{H:H\cap K}\).
+        \end{proof}
+    \item Let \(H\) be a finite index subgroup in \(G\). Show that there is only finitely many subgroups of form \(aHa^{-1}\) in \(G\).
+    \begin{proof}
+        Let \(a_1H, \dots, a_nH\) be left cosets of \(H\). Then, \(Ha_1^{-1}, \dots, Ha_n^{-1}\) are right cosets of \(H\). Suppose \(aH = a_iH\), then \(Ha^{-1} = Ha_i^{-1}\) and therefore, \(aHa^{-1} = a_{i} H a_{i}^{-1}\). Since there are finitely many \(a_i H a_i^{-1}\), then there are finitely many \(aHa^{-1}\).
+    \end{proof}
+    \item
+\end{enumerate}
+\section{Normal subgroups}
+\begin{definition}
+    A subgroup \(N\) of \(G\) is \textbf{normal} if \(\forall g \in G,n \in N,\ gng^{-1} \in N\).
+\end{definition}
+
+\begin{lemma}
+    \(N\) is normal if and only if \(gNg^{-1} = N\) for every \(g \in G\).
+\end{lemma}
+
+\begin{lemma}
+    \(N\) is a normal subgroup if and only if every left coset of \(N\) is a right coset.
+\end{lemma}
+
+\begin{definition}
+    \(G/N\) is called a \textbf{quotient group} is the set of all right cosets of \(N\).
+\end{definition}
+
+\section{Homomorphism}
+\begin{definition}
+    A mapping \(\phi\) from a group \(G\) to another group \(\bar{G}\) is a \textbf{homomorphism} if for all \(a,b \in G\)
+    \begin{equation*}
+        \func{\phi}{ab} = \func{\phi}{a} \func{\phi}{b}
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}
+    Suppose \(G\) is a group, \(N\) a normal subgroup of \(G\), \(\phi: G \to G/N\) given by \(\func{\phi}{x} = Nx\) for all \(x \in G\). Then, \(\phi\) is a homomorphism.
+\end{lemma}
+
+\begin{definition}
+    If \(\phi\) is a homomorphism of \(G\) into \(\bar{G}\), the \textbf{kernel} of \(\phi\), \(K_{\phi}\) is defined as \(K_{\phi} = \set<x \in G>{\func{\phi}{x} = \bar{e}}\).
+\end{definition}
+
+\begin{lemma}
+    \(\phi: G \to \bar{G}\) is a homomorphism if 
+    \begin{enumerate}
+        \item \(\func{\phi}{e} = \bar{e}\).
+        \item \(\func{\phi}{x^{-1}} = \bracket{\func{\phi}{x}}^{-1}\).
+    \end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+    If \(\phi\) is a homomorphism, then \(K_{\phi}\) is a normal subgroup of \(G\).
+\end{lemma}
+
+\begin{lemma}
+    If \(\phi\) is a homomorphism, then the set all iverse images of \(\bar{g} \in \bar{G}\) under \(\phi\) is given by \(K_{\phi} x\) for any particular inverse image of \(\bar{g}\).
+\end{lemma}
+
+\begin{definition}
+    A homomorphism \(\phi: G \to \bar{G}\) is an \textbf{isomorphism} if \(\phi\) is \underline{one-to-one}.
+\end{definition}
+
+\begin{definition}
+    Two groups \(G\) and \(\bar{G}\) are \textbf{isomorphic} if there exists an isomorphism of \(G\) \underline{onto} \(\bar{G}\). Isomorphic groups are denoted by \(G \approx \bar{G}\).
+\end{definition}
+
+\begin{corollary}
+    \(\phi\) is isomorphism if and only if \(K_{\phi} = \set{e}\).
+\end{corollary}
+
+\begin{theorem}
+    If \(\phi: G \to \bar{G}\) is a homomorphism, then \(G/K_{\phi} \approx \bar{G}\)
+\end{theorem}
+
+Thus, we can find all homomorphic images of \(G\) by going through normal subgroups of \(G\).
+
+\begin{definition}
+    A group is \textbf{simple} if it has no non-trivial homomorphic images.
+\end{definition}
+
+\begin{theorem}
+    Suoppose \(G\) is a finite abelian group, and \(p \mid \func{o}{G}\) where \(p\) is a prime number. Then, there is an element \(a \neq e\) such that \(a^p = e\).
+\end{theorem}
+
+\begin{theorem}
+    Suppose \(G\) is a finite abelian group and \(p^{\alpha} \mid\mid \func{o}{G}\), then \(G\) has a unique subgroup of order \(p^{\alpha}\).
+\end{theorem}
+
+\begin{lemma}
+    Suppose \(\phi: G \to \bar{G}\) is a homomorphism and \(\bar{H}\) is a subgroup of \(\bar{G}\). Let \(H = \set<x \in G>{\func{\phi}{x} \in \bar{H}}\). Then, \(H\) is a subgroup of \(G\) and \(H \supset K_{\phi}\). If \(\bar{H}\) is normal in \(\bar{G}\), then \(H\) is normal. Moreover, this association sets up a one-to-one mapping from the set of all subgroups \(\bar{G}\) onto the set of all subgroups of \(G\) which contain \(K_{\phi}\).
+\end{lemma}
+
+\begin{theorem}
+    Let \(\phi:G \to \bar{G}\) be a homomorphism, \(\bar{N}\) a normal subgroup of \(\bar{G}\), and \(N = \set<x \in G>{\func{\phi}{x} \in N}\). Then, \(G/N \approx \bar{G}/\bar{N}\) if and only if \(G/N \approx (G/K_{\phi})/(N/K_{\phi})\).
+\end{theorem}
+
+\section{Automorphism}
+\begin{definition}
+    An isomorphism of a group onto iteslf is called an \textbf{automorphism}.
+\end{definition}
+
+\begin{lemma}
+    If \(G\) is a group, then \(\func{\scrA}{G}\), the set of all automorphisms of \(G\) is also a group. The \(\func{\scrA}{G}\) is also denoted by \(\aut{G}\).
+\end{lemma}
+
+\begin{example}
+\(T_g:G \to G\) with \(xT_g = g^{-1}xg\). \(T_g\) is an automorphisms. \(T_g\) is called the \textbf{inner automorphism corresponding to \(g\)}. Let \(\func{\scrT}{G} = \set<T_g \in \aut{G}>{g \in G}\) is the \textbf{inner automorphism group} and is also denoted by \(\inn{G}\). \(\Psi: G \to \aut{G}\) given by \(g\Psi = T_g\) is a homomorphism. The kernel of \(\Psi\) is the \textbf{center} of \(G\), \(\func{Z}{G}\), the set of the elements that commute with all other elements. Note that, if \(g_o \in K_{\Psi}\), then \(T_{g_0} = I\), hence \(g_0^{-1}xg_0 = x\) implying \(g_0x = xg_0\) for all \(x \in G\). If \(g_0 \in \func{Z}{G}\), then \(xg_0 = g_0x\) for all \(x\), thus \(T_{g_0} = I\) and \(g_0 \in K_{\Psi}\).
+\end{example}
+
+\begin{lemma}
+    \(\inn{G} \sim G/Z\).
+\end{lemma}
+
+\begin{lemma}
+    Let \(G\) be a group and \(\phi\) be an automorphism of \(G\). If \(a \in G\) is of order \(\func{o}{a} > 0\), then \(\func{o}{\func{\phi}{a}} = \func{o}{a}\).
+\end{lemma}
+
+\section{Cayley's theorem}
+\begin{theorem}[Cayley]
+    Every group is isomorphic to a subgroup of \(\func{A}{S}\) for some set \(S\).
+\end{theorem}
+
+\begin{theorem}
+    If \(G\) is a group, \(H\) a subgroup of \(G\), and \(S\) is the set of all right cosets of \(H\) in \(G\), then there is a homomorphism \(\theta: G \to \func{A}{S}\) and the kernel of \(\theta\) is the largest normal subgroup of \(G\) which is contained in \(H\).
+\end{theorem}
+
+\begin{lemma}
+    If \(G\) is a finite group, and \(H \neq G\) is a subgroup of \(G\) such that \(\func{o}{G} \not\mid \func{i}{H}!\), then \(H\) must contain a non-trivial normal subgroup of \(G\). In particular, \(G\) is not simple.
+\end{lemma}
+
+\section{Permutation group}
+Suppose \(S\) is a finite set having \(n\) elements \(x_1, \dots, x_n\). If \(\phi \in \func{A}{S}\), then \(\phi\) is a one-to-one correspondence and it can be represented as 
+\begin{align*}
+    \phi:& \begin{pmatrix*}
+        x_1 & x_2 & \dots & x_n\\
+        x_{i_1} & x_{i_2} & \dots & x_{i_n}
+    \end{pmatrix*}
+\intertext{ where \( x_{i_j} = \func{\phi}{x_j}\). More simply}
+    & \begin{pmatrix*}
+        1 & 2& \dots & n\\
+        i_1 &i_2& \dots & i_n
+    \end{pmatrix*} 
+\end{align*}
+By considering composition of \(\theta,\psi \in \func{A}{S}\), we can define multiplication on their representation. 
+
+For \(\theta \in \func{A}{S}\) and \(a,b \in S\), \(a \equiv b \iff a = b \theta^i\) for some \(i \in \Integers\). This defines an equivalence relation. 
+
+--add the axioms
+
+We cakk the equivalence classes of \(s \in S\), the \textbf{orbit} of \(s\) under \(\theta\). The orbit of \(s\) consists of all elements in form of \(s \theta^i\), \(i \in \Integers\). If \(S\) is finite, then there is a smallest positive integer \(l = \func{l}{s}\) such that \(s\theta^l = s\). By \textbf{cycle} of \(\theta\) we mean the ordered set \((s,s\theta, \dots , s\theta^{l-1})\).
+
+\begin{lemma}
+    Every permutation is a product of its cycles.
+\end{lemma}
+
+\begin{lemma}
+    Every cycle can be written as a product of 2-cycle or \textbf{transpositions}.
+\end{lemma}
+
+\begin{definition}
+    A permutation \(\theta \in S_n\) is said to be an even permuation if it can be represented as a product of an even number of transpositions, 
+\end{definition}
+
+-- add well-definition of even
+
+Let \(A_n \subset S_n\) be the set of even permutations. \(A_n\) is a subgroup of \(S_n\) and it is called the \textbf{alternating group}. 
+\begin{lemma}
+    The alternating group is a normal subgroup of \(S_n\) of index \(2\), .
+\end{lemma}
