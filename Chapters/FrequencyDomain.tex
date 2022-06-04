@@ -4,16 +4,24 @@ For a periodic signal \(\func{x}{t}\):
 \begin{align*}
     \func{x_{\pm}}{t} = \sum_{n = -\infty}^{\infty} x_n e^{2\pi j \frac{n}{T_0} t} & & x_n = \dfrac{1}{T_0} \int_{T_0} \func{x}{t} e^{-2 \pi j \frac{n}{T_0} t} \diffOperator t
 \end{align*}
+and 
+\begin{equation*}
+    \func{x_{\pm}}{t} = \begin{cases*}
+        \func{x}{t} & \(x\)  \text{ is continuous at } \(t\)\\
+        \dfrac{\func{x}{t^+} + \func{x}{t^-}}{2} & \(x\) \text{ is discontinuous at } \(t\)
+    \end{cases*}
+\end{equation*}
 for angular frequency \(\omega_0 = 2\pi f_0\):
 \begin{align*}
     \func{x_{\pm}}{t} = \sum_{n = -\infty}^{\infty} x_n e^{ j n \omega_0 t} & & x_n = \dfrac{\omega_0}{2\pi} \int_{T_0} \func{x}{t} e^{- j n \omega_0 t} \diffOperator t
 \end{align*}
+\(f_0 = \frac{1}{T_0}\) is called the \textbf{fundamental frequency} and its \(n_{\cardinalTH}\) is called the \textbf{\(n_{\cardinalTH}\) harmonic}.
 \section{Fourier Transform}
 For non-periodic signals \(\func{x}{t}\):
 \begin{align*}
-    \func{X}{f} &= \int_{-\infty}^{\infty} \func{x}{t} e^{-j 2\pi f t} \diffOperator t &  \func{x}{t} &= \int_{-\infty}^{\infty} \func{X}{f} e^{j 2\pi f t}\diffOperator f\\
-    \func{X}{f} &= \Fourier{\func{x}{t}}  & \func{x}{t} &= \InvFourier{\func{X}{f}}\\
-    \func{X}{\omega} &= \int_{-\infty}^{\infty} \func{x}{t} e^{-j \omega t} \diffOperator t & \func{x}{t} &= \dfrac{1}{2\pi} \int_{-\infty}^{\infty} \func{X}{f} e^{j \omega t}\diffOperator \omega
+    \func{X}{f} &= \int_{-\infty}^{\infty} \func{x}{t} e^{-j 2\pi f t} \diffOperator t &  \func{x_{\pm}}{t} &= \int_{-\infty}^{\infty} \func{X}{f} e^{j 2\pi f t}\diffOperator f\\
+    \func{X}{f} &= \Fourier{\func{x}{t}}  & \func{x_{\pm}}{t} &= \InvFourier{\func{X}{f}}\\
+    \func{X}{\omega} &= \int_{-\infty}^{\infty} \func{x}{t} e^{-j \omega t} \diffOperator t & \func{x_{\pm}}{t} &= \dfrac{1}{2\pi} \int_{-\infty}^{\infty} \func{X}{f} e^{j \omega t}\diffOperator \omega
 \end{align*}
 \(\func{X}{f}\) is called the \textbf{spectrum} of \(\func{x}{t}\), or the \textbf{voltage spectrum}. From the relationship between the inverse Fourier transform of Fourier transform of a signal we define
 \begin{equation*}
@@ -23,13 +31,96 @@ That is, all frequencies in \(\func{\delta}{t}\) are with unit magnitude and zer
 \begin{align*}
     \func{\delta}{t} = \InvFourier{1} & & \func{\delta}{f} = \Fourier{1}
 \end{align*}
+\section{Properties of Fourier transform}
+\begin{description}
+    \item[Linearity.] For two signals \(\func{x}{t}\) and \(\func{y}{t}\) and complex constants \(a\) and \(b\)
+    \begin{align*}
+        \Fourier{a \func{x}{t} + b \func{y}{t}} &= \int_{-\infty}^{\infty} \bracket{a \func{x}{t} + b \func{y}{t}} e^{-2\pi j f t} \diffOperator t \\
+        &= a  \int_{-\infty}^{\infty}  \func{x}{t} e^{-2\pi j f t} \diffOperator t + b \int_{-\infty}^{\infty} \func{y}{t} e^{-2\pi j f t} \diffOperator t\\
+        &= a \Fourier{\func{x}{t}} + b \Fourier{\func{y}{t}}
+    \end{align*} 
+    \item[Duality.] For any signal \(\func{x}{t}\)
+    \begin{equation*}
+        \func{x}{f} = \Fourier{\func{\Fourier{\func{x}{t}}}{-\omega}}
+    \end{equation*} 
+    since 
+    \begin{align*}
+        \Fourier{\func{\Fourier{\func{x}{t}}}{-\omega}} &= \int_{-\infty}^{\infty} \func{\Fourier{\func{x}{t}}}{-\omega} e^{2 \pi j f \omega } \diffOperator \omega \\
+        &= \func{\InvFourier{\Fourier{\func{x}{t}}}}{f} \\
+        &= \func{x}{f}
+    \end{align*}
+    \item [Time shift.] A shift of \(t_0\) in time domain causes a phase shift in the frequency domain.
+    \begin{align*}
+        \Fourier{\func{x}{t - t_0}} &= \int_{-\infty}^{\infty} \func{x}{t - t_0} e^{-2 \pi j f t} \diffOperator t\\
+        &= \int_{-\infty}^{\infty} \func{x}{t} e^{-2 \pi j f (t + t_0)} \diffOperator t \\
+        &= e^{-2 \pi j f t_0 } \Fourier{\func{x}{t}}
+    \end{align*}
+    \item [Scaling. ] Suppose \(a \neq 0\) is real
+    \begin{align*}
+        \Fourier{\func{x}{at}} &= \int_{-\infty}^{\infty} \func{x}{at} e^{-2 \pi j f t} \diffOperator t\\
+        &= \dfrac{1}{a} \func{\sign}{a} \int_{-\infty}^{\infty} \func{x}{t} e^{-2 \pi j f \frac{t}{a}} \diffOperator t \\
+        &= \dfrac{1}{\abs{a}} \Fourier{\frac{f}{a}}
+    \end{align*}
+    \item [Convolution.] For two signals \(\func{x}{t}\) and \(\func{y}{t}\)
+    \begin{align*}
+        \Fourier{\func{x}{t} \ast \func{y}{t}} &= \int_{-\infty}^{\infty} \bracket{\func{x}{t} \ast \func{y}{t}} e^{-2 \pi j f t} \diffOperator t\\
+        &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \func{x}{\tau}e^{-2 \pi j f \tau} \func{y}{t- \tau}  e^{-2 \pi j f (t -\tau)} \diffOperator \tau \diffOperator t\\
+        &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \func{x}{\tau}e^{-2 \pi j f \tau} \func{y}{t- \tau}  e^{-2 \pi j f (t -\tau)}\diffOperator t \diffOperator \tau \\
+        &= \int_{-\infty}^{\infty}  \func{x}{\tau}e^{-2 \pi j f \tau}  \Fourier{\func{y}{t}} \diffOperator \tau\\
+        &= \Fourier{\func{x}{t}} \Fourier{\func{y}{t}}
+    \end{align*}
+    \item [Parseval's property.]  For two signals \(\func{x}{t}\) and \(\func{y}{t}\) with Fourier transform \(\func{X}{f}\) and \(\func{Y}{f}\)
+    \begin{equation*}
+        \int_{-\infty}^{\infty} \func{x}{t} \overline{\func{y}{t}} \diffOperator t = \int_{-\infty}^{\infty} \func{X}{f} \overline{\func{Y}{f}} \diffOperator f
+    \end{equation*}
+    since 
+    \begin{align*}
+        \int_{-\infty}^{\infty} \func{X}{f} \overline{\func{Y}{f}} \diffOperator f &= \int_{-\infty}^{\infty} \bracket{\int_{-\infty}^{\infty} \func{x}{t} e^{-2\pi j f t} \diffOperator t} \overline{\bracket{\int_{-\infty}^{\infty} \func{y}{t} e^{-2\pi j f t} \diffOperator t} } \diffOperator f \\
+        &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}  \func{x}{t} e^{-2\pi j f t} \overline{\func{y}{\tau}} e^{2\pi j f \tau} \diffOperator \tau \diffOperator t \diffOperator f\\
+        &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}  \func{x}{t} \overline{\func{y}{\tau}} e^{2\pi j f (\tau - t)} \diffOperator f \diffOperator \tau \diffOperator t\\
+        &= \int_{-\infty}^{\infty}  \int_{-\infty}^{\infty}  \func{x}{t} \overline{\func{y}{\tau}} \func{\delta}{\tau  - t}  \diffOperator \tau \diffOperator t\\
+        &= \int_{-\infty}^{\infty} \func{x}{t} \overline{\func{y}{t}} \diffOperator t\\
+    \end{align*}
+    \item[Rayleigh's propery.]  For any signal \(\func{x}{t}\) with Fourier transform \(\func{X}{f}\)
+    \begin{equation*}
+        \int_{-\infty}^{\infty} \abs{\func{x}{t}}^2 \diffOperator t = \int_{-\infty}^{\infty} \abs{\func{X}{f}}^2 \diffOperator f
+    \end{equation*}
+    \item[Autocorrelation.] The time autocorrelation of the signal \(\func{x}{t}\) is defined by 
+    \begin{equation*}
+        \func{R_{x}}{\tau} = \int_{-\infty}^{\infty} \func{x}{t} \overline{\func{x}{t - \tau}} \diffOperator t = \func{x}{t} \ast \overline{\func{x}{-t}}
+    \end{equation*} 
+    Then, 
+    \begin{equation*}
+        \Fourier{\func{R_x}{\tau}} = \abs{\func{X}{f}}^2
+    \end{equation*}
+    \item[Differentiation.]
+    \begin{equation*}
+        \Fourier{\dfrac{\diffOperator}{\diffOperator t} \func{x}{t}} = 2\pi j \Fourier{\func{x}{t}}
+    \end{equation*}
+    \item[Integration.]
+    \begin{equation*}
+        \Fourier{\int_{-\infty}^t \func{x}{\tau} \diffOperator \tau}=\dfrac{\func{X}{f}}{2\pi j f} + \dfrac{1}{2} \func{X}{0} \func{\delta}{f}
+    \end{equation*}
+    \item[Moments]
+    \begin{equation*}
+       \int_{-\infty}^{\infty} t^n \func{x}{t} \diffOperator t =\bracket{\dfrac{j}{2\pi}}^n \evaluate{\dfrac{\diffOperator^n}{\diffOperator f^n} \func{X}{f}}_{f = 0}
+    \end{equation*}
+    %TODO: uncertainty principle Papoulis Chapter 8.2
+\end{description}
 
 \section{Power and Energy}
 Define 
 \begin{align*}
     \calE_x = \int_{-\infty}^{\infty} \abs{\func{x}{t}}^2 \diffOperator t & & \calP_x = \lim_{T \to \infty} \dfrac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} \abs{\func{x}{t}}^2 \diffOperator t
 \end{align*}
-A signal is \textbf{energy-type} if \(E_x < + \infty\) and it is \textbf{power-type} if \(0 < P_x < +\infty\). A signal can not be both, but it can be neither.
+A signal is \textbf{energy-type} if \(\calE_x < + \infty\) and it is \textbf{power-type} if \(0 < \calP_x < +\infty\). A signal can not be both, but it can be neither.
+\begin{remark}
+    Average power is expressed in units of \(\unit{dBm}\) or \(\unit{dBw}\) as 
+    \begin{align*}
+        (S)_{\unit{dBw}} &= 10 \log_{10} (S)_{\unit{watts}}\\
+        (S)_{\unit{dBm}} &= 10 \log_{10} (S)_{\unit{milli watts}}
+    \end{align*}
+\end{remark}
 \subsection{Energy-type}
 Let \(\func{x}{t}\) be a energy-type signal. The \textbf{autocorrelation} of \(\func{x}{t}\) is 
 \begin{align*}
@@ -39,8 +130,9 @@ Let \(\func{x}{t}\) be a energy-type signal. The \textbf{autocorrelation} of \(\
 \end{align*}
 By Rayleigh's property 
 \begin{equation*}
-    \calE_x = \int_{-\infty}^{\infty}
+    \calE_x = \int_{-\infty}^{\infty} \abs{\func{X}{f}}^2 \diffOperator f
 \end{equation*}
+The Fourier transform exists for 
 The \textbf{energy spectral density} \(\func{\calG}{f} = \Fourier{\func{R_x}{\tau}} = \abs{\func{X}{f}}^2\), represent energy per hertz of bandwidth. 
 \subsection{Power-type}
 Let \(\func{x}{t}\) be a power type signal. The \textbf{time average autocorrelation} function 
@@ -52,7 +144,9 @@ The \textbf{power spectral density} \(\func{\calS}{f} = \Fourier{\func{R_x}{\tau
 \begin{equation*}
     \calP_x = \int_{-\infty}^{\infty} \func{\calS}{f} \diffOperator f
 \end{equation*}
-
+\begin{remark}
+    The power spectral density does not uniquely determine the signal. As it only retains the magnitude information and all phase information is lost.
+\end{remark}
 Suppose \(\func{x}{t}\) is a power-type signal passing through a filter with impluse response \(\func{h}{t}\):
 \begin{align*}
     \func{y}{t} &= \func{x}{t} \ast \func{h}{t}\\
@@ -71,3 +165,76 @@ Which implies that
 \section{Sampling of bandlimited signals}
 \(f_s = 2W\) is the \textbf{Nyquist rate} and \(f_s -  2W\) is \textbf{guard band}.
 \section{Bandpass signal}
+A \textbf{bandpass signal} has non-zero frequencies around a small neighborhood of some high frequency \(f_0\). That is, \(\func{X}{f} = 0\) for \(\abs{f - f_0} \geq W\) where \(W < f_0\). A \textbf{bandpass system} passes frequencies around some \(f_0\) or equivalently, the impluse response is a bandpass signal. \(f_0\) is called the \textbf{central frequency} even tho it might not be the center of signal's bandwidth. 
+\subsection{Analysis of monochromatic signals}
+\textbf{Monochromatic} signals are bandpass with \(W = 0\). 
+\begin{equation*}
+    \func{x}{t} = A \func{\cos}{2\pi f_0 t + \theta}
+\end{equation*}
+The \textbf{phasor} is defined as \(\hat{X} = A e^{j\theta}\). Consider an LTI system with impluse response \(\func{H}{f}\). Then, the phasor of the output of signal \(\func{x}{t}\) is \(\hat{Y} = A \func{H}{f_0} e^{j\theta}\) and the frequency of the output signal is the same, namely \(f_0\). To obtain the phasor of the input consider the signal 
+\begin{align*}
+    \func{z}{t} &= A e^{2\pi j f_0 t + j\theta }\\
+    &= A \func{\cos}{2\pi f_0 t + \theta} + jA \func{\sin}{2\pi f_0 t + \theta} \\
+    &= \func{x}{t} + j \func{x_q}{t} = \func{x}{t} + j \func{x}{t - \frac{\pi}{2}}
+\end{align*}
+where \(\func{x_q}{t}\) is a \(90^{\circ}\) phase shift version of the original signal-- \(q\) stands for \textit{quadrature}. Then, 
+\begin{equation*}
+    \hat{X} = \func{z}{t} e^{-2\pi j f_0 t}
+\end{equation*}
+Note that, \(\func{Z}{f}\) can be obtained from \(\func{X}{f}\) by deleting the negative frequencies and multiplying the positive frequencies by a factor of two. 
+
+\subsection{Analysis of a general bandpass signal}
+For a general bandpass signal, let \(\func{Z}{f}\) be the signal obtained from deleting the negative frequencies of \(\func{X}{f}\) and multiplying the positive frequencies by a factor of two. That is, 
+\begin{equation*}
+    \func{Z}{f} = 2 \func{U_{-1}}{f} \func{X}{f}
+\end{equation*}
+where \(\func{U_{-1}}{f}\) is the Heaviside step function. \(\func{z}{t}\) is called the \textbf{analytic signal corresponding to \(\func{x}{t}\)} or the  \textbf{pre-envelope of \(\func{x}{t}\)}.
+ The inverse Fourier of \(\func{U_{-1}}{f}\) is calculated as follows 
+\begin{align*}
+    \InvFourier{\func{U_{-1}}{f}} &= \func{\Fourier{\func{U_{-1}}{-\tau}}}{t}\\
+    &= \func{\Fourier{1 - \func{U_{-1}}{\tau}}}{t}\\
+    &= \func{\delta}{t} - \bracket{\dfrac{1}{2\pi j t} + \dfrac{1}{2}  \func{\delta}{t}}\\
+    &= \dfrac{1}{2} \func{\delta}{t} - \dfrac{1}{2\pi j t}\\
+    &= \dfrac{1}{2} \func{\delta}{t} + \dfrac{j}{2\pi t}
+\end{align*}
+Therefore, 
+\begin{align*}
+    \func{z}{t} &= \func{x}{t} \ast \bracket{ \func{\delta}{t} + \dfrac{j}{\pi t}}\\
+    &= \func{x}{t} + j \func{x}{t} \ast \dfrac{1}{\pi t}\\
+    &= \func{x}{t} + j \func{x'}{t}
+\end{align*}
+\(\func{x'}{t}\) is called the \textbf{Hilbert transform of \(\func{x}{t}\)}. Hilbert transform, as derived below, is equivalent to a \(- \frac{\pi}{2}\) shift for positive frequencies and a \(\frac{\pi}{2}\) shift for negative frequencies. 
+\begin{equation*}
+    \Fourier{\dfrac{1}{\pi t}} = -j \func{\sign}{f} = e^{-j \frac{\pi}{2} \func{\sign}{f}}
+\end{equation*}
+\(\func{H}{f} = -j \func{\sign}{f}\) is called the \textbf{quadrature filter}. Then, consider the signal \(\func{x_l}{t} = \func{z}{t} e^{-2\pi j f_0 t}\) or equivalently \(\func{X_l}{f} = \func{Z}{f + f_0}\) wher \(f_0\) is the centeral frequency of \(\func{x}{t}\). \(\func{x_l}{t}\) is called the \textbf{lowpass representation of bandpass signal \(\func{x}{t}\)}. In general \(\func{x}{t}\) is a complex-valued signal, hence we can decompose it into real and imaginary parts 
+\begin{equation*}
+    \func{x_l}{t} = \func{x_c}{t} + j \func{x_s}{t}
+\end{equation*}
+\(\func{x_c}{t}\) is called the \textbf{in-phase} and \(\func{x_s}{t}\) is called the the \textbf{quadrature} components of \(\func{x}{t}\). Then, 
+\begin{align*}
+    \func{z}{t} &= \func{x_l}{t} e^{2\pi j f_0 t}\\
+    &= \bracket{\func{x_c}{t} \func{\cos}{2 \pi f_0 t} - \func{x_s}{t} \func{\sin}{2 \pi f_0 t}} + j \bracket{\func{x_c}{t} \func{\sin}{2 \pi f_0 t} + \func{x_s}{t} \func{\cos}{2 \pi f_0 t}} 
+\end{align*}
+hence 
+\begin{align*}
+    \func{x}{t} &= \func{x_c}{t} \func{\cos}{2 \pi f_0 t} - \func{x_s}{t} \func{\sin}{2 \pi f_0 t}\\
+    \func{x'}{t} &= \func{x_c}{t} \func{\sin}{2 \pi f_0 t} + \func{x_s}{t} \func{\cos}{2 \pi f_0 t}
+\end{align*}
+these two equations are called the \textbf{bandpass to lowpass transformations}.
+
+Define the \textbf{envelope} of \(\func{x}{t}\), \(\func{V}{t}\), as 
+\begin{equation*}
+    \func{V}{t} = \sqrt{\bracket{\func{x_c}{t}}^2 + \bracket{\func{x_s}{t}}^2}
+\end{equation*}
+and the \textbf{phase} of \(\func{x}{t}\), \(\func{\Theta}{t}\), as 
+\begin{equation*}
+    \func{\Theta}{t} = \arctan \dfrac{\func{x_s}{t}}{\func{x_c}{t}}
+\end{equation*}
+Then, 
+\begin{align*}
+    \func{x_l}{t} &= \func{V}{t} e^{j \func{\Theta}{t}}\\
+    \func{z}{t} &= \func{V}{t} e^{2\pi j f_0 t +  j\func{\Theta}{t}}\\
+    \func{x}{t} &= \func{V}{t} \func{\cos}{2\pi f_0 t + \func{\Theta}{t}}\\
+    \func{x'}{t} &= \func{V}{t} \func{\sin}{2\pi f_0 t + \func{\Theta}{t}}
+\end{align*}

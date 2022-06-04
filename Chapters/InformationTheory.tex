@@ -32,8 +32,34 @@ Suppose \(r_s\) is the symbol rate of the source, measured in \(\). Then, averag
 \end{equation*}
 
 \subsection{Statistically dependent source}
+\begin{itemize}
+    \item emits a symbol once every \(T_s\) seconds.
+    \item A stochastic process.
+    \item stationary Markoff.
+    \item There are \(n\) states with a transition matrix \(\varphi\), (\(M\) symbols with a residual influence lasting \(q\) symbols can be represented by \(n \leq M^q\) states).
+    \item \(\condProb{X_k = s_q}{X_1, \dots , X_{k-1}} = \condProb{X_k = s_q}{S_k}\) where \(S_k\) is a discrete random variable. 
+    \item At the begninning it is in one of the \(n\) states with probability \(\func{p_i}{1}\).
+    \item \(\func{p_j}{k+ 1} = \sum_{i = 1}^n \func{p_i}{k} p_{ij}\) for all \(j\). \(\func{P}{k + 1} = \varphi \func{P}{k}\).
+\end{itemize}
 \subsection{Entropy for Markov source}
-
+\begin{itemize}
+    \item Assume, discrete finite state ergodic hence stationary.
+    \item Entropy of state \(i\) is
+    \begin{equation*}
+        H_i = - \sum_{j = 1}^M p_{ij} \lg p_{ij}
+    \end{equation*} 
+    \item Entropy of source 
+    \begin{equation*}
+        H = \sum_{ i = 1}^n p_i H_i
+    \end{equation*}
+    \item therefore, \(R = r_sH\).
+\end{itemize}
+\begin{theorem}
+    Let \(G_N = - \frac{1}{N} \sum_i \func{p}{m_i} \lg \func{p}{m_i}\) over all messages of length \(N\). Then, \(G_N\) is monotonice decreasing function of \(N\) and 
+    \begin{equation*}
+        \lim_{N \to \infty} G_N = H
+    \end{equation*}
+\end{theorem}
 \section{Source encoding}
 \begin{definition}
     The ratio of sourse information and the average encoded output bit rate is called \textit{coding efficiency}.

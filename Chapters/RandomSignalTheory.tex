@@ -1,0 +1,297 @@
+\chapter{Random Signal Theory}
+\section{Introduction}
+Marcum \(Q\) function 
+\begin{equation*}
+    \func{Q}{y} = \dfrac{1}{\sqrt{2\pi}} \int_{y}^{\infty} \func{\exp}{-\dfrac{z^2}{2}}
+\end{equation*}
+and if \(X \sim \func{\NormalDist}{\mu, \sigma^2}\) then 
+\begin{equation*}
+    \prob{X > a} = \func{Q}{\dfrac{a - \mu}{\sigma}}
+\end{equation*}
+We have the following upper bounds 
+\begin{equation*}
+    \func{Q}{x} \leq \dfrac{1}{2}e^{-x^2/2}
+\end{equation*}
+and 
+\begin{equation*}
+    \func{Q}{x} < \dfrac{1}{\sqrt{2\pi} x}e^{-x^2 / 2}
+\end{equation*}
+for all \(x \geq 0\). For lower bound 
+\begin{equation*}
+    \func{Q}{x} > \dfrac{1}{\sqrt{2 \pi} x} \bracket{1 - \dfrac{1}{x^2}}e^{-x^2 / 2}
+\end{equation*}
+
+\(\bar{X}\) has multivariate Gaussian distribution with mean \(\mu\) and covariance matrix \(\Sigma\)
+\begin{equation*}
+    \func{f_{\bar{X}}}{\bar{x}} = \dfrac{1}{\sqrt{\bracket{2\pi}^n \det \Sigma}} \func{\exp}{- \dfrac{1}{2} (\bar{x} - \mu)^T \Sigma^{-1} (\bar{x} - \mu)}
+\end{equation*}
+
+\section{Random Process}
+A set of indexed random variables \(\set{X_t}_{t \in T}\) is a random process. We denote a random process as \(\func{X}{t,\omega}\) where \(\omega \in \Omega\) and \(t \in T = \Reals\).  For a specific \(\omega_0\), \(\func{X}{t,\omega_0} = \func{x_0}{t}\) is a time function called \textbf{member function}, \textbf{sample function}, or a \textbf{realization function}. The totality of all sample functions is called an \textbf{ensemble}. For a specific \(t_0\), \(\func{X}{t_0,\omega}\) is a random variable.
+
+\begin{definition}
+    A process \(\func{X}{t}\) is described by its \(M_{\cardinalTH}\) \textbf{order statistics} if for all \(m \leq M\) and all \((t_1, \dots, t_m) \in \Reals^m\) the joint PDF of \((\func{X}{t_1} , \dots , \func{X}{t_n})\) is given.
+\end{definition}
+\subsection{Statistical averages}
+The mean of an stochastic process 
+\begin{equation*}
+    \func{\mu_X}{t} = \expected{\func{X}{t}}
+\end{equation*}
+The autocorrelation of an stochastic process
+\begin{equation*}
+    \func{R_{XX}}{t_1,t_2} = \expected{\func{X}{t_1} \func{X}{t_2}}
+\end{equation*}
+Statistical averages are also called ensemble averages.
+\subsection{Stationarity in wide sense}
+A stochastic process with constants mean and time invariant autocorrelation is called \textbf{stationary in wide sense}.
+\begin{equation*}
+    \func{\mu_X}{t} = K, \qquad \func{R_{XX}}{t_1 + t, t_2 + t}=  \func{R_{XX}}{t_1, t_2}
+\end{equation*}
+for all \(t_1,t_2,t\).
+\begin{definition}
+    A random process \(\func{X}{t}\) with mean \(\func{\mu_X}{t}\) and autocorrelation \(\func{R_{XX}}{t + \tau,t}\) is called \textbf{cyclostationary} if both the mean and autocorrelation are periodic in \(t\) with some period \(T_0\), that is 
+    \begin{equation*}
+        \func{\mu_X}{t + T_0} = \func{m_X}{t}
+    \end{equation*}
+    and 
+    \begin{equation*}
+        \func{R_{XX}}{t + \tau + T_0, t + T_0} = \func{R_{XX}}{t + \tau, t}
+    \end{equation*}
+    for all \(t\) and \(\tau\). 
+\end{definition}
+\subsection{Time averages}
+The time average mean and autocorrelation of a random process is defined as 
+\begin{align*}
+    \angleBracket{\mu_X} &= \lim_{T \to \infty} \dfrac{1}{T} \int_{-T/2}^{T/2} \func{X}{t} \diffOperator t\\
+    \angleBracket{\func{R_{XX}}{\tau}} &= \lim_{T \to \infty} \dfrac{1}{T} \int_{-T/2}^{T/2} \func{X}{t} \func{X}{t + \tau} \diffOperator t\\
+\end{align*}
+Both time averages are random variables and depend on \(\omega\).
+Ensemble averages and time averages are equal in mean squared sense. A random variable \(X\) is equal to a constant \(b\) in MS sense if \(\expected{X} = b\) and \(\expected{(X - b)^2} = 0\).
+\subsection{Ergodicity}
+A wide-sense stationary process is \textbf{ergodic in mean} if \(\angleBracket{\mu_X}\) converges to \(\mu_X\) in mean squared as \(T \to \infty\).
+A wide-sense stationary process is \textbf{ergodic in autocorrelation} if \(\angleBracket{\func{R_{XX}}{\tau}}\) converges to \(\func{R_{XX}}{\tau}\) in mean squared as \(T \to \infty\).
+
+\subsection{Power Spectral density of stationary random process}
+We can define the random variables for energy \(\scrE_X\) and power \(\scrP_X\) 
+\begin{align*}
+    \scrE_X &= \int_{-\infty}^{\infty} \func{X^2}{t} \diffOperator t\\
+    \scrP_X &= \lim_{T \to \infty} \dfrac{1}{T} \int_{-T/2}^{T/2} \func{X^2}{t} \diffOperator t
+\end{align*}
+Then, the power content \(\calP_X\) and energy content \(\calE_X\) of a stochastic process \(\func{X}{t}\) are defined as 
+\begin{align*}
+    \calE_X &= \expected{\scrE_X} = \int_{-\infty}^{\infty} \func{R_{XX}}{t,t} \diffOperator t\\
+    \calP_X &= \expected{\scrP_X} =  \lim_{T \to \infty} \dfrac{1}{T} \int_{-T/2}^{T/2} \func{R_{XX}}{t,t} \diffOperator t
+\end{align*}
+Foe stationary processes if \(\calE_X < \infty\), then \(\func{R_XX}{0} = 0\) and hence \(\func{X}{t}\) is zero almost everywhere.
+
+Let \(\func{X}{t}\) be a random process and \(\func{X_T}{f}\) be the random process from considering the Fourier transforms of truncated sample functions. That is, 
+\begin{equation*}
+    \func{X_T}{f,\omega} = \Fourier{\func{x_T}{t,\omega}}
+\end{equation*}
+Then, the \textbf{power density spectrum} or \textbf{power spectral density} is defined as 
+\begin{equation*}
+    \func{\calG_X}{f} = \lim_{T \to \infty} \dfrac{\expected{\abs{\func{X_T}{f}}^2}}{T}
+\end{equation*}
+Furthermore,
+\begin{equation*}
+    \angleBracket{\func{\calG_X}{f}} = \lim_{T \to \infty} \dfrac{\abs{ \int_{-T/2}^{T/2} \func{X}{t} \func{\exp}{-2\pi j ft} \diffOperator t}^2}{T}
+\end{equation*}
+For an ergodic random process 
+\begin{equation*}
+    \angleBracket{\func{\calG_X}{f}} \overset{\mathrm{MS}}{=} \func{\calG_X}{f}
+\end{equation*}
+\begin{theorem}[Wiener-Khinchin]
+    If for all finite \(\tau\) and any interval \(I\) of length \(\abs{\tau}\), the autocorrelation function \(R_{XX}\) satisfies the condition 
+    \begin{equation*}
+        \abs{\int_I \func{R_{XX}}{t + \tau, t} \diffOperator t} < \infty
+    \end{equation*}
+    Then, 
+    \begin{equation*}
+        \func{\calG_X}{f} = \Fourier{\lim_{T \to \infty} \dfrac{1}{T} \int_{-T/2}^{T/2} \func{R_{XX}}{t + \tau, t} \diffOperator t}
+    \end{equation*}
+\end{theorem}
+Thus, if \(\func{X}{t}\) is stationary with 
+\begin{equation*}
+    \int_{-\infty}^{\infty} \abs{\func{R_{XX}}{\tau}} \diffOperator \tau < \infty
+\end{equation*}
+then 
+\begin{equation*}
+    \func{\calG_X}{f} = \int_{-\infty}^{\infty} \func{R_{XX}}{\tau} \func{\exp}{-2\pi j f \tau} \diffOperator \tau 
+\end{equation*}
+If \(\func{X}{t}\) is cyclostationary with 
+\begin{equation*}
+    \abs{\int_0^{T_0} \func{R_{XX}}{t + \tau , t} \diffOperator t} < \infty 
+\end{equation*}
+then 
+\begin{equation*}
+    \func{\calG_X}{f} = \Fourier{\func{\bar{R}_{XX}}{\tau}}
+\end{equation*}
+where 
+\begin{equation*}
+    \func{\bar{R}_{XX}}{\tau} = \dfrac{1}{T_0} \int_{-T_0/2}^{T_0/2} \func{R_{XX}}{t + \tau,t} \diffOperator t
+\end{equation*}
+Moreover, \(\expected{\bracket{\func{X}{t}}^2}\) can be thought of as the average power dissipated by random process across \(1\) ohm resistor.
+\begin{equation*}
+    \expected{\bracket{\func{X}{t}}^2} = \func{R_{XX}}{0} = \int_{-\infty}^{\infty} \func{\calG_X}{f} \diffOperator f
+\end{equation*}
+
+\begin{enumerate}
+    \item \(\angleBracket{\func{X}{t}}\) is the DC component.
+    \item \(\angleBracket{\bracket{\func{X}{t}}^2}\) is the total average power.
+    \item \(\angleBracket{\bracket{\func{X}{t}}}^2\) is the DC power.
+    \item \(\angleBracket{\bracket{\func{X}{t}}^2} - \angleBracket{\bracket{\func{X}{t}}}^2\) is the AC power.
+    \item \(\sqrt{\angleBracket{\bracket{\func{X}{t}}^2} - \angleBracket{\bracket{\func{X}{t}}}^2}\) is rms value.
+\end{enumerate}
+\subsection{PSD of a sum process}
+Suppose \(\func{Z}{t} = \func{X}{t} + \func{Y}{t}\) is the sum of two jointy stationary process. It can be readily verified that \(\func{Z}{t}\) is stationary and 
+\begin{equation*}
+    \func{R_{ZZ}}{\tau} = \func{R_{XX}}{\tau} + \func{R_{XY}}{\tau} + \func{R_{YX}}{\tau} + \func{R_{YY}}{\tau}
+\end{equation*}
+and 
+\begin{equation*}
+    \func{\calG_Z}{f} = \func{\calG_X}{f} + \func{\calG_Y}{f} + 2 \func{\Re}{\calG_{XY}{f}} 
+\end{equation*}
+where 
+\begin{equation*}
+    \func{\calG_{XY}}{f} = \Fourier{\func{R_{XY}}{\tau}} 
+\end{equation*}
+If \(\func{X}{t}\) and \(\func{Y}{t}\) are uncorrelated and at least one of them is zero mean, then \(\func{R_{XY}}{\tau} = 0\) and 
+\begin{equation*}
+    \func{\calG_Z}{f} = \func{\calG_X}{f} + \func{\calG_Y}{f}
+\end{equation*}
+\section{Systems and random signals}
+The response of a system to a random signal, is a random signal itself. Therefore, we need tools to investigate the relationships between to random processes.
+\begin{definition}
+    Two random process \(\func{X}{t}\) and \(\func{Y}{t}\) are \textbf{independent} if for all \(t_1,t_2\), the random variables \(\func{X}{t_1}\) and \(\func{Y}{t_2}\) are independent. Similarly, \(\func{X}{t}\) and \(\func{Y}{t}\) are \textbf{uncorrelated} if for all \(t_1,t_2\), the random variables \(\func{X}{t_1}\) and \(\func{Y}{t_2}\) are uncorrelated.
+\end{definition}
+\begin{definition}
+    The \textbf{cross-correlation} function between two random process \(\func{X}{t}\) and  \(\func{Y}{t}\) is defined as 
+    \begin{equation*}
+        \func{R_{XY}}{t_1,t_2} = \expected{\func{X}{t_1} \func{X}{t_2}}
+    \end{equation*}
+    Two processes \(\func{X}{t}\) and  \(\func{Y}{t}\) are \textbf{jointly wide-sense stationary}, if both are stationary and the cross-correlation function depends on \(\tau = t_1 - t_2\).
+\end{definition}
+\subsection{Response of memoryless channel}
+\begin{equation*}
+    \func{Y}{t}= \func{g}{\func{X}{t}}
+\end{equation*}
+\subsection{Response of LTI System}
+Suppose stationary process \(\func{X}{t}\) is passed through a LTI system with impulse response \(\func{h}{t}\). Then, the input and output prcesses \(\func{X}{t}\) and \(\func{Y}{t}\) are jointly stationary. Moreover, 
+\begin{align*}
+    \func{Y}{t} &= \func{X}{t} \ast \func{h}{t}\\
+    &= \int_{-\infty}^{\infty} \func{X}{\tau} \func{h}{t - \tau} \diffOperator \tau\\
+    \implies  \expected{\func{Y}{t}} &= \int_{-\infty}^{\infty} \expected{\func{X}{\tau}} \func{h}{t - \tau} \diffOperator \tau\\
+    \expected{\func{Y}{t}} &= \mu_X \int_{-\infty}^{\infty} \func{h}{\tau} \diffOperator \tau = \mu_X \func{H}{0}
+\end{align*}
+and 
+\begin{align*}
+    \func{R_{YX}}{\tau} &= \expected{\func{Y}{t} \func{X}{t - \tau}}\\
+    & = \expected{\int_{-\infty}^{\infty} \func{X}{\eta} \func{h}{t - \eta} \func{X}{t - \tau} \diffOperator \eta }\\
+    &= \int_{-\infty}^{\infty} \func{R_{XX}}{t - \tau - \eta } \func{h}{t - \eta}\diffOperator \eta \\
+    &= \int_{-\infty}^{\infty} \func{R_{XX}}{ \eta - \tau } \func{h}{ \eta}\diffOperator \eta \\
+    &= \int_{-\infty}^{\infty} \func{R_{XX}}{  \tau - \eta } \func{h}{ \eta}\diffOperator \eta \\
+    &= \func{R_{XX}}{\tau} \ast \func{h}{\tau}\\
+    \implies \func{R_{YY}}{\tau} &= \expected{\func{Y}{t + \tau} \func{Y}{t}}\\
+    &=  \expected{\int_{-\infty}^{\infty} \func{Y}{t + \tau} \func{X}{t - \eta}\func{h}{\eta} \diffOperator \eta}\\
+    &= \int_{-\infty}^{\infty} \func{R_{YX}}{\tau + \eta} \func{h}{\eta} \diffOperator \eta \\
+    &= \func{R_{YX}}{\tau } \ast \func{h}{-\tau} \\
+    &= \func{R_{XX}}{\tau} \ast \func{h}{\tau} \ast  \func{h}{-\tau}\\
+    \implies & \func{\calG_X}{f} = \Fourier{\func{R_{YY}}{t}} = \func{\calG_X}{f} \abs{\func{H}{f}}^2
+\end{align*}
+\subsection{Special classes of random processes}
+\subsubsection{Gaussian random process}
+\(\func{X}{t}\) is Gaussian if 
+\begin{equation*}
+    \func{f_X}{x_1, \dots, x_n ; t_1, \dots, t_n} = \dfrac{1}{\sqrt{(2 \pi)^n \det \Sigma}} \func{\exp}{- \dfrac{1}{2} (\bar{x} - \bar{\mu})^T \Sigma^{-1} (\bar{x} - \bar{\mu})} \qquad \forall n, \forall t_1, \dots, t_n
+\end{equation*}
+where \(\Sigma = \begin{bmatrix}
+    \expected{(\func{X}{t_i} - \expected{\func{X}{t_i}})(\func{X}{t_j} - \expected{\func{X}{t_j}})}
+\end{bmatrix}_{i,j}\)
+\(    \bar{\mu} = \begin{bmatrix}
+        \expected{\func{X}{t_i}}
+    \end{bmatrix}_{i}
+\).
+
+\(\func{X}{t}\) is zero mean stationary Gaussian if \(\expected{\func{X}{t}} = 0\) and \(\func{R_{XX}}{t_1 + t,t_2 + t} = \func{R_{XX}}{t_1,t_2}\) for all \(t_1,t_2,t\). Then, \(\Sigma =  \begin{bmatrix}
+    \expected{\func{R_{XX}}{t_i,t_j}}
+\end{bmatrix}_{i,j}\) and \(\bar{\mu} = \bar{0}\).
+
+\begin{theorem}
+    For a Gaussian process, \(\func{\mu_X}{t}\) and \(\func{R_{XX}}{t_1,t_2}\) gives a complete statistical description of the process.
+\end{theorem}
+\begin{corollary}
+    For Gaussian processes, WSS and strictly stationarity are equivalent.
+\end{corollary}
+\begin{theorem}
+    The output of an LTI system on a Gaussian input is Gaussian.
+\end{theorem}
+\begin{theorem}
+    A sufficient condition for the ergodicity of the stationary zero-mean Gaussian process is 
+    \begin{equation*}
+        \int_{-\infty}^{\infty} \abs{\func{R_{XX}}{\tau}} \diffOperator \tau < \infty 
+    \end{equation*}
+\end{theorem}
+
+
+\subsubsection{Markoff Sequence}
+Suppose \(\func{X}{t}\) is defined for countable indices and it assumes a finte set of values. That is, \(\func{X}{t}\) is discrete-time and discrete-amplitude. \(\func{X}{t}\) is a Markoff chain if 
+\begin{equation*}
+    \condProb{X_n = a_n}{X_{n-1} = a_{n-1} , \dots , X_1 = a_1} = \condProb{X_{n} = a_n}{X_{n-1}  = a_{n-1}}
+\end{equation*}
+Let \(\func{p_i}{n} = \prob{X_n = a_i}\) and \(\func{p_{i,j}}{n,m} = \condProb{X_n = i}{X_m = j}\) for \(n > m\) then 
+\begin{equation*}
+    \func{p_j}{n} = \sum_{i = 1}^N \func{p_{j,i}}{n,m} \func{p_i}{m}
+\end{equation*}
+If \(\func{p_{i,j}}{n+1,n} = \func{p_{i,j}}{n ,n-1}\) for all \(n\), then \(\set{X_n}\) is called \textbf{homogeneous}. Finally, let 
+\begin{equation*}
+    \func{P}{k} = \begin{bmatrix}
+        \func{p_1}{k} \\
+        \vdots \\
+        \func{p_N}{k}
+    \end{bmatrix}
+    \qquad 
+    \varphi = \begin{bmatrix}
+        \func{p_{1,1}}{n,n - 1} & \dots & \func{p_{1,N}}{n,n- 1}\\
+        \vdots & \ddots & \vdots \\
+        \func{p_{N,1}}{n,n - 1} & \dots & \func{p_{N,N}}{n,n- 1}
+    \end{bmatrix}
+\end{equation*}
+Therefore 
+\begin{equation*}
+    \func{P}{k} = \varphi \func{P}{k- 1}
+\end{equation*}
+A Markov chain is stationary if \(\func{P}{k+1} = \func{P}{k}\) for all \(k\).
+
+\section{Noise in communication systems}
+Determined through expriments (thermodynamics and quantum mechanic) noise voltage \(\func{V}{t}\) that appears accross the terminal of a resistor of \(R\) Ohms has a Gaussian distribution with \(\mu_V= 0\) and 
+\begin{equation*}
+    \expected{\func{V^2}{t}} = \dfrac{(2\pi k T)^2}{3h} R 
+\end{equation*}
+where \(k\) is Boltzmann constant, \(h\) Plank constant, \(T\) is temperature in Kelvins. Then, 
+\begin{equation*}
+    \func{\calG_V}{f} = \dfrac{2 R h \abs{f}}{\func{\exp}{h \abs{f}/ (kT)} - 1} 
+\end{equation*}
+\(\func{\calG_V}{f}\) is flat over \(\abs{f} < 0.1 \frac{kT}{h}\). However, for modeling 
+\begin{equation*}
+    \func{\calG_V}{f} = 2RkT
+\end{equation*}
+but in this case \(\expected{\func{V^2}{t}} = \infty\). Yet it is alright since \(\func{V}{t}\) is subjected to filtering and hence \(\expected{\func{V^2}{t}}\) will be finite.
+
+\begin{definition}
+    A noise signal having flat power spectral density over a wide range frequency is called white noise.
+\begin{equation*}
+    \func{\calG_V}{f} = \dfrac{\eta}{2}
+\end{equation*}
+The factor \(1/2\) is included to indicate that \(\func{\calG_V}{f}\) is a two-sided psd.
+\end{definition}
+
+At room temperature, \(\func{\calG_V}{f}\) drops to 90\% of its maximum at about \(f \approx 2 \times 10^12\) Hertz, which is beyond the frequencies employed in the conventionaly communication systems.
+
+\textbf{Available power} is the maximum power that can be delivered to a load from a source having a fixed but non-zero resistence. 
+\begin{equation*}
+        P_{\max} = \dfrac{\expected{\func{V^2}{t}}}{4R}
+\end{equation*}
+Available power psd is \(\func{\calG_V}{f} = kT/2\). 
+
+We will assume the thermal noist is stationary, ergodic, zero-mean, white Gaussian noise whose power spectrum is \(N_0/2\) where \(N_0 = kT\).
+

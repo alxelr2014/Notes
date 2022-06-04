@@ -29,7 +29,8 @@
 \usepackage{common}
 \usepackage{english-theorems}
 \setcounter{tocdepth}{1}
-
+\newcommand{\unit}[1]{\ensuremath{\mathrm{#1}}}
+\allowdisplaybreaks
 \begin{document}
 \tableofcontents
 \clearpage
@@ -37,6 +38,8 @@
 \thispagestyle{empty}
 \fi
 \input{Chapters/FrequencyDomain.tex}
+\input{Chapters/RandomSignalTheory.tex}
 \input{Chapters/InformationTheory.tex}
 \input{Chapters/BasebandTransmission.tex}
+
 \end{document}
