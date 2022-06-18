@@ -1,0 +1,158 @@
+\chapter{Ring Theory}
+\begin{definition}
+    A non-empty set \(R\) is an \textbf{associative ring} if in \(R\) there are defined two operations \((+, \cdot)\) such that for all \(a,b,c \in R\)
+    \begin{enumerate}
+        \item \(R\) is closed under \(+\).
+        \item \(+\) is commutative.
+        \item \(+\) is associative.
+        \item There exists an element \(0 \in R\), which is the identity element of \(+\).
+        \item For each \(a\), there exists \(b\) such that \(a + b = b + a = 0\).
+        \item \(R\) is closed under \(\cdot\).
+        \item \(\cdot\) is associative.
+        \item \(\cdot\) is distributive over \(+\). That is, \(a\cdot(b+c) = a\cdot b + a \cdot c\)  and \((a + b) \cdot c = a \cdot c + b \cdot c\).
+    \end{enumerate}
+    If there is an element \(1 \in R\) such that \(a \cdot 1 = 1 \cdot a = a\) for all \(a \in R\), \(R\) is said to be a \textbf{ring with unity}. If \(\cdot\) is commutative, \(R\) is said to be a \textbf{commutative ring}. If the non-zero elements of \(R\) form an abelian group under \(\cdot\), \(R\) is said to be a \textbf{field}.
+\end{definition}
+
+\begin{example}
+    Consider the \textbf{real quaternions}, \(Q = \set<\alpha_0 + \alpha_1 i + \alpha_2 j + \alpha_3 k>{\alpha_1,\alpha_2,\alpha_3 \in \Reals}\) with multiplication rules; \(i^2 = j^2 = k^2 = ijk = 1\), \(ij = -ji = k\), \(jk = -kj = i\), \(ki = -ik = j\). Then, \(Q\) is a non-commutative ring and its non-zero elements form a non-commutative group under multiplication.
+\end{example}
+\section{Some special classed of ring}
+\begin{definition}
+    If \(R\) is a commutative ring, then a non-zero element \(a \in R\) is a \textbf{zero-divisor} if there exists another non-zero element \(b\) such that \(ab = 0\).
+\end{definition}
+\begin{definition}
+    A commutative ring is an \textbf{integral domain} if it has no zero-divisors.
+\end{definition}
+\begin{definition}
+    A ring in which all non-zero elements form a group under multiplication is called a \textbf{division ring} or \textbf{skew-field}.
+\end{definition}
+
+\begin{definition}
+    A field is a commutative division ring.
+\end{definition}
+
+\begin{lemma}
+    for all \(a,b,c \in R\)
+    \begin{enumerate}
+        \item \(a \cdot 0 = 0 \cdot a = 0\).
+        \item \(a(-b) = (-a)b = -ab\).
+        \item \((-a)(-b) = ab\).
+    \end{enumerate}
+    If \(1 \in R\)
+    \begin{enumerate}
+        \item \((-1)a = -a\).
+        \item \((-1)(-1) = 1\).
+    \end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+    A finite integral domain is a field.
+\end{lemma}
+
+\begin{corollary}
+    If \(p\) is a prime, \(\Integers_p\) is a field.
+\end{corollary}
+
+\begin{definition}
+    An integral domain \(D\) is said to be of characteristic \(0\) if the relation \(ma  = 0\) where \(a \neq 0\) and \(m \in \Integers\) holds only if \(m = 0\). \(D\) is of finite characteristic if there exists a positive integer \(m\) such that for all \(a \in D\), \(ma = 0\). The characteristic of \(D\) is the samllest such integer. We say that a ring \(R\) has \textbf{\(n\)-torsion} if there exists \(a \neq 0\) in \(R\) such that \(na = 0\) and \(ma \neq 0\) for \(0 < m < n\).
+\end{definition}
+
+\section{Homomorphisms}
+\begin{definition}
+    A mapping \(\phi\) from the ring \(R\) into the ring \(R'\) is a homomorphism if 
+    \begin{equation*}
+        \func{\phi}{a + b} = \func{\phi}{a} + \func{\phi}{b}
+    \end{equation*}
+    and 
+    \begin{equation*}
+        \func{\phi}{ab} = \func{\phi}{a} \func{\phi}{b}
+    \end{equation*}
+    for all \(a,b\in R\).
+\end{definition}
+
+\begin{lemma}
+   If \(\phi : R \to R'\) is a homomorphism
+   \begin{enumerate}
+    \item \(\func{\phi}{0} = 0\).
+    \item \(\func{\phi}{-a}= - \func{\phi}{a}\).
+   \end{enumerate}
+\end{lemma}
+
+\begin{definition}
+    Suppose \(\phi:R \to R'\) is a homomorphism. The kernel \(\func{I}{\phi} = \set{ a \in R}{\func{\phi}{a} = 0}\).
+\end{definition}
+
+\begin{lemma}
+    If \(\phi: R \to R'\) is a homomorphism
+    \begin{enumerate}
+        \item \(\func{I}{\phi}\) is a subgroup of \(R\) under addition.
+        \item If \(a \in \func{I}{\phi}\) and \(r \in R\), then \(ra, ar \func{I}{\phi}\).
+    \end{enumerate}
+\end{lemma}
+
+\begin{definition}
+    A homomorphism \(R\) into \(R'\) is an isomorphism of it is one-to-one. \(R\) and \(R'\) are isomorphic if there is an onto isomorphism between them.
+\end{definition}
+
+\begin{lemma}
+    The homomorphism \(\phi: R \to R'\) is an isomorphism if and only if \(\func{I}{\phi} = \set{0}\).
+\end{lemma}
+
+\section{Ideals and quotient ring}
+\begin{definition}
+    A non-empty subset \(U\) of \(R\) is a \textbf{two-sided ideal} of \(R\) if 
+    \begin{enumerate}
+        \item \(U\) is a subgroup of \(R\) under addition.
+        \item For all \(u \in U\) and \(r \in R\), \(ur , ru \in U\).
+    \end{enumerate}
+\end{definition}
+
+\(R/U\) is the set of distinct cosets of \(U\) in \(R\) as a group under addition. \(R/U\) is a ring with \((a + U)(b + U) = ab + U\).
+
+If \(R\) is commutative or it has unit element, then \(R/U\) is commutative or has unit element. But the converse is not necessarily true.
+--- give an example.
+
+\begin{lemma}
+    If \(U\) is an ideal of the ring \(R\). then \(R/U\) is a ring and is a homomorphic image of \(R\).
+\end{lemma}
+
+\begin{theorem}
+    Suppose \(\phi:R \to R"\) is a homomorphism and let \(U = \func{I}{\phi}\). Then, \(R' \approx R/U\). Moreover, there is a one-to-one correspondence between the set of ideals of \(R'\) and the set of ideals of \(R\) that contain \(U\). This correspondence can be achieved by associating with an ideal \(W'\) of \(R'\), the ideal \(W \) in \(R\) defined by \(W = \set<x \in R>{\func{\phi}{x} \in W'}\), then \(W' \approx R/W\).
+\end{theorem}
+\section{More ideals and quotient rings}
+\begin{lemma}
+    Let \(R\) be a commutative ring with unit element whose only ideals are \(\bracket{0}\) and \(R\). Then, \(R\) is a field.
+\end{lemma}
+
+\begin{definition}
+    An ideal \(M \neq R\) is said to be \textbf{maximal ideal} of \(R\) whenever \(U\) is an ideal of \(R\) such that \(M \subset U \subset R\), then either \(U R\) or \(U = M\).
+\end{definition}
+
+If a ring has unit element, then using axiom of choice it can be shown that there is a maximal ideal.
+
+\begin{theorem}
+    If \(R\) is a commutative ring with unit element and \(M\) is an ideal of \(R\), then \(M\) is maximal ideal if and only if \(R/M\) is a field.
+\end{theorem}
+
+\section{The field of quotients of integral domain}
+\begin{definition}
+    A ring \(R\) can be \textbf{imbedded} in ring \(R'\) if there is an isomorphism of \(R\) inot \(R'\). If \(R\) and \(R'\) have unit elements, this isomorphism should take \(1\) onto \(1'\). \(R'\) will be called an \textbf{over ring or extension } of \(R\).
+\end{definition}
+
+\begin{theorem}
+    Every integral domain can be imbedded in a field.
+\end{theorem}
+\begin{proof}
+    Take a look at quotients \(\frac{a}{b}\). \(M = \set<(a,b)>{a,b\in D, b \neq 0}\). \((a,b) \sim (c,d)\) if \(ad = bc\). \(F\) be the set of equivalence classes. \(F\) is a field and \(D\) can be imbedded in \(F\).
+\end{proof}
+\(F\) is caled the \textbf{field of quotients} of \(D\).
+
+\section{Euclidean ring}
+\begin{definition}
+    An integral domain \(R\) is an \textbf{Euclidean ring} if for every \(a \neq 0\) in \(R\) there exists a non-negative integer \(\func{d}{a}\) such that 
+    \begin{enumerate}
+        \item For all non-zero \(a,b \in R\), \(\func{d}{a} \leq \func{d}{ab}\).
+        \item For all non-zero \(a,b \in R\), there exists \(t,r \in R\) such that \(a = tb + r\) where either \(r = 0\) or \(\func{d}{r} < \func{d}{b}\).
+    \end{enumerate}
+\end{definition}

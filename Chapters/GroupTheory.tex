@@ -270,24 +270,65 @@ Let \(H\) and \(K\) be two subgroups of \(G\), then
     \begin{proof}
         Let \(a_1H, \dots, a_nH\) be left cosets of \(H\). Then, \(Ha_1^{-1}, \dots, Ha_n^{-1}\) are right cosets of \(H\). Suppose \(aH = a_iH\), then \(Ha^{-1} = Ha_i^{-1}\) and therefore, \(aHa^{-1} = a_{i} H a_{i}^{-1}\). Since there are finitely many \(a_i H a_i^{-1}\), then there are finitely many \(aHa^{-1}\).
     \end{proof}
-    \item
+    \item If an abelian group has subgroups of orders \(m\) and \(n\), respectively, then show it has a subgroup whose order is the least common multiple of \(m\) and \(n\).
+    \item Let \(G\) be a finite (abelian) group in which the number of solutions in \(G\) of the equation \(x^n = e\) is at most \(n\) for every positive integer \(n\). Prove that \(G\) must be a cyclic group.
 \end{enumerate}
 \section{Normal subgroups}
 \begin{definition}
     A subgroup \(N\) of \(G\) is \textbf{normal} if \(\forall g \in G,n \in N,\ gng^{-1} \in N\).
 \end{definition}
 
-\begin{lemma}
+\begin{lemma}\label{lm:normalEquivalency}
     \(N\) is normal if and only if \(gNg^{-1} = N\) for every \(g \in G\).
 \end{lemma}
+
+\begin{prooflemma}
+    By definition, \(gNg^{-1} \subset N\). Let \(n \in N\), then \(g^{-1}ng = n'\) for some \(n' \in N\). Hence, \(n \in gNg^{-1}\) for all \(n \in N\).
+\end{prooflemma}
 
 \begin{lemma}
     \(N\) is a normal subgroup if and only if every left coset of \(N\) is a right coset.
 \end{lemma}
 
+\begin{prooflemma}
+    If \(N\) is normal, then by \ref{lm:normalEquivalency}, \(gN = Ng\) for all \(g\). Suppose, for all \(g \in G\), \(gN = Nh\) for some \(h \in G\). Then, \(h = gn \implies gN = Ngn\) for \(n \in N\). This implies, \(gNn^{-1} = gN = Ng\) and therefore, \(gNg^{-1} = N\) which by \ref{lm:normalEquivalency} means that \(N\) is normal.
+\end{prooflemma}
+
+\begin{lemma}
+    \(N\) is a normal subgroup if and only if the product of two right cosets of \(N\) is a right coset as well.
+\end{lemma}
+
+\begin{prooflemma}
+    If \(N\) is normal, then 
+    \begin{equation*}
+        Na Nb = N (aN)b = N (Na)b = Nab
+    \end{equation*}
+    Then, suppose \(NaNb = Nc\) for all \(a,b \in G\) and some \(c \in G\). This implies \(NaNb = Nab\) and therefore, \(NaNa^{-1} = N \implies NaN = Na\).
+    \begin{align*}
+        NaN = Na &\implies \forall n, an \in Na \implies  aN \subset Na\\
+        Na^{-1}N = Na^{-1} &\implies \forall n \exists n', a^{-1}n = n'a^{-1} \implies na = an' \implies Na \subset aN \\
+    \end{align*}
+    therefore, \(aN = Na\).
+\end{prooflemma}
+
 \begin{definition}
     \(G/N\) is called a \textbf{quotient group} is the set of all right cosets of \(N\).
 \end{definition}
+
+\begin{theorem}
+    If \(N\) is normal in \(G\), then \(G/N\) is a group. Furthermore, for finite \(G\), \(\func{o}{G/N} = \frac{\func{o}{G}}{\func{o}{N}}\).
+\end{theorem}
+
+\begin{proof}
+    Checking axioms is pretty easy. Note that, \(\func{o}{G/N} = \func{i_G}{N}\).
+\end{proof}
+\ \\ 
+{\Large{\textbf{Exercises}}}
+\begin{enumerate}
+    \item The groups in which all subgroups are normal are called \textbf{Dedekind groups}. Non-abelian dedekind groups are called \textbf{Hamiltonian groups}. Show that quaternion group is a Hamiltonian group.
+    \item Show that if \(K\) is a normal subgroup of \(N\) and \(N\) is a normal subgroup of \(G\), then \(K\) is not necessarily a subgroup of \(G\).
+    % TODO: Dihedral group
+\end{enumerate}
 
 \section{Homomorphism}
 \begin{definition}
@@ -301,25 +342,57 @@ Let \(H\) and \(K\) be two subgroups of \(G\), then
     Suppose \(G\) is a group, \(N\) a normal subgroup of \(G\), \(\phi: G \to G/N\) given by \(\func{\phi}{x} = Nx\) for all \(x \in G\). Then, \(\phi\) is a homomorphism.
 \end{lemma}
 
+\begin{prooflemma}
+    Note that \(\func{\phi}{xy} = Nxy\) and \(\func{\phi}{x} \func{\phi}{y} = NxNy = Nxy\).
+\end{prooflemma}
+
 \begin{definition}
     If \(\phi\) is a homomorphism of \(G\) into \(\bar{G}\), the \textbf{kernel} of \(\phi\), \(K_{\phi}\) is defined as \(K_{\phi} = \set<x \in G>{\func{\phi}{x} = \bar{e}}\).
 \end{definition}
 
 \begin{lemma}
-    \(\phi: G \to \bar{G}\) is a homomorphism if 
+    If \(\phi: G \to \bar{G}\) is a homomorphism, then  
     \begin{enumerate}
         \item \(\func{\phi}{e} = \bar{e}\).
         \item \(\func{\phi}{x^{-1}} = \bracket{\func{\phi}{x}}^{-1}\).
     \end{enumerate}
 \end{lemma}
 
+\begin{prooflemma}
+    \begin{equation*}
+        \func{\phi}{xe} = \func{\phi}{x} = \func{\phi}{x}\func{\phi}{e} \implies \func{\phi}{e} = \bar{e}
+    \end{equation*}
+    and 
+    \begin{equation*}
+        \func{\phi}{x^{-1}} \func{\phi}{x} = \func{\phi}{x^{-1}x} = \bar{e} \implies \func{\phi}{x^{-1}} = \bracket{\func{\phi}{x}}^{-1}
+    \end{equation*}
+    \
+\end{prooflemma}
+
 \begin{lemma}
     If \(\phi\) is a homomorphism, then \(K_{\phi}\) is a normal subgroup of \(G\).
 \end{lemma}
 
-\begin{lemma}
+\begin{prooflemma}
+    Pick an arbitray \(x \in G\) and \(y \in K_{\phi}\). Then, 
+    \begin{equation*}
+        \func{\phi}{x y x^{-1}} = \func{\phi}{x} \func{\phi}{y} \func{\phi}{x^{-1}} = \bar{e}
+    \end{equation*}
+    hence, \(xyx^{-1} \in K_{\phi}\).
+\end{prooflemma}
+
+\begin{lemma}\label{lm:homomorphismInverse}
     If \(\phi\) is a homomorphism, then the set all iverse images of \(\bar{g} \in \bar{G}\) under \(\phi\) is given by \(K_{\phi} x\) for any particular inverse image of \(\bar{g}\).
 \end{lemma}
+
+\begin{prooflemma}
+    Suppose \(y\) is another inverse image of \(\bar{g}\). 
+    \begin{align*}
+        \func{\phi}{y} &= \bar{g} & \func{\phi}{x} &=\bar{g}\\
+        \implies & \func{\phi}{yx^{-1}} = \bar{e} &\implies& yx^{-1} \in K_{\phi}
+    \end{align*}
+    which means \(y \in K_{\phi}{x}\). Also, clearly each \(y \in K_{\phi}{x}\) is an inverse image of \(\bar{g}\).
+\end{prooflemma}
 
 \begin{definition}
     A homomorphism \(\phi: G \to \bar{G}\) is an \textbf{isomorphism} if \(\phi\) is \underline{one-to-one}.
@@ -330,34 +403,93 @@ Let \(H\) and \(K\) be two subgroups of \(G\), then
 \end{definition}
 
 \begin{corollary}
-    \(\phi\) is isomorphism if and only if \(K_{\phi} = \set{e}\).
+    Let \(\phi\) be a homomorphism. Then, \(\phi\) is an isomorphism if and only if \(K_{\phi} = \set{e}\).
 \end{corollary}
 
-\begin{theorem}
-    If \(\phi: G \to \bar{G}\) is a homomorphism, then \(G/K_{\phi} \approx \bar{G}\)
+\begin{prooflemma}
+    If \(\phi\) is an isomorphism, then it is injective and hence only \(e \in K_{\phi}\). Suppose \(K_{\phi} = \set{e}\), then we must show that \(\phi\) is a injective function. Suppose \(\func{\phi}{x} = \func{\phi}{y}\), then by \ref{lm:homomorphismInverse}, \(y x^{-1} \in K_{\phi}\). Thus, \(y = x\) and \(\phi\) is injective.
+\end{prooflemma}
+
+\begin{theorem}\label{thm:surjectiveHomomorphism}
+    If \(\phi: G \to \bar{G}\) is a surjective homomorphism, then \(G/K_{\phi} \approx \bar{G}\)
 \end{theorem}
+
+\begin{prooflemma}
+    Consider the following mapping, \(\psi: G/K_{\phi} \to \bar{G}\). For any \(X \in K/\phi\), \(\func{\psi}{X} = \func{\phi}{g}\) for some \(g \in X\). This is well-defined since if \(g,g' \in X\), then \(g' = xg\) for some \(x \in K_{\phi}\) and hence 
+    \begin{equation*}
+        \func{\phi}{g'} = \func{\phi}{g} \func{\phi}{x} = \func{\phi}{g}
+    \end{equation*}
+    Furthermore, \(\psi\) is injective. Suppose \(xK_{\phi},yK_{\phi} \in G/K_{\phi}\). Then,
+    \begin{equation*}
+        \func{\psi}{xK_{\phi}} = \func{\psi}{yK_{\phi}} \implies \func{\phi}{x} = \func{\phi}{y} \implies xy^{-1} \in K_{\phi}
+    \end{equation*}
+    which implies that \(x \in K_{\phi} y\) and hence \(K_{\phi} y = K_{\phi} x\). Moreover, this map is surjective. Let \(\bar{g} \in \bar{G}\). Since \(\phi\) is surjective, then there exists an inverse image \(g\). Therefore, \(\func{\psi}{gK_{\phi}} = \bar{g}\). Finally, we must show that \(\psi\) is a homomorphism. Since \(K_{\phi}\) is normal in \(G\) we have 
+    \begin{equation*}
+        \func{\psi}{xK_{\phi} y K_{\phi}} = \func{\psi}{xy K_{\phi}}= \func{\phi}{xy} = \func{\phi}{x}\func{\phi}{y} = \func{\psi}{xK_{\phi}} \func{\psi}{yK_{\phi}}
+    \end{equation*}
+    which concludes the proof.
+\end{prooflemma}
 
 Thus, we can find all homomorphic images of \(G\) by going through normal subgroups of \(G\).
 
 \begin{definition}
-    A group is \textbf{simple} if it has no non-trivial homomorphic images.
+    A group is \textbf{simple} if it has no non-trivial homomorphic images. i.e. it has no non-trivial normal subgroup.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}[Cauchy's theorem for finite abelian groups]\label{thm:CauchyForAbelian}
     Suoppose \(G\) is a finite abelian group, and \(p \mid \func{o}{G}\) where \(p\) is a prime number. Then, there is an element \(a \neq e\) such that \(a^p = e\).
 \end{theorem}
 
-\begin{theorem}
-    Suppose \(G\) is a finite abelian group and \(p^{\alpha} \mid\mid \func{o}{G}\), then \(G\) has a unique subgroup of order \(p^{\alpha}\).
+\begin{proof}
+    We induct over \(\func{o}{G}\). For \(G\) with a single element, the theorem is true trivially. If \(G\) has non-trivial subgroup \(H\), then \(G\) is cyclic and hence all its elements satisfy the condition. Suppose \(H\) is a non-trivial group of \(G\). Since \(G\) is abelian, then \(H\) is normal in \(G\). If \(p \mid \func{o}{H}\) then by induction we are done. Suppose otherwise, then \(p \mid \func{o}{G/H}\). Consder a set \(S\) where each element correspond to a right coset of \(H\). Clearly, there is a isomorphism between \(G/H\) and \(S\). Since \(S\) is a subgroup of \(G\) and \(p \mid \func{o}{S}\) by induction hypothesis we are done.
+\end{proof}
+
+\begin{theorem}[Sylow's theorem for finite abelian groups]
+    Suppose the group \(G\) is a finite abelian group and \(p^{\alpha} \mid\mid \func{o}{G}\), then \(G\) has a unique subgroup of order \(p^{\alpha}\).
 \end{theorem}
+
+\begin{proof}
+    We first prove the existence of such group. For \(\alpha = 0\), the claim holds trivially as \(\set{e}\) is a subgroup of order 1. . Suppose \(H = \set<x \in G>{x^{p^n} = e}\) is a subgroup of \(G\). Since \(p \mid \func{o}{G}\) there is a non identity element \(g\) such that \(g^p = e\). Hence \(g \in H\). We show that \(q \not \mid \func{o}{H}\) for any other prime \(q \neq p\). Since otherwise there is a an element \(h \in H\) where \(h \neq e \) and \(h^q = e\) by \ref{thm:CauchyForAbelian}. Since \(q\) and \(p^n\) are coprime, then \(h = e\) which is a contradiction. Lastly, we claim that \(p^{\alpha} \mid\mid \func{o}{H}\). Suppose the contrary that \(p^{\beta} \mid\mid \func{o}{H}\) for some \(\beta < \alpha\). Then, the quotient group of \(H\), \(p \mid \func{o}{G/H}\). By \ref{thm:CauchyForAbelian}, there is a right coset \(Hx \neq H\) such that \((Hx)^p = Hx^p = H\). This implies that \(x^p \in H\) which means \((x^p)^{p^n} = e\) for some \(n\). \(x^{p^{n+1}} = e \implies x \in H\). which is a contradtion. Thus, \(\func{o}{H} = p^{\alpha}\).
+
+    Finally, suppose \(K \neq H\) is another subgroup of \(G\) such that \(\func{o}{K} = p^{\alpha}\). Then, note that 
+    \begin{equation*}
+        \abs{HK} = \dfrac{\func{o}{H} \func{o}{K}}{\func{o}{H \cap K}} = \dfrac{p^{2\alpha}}{\func{o}{H \cap K}} \implies p^{\gamma} \mid\mid \abs{HK}
+    \end{equation*}
+    However, this is a contradiction since  \(HK\) is a subgroup in \(G\). Therefore \(H\) is unique in \(G\).
+\end{proof}
 
 \begin{lemma}
-    Suppose \(\phi: G \to \bar{G}\) is a homomorphism and \(\bar{H}\) is a subgroup of \(\bar{G}\). Let \(H = \set<x \in G>{\func{\phi}{x} \in \bar{H}}\). Then, \(H\) is a subgroup of \(G\) and \(H \supset K_{\phi}\). If \(\bar{H}\) is normal in \(\bar{G}\), then \(H\) is normal. Moreover, this association sets up a one-to-one mapping from the set of all subgroups \(\bar{G}\) onto the set of all subgroups of \(G\) which contain \(K_{\phi}\).
+    Suppose \(\phi: G \to \bar{G}\) is a surjective homomorphism and \(\bar{H}\) is a subgroup of \(\bar{G}\). Let \(H = \set<x \in G>{\func{\phi}{x} \in \bar{H}}\). Then, \(H\) is a subgroup of \(G\) and \(H \supset K_{\phi}\). If \(\bar{H}\) is normal in \(\bar{G}\), then \(H\) is normal. Moreover, this association sets up a one-to-one mapping from the set of all subgroups \(\bar{G}\) onto the set of all subgroups of \(G\) which contain \(K_{\phi}\).
 \end{lemma}
 
+\begin{prooflemma}
+    Since \(\bar{e} \in \bar{H}\), then \(K_{\phi} \subset H\). Let \(x,y \in H\). \(xy \in H\) since \(\func{\phi}{xy} = \func{\phi}{x} \func{\phi}{y} \in \bar{H}\) and \(x^{-1} \in H\) since \(\func{\phi}{x^{-1}} = \bracket{\func{\phi}{x}}^{-1} \in \bar{H}\). Thus, \(H\) is a subgroup in \(G\). Assume that \(\bar{H}\) is normal and pick arbitray elements \(g \in G\) and \(h \in H\). 
+    \begin{equation*}
+        \func{\phi}{ghg^{-1}} = \func{\phi}{g} \func{\phi}{h} \bracket{\func{\phi}{g}}^{-1} \in \bar{H } \implies ghg^{-1} \in H
+    \end{equation*}
+    hence \(H\) is normal in \(G\). Let \(\bar{H},\bar{H'}\) be two subgroups of \(\bar{G}\) and \(H = \func{\phi^{-1}}{\bar{H}},H'= \func{\phi^{-1}}{\bar{H'}}\). Thus far we have proved that \(H,H' \supset K_{\phi}\) are subgroups of \(G\) and \(\phi^{-1}\) is surjective. If \(\bar{H} \neq \bar{H'}\), then there is an element \(x \in \bar{H}\) but \(x \notin \bar{H'}\). We should see that for any \(y = \func{\phi^{-1}}{x}\), \(y \subset H\) but \(y \notin H'\). Since \(\func{\phi}{y} = x \in \bar{H}\), then \(y \in H\). If \(y \in H'\), then \(\func{\phi}{y} = x \in \bar{H'}\) which is a contradiction. Therefore, \(\phi^{-1}\) is a injective as well. So \(\phi^{-1}\) is a bijection between the subgroups of \(\bar{G}\) and subgroups of \(G\) that contain \(K_{\phi}\).
+\end{prooflemma}
+
 \begin{theorem}
-    Let \(\phi:G \to \bar{G}\) be a homomorphism, \(\bar{N}\) a normal subgroup of \(\bar{G}\), and \(N = \set<x \in G>{\func{\phi}{x} \in N}\). Then, \(G/N \approx \bar{G}/\bar{N}\) if and only if \(G/N \approx (G/K_{\phi})/(N/K_{\phi})\).
+    Let \(\phi:G \to \bar{G}\) be a surjective homomorphism, \(\bar{N}\) a normal subgroup of \(\bar{G}\), and \(N = \set<x \in G>{\func{\phi}{x} \in N}\). Then, \(G/N \approx \bar{G}/\bar{N}\) and equivalently \(G/N \approx (G/K_{\phi})/(N/K_{\phi})\).
 \end{theorem}
+
+\begin{proof}
+    The last equivalency results immediately from \ref{thm:surjectiveHomomorphism}. 
+\end{proof}
+\ \\ 
+{\Large{\textbf{Exercises}}}
+\begin{enumerate}
+    \item Let \(U\) be a subset of a group \(G\). The subgroup generated by \(U\), denoted by \(\angleBracket{U}\) is the smallest subgroup that contains \(U\). Show that \(\angleBracket{U}\) exists and give a construction for it.
+    \item Let \(U = \set<xyx^{-1}y^{-1}>{x,y \in G}\). In this case,\(\angleBracket{U}\) is usually written as \(\hat{G}\) and is called the \textbf{commutator subgroup} of \(G\).
+    \begin{enumerate}
+        \item Prove \(\hat{G}\) is normal in \(G\).
+        \item Prove \(G/\hat{G}\) is abelian.
+        \item If \(G/N\) is abelian, prove that \(N \supset \hat{G}\).
+        \item Prove that if \(H\) is a subgroup of \(G\) and \(H \supset \hat{G}\), then \(H\) is normal in \(G\).
+        \item Let \(G = \func{\GL_2}{\Reals}\) and \(N = \func{\SL_2}{\Reals}\). Show that \(N = \hat{G}\).
+    \end{enumerate}
+\end{enumerate}
 
 \section{Automorphism}
 \begin{definition}
@@ -368,31 +500,106 @@ Thus, we can find all homomorphic images of \(G\) by going through normal subgro
     If \(G\) is a group, then \(\func{\scrA}{G}\), the set of all automorphisms of \(G\) is also a group. The \(\func{\scrA}{G}\) is also denoted by \(\aut{G}\).
 \end{lemma}
 
+\begin{prooflemma}
+    The \(\aut{G}\) is a group under composition. Suppose \(\theta,\phi, \psi \in \aut{G}\).
+    \begin{enumerate}
+        \item It is closed under composition. Since \(\phi, \theta\) are both bijective, then their composition is a bijection as well. Moreover, it is a homomorphisms
+        \begin{equation*}
+            \func{\phi}{\func{\psi}{xy}} = \func{\phi}{\func{\psi}{x} \func{\psi}{y}} = \func{\phi}{\func{\psi}{x}}\func{\phi}{\func{\psi}{y}}
+        \end{equation*}
+        therefore, \(\phi \circ \psi \in \aut{G}\).
+        \item The identity is the identity transformation \(I\).
+        \begin{equation*}
+            I \circ \phi = \phi \circ I = \phi
+        \end{equation*}
+        \item the inverse of each automorphisms is its inverse map. Suppose \(\phi^{-1}\) is inverse of \(\phi\) 
+        \begin{equation*}
+            xy = \func{\phi}{\func{\phi^{-1}}{x}} \func{\phi}{ \func{\phi^{-1}}{y} } = \func{\phi}{\func{\phi^{-1}}{x} \func{\phi^{-1}}{x}} \implies \func{\phi^{-1}}{xy} = \func{\phi^{-1}}{x} \func{\phi^{-1}}{y} 
+        \end{equation*}
+        \item composition is associative 
+        \begin{equation*}
+            \phi \circ (\psi \circ \theta) = (\phi \circ \psi) \circ \theta
+        \end{equation*}
+    \end{enumerate} 
+    for any maps \(\phi,\psi, \theta \) from \(G\) to \(G\).
+\end{prooflemma}
+
 \begin{example}
 \(T_g:G \to G\) with \(xT_g = g^{-1}xg\). \(T_g\) is an automorphisms. \(T_g\) is called the \textbf{inner automorphism corresponding to \(g\)}. Let \(\func{\scrT}{G} = \set<T_g \in \aut{G}>{g \in G}\) is the \textbf{inner automorphism group} and is also denoted by \(\inn{G}\). \(\Psi: G \to \aut{G}\) given by \(g\Psi = T_g\) is a homomorphism. The kernel of \(\Psi\) is the \textbf{center} of \(G\), \(\func{Z}{G}\), the set of the elements that commute with all other elements. Note that, if \(g_o \in K_{\Psi}\), then \(T_{g_0} = I\), hence \(g_0^{-1}xg_0 = x\) implying \(g_0x = xg_0\) for all \(x \in G\). If \(g_0 \in \func{Z}{G}\), then \(xg_0 = g_0x\) for all \(x\), thus \(T_{g_0} = I\) and \(g_0 \in K_{\Psi}\).
 \end{example}
 
 \begin{lemma}
-    \(\inn{G} \sim G/Z\).
+    \( G/Z\approx \inn{G}\).
 \end{lemma}
+
+\begin{prooflemma}
+    Since \(K_{\psi} = Z\), this is an immediate result of \ref{thm:surjectiveHomomorphism}, by considering \(\Psi:G \to \inn{G}\).
+\end{prooflemma}
 
 \begin{lemma}
     Let \(G\) be a group and \(\phi\) be an automorphism of \(G\). If \(a \in G\) is of order \(\func{o}{a} > 0\), then \(\func{o}{\func{\phi}{a}} = \func{o}{a}\).
 \end{lemma}
 
+\begin{prooflemma}
+    For any homomorphism \(\phi:G \to \bar{G}\), \(\func{o}{\func{\phi}{a}} \mid \func{o}{a}\) since 
+    \begin{equation*}
+        \func{\phi}{a}^{\func{o}{a}}= \func{\phi}{a^{\func{o}{a}}} = \func{\phi}{e} = \bar{e}
+    \end{equation*}
+    since both \(\phi\) and \(\phi^{-1}\) are homomorphism from \(G\) to \(G\), then 
+    \begin{align*}
+        &\func{o}{\func{\phi}{a}} \mid \func{o}{a}\\
+        &\func{o}{\func{\phi^{-1}}{\func{\phi}{a}}} = \func{o}{a} \mid \func{o}{\func{\phi}{a}}\\
+        \implies & \func{o}{\func{\phi}{a}} = \func{o}{a}
+    \end{align*}
+    \
+\end{prooflemma}
+\ \\ 
+{\Large{\textbf{Exercises}}}
+\begin{enumerate}
+    \item A subgroup \(C\) of \(G\) is said to be a \textbf{characteristics subgroup} of \(G\) if \(CT \subset C\) for all automorphisms \(T\) of \(G\).    For any group \(G\), prove that the commutator subgroup \(\hat{G}\) is a characteristic subgroup of \(G\).
+    \item Let \(G\) be a finite group, \(T\) an automorphism of \(G\) with property that \(xT=x\) if and only if \(x = e\). Suppose futher that \(T^2 = I\). Prove that \(G\) must be abelian.
+    \item Let \(G\) be a finite group, \(T\) an automorphism of \(G\) that sends more than three-quarters of the elements of \(G\) onto their inverses. Prove that  \(xT = x^{-1}\) and that \(G\) is abelian.
+    \item Let \(G\) be a group of order \(2n\). Suppose that half of the elements of \(G\) are of order \(2\), and the other half form a subgroup \(H\) of order \(n\). Prove that \(H\) is of odd order and is an abelian subgroup of \(G\).
+\end{enumerate}
 \section{Cayley's theorem}
 \begin{theorem}[Cayley]
     Every group is isomorphic to a subgroup of \(\func{A}{S}\) for some set \(S\).
 \end{theorem}
 
+\begin{proof}
+    Take \(S = G\) and let \(\tau_g: S \to S\) be given by \(\tau_g: x \mapsto xg\) for a \(g \in G\). We claim that \(\theta: G \to \func{A}{S}\) given by \(\theta: g \mapsto \tau_g\) is an isomorphism. First, we must show that \(\theta\) is well defined. That is, for all \(g \in G\), \(\tau_g \in \func{A}{S}\). Note that, if \(xg = yg\), then \(x = y\), hence \(\tau_g\) is injective. For every \(y \in G\), \(y = yg^{-1} \tau_g\), hence \(\tau_g\) is surjective. Thus, \(\tau_g \in \func{A}{S}\). Second, we show that \(\theta\) is a homomorphism. For all \(g,h,x \in G\), \(x(gh) = (xg)h\) therefore, \(\tau_{gh} = \tau_g \tau_h\). Finally, to show that \(\theta\) is an isomorphism, we must show that it is injective. If for all \(x \in G\), \(x\tau_g = x\tau_h\), then \(g = h\). Which was what was wanted.
+\end{proof}
+
+The construction above, describes a group \(G\) as a subgroup of \(\func{A}{G}\) that for finite \(G\), is of order \(\func{o}{G}!\). Too BIG. We wish to make it smaller. Consider the following results.
+
 \begin{theorem}
     If \(G\) is a group, \(H\) a subgroup of \(G\), and \(S\) is the set of all right cosets of \(H\) in \(G\), then there is a homomorphism \(\theta: G \to \func{A}{S}\) and the kernel of \(\theta\) is the largest normal subgroup of \(G\) which is contained in \(H\).
 \end{theorem}
 
+\begin{proof}
+    Let \(\tau_g: S \to S\) be given by \(Hx \tau_g = Hxg\) and then let \(\theta: G \to \func{A}{S}\) be given by \(\theta: g \mapsto \tau_g\). One can easily check that, \(\tau_g \in \func{A}{S}\) for all \(g\) and that \(\theta\) is a homomorphism. Suppose \(K\) is the kernel of \(\theta\). Since \(K\) is a kernel of a homomorphism, it is normal. Moreover, if \(g \in K\), then \(Hxg = Hx\) for all \(x \in G\). In particular, \(Hg = H\) which implies that \(g \in H\). As a result, \(K \subset H\). Lastly, suppose \(K'\) is another normal subgroup of \(G\) which is contained in \(H\). If \(g' \in K'\), then for all \(x \in G\), \(xg' x^{-1} \in K' \subset H'\). That is, there exists a \(h_x \in H\) such that \(xg' = hx\) which implies \(Hxg' = Hx\) for all \(x\). Therefore, \(g' \in K\) and \(K' \subset K\). Which was what was wanted.
+\end{proof}
+
+Given the above theorem, if \(H\) has no non-trivial normal subgroup of \(G\) inside it, then \(\theta\) is an isomorphism.
+
 \begin{lemma}
-    If \(G\) is a finite group, and \(H \neq G\) is a subgroup of \(G\) such that \(\func{o}{G} \not\mid \func{i}{H}!\), then \(H\) must contain a non-trivial normal subgroup of \(G\). In particular, \(G\) is not simple.
+    If \(G\) is a finite group, and \(H \neq G\) is a subgroup of \(G\) such that \(\func{o}{G} \nmid \func{i}{H}!\), then \(H\) must contain a non-trivial normal subgroup of \(G\). In particular, \(G\) is not simple.
 \end{lemma}
 
+\begin{proof}
+    Suppose \(H\) contains no non-trivial normal subgroup of \(G\). Then, by preceding theorem, \(\theta \) is an isomorphism and \(G\) is isomorphic to a subgroup of \(\func{A}{S}\), where \(\func{A}{S} = \func{i}{H}!\). By Lagrange, theorem, \(\func{o}{G} \mid \func{i}{H}!\) which was what was wanted.
+\end{proof}
+\ \\ 
+{\Large{\textbf{Exercises}}}
+\begin{enumerate}
+    \item Let \(\func{o}{G} = pq\), \(p > q\) are primes, prove 
+    \begin{enumerate}
+        \item \(G\) has a subgroup of order \(p\) and a subgroup of order \(q\).
+        \item If \(q \nmid p - 1\), then \(G\) is cyclic.
+        \item Given two primes, \(p\) and \(q\) with \(q \mid p - 1\), there exists a non-abelian group of order \(pq\).
+        \item Any two non-abelian groups of order \(pq\) are isomorphic.
+    \end{enumerate}
+\end{enumerate}
 \section{Permutation group}
 Suppose \(S\) is a finite set having \(n\) elements \(x_1, \dots, x_n\). If \(\phi \in \func{A}{S}\), then \(\phi\) is a one-to-one correspondence and it can be represented as 
 \begin{align*}
@@ -408,27 +615,292 @@ Suppose \(S\) is a finite set having \(n\) elements \(x_1, \dots, x_n\). If \(\p
 \end{align*}
 By considering composition of \(\theta,\psi \in \func{A}{S}\), we can define multiplication on their representation. 
 
-For \(\theta \in \func{A}{S}\) and \(a,b \in S\), \(a \equiv b \iff a = b \theta^i\) for some \(i \in \Integers\). This defines an equivalence relation. 
+For \(\theta \in \func{A}{S}\) and \(a,b \in S\), \(a \overset{\theta}{\equiv} b \iff a = b \theta^i\) for some \(i \in \Integers\). This defines an equivalence relation. 
 
---add the axioms
+\begin{enumerate}
+    \item \(a \overset{\theta}{\equiv} a \) for all \(a\), since \(a = a \theta^0\).
+    \item \(a \overset{\theta}{\equiv} b\) implies \(b \overset{\theta}{\equiv} a\), since \(a = b \theta^{i} \implies b = a\theta^{-1}\).
+    \item \(a \overset{\theta}{\equiv} b\) and \(b \overset{\theta}{\equiv} c\) implies \(a \overset{\theta}{\equiv} c\), since \(a = b \theta^i\) and \(b = c \theta^j\) implies \(a = c \theta^{i + j}\).
+\end{enumerate}
 
-We cakk the equivalence classes of \(s \in S\), the \textbf{orbit} of \(s\) under \(\theta\). The orbit of \(s\) consists of all elements in form of \(s \theta^i\), \(i \in \Integers\). If \(S\) is finite, then there is a smallest positive integer \(l = \func{l}{s}\) such that \(s\theta^l = s\). By \textbf{cycle} of \(\theta\) we mean the ordered set \((s,s\theta, \dots , s\theta^{l-1})\).
+We call the equivalence classes of \(s \in S\), the \textbf{orbit} of \(s\) under \(\theta\). The orbit of \(s\) consists of all elements in form of \(s \theta^i\), \(i \in \Integers\). If \(S\) is finite, then there is a smallest positive integer \(l = \func{l}{s}\) such that \(s\theta^l = s\). By \textbf{cycle} of \(\theta\) we mean the ordered set \((s,s\theta, \dots , s\theta^{l-1})\).
 
 \begin{lemma}
     Every permutation is a product of its cycles.
 \end{lemma}
 
+\begin{prooflemma}
+    Note that the cycles of a permuation are disjoint, and each is a permuation, hence their product is a permuation. Suppose \(\psi\) is the permuation of the product of cycles of \(\theta\). \(\psi\) is well-defined since the product of disjoint permuation is commutative. Futhermore, for each \(s \in S\), \(s\psi = \theta s\) thus, \(\theta = \psi\).
+\end{prooflemma}
+
 \begin{lemma}
     Every cycle can be written as a product of 2-cycle or \textbf{transpositions}.
 \end{lemma}
 
+\begin{prooflemma}
+    Every \(m\)-cycle can be written as a product of 2-cycles. 
+    \begin{equation*}
+        \begin{pmatrix*}
+            1 & 2& \dots & m
+        \end{pmatrix*} = \begin{pmatrix*}
+            1 & 2
+        \end{pmatrix*}
+        \begin{pmatrix*}
+            2& 3
+        \end{pmatrix*} \dots 
+        \begin{pmatrix*}
+            m-1& m
+        \end{pmatrix*}
+    \end{equation*}
+\end{prooflemma}
+
 \begin{definition}
-    A permutation \(\theta \in S_n\) is said to be an even permuation if it can be represented as a product of an even number of transpositions, 
+    A permutation \(\theta \in S_n\) is said to be an \textbf{even permuation} if it can be represented as a product of an even number of transpositions, 
 \end{definition}
 
--- add well-definition of even
+The proof of well-definition of even permuation involves the polynomial \(\func{p}{x_1, \dots,x_n}\)
+\begin{equation*}
+    \func{p}{x_1,\dots, x_n} = \prod_{i < j} (x_i - x_j)
+\end{equation*}
+Define the action of \(\theta \in A(S_n)\) on the polynomial \(p\)
+\begin{equation*}
+    \theta \cdot p = \prod_{i < j} (x_{\func{\theta}{i}} - x_{\func{\theta}{j}})
+\end{equation*}
+It can be easily seen that \(\theta \cdot p = \pm p\). In fact, if \(\theta\) is a transposition, then \(\theta \cdot p = -p\). Since this is an action on \(p\), if \(\theta\) is the product of \(m\) transposition, \(\theta \cdot p = (-1)^m p\). Therefore, even permuations are well-defined. That is, no permuation can be written as a product of even number of transpositions and odd number of transpositions simultaneously.
 
 Let \(A_n \subset S_n\) be the set of even permutations. \(A_n\) is a subgroup of \(S_n\) and it is called the \textbf{alternating group}. 
 \begin{lemma}
     The alternating group is a normal subgroup of \(S_n\) of index \(2\), .
+\end{lemma}
+\begin{prooflemma}
+    A way to prove this lemma, is to show that every odd permuation is in one coset of \(A_n\).
+    
+    Another way, is to show that \(\Psi:S_n \to W\) given by 
+    \begin{equation*}
+        \theta \Psi = \begin{cases}
+            1 & \theta \text{ is even}\\
+            -1 & \theta \text{ is odd}\\
+        \end{cases}
+    \end{equation*}
+    is an onto homomorphism. \(W\) is the group of \(\set{1,-1}\) under multiplication. Then \(A_n\) is the kernel of \(\Psi\). Since \(S_n/A_n \approx W\), then 
+    \begin{equation*}
+        \dfrac{\func{o}{S_n}}{\func{o}{A_n}} = \func{o}{W} = 2
+    \end{equation*}
+    Which was what was wanted.
+\end{prooflemma}
+\ \\ 
+{\Large{\textbf{Exercises}}}
+\begin{enumerate}
+    \item  
+    \begin{enumerate}
+        \item What is the order of an \(n\)-cycle.
+        \item What is the order of the product of disjoint cycles of length \(m_1,m_2, \dots , m_k\).
+        \item How do you find the order of a given permutation?
+    \end{enumerate}
+    \item Prove that \(A_5\) has no non-trivial normal subgroups.
+    \item If \(n \geq 5\) prove that \(A_n\) is the only non-trivial normal subgroup in \(S_n\).
+\end{enumerate}
+\section{Another counting principle} 
+\begin{definition}
+    If \(a,b \in G\), then \(b\) is said to be a \textbf{conjugate} of \(a\) in \(G\), denoted by \(a \sim b\), if there exists an element \(c \in G\) such that \(b = c^{-1}ac\)
+\end{definition}
+
+\begin{lemma}
+    Conjugacy is an equivalence relation on \(G\).
+\end{lemma}
+
+\begin{prooflemma}
+    \begin{enumerate}
+        \item \(a \sim a\) for all \(a \in G\), \(a = e^{-1}ae\).
+        \item \(a \sim b \implies b \sim a\) for all \(a,b \in G\), since \(a = c^{-1}bc \) implies that \(b = cac^{-1}\).
+        \item \(a \sim b, b \sim c \implies a \sim c\) for all \(a,b,c \in G\), since \(a = d^{-1}b d = d^{-1}e^{-1}ced = (ed)^{-1}c(ed)\).
+    \end{enumerate}
+\end{prooflemma}
+
+For \(a\in G\) let \(\func{C}{a} = \set<x \in G>{x \sim a}\). \(\func{C}{a}\) is called the \textbf{conjugate class} of \(a \) in \(G\). It consists all elements in form of \(y^{-1}ay\) for \(y \in G\). Suppose \(G\) is a finite group and \(A\) is a set of representative of conjugacy classes. Then, 
+\begin{equation*}
+    \func{o}{G} = \sum_{a \in A} \abs{\func{C}{a}}
+\end{equation*}
+
+\begin{definition}
+    Suppose \(a \in G\). The \textbf{normalizer} of \(a\) in \(G\), denoted by \(\func{N}{a}\), is the set of all elements that commute with \(a\), \(\func{N}{a} = \set<x \in G>{ax = xa}\).
+\end{definition}
+
+\begin{lemma}
+    \(\func{N}{a}\) is a subgroup of \(G\).
+\end{lemma}
+
+\begin{prooflemma}
+    Suppose \(x,y \in \func{N}{a}\), then \(a(xy) = (ax)y = (xa)y = x(ay) = x(ya) = (xy)a\). And \(x^{-1}a = ax^{-1}\) holds. Therefore, \(\func{N}{a}\) is a subgroup of \(G\).
+\end{prooflemma}
+
+\begin{theorem}\label{thm:SizeofConjugacyClass}
+    If \(G\) is a finite group, then \(\abs{\func{C}{a}} = \func{i_G}{\func{N}{a}}\). i.e. the number of elements conjugate to \(a\) in \(G\) is the index of normalized of \(a\) in \(G\).
+\end{theorem}
+
+\begin{proof}
+    Let \(S\) be the set of right cosets of \(\func{N}{a}\) in \(G\). Consider \(\varphi : S \to \func{C}{a}\) given by \(\varphi: \func{N}{a}g \mapsto g^{-1}ag\). This, function is well-defined since if \(\func{N}{a}g = \func{N}{a}h\), then \(g = nh\) for some \(n \in \func{N}{a}\). Then, \(g^{-1}ag = h^{-1}n^{-1}anh = h^{-1}ah\). Similary, it is injective. If \(\func{N}{a}g \varphi = \func{N}{a}h \varphi\), then \(g^{-1}ag = h^{-1}a h \implies a=(gh^{-1})a (hg^{-1}) \implies hg^{-1} \in \func{N}{a}\) hence \(\func{N}{a}g = \func{N}{a}h\). \(\varphi\) is clearly surjective. Suppose \(x \in \func{C}{a}\), then there exists \(g \in G\) such that \(x = g^{-1}ag\). Then, \(\func{N}{a}g \varphi = g^{-1}ag = x\). Therefore, \(\varphi\) is a bijection and \(\abs{\func{C}{a}} = \func{i_G}{\func{N}{a}}\).
+\end{proof}
+\begin{corollary}
+    The \textit{class equation} of \(G\)
+    \begin{equation*}
+        \func{o}{G} = \sum_{a \in A} \dfrac{\func{o}{G}}{\func{o}{\func{N}{a}}}
+    \end{equation*}
+\end{corollary}
+
+Recall that the center \(\func{Z}{G}\) of a group \(G\) is the set of all \(a \in G\) such that \(ax = xa\) for all \(x \in G\). 
+
+\begin{lemma}
+    \(a \in \func{Z}{G}\) if and only if \(\func{N}{a} = G\). If \(G\) is finite, \(a \in \func{Z}{G}\) if and only if \(\func{o}{\func{N}{a}} = \func{o}{G}\).
+\end{lemma}
+
+\begin{prooflemma}
+    It can be readily proven by applying the definitions.
+\end{prooflemma}
+
+\subsection{Applications of \ref{thm:SizeofConjugacyClass}}
+
+\begin{theorem}
+    If \(\func{o}{G} = p^n\) where \(p\) is a prime number, then \(\func{Z}{G} \neq \set{e}\).
+\end{theorem}
+
+\begin{proof}
+    Let \(z = \func{o}{\func{Z}{G}}\). For each \(a \in \func{Z}{G}\), \(\abs{\func{C}{a} }= 1\). For each \(b \notin \func{Z}{G}\), \(\func{N}{a} \neq G\), hence \(\func{o}{\func{N}{a}} = p^{k}\) for some \(0 < k < n\). Therefore, \(\abs{\func{C}{a}} = p^{n - k}\) with \(n - k \geq 1\). Hence, 
+    \begin{align*}
+        p^n &= \sum_{a \in A} \abs{\func{C}{a}} \\
+        &= \sum_{A \cap \func{Z}{G}} \abs{\func{C}{a}} + \sum_{A \cap (\func{Z}{G})^c} \abs{\func{C}{a}}\\
+        &= z + \sum_{A \cap (\func{Z}{G})^c} \abs{\func{C}{a}}
+    \end{align*}
+    We have shown that, for \(a \notin \func{Z}{G}\), then \(p \mid \abs{\func{C}{a}}\), thus \(p \mid z\). Since \(e \in \func{Z}{G}\), then \(\func{Z}{G}\) contains at least \(p\) elements.
+\end{proof}
+
+\begin{corollary}
+    If \(\func{o}{G} = p^2\) where \(p\) is a prime number, then \(G\) is abelian.
+\end{corollary}
+
+\begin{proof}
+    Based on the proof last theorem, \(\func{o}{\func{Z}{G}}= p,p^2\). Suppose \(\func{o}{\func{Z}{G}} = p\) and \(a \notin \func{Z}{G}\). Then, \(\func{Z}{G} \subsetneq \func{N}{a}\). By Lagrange's theorem, \(\func{o}{\func{N}{a}} \mid \func{o}{G}\), thus \(\func{o}{\func{N}{a}} = p^2\) which means \(a \in \func{Z}{G}\), a contradiction. Therefore, \(\func{o}{\func{Z}{G}} = p^2\) and \(G\) is abelian.
+\end{proof}
+
+\begin{theorem}[Cauchy]
+    If \(p\) is a prime number and \(p \mid \func{o}{G}\), then \(G\) has an element of order \(p\).
+\end{theorem}
+
+\begin{proof}
+    If \(\func{o}{G} = p\), then \(G\) is cyclic and the theorem holds. Suppose, the statement is true for all groups with \(\func{o}{G} = pk\) for \(1 \leq k \leq n-1\), we will show that it is also true for \(\func{o}{G} = np\). That is, we will prove the theorem by induction. If \(G\) has a non-trivial subset \(H\) where \(p \mid \func{o}{H}\), then we would be done. Suppose, that \(p\) divides the order of no non-trivial subgroup of \(H\). Consider the normalizer subgroups, \(\func{N}{a}\). If a normalizer subgroup is trivial, then \(\func{N}{a} = G\) and hence \(a \in \func{Z}{G}\). If it is not trivial, then its index divides \(p\). 
+    \begin{equation*}
+        p^n = z + \sum_{A \cap (\func{Z}{G})^c} \abs{\func{C}{a}} \implies p \mid z
+    \end{equation*} 
+    That is \(p \mid \func{o}{\func{Z}{G}}\). Therefore, \(\func{Z}{G} = G\) which means \(G\) is abelian. By Cauchy's theorem for abelian groups, there exists \(a \neq e\) such that \(a^p = e\).
+\end{proof}
+
+Recall that every permutation in \(S_n\) can be decomposed into disjoint cycles. We shall say a permutation \(\sigma \in S_n\) has the \textbf{cycle decomposition} \(\set{n_1, \dots , n_r}\) if it can be written as product of disjoint cycles of length \(n_1, \dots ,n _r\) with \(n_1 \leq n_2 \leq \dots \leq n_r\).
+
+\begin{lemma}
+    Two permuations in \(S_n\) are conjugate if and only if they have the same cycle decomposition.
+\end{lemma}
+
+\begin{prooflemma}
+    Conjugation in \(S_n\) leaves the cyclic decomposition unchanged. Also, for any two permuations with the same cyclic decomposition, we can find a \(\theta \in S_n\) such that \(\sigma_1 = \theta^{-1} \sigma_2 \theta\).
+\end{prooflemma}
+\begin{corollary}
+    The number of conjugate classes in \(S_n\) is \(\func{p}{n}\), the number of partitions of \(n\).
+\end{corollary}
+\begin{prooflemma}
+    Every conjugate class corresponds to a partition of \(n\).
+\end{prooflemma}
+
+\ \\ 
+{\Large{\textbf{Exercises}}}
+\begin{enumerate}
+    \item 
+\end{enumerate}
+\section{Sylow's theorem}
+
+\begin{theorem}[Sylow]
+    If \(p\) is a prime number and \(p^{\alpha} \mid \func{o}{G}\), then \(G\) has a subgroup of order \(p^{\alpha}\).
+\end{theorem}
+
+\begin{corollary}
+    If \(p^m \mid \func{o}{G}\), \(\func{p^{m+1}} \not\mid \func{o}{G}\), then \(G\) has a subgroup of order \(p^m\).
+\end{corollary}
+
+A subgroup of \(G\) of order \(p^m\) where \(p^m \mid\mid \func{o}{G}\) is called a \(p\)-Sylow group.
+
+Let \(\func{e_p}{n}\) be \(p^{\func{e_p}{n}} \mid\mid n!\).
+\begin{lemma}
+    \(\func{e_p}{p^k} = 1 + p + \dots + p^{k-1}\).
+\end{lemma}
+
+\begin{lemma}
+    \(S_{p^k}\) has a \(p\)-Sylow group.
+\end{lemma}
+
+\begin{definition}
+    Let \(G\) be a group, \(A,B\) subgroups of \(G\). If \(x,y \in G\) define \(x \sim y\) if \(y = axb\) for some \(a \in A\) and \(b \in B\). 
+\end{definition}
+
+\begin{lemma}
+    The relatino \( \sim \) defines an equivalence relation on \(G\). The equivalence class of \(x \in G\) is the set \(AxB = \set<axb>{a \in A, b \in B}\).
+\end{lemma}
+
+\begin{lemma}
+    If \(A,B\) are finie subgroups of \(G\) then 
+    \begin{equation*}
+        \abs{AxB} = \dfrac{\func{o}{A} \func{o}{B}}{\func{o}{A \cup xBx^{-1}}}
+    \end{equation*}
+\end{lemma}
+
+\begin{lemma}
+    Let \(G\) be a finite group and suppose \(G\) is a subgroup of the finite group \(M\). Suppose further that \(M\) has a \(p\)-Sylow group subgroup \(Q\). Then \(G\) has a \(p\)-Sylow subgroup \(P\). In fact, \(P = G \cap xQx^{-1}\) for some \(x \in M\).
+\end{lemma}
+
+\begin{theorem}[Second part of Sylow's theorem]
+    If \(G\) is a finite group, \(p\) is a prime and \(p^n \mid\mid \func{o}{G}\), then any two subgroups of \(G\) of order \(p^n\) are conjugate.
+\end{theorem}
+
+\begin{lemma}
+    The number of \(p\)-Sylow subgroups in \(G\) equals \(\func{o}{G}/\func{o}{\func{N}{P}}\) where \(P\) is any \(p\)-Sylow subgroup of \(G\). In particular, this number is a divisor of \(\func{o}{G}\).
+\end{lemma}
+
+\begin{theorem}[Second part of Sylow's theorem]
+    The number of \(p\)-Sylow subgroups in \(G\), is of the form \(1 + kp\).
+\end{theorem}
+\section{Direct product}
+Let \(A\) and \(B\) be any two groups and \(G = A \times B\). Define the operation \(\circ_G\) as \((a_1,b_1) \circ_G (a_2,b_2) = (a_1\circ_A a_2, b_1 \circ_B b_2)\). It can be readily verified that \(G\) is group under the operation \(\circ_G\). We call \((G,\circ_G)\) the \textbf{external direct product} of \(A\) and \(B\).
+
+Now suppose \(G = A \times B\) and consider \(\bar{A} = \set<(a,f) \in G>{a \in A}\) where \(f\) is the unit element of \(B\). Then, \(\bar{A}\) is a normal subgroup in \(G\) and is isomorphic to \(A\). We claim that \(G = \bar{A}\bar{B}\) and every \(g \in G\) has a unique decomposition in the form of \(g = \bar{a}\bar{b}\) where \(\bar{a} \in \bar{A}\) and \(\bar{b} \in \bar{B}\). Thus we have realized \(G\) as an \textbf{internal product} \(\bar{A}\bar{B}\) of two normal subgroups.
+
+\begin{definition}
+    Let \(G\) be a group and \(N_1, \dots , N_n\) normal subgroups of \(G\) such that 
+    \begin{enumerate}
+        \item \(G = N_1 \dots N_n\).
+        \item Any \(g \in G\) can be uniquely represented as \(g = n_1n_2 \dots n_n\) where \(n_i \in N_i\).
+    \end{enumerate}
+    We then say that \(G\) is the \textbf{internal direct product} of \(N_1, \dots, N_n\).
+\end{definition}
+
+\begin{lemma}
+    Suppose that \(G\) is the internal product of \(N_1, \dots , N_n\). Then for \(i \neq j\), \(N_i \cap N_j = \set{e}\) and if \(a \in N_i\) and \(b \in N_j\) then \(ab = ba\).
+\end{lemma}
+
+\begin{theorem}
+    Suppose that \(G\) is the internal product of \(N_1, \dots , N_n\) and let \(T = N_1 \times \dots \times N_n\). Then \(G\) and \(T\) are isomorphic.
+\end{theorem}
+\section{Finite abelian groups}
+
+\begin{theorem}[The fundamental theorem on finite abelian groups]
+    Every finite abelian group is the direct product of cyclic groups.
+\end{theorem}
+
+\begin{definition}
+    If \(G\) is an abelian group of order \(p^n\), \(p\) a prime, and \(G = A_1 \times \dots \times A_k\) where \(A_i\) is cyclic of order \(p^{n_i}\) with \(n_1 \geq n_2 \geq \dots \geq n_k > 0\), then the integers \(n_1,n_2, \dots ,n_k\) are called the \textbf{invariants} of \(G\).
+\end{definition}
+
+\begin{definition}
+    Ig \(G\) is an abelian group and \(s\) is any integer, then \(\func{G}{s} = \set<x \in G>{x^s = e}\).
+\end{definition}
+
+\begin{lemma}
+    If \(G\) and \(G'\) are isomorphic abelian groups, then for every integer \(s\), \(\func{G}{s}\) and \(\func{G'}{s}\) are isomorphic.
 \end{lemma}
