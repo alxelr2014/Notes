@@ -1,0 +1,78 @@
+\chapter{Church-Turing Thesis}
+\section{Turing machine}
+\subsection{Formal definition}
+\begin{definition}
+    A Turing machine is a 7-tuple \((Q,\Sigma,\Gamma,\delta,q_0,q_{acc},q_{rej})\) where \(Q,\Sigma,\Gamma\) are all finite sets 
+    \begin{enumerate}
+        \item \(Q\) is the set of states.
+        \item \(\Sigma\) is the input alphabet not containing the blank symbol \(\blankSymbol\).
+        \item \(\Gamma\) is the tape alphabet, where \(\blankSymbol \in \Gamma\) and \(\Sigma \subset \Gamma\).
+        \item \(\delta: Q \times \Gamma \to Q \times \Gamma \times \set{L,R}\) is the transition function. 
+        \item \(q_0 \in Q\) is the start state.
+        \item \(q_{acc} \in Q\) is the accept state. 
+        \item \(q_{rej} \in Q\) is the reject state and \(q_{rej} \neq q_{acc}\).
+    \end{enumerate}
+\end{definition}
+Turing machine \(M = (Q,\Sigma,\Gamma,\delta,q_0,q_{acc},q_{rej})\) receives input \(w = w_1 \dots w_n \in \Sigma^{\ast}\) on the leftmost \(n\) squares of the tape. And initially the rest of the tape is blank. The content tape together with the current state and head's position is called the \textbf{configuration}. A configuration may be denoted as \(uqv\) where \(uv\) is the content of the tape, \(q\) is the current state, and the head is on the first symbol of \(v\). For example, \(q_0w\) is the start configuration and \(q_{acc}\) and \(q_{rej}\) are the accepting and rejecting configuration respectively. The accepting configuration and rejecting configuration are called the \textbf{halting configuration}.
+
+Suppose \(C_1\) and \(C_2\) are two configuration. \(C_1\) \textbf{yields} \(C_2\) if the Turing machine can legally go from \(C_1\) to \(C_2\) in a single step. 
+
+A Turing machine accepts input \(w\) if a sequence of configuration \(C_1, \dots , C_k\) exists where 
+\begin{enumerate}
+    \item \(C_1\) is the start configuration of \(M\) on input \(w\).
+    \item Each \(C_i\) yields \(C_{i + 1}\).
+    \item \(C_k\) is an accepting configuration.
+\end{enumerate}
+The collection of strings that \(M\) accepts is the language of \(M\).
+\begin{definition}
+    A language is \textbf{Turing recognizable} or \textbf{recursively enumeratable} if some Turing machine recognizes it.
+
+    \textbf{Deciders} are Turing machines that halt on all iputs. A decider that recognizes some language is also said to decide that language.
+
+    A language is \textbf{Turing decidable} or \textbf{recursive} if some Turing machine decides it. 
+\end{definition}
+%TODO: difference between a decider and TM
+\subsection{Examples}
+%TODO: give some examples
+\section{Variants of Turing machine}
+\subsection{Stay put}
+Any Turing machine with stay put order \(S\) can be emulated by a Turing machine without.
+\subsection{Multipath Turing machine}
+each tape has its own head for reading and writing. 
+\begin{equation*}
+    \delta: Q \times \Gamma^k \to  Q \times \Gamma^k \times \set{L,R,S}^l
+\end{equation*}
+\begin{theorem}
+    Every Multipath Turing machine has an equivalent single Turing machine.
+\end{theorem}
+\begin{corollary}
+    A language is Turing recognizable if and only if some multipath Turing machine recognizes it. 
+\end{corollary}
+
+\subsection{Nondeterministic Turing machine}
+\begin{equation*}
+    \delta: Q \times \Gamma \to \powerSet{Q \times \Gamma \times \set{L,R}}
+\end{equation*}
+\begin{theorem}
+    Every nondeterministic Turing machine has an equivalent determinstic Turing machine.
+\end{theorem}
+\begin{corollary}
+    A language is Turing recognizable if and only if some nondeterministic Turing machine recognizes it. 
+\end{corollary}
+\subsection{Enumerators}
+%TODO: definitions
+\begin{theorem}
+    Every enumerator has an equivalent determinstic Turing machine.
+\end{theorem}
+\begin{corollary}
+    A language is Turing recognizable if and only if some enumerator recognizes it. 
+\end{corollary}
+
+\section{The definition of algorithm}
+\subsection{Hilber's \(10_{\cardinalTH}\) problem}
+Provide an algorithm for determining if a polynomial has an integral root. This is equivalent to 
+\begin{equation*}
+    D = \set<p>{p\ \text{is a polynomial with an integral root}}
+\end{equation*}
+being decidable which is not. Although, it is Turing recognizable.
+% TODO: add proofs, add examples and problems 
