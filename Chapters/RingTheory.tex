@@ -156,3 +156,213 @@ If a ring has unit element, then using axiom of choice it can be shown that ther
         \item For all non-zero \(a,b \in R\), there exists \(t,r \in R\) such that \(a = tb + r\) where either \(r = 0\) or \(\func{d}{r} < \func{d}{b}\).
     \end{enumerate}
 \end{definition}
+
+\(\angleBracket{a} = \set<xa>{x \in R}\).
+
+\begin{theorem}
+    Let \(R\) be a Euclidean ring and let \(A\) be an ideal of \(R\). Then, there exists \(a_0\in A\) such that \(A\) consists exactly of \(a_0 x\) as \(x\) ranges over \(R\).
+\end{theorem}
+
+\begin{definition}
+    An integral domain \(R\) with unit element is a \textbf{principle ideal ring} if every ideal \(A\) of \(R\) is of the form \(A = \angleBracket{a}\) for some \(a \in R\)
+\end{definition}
+
+\begin{corollary}
+    A Euclidean ring possesses a unit element.
+\end{corollary}
+
+\begin{definition}
+    If \(a \neq 0\) and \(b\) are in a commutative ring \(R\), then \(a\) is said to divide \(b\) there exists \(c \in R\) such that  \(b = ac\) denoted by \(a \mid b\).
+\end{definition}
+
+\begin{remark}
+    \ 
+    \begin{enumerate}
+        \item \(a \mid b,\ b\mid c \implies a \mid c\).
+        \item \(a \mid b,\ a \mid c \implies a \mid (b \pm c)\).
+        \item \(a \mid b \implies a \mid bx\) for all \(x \in R\).
+    \end{enumerate}
+\end{remark}
+
+\begin{definition}
+    If \(a,b \in R\), then \(d \in R\) is the \textbf{greatest common divisor} of \(a\) and \(b\) if 
+    \begin{enumerate}
+        \item \(d \mid a, \ d\mid b\).
+        \item \(c \mid a, \ c \mid b \implies c \mid d\).
+    \end{enumerate}
+    It is denoted as \(d = (a,b) = \func{\gcd}{a,b}\).
+\end{definition}
+
+\begin{lemma}
+    Let \(R\) be a Euclidean ring. Then, any two elements \(a\) and \(b\) in \(R\) have a greatest common divisor \(d\). Moreover, \(d = \lambda a + \mu b\) for some \(\lambda, \mu \in R\).
+\end{lemma}
+
+\begin{definition}
+    Let \(R\) be a commutative ring with unit element. An element \(a \in R\) is a \textbf{unit} in \(R\) if there exists an element \(b\) such that \(ab = 1\).
+\end{definition}
+
+A unit is an element whose multiplicative inverse exists in \(R\).
+
+\begin{lemma}
+    Let \(R\) be an integral domain with unit element and suppose that for \(a,b \in R\) both \(a \mid b\) and \(b \mid a\) are true. Then, \(a = ub\), where \(u\) is a unit in \(R\).
+\end{lemma}
+
+\begin{definition}
+    In a commutative ring \(R\) with unit element, two elements \(a\) and \(b\) are \textbf{associates}  if \(b = ua\) for some unit \(u \in R\).
+\end{definition}
+
+\begin{lemma}
+    Let \(R\) be a Euclidean ring and \(a,b \in R\) be non-zero elements. If \(b\) is not a unit in \(R\), then \(\func{d}{a} < \func{d}{ab}\).
+\end{lemma}
+
+\begin{definition}
+    Let \(R\) be a Euclidean. A non-unit elemnt \(\pi \in R\) is \textbf{prime} if whenever \(\pi = ab\), one of \(a\) or \(b\) is a unit in \(R\).
+\end{definition}
+
+\begin{theorem}\label{lm:factorizationTheorem}
+    Let \(R\) be a Euclidean ring. Then, every element is either a unit in \(R\) or can be written as a product of finite number prime elements.
+\end{theorem}
+
+\begin{definition}
+    Let \(R\) be a Euclidean ring. Two elements \(a\) and \(b\) in \(R\) are \textbf{relatively prime} if their greatest common divisor is a unit in \(R\).
+\end{definition}
+
+\begin{lemma}
+    Let \(R\) be a Euclidean ring. If \(a \mid bc\) but \(a\) and \(b\) are relatively prime, then \(a \mid c\).
+\end{lemma}
+
+\begin{lemma}
+    If \(\pi\) is a prime element in a Euclidean ring \(R\), then \(\pi \mid ab \implies \pi \mid a\) or \(\pi \mid b\).
+\end{lemma}
+
+\begin{theorem}[Unique factorization theorem]
+    Let \(R\) be a Euclidean ring and \(a \neq 0\) be non-unit element of \(R\). Suppose that \(a = \pi_1 \dots \pi_n = \pi'_1 \dots \pi'_m\) where \(\pi_i\) and \(\pi'_j\) are prime elements. Then, \(n = m\) and each \(\pi_i\) is an associate of a \(\pi_j'\) and each \(\pi'_j\) is an associate of a \(\pi_i\).
+\end{theorem}
+
+Combining unique factorization theorem with \ref{lm:factorizationTheorem} gives that every non-zero element in \(R\) can be written uniquely up to associates as a product of primes in \(R\).
+
+\begin{lemma}
+    The ideal \(A = \angleBracket{a_0}\) is a maximal ideal of the Euclidean ring \(R\) if and only if \(a_0\) is a prime element.
+\end{lemma}
+
+\section{A particular Euclidean ring}
+The domain of \textbf{Gaussian integers} \(\squareFunc{\Integers}{i} = \set<a + bi>{a,b \in \Integers, i = \sqrt{-1}}\) is a Euclidean ring, with \(\func{d}{a + bi} = a^2 + b^2\).
+\begin{theorem}
+    \(\squareFunc{\Integers}{i}\) is a Euclidean ring.
+\end{theorem}
+
+\begin{lemma}
+    Let \(p\) be a prime integer and suppose for integer \(c\) relatively prime to \(p\) we can find integers \(x\) and \(y\) such that \(x^2 + y^2 = cp\). Then, \(p\) can be written as a sum of two squares of integers. \textit{i.e.} there exists integers \(a\) and \(b\) such that \(a^2 + b^2 = p\).
+\end{lemma}
+
+\begin{lemma}
+    If \(p \equiv 1 \mod{4}\), we can solve the congruence \(x^2 \equiv -1 \mod{p}\).
+\end{lemma}
+
+\begin{theorem}
+    If \(p\) is a prime of form \(4n + 1\), then \(p = a^2 + b^2\) for some integers \(a\) and \(b\).
+\end{theorem}
+
+\section{Polynomial rings}
+Let \(F\) be a field. \(\squareFunc{F}{x} = \set<a_0 + a_1 x + \dots + a_nx^n>{n \geq 0, a_i \in F}\) is the ring of polynomials in the indeterminate \(x\).
+
+\begin{definition}
+    If \(\func{p}{x} = a_0 + a_1 x + \dots + a_m x^m\) and \(\func{q}{x} = b_0 + \dots + b_nx^n\) are in \(\squareFunc{F}{x}\), then \(\func{p}{x} = \func{q}{x}\) if \(m = n\) and for each \(i \geq 0\), \(a_i = b_i\).
+\end{definition}
+
+\begin{definition}
+    \(\func{p}{x} + \func{q}{x} = c_0 + \dots + c_k x^k\) where \(c_i = a_i + b_i\).
+\end{definition}
+
+\begin{definition}
+    \(\func{p}{x} \func{q}{x} = c_0 + \dots + c_k x^k\) where \(c_i = \sum_{t = 0}^i a_t b_{i - t}\).
+\end{definition}
+
+Therefore, \(\squareFunc{F}{x}\) is a commutative ring with unit element.
+
+\begin{definition}
+    If \(\func{f}{x} = a_0 + a_1 x + \dots + a_n x^n \neq 0\) and \(a_n \neq 0\), then the \textbf{degree} of \(f\) is \(n\). \textit{i.e.} the degree of \(f\), \(\deg f = \min\set<n \geq 0>{a_k =0,\ \forall k > n}\). The zero polynomial can be defined to be of infinite degree. 
+ \end{definition}
+
+ \begin{lemma}
+    If \(\func{f}{x}, \func{g}{x} \neq 0\) are two polynomials in \(\squareFunc{F}{x}\), then 
+    \begin{equation*}
+        \func{\deg}{fg}= \func{\deg}{f}  + \func{\deg}{g}
+    \end{equation*}
+ \end{lemma}
+
+ \begin{corollary}
+    \(\func{f}{x}, \func{g}{x} \neq 0\), then \( \func{\deg}{f}\leq \func{\deg}{fg}\).
+ \end{corollary}
+
+ \begin{corollary}
+    \(\squareFunc{F}{x}\) is an integral domain.
+ \end{corollary}
+
+ Since \(\squareFunc{F}{x}\) is an integeral domain, we can construct its field of quotients which is the field of rational functions in \(x\) over \(F\).
+
+ \begin{lemma}[The division algorithm]
+    Given two polynomials \(\func{f}{x}\) and \(\func{g}{x} \neq 0\), there exists two polynomials \(\func{t}{x},\func{r}{x} \in \squareFunc{F}{x}\) such that \(\func{f}{x} = \func{t}{x} \func{g}{x} + \func{r}{x}\) where \(\func{r}{x} =0\) or \(\deg r < \deg g\).
+ \end{lemma}
+
+ \begin{theorem}
+    \(\squareFunc{F}{x}\) is a Euclidean ring.
+ \end{theorem}
+
+ \begin{theorem}
+    \(\squareFunc{F}{x}\) is a principle ideal group.
+ \end{theorem}
+
+ \begin{lemma}
+    Given two polynomials \(\func{f}{x}, \func{g}{x} \in \squareFunc{F}{x}\), the greatest common divisor \(\func{d}{x} = (\func{f}{x}, \func{g}{x})\) can be realized as \(\func{d}{x} = \func{\lambda}{x} \func{f}{x} + \func{\mu}{x} \func{g}{x}\) for some \(\func{\lambda}{x}, \func{\mu}{x} \in \squareFunc{F}{x}\).
+ \end{lemma}
+ \begin{definition}
+    A polynomial \(\func{p}{x} \in \squareFunc{F}{x}\) is \textbf{irreducible} over \(F\) if whenever \(\func{p}{x} = \func{a}{x} \func{b}{x}\) with \(\func{a}{x}, \func{b}{x} \in \squareFunc{F}{x}\), one of \(\func{a}{x}\) or \(\func{b}{x}\) has degree \(0\).
+ \end{definition}
+
+ \begin{lemma}
+    Any polynomial in \(\squareFunc{F}{x}\) can be written in a unique manner as product of irreducible polynomials in \(\squareFunc{F}{x}\).
+ \end{lemma}
+
+ \begin{lemma}
+    The ideal \(A = \angleBracket{\func{p}{x}}\) in \(\squareFunc{F}{x}\) is a maximal ideal if and only \(\func{p}{x}\) is irreducible.
+ \end{lemma}
+
+ \section{Polynomials over field of rationals}
+
+\begin{definition}
+    The polynomial \(\func{f}{x} = a_0 + a_1x + \dots + a_nx^n\) where \(a_i \in \Integers\) is said to be \textbf{primitive} if the greatest common divisor of \(a_0, \dots, a_n\) is \(1\).
+\end{definition}
+
+\begin{lemma}
+    If \(\func{f}{x}\) and \(\func{g}{x}\) are primitive, then \(\func{f}{x} \func{g}{x}\) is a primitive polynomial.
+\end{lemma}
+
+\begin{definition}
+    The \textbf{content} of a polynomial \(\func{f}{x} =  a_0 + a_1x + \dots + a_nx^n\) where \(a_i \in \Integers\) is the \(\func{\gcd}{a_0, \dots, a_n}\).
+\end{definition}
+
+\begin{theorem}[Guass' lemma]
+    If primitive polynomial \(\func{f}{x}\) can be factored as a product of two polynomials with rational coefficients, it can be factored as the product of two polynomials with integer coefficients.
+\end{theorem}
+
+\begin{definition}
+    A polynomial is said to be \textbf{integer monic} if all of its coefficients are integers and its highest coefficient is \(1\).
+\end{definition}
+
+\begin{corollary}
+    If an integer monic polynomial \(\func{f}{x}\) can be factored as a product of two polynomials with rational coefficients, it can be factored as a product of two integer monic polynomials.
+\end{corollary}
+
+\begin{theorem}[The Eisenstein criterion]
+    Let \(\func{f}{x}=  a_0 + a_1x + \dots + a_nx^n\) with \(a_i \in \Integers\). Suppose that for some \(p\), \(p \nmid a_n\), \(p \mid a_{n-1}, \dots, p \mid a_1, \ p \mid a_0\), but \(p^2 \nmid a_0\). Then, \(\func{f}{x}\) is irreducible over rationals.
+\end{theorem}
+
+\section{Polynomial rings over commutative rings}
+\(\squareFunc{R}{x} = \set<a_0 + a_1x + \dots + a_nx^n>{a_i \in R}\).
+For the rest of this section \(R\) is assumed to be commutative and have unit element.
+\(\squareFunc{R}{x_1, \dots, x_n}\) is the ring of polynomials in the indeterminate \(x_1, \dots, x_n\). It can be constructed as \(\squareFunc{\squareFunc{\squareFunc{R}{x_1}}{x_2}\dots}{x_n} = \set{\sum a_{i_1, \dots, i_n} x_1^{i_1} \dots x_n^{i_n}}\).
+
+\begin{lemma}
+    If \(R\) is an integral domain, so is \(\squareFunc{R}{x}\) and by induction, \(\squareFunc{R}{x_1, \dots, x_n}\) is an integral domain.
+\end{lemma}

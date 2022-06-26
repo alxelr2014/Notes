@@ -741,7 +741,7 @@ For \(a\in G\) let \(\func{C}{a} = \set<x \in G>{x \sim a}\). \(\func{C}{a}\) is
 \begin{proof}
     Let \(S\) be the set of right cosets of \(\func{N}{a}\) in \(G\). Consider \(\varphi : S \to \func{C}{a}\) given by \(\varphi: \func{N}{a}g \mapsto g^{-1}ag\). This, function is well-defined since if \(\func{N}{a}g = \func{N}{a}h\), then \(g = nh\) for some \(n \in \func{N}{a}\). Then, \(g^{-1}ag = h^{-1}n^{-1}anh = h^{-1}ah\). Similary, it is injective. If \(\func{N}{a}g \varphi = \func{N}{a}h \varphi\), then \(g^{-1}ag = h^{-1}a h \implies a=(gh^{-1})a (hg^{-1}) \implies hg^{-1} \in \func{N}{a}\) hence \(\func{N}{a}g = \func{N}{a}h\). \(\varphi\) is clearly surjective. Suppose \(x \in \func{C}{a}\), then there exists \(g \in G\) such that \(x = g^{-1}ag\). Then, \(\func{N}{a}g \varphi = g^{-1}ag = x\). Therefore, \(\varphi\) is a bijection and \(\abs{\func{C}{a}} = \func{i_G}{\func{N}{a}}\).
 \end{proof}
-\begin{corollary}
+\begin{corollary}\label{cor:classEquation}
     The \textit{class equation} of \(G\)
     \begin{equation*}
         \func{o}{G} = \sum_{a \in A} \dfrac{\func{o}{G}}{\func{o}{\func{N}{a}}}
@@ -820,29 +820,101 @@ Recall that every permutation in \(S_n\) can be decomposed into disjoint cycles.
 \begin{theorem}[Sylow]
     If \(p\) is a prime number and \(p^{\alpha} \mid \func{o}{G}\), then \(G\) has a subgroup of order \(p^{\alpha}\).
 \end{theorem}
+We give three proofs for this theorem.
+\begin{proof}
+    Let \(\func{o}{G} = p^{\alpha}m\) where \(p^r \mid\mid m\) for some \(r \geq 0\). Consider \(\calM\), the set of all \(p^{\alpha}\)-element subsets of \(G\). Clearly, \(\abs{\calM} = \binom{p^{\alpha} m}{p^{\alpha}}\). Let \(\func{e_p}{n}\) be \(p^{\func{e_p}{n}} \mid\mid n\).
+     We claim that \(p^r \mid \mid \abs{\calM}\). Note that 
+    \begin{equation*}
+        \func{e_p}{\abs{\calM}} =  \func{e_p}{(p^{\alpha}m)!} -  \func{e_p}{(p^{\alpha})!} -  \func{e_p}{(p^{\alpha}(m - 1))!}
+    \end{equation*}
+    For any \(m\) and \(\alpha\)
+    \begin{equation*}
+        \func{e_p}{(p^{\alpha}m)!} = m \func{e_p}{(p^{\alpha})!} + \func{e_p}{m!}
+    \end{equation*}
+    therefore,
+    \begin{align*}
+        \func{e_p}{\abs{\calM}} &=  \func{e_p}{(p^{\alpha}m)!} -  \func{e_p}{(p^{\alpha})!} -  \func{e_p}{(p^{\alpha}(m - 1))!}\\
+        &= \func{e_p}{m!} - \func{e_p}{(m-1)!} \\
+        &= \func{e_p}{\dfrac{m!}{(m-1)!}} \\
+        &= \func{e_p}{m}
+    \end{align*}
+    which proves the claim. Define the equivalence relation \(\sim\) on \(\calM\) as following. \(M_1, M_2 \in \calM\) are equivalent if there exists a \(g \in G\) such that  \(M_1 = M_2 g\). There is at least one equivalence class that the number of elements in that class does not divide \(p^{r+1}\). As otherwise, \(p^{r+1}\mid \abs{\calM}\) which is a contradiction. Suppose \(\set{M_1, \dots, M_n}\) where \(p^{r+1} \nmid n\) is that equivalence class. Let \(H = \set<g \in G>{M_1 g = M_1}\). It can be easily shown that \(H\) is a subgroup of \(G\). We will show that \(\func{i_G}{H} = n\). Let \(\phi: Hg \mapsto M_1 g\)
+    \begin{itemize}
+        \item \(\phi\) is well-defined. Let \(Hg_1 = Hg_2\), then \(g_2 = hg_1\) where \(h \in H\). Hence 
+        \begin{equation*}
+            M_1 g_2 = M_1 hg_1 = M_1 g_1
+        \end{equation*}
+        \item \(\phi\) is injective. Suppose \(M_1 g_1 = M_1 g_2\), then \(M_1 g_1g^{-1}_2 = M_2\) thus \(g_1g_2^{-1} \in H \implies H g_1 = H g_2\).
+        \item \(\phi\) is clearly surjective. 
+    \end{itemize}
+    Note that \(\set<M_1g>{g \in G} = \set{M_1, \dots, M_n}\) by definition. Then, \(\func{i_G}{H} = n\). which implies \(p^{\alpha} \mid \func{o}{H}\). For each \(m_1 \in M_1\), \(m_1 H_1 \subset M_1\), therefore, \(H\) has at most \(p^{\alpha}\) distinct elements. Thus \(\func{o}{H} = p^{\alpha}\).
+\end{proof}
 
 \begin{corollary}
-    If \(p^m \mid \func{o}{G}\), \(\func{p^{m+1}} \not\mid \func{o}{G}\), then \(G\) has a subgroup of order \(p^m\).
+    If \(p^m \mid \func{o}{G}\), \(p^{m+1} \nmid \func{o}{G}\), then \(G\) has a subgroup of order \(p^m\).
 \end{corollary}
 
-A subgroup of \(G\) of order \(p^m\) where \(p^m \mid\mid \func{o}{G}\) is called a \(p\)-Sylow group.
+The second proof is by induction. 
+\begin{proof}
+    For \(\func{o}{G} = 2\), the only prime divisor is \(2\) and \(G\) itself is a subgroup of \(G\) with order \(2\). Suppose for all groups with order less than \(\func{o}{G}\), the theorem holds and suppose \(p^{\alpha} \mid \func{o}{G}\). If \(G\) has a non-trivial subgroup \(H\) where \(p^{\alpha} \mid \func{o}{H}\), then by induction hypothesis there exists a subgroup \(T\) of \(H\) with \(p^{\alpha}\) elements. We are done, since \(T\) is a subgroup of \(G\) as well. Suppose, \(G\) does not have a non-trivial subgroup whose order is divisible by \(p^{\alpha}\). Consider the normalizer groups \(\func{N}{a}\). If \(\func{N}{a} = G\), then \(a \in \func{Z}{G}\). Otherwise, \(p^{\alpha}  \nmid \func{o}{\func{N}{a}}\), hence \(p \mid \func{i_G}{\func{N}{a}}\). By class equation, \ref{cor:classEquation},
+    \begin{equation*}
+        \func{o}{G} = \func{o}{\func{Z}{G}} + \sum_{A \cap (\func{Z}{G})^c}  \func{i_G}{\func{N}{a}}
+    \end{equation*}
+    which implies that \(p \mid \func{o}{\func{Z}{G}}\). By Cauchy's theorem, there exists an element \(b \in \func{Z}{G}\) with order \(p\). Let \(B = \angleBracket{b}\). Since \(B \subset \func{Z}{G}\) it commutes with all elements of \(G\) and hence it is a normal subgroup. Let \(\bar{G} = G/B\), then \(\func{o}{\bar{G}} = \func{o}{G}/\func{o}{B} = \func{o}{G}/p\). Therefore, \(p^{\alpha - 1} \mid \func{o}{\bar{G}}\) and by the induction hypothesis, there exists a subgroup \(\bar{P}\) with order of \(p^{\alpha}\). Let \(P = \set<x \in G>{Bx \in \bar{P}}\), then \(P/B\) is isomorphic to \(\bar{P}\) and hence \(\func{o}{P} = \func{o}{\bar{P}} \func{o}{B} = p^{\alpha}\). Which was what was wanted.
+\end{proof}
 
-Let \(\func{e_p}{n}\) be \(p^{\func{e_p}{n}} \mid\mid n!\).
-\begin{lemma}
-    \(\func{e_p}{p^k} = 1 + p + \dots + p^{k-1}\).
-\end{lemma}
+A subgroup of \(G\) of order \(p^m\) where \(p^m \mid\mid \func{o}{G}\) is called a \textbf{\(p\)-Sylow group}.
+
+For the third proof of Sylow's theorem, consider the following lemmas.
 
 \begin{lemma}
     \(S_{p^k}\) has a \(p\)-Sylow group.
 \end{lemma}
 
+\begin{proof}
+    For \(k = 1\), the order of \(p\)-Sylow group is \(p\). Therefore, \(H = \angleBracket{\begin{pmatrix}1 & 2 & \dots & p \end{pmatrix}}\) is a \(p\)-Sylow group.
+    Suppose that \(S_{p^{k-1}}\) has a \(p\)-Sylow group. Consider the permuation \(\sigma \in S_{p^k}\) defined as following 
+    \begin{align*}
+        \sigma = \begin{pmatrix}
+            1 & p^{k-1} + 1 & \dots & (p-1)p^{k-1} + 1
+        \end{pmatrix} & \begin{pmatrix}
+            2 & p^{k-1} + 2 & \dots & (p-1)p^{k-1} + 2
+        \end{pmatrix} \\
+        \dots& \begin{pmatrix}
+            p^{k-1} & 2 p^{k-1} & \dots & p^k
+        \end{pmatrix}
+    \end{align*}
+    Let \(A_n = \set<\tau \in S_{p^k}>{i \tau = i \text{ for } i \leq (n-1)p^{k-1}  \text{ and } i > np^{k-1}}\) for \(n = 1, \dots,p \) the set of all permuations that only change the elements \((n-1)p^{k-1} + 1, \dots,np^{k-1}\). It can be easily shown that \(A_n\) is a subgroup of \(S_{p^k}\). Futhermore, \(A_n = \sigma^{-n} A_1 \sigma^{n}\) and \(\func{o}{A_1} = (p^{k-1})!\), in fact \(A_1 \approx S_{p^{k-1}}\). Therefore, \(A_n\) has a \(p\)-Sylow group \(P_n\), where \(P_n = \sigma^{-n} P_1 \sigma^{n}\). Let \(T = P_1 P_2 \dots P_n\). Since \(P_i \subset A_i\) and \(A_i\) are disjoint, then \(P_i\) are disjoint and hence they commute. Thus \(T\) is a subgroup of \(S_{p^k}\) with order \(\func{o}{P_1}^p = p^{p\func{e_p}{p^{k-1}!}}\). Which means \(T\) is a not a \(p\)-Sylow group. Note that \(\sigma \notin T\) and \(P_{i}\sigma^j = \sigma^j P_{i+j}\). Consider \(P = \set<\sigma^j t>{t \in T, 0 \leq j < p}\), we claim that \(P\) is a subgroup of \(S_{p^k}\). 
+    \begin{enumerate}
+        \item Let \(t = q_1 \dots q_p\) where \(q_i \in P_1\). Then, 
+        \begin{align*}
+            \sigma^{j} t \sigma^{k} t' &= \sigma^{j}  q_1 \dots q_{p-1} q_p \sigma^{k}\ t'\\
+            &= \sigma^{j}  q_1 \dots q_{p-1} \sigma^{k} q'_p\  t'\\
+            &= \sigma^{j+k}  q_1^{'} \dots q_{p-1}^{'}  q_p^{'} \ t'
+        \end{align*}
+        where \(q_i^{'} \in P_{i + j}\). Since \(P_i\) are commutative, then \(  q_1^{'} \dots  q_p^{'}  t' \in T\).
+        \item The inverse of \(\sigma^j t\) can be easily found.
+    \end{enumerate}
+    The order of \(P\) is \(p\; \func{o}{T} = p^{p\func{e_p}{p^{k-1}!} + 1} = p^{\func{e_p}{p^k!}}\). Which means, \(P\) is a \(p\)-Sylow subgroup of \(S_{p^k}\).
+\end{proof}
+
 \begin{definition}
-    Let \(G\) be a group, \(A,B\) subgroups of \(G\). If \(x,y \in G\) define \(x \sim y\) if \(y = axb\) for some \(a \in A\) and \(b \in B\). 
+    Let \(G\) be a group, \(A,B\) subgroups of \(G\). If \(x,y \in G\) define \(x \sim^A_B y\) if \(y = axb\) for some \(a \in A\) and \(b \in B\). 
 \end{definition}
 
 \begin{lemma}
-    The relatino \( \sim \) defines an equivalence relation on \(G\). The equivalence class of \(x \in G\) is the set \(AxB = \set<axb>{a \in A, b \in B}\).
+    The relation \( \sim^A_B \) defines an equivalence relation on \(G\). The equivalence class of \(x \in G\) is the set \(AxB = \set<axb>{a \in A, b \in B}\).
 \end{lemma}
+
+\begin{prooflemma}
+    \
+    \begin{enumerate}
+        \item For all \(x \in G\), \(x = exe\) and hence \(x \sim_B^A x\).
+        \item For all \(x,y \in G\), if \(x \sim^A_B y\), then \(y = axb\) for some \(a \in A\) and \(b \in B\), hence \(x = a^{-1}y b^{-1}\), therefore, \(y \sim^A_B x\).
+        \item For all \(x,y,z \in G\), if \(x \sim^A_B y\) and \(y \sim^A_B z\), then \(y = a_1xb_1\) and \(z = a_2yb_2\) for some \(a_1,a_2 \in A\) and \(b_1,b_2 \in B\), hence \(z = a_2a_1 x b_1b_2\), therefore, \(x \sim^A_B z\).
+    \end{enumerate}
+
+\end{prooflemma}
 
 \begin{lemma}
     If \(A,B\) are finie subgroups of \(G\) then 
@@ -851,21 +923,110 @@ Let \(\func{e_p}{n}\) be \(p^{\func{e_p}{n}} \mid\mid n!\).
     \end{equation*}
 \end{lemma}
 
+\begin{prooflemma}
+    Note that \(\abs{AxB} = \abs{AxBx^{-1}}\)
+    \begin{equation*}
+        \abs{AxB} = \abs{AxBx^{-1}} = \dfrac{\func{o}{A} \func{o}{xBx^{-1}}}{\func{o}{A \cap xBx^{-1}}} =  \dfrac{\func{o}{A} \func{o}{B}}{\func{o}{A \cap xBx^{-1}}}
+    \end{equation*}
+    which proves the lemma.
+\end{prooflemma}
+
 \begin{lemma}
     Let \(G\) be a finite group and suppose \(G\) is a subgroup of the finite group \(M\). Suppose further that \(M\) has a \(p\)-Sylow group subgroup \(Q\). Then \(G\) has a \(p\)-Sylow subgroup \(P\). In fact, \(P = G \cap xQx^{-1}\) for some \(x \in M\).
 \end{lemma}
+
+\begin{prooflemma}
+    Let \(p^m \mid\mid \func{o}{M}\) and \(p^n \mid \mid \func{o}{G}\) with \(n \leq m\). Therefore, \(\func{o}{Q} = p^m\) and since \(G \cap xQx^{-1} \overset{\mathrm{gp}}{\subset} xQx^{-1}\) for all \(x \in M\), then \(\func{o}{G \cap xQx^{-1}} = p^{m_x}\) for some \(m_x \leq n\). Note that by the above's lemma
+    \begin{equation*}
+        \abs{GxQ} =  \dfrac{\func{o}{G} \func{o}{Q}}{\func{o}{G \cup xPx^{-1}}} = \dfrac{p^n \alpha p^m}{p^{m_x}} = p^{n + m - m_x} \alpha
+    \end{equation*}
+    We claim that there exists \(x \in M\) such that \(m_x = n\). As otherwise, \(m_x\) would be strictly smaller than \(n\), hence \(n - m_x \geq 1\). Thus, 
+    \begin{equation*}
+        \func{o}{M} = \sum_{x \in A} \abs{GxQ}
+    \end{equation*}
+    would divide \(p^{m+1}\) which is a contradiction. Therefore, let \(x\) be such that \(m_x  = n\) and \(P = G \cap xQx^{-1}\)
+    \begin{equation*}
+        \func{o}{P} = \dfrac{\func{o}{G} \func{o}{Q}}{\abs{G \cap xQx^{-1}}} = \dfrac{p^n \alpha p^m}{p^m \alpha} = p^n
+    \end{equation*}
+    which means that \(P\) is a \(p\)-Sylow group of \(G\).
+\end{prooflemma}
+
+We now present the thrid proof.
+\begin{proof}
+    Let \(\func{o}{G} = n\). By the Cayley's theorem, we can isomorphically embed \(G\) in \(S_n\). Let \(p^k > n\). Then, \(S_n\) is a subgroup of \(S_{p^k}\) and therefore \(G\) is a subgroup of \(S_{p^k}\). By the last lemma, \(G\) has a \(p\)-Sylow group.
+\end{proof}
 
 \begin{theorem}[Second part of Sylow's theorem]
     If \(G\) is a finite group, \(p\) is a prime and \(p^n \mid\mid \func{o}{G}\), then any two subgroups of \(G\) of order \(p^n\) are conjugate.
 \end{theorem}
 
+\begin{proof}
+    Let \(A\) and \(B\) be two \(p\)-Sylow groups of \(G\) with order \(p^n\). Consider the double coset decomposition of \(G\) with respected to \(A\) and \(B\).
+    \begin{equation*}
+        \abs{AxB} = \dfrac{\func{o}{A} \func{o}{B}}{\func{o}{A \cap xBx^{-1}}} = p^{2n - m_x}
+    \end{equation*}
+    where \(m_x = \func{o}{A \cap xBx^{-1}}\). If \(A \neq xBx^{-1}\) for any \(x \in G\), then \(m_x < n\) for all \(x \in G\). Therefore, \(2n -m_x \geq n + 1\) for all \(x \in G\). Particularly, if \(A\) is the set of representatives of equivalence classes of \(\sim^A_B\), 
+    \begin{equation*}
+        \func{o}{G} = \sum_{x \in A} \abs{AxB}
+    \end{equation*}
+    which means \(p^{n+1} \mid \func{o}{G}\) which is a contradiction. Therefore, there exists a \(x \in G\) such that \(A = xBx^{-1}\).
+\end{proof}
+
+\begin{definition}
+    Suppose \(H\) is a subgroup of \(G\). The \textbf{normalizer} of \(H\) is the subgroup \(\func{N}{H}= \set<x \in G>{x^{-1}Hx = H}\).
+\end{definition}
+
 \begin{lemma}
-    The number of \(p\)-Sylow subgroups in \(G\) equals \(\func{o}{G}/\func{o}{\func{N}{P}}\) where \(P\) is any \(p\)-Sylow subgroup of \(G\). In particular, this number is a divisor of \(\func{o}{G}\).
+    Let \(H\) be a subgroup of \(G\). Then, the number of distinct conjugates of \(H\) is \(\func{i_G}{\func{N}{H}}\).
 \end{lemma}
+
+\begin{prooflemma}
+    Let \(S\) be the set of right cosets of \(\func{N}{H}\) in \(G\) and \(T\) be the set of conjugates of \(H\). Consider \(\varphi : S \to T\) given by \(\varphi: \func{N}{H}g \mapsto g^{-1}Hg\). This, function is well-defined since if \(\func{N}{H}g = \func{N}{H}h\), then \(g = nh\) for some \(n \in \func{N}{H}\). Then, \(g^{-1}Hg = h^{-1}n^{-1}Hnh = h^{-1}Hh\). Similary, it is injective. If \(\func{N}{H}g \varphi = \func{N}{H}h \varphi\), then \(g^{-1}Hg = h^{-1}H h \implies H =(gh^{-1})H (hg^{-1}) \implies hg^{-1} \in \func{N}{H}\) hence \(\func{N}{H}g = \func{N}{H}h\). \(\varphi\) is clearly surjective. Suppose \(x^{-1}Hx\in T\) then, \(\func{N}{H}x \varphi = x^{-1}Hx\). Therefore, \(\varphi\) is a bijection and \(\abs{T} =\abs{S} =  \func{i_G}{\func{N}{H}}\).
+\end{prooflemma}
+
+\begin{corollary}
+    The number of \(p\)-Sylow subgroups in \(G\) equals \(\func{o}{G}/\func{o}{\func{N}{P}}\) where \(P\) is any \(p\)-Sylow subgroup of \(G\). In particular, this number is a divisor of \(\func{o}{G}\).
+\end{corollary}
+
+\begin{prooflemma}
+    \(p\)-Sylow subgroups are conjugates.
+\end{prooflemma}
 
 \begin{theorem}[Second part of Sylow's theorem]
     The number of \(p\)-Sylow subgroups in \(G\), is of the form \(1 + kp\).
 \end{theorem}
+
+\begin{proof}
+    Let  \(p^n \mid\mid G\) and consider the double coset decomposition of \(G\) with respect to \(P\) and \(P\). 
+    \begin{equation*}
+        \abs{PxP} = \dfrac{(\func{o}{P})^2}{\func{o}{P \cap xPx^{-1}}}
+    \end{equation*}
+    if \(x \in \func{N}{P}\), then \(P \cap xPx^{-1} = P\) and hence \(\func{o}{P \cap xPx^{-1}} = p^n\). Otherwise, \(P \cap xPx^{-1} \subsetneq P\) and hence \(\func{o}{P \cap xPx^{-1}} = p^{m_x}\) for some \(m_x < n\). Therefore, 
+    \begin{align*}
+        \func{o}{G} = \sum_{x \in \func{N}{P}} \abs{PxP}  + \sum_{x \notin \func{N}{P}} \abs{PxP} 
+    \end{align*}
+    If \(x \in \func{N}{P}\), then \(xPx^{-1} = P \implies PxP = Px\). Hence, the first summation is 
+    \begin{equation*}
+        \sum_{x \in \func{N}{P}} \abs{Px}  = \func{o}{P} \func{i_{\func{N}{P}}}{P} = \func{o}{\func{N}{P}}
+    \end{equation*}
+    and the second summation is divisible by \(p^{n+1}\) hence there exists an intger \(u\) such that
+    \begin{equation*}
+        \sum_{x \notin \func{N}{P}} \abs{PxP} = p^{n+1}u
+    \end{equation*}
+    therefore 
+    \begin{align*}
+        \func{o}{G} = \func{o}{\func{N}{P}} + p^{n+1}u \implies \func{i_G}{\func{N}{P}} = 1 + \dfrac{p^{n+1} u}{ \func{o}{\func{N}{P}}}
+    \end{align*}
+    Moreover, \(p^{n+1}\) does not divide \(G\) and hence it does not divide \(\func{N}{P}\). Thus, \(p^{n+1} u /\func{o}{\func{N}{P}}\) is an integer divisible by 
+    \(p\).
+\end{proof}
+\ \\ 
+{\Large{\textbf{Exercises}}}
+\begin{enumerate}
+    \item Let \(N\) be a subgroup of of finite group \(G\) such that \(\func{i_G}{N}\) is the smallest prime factor of \(\func{o}{G}\). Prove \(N\) is normal.
+    \item 
+\end{enumerate}
+
 \section{Direct product}
 Let \(A\) and \(B\) be any two groups and \(G = A \times B\). Define the operation \(\circ_G\) as \((a_1,b_1) \circ_G (a_2,b_2) = (a_1\circ_A a_2, b_1 \circ_B b_2)\). It can be readily verified that \(G\) is group under the operation \(\circ_G\). We call \((G,\circ_G)\) the \textbf{external direct product} of \(A\) and \(B\).
 
