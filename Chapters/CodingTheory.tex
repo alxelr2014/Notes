@@ -1,0 +1,93 @@
+\part{Coding Theory}
+\chapter{Algebraic Coding Theory}
+\section{Block Codes}
+A \(q\)-nary \(n,k\) block code encodes messages of size \(k\) from an alphabet \(\set{0,1,\dots,q-1}\) elements to codes of length \(n\) from the same alphabet.
+A simple way of encoding and decoding is to use tables. But this requires tables of size \(nq^k\) and \(kq^n\) which is inefficient.
+
+\subsection{Code parameters}
+\begin{description}
+    \item[Code Rate:] the rate the information is transmitted by the code. In a \(q\)-nary \((n,k)\) block code the rate is \(k/n\);
+    \item[Weight:] weight of a codeword is the number of non-zero components. 
+    \begin{equation*}
+        \func{wt}{b} = \abs{\set<i>{b_i \neq 0,\; 0 \geq i < n}}
+    \end{equation*}
+    \item[Hamming distance:] \(\func{d}{b,b'} = \abs{\set<i>{b_i \neq b_i',\; 0 \geq i < n}}\). For a code \(\calC\) consisting of \(M\) codes \(b_1, b_2, \dots, b_M\), the minimum Hamming distance is given by 
+    \begin{equation*}
+        d = \min_{i \neq j} \func{d}{b_i,b_j}
+    \end{equation*}
+    A \(q\)-nary \((n,k)\) block code with Hamming distance \(d\) is denoted by \(\func{\bbB}{n,k,d}\). The minimum weight of the code is defined as \(\min_{b \neq 0} \func{wt}{b}\).
+    \item[Weight distribution:]  the number of codewords with weight \(i\), \(w_i = \abs{\set<b \in \bbB>{\func{wt}{b} = i}}\) 
+    \begin{equation*}
+        \func{W}{x} = \sum_{i = 1}^n w_i x^i
+    \end{equation*}
+    \item[Code space:] A \(q\)-nary block code \(\func{\bbB}{n,k,d}\) can be seen as a subset of \(\bbF^n_q\). 
+    \item[Maximum likelihood decoding:] word error probability
+    \begin{equation*}
+        p_{err} = \prob{\hat{u} \neq u} = \prob{\hat{b} \neq b}
+    \end{equation*}
+    \item[Symbol error probability:]
+    \begin{equation*}
+        p_{sym} = \dfrac{1}{k} \sum_{i = 0}^{k-1} \prob{\hat{u_i} \neq u_i}
+    \end{equation*}  
+    Bossert 1999
+    \begin{equation*}
+        \dfrac{1}{k} p_{err} \leq p_{sym} \leq p_{err}
+    \end{equation*}
+    To decode a codeword \(b\), first the received \(r\) must be corrected to \(\hat{b} = \func{\hat{b}}{r}\) which produces minimal \(p_{err}\). To do this, \(r\) is assumed to be in \(\bbF_q^n\) and \(\bbF_q^n\) is partitioned to \(M\) decision regions \(\calD_i, i = 0, \dots , M_1\). If \(r \in \calD_i\), then \(\func{\hat{b}}{r} = b_i\) is returned. The probability of error is given by 
+    \begin{equation*}
+        \prob{\func{\hat{b}}{r} = b_i \; \land \; b = b_j} = \prob{r \in \calD_i \; \land \; b = b_j}
+    \end{equation*}
+    and 
+    \begin{align*}
+        p_{err} &= \prob{\func{\hat{b}}{r} \neq b}\\
+        &= \sum_{i = 1}^M \sum_{j \neq i} \prob{\func{\hat{b}}{r} = b_i \; \land \; b = b_j}\\
+        &= \sum_{i = 1}^M \sum_{j \neq i} \prob{r \in \calD_i \; \land \; b = b_j}\\
+        &= \sum_{i = 1}^M \sum_{j \neq i} \sum_{r \in \calD_i} \prob{r \; \land \; b = b_j}\\
+        &= \sum_{i = 1}^M \sum_{j \neq i} \sum_{r \in \calD_i} \condProb{b = b_j}{r} \prob{r}\\
+        &= \sum_{i = 1}^M  \sum_{r \in \calD_i}\prob{r} \sum_{j \neq i}\condProb{b = b_j}{r} \\
+        &=\sum_{i = 1}^M  \sum_{r \in \calD_i}\prob{r} \bracket{1 - \condProb{b = b_i}{r} }
+    \end{align*}
+    Assign \(r\) to \(\calD_j\) if \(\prob{r} \bracket{1 - \condProb{b = b_j}{r} }\) is minimum. Since \(\prob{r}\) does not depend on \(i\) it can be dropped. Hence the optimal decoding rule is 
+    \begin{equation*}
+        \func{\hat{b}}{r} = b_j \iff \condProb{b = b_j}{r} = \max_{1 \leq i \leq r} \condProb{b = b_i}{r} 
+    \end{equation*}
+    or 
+    \begin{equation*}
+        \func{\hat{b}}{r} = \argmax_{b \in \bbB} \condProb{b}{r} 
+    \end{equation*}
+    This is called \textbf{minimum error probability decoding}, MED, or \textbf{maximum a-posteriori decoding}, MAP. Furthermore
+    \begin{equation*}
+        \func{\hat{b}}{r} = \argmax_{b \in \bbB} \dfrac{\condProb{r}{b} \prob{b}}{\prob{r}} = \argmax_{b \in \bbB} \condProb{r}{b} \prob{b}
+    \end{equation*}
+    Therefore, for MAP we need the conditional probabilities \(\condProb{r}{b}\) and a-priori \(\prob{b}\). If all \(\prob{b}\) are equal to each other, i.e. uniform distribution, then we get \textbf{maximum likelihood decoding}, MLD, 
+    \begin{equation*}
+        \func{\hat{b}}{r} =  \argmax_{b \in \bbB} \condProb{r}{b} 
+    \end{equation*}
+\end{description}
+\subsection{Binary Symmetry channel}
+\(b\) is received correctly with probability \(1 - \epsilon\) and it is flipped with probability \(\epsilon\)
+\begin{equation*}
+    \condProb{r_i}{b_i} = \begin{cases}
+        1 - \epsilon & r_i = b_i\\
+        \epsilon & r_i \neq b_i
+    \end{cases}
+\end{equation*}
+
+Assume that the channel is memoryless, the conditional probability \(\condProb{r}{b}\) for \(r = (r_0, \dots, r_{n-1})\) and \(b = (b_1, \dots , b_{n-1})\) is given by 
+\begin{align*}
+    \prob{r}{b} &= \prod_{i = 0}^{n-1} \condProb{r_i}{b_i}\\
+    &= (1 - \epsilon)^{n - \func{d}{r,b}} \epsilon^{\func{d}{r,b}}\\
+    &= (1 - \epsilon)^n \bracket{\dfrac{\epsilon}{1 - \epsilon}}^{\func{d}{r,b}}
+\end{align*}
+Taking into account \(0 \leq \epsilon \leq \frac{1}{2}\), \(\frac{\epsilon}{1 - \epsilon} < 1\) and the MLD rule is given by 
+\begin{equation*}
+    \func{\hat{b}}{r} = \argmax_{r \in \bbB} \func{d}{r,b}
+\end{equation*}
+Hence, MLD resulted in minimum distance decoding, Minimum distance decoding is optimal for \(q\)-nary symmetric channels. 
+\subsection{Error detection and correction}
+We can detect error if \(r\) is not equal to any codes. Therefore for \(\func{\bbB}{n,k,d}\) we can detect error if \(r\) has less than \(d\) errors, \(e_{det} = d-1\). Using minimum distance decoding scheme we can correct \(r\) if the number of errors is smaller than \(d/2\), \(e_{cor} = \floor{\frac{d - 1}{2}}\).
+\section{Linear block codes}
+The block code \(\func{\bbB}{n,k,d}\) over finite field \(\bbF_q\) is linear if \(\func{\bbB}{n,k,d}\) is a \(k\)-dimensional subspace of \(\bbF_q^n\).
+\begin{proposition}
+    In a linear block code \(d = \min_{b \neq 0} \func{wt}{b}\).
+\end{proposition}
