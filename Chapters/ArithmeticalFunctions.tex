@@ -1,0 +1,208 @@
+\chapter{Arithmetical Functions and Dirichlet Multiplication}
+\begin{definition}
+    A function \(f: \Naturals \to \Complex\) is an arithmetical function.
+\end{definition}
+\section{Mobius function}
+The Mobius function \(\mu\), is defined as \(\func{\mu}{1} = 1\) and for \(n > 1\) if \(n = p_1^{\alpha_1} \dots p_k^{\alpha_k}\)
+\begin{equation*}
+    \func{\mu}{n} = \begin{cases}
+        (-1)^k & \alpha_1 = \dots = \alpha_k = 1\\
+        0 & \mathrm{otherwise}
+    \end{cases}
+\end{equation*}
+\begin{theorem}
+    If \(n\geq 1\), 
+    \begin{equation*}
+        \sum_{d \mid n} \func{\mu}{d} = \floor{\frac{1}{n}} = \begin{cases}
+            1 & n = 1\\
+            0 & \mathrm{otherwise}
+        \end{cases}
+    \end{equation*}
+\end{theorem}
+\section{The Euler totient function}
+The Euler totient function \(\phi\) is defined as 
+\begin{equation*}
+    \func{\phi}{n} = \left.\sum_{k  = 1}^n\right.' 1 = \abs{\set[[\Big]]<1 \leq k \leq n>{(k,n) = 1}}
+\end{equation*}
+\begin{theorem}
+    If \(n \geq 1\), 
+    \begin{equation*}
+        \sum_{d \mid n} \func{\phi}{d} = n 
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+    If \(n \geq 1\), 
+    \begin{equation*}
+        \func{\phi}{n} = \sum_{d \mid n} \func{\mu}{d} \frac{n}{d}
+    \end{equation*}
+\end{theorem}
+
+\subsection{The product formular for \(\func{\phi}{n}\)}
+\begin{theorem}
+    For any \(n \geq 1\),
+    \begin{equation*}
+        \func{\phi}{n} = n \prod_{p \mid n}\bracket{1 - \dfrac{1}{p}}
+    \end{equation*}
+\end{theorem}
+\begin{corollary}
+    \ 
+    \begin{enumerate}
+        \item \(\func{\phi}{p^{\alpha}} = (p-1) p^{\alpha - 1}\).
+        \item \(\func{\phi}{mn} = \func{\phi}{m} \func{\phi}{n} \frac{d}{\func{\phi}{d}}\) where \(d = (m,n)\).
+        \item If \(a \mid b\), then \(\func{\phi}{a} \mid \func{\phi}{b}\).
+        \item \(\func{\phi}{n}\) is even for \(n \geq 3\). Moreover, if \(n\) has \(r\) distinct odd prime factos, then \(2^r \mid \func{\phi}{n}\).
+    \end{enumerate}
+\end{corollary}
+
+\section{The Dirichlet product}
+\begin{definition}
+    Let \(f\) and \(g\) be two arithmetical functions, their \textbf{Dirichlet product} is defined as 
+    \begin{equation*}
+        \func{(f \ast g)}{n} = \sum_{d \mid n}\func{f}{d} \func{g}{\frac{n}{d}}
+    \end{equation*}
+\end{definition}
+Then, we can write \(\phi = \mu \ast N\) where \(\func{N}{n}  = n\).
+\begin{theorem}
+    \ 
+    \begin{enumerate}
+        \item \(f \ast g = g \ast f\).
+        \item \((f \ast g) \ast k = f \ast ( g \ast k)\).
+    \end{enumerate}
+\end{theorem}
+\begin{definition}
+    The identity function, \(\func{I}{n} = \floor{\frac{1}{n}}\).
+\end{definition}
+\begin{theorem}
+    For any arithmetical function \(f\), \(I \ast f = f \ast I = f\).
+\end{theorem}
+
+\begin{theorem}
+    If \(f\) is an arithmetical function with \(\func{f}{1} \neq 0\), there is a unique arithmetical function \(f^{-1}\), called the Dirichlet inverse of \(f\) such that
+    \begin{equation*}
+        f \ast f^{-1} = f^{-1} \ast f = I
+    \end{equation*}
+    Moreover, \(f^{-1}\) is given by \(\func{f^{-1}}{1} = \frac{1}{\func{f}{1}}\) and for \(n > 1\)
+    \begin{equation*}
+        \func{f^{-1}}{n} = -\frac{1}{\func{f}{1}} \sum_{\substack{d \mid n \\ d < n}} \func{f}{\frac{n}{d}} \func{f^{-1}}{d}
+    \end{equation*}
+\end{theorem}
+
+\begin{remark}
+    The set of all arithmetical functions \(f\) with \(\func{f}{1} \neq 0\) is an Abelian group under Dirichlet multiplication.
+\end{remark}
+
+\begin{proposition}
+    \((f \ast g)^{-1} = f^{-1} \ast g^{-1}\).
+\end{proposition}
+\begin{definition}
+    The unit function \(\func{u}{n} = 1\) for all \(n\). Since \(\sum_{d \mid n} \func{\mu}{d} = \func{I}{n}\), then \(\mu \ast u = I\) and thus by uniqueness of inverse \(\mu^{-1} = u\).
+\end{definition}
+
+\begin{theorem}[Mobius inversion formula]
+    If 
+    \begin{equation*}
+        \func{f}{n} = \sum_{d \mid n} \func{g}{n} 
+    \end{equation*}
+    then, 
+    \begin{equation}
+        \func{g}{n} = \sum_{d \mid n} \func{f}{d} \func{\mu}{\frac{n}{d}}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Since \(f = g \ast u\), then \(g = f \ast u^{-1} = f \ast \mu\).
+\end{proof}
+\section{The Mangoldt function \(\Lambda\)}
+\begin{definition}
+    For every integer \(n \geq 1\), we define 
+    \begin{equation*}
+        \func{\Lambda}{n} = \begin{cases}
+            \log p & \mathrm{if\ } n = p^m \mathrm{\ for\ some\ prime\ } p \mathrm{\ and\ } m \geq 1\\
+            0 & \mathrm{otherwise}
+        \end{cases}
+    \end{equation*}
+\end{definition}
+\begin{theorem}
+    For \(n \geq 1\),
+    \begin{equation*}
+        \func{\log}{n} = \sum_{d \mid n} \func{\Lambda}{n}
+    \end{equation*}
+    and 
+    \begin{equation*}
+        \func{\Lambda}{n} = \sum_{d \mid n} \func{\mu}{d} \func{\log}{\frac{n}{d}} = - \sum_{d \mid n} \func{\mu}{d} \func{\log}{d}
+    \end{equation*}
+\end{theorem}
+\section{Multiplicative functions}
+\begin{definition}
+    An arithmetical function \(f\) is \textbf{multiplicative} if \(f \not\equiv 0\) and 
+    \begin{equation*}
+        \func{f}{mn} = \func{f}{m} \func{f}{n}
+    \end{equation*}
+    whenver \((m,n) = 1\). The function \(f\) is said to be \textbf{completely multiplicative} if for all \(m,n\)
+    \begin{equation*}
+        \func{f}{mn} = \func{f}{m} \func{f}{n}
+    \end{equation*}
+\end{definition}
+\begin{remark}
+    Multiplicative functions for a subgroup under \(\ast\).
+\end{remark}
+\begin{proposition}
+    If \(f\) is multiplicative, then \(\func{f}{1} = 1\).
+\end{proposition}
+\begin{theorem}
+    Given an arithmetical function \(f\) with \(\func{f}{1} = 1\)
+    \begin{enumerate}
+        \item  \(f\) is multiplicative if and only if \(\func{f}{\prod p_i^{\alpha_i}} = \prod \func{f}{p_i^{\alpha_i}}\)
+        \item If \(f\) is multiplicative, then \(f\) is completely multiplicative if \(\func{f}{p^{\alpha}} = \bracket{\func{f}{p}}^{\alpha}\).
+    \end{enumerate}
+\end{theorem}
+\begin{theorem}
+    If \(f\) and \(g\) are both multiplicative, then \(f \ast g\) is multiplicative. If \(g\) and \(f \ast g\) are both multiplicative, then \(f\) is multiplicative.
+\end{theorem}
+\subsection{Inverse of completely multiplicative functions}
+\begin{theorem}
+    Let \(f\) be a multiplicative function. Then, \(f\) is completely multiplicative if and only if 
+    \begin{equation*}
+        \func{f^{-1}}{n} = \func{\mu}{n} \func{f}{n}
+    \end{equation*}
+\end{theorem}
+\begin{remark}
+    Note that \(N = \phi \ast u\) and \(\phi = N \ast \mu\) therefore, \(\phi^{-1}= \mu^{-1} \ast N^{-1} = u \ast N^{-1}\). Since \(N\) is completely multiplicative, \(\phi^{-1} = u \ast \mu N\). That is, 
+    \begin{equation*}
+        \func{\phi^{-1}}{n} = \sum_{d \mid n} d \func{\mu}{d}
+    \end{equation*}
+\end{remark}
+\begin{theorem}
+    If \(f\) is multiplicative,
+    \begin{equation*}
+        \sum_{d \mid n} \func{\mu}{d} \func{f}{d} = \prod_{p \mid n} \bracket{1 - \func{f}{p}}
+    \end{equation*}
+\end{theorem}
+\section{Liouville's function \(\lambda\)}
+\begin{definition}
+    The Liouville function \(\lambda\) is defined as \(\func{\lambda}{1} = 1\) and if \(n = p_1^{\alpha_1} \dots p_k^{\alpha_k}\), then 
+    \begin{equation*}
+        \func{\lambda}{n} = (-1)^{\alpha_1 + \dots + \alpha_k}
+    \end{equation*}
+    and also \(\func{\lambda^{-1}}{n} = \abs{\func{\mu}{n}}\).
+\end{definition}
+\section{The divisor function \(\sigma_{\alpha}\)}
+\begin{definition}
+    For all \(\alpha \in \Complex\), \(\func{\sigma_{\alpha}}{n} = \sum_{d \mid n} d^{\alpha} = u \times N^{\alpha}\)
+\end{definition}
+\begin{proposition}
+    The divisor function \(\sigma_{\alpha}\) is multiplicative. Therefore,
+    \begin{equation*}
+        \func{\sigma_{\alpha}}{p^k} = 1 + p^{\alpha} + \dots + p^{k \alpha} = \begin{cases}
+            \dfrac{p^{(k+1)\alpha} - 1}{p^{\alpha} - 1} & \alpha \neq 0\\
+            k + 1 & \alpha = 0
+        \end{cases}
+    \end{equation*}
+\end{proposition}
+
+\begin{theorem}
+    For \(n \geq 1\), we have 
+    \begin{equation*}
+        \func{\sigma_{\alpha}^{-1}}{n} = \sum_{d \mid n} d^{\alpha} \func{\mu}{d} \func{\mu}{\frac{n}{d}}
+    \end{equation*}
+\end{theorem}
