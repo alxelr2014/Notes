@@ -1,0 +1,10 @@
+\chapter{Averages of Arithmetical Functions}
+Arithmetical functions fluctuate a lot, by taking averages we can determine their behaviour
+\begin{equation*}
+    \func{\tilde{f}}{n} = \frac{1}{n} \sum_{k = 1}^n \func{f}{k}
+\end{equation*}
+\section{Asymptotic equality of function}
+\(\func{f}{x} \in \bigO{\func{g}{x}}\) if there exists \(M > 0\) and \(a\) such that for all \(x \geq a\), \(\abs{\func{f}{x}} \leq M \abs{\func{g}{x}}\). Usually, \(g\) is taken to be positive.
+\begin{definition}
+    If \(\lim_{x \to \infty } \frac{\func{f}{x}}{\func{g}{x}} = 1\), then \(f\) is asymptotic to \(g\) as \(x \to \infty\) and we write \(\func{f}{x} \sim \func{g}{x}\) as \(x \to \infty\).
+\end{definition}

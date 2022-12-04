@@ -206,3 +206,86 @@ Then, we can write \(\phi = \mu \ast N\) where \(\func{N}{n}  = n\).
         \func{\sigma_{\alpha}^{-1}}{n} = \sum_{d \mid n} d^{\alpha} \func{\mu}{d} \func{\mu}{\frac{n}{d}}
     \end{equation*}
 \end{theorem}
+
+\section{Generalized convolution}
+Let \(F: \opop{0}{\infty} \to \Complex\) such that \(\func{F}{x} = 0\) for \(0 < x < 1\). Let \(f\) be an arithmetical function 
+\begin{equation*}
+    \func{f \circ F}{x} = \sum_{n \leq x} \func{f}{n} \func{F}{\frac{x}{n}}
+\end{equation*}
+is a function such that \(\func{f \circ F}{x} = 0\) for \(0 < x < 1\) and defined on \(\opop{0}{\infty}\). 
+\begin{remark}
+    In general, \(\circ\) is not commutative nor associative.
+\end{remark}
+\begin{theorem}
+    Let \(f\) and \(g\) be two arithmetical functions
+    \begin{equation*}
+        f \circ (g \circ F) = (f \ast g) \circ F
+    \end{equation*}
+\end{theorem}
+\begin{theorem}[Inverse formula] 
+    Let \(f\) have inverse \(f^{-1}\), then the equation 
+    \begin{equation*}
+        \func{G}{x} = \sum_{n \leq x} \func{f}{x} \func{F}{\frac{x}{n}}
+    \end{equation*}
+    implies 
+    \begin{equation*}
+        \func{F}{x} = \sum_{n \leq x} \func{f^{-1}}{x} \func{G}{\frac{x}{n}}
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Generalized Mobius inversion]
+    Let \(f\) be a completely multiplicative function 
+    \begin{equation*}
+        \func{G}{x} = \sum_{n \leq x} \func{f}{n}\func{F}{\frac{x}{n}} \iff \func{F}{x} = \sum_{n \leq x} \func{\mu}{n} \func{f}{n} \func{G}{\frac{x}{n}}
+    \end{equation*}    
+\end{theorem}
+\section{Formal power series}
+Definiton of formal power series as usual with equality, sum, and multiplication. Therefore, formal power series form a ring with \(0\) and \(1\). If the leading coefficient is non-zero, then the formal power series is invertible. 
+\begin{definition}
+    Let \(f\) be an arithmetical function and \(p\) be a prime 
+    \begin{equation*}
+        \func{f_p}{x} = \sum_{n = 0}^{\infty} \func{f}{p^n}x^n
+    \end{equation*}
+    is the \textbf{Bell series of \(f\) modulo \(p\)}.
+\end{definition}
+
+\begin{theorem}
+    If \(f\) and \(g\) are multiplicative, then \(f = g\) if and only if \(f_p = g_p\) for all \(p\). 
+\end{theorem}
+\begin{example}
+    \begin{align*}
+        \func{\mu_p}{x} &= 1-x & \func{I_p}{x} &= 1 & \func{\lambda_p}{x} &= \frac{1}{1 + x}\\
+        \func{\phi_p}{x} &= \frac{1-x}{1 - px} & \func{u_p}{x} &= \frac{1}{1 - x} & \func{N^{\alpha}_p}{x} &= \frac{1}{1 - p^{\alpha} x} 
+    \end{align*}
+\end{example}
+\begin{theorem}
+    Let \(f\) and \(g\) be two arithmetical functions and \(h = f \ast g\), then \(h_p = f_p g_p\) for all \(p\).
+\end{theorem}
+As a result, 
+\begin{equation*}
+    \func{\bracket{\sigma_{\alpha}}_p}{x} = \func{N^{\alpha}_p}{x} \func{u_p}{x} = \frac{1}{1- p^{\alpha}x} \frac{1}{1- x} = \frac{1}{1 - (p^{\alpha} + 1)x + p^{\alpha}x^2} = \frac{1}{1 - \func{\sigma_{\alpha}}{p} + p^{\alpha} x^2}
+\end{equation*}
+
+\begin{definition}
+    The derivative arithmetical function \(f\) is defined by 
+    \begin{equation*}
+        \func{f'}{n} = \func{f}{n} \func{\log}{n}
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    \ 
+    \begin{enumerate}
+        \item \((f + g)' = f' + g'\).
+        \item \((f \ast g)' = f' \ast g + f \ast g'\).
+        \item \((f^{-1})' = -f' \ast (f \ast f)^{-1}\) provided that \(\func{f}{1} \neq 0\). 
+    \end{enumerate}
+\end{theorem}
+
+\section{The Selberg theorem}
+\begin{theorem}
+    For \(n \geq 1\), 
+    \begin{equation*}
+        \func{\Lambda}{n} \func{\log}{n} + \sum_{d \mid n} \func{\Lambda}{d} \func{\Lambda}{\frac{n}{d}} = \sum_{d \mid n} \func{\mu}{d} \func{\log^2}{\frac{n}{d}}
+    \end{equation*}
+\end{theorem}
