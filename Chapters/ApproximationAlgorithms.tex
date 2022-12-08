@@ -1,0 +1,210 @@
+\chapter{Approximation Algorithms}
+\section{Solving \(\compProblem{SVP}\) in dimension 2}
+\subsection{Reduced basis}
+\begin{definition}
+    Let \(\begin{bmatrix}
+        a & b
+    \end{bmatrix}\) be a lattice basis. The basis is reduced with respect to \(\norm{\; \cdot \;}\) if 
+    \begin{equation*}
+        \norm{a}, \norm{b} \leq \norm{a + b}, \norm{a - b}
+    \end{equation*}
+\end{definition}
+We claim that this is equivalent to \(\norm{a}, \norm{b} = \lambda_1, \lambda_2\).
+\begin{lemma}
+    Consider three vector on a line \(x,x+y, x + \alpha y\) where \(\alpha > 1\). For any norm \(\norm{\; \cdot \;}\)
+    \begin{align*}
+        \norm{x} \leq \norm{x + y} &\implies \norm{x + y} \leq \norm{x + \alpha y}\\
+        \norm{x} < \norm{x + y} &\implies \norm{x + y} < \norm{x + \alpha y}
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    We easily have 
+    \begin{align*}
+        \norm{x + \alpha y} &= \norm{\alpha x + \alpha y - (\alpha - 1) x}\\
+        &\geq \abs{\norm{\alpha x + \alpha y} - \norm{(\alpha - 1)x}}\\
+        &= \alpha \norm{x + y} - (\alpha - 1)\norm{x}\\
+        &= \norm{x + y} + (\alpha - 1)(\norm{x + y} - \norm{x})
+    \end{align*}
+    which was what was wanted.
+\end{proof}
+
+\begin{theorem}
+    Let \(\begin{bmatrix}
+        a & b
+    \end{bmatrix}\) be a lattice basis and let \(\lambda_1, \lambda_2\) be the successive minima of the lattice. Then, \(\begin{bmatrix}
+        a & b
+    \end{bmatrix}\) is reduced if and only if \(\norm{a}, \norm{b} = \lambda_1,\lambda_2\).
+\end{theorem}
+\subsection{Gauss' Algorithm}
+The goal is to find a reduced basis for any \(2\)-dimensional lattice.
+\begin{definition}
+    A basis \(\begin{bmatrix}
+        a & b
+    \end{bmatrix}\) is well-ordered if \(\norm{a} \leq \norm{a - b} \leq \norm{b}\).
+\end{definition}
+
+\begin{algorithm}
+    \DontPrintSemicolon
+    \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+    \SetKw{Goto}{goto}
+    \Input{\(a,b \in \Lambda\) are linearly independent.}
+    \Output{A reduced basis for the lattice \(\Lambda\).}
+    \If{\(\norm{a} > \norm{b}\)}{
+        swap\((a,b)\)\;
+    }
+    \tcc*{Here: \(\norm{a} \leq \norm{b}\)}
+    \If{\(\norm{a-b} > \norm{a + b}\)}{
+        \(b = -b\)\;
+    }
+    \tcc*{Here: \(\norm{a} \leq \norm{b}\) and \(\norm{a - b} \leq \norm{a + b}\)}
+    \If(the basis is reduced){\(\norm{b} \leq \norm{a - b}\)}{
+        \Return{\(\begin{bmatrix} a & b \end{bmatrix}\)}\;
+    }
+    \If(the basis is well-ordered){\(\norm{a} \leq \norm{a -b}\)}{
+        \Goto \emph{loop}  
+    }
+    \tcc*{\(\norm{a - b} < \norm{a} \implies  \norm{a} < \norm{a + b}\)}
+    \tcc*{Therefore: \(\norm{a - b} < \norm{a} \leq \norm{b},\norm{a + b}\)}
+    \If{\(\norm{a} = \norm{b}\)}{
+        \Return{\(\begin{bmatrix} a- b& a \end{bmatrix}\)}\;
+        \tcc*{Note that \(\norm{2a - b} \geq \abs{2\norm{a} - \norm{b}} = \norm{a}\)}
+        \tcc*{and thus \(\norm{a-b},\norm{a} \leq \norm{b},\norm{2a-b}\)}
+    }
+    \tcc*{Here: \(\norm{a - b} < \norm{a} < \norm{b},\norm{a + b}\)}
+    \(\begin{bmatrix*}  a & b  \end{bmatrix*} = \begin{bmatrix*}  b - a & b \end{bmatrix*} \)\;
+    \tcc*{This is a well ordered basis.}
+    \tcc*{Note that in the \emph{loop}, the basis is always well-ordered}
+    \emph{loop:} Find \(\mu \in \Integers\) such that \(\norm{b - \mu a}\) is minimized.\;
+    \(b' = b - \mu a\)\; 
+    \If{\(\norm{a - b'} > \norm{a + b'}\)}{
+        \(b' = - b'\)\;
+    }
+    swap\((a,b')\)\;
+    \eIf{\(\begin{bmatrix*}  a & b'  \end{bmatrix*}\) is reduced}{
+        \Return{\(\begin{bmatrix*}  a & b'  \end{bmatrix*}\)}
+    }{
+        \(b = b'\)\;
+        \Goto \emph{loop}  
+    }
+    \caption{Gauss' Algorithm}
+\end{algorithm}
+
+\begin{lemma}
+    Let \(\norm{\; \cdot \;}\) be an effeciently computable norm and \(a,b\) be two vectors such that \(\norm{b} > \norm{b - a}\). Then, one can effeciently find an integer such that \(\norm{b - \mu a}\) is minimal. Moreover, \(\mu\) satisfies \(1 \leq \mu \leq 2 \frac{2 \norm{b}}{\norm{a}}\).
+\end{lemma}
+\begin{proof}
+    Binary search.
+\end{proof}
+\begin{lemma}
+    In any execution of the Gauss algorithm, at the beginning of each iteration the basis \(\begin{bmatrix*}  a & b  \end{bmatrix*}\) is well-ordered.
+\end{lemma}
+
+\begin{theorem}
+    On any input of two linearly independent \(\begin{bmatrix*}  a & b  \end{bmatrix*}\), the Gauss' algorithm always terminated and correctly computes a reduced basis for the lattice.
+\end{theorem}
+
+\section{Approximating \(\compProblem{SVP}\) in dimension \(n\)}
+\subsection{Reduced basis}
+\begin{definition}
+    A basis \(B = \begin{bmatrix*}
+        b_1 & b_2
+    \end{bmatrix*}\) is reduced if and only if 
+    \begin{enumerate}
+        \item \(\mu_{2,1} = \dfrac{\angleBracket{b_2,b_1^{\ast}}}{\angleBracket{b_1^{\ast},b_1^{\ast}}} =  \dfrac{\angleBracket{b_2,b_1}}{\angleBracket{b_1,b_1}}\leq \frac{1}{2}\).
+        \item \(\norm{b_1} \leq \norm{b_2}\).
+    \end{enumerate}
+\end{definition}
+Define \(\pi_i: \Reals^m \to \func{\vspan}{b_i^{\ast}, \dots, b_n^{\ast}} \) such that 
+\begin{equation*}
+    \func{\pi_i}{x} = \sum_{j = i}^n \dfrac{\angleBracket{x,b_j^{\ast}}}{\angleBracket{b_j^{\ast},b_j^{\ast}}}b_j^{\ast}
+\end{equation*}
+
+\begin{definition}
+    A basis \(B = \begin{bmatrix*} b_1 & \dots & b_n \end{bmatrix*} \in \Reals^{m \times n}\) is \textbf{LLL-reduced} with parameter \(\delta\), \(\delta\)-LLL reduced, if 
+    \begin{enumerate}
+        \item \(\abs{u_{i,j}} \leq \frac{1}{2} \forall i > j\).
+        \item For any pair of consecutive vectors \(b_i, b_{i + 1}\)
+        \begin{equation*}
+            \delta \norm{\func{\pi_i}{b_i}}^2 \leq \norm{\func{\pi_i}{b_{i + 1}}}^2
+        \end{equation*}
+    \end{enumerate}
+    When \(\delta = 1\), the second condition implies that \(\begin{bmatrix*}
+        \func{\pi_i}{b_i} & \func{\pi_i}{b_{i + 1}}
+    \end{bmatrix*}\) is a reduced basis.
+ \end{definition}
+
+ \begin{lemma}
+    If \(B = \begin{bmatrix*} b_1 & \dots & b_n \end{bmatrix*} \in \Reals^{m \times n}\) is a \(\delta\)-LLL reduced with \(\delta \in \opop{1/4}{1}\), then 
+    \begin{equation*}
+        \norm{b_1} \leq \bracket{\dfrac{2}{\sqrt{4\delta - 1}}}^{n - 1} \lambda_1
+    \end{equation*}
+    In particular, if \(\delta = \frac{1}{4} + \bracket{\frac{3}{4}}^{n/n-1}\), then 
+    \begin{equation*}
+        \norm{b_1} \leq \bracket{\dfrac{2}{\sqrt{3}}}^n \lambda_1
+    \end{equation*}
+ \end{lemma}
+
+ \begin{proof}
+    For all \(i\)
+    \begin{align*}
+        \delta \norm{b_i^{\ast}}^2 &= \delta \norm{\func{\pi_i}{b_i^{\ast}}}^2 \\
+        &\leq \norm{\func{\pi_i}{b_{i + 1}^{\ast}}}^2\\
+        &= \norm{u_{i+1,i} b_i^{\ast} + b_{i + 1}^{\ast}}^2\\
+        &= \abs{u_{i+1,i}}^2 \norm{b_i^{\ast}}^2 + \norm{b_{i + 1}^{\ast}}^2\\
+        &\leq \frac{1}{4} \norm{b_i^{\ast}}^2 + \norm{b_{i + 1}^{\ast}}^2\\
+        \implies& \norm{b_i^{\ast}}^2 \leq \dfrac{4}{4\delta - 1} \norm{b_{i + 1}^{\ast}}^2\\
+        \implies& \norm{b_i^{\ast}} \leq \dfrac{2}{\sqrt{4\delta - 1}} \norm{b_{i + 1}^{\ast}}
+    \end{align*}
+    Let \(\norm{b_i^{\ast}}\) be the minimum of \(\norm{b_j^{\ast}}\), then 
+    \begin{equation*}
+        \norm{b_1^{\ast}} \leq \bracket{\dfrac{2}{\sqrt{4\delta - 1}}}^{i-1}  \norm{b_{i}^{\ast}} \leq \bracket{\dfrac{2}{\sqrt{4\delta - 1}}}^{i-1}  \lambda_1 \leq \bracket{\dfrac{2}{\sqrt{4\delta - 1}}}^{n-1}  \lambda_1
+    \end{equation*}
+    because, \(\dfrac{2}{\sqrt{4\delta - 1}} > 1\). Since \(\norm{b_1^{\ast}} = \norm{b_1}\), then 
+    \begin{equation*}
+        \norm{b_1} \leq \bracket{\dfrac{2}{\sqrt{4\delta - 1}}}^{n-1}  \lambda_1
+    \end{equation*}
+ \end{proof}
+ \section{The LLL basis reduction algorithm}
+ Note that, the Gauss' algorithm is basically 
+ \begin{enumerate}
+    \item reduce \(b = b - \mu a\).
+    \item swap.
+    \item repeat the process if the basis is not reduced.
+ \end{enumerate}
+
+ \begin{algorithm}
+    \DontPrintSemicolon
+    \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+    \Input{\(B = \begin{bmatrix*} b_1 & \dots & b_n \end{bmatrix*}\) is a basis for \(\Lambda\).}
+    \Output{A reduced basis for the lattice \(\Lambda\).}
+    \emph{Reduction:}\;
+    \For{\(i = 1, \dots , n\)}{
+        \For{\(j = i + 1, \dots, n\)}{
+            \(b_i = b_i  - c_{i,j} b_j\) where \(c_{i,j} = \floor{\dfrac{\angleBracket{b_i,b_j}}{\angleBracket{b_j, b_j}}}\)\;
+        }
+    }
+    \emph{Swap:} if \(\delta \norm{\func{\pi_i}{b_i}}^2 > \norm{\func{\pi_i}{b_{i+1}}}^2\) swap \(b_i\) and \(b_{i+1}\)\;
+    \emph{Repeat:} if anything was swapped.\;
+    \caption{\(\delta\)-LLL Basis Reduction Algorithm}
+\end{algorithm}
+In the \emph{Reduction} \(B \mapsto B'\) where \(B'\) is the result of applying elementary integer column operations on \(B\). Therefore, they are both basis for  the same lattice. Moreover, \(B^{\ast}  = \bracket{B'}^{\ast}\) but \(\abs{u_{i,j}} \leq \frac{1}{2} \ \forall i > j\).
+After swapping we might need to reduce again. 
+\subsection{Running time analysis}
+\section{Approximating \(\compProblem{CVP}\) in dimension \(n\)}
+\begin{algorithm}
+    \DontPrintSemicolon
+    \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+    \Input{\(B = \begin{bmatrix*} b_1 & \dots & b_n \end{bmatrix*} \in \Integers^{m \times n}\) is a basis for \(\Lambda\) and \(t \in \Integers^m\) is the target vector.}
+    \Output{\(x \in \Lambda\) such that \(\norm{t - x} \leq 2 \bracket{\frac{2}{\sqrt{3}}}^n \min_{y \in \Lambda} \norm{y -t}\)}
+    Run LLL-algorithm on \(B\)\;
+    Let \(b = t\)\; 
+    \For{\(j =  n , \dots, 1\)}{
+        \(b = b - c_j b_j\) where \(c_j = \floor{\dfrac{\angleBracket{b,b_j}}{\angleBracket{b_j,b_j}}}\)\;
+    }
+    \Return{\(t - b\)}
+    \caption{Nearest plane algorithm Algorithm}
+\end{algorithm}
+
+\begin{lemma}
+    When \(\delta = \frac{1}{4} + \bracket{\frac{3}{4}}^{n/n-1}\), the nearest plane algorithm solves \(\compProblem{CVP}\) within an factor \(\func{\gamma}{n} = 2 \bracket{\frac{2}{\sqrt{3}}}^n\).
+\end{lemma}
