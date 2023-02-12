@@ -1,0 +1,286 @@
+\chapter{Measurements and Operators}
+\section{Measurement}
+If we have systems \(H_1\) and \(H_2\) with state space \(\scrE_1\) and \(\scrE_2\), respectively. The state space of \(H_1\) and \(H_2\) together is \(\scrE_1 \otimes \scrE_2\). If \(A_1\) is an observable in \(\scrE_1\), then we can naturally extend it to \(\scrE_1 \otimes \scrE_2\),
+\begin{equation*}
+    \tilde{A_1} = A_1 \otimes I
+\end{equation*}
+The eigenvalue of \(\tilde{A_1}\) are degenerate in \(\scrE_1 \otimes \scrE_2\). Let \(P_n\) the eigenspace of the eigenvalue \(a_n\) of \(A_1\).
+\begin{equation*}
+    P_n = \sum_{i = 1}^{g_n} \ket{u_n^i} \bra{u_n^i}
+\end{equation*}
+with \(\tilde{P_n} = P_n \otimes I\). Given \(\ket{\psi}\) in \(\scrE_1 \otimes \scrE_2\),
+\begin{align*}
+    \prob{a_n} & = \bra{\psi} \tilde{P_n} \ket{\psi} & \ket{\psi'} & = \dfrac{\tilde{P_n} \ket{\psi}}{\sqrt{ \bra{\psi} \tilde{P_n} \ket{\psi} }}
+\end{align*}
+If the system is not separable, then a C.S.C.O measurement will result into a separable system.
+\section{The trace operator}
+The trace of an operator is defined as 
+\begin{align*}
+    \trace A &= \sum_{n} \bra{u_n} A \ket{u_n}\\
+    \trace A &= \int \bra{w_{\alpha}} A \ket{w_{\alpha}} \diffOperator \alpha 
+\end{align*}
+where \(\set{\ket{u_n}}\) is a discrete basis and \(\set{\ket{w_{\alpha}}}\) is continuous basis. The trace of an operator does not depend on the chosen basis. Let \(\set{\ket{v_m}}\) be another basis for the vector space.
+\begin{align*}
+    \trace A &= \sum_{n} \bra{u_n} A \ket{u_n}\\
+    &= \sum_{n,m,k} \bra{u_n} \ket{v_m} \bra{v_m} A \ket{v_k} \bra{v_k}\ket{u_n}\\
+    &= \sum_{n,m,k} \braket{v_k}{u_n} \braket{u_n}{v_m} \bra{v_m} A \ket{v_k}\\
+    &= \sum_{m,k}\bra{v_k} \ket{v_m}\bra{v_m} A \ket{v_k}\\
+    &= \sum_{k} \bra{v_k} A \ket{v_k}
+\end{align*}
+When consider the Jordan normal form of an operator we get 
+\begin{equation*}
+    \trace A = \sum a_n \lambda_n
+\end{equation*}
+where \(a_n\) is the algebraic multiplicity of eigenvalue \(\lambda_n\). If \(A\) is an observable, then \(a_n = g_n\), the geometric multiplicity, hence 
+\begin{equation*}
+    \trace A = \sum g_n \lambda_n
+\end{equation*}
+Let \(A\) and \(B\) be two operators, then \(\trace AB = \trace BA\).
+\begin{align*}
+    \trace AB &= \sum_{n} \bra{u_n} AB \ket{u_n}\\
+    &= \sum_{n,m}  \bra{u_n} A\ket{u_m}\bra{u_m}B \ket{u_n}\\
+    &= \sum_{n,m}  \bra{u_m}B \ket{u_n}\bra{u_n} A\ket{u_m}\\
+    &= \sum_{m}  \bra{u_m}B A\ket{u_m}\\
+    &= \trace BA
+\end{align*}
+This is called the cyclic property as \(\trace ABC = \trace CAB = \trace BCA\), however, \(\trace ABC\) is not necessarily equal to \(\trace ACB\).
+
+\section{Functions of operators}
+Let \(F\) be a function with the following power series. 
+\begin{equation*}
+    \func{F}{x} = \sum_{n = 0}^{\infty} f_n x^n
+\end{equation*}
+Generalizing the definition to operators gives 
+\begin{equation*}
+    \func{F}{A} = \sum f_n A^n
+\end{equation*}
+\begin{theorem}
+    Let \(A\) be a normal operator with spectral decomposition \(A = U \Lambda U^{\dagger}\) -- \(\Lambda\) is diagonal and \(U\) is unitary. Then 
+    \begin{equation*}
+        \func{F}{A} = U \func{F}{\Lambda} U^{\dagger}
+    \end{equation*}
+    Since \(\Lambda\) is diagonal, then \(\Lambda^n\) is diagonal, moreover, if \(\lambda_i\) is the \(i_{\cardinalTH}\) diagonal entry of \(\Lambda\), then \(\lambda_i^n\) is the \(i_{\cardinalTH}\) diagonal entry of \(\Lambda^n\). As a result, \(\func{F}{\lambda_i}\) is the \(i_{\cardinalTH}\) diagonal entry of \(\func{F}{\Lambda}\). 
+    
+    Simply, if \(A = \sum \lambda_i \ket{v_i}\bra{v_i}\), then 
+    \begin{equation*}
+        \func{F}{A} = \sum \func{F}{\lambda_i} \ket{v_i}\bra{v_i}
+    \end{equation*}
+\end{theorem}
+The first part of the last theorem, can be easily extended to any diagonalizable operator, not just unitarily diagonalizable -- i.e. normal operators.
+\begin{proposition}
+    If \(\commutator{A}{B} = 0\), then \(\commutator{A}{\func{F}{B}} = 0\).
+\end{proposition}
+\begin{proposition}
+    If \(\commutator{A}{\commutator{A}{B}} = \commutator{B}{\commutator{A}{B}} = 0\), then \(\commutator{A}{\func{F}{B}} = \commutator{A}{B} \func{F'}{B}\).
+\end{proposition}
+\begin{example}
+    \(\commutator{X}{P^n} = i \hbar n P^{n-1}\), \(\commutator{P}{X^n} = -i\hbar n X^{n-1}\).
+\end{example}
+\subsection{Derivative}
+The derivative of a time dependent operator \(A\) is defined as 
+\begin{equation*}
+    \dfrac{\diffOperator}{\diffOperator t} A = \lim_{h \to 0} \dfrac{\func{A}{t+h} - \func{A}{t}}{h}
+\end{equation*}
+In matrix representation, 
+\begin{align*}
+    \bra{u_m}\dfrac{\diffOperator}{\diffOperator t} A \ket{u_n} &= \bra{u_m}\lim_{h \to 0} \dfrac{\func{A}{t+h} - \func{A}{t}}{h}\ket{u_n} \\
+    &= \lim_{h \to 0} \dfrac{\bra{u_m}\func{A}{t+h}\ket{u_n} - \bra{u_m}\func{A}{t}\ket{u_n}}{h}\\
+    &= \dfrac{\diffOperator}{\diffOperator t} \bra{u_m}A \ket{u_n}
+\end{align*}
+Let \(A\) and \(B\) be two time dependent operators.
+\begin{align*}
+    \dfrac{\diffOperator}{\diffOperator t} \bracket{A + B} & = \dfrac{\diffOperator}{\diffOperator t} A +  \dfrac{\diffOperator}{\diffOperator t} B            \\
+    \dfrac{\diffOperator}{\diffOperator t}AB & = \bracket{\dfrac{\diffOperator}{\diffOperator t} A}B +  A\dfrac{\diffOperator}{\diffOperator t} B \\
+    \dfrac{\diffOperator}{\diffOperator t} e^{At} & = A e^{At} = e^{At} A                                                                             
+\end{align*}
+\begin{proposition}
+    If \(\commutator{A}{\commutator{A}{B}} = \commutator{B}{\commutator{A}{B}} = 0\), then
+    \begin{equation*}
+        e^A e^B = e^{A + B} e^{\frac{1}{2} \commutator{A}{B}}
+    \end{equation*}
+\end{proposition}
+\section{The density operator}
+\subsection{Pure states}
+A state \(\ket{\func{\psi}{t}} = \sum_n \func{c_n}{t} \ket{u_n}\) with \(\sum_n \abs{\func{c_n}{t}}^2 = 1\) is a \textbf{pure state}. Let \(\func{\rho}{t} = \ket{\func{\psi}{t}} \bra{\func{\psi}{t}}\), and \(\func{\rho}{t}_{n,m} = \func{c_n}{t} \overline{\func{c_m}{t}}\). Then,
+\begin{equation*}
+    \func{\trace}{\func{\rho}{t}} = \sum_n \func{\rho}{t,t}_{n,n} = \sum_{n} \abs{\func{c_n}{t}}^2 = 1
+\end{equation*}
+We claim that \(\func{\rho}{t}\) fully describes the measurable properties of the quantum state. Let \(A\) be an operator
+\begin{equation*}
+    \func{\angleBracket{A}}{t} = \bra{\func{\psi}{t}} A \ket{\func{\psi}{t}} = \func{\trace}{A \func{\rho}{t}}
+\end{equation*}
+Specifically,  the probability \(\prob{a_n} = \bra{\psi} \tilde{P_n} \ket{\psi} = \func{\trace}{P_n \func{\rho}{t}}\). Moreover, for the time evolution we have
+\begin{align*}
+    \dfrac{\diffOperator}{\diffOperator t} \func{\rho}{t} &= \dfrac{\diffOperator \, \ket{\func{\psi}{t}}}{\diffOperator t} \bra{\func{\psi}{t}} + \ket{\func{\psi}{t}} \dfrac{\diffOperator \, \bra{\func{\psi}{t}}}{\diffOperator t} \\
+    &= -\dfrac{i}{\hbar} H \ket{\func{\psi}{t}}\bra{\func{\psi}{t}} + \dfrac{i}{\hbar} \ket{\func{\psi}{t}}\bra{\func{\psi}{t}}   H  \\  
+    &= -\frac{i}{\hbar} \commutator{\func{H}{t}}{\func{\rho}{t}}
+\end{align*}
+and thus the trace of \(\func{\rho}{t}\) is conserved?.
+\begin{proposition}
+    For a pure state, the density operator is
+    \begin{enumerate}
+        \item  Hermitian \(\func{\rho^{\dagger}}{t} = \func{\rho}{t}\).
+        \item \(\func{\rho^2}{t} = \func{\rho}{t}\).
+        \item \(\trace \func{\rho^2}{t} = 1\).
+    \end{enumerate}
+\end{proposition}
+The last two statements do not hold for statistical mixtures.
+\subsection{Statistical mixtures}
+The statistical mixture is denoted by \(\ket{\psi} = \bigoplus p_k \ket{\psi_k}\). Consider the measurement \(P_n\) on \(\ket{\psi}\)
+\begin{align*}
+    \prob{a_n} & = \sum_{k} \condProb{a_n}{\ket{\psi_k}} \prob{\ket{\psi_k}} \\
+               & = \sum p_i \trace P_n \rho_k                                \\
+               & = \func{\trace}{ P_n \sum p_k \rho_k}
+\end{align*}
+Let \(\func{\rho}{t} = \sum p_k \rho_k = \sum p_k \ket{\psi_k} \bra{\psi_k}\), then \(\trace \func{\rho}{t} = \sum_k p_k \func{\trace}{\rho_k} = \sum p_k = 1\). Moreover
+\begin{equation*}
+    \func{\angleBracket{A}}{t} = \trace A \func{\rho}{t}
+\end{equation*}
+\begin{equation*}
+    i \hbar \dfrac{\diffOperator}{\diffOperator t} \func{\rho_k}{t} = \commutator{\func{H}{t}}{\func{\rho_k}{t}}
+\end{equation*}
+which implies
+\begin{equation*}
+    i \hbar \dfrac{\diffOperator}{\diffOperator t} \func{\rho}{t} = \sum_k p_k\commutator{\func{H}{t}}{ \func{\rho_k}{t}}=  \commutator{\func{H}{t}}{\func{\rho}{t}}
+\end{equation*}
+Therefore, \(\rho^2 \neq \rho\) and \(\trace \rho^2 \leq 1\), however, \(\bra{u} \rho \ket{u} = \sum p_k \abs{\braket{u}{\psi_k} }^2 \geq 0\) hence \(\rho\) is positive.
+
+\begin{proposition}
+    In general if \(\rho\) is a density operator
+    \begin{enumerate}
+        \item  \(\rho\) is Hermitian, \(\func{\rho^{\dagger}}{t} = \func{\rho}{t}\).
+        \item \(\func{\rho^2}{t}\) and \(\func{\rho}{t}\) are not necessarily equal, however, \(\func{\rho^2}{t} = \func{\rho}{t}\) if and only if \(\func{\rho}{t}\) describes a pure state system.
+        \item \(\trace \func{\rho^2}{t} \leq 1\) with equality if and only if \(\func{\rho}{t}\) describes a pure state system.
+        \item \(\rho\) is positive.
+    \end{enumerate}
+\end{proposition}
+\subsection{Physical meaning}
+\(\rho_{n,n}\) is the average of probability \(\ket{u_n}\) in \(\ket{\psi_k}\)s. It is called the population of the states. non-diagonal elements are called coherences, because if \(\rho_{n,m}\) is zero there is no interference effect between \(\ket{u_n}\) and \(\ket{u_m}\) and if its not zero it can be shown that there is a certian coherence.
+
+If \(\set{\ket{u_n}}\) are eigenvectors of time independent Hamiltonian \(H\),
+\begin{align*}
+    H \ket{u_n} = E_n \ket{u_n} & \implies  i\hbar \dfrac{\diffOperator}{\diffOperator t} \func{\rho_{n,n}}{t} =0                        \\
+                                & \implies   i\hbar \dfrac{\diffOperator}{\diffOperator t} \func{\rho_{n,m}}{t} = (E_n - E_p) \rho_{n,m} 
+\end{align*}
+That is \(\func{\rho_{n,n}}{t}\) is constant and \(\func{\rho_{n,m}}{t}\) oscillate at Bohr frequency.
+
+As we have seen, we can construct an operator on \(\scrE_1 \otimes \scrE_2\) by extending an operator from \(\scrE_1\) or \(\scrE_2\). Given the density operator of a state in \(\scrE_1 \otimes \scrE_2\), we are able to get a density operator in \(\scrE_1\) or \(\scrE_2\). This operation is called partial trace.
+\begin{align*}
+    \rho_1 & = \trace_2 \rho & \bracket{\rho_1}_{n,m} = \sum_{k} \bra{u_n v_k} \rho \bra{u_m v_k} \\
+    \rho_2 & = \trace_1 \rho & \bracket{\rho_2}_{n,m} = \sum_{k} \bra{u_k v_n} \rho \bra{u_k v_m} 
+\end{align*}
+Abstractly, \(\trace_2: \func{\calL}{\scrE_1 \otimes \scrE_2} \to \func{\calL}{\scrE_1}\) is linear function such that \(\func{\trace_1}{R \otimes S} = \func{\trace}{S} R\) for all \(R \in \func{\calL}{\scrE_1}\) and \(S \in \func{\calL}{\scrE_2}\). Since \(\func{\calL}{\scrE_1 \otimes \scrE_2}\) is a vector space we can find a basis for it and thus generalize the definition to non-separable operators.
+\begin{proposition}
+    \
+    \begin{enumerate}
+        \item \(\trace_2 TU = \trace_2 UT\).
+        \item \(\trace_2 \rho\) and \(\trace_1 \rho\) are both density operators.
+        \item Cosider \(\tilde{A_1}\), then
+              \begin{equation*}
+                  \angleBracket{\tilde{A_1}} = \func{\trace}{\tilde{A_1} \rho} = \func{\trace}{(A_1 \otimes I) \rho} = \trace A_1 \rho_1
+              \end{equation*}
+    \end{enumerate}
+\end{proposition}
+
+Note that \(\rho \neq \func{\trace_2}{\rho} \otimes \func{\trace_1}{\rho}\) and even if \(\trace \rho^2 = 1\) i.e. the the state is pure. It might be the case that \(\rho_1\) and \(\rho_2\) are pure?!?.
+
+\section{Unitary operators}
+An operator \(U\) is unitary if \(UU^{\dagger} = U^{\dagger} U = I\). Unitary operators conserve the inner product.
+\begin{equation*}
+    \braket{U \phi}{U \psi} = \bra{\phi} U^{\dagger} U \ket{\psi} = \braket{\phi}{\psi}
+\end{equation*}
+This implies, that under a unitary operator, an orthonormal basis is mapped to another orthonormal basis. Moreover, if an operator \(U\) maps an orthonormal basis to another, then \(U\) is unitary. Let \(\set{\ket{u_i}}\) be an orthonormal basis and \(\ket{v_i} = U \ket{u_i}\) is another orthonormal basis. Then, 
+\begin{equation*}
+    U  = \sum_i \ket{v_i}\bra{u_i} \implies U^{\dagger} = \sum_i \ket{u_i} \bra{v_i}
+\end{equation*}
+hence 
+\begin{equation*}
+    U U^{\dagger} = \sum_{i,j} \ket{v_i}\bra{u_i}\ket{u_j} \bra{v_j} = \sum_i \ket{v_i}\bra{v_i} = I
+\end{equation*}
+The product of two unitary operators \(U\) and \(V\), is unitary. Let \(\set{\bracket{\lambda_i,\ket{\psi_i}}}\) be the spectra of \(U\). Then, 
+\begin{equation*}
+    \braket{U\psi_i}{U\psi_i} = \abs{\lambda_i}^2 \braket{\psi_i}{\psi_i}= \braket{\psi_i}{\psi_i}
+\end{equation*}
+As a result, \(\abs{\lambda}^2 = 1 \implies \lambda = e^{i \phi_i}\). 
+\begin{equation*}
+    \braket{U\psi_j}{U\psi_i} = e^{i (\phi_i - \phi_j)} \braket{\psi_j}{\psi_i}= \braket{\psi_j}{\psi_i}
+\end{equation*}
+which means that if \(\lambda_i \neq \lambda_j\), then \(\braket{\psi_j}{\psi_i} = 0\) i.e. eigenvectors of different eigenvalues are orthogonal.
+
+\begin{proposition}
+    If \(A\) is Hermitian, then \(T = e^{iA}\) is unitary.
+\end{proposition}
+
+Let \(\tilde{A} = U A U^{\dagger}\) for some unitary operator \(U\). \(\tilde{A}\) on \(\ket{\tilde{v_i}} = U \ket{v_i}\) the same way that \(A\) acts on \(\ket{v_i}\). 
+\begin{equation*}
+    \tilde{A} \ket{\tilde{v_i}}  = U A \ket{v_i} = \ket{\widetilde{Av_i}}
+\end{equation*}
+As a result if \((\lambda_i, \ket{\psi_i})\) is an eigenvalue/eigenvector pair of \(A\), then \((\lambda_i, \ket{\tilde{\psi_i}})\) is an eigenvalue/eigenvector pair of \(\tilde{A}\).
+\begin{equation*}
+    \tilde{A} \ket{\tilde{\psi_i}}  = U A \ket{\psi_i} = \lambda_i U \ket{\psi_i} = \lambda_i \ket{\tilde{\psi_i}}
+\end{equation*}
+
+ Furthermore, \(\bracket{\tilde{A}}^{\dagger} = \widetilde{A^{\dagger}}\) and \(\widetilde{\func{F}{A}} = \func{F}{\tilde{A}}\).
+
+\section{The time evolution}
+We know that \(\ket{\func{\psi}{t}} = \func{U}{t,t_0} \ket{\func{\psi}{t_0}}\) for some unitary operator \(\func{U}{t,t_0}\) such that
+\begin{enumerate}
+    \item \(\func{U}{t,t} = I\).
+    \item
+          \begin{align*}
+              i\hbar \dfrac{\diffOperator }{\diffOperator t} \ket{\func{\psi}{t}}      & = i \hbar  \dfrac{\diffOperator }{\diffOperator t} \func{U}{t,t_0}\ket{\func{\psi}{t_0}} \\
+              i\hbar \dfrac{\diffOperator }{\diffOperator t} \ket{\func{\psi}{t}}      & = \func{H}{t} \ket{\func{\psi}{t}} = \func{H}{t} \func{U}{t,t_0} \ket{\func{\psi}{t_0}}  \\
+              \implies  i\hbar \dfrac{\diffOperator }{\diffOperator t} \func{U}{t,t_0} & = \func{H}{t} \func{U}{t,t_0}
+          \end{align*}
+\end{enumerate}
+Therefore,
+\begin{equation*}
+    \func{U}{t,t_0}  = -\frac{i}{\hbar} \int_{t_0}^t \func{H}{\tau} \func{U}{\tau,t_0} \diffOperator \tau + C
+\end{equation*}
+where \(C\) is an operator. Plugging \(t = t_0\) gives \(C = I\) and hence
+\begin{equation*}
+    \func{U}{t,t_0} = I -\frac{i}{\hbar} \int_{t_0}^t \func{H}{\tau} \func{U}{\tau,t_0} \diffOperator \tau
+\end{equation*}
+We can readily see that for all \(t_0,t_1,t_2\)
+\begin{equation*}
+    \func{U}{t_2,t_0} = \func{U}{t_2,t_1} \func{U}{t_1,t_0}
+\end{equation*}
+letting \(t_2 = t_0\) gives us
+\begin{equation*}
+    \func{U}{t_0, t_1} \func{U}{t_1, t_0} = I \implies \func{U}{t_0,t_1} = \func{U^{-1}}{t_1,t_0}
+\end{equation*}
+Moreover, it can be shown that \(\func{U}{t_1,t_0}\) is unitary, therefore, \(\func{U}{t_0,t_1} = \func{U^{\dagger}}{t_1,t_0}\).
+\subsection{Conservative system}
+When \(H\) is time independent
+\begin{equation*}
+    i\hbar \dfrac{\diffOperator}{ \diffOperator t} \func{U}{t,t_0} = H \func{U}{t,t_0} \implies \func{U}{t,t_0} = e^{-\frac{i}{\hbar} H (t - t_0)}
+\end{equation*}
+Let \(\bracket{E_k,\ket{\phi_k}}\) be an eigenstate pair of \(H\), then
+\begin{align*}
+    \func{U}{t,t_0} \ket{\phi_k} & = e^{-\frac{i}{\hbar} H (t - t_0)} \ket{\phi_k}                                                  \\
+                                 & = \sum_{n = 0}^{\infty} \dfrac{1}{n!} \bracket{\dfrac{-i (t - t_0)}{\hbar}}^n H^n \ket{\phi_k}   \\
+                                 & = \sum_{n = 0}^{\infty} \dfrac{1}{n!} \bracket{\dfrac{-i (t - t_0)}{\hbar}}^n E_k^n \ket{\phi_k} \\
+                                 & = e^{-\frac{i}{\hbar} E_k (t - t_0)} \ket{\phi_k}
+\end{align*}
+\section{The Schr\"{o}dinger and Hisenberg pictures}
+In Schr\"{o}dinger picture, the time evolution of the system is characterized in the state vector \(\ket{\func{\psi_S}{t}}\) which evolves unitarily. This way, we may assume that the observables are time independent. In Hisenberg picture we bring the time dependency into the operators. Let \(A_S\) be a Schr\"{o}dinger operator -- may be time independent or dependent,-- the corresponding Hisenberg operator \(A_H\) is defined as 
+\begin{equation*}
+    \func{A_H}{t} = \func{U^{\dagger}}{t,t_0} A_S \func{U}{t,t_0}
+\end{equation*}
+then note that 
+\begin{equation*}
+    \bra{\func{\psi_S}{t}} A_S \ket{\func{\psi_S}{t}} = \bra{\func{\psi_S}{t_0}} \func{U^{\dagger}}{t,t_0} A_S \func{U}{t,t_0}\ket{\func{\psi_S}{t_0}} = \bra{\psi_H} \func{A_H}{t} \ket{\psi_H} 
+\end{equation*}
+where \(\ket{\psi_H} = \ket{\func{\psi}{t_0}}\).
+
+\begin{proposition}
+    If \(C_S = A_S + B_S\), then \(\func{C_H}{t} = \func{A_H}{t} + \func{B_H}{t}\). And if \(C_S = A_S B_S\), then \(\func{C_H}{t} = \func{A_H}{t} \func{B_H}{t}\).
+\end{proposition}
+
+\begin{proposition}[The Hisenberg equation of motion]
+    Let \(A\) be an operator. 
+    \begin{equation*}
+        i \hbar \dfrac{\diffOperator }{\diffOperator t} \func{A_H}{t} = \commutator{\func{A_H}{t}}{\func{H_H}{t}} + i \hbar \bracket{\dfrac{\partial}{\partial t} A_S }_H
+    \end{equation*}
+    the last term is the Hisenberg equivalent to the time derivative of \(A_S\).
+\end{proposition}

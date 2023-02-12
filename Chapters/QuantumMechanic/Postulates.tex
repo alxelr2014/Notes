@@ -1,0 +1,81 @@
+\chapter{The Postulates of Quantum Mechanic}
+\section{Statement of the postulate}
+\begin{description}
+    \item[First Postulate:] At a fixed time \(t_0\), the state of an isolated physical system is defined by specifiying a ket \(\ket{\func{\psi}{t_0}}\) belonging to the state space \(\scrE\).
+        \begin{remark}
+            Two proportional states vector represent the same physical state.
+        \end{remark}
+
+    \item[Second Postulate:] Every measurable physical quantity \(\calA\) is described by an operator acting on \(\scrE\). This operator is an observable.
+    \item[Third Postulate:] The only possible result of the measurement of a physical quantity \(\calA\) is one of the eigenvalues of the corresponding observable \(A\).
+    \item[Fourth Postulate:] When the physical quantity \(\calA\) is measured on a system in the normalized state \(\ket{\psi}\), the probability of obtaining the eigenvalue \(a_n\) of the corresponding observable \(A\) is
+        \begin{equation*}
+            \prob{a_n} = \sum_{i = 1}^{g_n} \abs{\braket{u^i_n}{\psi}}^2
+        \end{equation*}
+        where \(\ket{u^i_n}\) is a basis for the eigenspace corresponding to \(a_n\) and \(g_n\) id the degree of degeneracy. Let \(P_n = \sum_{i = 1}^{g_n} \ket{u_n^i} \bra{u_n^i}\) gives
+        \begin{equation*}
+            \prob{a_n} = \sum_{i = 1}^{g_n} \braket{\psi}{u^i_n} \braket{u_n^i}{\psi} = \bra{\psi}P_n \ket{\psi} = \norm{P_n \ket{\psi}}^2
+        \end{equation*}
+        Since \(P_n\) is independent of the chosen basis \(\ket{u^i_n}\), then \(\prob{a_n}\) is independent of the basis too.
+
+        For a continuous spectrum,
+        \begin{equation*}
+            \diffOperator \prob{a_n} = \norm{P_{\alpha} \ket{\psi}}^2 \diffOperator \alpha
+        \end{equation*}
+        we can do some more generalization by considering mixed spectrum.
+    \item [Fifth Postulate: ] The state immediately adter the measurement is the normalized projection
+          \begin{equation*}
+              \frac{P_n \ket{\psi}}{\sqrt{\bra{\psi} P_n \ket{\psi}}}
+          \end{equation*}
+          of \(\psi\) onto the eigenspace of \(a_n\).
+    \item [Sixth Postulate:] The time evolution of a state vector \(\ket{\func{\psi}{t}}\) is governed by the Schr\"{o}dinger's equation
+          \begin{equation*}
+              i\hbar \dfrac{\diffOperator}{\diffOperator t} \ket{\func{\psi}{t}} = \func{H}{t} \func{\psi}{t}
+          \end{equation*}
+          where \(\func{H}{t}\) is an the \textbf{Hamiltonian} observable associated with total energy of the system.
+\end{description}
+\section{Quatization Rules}
+construct observable \(A\) for physical quantity \(\calA\). If \(\calA = \func{\calA}{\vectbf{r},p,t}\), then \(A = \func{A}{\vectbf{r},P,t}\) is suitably symmetrized where \(R = (X,Y,Z)\) and \(P = (P_x, P_y, P_z)\). For example,
+\begin{equation*}
+    r\cdot p  \iff \frac{1}{2}\bracket{\vectbf{r} \cdot P + P \cdot R}
+\end{equation*}
+\section{Physical interpretation}
+The state chanes deterministically between two measurements. Conservation of the probability
+\begin{align*}
+    \frac{\diffOperator }{\diffOperator t} \braket{\func{\psi}{t}}{\func{\psi}{t}} & =  \braket{\frac{\diffOperator }{\diffOperator t} \func{\psi}{t}}{\func{\psi}{t}} +  \braket{\func{\psi}{t}}{\frac{\diffOperator }{\diffOperator t} \func{\psi}{t}} \\
+                                                                                   & = \braket{-\frac{i}{\hbar} \func{H}{t} \func{\psi}{t}}{\func{\psi}{t}} + \braket{\func{\psi}{t}}{-\frac{i}{\hbar} \func{H}{t} \func{\psi}{t}}                       \\
+                                                                                   & = \frac{i}{\hbar} \bra{\func{\psi}{t}} \func{H}{t} \ket{\func{\psi}{t}} - \frac{i}{\hbar} \bra{\func{\psi}{t}} \func{H}{t} \ket{\func{\psi}{t}}                     \\
+                                                                                   & = 0
+\end{align*}
+\subsection{Local conservation of probability}
+In a system of one spinless particle \(\func{\rho}{\vectbf{r},t} = \abs{\braket{\func{\psi}{t}}{\func{\psi}{t}}}^2\) is the probability density. Therefore, \(\diffOperator \prob{\vectbf{r},t} = \func{\rho}{\vectbf{r},t}\diffOperator r\).
+
+In electromagnetism, the change in the charge of the volume \(V\), \(\diffOperator Q\) is equal to \(-I \diffOperator t\), the intensity of the current traversing \(S\). If \(\func{\rho}{\vectbf{r},t}\) is the charge distribution.
+\begin{equation*}
+    \dfrac{\partial}{\partial t} \func{\rho}{\vectbf{r},t} + \divergence \func{J}{\vectbf{r},t} = 0
+\end{equation*}
+where \(\func{J}{\vectbf{r},t}\) is the vector current density. Suppose \(H = \frac{P^2}{2m} + \func{V}{\vectbf{r},t}\), where \(\func{V}{\vectbf{r},t}\) is a scalar potential.
+\begin{align*}
+             & -\frac{\hbar^2}{2m} \Delta \func{\Psi}{\vectbf{r},t} + \func{V}{\vectbf{r},t} \func{\Psi}{\vectbf{r},t} = i \hbar \frac{\partial }{\partial t} \func{\Psi}{\vectbf{r},t}                                   \\
+    \implies & -\frac{\hbar^2}{2m} \Delta \func{\overline{\Psi}}{\vectbf{r},t} + \func{V}{\vectbf{r},t} \func{\overline{\Psi}}{\vectbf{r},t} = -i \hbar \frac{\partial }{\partial t} \func{\overline{\Psi}}{\vectbf{r},t} \\
+\end{align*}
+multiplying the equations by \(\overline{\Psi}\) and \(-\Psi\) respectively, and then add them together
+\begin{align*}
+     & -\frac{\hbar^2}{2m} (\overline{\Psi}\Delta \Psi - \Psi \Delta \overline{\Psi}) + \func{V}{\vectbf{r},t} (\Psi \overline{\Psi} - \overline{\Psi} \Psi) = i\hbar \bracket{\overline{\Psi} \frac{\partial }{\partial t} \Psi + \Psi \frac{\partial }{\partial t} \overline{\Psi}} \\
+     & \implies i \hbar \frac{\partial }{\partial t} \Psi^{\dagger } \Psi = -\frac{\hbar^2}{2m} (\overline{\Psi}\Delta \Psi - \Psi \Delta \overline{\Psi}) + \func{V}{\vectbf{r},t} (\Psi \overline{\Psi} - \overline{\Psi} \Psi)                                                     \\
+     & \implies \frac{\partial }{\partial t} \func{\rho}{\vectbf{r},t} = i \frac{\hbar}{2m} (\overline{\Psi}\Delta \Psi - \Psi \Delta \overline{\Psi})
+\end{align*}
+Let \(J = \frac{-i\hbar}{2m} (\overline{\Psi} \nabla \Psi - \Psi \nabla \overline{\Psi} )\), then
+\begin{equation*}
+    \divergence J = \frac{-i\hbar}{2m} (\nabla \overline{\Psi} \cdot  \nabla \Psi + \overline{\Psi}  \nabla^2 \Psi - \nabla \Psi \cdot \nabla \overline{\Psi} - \Psi \nabla^2 \overline{\Psi}) = \frac{-i\hbar}{2m} (\overline{\Psi}  \nabla^2 \Psi  - \Psi \nabla^2 \overline{\Psi})
+\end{equation*}
+which implies
+\begin{equation*}
+    \implies \frac{\partial }{\partial t} \func{\rho}{\vectbf{r},t} + \divergence J = 0
+\end{equation*}
+and that local probability is conserved.
+\subsection{Time evolution of an operator}
+\begin{equation*}
+    \frac{\diffOperator }{\diffOperator t}\angleBracket{\func{A}{t}}= \frac{-i}{\hbar} \angleBracket{\commutator{\func{A}{t}}{\func{H}{t}}} + \angleBracket{\dfrac{\diffOperator }{\diffOperator t} \func{A}{t}}
+\end{equation*}
+-- Ehrenfest's theorem

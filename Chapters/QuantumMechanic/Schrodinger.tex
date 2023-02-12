@@ -1,0 +1,229 @@
+\chapter{Schr\"{o}dinger's Equation and Wavefunction}
+\section{Introduction}
+In classical mechanic, the state of a wave is represented by a function \(\func{\Psi}{\vectbf{r},t}\) which satisfies
+\begin{equation*}
+    \Delta \func{\Psi}{\vectbf{r},t} = \frac{1}{v^2} \dfrac{\partial^2}{\partial t^2} \func{\Psi}{\vectbf{r},t}
+\end{equation*}
+for some constant \(v\) wtih dimension of speed. Note that, due to that fact that both sides are second derivative, the equation does not have any imaginary parts for the plane waves \(\func{\Psi}{\vectbf{r},t} = e^{- i(\omega t - \vectbf{k} \cdot \vectbf{r})}\) where \(\omega= 2\pi \nu\) is the angular frequency and \(\vectbf{k}\) is the wave vector such that \(\abs{\vectbf{k}} = \frac{2\pi}{\lambda}\) with \(\lambda\) denoting wave length.
+
+Einstein and Plank postulated that for a photon
+\begin{align}\label{eq:duality}
+    E & = h \nu = \hbar \omega & \vectbf{p} & = \hbar \vectbf{k}
+\end{align}
+To describe a wave we need its frequency and wavelength and to describe a particle we need its momentum energy. Therefore, these equations \ref{eq:duality} imply the dual nature of light as a wave and a particle. When light has no interaction it propagates as a wave and when it interacts its particle nature appears. De Broglie stated that equations \ref{eq:duality} holds for both light and matter. That is, a moving particle behaves like a wave -- a stationary particle does not have a wave nature. Since moving particles act like a wave, then there must be a wave function for that particle, Schr\"{o}dinger postulated.
+
+Thus, the states in quantum mechanic are denoted by a wavefunction \(\func{\Psi}{\vectbf{r},t}\). The wavefunction \(\Psi\) must satisfy the Schr\"{o}dinger's equation.
+\begin{equation*}
+    -\dfrac{\hbar^2}{2m} \Delta \func{\Psi}{\vectbf{r},t} + \func{V}{\vectbf{r},t} \func{\Psi}{\vectbf{r},t} = -i\hbar \dfrac{\partial}{\partial t} \func{\Psi}{\vectbf{r},t}
+\end{equation*}
+Schr\"{o}dinger realized that is necessary to only consider the first time derivative, so that the Broglie's equations hold. However, this means that the wavefunction has some imaginary part. Moreover, we impose the following regularity conditions on \(\Psi\).
+\begin{enumerate}
+    \item \(\func{\Psi}{\vectbf{r},t} \in \Complex\).
+    \item \(\Psi\) is continuous and single-valued.
+    \item The partials \(\frac{\partial \Psi}{\partial x},\frac{\partial \Psi}{\partial y},\frac{\partial \Psi}{\partial z}\) are all continuous and single-valued.
+    \item \(\Psi\) is square integrable, i.e.
+          \begin{equation*}
+              \int \abs{\Psi}^2 \diffOperator \vectbf{r}< + \infty
+          \end{equation*}
+          and thus, \(\lim_{x \to \pm \infty} \Psi = \lim_{y \to \pm \infty} \Psi = \lim_{z \to \pm \infty} \Psi = 0\).
+\end{enumerate}
+
+The operator \(H = -\frac{\hbar^2}{2m} \Delta + \func{V}{\vectbf{r},t}\) is called the \textbf{Hamiltonian operator} of the system, \(E = i\hbar \frac{\partial}{\partial t}\) is the \textbf{energy operator}, and \(P = -i\hbar \nabla\) is the \textbf{momentum operator}. The Schr\"{o}dinger equation can be written as
+\begin{equation*}
+    H \func{\Psi}{\vectbf{r},t} = \bracket{ \frac{P^2}{2m}  + \func{V}{\vectbf{r},t}} \func{\Psi}{\vectbf{r},t} = E \func{\Psi}{\vectbf{r},t}
+\end{equation*}
+
+Since there is no complex wave in nature, Born's stated that the \(\abs{\func{\Psi}{\vectbf{r},t}}^2\) represents the probability that the particle is at \(\vectbf{r}\) at time \(t\). As a result, we may assume that that \(\func{\Psi}{\vectbf{r},t}\) is normalized, that is
+\begin{equation*}
+    \int \abs{\func{\Psi}{\vectbf{r},t}}^2 \diffOperator \vectbf{r} = 1
+\end{equation*}
+
+The expected value of a quantity \(\func{f}{\vectbf{r},\vectbf{p},t}\) is calculated as
+\begin{equation*}
+    \angleBracket{\func{f}{\vectbf{r},\vectbf{p},t}} = \int \overline{\func{\Psi}{\vectbf{r},t}} \func{f}{\vectbf{r},-i\hbar \nabla,t} \func{\Psi}{\vectbf{r},t} \diffOperator \vectbf{r}
+\end{equation*}
+
+\begin{remark}
+    The Schr\"{o}dinger equation does is not derived by some physical principle, but rather itself is taken as a postulate. Its correctness is not deduced from any experiment, however, it correctly predicts results of those experiments. A plausiblity argument can be given for the Schr\"{o}dingers equation, that uses four assumptions about properties of quantum wave function.
+    \begin{enumerate}
+        \item It must be consistent with De Broglie equations.
+        \item It must be consistent with the equation
+              \begin{equation*}
+                  E = \frac{p^2}{2m} + V
+              \end{equation*}
+        \item The equation describing \(\Psi\), must be linear in \(\Psi\) to allow for wave interferences.
+        \item The potential energy of the system only depends on \(\vectbf{r}\) and \(t\).
+    \end{enumerate}
+\end{remark}
+
+\subsection*{Hisenberg's uncertainty principle}
+In classical mechanic, the Fourier transform of a wave \(\func{f}{t}\) is \(\func{F}{\omega}\) and the bandwidths satisfy \(\Delta t \Delta \omega \geq \frac{1}{2}\). Similarly, for a spatial wave, \(t\) is replace with \(\vectbf{r}\) and \(\omega\) with \(\vectbf{k}\). The \((t,\omega)\) and \((\vectbf{r}, \vectbf{k})\) are called conjugate pairs. From the De Broglie's equations we know that \(\vectbf{p} \propto \vectbf{k}\) and hence \((\vectbf{r}, \vectbf{p})\) are conjugate pairs, as well.
+\begin{align*}
+    \func{\overline{\Psi}}{\vectbf{p},t} & = \bracket{\dfrac{1}{2\pi \hbar}}^{\frac{3}{2}} \int \func{\Psi}{\vectbf{r},t} e^{-i \vectbf{p} \cdot \vectbf{r}/\hbar}\diffOperator \vectbf{r}           \\
+    \func{\Psi}{\vectbf{r},t}            & = \bracket{\dfrac{1}{2\pi \hbar}}^{\frac{3}{2}} \int \func{\overline{\Psi}}{\vectbf{p},t} e^{i \vectbf{p} \cdot \vectbf{r}/\hbar}\diffOperator \vectbf{p}
+\end{align*}
+Then, we can arrive at the Hisenberg's uncertainty principle as follows:
+\begin{align*}
+    \Delta \vectbf{r} \Delta \vectbf{p} & = \hbar\Delta \vectbf{r} \Delta  \vectbf{k} \geq \dfrac{\hbar}{2} \\
+    \Delta t \Delta E                   & = \hbar \Delta t \Delta  \nu \geq \dfrac{\hbar}{2}
+\end{align*}
+The Bohr's complementary principle states that an experiment that forces the quantum state to reveal its wave nature strongly suppresses its particle nature and vice verse. Therefore, the results of a quantum experiment depends on the observer.
+
+\section{Time independent Schr\"{o}dinger equation}
+Most systems in quantum mechanic have time independent potential \(\func{V}{\vectbf{r}, t} = \func{V}{\vectbf{r}}\). Moreover, we then assume that \(\func{\Psi}{\vectbf{r},t} = \func{\psi}{\vectbf{r}} \func{\phi}{t}\) is separable. Then we have,
+\begin{align*}
+     & -\frac{\hbar^2}{2m} \Delta \func{\psi}{\vectbf{r}} \func{\phi}{t} + \func{V}{\vectbf{r}} \func{\psi}{\vectbf{r}} \func{\phi}{t}  = i \hbar \dfrac{\partial}{\partial t} \func{\psi}{\vectbf{r}} \func{\phi}{t}           \\
+     & -\frac{\hbar^2}{2m} \func{\phi}{t}\Delta \func{\psi}{\vectbf{r}} + \func{V}{\vectbf{r}} \func{\psi}{\vectbf{r}} \func{\phi}{t}  = i \hbar \func{\psi}{\vectbf{r}} \dfrac{\diffOperator}{\diffOperator t}  \func{\phi}{t}
+\end{align*}
+dividing both sides by \(\func{\psi}{\vectbf{r}} \func{\phi}{t}\) gives
+\begin{equation*}
+    -\frac{\hbar^2}{2m} \dfrac{1}{\func{\psi}{\vectbf{r}}}\Delta \func{\psi}{\vectbf{r}} + \func{V}{\vectbf{r}}  = i \hbar \frac{1}{\func{\phi}{t}} \dfrac{\diffOperator}{\diffOperator t}  \func{\phi}{t}
+\end{equation*}
+The left-hand side is a function of \(\vectbf{r}\) and the right-hand side is a function of \(t\) therefore, they must be equal to a constant \(G\).
+\begin{equation*}
+    i \hbar \frac{1}{\func{\phi}{t}} \dfrac{\diffOperator}{\diffOperator t}  \func{\phi}{t} = G \implies  \dfrac{\diffOperator}{\diffOperator t}  \func{\phi}{t} = -i \frac{G}{\hbar} \func{\phi}{t} \implies \func{\phi}{t} = A \func{\exp}{-i\frac{G}{\hbar} t}
+\end{equation*}
+for some constant \(A\) -- We may assume \(A = 1\). We know that the angular frequency is \(\omega = \frac{G}{\hbar}\) and \(E = \hbar \omega\) thus, \(G = E\). Then,
+\begin{equation*}
+    -\frac{\hbar^2}{2m} \Delta \func{\psi}{\vectbf{r}} + \func{V}{\vectbf{r}}\func{\psi}{\vectbf{r}} = E\func{\psi}{\vectbf{r}}
+\end{equation*}
+If some \(\psi\) satisfies the above's equation for some given potential, then \(\func{\psi}{\vectbf{r}} \func{\exp}{- i \frac{E}{\hbar} t}\) is a solution of the system.
+\subsection{Particle in an infinite potential well}
+Suppose the following potential is given
+\begin{equation*}
+    \func{V}{x} = \begin{cases}
+        0      & 0 \leq x \leq L  \\
+        \infty & \text{otherwise}
+    \end{cases}
+\end{equation*}
+Intuitively, the particle is bounded in \(\clcl{0}{L}\) and it is imposible to find it outside of this box. Thus, we may only consider the solutions on the equation on \(\clcl{0}{L}\).
+\begin{equation*}
+    -\frac{\hbar^2}{2m} \dfrac{\diffOperator^2}{\diffOperator x^2} \func{\psi}{x} = E \func{\psi}{x} \implies \func{\psi}{x} = A \func{\cos}{\dfrac{\sqrt{2Em}}{\hbar} x + \theta}
+\end{equation*}
+with boundary conditions \(\func{\psi}{0} = \func{\psi}{L} = 0\).
+\begin{align*}
+     & \func{\psi}{0} = A \func{\cos}{\theta} = 0 \implies \theta = -\frac{\pi}{2} \implies \func{\psi}{x} = A \func{\sin}{\dfrac{\sqrt{2Em}}{\hbar} x} \\
+     & \func{\psi}{L} = A \func{\sin}{\dfrac{\sqrt{2Em}}{\hbar} L} = 0 \implies \dfrac{\sqrt{2Em}}{\hbar}L = \pi n
+\end{align*}
+This implies that energy is quantized as
+\begin{equation*}
+    E_n = \dfrac{\pi^2 \hbar^2 n^2}{2L^2m}
+\end{equation*}
+Then,
+\begin{equation*}
+    \func{\psi_n}{x} = A_n \func{\sin}{\dfrac{\sqrt{2E_n m}}{\hbar} x} = A_n \func{\sin}{\dfrac{n \pi}{L} x}
+\end{equation*}
+and for \(A_n\)
+\begin{align*}
+    \int_{0}^L \abs{\func{\psi_n}{x}}^2 \diffOperator x & =  A_n^2 \int_{0}^L \func{\sin^2}{\dfrac{n \pi}{L} x}\diffOperator x                         \\
+                                                        & = A_n^2 \evaluate{\dfrac{x}{2} - L\dfrac{\func{\sin}{2 \frac{n \pi}{L} x }}{4 \pi n} }_{0}^L \\
+                                                        & = A_n^2 \frac{L}{2} = 1                                                                      \\
+    \implies                                            & A_n = \sqrt{\frac{2}{L}}
+\end{align*}
+\subsection{Particle in an finite potential well}
+The potential is given by
+\begin{equation*}
+    \func{V}{x} = \begin{cases}
+        V & x < 0 \lor x > L \\
+        0 & 0 \leq x \leq L
+    \end{cases}
+\end{equation*}
+and the wavefunction satisfies.
+\begin{equation*}
+    -\frac{\hbar^2}{2m} \dfrac{\diffOperator^2}{\diffOperator x^2} \func{\psi}{x} + \func{V}{x}\func{\psi}{x}= E \func{\psi}{x}
+\end{equation*}
+If \(E > V\), then the wavefunctions are not square-integrable and as a result the spectrum is continuous. Suppose \(E < V\), in the region I -- \(x < 0\),-- the wavefunction is given by 
+\begin{equation*}
+    \frac{\hbar^2}{2m} \dfrac{\diffOperator^2}{\diffOperator x^2} \func{\psi_I}{x} = (V - E)\func{\psi_I}{x} \implies \func{\psi_I}{x} = A e^{\alpha x} + B e^{- \alpha x}
+\end{equation*}
+where \(\alpha=  \sqrt{\frac{2m(V - E)}{\hbar^2}}\). As \(x \to -\infty\), we must have \(\func{\psi_I}{x} \to 0\) hence \(B = 0\). Similarly, for region III -- \(x > L\), -- the wavefunction is given by 
+\begin{equation*}
+    \frac{\hbar^2}{2m} \dfrac{\diffOperator^2}{\diffOperator x^2} \func{\psi_{III}}{x} = (V - E)\func{\psi_{III}}{x} \implies \func{\psi_{III}}{x} = C e^{\alpha x} + D e^{- \alpha x}
+\end{equation*}
+As \(x \to \infty\), we must have \(\func{\psi_{III}}{x} \to 0\) hence \(C = 0\). Lastly, for region II -- \(0 \leq x \leq L\),-- the wavefunction is given by 
+\begin{equation*}
+    \frac{\hbar^2}{2m} \dfrac{\diffOperator^2}{\diffOperator x^2} \func{\psi_{II}}{x} = -E\func{\psi_{II}}{x} \implies \func{\psi_{II}}{x} = E e^{i\beta x} + F e^{- i\beta x}
+\end{equation*}
+where \(\beta = \sqrt{\frac{2mE}{\hbar^2}}\). Note that \(\psi\) and its derivative are both continuous. Setting up those equation allows us to eliminate some of these constants. 
+\begin{align*}
+    \func{\psi_{I}}{0} &= \func{\psi_{II}}{0} \implies A = E + F\\
+    \frac{\diffOperator}{\diffOperator x}\func{\psi_{I}}{0} &= \frac{\diffOperator}{\diffOperator x}\func{\psi_{II}}{0} \implies A = \frac{i\beta}{\alpha} \bracket{E - F}\\
+    \implies& E = A \bracket{\frac{1}{2} - i \frac{\alpha}{2\beta} } \ \ F = A \bracket{\frac{1}{2} + i \frac{\alpha}{2\beta} }\\
+    \implies& \func{\psi_{II}}{x} = A \func{\cos}{\beta x} + A \frac{\alpha}{\beta} \func{\sin}{\beta x}\\
+    \func{\psi_{II}}{L} &= \func{\psi_{III}}{L} \implies D = A e^{\alpha L}\func{\cos}{\beta L} + A \frac{\alpha}{\beta} e^{\alpha L}\func{\sin}{\beta L}\\
+    \frac{\diffOperator}{\diffOperator x}\func{\psi_{II}}{L} &= \frac{\diffOperator}{\diffOperator x}\func{\psi_{III}}{L} \implies  D = - A e^{\alpha L}\func{\cos}{\beta L} + A \frac{\beta}{\alpha} e^{\alpha L}\func{\sin}{\beta L}\\
+    \implies & \tan \beta L = \frac{2\alpha \beta}{\beta^2 - \alpha^2}
+\end{align*}
+The last equation allows to get the values of \(E\). Although, there are no analytic closed form for the values of \(E\), we can see that they are discrete. 
+\subsection{Harmonic oscillator}
+The potential is given by \(\func{V}{x} = \frac{1}{2}Cx^2\) where \(C = m \omega^2\), \(\omega\) being the angular frequency.
+\begin{equation*}
+    \bracket{ \dfrac{\diffOperator^2}{\diffOperator x^2}  + \frac{1}{2}m\omega^2 x^2 - E} \func{\psi}{x} = -\frac{\hbar^2}{2m} \bracket{ \dfrac{\diffOperator^2}{\diffOperator x^2}  - \frac{m^2 \omega^2}{\hbar^2} x^2 + \dfrac{2mE}{\hbar^2}} \func{\psi}{x} = 0
+\end{equation*}
+Let \(\alpha = \frac{m \omega}{\hbar}\) and \(\beta = \frac{2mE}{\hbar^2}\), then
+\begin{equation*}
+    \frac{\diffOperator^2}{\diffOperator x^2} \func{\psi}{x} + \bracket{\beta - \alpha^2 x^2}\func{\psi}{x} = 0
+\end{equation*}
+Consider the change of variable \(u = \sqrt{\alpha}x\), then
+\begin{equation*}
+    \frac{\diffOperator^2}{\diffOperator x^2} =\bracket{\dfrac{\diffOperator}{\diffOperator u} \dfrac{\diffOperator u}{\diffOperator x}} \bracket{\dfrac{\diffOperator}{\diffOperator u} \dfrac{\diffOperator u}{\diffOperator x}} = \alpha \dfrac{\diffOperator^2}{\diffOperator u^2}
+\end{equation*}
+which gives
+\begin{equation*}
+    \frac{\diffOperator^2}{\diffOperator u^2} \func{\psi}{u} + \bracket{\frac{\beta}{\alpha} - u^2}\func{\psi}{u} = 0
+\end{equation*}
+Note that for sufficiently large \(u\) we can approximate the behaviour of \(\func{\psi}{u}\) as
+\begin{equation*}
+    \frac{\diffOperator^2}{\diffOperator u^2} \func{\psi}{u} -  u^2\func{\psi}{u} = 0 \implies \func{\psi}{u} \asymp  e^{-u^2/2}
+\end{equation*}
+Let \(\func{H}{u}\) be the lower degree terms in \(\func{\psi}{u}\), i.e. \(\func{\psi}{u} = \func{H}{u} e^{-u^2/2} \) and let \(\gamma = \frac{\beta}{\alpha} = \frac{E}{\hbar \omega}\). By substituting \(\func{\psi}{u} = \func{H}{u}e^{-u^2/2}\) we get
+\begin{align*}
+     & \frac{\diffOperator^2}{\diffOperator u^2}\func{H}{u} e^{-\frac{u^2}{2}} +  \bracket{\gamma - u^2} \func{H}{u} e^{-\frac{u^2}{2}}                                                                                                  \\
+     & = \bracket{\frac{\diffOperator^2}{\diffOperator u^2}\func{H}{u} - 2u \frac{\diffOperator}{\diffOperator u}\func{H}{u} + \bracket{u^2 - 1} \func{H}{u}}  e^{-\frac{u^2}{2}} + \bracket{\gamma - u^2}\func{H}{u} e^{-\frac{u^2}{2}} \\
+     & = \bracket{\frac{\diffOperator^2}{\diffOperator u^2}\func{H}{u} - 2u \frac{\diffOperator}{\diffOperator u}\func{H}{u} + \bracket{\gamma - 1}\func{H}{u} } e^{-\frac{u^2}{2}} = 0                                                  \\
+     & \implies  \frac{\diffOperator^2}{\diffOperator u^2}\func{H}{u} - 2u \frac{\diffOperator}{\diffOperator u}\func{H}{u} + \bracket{\gamma - 1}\func{H}{u} = 0
+\end{align*}
+We employ the power series technique to find \(\func{H}{u}\). Substitute \(\func{H}{u} = \sum_{n = 0}^{\infty} h_n u^n\)
+\begin{align*}
+     & \frac{\diffOperator^2}{\diffOperator u^2}\func{H}{u} - 2u \frac{\diffOperator}{\diffOperator u}\func{H}{u} + \bracket{\gamma - 1}\func{H}{u} \\
+     & = \sum_{n = 0}^{\infty} n \bracket{n-1} h_n u^{n-2} - 2u n h_n u^{n-1} + \bracket{\gamma - 1} h_n u^n                                        \\
+     & = \sum_{n = 0}^{\infty} \squareBracket[[\Bigg]]{\bracket{n+2}\bracket{n+1} h_{n+2} - 2 n h_{n} + \bracket{\gamma - 1} h_n}u^n                \\
+     & = \sum_{n = 0}^{\infty} \squareBracket[[\Bigg]]{\bracket{n+2}\bracket{n+1} h_{n+2} +  \bracket{\gamma -2 n- 1} h_n}u^n = 0                   \\
+     & \implies h_{n+2} = \dfrac{2n + 1 - \gamma}{\bracket{n+2}\bracket{n+1}} h_n                                                                   \\
+     & \implies \begin{cases}
+                    h_{2n}     & = \dfrac{\prod_{k=1}^n (4k - 3 -\gamma)}{(2n)!} h_0      \\
+                    h_{2n + 1} & = \dfrac{\prod_{k=1}^n (4k - 1  -\gamma)}{(2n + 1)!} h_1 \\
+                \end{cases}
+\end{align*}
+for \(n \geq 1\) and arbitrary \(h_0,h_1\). Let \(\func{H_0}{u}\) and \(\func{H_1}{u}\) be the even and odd component of \(\func{H}{u}\) as such
+\begin{equation*}
+    \func{H}{u} = h_0 \bracket{1 + \frac{h_2}{h_0} u^2 + \dots } + h_1u \bracket{1 + \frac{h_3}{h_1} u^2 + \dots } = h_0 \func{H_0}{u} + h_1u \func{H_1}{u}
+\end{equation*}
+If \(\gamma \neq 4k - 3\) for some \(k \geq 1\), then the coefficients of \(\func{H_0}{u}\) grow the same as \(e^{-u^2/2}\). Similary, if \(\gamma \neq 4k - 1\) for some \(k \geq 1\), then the coefficients of \(\func{H_1}{u}\) grow the same as \(e^{-u^2/2}\). However, both of these contradict the fact that \(\func{H}{u}\) is of lower degree than \(e^{-u^2/2}\). Therefore, we must either have \(\gamma = 4k - 3\) and \(h_1 = 0\) or \(\gamma = 4k - 1\) and \(h_0 = 0\). As a result, \(\gamma = 2n + 1\) for \(n \geq 0\) and thus \(E = \bracket{n + \frac{1}{2}} \hbar \omega\). Moreover, we get the following table for the possible Hermite polynomials
+\begin{center}
+    \begin{tabular}{c|c|c}
+        \(n\) & \(\func{H_0}{u}\) & \(u\func{H_1}{u} \)\\ \hline 
+        0 & \(1\) & \\ \hline 
+        1 &  & \(u\) \\ \hline 
+        2 & \(1 - u^2\) & \\\hline 
+        3 &  & \(3u - 2 u^3\) \\\hline
+        4 & \(3 - 12 u^2 + 4u^4\) &  \\\hline 
+        5 & & \(15u - 20u^3 + 4u^5\) \\
+    \end{tabular}
+\end{center}
+we then get the following wavefunctions
+\begin{equation*}
+    \func{\psi_n}{x} = A_n \func{H_n}{\sqrt{\frac{m\omega}{\hbar} x}} \func{\exp}{- \frac{m\omega x^2}{2\hbar}} = \dfrac{1}{\sqrt{2^n n!}} \bracket{\dfrac{m\omega}{\pi \hbar}}^{1/4} \func{H_n}{\sqrt{\frac{m\omega}{\hbar} x}} \func{\exp}{- \frac{m\omega x^2}{2\hbar}}
+\end{equation*}
+where \(\func{H_n}{u}\) is the physicist's Hermite polynomials.
+\begin{center}
+    \begin{tabular}{c|l}
+        \(n\) & \(\func{H_n}{u}\) \\ \hline 
+        0 & \(1\)  \\ \hline 
+        1 &  \(u\) \\ \hline 
+        2 & \(4u^2 - 2\)  \\\hline 
+        3 &   \(8u^3 - 12 u\) \\\hline
+        4 & \(16u^4 - 48u^2 + 12 3\)  \\\hline 
+        5 &  \(32u^5 - 160u^3 + 120u\) \\
+    \end{tabular}
+\end{center}

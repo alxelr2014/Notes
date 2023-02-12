@@ -1,0 +1,32 @@
+\chapter{Automaton}
+A PTM \(\delta: Q \times \Gamma \times Q \times \Gamma \times \set{L,S,R} \to \clcl{0}{1}\). Local probability condition
+\begin{equation*}
+    \sum_{(q_d,a_d,d) \in Q \times \Gamma \times \set{L,S,R}} \func{\delta}{q_s,a_s,q_d,a_d,d} = 1
+\end{equation*}
+Global probability condition: Suppose \(c_1, \dots, c_k\) are distinct possible configuration with probabilities \(p_1, \dots, p_k\) respectively. Then, 
+\begin{equation*}
+    \sum_{i = 1}^k p_i = 1
+\end{equation*}
+\begin{proposition}
+    Local probability condition gives global probability condition.
+\end{proposition}
+The Transition matrix is \(M = \begin{bmatrix}
+    p_{ij}
+\end{bmatrix}\) where \(p_{ij}\) is the probability that \(c_i\) is the successor of \(c_j\).
+
+A QTM \(\delta: Q \times \Gamma \times Q \times \Gamma \times \set{L,S,R} \to \Complex_{\clcl{0}{1}} = \set<z \in \Complex>{\abs{z} \leq 1}\).Local probability condition
+\begin{equation*}
+    \sum_{(q_d,a_d,d) \in Q \times \Gamma \times \set{L,S,R}} \abs{\func{\delta}{q_s,a_s,q_d,a_d,d}}^2 = 1
+\end{equation*}
+Global probability condition: Suppose \(c_1, \dots, c_k\) are distinct possible configuration with total amplitudes \(\beta_1, \dots, \beta_k\) respectively. Then, 
+\begin{equation*}
+    \sum_{i = 1}^k \abs{\beta_i}^2 = 1
+\end{equation*}
+The Transition matrix is \(M = \begin{bmatrix}
+    \beta_{ij}
+\end{bmatrix}\) where \(\beta_{ij}\) is the amplitude that \(c_i\) is the successor of \(c_j\). Furthermore, \(M\) is unitary
+\begin{equation*}
+    M M^{\dagger} = M^{\dagger} M = I
+\end{equation*}
+
+Difference between PTM and QTM: PTM selects a path but QTM continues all paths as a superposition. We can watch (measure) the computation of PTM without affecting it but not for QTM.

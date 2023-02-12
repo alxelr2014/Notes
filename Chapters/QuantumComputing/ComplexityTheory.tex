@@ -1,0 +1,54 @@
+\chapter{Complexity Theory}
+\section{Models of computation}
+\subsection{Turing machines}
+is defined by the tuple \((Q,\Sigma, \Gamma, \delta, q_{acc}, q_{rej})\) where \(\delta: Q \times  \Gamma \to Q \times \Gamma \times \set{L,R,S}\).
+\subsection{Circuits}
+is defined by gates \(f: \set{0,1}^{k} \to \set{0,1}^l\).
+\section{Analysis of computation problems}
+\begin{definition}[Strong Church-Turing thesis:] 
+    Any model of computation can be simulated  on a probabilistic Turing machine with at most a polynomial increase in the number of elementary operations required.
+\end{definition}
+The language \(L\) is decided by a Turing machine if the machine is able to decide whether the input \(x\) is a member of \(L\)  or not. That is, on any string it halts. For example, if \(L \in \func{TIME}{\func{f}{n}}\), then a Turing machine can decide \(x\) with \(\abs{x} = n\) in time \(\bigO{\func{f}{n}}\). 
+\begin{equation*}
+    P = \set<L>{L \in \func{TIME}{n^k}, \; \text{for some finite} \ k}
+\end{equation*}
+NP are the set of problems not in \(P\) but it can be checked efficiently.
+\begin{equation*}
+    NP = \set<L>{}
+\end{equation*}
+%\exists TM \; \suchThat \; \text{if} \(x \in L\) \text{there exists a witness} \(w\) \; \suchThat \; \(TM\) \text{halts at } \(q_{acc}\) \text{starting at} x. \text{Else for all} w, M \text{halts at } \(q_{rej}\)
+coNP is the complement of NP. NP-complete if solves in time \(t\) allows any other problem in NP to be solved in \(\bigO{\func{p}{t}}\).
+
+A language \(B\) is reducible to \(A\), if there exists a Turing machine \(TM\), running in polynomial time given \(x\) outputs \(\func{R}{x}\) such that \(x \in B\) if and only if \(\func{R}{x} \in A\).
+
+\begin{proposition}
+    If \(L_1\) is reducible to \(L_2\) and \(L_2\) is reducible to \(L_3\), then \(L_1\) is reducible to \(L_3\).
+\end{proposition}
+
+A language \(L\) is complete for a class, if \(L\) is in that class and all other languages in that class are reducible to \(L\).
+\begin{example}
+    Circuit satisfiability is complete for NP. Cook-Levin problem. Given a Boolean circuit with AND, OR, NOT, determine if there is an assignment which output \(1\).
+\end{example}
+
+The focus of quantum computer is NPI problems.
+\subsection{Space}
+PSPACE is the set of all problems that use polynomial nymber of working bits on a Turing machine. \(P \subset NP \subset PSPACE\). If \(P = PSPACE\), then quantum computers are technically worthless. 
+\begin{equation*}
+    L \subset P \subset NP \subset PSPACE \subset EXP
+\end{equation*}
+since \(P \subsetneq EXP\), then at least one the of the inequalities is strict. 
+\subsection{Approximate algorithms and MASNP}
+Random (bound-error probabilistic) BPP and BPQ. done repeatedly gives correct asnwer using Chernoff bound.
+\subsection{Energy}
+\begin{theorem}[Landauer's first principle] Suppose a computer erases a single bit. The amount of energy dissipated into environment is at least \(k_B T \ln 2\), \(k_B\) is the Boltzmann constant and \(T\) is the temperature.
+\end{theorem}
+
+\begin{theorem}[Landauer's second principle] Suppose a computer erases a single bit of information. The entropy of the environment is increased by at least \(k_B \ln 2\)
+\end{theorem}
+\subsubsection{Reversible and conservative computation}
+Fredkin, Toffoli gates.
+Reversible computation is highly sensitive to noise and thus we must use an error-correcting code and then need to delete the redundant information which uses energy by Landauer's principles.
+
+Analog computers comput based on continuous degree of freedom. Therefore, are sensitive to noise and thus we need to reduce the number of states from continuous to discrete and finite.
+
+Kau97,98a,98b, Pap94, Min67, Con72,86.

@@ -1,0 +1,308 @@
+\chapter{Dirac Algebraic Formalism}
+\section{Hilbert vector space}
+Let \(\calL^2 = \func{\calL^2}{\Complex}\) be the set of all the square integrable complex functions \(\func{f}{\vectbf{r},t}\). Let \(\calW\) be the set of all the possible wavefunctions. Clearly, \(\calW \subset \calL^2\).
+\begin{proposition}
+    \(\calL^2\) is Hilbert space and \(\calW\) is vector subspace of \(\calL^2\).
+\end{proposition}
+\begin{definition}
+    Define the inner product \(\angleBracket{\Psi,\Phi}\) for all \(\Psi, \Phi \in \calL^2\) as
+    \begin{equation*}
+        \angleBracket{\Phi,\Psi} = \int \overline{\func{\Phi}{\vectbf{r},t}} \func{\Psi}{\vectbf{r},t} \diffOperator \vectbf{r}
+    \end{equation*}
+    The integral converges if \(\Psi,\Phi \in \calW\) -- prove the convergence and the inner productness.
+
+    If \(\angleBracket{\Psi,\Phi} = 0\), then they are called \textbf{orthogonal}.
+\end{definition}
+
+In a vector space \textbf{operators} map a vector to another vector. An operator \(A\) is \textbf{linear} if for all \(\Psi,\Phi \in \calL^2\) and \(\lambda \in \Complex\)
+\begin{equation*}
+    \func{A}{\Psi + \lambda \Phi} = A \Psi + \lambda A \Phi
+\end{equation*}
+
+\begin{example}
+    The following operators are linear
+    \begin{enumerate}
+        \item Parity operator \(\Pi \func{\Psi}{x,y,z,t} = \func{\Psi}{-x,-y,-z,t}\).
+        \item \(X\) operator \(X \func{\Psi}{x,y,z,t} = x \func{\Psi}{x,y,z,t}\).
+        \item \(D_x\) operator \(D_x \func{\Psi}{x,y,z,t} = \frac{\partial}{\partial x} \func{\Psi}{x,y,z,t}\).
+    \end{enumerate}
+\end{example}
+
+\begin{definition}
+    The \textbf{commutator} of two operators \(A\) and \(B\) is \(\commutator{A}{B} = AB - BA\). Similarly, the \textbf{anti-commutator} of two operators \(A\) and \(B\) is \(\anticommutator{A}{B} = AB + BA\).
+\end{definition}
+
+\begin{example}
+    \(\commutator{X}{D_x} = -1\) and \(\commutator{X}{P} = i\hbar\).
+\end{example}
+
+\begin{definition}
+    For any vector space we may find a \textbf{basis}; A set of linearly independent vectors that span the whole vector space. A basis \(\set{u_i}_{i \in I}\) -- \(u_i = \func{u_i}{\vectbf{r},t}\) -- is an orthonormal basis if
+    \begin{equation*}
+        \angleBracket{u_i,u_j} = \delta_{ij} = \begin{cases}
+            1 & i = j              \\
+            0 & \mathrm{otherwise}
+        \end{cases}
+    \end{equation*}
+    where \(\delta_{ij}\) is the \textit{Kronecker delta}.
+\end{definition}
+
+If \(\set{u_i}_{i \in I}\) is basis for vector space \(V\), then all vectors \(v \in V\) can be represented uniquely as a linear combination of \(\set{u_i}\)
+\begin{equation*}
+    v = \sum_{i \in I} c_i u_i
+\end{equation*}
+Specifically, if \(\set{u_i}\) is basis for \(\calL^2\), then \(\Psi \in \calL^2\) can be represented as \(\Psi \equiv \bracket{c_i}_{i \in I}\).
+If \(\Psi \equiv (c_i)\) and \(\Phi \equiv (d_i)\), then
+\begin{equation*}
+    \angleBracket{\Phi, \Psi} = \sum_{i \in I} c_i \overline{d_i}
+\end{equation*}
+
+The dual space \(V^{\ast}\) is the vector space containing all linear functionals \(\phi: V \to F\). Suppose \(\set{u_i}_{i \in I}\) is basis for a vector space \(V\) over the field \(F\). There exists a unique set of linearly independent vectors \(\set{u_i^{\ast}}_{i \in I} \subset V^{\ast}\) that makes a biorthogonal system with \(\set{u_i}\).
+\begin{equation*}
+    u^{\ast}_i u_j = \delta_{i,j}
+\end{equation*}
+The closure property states
+\begin{equation*}
+    \sum_{i \in I} u_i u_i^{\ast} = I
+\end{equation*}
+since for any \(v = \sum_{i \in I} c_i u_i\)
+\begin{equation*}
+    \operatorFunc{\sum_{i \in I} u_i u_i^{\ast}}{\sum_{i \in I} c_i u_i} = \sum_{i \in I}\sum_{j \in J} c_j u_i  u^{\ast}_i u_j = \sum_{i \in I} c_i u_i
+\end{equation*}
+\begin{remark}
+    The dual set \(\set{u^{\ast}_i}\) does not necessarily span \(V^{\ast}\).
+\end{remark}
+If \(\set{u_i}\) is an orthonormal basis for \(\calL^2\), then
+\begin{align*}
+    \func{\Psi}{\vectbf{r},t} & = \sum_{i \in I} \angleBracket{u_i,\Psi} u_i                                                                                      \\
+                              & =\sum_{i \in I} \int \func{\overline{u_i}}{\vectbf{r}'} \func{\Psi}{\vectbf{r}'} \diffOperator \vectbf{r}' \func{u_i}{\vectbf{r}} \\
+                              & =\int \sum_{i \in I} \func{\overline{u_i}}{\vectbf{r}'} \func{u_i}{\vectbf{r}} \func{\Psi}{\vectbf{r}'} \diffOperator \vectbf{r}' \\
+    \implies                  & \sum_{i \in I} \func{u_i}{\vectbf{r}} \func{\overline{u_i}}{\vectbf{r}'} = \func{\delta}{\vectbf{r}- \vectbf{r}'}
+\end{align*}
+where \(\delta\) is the Dirac's delta function.
+\subsection{Plane waves}
+Let \(\func{v_{\vectbf{p}}}{\vectbf{r}} = \dfrac{1}{\sqrt{(2\pi \hbar)^3}} \func{\exp}{\dfrac{i \vectbf{p}\cdot \vectbf{r}}{ \hbar}} \notin \calL^2\) where \(\vectbf{p} \cdot \vectbf{r} = \sum_{i} p_ir_i\). By Fourier transform
+\begin{align*}
+    \func{\Psi}{\vectbf{r}} = \int \func{\overline{\Psi}}{\vectbf{p}} \func{v_{\vectbf{p}}}{\vectbf{r}} \diffOperator \vectbf{p} \\
+    \func{\overline{\Psi}}{\vectbf{p}} = \angleBracket{v_{\vectbf{p}},\Psi} =  \int \func{\Psi}{\vectbf{r}} \overline{\func{v_{\vectbf{p}}}{\vectbf{r}}}\diffOperator \vectbf{r}
+\end{align*}
+Therefore, \(\overline{\Psi}\) can be viewed as the basis coefficients for \(\Psi\). By Parseval's identity
+\begin{equation*}
+    \angleBracket{\Psi,\Psi} = \int \abs{\func{\Psi}{\vectbf{r}}}^2 \diffOperator \vectbf{r} = \int \abs{\func{\overline{\Psi}}{\vectbf{p}}}^2 \diffOperator \vectbf{p}
+\end{equation*}
+The closure and orthonormalization relationships become
+\begin{equation*}
+    \int \func{v_{\vectbf{p}}}{\vectbf{r}} \overline{\func{v_{\vectbf{p}}}{\vectbf{r}'}} \diffOperator \vectbf{p} = \dfrac{1}{\bracket{2\pi \hbar}^3} \int \func{\exp}{i \frac{\vectbf{p} \cdot (\vectbf{r} - \vectbf{r}')}{h}} \diffOperator \vectbf{p} = \func{\delta}{\vectbf{r} - \vectbf{r}'}
+\end{equation*}
+and
+\begin{equation*}
+    \int \func{v_{\vectbf{p}}}{\vectbf{r}} \func{v_{\vectbf{p}'}}{\vectbf{r}} \diffOperator \vectbf{r} = \func{\delta}{\vectbf{p} - \vectbf{p}'}
+\end{equation*}
+That is, \(\func{v_{\vectbf{p}}}{\vectbf{r}}\) are orthonormal in dirac's sense.
+\subsection{Delta function}
+Let \(\func{\xi_{\vectbf{r}_0}}{\vectbf{r}} = \func{\delta}{\vectbf{r} -\vectbf{r}_0} \notin \calL^2\).
+\begin{align*}
+    \func{\Psi}{\vectbf{r}} = \int \func{\xi_{\vectbf{r}_0}}{\vectbf{r}} \func{\Psi}{\vectbf{r}_0} \diffOperator \vectbf{r}_0 \\
+    \func{\Psi}{\vectbf{r}_0} = \angleBracket{\xi_{\vectbf{r}_0},\Psi} =\int \func{\xi_{\vectbf{r}_0}}{\vectbf{r}} \func{\Psi}{\vectbf{r}} \diffOperator \vectbf{r}
+\end{align*}
+Note that \(\overline{\xi_{\vectbf{r}_0}} = \xi_{\vectbf{r}_0}\).
+The orthonormalization and closure relationships become
+\begin{align*}
+     & \int \func{\xi_{\vectbf{r}_0}}{\vectbf{r}} \func{\xi_{\vectbf{r}_0'}}{\vectbf{r}} \diffOperator \vectbf{r} = \func{\delta}{\vectbf{r}_0 - \vectbf{r}_0'}\\
+     & \int \func{\xi_{\vectbf{r}_0}}{\vectbf{r}} \func{\xi_{\vectbf{r}_0}}{\vectbf{r}'} \diffOperator \vectbf{r}_0 = \func{\delta}{\vectbf{r} - \vectbf{r}'}   
+\end{align*}
+\subsection{Continuous basis}
+Generally, the set of functions \(\set{\func{w_{\alpha}}{\vectbf{r}}}\) indexed by continuous \(\alpha\) which satisfy the following orthonormalization and closure relationships, is called a continuous basis. 
+\begin{align*}
+    &\int \overline{\func{w_{\alpha'}}{\vectbf{r}}}\func{w_{\alpha}}{\vectbf{r}}\diffOperator \vectbf{r}= \func{\delta}{\alpha - \alpha'}\\
+    &\int \overline{\func{w_{\alpha}}{\vectbf{r}'}}\func{w_{\alpha}}{\vectbf{r}}\diffOperator \alpha = \func{\delta}{\vectbf{r} - \vectbf{r}'}
+\end{align*}
+The coefficients are then given by 
+\begin{equation*}
+    \func{c}{\alpha} = \angleBracket{w_{\alpha}, \Psi} = \int \overline{\func{w_{\alpha}}{\vectbf{r}}} \func{\Psi}{\vectbf{r}} \diffOperator \vectbf{r}
+\end{equation*}
+and by the orthonormalization relationship we get 
+\begin{equation*}
+    \func{\Psi}{\vectbf{r}} = \int  \func{c}{\alpha} \func{w_{\alpha}}{\vectbf{r}}\diffOperator \alpha
+\end{equation*}
+Moreover, if \(\func{d}{\alpha}\) are the coefficients of \(\Phi\) we have 
+\begin{align*}
+    \angleBracket{\Phi, \Psi} &= \int \overline{\func{\Phi}{\vectbf{r}}} \func{\Psi}{\vectbf{r}} \diffOperator \vectbf{r}\\
+    &= \int \bracket{\overline{  \int  \func{d}{\alpha'} \func{w_{\alpha'}}{\vectbf{r}}\diffOperator \alpha' }}  \bracket{\int  \func{c}{\alpha} \func{w_{\alpha}}{\vectbf{r}} \diffOperator \alpha} \diffOperator \vectbf{r}\\
+    &= \int \int \int \overline{  \func{d}{\alpha'}} \func{c}{\alpha} \overline{ \func{w_{\alpha'}}{\vectbf{r}}}  \func{w_{\alpha}}{\vectbf{r}} \diffOperator \alpha' \diffOperator \alpha \diffOperator \vectbf{r}\\
+    &= \int \int \overline{  \func{d}{\alpha'}} \func{c}{\alpha} \func{\delta}{\alpha - \alpha'}\diffOperator \alpha' \diffOperator \alpha\\
+    &= \int \overline{  \func{d}{\alpha}} \func{c}{\alpha}\diffOperator \alpha
+\end{align*}
+Especially, 
+\begin{equation*}
+    \angleBracket{\Psi, \Psi} = \int \abs{\func{c}{\alpha}}^2 \diffOperator \alpha
+\end{equation*}
+\section{State space Dirac notation}
+We now consider every physical quantum state as a vector state in a vector space \(\scrE\). This is not merely a simplification, but also a generalization. Since there are quantum systems that are not describable by Schr\"{o}dinger waves.
+\begin{description}
+    \item[Kets] \(\func{\Psi}{\vectbf{r}} \in \calW \equiv \ket{\Psi} \in \scrE_{\vectbf{r}}\).
+    \item[Bras] If \(\chi \in \scrE_{\vectbf{r}}^{\ast}\), then \(\chi \ket{\Psi} \equiv \braket{\chi}{\Psi}\). Also, the inner product \(\angleBracket{\ket{\Phi},\ket{\Psi}} \equiv \braket{\Phi}{\Psi}\). In general, every ket corresponds to a bra but not every bra corresponds to a ket.
+    \item[Linear operator] These operators map kets to kets linearly.
+    \item[Projections] Projections are linear operators in form of \(\ket{\psi}\bra{\phi}\) or a linear combination of.
+    \item[Hermitian conjugate] \(\ket{\Psi'} = A \ket{\Psi} \iff \bra{\Psi'} = \bra{\Psi} A^{\dagger}\) and hence \(A^{\dagger}\) is a linear operator on bras as well. Also \(\bra{A \Psi} = \bra{\Psi} A^{\dagger}\) and \(\bra{\Phi}A^{\dagger} \ket{\Psi} = \overline{\bra{\Psi} A \ket{\Phi}}\). We also have \(\ket{\Psi}\bra{\Phi}^{\dagger} = \ket{\Phi}\bra{\Psi} \). 
+    \item[Hermitian] if \(A = A^{\dagger}\).
+\end{description}
+Given a discrete basis \(\set{\ket{u_i}}\) or a continuous basis \(\set{\ket{w_{\alpha}}}\), we have 
+\begin{align*}
+    c_i &= \braket{u_i}{\Psi}\\
+    \func{c}{\alpha} &= \braket{w_{\alpha}}{\Psi}
+\end{align*}
+with orthonormalization relationship
+\begin{align*}
+    \braket{u_i}{u_j} &= \delta_{i,j}\\
+    \braket{w_{\alpha}}{w_{\alpha'}} &= \func{\delta}{\alpha - \alpha'}
+\end{align*}
+and closure relationship
+\begin{align*}
+    \sum_i \ket{u_i} \bra{u_i} = I\\
+    \int \ket{w_{\alpha}} \bra{w_{\alpha}} \diffOperator \alpha = I
+\end{align*}
+Note that \( \ket{w_{\alpha}}\) and \(\bra{w_{\alpha}}\) are not well-defined, however, we accept them as generalized kets and bras.
+For a linear operator \(A\), the matrix representation of \(A\) is
+\begin{align*}
+    A_{ij} &= \bra{u_i}A \ket{u_j} &\func{A}{\alpha, \beta} &= \bra{w_{\alpha}} A \ket{w_{\beta}}
+\end{align*}
+\section{Eigenvalues and eigenvectors}
+An eigenvalue of algebraic multiplicity \(1\), is called a \textbf{non-degenerate} eigenvalue.
+
+The algebraic multiplicity of an eigenvalue is always greater than or equal to the geometric multiplicity -- dimension of eigenspace -- of that eigenvalue. The geometric multiplicity is also called the order/degree of degeneracy. An operator \(A\) is diagonalizable if the algebraic multiplicity and geometric multiplicity of all its eigenvalues are equal.
+\begin{theorem}
+    \(A\) is diagonalizable if and only if \(A\) is normal, \(AA^{\dagger} = A^{\dagger} A\).
+\end{theorem}
+
+A Hermitian operator \(A\) is an \textbf{observable} if its eigenspace spans the whole space.
+\begin{theorem}
+    The eigenspaces of an operator \(A\) are prependicular if and only if \(A\) is Hermitian.
+\end{theorem}
+
+\begin{theorem}
+    Two observables commute if and only if there exists an orthonormal basis that diagonalize both.
+\end{theorem}
+
+\begin{proof}
+    Let \(A\) and \(B\) be two observables that are diagonalizable with an orthonormal basis \(\set{\ket{u_i}}\). Then
+    \begin{equation*}
+        AB \ket{u_i} = A \gamma_i \ket{u_i} = \lambda_i \gamma_{i}\ket{u_i} = B \lambda_i \ket{u_i} = BA \ket{u_i}
+    \end{equation*}
+    Since an operator is determined by how it acts on a basis, then \(AB= BA\). Suppose \(A\) and \(B\) commute and \((\lambda,\ket{\psi})\) is an eigenvalue/vector pair of \(A\).
+    \begin{equation*}
+        AB \ket{\psi} = BA \ket{\psi} = \lambda B \ket{\psi}
+    \end{equation*}
+    That is, \(B \ket{\psi}\) is also an eigenvector of \(A\) with eigenvalue \(\lambda\). Suppose that the eigenspace \(\calE_{\lambda}\) corresponding to eigenvalue \(\lambda\) of \(A\) has an orthonormal basis \(\ket{u_{\lambda}^i}\). By the previous argument, \(B \ket{u_{\lambda}^i} \in \calE_{\lambda}\). That is, \(B\) is an observable that maps \(\calE_{\lambda}\) onto itself \(\calE_{\lambda}\). Let \(B_{\lambda} = P_{\lambda} B P_{\lambda}\) where \(P_{\lambda}\) is the projection onto \(\calE_{\lambda}\). Clearly, \(B_{\lambda}\) is Hermitian and thus has a spectral decomposition. Let \(\bracket{\gamma_{\lambda}, \ket{\phi_{\gamma,\lambda}^i}}\) be the decomposition of \(B_{\lambda}\) on \(\calE_{\lambda}\). Then,
+    \begin{align*}
+        A  \ket{\phi_{\gamma,\lambda}^i} & = \lambda \ket{\phi_{\gamma,\lambda}^i}                                                                                                                  \\
+        B  \ket{\phi_{\gamma,\lambda}^i} & = P_{\lambda} B P_{\lambda}  \ket{\phi_{\gamma,\lambda}^i} = B_{\lambda} \ket{\phi_{\gamma,\lambda}^i} = \gamma_{\lambda}  \ket{\phi_{\gamma,\lambda}^i}
+    \end{align*}
+    which was what was wanted.
+\end{proof}
+
+\begin{definition}
+    Operators \(A,B,C, \dots\) are called a \textbf{complete set of commutating observables} if
+    \begin{enumerate}
+        \item all the observables pairs commute.
+        \item Specifying the eigenvalues of all operators \(A,B,C, \dots\) determines a unique eigenvalue.
+    \end{enumerate}
+\end{definition}
+
+\section{Two important examples of representation and observables}
+Let \(\func{\xi_{\vectbf{r}_0}}{\vectbf{r}} \equiv \ket{\vectbf{r}_0}\), \(\func{v_{\vectbf{p}_0}}{\vectbf{r}} \equiv \ket{\vectbf{p}_0}\), and \(\psi, \phi \in \scrE_{\vectbf{r}}\). Then,
+\begin{equation*}
+    \angleBracket{\phi,\psi} = \braket{\phi}{\psi} = \int \overline{\func{\phi}{\vectbf{r}}} \func{\psi}{\vectbf{r}} \diffOperator \vectbf{r}
+\end{equation*}
+Note that, \(\braket{\vectbf{r}_0}{\psi} = \func{\psi}{\vectbf{r}_0}\) and \(\braket{\vectbf{p}_0}{\psi} = \func{\overline{\psi}}{\vectbf{p}_0}\), where \(\func{\overline{\psi}}{\vectbf{p}}\) is the Fourier transform of \(\func{\psi}{\vectbf{r}}\). From the closure property we also have
+\begin{equation*}
+    \int \ket{\vectbf{r}_0} \bra{\vectbf{r}_0} \diffOperator \vectbf{r}_0 = \int \ket{\vectbf{p}_0} \bra{\vectbf{p}_0} \diffOperator \vectbf{p}_0 = I
+\end{equation*}
+Then,
+\begin{align*}
+    \angleBracket{\phi,\psi} & = \braket{\phi}{\psi} = \int \overline{\func{\phi}{\vectbf{r}}} \func{\psi}{\vectbf{r}} \diffOperator \vectbf{r} \\
+                             & = \int \overline{\braket{\vectbf{r}}{\phi}} \braket{\vectbf{r}}{\psi} \diffOperator \vectbf{r}                   \\
+                             & = \int \braket{\phi}{\vectbf{r}} \braket{\vectbf{r}}{\psi} \diffOperator \vectbf{r}                              \\
+                             & = \int \braket{\phi}{\vectbf{p}} \braket{\vectbf{p}}{\psi} \diffOperator \vectbf{p}                              \\
+                             & = \int \overline{\func{\overline{\phi}}{\vectbf{p}}} \func{\overline{\psi}}{\vectbf{p}} \diffOperator \vectbf{p}
+\end{align*}
+\subsection{changing from \(\ket{\vectbf{r}}\) to \(\ket{\vectbf{p}}\)}
+Note that, \(\braket{\vectbf{r}}{\vectbf{p}} = \func{v_{\vectbf{p}}}{\vectbf{r}}\), hence
+\begin{align*}
+    \braket{\vectbf{r}}{\psi} & = \int \braket{\vectbf{r}}{\vectbf{p}} \braket{\vectbf{p}}{\psi} \diffOperator \vectbf{p}            \\
+                              & = \int \func{v_{\vectbf{p}}}{\vectbf{r}} \func{\overline{\psi}}{\vectbf{p}} \diffOperator \vectbf{p} \\
+    \braket{\vectbf{p}}{\psi} & = \int \braket{\vectbf{p}}{\vectbf{r}} \braket{\vectbf{r}}{\psi} \diffOperator \vectbf{r}            \\
+                              & = \int \overline{\func{v_{\vectbf{p}}}{\vectbf{r}}} \func{\psi}{\vectbf{r}} \diffOperator \vectbf{r}
+\end{align*}
+\subsection{\(R\) and \(P\) operators}
+Consider the operator \(X,Y,Z\)   such that
+\begin{align*}
+    \bra{\vectbf{r}}X \ket{\psi} & = x \braket{\vectbf{r}}{\psi} = x \func{\psi}{\vectbf{r}} \\
+    \bra{\vectbf{r}}Y \ket{\psi} & = y\braket{\vectbf{r}}{\psi} = y\func{\psi}{\vectbf{r}}   \\
+    \bra{\vectbf{r}}Z \ket{\psi} & = z \braket{\vectbf{r}}{\psi} = z \func{\psi}{\vectbf{r}}
+\end{align*}
+Then
+\begin{equation*}
+    \bra{\phi}X \ket{\psi} = \int \braket{\phi}{\vectbf{r}} \bra{\vectbf{r}}X \ket{\psi} \diffOperator r =  \int \overline{\func{\phi}{\vectbf{r}}} x \func{\psi}{\vectbf{r}} \diffOperator r
+\end{equation*}
+Define the operator \(R = (X,Y,Z)\). Similarly, consider the operator \(P_x, P_y, P_z\) such that
+\begin{align*}
+    \bra{p}P_x \ket{\psi} & = p_x \braket{p}{\psi} = p_x \func{\overline{\psi}}{p} \\
+    \bra{p}P_y\ket{\psi}  & = p_y \braket{p}{\psi} = p_y \func{\overline{\psi}}{p} \\
+    \bra{p}P_z \ket{\psi} & = p_z \braket{p}{\psi} = p_z \func{\overline{\psi}}{p}
+\end{align*}
+Define the operator \(P = (P_x, P_y , P_z)\). Moreover,
+\begin{align*}
+    \bra{\vectbf{r}}P\ket{\psi} & = \bracket{\int \braket{\vectbf{r}}{p} \bra{p}P_x \ket{\psi} \diffOperator p }_x         \\
+                                & = \bracket{\int \func{v_p}{\vectbf{r}} p_x \func{\overline{\psi}}{p} \diffOperator p }_x
+    \intertext{note that \(i p_x \func{\overline{\psi}}{p}\) is the Fourier transform of \(\frac{\partial}{\partial x} \func{\psi}{\vectbf{r}}\), then}
+                                & = \bracket{   -i\hbar \frac{\partial}{\partial x} \func{\psi}{\vectbf{r}}}_x             \\
+                                & = -i\hbar \nabla \func{\psi}{\vectbf{r}}
+\end{align*}
+The canonical commutation principle:
+\begin{align*}
+    \commutator{R_i}{R_j} &= 0 & \commutator{P_i}{P_j} &= 0 & \commutator{R_i}{P_j} &= i\hbar \delta_{i,j}
+\end{align*}
+The \(R\) and \(P\) are Hermitian operators -- each one of their components is Hermitian. We further have 
+\begin{align*}
+    R \ket{\vectbf{r}_0} &= r_0 \ket{\vectbf{r}_0} &  P \ket{\vectbf{p}_0} &= \vectbf{p}_0 \ket{\vectbf{p}_0}
+\end{align*}
+The closure relationships \(\int \ket{\vectbf{r}}\bra{\vectbf{r}} \diffOperator \vectbf{r} = I\) and \(\int \ket{\vectbf{p}}\bra{\vectbf{p}} \diffOperator \vectbf{p} = I\) show that \(R\) and \(P\) are observables.
+\section{Tensor product}
+Let \(\ket{\psi_1} \in \scrE_1\) and \(\ket{\psi_2} \in \scrE_2\). The \textbf{tensor product} of \(\ket{\psi_1}\) and \(\ket{\psi_2}\) is denoted by 
+\begin{equation*}
+    \ket{\psi_1} \otimes \ket{\psi_2} = \ket{\psi_1} \ket{\psi_2} = \ket{\psi_1, \psi_2}
+\end{equation*}
+The tensor product is linear
+\begin{align*}
+    \bracket{\lambda \ket{\psi_1} + \ket{\phi_1}} \otimes \ket{\psi_2} &= \lambda \ket{\psi_1} \otimes \ket{\psi_1} + \ket{\phi_1} \otimes \ket{\psi_2}\\
+    \ket{\psi_1} \otimes \bracket{\lambda \ket{\psi_2} + \ket{\phi_2}} &= \lambda\ket{\psi_1} \otimes \ket{\psi_2} + \ket{\psi_1} \otimes \ket{\phi_2}\\
+\end{align*}
+The tensor product of \(\scrE_1\) and \(\scrE_2\) is defined as \(\scrE = \scrE_1 \otimes \scrE_2 = \vspan \set{\ket{\psi_1} \otimes \ket{\psi_2}}\).
+
+\begin{proposition}
+    If \(\set{\ket{u_1}}\) is a basis for \(\scrE_1\) and \(\set{\ket{u_2}}\) is basis for \(\scrE_2\), then \(\set{\ket{\psi_1} \otimes \ket{\psi_2}}\) is a basis for \(\scrE\).
+\end{proposition}
+\begin{definition}
+    An inner product for \(\scrE\) can be given from the inner product for \(\scrE_1\) and \(\scrE_2\).
+    \begin{equation*}
+        \bracket{\phi_1 \phi_2}{\psi_1 \psi_2} = \braket{\phi_1}{\psi_1} \braket{\phi_2}{\psi_2}
+    \end{equation*}
+\end{definition}
+Let \(A_1\) be an operator in \(\scrE_1\). We can extend it to \(\tilde{A_1}\) an operator in \(\scrE\) such that 
+\begin{equation*}
+    \tilde{A_1} \ket{\psi_1} \otimes \ket{\psi_2} = \bracket{A \ket{\psi_1}} \otimes \ket{\psi_2}
+\end{equation*}
+Generally, if \(A_1\) is an operator in \(\scrE_1\) and \(A_2\) an operator in \(\scrE_2\), \(A_1 \otimes A_2\) is an operator in \(\scrE\) 
+\begin{equation*}
+    A_1 \otimes A_2 \ket{\psi_1} \otimes \ket{\psi_2} = A_1 \ket{\psi_1} \otimes A_2 \ket{\psi_2}
+\end{equation*}
+In this way, \(\tilde{A_1} = A_1 \otimes I\).  We can similarly show that if \(\set{A_1}\) is a basis for \(\func{\calL}{\scrE_1}\) and \(\set{A_2}\) is basis for \(\func{\calL}{\scrE_2}\), then \(\set{A_1 \otimes A_2}\) is a basis for \(\func{\calL}{\scrE}\).
+
+If \(\set{a_n}\) is the spectra of \(A_1\) and \(\set{b_m}\) is the spectra of \(B_2\), then \(\set{a_n + b_m}\) is the spectra of \(C = A_1 \otimes B_2\). 
+
+If \(\set{A_1}\) is a C.S.C.O for \(\scrE_1\) and \(\set{A_2}\) is a C.S.C.O for \(\scrE_2\), then \(\set{A_1 \otimes A_2}\) is a C.S.C.O for \(\scrE\).
+
+Let \(\scrE_{xyz} = \scrE_x \otimes \scrE_y \otimes \scrE_z\). It can be shown that it is the same as \(\scrE_{\vectbf{r}}\). 
+
+When a physical system is composed of the union of the two or several simple systems, its state space is the tensor product of the spaces which corresponds to each of the components systems.

@@ -1,0 +1,236 @@
+\chapter{Quantum Mechanic}
+\section{Axioms of quantum mechanic}
+Each physical system is a seperable complex Hilbert space -- complete vector space -- with inner product \(\angleBracket{\psi,\phi}\). Rays -- complex subspaces of dimesion 1 -- in \(\calH\) are associated with quantum state of the system. We bring an incomplete set of quantum mechanic axioms.
+
+\begin{description}
+    \item [Postulate I:] The state of an isolated physical system at a fixed time \(t\) is represented by a (unit) stated vector \(\ket{\psi}\) belongin to \(\calH\).
+    \item [Postulate II:] The evolution of a closed quantum system is described by a unitary transformation.
+    \begin{equation*}
+        \ket{\psi_{t_1}} = U \ket{\psi_{t_0}}
+    \end{equation*}
+    The time evolution of the state of a closed quantum system is described by Schrodinger's equation.
+    \begin{equation*}
+        ih \dfrac{\diffOperator}{\diffOperator t} \ket{\psi} = H \ket{\psi}
+    \end{equation*}
+    where \(H\) is the Hamiltonian operator. The Hamiltonian is a hermitian operator -- \(H = H^{\dagger}\)-- and it can be decomposed into its energy levels (eigenvalues).
+    \begin{equation*}
+        H = \sum_{E} E \ket{E} \bra{E}
+    \end{equation*}
+
+    \item [Postulate III:] Quantum measurements are described by a collection  of measurement operators \(\set{\calM_m}\) satisfying the completeness relation
+    \begin{equation*}
+        \sum \calM_m^{\dagger} \calM_m = I
+    \end{equation*}
+    These are operators acting on the state space of the system being measured.
+    \begin{equation*}
+        \prob{m} = \bra{\psi} \calM_m^{\dagger} \calM_m \ket{\psi}
+    \end{equation*} 
+    is the probability of measuring \(m\). \(\set{\calM_m}\) are basically the eigenvectors of a hermitian operator -- therefore, \(\calM_m^{\dagger} \calM_m \) is the eigenspace. The state of quantum system post measurement is 
+    \begin{equation*}
+        \dfrac{\calM_m \ket{\psi}}{\sqrt{\bra{\psi} \calM_m^{\dagger} \calM_m \ket{\psi}}}
+    \end{equation*}
+    \item [Postulate IV:] The composite state space is the tensor product of the state spaces of the component physical  systems.
+\end{description}
+
+\begin{remark}
+    Non-orthogonal states can not be reliably distinguished. Suppose there is a measurement device that can distinguish non-orthogonal states \(\ket{\psi_1}, \ket{\psi_2}\). Suppose \(\ket{\psi_b}\) is prepared, then the probability of measuring \(j\) such that \(\func{f}{j} = b\) is 1. Define 
+    \begin{equation*}
+        E_i = \sum_{j; \func{f}{j} = i} 
+    \end{equation*}
+\end{remark}
+\section{Projective measurements}
+A projective measurement is described by an observable, \(M\), a hermitian operator on the state space of the system being observed.
+\begin{equation*}
+    M = \sum m P_m
+\end{equation*}
+where \(P_m\) is the projectors into eigenspace with \(P_i P_j = \delta_{ij} P_i\). Then, the probability of getting result \(m\) is 
+\begin{equation*}
+    \prob{m} = \bra{\psi} P_m \ket{\psi}
+\end{equation*}
+We define the average and variance of a projective measurement as follows.
+\begin{align*}
+    \angleBracket{M} &= \expected{M} = \sum m \prob{m} \\
+    &= \sum m \bra{\psi} P_m \ket{\psi} \\
+    &= \bra{\psi} \bracket{\sum m P_M} \ket{\psi}\\
+    &= \bra{\psi} M \ket{\psi}\\
+    \bracket{\Delta M}^2 &= \angleBracket{\bracket{M - \angleBracket{M}}^2}\\
+    &= \angleBracket{M^2} - \angleBracket{M}^2
+\end{align*}
+
+\begin{remark}[Heisenberg uncertainty principle]
+    Suppose \(\ket{\psi}\) is a quantum state and \(A,B\) are hermitian operators. Let 
+    \begin{equation*}
+        x + iy = \bra{\psi} AB \ket{\psi}
+    \end{equation*}
+    then, 
+    \begin{equation*}
+        \bra{\psi} BA \ket{\psi} = \bra{\psi} \bracket{AB}^{\dagger} \ket{\psi} = \bracket{ \bra{\psi} AB \ket{\psi}}^{\dagger} = x - iy
+    \end{equation*}
+    therefore, 
+    \begin{equation*}
+        \abs{\bra{\psi} \squareBracket{A,B} \ket{\psi}} = 2\abs{x} \leq 2 \abs{\bra{\psi} AB \ket{\psi}}
+    \end{equation*}
+    With Cauchy-Schwarz inequality (\(\abs{\bra{\psi}AB \ket{\psi}}\) is an inner product over the space of hermitian operators)
+    \begin{align*}
+        \abs{\bra{\psi} AB \ket{\psi}}^2 &\leq \bra{\psi} A^2 \ket{\psi} \bra{\psi} B^2 \ket{\psi}\\
+        \implies \abs{\bra{\psi} \squareBracket{A,B} \ket{\psi}}^2 &\leq 4  \bra{\psi} B^2 \ket{\psi} \bra{\psi} A^2 \ket{\psi}
+    \end{align*}
+    Hence if we let \(A = C - \angleBracket{C}, B = D - \angleBracket{D}\) then 
+    \begin{align*}
+        \squareBracket{A,B} &= \squareBracket{C,D} \\
+        \angleBracket{A^2} &= \bracket{\Delta C}^2 , \angleBracket{B^2} = \bracket{\Delta D}^2
+    \end{align*}
+    and 
+    \begin{equation*}
+        \bracket{\Delta C} \bracket{\Delta D} \geq \dfrac{\abs{\bra{\psi} \squareBracket{C,D} \ket{\psi}}}{2}
+    \end{equation*}
+    Which basically means that if two measurements \(C,D\) do not commute then as the error in measuring one decreases the error in measuring the other one must increase. Hence, there would always be an uncertainty in the exact properties of the system.
+\end{remark}
+Let \(\vec{v}\) be a direction in \(\Reals^3\) then, the measurement of spin along \(\vec{v}\) is defined as 
+\begin{equation*}
+    \vec{v} \cdot \vec{\sigma} = v_1 \sigma_1  + v_2 \sigma_2 + v_3 \sigma_3
+\end{equation*}
+where \(\sigma_i\) are the Pauli matrices.
+
+\section{POVM measurement}
+Suppose \(\calM_m\) are measurement operators. Then, 
+\begin{equation*}
+    E_m = \calM_m^{\dagger} \calM_m
+\end{equation*}
+are positive and complete -- \(\sum_m E_m = I\) --. The complete set of \(\set{E_m}\) is called ``Positive Operator Valued Measure'' or POVM. We can get the \(\set{\calM_m}\) from \(\set{E_m}\) by letting \(\calM_m = \sqrt{E_m}\).
+\begin{example}
+    Suppose we want to distinguish between \(\ket{\psi} = \ket{0}\) and \(\ket{\psi_2} = \ket{+}\) with no error. Since these two states are 
+\end{example}
+
+\section{Density operator}
+Suppose a quantum system is prepared in one of the \(\ket{\psi_i}\) states with probability \(p_i\). The density operator for the system is 
+\begin{equation*}
+    \rho = \sum p_i \ket{\psi_i} \bra{\psi_i}
+\end{equation*}
+If the system evolves with unitary matrix \(U\) then the density operator evolves to 
+\begin{equation*}
+    \rho = \sum p_i \ket{\psi_i} \bra{\psi_i} \xrightarrow{U} \sum p_i U\ket{\psi_i} \bra{\psi_i} U^{\dagger} = U \rho U^{\dagger}
+\end{equation*}
+Furthermore, if \(\set{\calM_m}\) are a set of measurements then,
+\begin{equation*}
+    \condProb{m}{i} = \bra{\psi_i} \calM_m^{\dagger} \calM_m \ket{\psi_i} = \func{\trace}{ \calM_m^{\dagger} \calM_m \ket{\psi_i} \bra{\psi_i}}
+\end{equation*}
+and 
+\begin{align*}
+    \prob{m} &= \sum p_i \condProb{m}{i}\\
+    &= \sum p_i \func{\trace}{ \calM_m^{\dagger} \calM_m \ket{\psi_i} \bra{\psi_i}} \\
+    &= \func{\trace}{ \calM_m^{\dagger} \calM_m \sum p_i \ket{\psi_i} \bra{\psi_i}} \\
+    &= \func{\trace}{ \calM_m^{\dagger} \calM_m \rho}
+\end{align*}
+If \(m\) was measured in \(\ket{\psi}\) then the post measurement state is 
+\begin{equation*}
+    \ket{\psi_i^m} = \dfrac{\calM_m \ket{\psi}}{\sqrt{ \func{\trace}{ \calM_m^{\dagger} \calM_m \ket{\psi_i} \bra{\psi_i}}}}
+\end{equation*}
+and the density operator post measurement is 
+\begin{align*}
+    \rho_m &= \sum \condProb{i}{m} \ket{\psi_i^m} \bra{\psi_i^m}\\
+    &= \sum \bracket{\dfrac{p_i \func{\trace}{ \calM_m^{\dagger} \calM_m \ket{\psi_i} \bra{\psi_i}}}{\func{\trace}{ \calM_m^{\dagger} \calM_m \rho}}} \bracket{\dfrac{\calM_m \ket{\psi_i} \bra{\psi_i} \calM_m^{\dagger}}{\func{\trace}{ \calM_m^{\dagger} \calM_m \ket{\psi_i} \bra{\psi_i}}}}\\
+    &= \dfrac{1}{\func{\trace}{ \calM_m^{\dagger} \calM_m \rho}} \sum  p_i \calM_m \ket{\psi_i} \bra{\psi_i} \calM_m^{\dagger}\\
+    &= \dfrac{\calM_m \rho \calM_m^{\dagger}}{\func{\trace}{  \calM_m \rho \calM_m^{\dagger}}}
+\end{align*}
+
+\begin{theorem}
+    An operator \(\rho\) is the density operator associated to some ensemble \(\set{p_i , \ket{\psi_i}}\) if and only if it satisfies the following conditions
+    \begin{enumerate}
+        \item \(\func{\trace}{\rho} = 1\).
+        \item \(\rho\) is a positive operator.
+    \end{enumerate}
+\end{theorem}
+
+We can reform the quantum mechanic postulate for density operator as follows.
+\begin{definition}
+    \item [Postulate I:] The state of an isolated physical system at a fixed time \(t\) is completely described by its density operator.
+    \item [Postulate II:] The evolution of a closed quantum system is described by a unitary transformation.
+    \begin{equation*}
+        \rho_{t_1} = U \rho_{t_0} U^{\dagger}
+    \end{equation*}
+    
+    \item [Postulate III:] Quantum measurements are described by a collection \(\set{\calM_m}\) of measurement operators satisfying the completeness relation
+    \begin{equation*}
+        \sum \calM_m^{\dagger} \calM_m = I
+    \end{equation*}
+    These are operators acting on the density operator of the system being measured.
+    \begin{equation*}
+        \prob{m} = \func{\trace}{\calM_m \rho \calM_m^{\dagger}}
+    \end{equation*} 
+    is the probability of measuring \(m\). \(\set{\calM_m}\) are basically the eigenvectors of a hermitian operator -- therefore, \(\calM_m^{\dagger} \calM_m \) is the eigenspace. The stated post measurement is 
+    \begin{equation*}
+        \dfrac{\calM_m \rho \calM_m^{\dagger}}{ \func{\trace}{\calM_m \rho \calM_m^{\dagger}}}
+    \end{equation*}
+    \item [Postulate IV:] The composite density operator is the tensor product of the density operator of the component physical  systems.
+    \begin{equation*}
+        \rho = \rho_1 \otimes \rho_2 \otimes \dots \otimes \rho_n
+    \end{equation*}
+\end{definition}
+
+The mean of an operator over a system described by \(\rho\) is 
+\begin{align*}
+    \angleBracket{A} &= \sum p_i \bra{\psi_i} A \ket{\psi_i} \\
+    &= \sum p_i \func{\trace}{A \ket{\psi_i} \bra{\psi_i}}\\
+    &= \func{\trace}{A \rho}
+\end{align*}
+
+\begin{theorem}
+    \(\func{\trace}{\rho^2} \leq 1\), equallity if and only if \(\rho\) is a pure state.
+\end{theorem}
+\(\ket{\tilde{\psi_i}}\) generates \(\rho\) if \(\rho = \sum_{i} \ket{\tilde{\psi_i}} \bra{\tilde{\psi}_i}\).
+\begin{theorem}[Unitary freedon in the ensemble for density matrices]
+    Suppose the states \(\ket{\tilde{\psi}_i}\) and \(\ket{\tilde{\phi}_i}\) generate the same density operator if and only if 
+    \begin{equation*}
+        \ket{\tilde{\psi}_i} = \sum_{j} u_{ij} \ket{\tilde{\phi}_i}
+    \end{equation*}
+    where \(U = \begin{bmatrix}
+        u_{ij}
+    \end{bmatrix}\) is a unitary matrix.
+\end{theorem}
+ \subsection{Reduced density operator}
+ \(\rho^{AB}\) is  density operator for systems \(A\) and \(B\). The reduced density operator for system \(A\) is 
+ \begin{equation*}
+    \rho^Q = \func{\trace_B}{\rho^{AB}}
+ \end{equation*}
+ where 
+ \begin{equation*}
+    \func{\trace_B}{\ket{a_1}\bra{a_2} \otimes \ket{b_1}\bra{b_2}} = \func{\trace}{\ket{b_1}\bra{b_2}}\ket{a_1}\bra{a_2} + \bra{b_1}\ket{b_2}\ket{a_1}\bra{a_2} 
+ \end{equation*}
+
+ \begin{theorem}[Schmidt Decompostion]
+    Suppose \(\ket{\psi}\) is a pure state of a composite systems \(A\) and \(B\). There exists an orthonormal states \(\ket{i_A}\) for the system \(A\) and orthonormal states \(\ket{i_B}\) for system \(B\) such that 
+    \begin{equation*}
+        \ket{\psi} = \sum_i \lambda_i \ket{i_A} \ket{i_B}
+    \end{equation*}
+    where \(\lambda_i \geq 0\) satisfying \(\sum_i \lambda_i^2 = 1\) known as Schmidt coefficients. The number of non-zero values of \(\lambda_i\) is called the Schmidt number.
+ \end{theorem}
+ \begin{definition}[Purifiction]
+    \(\rho^A\) of a quantum system \(A\). It is possible to introduce another system whcih we donte by \(R\), the reference system, and define a pure state \(\ket{AR}\) reduces to \(\rho^A\)
+ \end{definition}
+
+ \section{Bell's inequality}
+
+ \section{Extra}
+ \begin{theorem}
+    If a state \(\ket{\psi}\) of a Hilbert space of \(n\) qubits can be written as a superposition of \(m_1\) basis in standart basis and \(m_2\) basis in the dual basis, then 
+    \begin{equation*}
+        m_1 m_2 \geq 2^n
+    \end{equation*}
+ \end{theorem}
+ The amount of entanglement in a pure state \(\ket{\psi}\) of a compound system \(A \otimes B\) is measured by
+ \begin{equation*}
+    \func{E}{\psi} = - \func{\trace}{\rho_A \lg \rho_A} = - \func{\trace}{\rho_B \lg \rho_B}
+ \end{equation*}
+ where \(\rho = \ket{\psi} \bra{\psi}\). This is the von-Neumann entropy. A pair of maximally entangled qubits are called ebit. Bell pairs are maximally entangled.
+ In \(\calH_n\)
+ \begin{equation*}
+    \ket{\phi_n} = \dfrac{1}{\sqrt{N}} \sum_{i = 1}^n \ket{i}\ket{i}
+ \end{equation*}
+is maximally entangled. In \(H_2\) 
+\begin{equation*}
+    \frac{1}{\sqrt{k}} \ket{00} + \sqrt{\dfrac{k-1}{k}} \ket{11}
+\end{equation*}
+for large \(k\) is weakly entangled. For mixed states entanglement is defined similarly.
+-- multi-party communication
+-- Two-party communication complexity.

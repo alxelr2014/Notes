@@ -1,0 +1,293 @@
+\chapter{Linear Algebra}
+A system in quantum mechanic is modeled by a Hilbert space \(\calH\), which is a complete complex inner product space. The states correspond to vectors in the Hilbert space and are denoted by \(\ket{\psi}\). The conjugate transpose of a state is \(\bra{\psi} = \ket{\psi}^{\dagger}\). The inner product is defined as \(\angleBracket{\phi,\psi} = \braket{\phi}{\psi}\) and hence the norm is  
+\begin{equation*}
+    \norm{\ket{\psi}} = \sqrt{\braket{\psi}{\psi}}
+\end{equation*}
+We can define linear operator \(A : \calH \to \calH\), \(A \in \func{\calL}{\calH}\). \(A\) is said to be positive (positive semi-,negative semi-,negative) definite if for all \(\ket{\psi} \in \calH\), \(\bra{\psi} A \ket{\psi} > ( \geq , \leq , <)0\). The norm of an operator is defined as 
+\begin{equation*}
+    \norm{A} = \sup_{\norm{\ket{\psi}} = 1} \norm{A \ket{\psi}}
+\end{equation*}
+For example, the Pauli matrices are \(\squareMatrices[\Complex]{2}\) 
+\begin{align*}
+    \sigma_0 &= I = \begin{bmatrix}
+        1 & 0\\
+        0 & 1 
+    \end{bmatrix} \qquad &\sigma_1 &= \sigma_x = X = \begin{bmatrix}
+        0 & 1 \\
+        1 & 0 
+    \end{bmatrix}\\
+    \sigma_2 &= \sigma_y = Y = \begin{bmatrix}
+        0 & -i \\
+        i & 0
+    \end{bmatrix} \qquad &\sigma_3& = \sigma_z= Z = \begin{bmatrix}
+        1 & 0 \\
+        0 & -1 
+    \end{bmatrix}
+\end{align*}
+For \(\ket{\psi} \in \calH, \ket{\psi'} \in \calH'\) we can define an outer product \(\ket{\psi'}\bra{\psi} : \calH \to \calH\). 
+\begin{equation*}
+    \ket{\psi'} \bra{\psi} \ket{\phi} = \braket{\psi}{\phi} \ket{\psi'}
+\end{equation*}
+The completeness relation says that given an orthogonal basis \(\ket{i}\) 
+\begin{equation*}
+    \sum_i \ket{i} \bra{i} = I 
+\end{equation*}
+which is easy to see 
+\begin{equation*}
+    \sum_i \ket{i} \bra{i} \ket{\psi} = \sum \braket{i}{\psi} \ket{i} = \ket{\psi}
+\end{equation*}
+In any inner product space the Cauchy-Schwarz inequality holds.
+\begin{equation*}
+    \braket{\psi}{\psi} \braket{\phi}{\phi} \geq \abs{\braket{\psi}{\phi}}^2
+\end{equation*}
+
+\section{Adjoint and Hermitian operators}
+For any linear operator on a Hilbert space there exists \(B\) such that for all \(\ket{\psi}, \ket{\phi}\in \calH\) 
+\begin{equation*}
+    \braket{\psi}{A\phi} = \braket{B\psi}{\phi}
+\end{equation*}
+It is easy to see that \(B = A^{\dagger}\) the adjoint or Hermitian conjuagate of \(A\). \(A = A^{\dagger}\) is a Hermitian or self-adjoint operator. A projection is an operator that projects \(\ket{v}\) into its compenents on a subspace. Suppose \(\ket{1} , \dots , \ket{k}\) is an orthonormal basis for subspace \(W\) 
+\begin{equation*}
+    P = \sum_{i = 1}^k \ket{i} \bra{i}
+\end{equation*}
+Geoemtrically, applying \(P\) twice to a vector should again give the projection of that vector that is, \(P^2 = P\). 
+\begin{align*}
+    P^2 &=  \bracket{\sum_{i = 1}^k \ket{i} \bra{i}}  \bracket{\sum_{j = 1}^k \ket{j} \bra{j}}\\
+    &=  \sum_{i = 1}^k  \sum_{j = 1}^k \ket{i} \bra{i} \ket{j} \bra{j} \\
+    &=  \sum_{i = 1}^k  \sum_{j = 1}^k \ket{i} \braket{i}{j} \bra{j} \\
+    &= \sum_{i = 1}^k \ket{i} \braket{i}{i} \bra{i} \\
+    &=  \sum_{i = 1}^k  \ket{i}  \bra{j} = P
+\end{align*} 
+
+\(A A^{\dagger} = A^{\dagger} A\) is a normal operator. An operator is diagonalizable if it has a diagonal representation 
+\begin{equation*}
+    A = \sum \lambda_i \ket{i} \bra{i}
+\end{equation*}
+where \(\lambda_i\) are the eigenvalues and \(\ket{i}\) form an orthonormal set for the eigenvectors of \(A\). If an eigenspace has dimension greater than one then those eigenvectors are called degenerates.
+\begin{theorem}[Spectral decomposition]
+    Any normal operator \(M\) is diagonal with respect to orthonormal basis in \(V\). The converse is also true, any diagonalizable matrix is normal.
+\end{theorem}
+
+\begin{proof}
+    Lets induct over \(\dim V\). If \(\dim V = 1\) then it is trivial that \(M\) is diagonal. Suppose \(\lambda\) is an eigenvalue of \(M\) and \(P\) is the projection onto its eigenspace. Then, \(M = (P + Q) M (P + Q) = PMP + PMQ + QMP + QMQ\) where \(Q = I - P\). Clearly, \(PMP = \lambda P\) and \(QMP = 0\). We claim that \(PMQ = QM^{\dagger} P \) is zero as well. Suppose \(\ket{v} \in P\) then 
+    \begin{equation*}
+        M \bracket{M^{\dagger} \ket{v}} = M^{\dagger} M \ket{v} = \lambda M^{\dagger} \ket{v}
+    \end{equation*}
+    Therefore, \(M^{\dagger} \in P\) as well, hence \(PMQ = 0\). We then show that \(QMQ\) is normal as well. 
+    \begin{align*}
+        \bracket{QMQ} \bracket{QMQ}^{\dagger} &= QMQQM^{\dagger}Q\\
+        &= Q M Q M^{\dagger} Q \\
+        &= QM M^{\dagger} Q \qquad (QM^{\dagger} = QM^{\dagger} Q + QM^{\dagger} P = QM^{\dagger}Q)\\
+        &= QM^{\dagger} M Q \\
+        &= QM^{\dagger} QMQ  \qquad (QMQ = MQ - PMQ = MQ)\\
+        &= \bracket{QMQ}^{\dagger} \bracket{QMQ}
+    \end{align*}
+    Now note that \(PMP\) is diagonal with respect to an orthonormal basis for \(P\) and by induction hypothesis there is a basis for \(Q\) such that \(QMP\) is diagonal. Together, these two imply that \(M\) with respect to the union of these two basis is diagonal in \(V\). Furthermore, this implies that \(M\) can be written as 
+    \begin{equation*}
+        M = \sum \lambda_i \ket{i} \bra{i}
+    \end{equation*}
+    where \(\lambda_i\) are its eigenvalues. To show that converse, suppose \(M\) is diagonalizable. Then,
+    \begin{align*}
+        M^{\dagger} M &=\bracket{\sum \lambda_i^{\ast} \ket{i} \bra{i}} \bracket{\sum \lambda_i\ket{i} \bra{i}}\\
+        &= \sum_i \sum_j \lambda_i^{\ast} \ket{i} \bra{i}  \lambda_j\ket{j} \bra{j}\\
+        &= \sum_i \norm{\lambda}^2 \ket{i} \bra{i}
+    \end{align*} 
+    and similarly 
+    \begin{align*}
+        M M^{\dagger}  &=  \bracket{\sum \lambda_i\ket{i} \bra{i}} \bracket{\sum \lambda_i^{\ast} \ket{i} \bra{i}}\\
+        &= \sum_i \sum_j \lambda_i \ket{i} \bra{i}  \lambda_j^{\ast} \ket{j} \bra{j}\\
+        &= \sum_i \norm{\lambda}^2 \ket{i} \bra{i} \implies M M^{\dagger} = M^{\dagger} M
+    \end{align*}
+\end{proof}
+
+\begin{theorem}
+    A normal operator is hermitian if and only if it has real eigenvalues.
+\end{theorem}
+\begin{proof}
+    A hermitian operator is normal and has real eigenvalues since
+    \begin{equation*}
+        \bra{v} A \ket{v} = \lambda \braket{v}{v}
+    \end{equation*} 
+    and 
+    \begin{equation*}
+        \bra{v} A \ket{v} = \bra{v} A^{\dagger} \ket{v} = \bracket{\bra{v} A \ket{v}}^{\dagger} \implies \lambda = \lambda^{\ast}
+    \end{equation*}
+    Suppose \(A\) is a normal with real eigenvalues. By spectral decomposition
+    \begin{equation*}
+        A^{\dagger} = \bracket{\sum \lambda_i \ket{i} \bra{i}}^{\dagger} =  \sum \lambda^{\ast}_i \ket{i} \bra{i} = \sum \lambda_i \ket{i} \bra{i} = A
+    \end{equation*}
+\end{proof}
+\(UU^{\dagger} = I\) is unitary.
+\begin{proposition}
+    an unitary operator
+    \begin{enumerate}
+        \item  preserves inner product.
+        \item there are two orthonormal basis \(\ket{v_i}, \ket{w_i}\) such that 
+        \begin{equation*}
+            U = \sum \ket{w_i} \bra{v_i}
+        \end{equation*}
+        \item its eigenvalues have modulus \(1\)
+        
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    \begin{enumerate}
+        \item     
+        \begin{equation*}
+            \braket{Uv}{Uw} = \bra{v} U^{\dagger}U \ket{w} = \braket{v}{w}
+        \end{equation*}
+        \item Let \(\ket{v_i}\) be an orthonormal set and \(\ket{w_i} = U \ket{v_i}\). Then, by above's result \(\ket{w_i}\) are orthonormal as well.
+        Also note that for any \(v \in V\), \(\braket{v_i}{v} = \bracket{w_i}{Uv}\). Then, 
+        \begin{equation*}
+            \sum \ket{w_i} \bra{v_i} \ket{v} = \sum \ket{w_i} \braket{v_i}{v} = \sum  \ket{w_i} \braket{w_i}{Uv} = \sum \ket{w_i} \bra{w_i} \ket{Uv} = U \ket{v}
+        \end{equation*}
+        therefore 
+        \begin{equation*}
+            U = \sum \ket{w_i} \bra{v_i}
+        \end{equation*}
+        \item Let \((v,\ket{v})\) be a pair of eigenvalue and eigenvector of \(U\).
+        \begin{align*}
+            \braket{Uv}{Uv} &= \braket{v}{v}\\
+            &= \norm{v}^2 \braket{v}{v} \implies \norm{v} = 1
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+\(A\) is positive when for all \(\ket{v}\), \(\bra{v} A \ket{v} \geq 0\) and positive definite if the equality only happens when \(\ket{v} = 0\).
+\begin{proposition}
+    Any operator \(A\) can be written as \(A = B + iC\) where \(B,C\) are hermitian.
+\end{proposition}
+\begin{proof}
+    Let 
+    \begin{equation*}
+        B = \dfrac{A + A^{\dagger}}{2} \qquad C = \dfrac{A - A^{\dagger}}{2i}
+    \end{equation*}
+    then clearly \(A = B + iC\) and both of the hermitian. 
+    \begin{equation*}
+        B^{\dagger} = \dfrac{A^{\dagger} + A}{2} = B\qquad C^{\dagger} = \dfrac{A^{\dagger} - A}{-2i} = C
+    \end{equation*}
+\end{proof}
+\begin{proposition}
+    Positive operators are hermitian. 
+\end{proposition}
+\begin{proof}
+    By the last result \(A = B + iC\) where \(B,C\) are hermitian. Since \(B,C\) are hermitian then they have spectral decomposition
+    \begin{equation*}
+        B = \sum \lambda_i \ket{v_i}\bra{v_i}  \qquad C = \sum \gamma_j \ket{w_j}\bra{w_j}
+    \end{equation*}
+    where \(\lambda_i,\gamma_j\) are real numbers. For every \(\ket{v} \in V\)
+    \begin{align*}
+        \bra{v} B \ket{v} &= \sum \lambda_i \bra{v} \ket{v_i}\bra{v_i} \ket{v} \\
+        &= \sum \lambda_i \norm{\braket{v_i}{v}}^2
+    \end{align*}
+    is a real number. Therefore, since
+    \begin{equation*}
+        \bra{v} A \ket{v} = \bra{v} B \ket{v}  + i \bra{v} C \ket{v}
+    \end{equation*}
+    is a real number as well then 
+    \begin{equation*}
+        \bra{v} C \ket{v} = 0 \qquad \forall \ket{v}
+    \end{equation*}
+    Then for any \((\gamma_j, \ket{w_j})\)
+    \begin{equation*}
+        \bra{w_j} C \ket{w_j} = \gamma_j \braket{w_j}{w_j} = 0
+    \end{equation*}
+    since \(w_j\) are orthonormal then \(\gamma_j = 0\) and hence \(C = 0 \).
+\end{proof}
+\section{Tensor product}
+Let \(\ket{v} \in V\) and \(\ket{w} \in W\) then 
+\begin{equation*}
+    \ket{v} \otimes \ket{w} = \begin{bmatrix}
+        v_1w_1 & v_1w_2 & \dots & v_1w_m \\
+        \vdots & \vdots & \ddots & \vdots\\
+        v_nw_1 & v_nw_2 & \dots & v_nw_m
+    \end{bmatrix}
+    \qquad V \otimes W = \set<\ket{v} \otimes \ket{w}>{\ket{v} \in V, \ket{w} \in W}
+\end{equation*}
+If \(\ket{i}\) and \(\ket{j}\) are orthonormal basis for \(V\) and \(W\) then \(\ket{i} \otimes \ket{j}\) is a basis for \(V \otimes W\). For operators 
+\begin{equation*}
+    \bracket{A \otimes B } \bracket{\ket{v} \otimes \ket{w}} = A \ket{v} \otimes B \ket{w}
+\end{equation*}
+with the Kroneker matrix representation
+\begin{equation*}
+    A \otimes B = \begin{bmatrix}
+        A_{11}B & A_{12}B & \dots & A_{1n}B \\
+        \vdots & \vdots & \ddots & \vdots\\
+        A_{m1}B & A_{m2}B & \dots & A_{mn}B
+    \end{bmatrix}
+\end{equation*}
+If \(A\) is \(m \times n \) and \(B\) is \(p \times q\) then \(A \times B\) is \(mp \times nq\).
+\begin{proposition}
+    If \(V\) and \(W\) are inner product space, then we can define the following inner product for \(V \otimes W\)
+    \begin{equation*}
+        \braket{x \otimes y}{u \otimes v}= \braket{x}{u} \braket{y}{v}
+    \end{equation*}
+\end{proposition}
+
+\begin{proposition} \leavevmode
+    \begin{enumerate}
+        \item Tensor product of unitary operators is unitary.
+        \item Tensor product of hermitian operators is hermitian.
+        \item Tensor product of projection operators is projection.
+        \item Tensor product of positive operator is positive.
+    \end{enumerate}
+\end{proposition}
+\section{Operator function}
+Let \(A\) be a normal operator then 
+\begin{equation*}
+    \func{f}{A} = \sum \func{f}{\lambda_i} \ket{i}\bra{i}
+\end{equation*}
+
+trace of a matrix is the sum of its diagonal elements. 
+\begin{equation*}
+    \trace A = \sum a_{ii}
+\end{equation*}
+\begin{proposition}
+    \begin{enumerate}
+        \item it is commutative 
+        \begin{equation*}
+            \trace AB =  \trace BA
+        \end{equation*}
+        \item it is linear 
+        \begin{equation*}
+            \trace A + cB = \trace A + c \trace B
+        \end{equation*}
+        \item it is invariant under unitary transformation
+        \begin{equation*}
+            \trace U A U^{\dagger} = \trace A
+        \end{equation*}
+    \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+    Let \(\func{\calL}{V}\) be all the linear function on \(V\). Give a basis for \(\func{\calL}{V}\) and show that 
+    \begin{equation*}
+        \angleBracket{A,B} = \trace A^{\dagger}B
+    \end{equation*}
+    is an inner product. Find a basis for hermitian matrices for \(\func{\calL}{V}\).
+\end{proposition}
+
+\section{Commutators and anti-commutators}
+\begin{equation*}
+    \squareBracket{A,B} = AB - BA  \qquad \curlyBracket{A,B} = AB + BA
+\end{equation*}
+\begin{theorem}[Simultaneous diagonalization theorem] Suppose \(A\) and \(B\) are hermitian. They commute if and only if there exists an orthonormal basis such that \(A\) and \(B\) are both diagonalizable with respect to that basis.
+\end{theorem}
+
+\section{Polar decomposition and SVD}
+\begin{theorem}
+    Let \(A\) be a linear operator on \(V\). There exists an unitary operator and positive operators \(J\) and \(K\) such that 
+    \begin{equation*}
+        A = UJ = KU
+    \end{equation*}
+    \(UJ\) is the left PD and \(KU\) is the right PD. \(J,K\) are unique and defined by \(J = \sqrt{A^{\dagger }A}\) and \(L = \sqrt{AA^{\dagger}}\). If \(A\) is invertible then \(U\) is unique. 
+\end{theorem}
+
+\begin{theorem}
+    Let \(A\) be a square matrix. There are unitary matrices \(U,V\) and diagonal matrix \(D\) with non-negative entries such that 
+    \begin{equation*}
+        A = UDV
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    By PD, \(A = SJ\) and from spectral theorem \(J = TDT^{\dagger}\) where \(T\) is unitary and \(D\) is diagonal. Therefore \(A = U D T^{\dagger}\) where \(U = ST\).
+\end{proof}

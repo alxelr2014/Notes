@@ -1,0 +1,184 @@
+
+\chapter{The One-dimensional Harmonic Oscillator}
+\section{Introduction}
+Simplest potential \(\func{V}{x} = 1/2 kx^2\) with angular frequency \(\omega = \sqrt{\frac{k}{m}}\). Near a stable equilibrium, any system can approximated by an equivalent harmonic oscillator. The energy levers are discrete and equidistant, \(E_n - E_{n - 1} = \hbar \omega\). The transition from lever \(n\) to \(n + 1\) or \(n - 1\) corresponds to the \textit{creation} and \textit{annihilation} of a quantum of energy \(\hbar \omega\).
+
+The harmonic oscillator is applicable in the analysis of a myriad of physical phenomena. For example, the electromagnetic field is formally equivalent to a set of independent harmonic oscillator, the quantization of the field is obtained by quatizing these oscillators associated with the various normal modes of the cavity.  
+\subsection{Eigenvalues of Hamiltonian}
+We know that \(\commutator{X}{P} = i\hbar\), \(H = \frac{P^2}{2m} + \dfrac{1}{2}m \omega^2 X^2 \), and the eigenvalues of \(H\) statisfy the following equation.
+\begin{equation*}
+    H \ket{\psi} = E \ket{\psi}
+\end{equation*}
+The observables \(X\) and \(P\) have dimensions of length and momentum, respectively. Then, let
+\begin{align*}
+    \hat{X} &= \sqrt{\dfrac{m\omega}{\hbar}} X &\hat{P} &= \dfrac{1}{\sqrt{m\omega \hbar}} P
+\end{align*}
+Hence, \(\commutator{\hat{X}}{\hat{P}} = i\) and
+\begin{equation*}
+    H = \frac{1}{2} \omega \hbar \hat{P}^2 + \dfrac{1}{2}\omega \hbar \hat{X}^2
+\end{equation*}
+Let \(\hat{H} = \frac{1}{2} (\hat{P}^2 + \hat{X}^2)\) and thus
+\begin{equation*}
+    H = \hbar \omega \hat{H}
+\end{equation*}
+As a result, we can instead find the solutions to
+\begin{equation*}
+    \hat{H} \ket{\phi_{\nu}^i} = \varepsilon_{\nu} \ket{\phi_{\nu}^i}
+\end{equation*}
+where \(\varepsilon_v\) are dimensionless. \(\nu\) are in an index set \(\calV\) and \(i\) determines the basis of the eigenspace corresponding to \(\varepsilon_{\nu}\).
+
+Let \(a = \dfrac{1}{\sqrt{2}} \bracket{\hat{X} + i \hat{P}}\) and \(a^{\dagger} = \dfrac{1}{\sqrt{2}} \bracket{\hat{X} - i \hat{P}}\), inspired by \(x^2 + y^2 = (x + iy)(x - iy)\), we want to factor \(\hat{H}\) in terms of \(a\) and \(a^{\dagger}\). We have
+\begin{equation*}
+    \hat{X} = \frac{1}{\sqrt{2}} (a^{\dagger} + a) \ \ \ \hat{P} = \frac{i}{\sqrt{2}} (a^{\dagger} - a)
+\end{equation*}
+and
+\begin{equation*}
+    \commutator{a}{a^{\dagger}} = \dfrac{1}{2} \commutator{\hat{X} + i \hat{P}}{\hat{X} - i \hat{P}} = \dfrac{-i}{2} \commutator{\hat{X}}{\hat{P}} + \dfrac{i}{2} \commutator{\hat{P}}{\hat{X}} = \frac{1}{2} + \frac{1}{2} = 1
+\end{equation*}
+hence
+\begin{align*}
+    a^{\dagger} a & = \frac{1}{2} \bracket{\hat{X}^2 + i \hat{X}\hat{P} - i \hat{P}\hat{X} + \hat{P}^2}                                \\
+                  & = \frac{1}{2} \bracket{\hat{X}^2  + \hat{P}^2} + \frac{i}{2} \commutator{\hat{X}}{\hat{P}} = \hat{H} - \frac{1}{2}
+\end{align*}
+Let \(N = a^{\dagger} a\), then \(N^{\dagger} = (a^{\dagger} a)^{\dagger} = a^{\dagger} a = N\), hence \(N\) is Hermitian. Since \(\hat{H} = N + \frac{1}{2}\), then the eigenvectors of \(\hat{H}\) are the eigenvectors of \(N\) and vice versa. Moreover, if \(\bracket{\varepsilon_{\nu},\ket{\phi_{\nu}^i}}\) is an eigenvalue/vector pair  of \(\hat{H}\), \(\bracket{\varepsilon_{\nu} - \frac{1}{2},\ket{\phi_{\nu}^i}}\) is an eigenvalue/vector pair of \(N\) and vice versa.  If  \begin{equation*}
+    N\ket{\phi_{\nu}^i} = \vartheta_{\nu} \ket{\phi_{\nu}^i} \implies H \ket{\phi_{\nu}^i} = \hbar \omega \hat{H} \ket{\phi_{\nu}^i} = \hbar \omega \bracket{\vartheta_{\nu} + \frac{1}{2}} \ket{\phi_{\nu}^i}
+\end{equation*}
+and therefore \(E_{\nu} = \hbar \omega \bracket{\vartheta_{\nu}  + \frac{1}{2}}\).
+\subsection{Determination of spectrum}
+\begin{lemma}
+    The eigenvalues of \(N\) are positive or zero.
+\end{lemma}
+\begin{prooflemma}
+    Observe that \(N\) is a positive operator. But, suppose \(\bracket{\vartheta_{\nu}, \ket{\phi_{\nu}^i}}\) is an eigenvalue/vector pair of \(N\).
+    \begin{align*}
+        \bra{\phi_{\nu}^i} N \ket{\phi_{\nu}^i} & = \bra{\phi_{\nu}^i} a^{\dagger} a \ket{\phi_{\nu}^i} = \braket{a \phi_{\nu}^i }{a \phi_{\nu}^i} = \norm{a \ket{\phi_{\nu}^i}}^2 \\
+                                                & =  \vartheta_{\nu} \braket{\phi_{\nu}^i }{\phi_{\nu}^i} = \vartheta_{\nu} \norm{\ket{\phi_{\nu}^i}}^2                            \\
+        \implies                                & \vartheta_{\nu} \norm{\ket{\phi_{\nu}^i}}^2 = \norm{a \ket{\phi_{\nu}^i}}^2 \implies \vartheta_{\nu} \geq 0
+    \end{align*}
+\end{prooflemma}
+
+\begin{lemma}
+    \
+    \begin{enumerate}
+        \item If \(\vartheta_{\nu} = 0\), then \(a \ket{\phi_{\nu}^i} = 0\).
+        \item If \(\vartheta_{\nu} > 0\),  then \(a \ket{\phi_{\nu}^i}\) is an eigenvector of \(N\) with eigenvalue \(\vartheta_{\nu} - 1\).
+        \item \(a^{\dagger} \ket{\phi_{\nu}^i}\) is always non-zero and it is an eigenvector of \(N\) with value \(\vartheta_{\nu} + 1\).
+    \end{enumerate}
+\end{lemma}
+
+\begin{prooflemma}
+    The first part can be readily proved from the proof of the previous lemma. Note that,
+    \begin{align*}
+        N a \ket{\phi_{\nu}^i} & = a^{\dagger }a^2 \ket{\phi_{\nu}^i} = \commutator{a^{\dagger}}{a} a \ket{\phi_{\nu}^i} + a a^{\dagger} a \ket{\phi_{\nu}^i} \\
+                               & = - a \ket{\phi_{\nu}^i} + a N\ket{\phi_{\nu}^i}                                                                             \\
+                               & = - a \ket{\phi_{\nu}^i} + \vartheta_{\nu} a\ket{\phi_{\nu}^i}                                                               \\
+                               & =(\vartheta_{\nu} - 1) a \ket{\phi_{\nu}^i}                                                                                  \\
+    \end{align*}
+    Then,
+    \begin{align*}
+        \norm{a^{\dagger} \ket{\phi_{\nu}^i}}^2 & = \braket{a^{\dagger} \phi_{\nu}^i}{a^{\dagger} \phi_{\nu}^i}       \\
+                                                & = \bra{\phi_{\nu}^i} a a^{\dagger} \ket{\phi_{\nu}^i}               \\
+                                                & = \bra{\phi_{\nu}^i} N + 1 \ket{\phi_{\nu}^i}                       \\
+                                                & = \bracket{\vartheta_{\nu} + 1} \braket{\phi_{\nu}^i}{\phi_{\nu}^i}
+    \end{align*}
+    which according to previous lemma \(\vartheta_{\nu} \geq 0 \implies \vartheta_{\nu} + 1 > 0\). Lastly,
+    \begin{align*}
+        N a^{\dagger} \ket{\phi_{\nu}^i} & = \commutator{N}{a^{\dagger}} \ket{\phi_{\nu}^i} + a^{\dagger} N \ket{\phi_{\nu}^i} \\
+                                         & = a^{\dagger} \ket{\phi_{\nu}^i} + a^{\dagger} \vartheta_{\nu} \ket{\phi_{\nu}^i}   \\
+                                         & = (\vartheta_{\nu} + 1) a^{\dagger} \ket{\phi_{\nu}^i}
+    \end{align*}
+    which was what was wanted.
+\end{prooflemma}
+
+\begin{lemma}
+    The \(\vartheta_{\nu}\) are non-negative integer.
+\end{lemma}
+
+\begin{prooflemma}
+    Suppose \(\vartheta_{\nu}\) is not an integer. Then, there exists \(n\) such that \(n < \vartheta_{\nu} < n + 1\). Consider \(\ket{\phi_{\nu}^i}, a \ket{\phi_{\nu}^i} , \dots, a^n\ket{\phi_{\nu}^i}\). By the last Lemma,
+    \begin{equation*}
+        Na^{p}\ket{\phi_{\nu}^i} = \bracket{\vartheta_{\nu} - p} a^p \ket{\phi_{\nu}^i}
+    \end{equation*}
+    Applying \(a\) to \(a^n \ket{\phi_{\nu}^i}\), since \(\vartheta_{\nu} > n\) gives an eigenvalue \(\vartheta_{\nu} - n -1 < 0\) which is a contradiction. Therefore, \(\vartheta_{\nu}\) are non-negative integers.
+\end{prooflemma}
+When \(\vartheta_{\nu} = n\), \(E_n = (n + 1/2) \hbar \omega\). Therefore, energy of harmonic oscillator is quantized. Moreover, \(a\) is called the annihilation operator as it disappears \(\hbar \omega\) energy and \(a^{\dagger}\) is called the creation operator.
+
+\subsection{Degeneracy of the eigenvalues}
+\begin{lemma}
+    The ground state is a non-degenerate. When \(n = 0\),
+    \begin{equation*}
+        N \ket{\phi_0^i} = i \iff a \ket{\phi_0^i} = 0
+    \end{equation*}
+    That is,
+    \begin{equation*}
+        \dfrac{1}{\sqrt{2}} \bracket{ \sqrt{\dfrac{m \omega}{\hbar}} X +
+            \dfrac{i}{\sqrt{m \omega \hbar}} P } \ket{\phi_0^i} = 0
+    \end{equation*}
+    In \(\set{\ket{x}}\) representation
+    \begin{equation*}
+        \dfrac{1}{\sqrt{2}} \bracket{ \sqrt{\dfrac{m \omega}{\hbar}} x -
+            \sqrt{\dfrac{\hbar}{m \omega }} \frac{\diffOperator}{\diffOperator x} } \func{\phi_0^i}{x}= 0
+    \end{equation*}
+    Thus,
+    \begin{equation*}
+        \frac{\diffOperator}{\diffOperator x}\func{\phi_0^i}{x}= - \dfrac{m \omega}{\hbar} x \func{\phi_0^i}{x} \implies \func{\phi_0^i}{x} = C \func{\exp}{- \frac{m \omega}{2 \hbar} x^2}
+    \end{equation*}
+    All solutions to \(N \ket{\phi_0^i}\) are linearly dependent. Therefore, \(E_0\) level is non-degenerate. We claim that given \(E_n\) is not degenerate, then \(E_{n+ 1}\) is non-degenerate. Easy with the operators. Note that,
+    \begin{equation*}
+        \braket{x}{\phi_0} = C \func{\exp}{- \frac{m \omega}{2 \hbar} x^2} \ \text{and} \ \ket{\phi_n} = c_n (a^{\dagger})^n \ket{\phi_0}
+    \end{equation*}
+    where \(C = \sqrt{\frac{m \omega}{ 2 \pi \hbar}}\). This and \(c_n = \frac{1}{\sqrt{n!}}\) creats an orthonormalized \(\ket{\phi_n}\) is basis for \(\scrE_x\).
+\end{lemma}
+\section{Eigenstate of the Hamiltonian}
+Suppose \(N\) and \(H\) are observables. They are C.S.C.O. Let \(\ket{\phi_0}\) be such that \(a \ket{\phi_0} = 0\) and \(\braket{\phi_0}{\phi_0} = 1\). Let \(\ket{\phi_1} = c_1 a^{\dagger} \ket{\phi_0}\) such that \(\ket{\phi_1}\) is normalized.
+\begin{align*}
+    \braket{\phi_1}{\phi_1} & = \abs{c_1}^2 \braket{a^{\dagger} \phi_0}{a^{\dagger} \phi_0} \\
+                            & = \abs{c_1}^2 \bra{\phi_0} aa^{\dagger} \ket{\phi_0}          \\
+                            & = \abs{c_1}^2 \bra{\phi_0} 1 + a^{\dagger} a\ket{\phi_0}      \\
+                            & = \abs{c_1}^2 = 1 \implies c_1 = 1
+\end{align*}
+Let \(\ket{\phi_2} = c_2 a^{\dagger} \ket{\phi_1}\) such that \(\ket{\phi_2}\) is normalized.
+\begin{align*}
+    \braket{\phi_2}{\phi_2} & = \abs{c_2}^2 \braket{a^{\dagger} \phi_1}{a^{\dagger} \phi_1}       \\
+                            & = \abs{c_2}^2 \bra{\phi_1} aa^{\dagger} \ket{\phi_1}                \\
+                            & = \abs{c_2}^2 \bra{\phi_1} 1 + a^{\dagger} a\ket{\phi_1}            \\
+                            & = \abs{c_2}^2 + \abs{c_2}^2 \bra{\phi_1} N\ket{\phi_1}              \\
+                            & = \abs{c_2}^2 + \abs{c_2}^2 = 1  \implies c_2 = \dfrac{1}{\sqrt{2}}
+\end{align*}
+and similarly for \(\ket{\phi_n}\)
+\begin{align*}
+    \braket{\phi_n}{\phi_n} & = \abs{c_{n}}^2 \braket{a^{\dagger} \phi_{n-1}}{a^{\dagger} \phi_{n-1}}  \\
+                            & = \abs{c_n}^2 \bra{\phi_{n-1}} aa^{\dagger} \ket{\phi_{n-1}}             \\
+                            & = \abs{c_n}^2 \bra{\phi_{n-1}} 1 + a^{\dagger} a\ket{\phi_{n-1}}         \\
+                            & = \abs{c_n}^2 + \abs{c_n}^2 \bra{\phi_{n-1}} N\ket{\phi_{n-1}}           \\
+                            & = \abs{c_n}^2 + (n-1)\abs{c_n}^2 = 1  \implies c_n = \dfrac{1}{\sqrt{n}}
+\end{align*}
+Therefore,
+\begin{equation*}
+    \ket{\phi_n} = \dfrac{1}{\sqrt{n!}} \bracket{a^{\dagger}}^n \ket{\phi_0}
+\end{equation*}
+with \(\set{\ket{\phi_n}}\) statisfying both orthonormality and closure.
+\subsection{Action of operators}
+\begin{equation*}
+    a^{\dagger} \ket{\phi_n} = \sqrt{n + 1} \ket{\phi_{n+1}} \ \ \ a \ket{\phi_n} = n \ket{\phi_{n-1}}
+\end{equation*}
+\subsection{wavefunctions}
+\begin{equation*}
+    \func{\phi_0}{x} = \bracket{\frac{m\omega}{\pi \hbar}}^{\frac{1}{4}} \func{\exp}{-\dfrac{m \omega}{2 \hbar} x^2}
+\end{equation*}
+and
+\begin{equation*}
+    \bra{x}a^{\dagger} = \frac{1}{\sqrt{2}} \bracket{\sqrt{\dfrac{m\omega}{\hbar}} x - \sqrt{\dfrac{\hbar}{m \omega}} \frac{\diffOperator}{\diffOperator x}}
+\end{equation*}
+\section{Mean values }
+\begin{equation*}
+    \bra{\phi_n}X \ket{\phi_n} = \bra{\phi_n}P \ket{\phi_n} = 0
+\end{equation*}
+and
+\begin{equation*}
+    \bra{\phi_n}X^2 \ket{\phi_n} = \bracket{n + \frac{1}{2}} \frac{\hbar}{m \omega}, \ \ \ \bra{\phi_n}P^2 \ket{\phi_n} = \bracket{n + \frac{1}{2}} m \omega \hbar
+\end{equation*}
+thus
+\begin{equation*}
+    \Delta X \Delta P \geq \bracket{n + \frac{1}{2}} \hbar \omega
+\end{equation*}
