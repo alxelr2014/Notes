@@ -1,0 +1,671 @@
+\chapter{Measure Theory}
+\section{Bernoulli sequences}
+Let \(\calB\) be the set of all Bernoulli sequences. \(\calB\) is uncountable.
+\begin{proposition}
+    If we delete a countable subset of \(\calB\), we can index what is left by the points on the real interval \(I = \opcl{0}{1}\). That is, there exists an injective function \(f: I \to \calB\).
+\end{proposition}
+\begin{proof}
+    Each \(\omega \in I\) can be written as 
+    \begin{align*}
+        \omega &= \sum_{i = 1}^{\infty} \dfrac{a_i}{2^i} \qquad a_i = 0,1\\
+        &= 0.a_1a_2\dots
+    \end{align*}
+    Since \(\omega\) may not have a unique binary representation, we will only consider non-terminating expansion for \(\omega\). Then, by mapping \(1\) to \(H\) and \(0\) to \(T\) we get an injective function from \(I\) to \(\calB\). To show this, suppose \(\calB_{\deg}\) is the set of all Bernoulli sequences that after a certain point degenerates to all tails.
+    \begin{lemma}
+        \(\calB_{\deg}\) is countable.
+    \end{lemma}
+    \begin{prooflemma}
+        Let \(\calB_{\deg}^k\) be all degenerate Bernoulli sequences where we have only tails after \(k_{\cardinalTH}\) toss. Then, \(\calB_{\deg}^k\) is finite and 
+        \begin{equation*}
+            \calB_{\deg} = \bigcup_{k = 1}^{\infty} \calB_{\deg}^k
+        \end{equation*}
+        is the countable union of finite set and hence \(\calB_{\deg}\) is countable.
+    \end{prooflemma}
+
+    This concludes the proof.
+\end{proof}
+
+\begin{definition}[Borel Principle]
+    Suppose \(E\) is a probabilistic event occuring in certain sequences. Let \(\calB_{E}\) denote the subset of \(\calB\) for which that event occurs. Let \(I_E\) be the corresponding subset of \(I\), then 
+    \begin{equation*}
+        \prob{E} = \func{\mu_L}{I_E}
+    \end{equation*}
+    where \(\mu_L\) is Lebesgue measure.
+\end{definition}
+
+\begin{example}
+    Start with \(X\) dollars and at each toss you win \(1\) dollars if heads shows up and ypu lose \(1\) dollars if tail shows up. What is the probability you lose all your original stake?
+
+    For \(\omega \in I\) define the \(k_{\cardinalTH}\) \textit{Radamcher} function, \(R_k\), by 
+    \begin{align*}
+        \func{R_k}{\omega} &= 2a_k - 1\\
+        &= \begin{cases}
+            +1 & a_k = 1\\
+            -1 & a_k = 0
+        \end{cases}
+    \end{align*}
+    Then, let \(\func{S_k}{\omega}\) be the total amount won or loss at \(k_{\cardinalTH}\) toss.
+    \begin{equation*}
+        \func{S_k}{\omega} = \sum_{l = 1}^k \func{R_l}{\omega}
+    \end{equation*}
+    Thus, the event that we lose our stake at \(k_{\cardinalTH}\) is 
+    \begin{equation*}
+        I_{E_k} = \set[[\Bigg]]<\omega \in I>{\func{S_l}{\omega} > -X \ \mathrm{for} \ l < k, \func{S_k}{\omega} = -X}
+    \end{equation*}
+    hence 
+    \begin{equation*}
+        I = \bigcup_{l = 1}^{\infty} I_{E_k}
+    \end{equation*}
+    is the event that we loss all our money eventually. We will however postpone calculating \(\func{\mu_L}{I_E}\) as it is not finite union of intervals.
+\end{example}
+
+\section{Weak law of large numbers}
+For some fixed \(\epsilon\) let
+\begin{equation*} 
+    I_N = \set<\omega \in I>{\abs{\dfrac{\func{s_N}{\omega}}{N} - \dfrac{1}{2}} > \epsilon}
+\end{equation*}
+where \(\func{s_N}{\omega} = a_1 + a_2 + \dots + a_N\). Then, \(I_N\) represents the event that the number of heads and tails \underline{are not} roughly equal.
+\begin{theorem}[Weak law of large numbers]
+    WLLN states 
+    \begin{equation*}
+        \func{\mu_L}{I_N} \to 0 \ \mathrm{as} \ N \to \infty
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Equivalently, for 
+    \begin{equation*} 
+        A_N = \set[[\Big]]<\omega \in I>{\abs{\func{S_N}{\omega}} > 2N \epsilon}
+    \end{equation*}
+    then
+    \begin{equation*}
+        \func{\mu_L}{A_N} \to 0  \ \mathrm{as} \ N \to \infty
+    \end{equation*}
+    \begin{lemma}[Chebyshev's inequality]
+        Let \(f\) be a non-negative, piecewise constant function on \(\opcl{0}{1}\). Let \(\alpha > 0\) be given. Then, 
+        \begin{equation*}
+            \func{\mu_L}{\set[[\Big]]<\omega \in I>{\func{f}{\omega} > \alpha}} < \dfrac{1}{\alpha} \int_{0}^1 f \diffOperator x
+        \end{equation*}
+        where \(\int\) is the Riemann integral.
+    \end{lemma}
+    \begin{prooflemma}
+        Since \(f\) is piecewise constant then there is a parition \(0 = x_1 < \dots < x_k = 1\) such that \(f = c_i\) on \(\opcl{x_i}{X_{i+1}}\) for \(i= 1, \dots k - 1\). Then, 
+        \begin{align*}
+            \int_{0}^1 f \diffOperator x &= \sum_{i = 1}^{k-1} c_i \bracket{x_{i+1} - x_i} \\
+            &\geq  \sum_{c_i > \alpha} c_i \bracket{x_{i+1} - x_i} \\
+            &> \alpha  \sum_{c_i > \alpha}  x_{i+1} - x_i = \alpha \func{\mu_L}{\set[[\Big]]<\omega \in I>{\func{f}{\omega} > \alpha}}
+        \end{align*}
+        which proves the Chebyshev's inequality.
+    \end{prooflemma}
+    Then, we have 
+    \begin{equation*}
+        A_N = \set[[\Big]]<\omega \in I>{\abs{\func{S_N}{\omega}} > 2N \epsilon}= \set[[\Big]]<\omega \in I>{\bracket{\func{S_N}{\omega}}^2 > 4N^2 \epsilon^2}
+    \end{equation*}
+    and hence 
+    \begin{align*}
+        \func{\mu_L}{A_N} &< \dfrac{1}{4N^2\epsilon^2} \int_0^1 \bracket{\func{S_N}{\omega}}^2 \diffOperator \omega\\
+        &= \dfrac{1}{4N^2\epsilon^2} \squareBracket{\sum_i \int_0^1 \bracket{\func{R_i}{\omega}}^2 \diffOperator \omega + \sum_{i\neq j} \int_0^1 \func{R_i}{\omega}\func{R_j}{\omega} \diffOperator \omega }\\
+        &= \dfrac{1}{4N^2\epsilon^2} N = \dfrac{1}{4N \epsilon^2}
+    \end{align*}
+    Therefore, as \(N\) approaches infinity, \(\func{\mu}{A_N}\) approaches zero.
+\end{proof}
+
+Now we want to show that for a ``typical'' Bernoulli sequence 
+\begin{equation}\label{eq:typicalBernoulli}
+    \dfrac{1}{2} - \dfrac{\func{s_N}{\omega}}{N} \to 0 \ \mathrm{as} \ N \to \infty
+\end{equation}
+and by ``typical'' we mean \Cref{eq:typicalBernoulli} fails on a set of zero proability or the equivalent event has measure zero.
+\begin{definition}
+    A set \(A \subset \Reals\) has Lebesgue measure zero if for every \(\epsilon > 0\), there exists a countable covering \(\set{A_i}\) of \(A\) by intervals such that 
+    \begin{equation*}
+        \sum_{i = 1}^{\infty} \func{\mu_L}{A_i} < \epsilon
+    \end{equation*}
+\end{definition}
+\begin{itemize}
+    \item Subset of a measure zero are measure zero.
+    \item A signle point has a measure zero.
+    \item countable union of measure zeros is a measure zero.
+\end{itemize}
+
+Let \(N = \set<\omega \in I>{ \frac{\func{s_N}{\omega}}{N} \to \frac{1}{2}}\). \(N\) is called the set of \textbf{normal numbers}. Let \(N^c\) be the complement of \(N\).
+\begin{theorem}[Strong law of large numbers]
+    SLLN states that \(N^c\) has measure zero.
+\end{theorem}
+
+\begin{proof}
+    Let \(A_n = \set<\omega \in I>{\abs{\func{S_n}{\omega}} > \epsilon n}\) then 
+    \begin{equation*}
+        A_n = \set[[\Big]]<\omega \in I>{\bracket{\func{S_n}{\omega}}^4 > \epsilon^4 n^4}
+    \end{equation*}
+    By Chebyshev's inequality
+    \begin{align*}
+        \func{\mu_L}{A_n} &< \dfrac{1}{n^4 \epsilon^4} \int_0^1 \bracket{\func{S_n}{\omega}}^4 \diffOperator \omega \\
+        &= \dfrac{1}{n^4 \epsilon^4} \bracket{n + 3n(n-1)} \leq \dfrac{3}{\epsilon^4 n^2}
+    \end{align*}
+    \begin{lemma}
+        Given \(\delta > 0\) there exists a sequence \(\epsilon_1, \epsilon_2, \dots \) such that \(\epsilon \to 0\) and 
+        \begin{equation*}
+            \sum_{n = 1}^{\infty} \dfrac{3}{n^2 \epsilon_n^4} < \delta
+        \end{equation*}
+    \end{lemma}
+    \begin{prooflemma}
+        Choose \(\epsilon_n^4 = cn^{-1/2}\) for some constant \(c\). 
+        \begin{equation*}
+            \sum_{n = 1}^{\infty} \dfrac{3}{n^2 \epsilon_n^4} =\dfrac{3}{c} \sum_{n = 1}^{\infty} n^{-\frac{3}{2}} = \dfrac{3}{c}L < \delta
+        \end{equation*}
+        if \(c > \dfrac{3L}{\delta}\).
+    \end{prooflemma}
+    Finally, Let \(B_n = \set<\omega \in I> {\abs{\func{S_n}{\omega}} > \epsilon_n n}\). Then, by our first computation 
+    \begin{equation*}
+        \func{\mu_L}{B_n} < \dfrac{3}{\epsilon_n^4 n^2}
+    \end{equation*}
+    and by the lemma 
+    \begin{equation*}
+        \sum  \func{\mu_L}{B_n} < \dfrac{3}{\epsilon_n^4 n^2} < \delta 
+    \end{equation*}
+    It remains to show that \(N^c \subset \cup_{n = 1}^{\infty} B_n\) which is obvious. As every \(\omega \in N^c\) is some \(B_n\). Therefore, \(N^c\) has measure zero.
+\end{proof}
+\section{Measure theory}
+\subsection{Measure}
+\begin{definition}
+    A \textbf{ring} of sets in \(X\) is a non-empty collection \(\scrR\) of subsets of \(X\) satisfying following two properties
+    \begin{enumerate}
+        \item \(A,B \in \scrR \implies A \cup B \in \scrR\).
+        \item \(A,B \in \scrR \implies A - B \in \scrR\).
+    \end{enumerate}
+\end{definition}
+\begin{lemma}
+    If \(A,B \in \scrR\), then \(A \cap B \in \scrR\). Moreover, \(R\) is a ring if and only if it is closed under intersection and symmetric difference.
+\end{lemma}
+\begin{proof}
+    \begin{equation*}
+        A \cap B = \squareBracket{(A \cup B) - (A - B)} - (B - A)
+    \end{equation*}
+    \
+\end{proof}
+\begin{example}
+    \(\powerSet{X}\) is a ring.
+\end{example}
+
+\begin{definition}
+    A \textbf{semi-ring} is a non-empty collection of \(\scrS\) such that 
+    \begin{enumerate}
+        \item \(\emptyset \in \scrS\).
+        \item \(A,B \in \scrS \implies A \cap B \in \scrS\).
+        \item \(A,B \in \scrS \implies A - B = \cup_{i = 1}^k C_i\) where \(C_i \in \scrS\) are disjoint.
+    \end{enumerate}
+    The ring generated by a semi-ring \(\scrS\) is denoted by \(\func{\calR}{\scrS}\).
+\end{definition}
+
+\begin{theorem}
+    Suppose \(\scrS\) is a semi-ring. Then, \(A \in \func{\calR}{\scrS}\) if and only if \(A = \cup_{i = 1}^k C_i\) for disjoint \(C_i \in \scrS\).
+\end{theorem}
+
+\begin{example}
+    Let \(\scrR_{\Leb} = \set<A>{A = \bigcup_{i = 1}^n A_i}\) where \(A_i\) are disjoint \(k\)-cells in \(\Reals^k\). \(\scrR_{\Leb}\) is a ring. Why?
+\end{example}
+
+\begin{definition}
+    Let \(\mu:\scrR \to \ExtReals^+_0\) where \(\scrR\) is a ring of some set \(X\), then \(\mu\) is \textbf{additive} if \(\func{\mu}{A \cup B} = \func{\mu}{A} + \func{\mu}{B}\) whenever \(A,B \in \scrR\) are disjoint.
+\end{definition}
+
+\begin{proposition}
+    Let \(\scrR\) be a ring of \(X\) and \(\mu: \scrR \to \ExtReals^+_0\) is additive, then 
+    \begin{enumerate}
+        \item \(\func{\mu}{\emptyset} = 0\).
+        \item (Monotonicity) If \(A,B \in \scrR\) with \(A \subset B \implies \func{\mu}{A} \geq \func{\mu}{B}\).
+        \item (Finite Addtivity) For disjoint \(A_1, \dots , A_n \in \scrR\), \(\func{\mu}{\cup_{i = 1}^n A_i} = \sum_{i = 1}^n \func{\mu}{A_i}\).
+        \item (Lattice property) \(A,B \in \scrR \implies \func{\mu}{A \cup B} + \func{\mu}{A \cap B} = \func{\mu}{A} + \func{\mu}{B}\).
+        \item (Finite subaddtivity) If \(A_1, \dots , A_n \in \scrR\), then 
+        \begin{equation*}
+            \func{\mu}{\bigcup_{i = 1}^n A_i} \leq \sum_{i = 1}^n \func{\mu}{A_i}
+        \end{equation*}
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}
+    \(\mu\) is \textbf{countably additive} on \(\scrR\) if given any countable collection \(\set{A_i} \subset \scrR\) with \(A_i\) mutually disjoint and such that \(A = \cup A_i\) is also in \(\scrR\)
+    \begin{equation*}
+        \func{\mu}{A} = \sum_{i = 1}^{\infty} \func{\mu}{A_i}
+    \end{equation*}
+    A countably additive, non-negative set function \(\mu\) on ring \(\scrR\) in \(X\) is called a \textbf{measure}.
+\end{definition}
+
+\begin{theorem}
+    If \(X = \Reals^n\), \(\scrR = \scrR_{\Leb}\) and \(\mu\) for \(n\)-cells is defined as
+    \begin{equation*}
+        \func{\mu}{A} = \prod_{i = 1}^n( b_i - a_i)
+    \end{equation*}
+    where \(A = \set<x \in \Reals^n>{x_i \in \pair{a_i}{b_i}}\)-- \(\pair{a}{b}\) denotes any of  four possibilities, \(\opop{a}{b}, \opcl{a}{b}, \clop{a}{b}\) and \(\clcl{a}{b}\). Then, \(\mu\) is a measure.
+\end{theorem}
+To prove this theorem, we consider the following lemma 
+\begin{lemma}
+    Let \(A \in \scrR_{\Leb}\) and let \(\epsilon > 0\). There exists \(F,G \in \scrR_{\Leb}\) such that \(F\) is closed and \(G\) is open, \(F \subset A \subset G\) and 
+    \begin{align*}
+        \func{\mu}{F} &\geq \func{\mu}{A} - \epsilon\\
+        \func{\mu}{G} &\leq \func{\mu}{A} + \epsilon
+    \end{align*}
+\end{lemma}
+\begin{prooflemma}
+    
+\end{prooflemma}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{definition}
+Let \(\set{A_n}\) be a sequence of sets in \(X\). Then, 
+    \begin{align*}
+        \limsup A_n &= \bigcap_{k = 1}^{\infty} \bigcup_{n = k}^{\infty} A_n & \liminf A_n &= \bigcup_{k = 1}^{\infty} \bigcap_{n = k}^{\infty} A_n
+    \end{align*}
+    \(A_n\) is said to converge to \(A\) if \(\limsup A_n = \liminf A_n = A\). \(A\) is said to be \textbf{limit set} of \(\set{A_n}\). The sequence \(\set{A_n}\) is increasing if \(A_{n} \subset A_{n+1}\) for all \(n\) and it is decreasing if \(A_n \supset A_{n+1}\) for all \(n\).
+\end{definition}
+
+It can be readily seen that if \(\set{A_n}\) is increasing/decreasing, then it is convergent to \(\cup A_n\)/ \(\cap A_n\).
+
+\begin{definition}
+    Let \(\scrR\) be a ring of subsets in \(X\) and \(\mu:\scrR \to \ExtReals^+_0\) is a set function. For any \(E \in \scrR\), \(\mu\) is said to be \textbf{continuous from below} if for all increasing sequences \(E_n\), \(\func{\mu}{E_n} \to \func{\mu}{E}\). Similarly, \(\mu\) is said to be \textbf{continuous from above} if for all decreasing sequences \(E_n\) such that \(\func{\mu}{E_i} < \infty\) for at least one \(i\), \(\func{\mu}{E_n} \to \func{\mu}{E}\). \(\mu\) is continuous at \(E\) if it is both continuous from below and  above.
+\end{definition}
+
+\begin{theorem}
+    A measure \(\mu\) is continuous at every \(E \in \scrR\). 
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{proposition}
+    Suppose \(\scrR\) is ring of subsets of \(X\) and \(\mu\) is a finite additive function.
+    \begin{itemize}
+        \item If \(\mu:\scrR \to \ExtReals^+_0\) is continuous from below at every \(E \in \scrR\), then \(\mu\) is a measure.
+        \item If \(\mu:\scrR \to \Reals^+_0\) is continuous from above at  \(\emptyset\), then \(\mu\) is a measure.
+    \end{itemize}
+\end{proposition}
+
+\subsection{Caratheodory extension}
+
+\begin{definition}
+    Let \(A\) be a subset of \(X\). A number \(l\geq 0\) is called an \textbf{approximate outer measure} of \(A\) if there exists a covering of \(A\) by countable collection of sets \(\set{A_i}\) with each \(A_i\in \scrR\) such that 
+    \begin{equation*}
+        \sum_{i = 1}^{\infty} \func{\mu}{A_i} \geq l
+    \end{equation*}
+\end{definition}
+\begin{remark}
+    \(l\) is allowed to be \(+\infty\).
+\end{remark}
+
+\begin{definition}
+    Let \(A\) be a subset of \(X\). The \textbf{outer measure} of \(A\) is the greates lower bound of the set \(\set<l>{l \ \mathrm{is an approximate outer measure}}\). 
+    \begin{equation*}
+        \func{\mu^{\ast}}{A} =  \inf \set<l>{A \subset \bigcup_{i= 1}^{\infty} A_i, \sum_{i = 1}^{\infty} \func{\mu}{A_i} \leq l}
+    \end{equation*}
+    If the set is empty, then \(\func{\mu^{\ast}}{A} = + \infty\).
+\end{definition}
+
+\begin{remark}
+    \(\mu^{\ast}: \powerSet{X} \to \ExtReals^+_0\) is not a measure. However, \(\mu^{\ast}\) is a measure on larger ring of subsets of \(X\).
+\end{remark}
+
+\begin{proposition}
+    \ 
+    \begin{enumerate}
+        \item If \(A \in \scrR\), then \(\func{\mu^{\ast}}{A} = \func{\mu}{A}\).
+        \item If \(A \subset B\), then \(\func{\mu^{\ast}}{A} \leq \func{\mu^{\ast}}{B}\).
+        \item \(\mu^{\ast}\) is countably subadditive. 
+        \begin{equation*}
+            \func{\mu^{\ast}}{\bigcup_{i=1}^{\infty} A_i}  \leq \sum_{i = 1}^{\infty} \func{\mu^{\ast}}{A_i}
+        \end{equation*}
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{definition}
+    A set \(A \subset X\) is \textbf{measurable} with respect to \(\mu\) if for all \(E \subset X\),
+    \begin{equation*}
+        \func{\mu}{E} = \func{\mu}{E \cap A} + \func{\mu}{E \cap A^c}
+    \end{equation*}
+    The set of all measurable sets with respect to \(\mu\) is denoted by \(\func{\calM}{\mu}\).
+\end{definition}
+
+\begin{proposition}
+    Let \(\mu\) be a measure defined on the ring \(\scrR\). Then, \(\func{\calM}{\mu^{\ast}}\) is a ring and \(\scrR \subset \func{\calM}{\mu^{\ast}}\).
+\end{proposition}
+
+\begin{proof}
+         \(\func{\calM}{\mu^{\ast}}\) is closed under complementing and intersection.
+\end{proof}
+
+
+\begin{definition}
+    Let \(\scrS\) be a collection of subsets of a set \(X\). \(\scrS\) is called a \textbf{\(\sigma\)-ring} if
+    \begin{enumerate}
+        \item \(\scrS\) is a ring.
+        \item \(\scrS\) is closed under countable union. That is, given \(\set{A_i} \subset \scrS\), \(\bigcup A_i \in \scrS\).
+    \end{enumerate} 
+\end{definition}
+
+\begin{theorem}
+    \(\func{\calM}{\mu^{\ast}}\) is a \(\sigma\)-ring and the restriction \(\mu^{\ast}\) on \(\func{\calM}{\mu^{\ast}}\) is a measure.
+\end{theorem}
+
+\begin{remark}
+    The extension of \(\mu\) to \(\mu^{\ast}\) is not necessarily unique. However, by placing certain requirements on \(X\) we can deduce uniqueness.
+\end{remark}
+
+\begin{definition}
+    Let \(\scrR\) be a ring of subsets in \(X\) and \(\mu:\scrR \to \ExtReals^+_0\) be a measure. \(\mu\) is \textbf{finite} if for each \(A \in \scrR\), \(\func{\mu}{A} < \infty\). \(\mu\) is \textbf{\(\sigma\)-finite} if for each \(E \in \func{\sigma}{R}\), there exists a sequence of subsets \(\set{E_n} \subset \scrR\) such that \(E \subset \cup E_n\) and \(\func{\mu}{E_n} < \infty\) for all \(n\).
+\end{definition}
+
+\begin{definition}
+    A collection of subsets \(\scrC\) is a \textbf{monotone class} if the limit set of every increasing and decreasing sequence  of \(\scrC\) is in \(\scrC\). The smallest monotone class of a collection \(\scrD\) is denoted by \(\func{\calC}{\scrD}\).
+\end{definition}
+
+\begin{theorem}
+    If \(\scrR\) is a ring and \(\scrC\) is a monotone class containing \(\scrR\), then \(\func{\sigma}{\scrR} \subset \scrC\). In fact \(\func{\sigma}{\scrR}  = \func{\calC}{\scrR}\).
+\end{theorem}
+
+\begin{corollary}
+    Let \(\scrR\) be a ring of subsets of \(X\) and \(\mu,\nu: \func{\sigma}{\scrR} \to \ExtReals^+_0\) are two measures. If \(\mu\) and \(\nu\) are finite and equal on \(\scrR\), then they are equal on \(\func{\sigma}{\scrR}\).
+\end{corollary}
+
+\begin{definition}
+    Let \(\scrD\) be a collection of subset of \(X\) and \(A \subset X\). Then 
+    \begin{equation*}
+        \scrD|_A = \set<A \cap E>{E \in \scrD}
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    Let \(\scrR\) be a ring. Then, \(\func{\sigma}{\scrR|_A} =\func{\sigma}{\scrR}|_A \).
+\end{proposition}
+
+\begin{theorem}
+    Suppose \(\scrR\) is a ring of subsets of \(X\) and \(\mu: \scrR \to \ExtReals^+_0\) is a \(\sigma\)-finite measure. The restriction of \(\mu^{\ast}\) to \(\func{\sigma}{\scrR}\) is the only extension of \(\mu\) to \(\scrR\).
+\end{theorem}
+
+\subsection{Metric extension}
+Let \(\mu:\scrR \to \Reals^+_0\) be a measure on the ring \(\scrR\). For \(A,B \in \powerSet{X}\), we define a \textit{psuedo distance} function on \(\powerSet{X}\)
+\begin{equation*}
+    \func{d}{A,B} = \func{\mu^{\ast}}{A \triangle B}
+\end{equation*}
+Note that, \(\func{d}{A,B}\) may be \(+ \infty\) and \(\func{d}{A,B} = 0\) does not imply that \(A = B\). To go around this constraint, we consider the equivalence relation \(\sim\) with \(A \sim B\) when \(\func{d}{A,B} = 0\). Then, \(d\) is metric on the equivalence classes \(\powerSet{X}/\sim\).
+\begin{proposition}
+    Suppose \(A,B,C \in \powerSet{X}\), then 
+    \begin{enumerate}
+        \item \(\func{d}{A,B} = \func{d}{B,A}\).
+        \item \(\func{d}{A,A} = 0\).
+        \item \(\func{d}{A,B} \leq \func{d}{A,C} + \func{d}{C,A}\)
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+Although, \(d\) is not quite a metric, we can still definte the notion of convergence; \(A_i \to A\) if \(\func{d}{A,A_i} \to 0\).
+
+\begin{proposition}
+    The Boolean operation in \(\powerSet{X}\) are continuous with respect to \(d\). That is, if \(A_n \to A\) and \(B_n \to B\)
+    \begin{align*}
+        A_n \cup B_n &\to A \cup B\\
+        A_n \cap B_n &\to A \cap B\\
+        A_n^c &\to A^c
+    \end{align*}
+\end{proposition}
+
+\begin{proposition}
+    \(\mu^{\ast}\) is continuous in the following sense that for \(A,B \in \powerSet{X}\) where  \(\func{\mu^{\ast}}{A}\) or \(\func{\mu^{\ast}}{B}\) is finite 
+    \begin{equation*}
+        \abs{\func{\mu^{\ast}}{A} - \func{\mu^{\ast}}{B}} \leq \func{d}{A,B}
+    \end{equation*}
+\end{proposition}
+
+\begin{definition}
+    Let \(\scrM_F\) be the closure of \(\scrR\) in \(\powerSet{X}\). That is, \(A \in \scrM_F\) whenever there exists a sequence \(\set{A_i} \subset \scrR\) such that \(\func{d}{A_i,A} \to 0\) as \(i \to \infty\).
+\end{definition}
+
+\begin{theorem}
+    \ 
+    \begin{enumerate}
+        \item \(\scrM_F\) is a ring.
+        \item For \(A \in \scrM_F\), \(\func{\mu^{\ast}}{A} < + \infty\).
+        \item \(\mu^{\ast}\) is a measure on \(\scrM_F\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{definition}
+    \(A\) is \textbf{measurable set}, \(A \in \scrM\), if there exists a sequence \(\set{A_i} \subset \scrM_F\) such that \(A = \bigcup A_i\).
+\end{definition}
+
+\begin{theorem}
+    If \(A \in \scrM\), then \(A \in \scrM_F \iff \func{\mu^{\ast}}{A} < + \infty\).
+\end{theorem}
+
+
+\begin{theorem}
+    \(\scrM\) is a \(\sigma\)-ring.
+\end{theorem}
+
+\begin{theorem}
+    If \(A_1,A_2, \dots \) is a countable collection of disjoint sets in \(\scrM\) then 
+    \begin{equation*}
+        \func{\mu^{\ast}}{\bigcup_{i = 1}^{\infty} A_i} = \sum_{i = 1}^{\infty} \func{\mu^{\ast}}{A_i}
+    \end{equation*}
+    That is, \(\mu^{\ast}\) is a measure on \(\scrM\).
+\end{theorem}
+
+We now investigate the relation between the measurablity in Caratheodory sense and metric sense. Note that, for measurablity in metric sese we assumed that \(\mu\) is a finite measure. Therefore, we assume that \(\mu^{\ast}\) is \(\sigma\)-finite with respect to \(\scrM_F\).
+
+\begin{theorem}
+    Let \(\scrR\) be a ring of subset of \(X\) and \(\mu:\scrR \to \Reals^+_0\) be a measure. If \(A \in \scrM_F\), then for every \(E \subset X\)
+    \begin{equation*}
+        \func{\mu^{\ast}}{E} = \func{\mu^{\ast}}{E \cap A} +  \func{\mu^{\ast}}{E \cap A^c}
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+    Let \(\scrR\) be a ring of subset of \(X\) and \(\mu:\scrR \to \Reals^+_0\) be a measure. If \(\func{\mu^{\ast}}{A} < \infty \) and for every \(E \subset X\)
+    \begin{equation*}
+        \func{\mu^{\ast}}{E} = \func{\mu^{\ast}}{E \cap A} +  \func{\mu^{\ast}}{E \cap A^c}
+    \end{equation*}
+    then, \(A \in \scrM_F\).
+\end{theorem}
+Therefore, from the last two theorems we conclude that if the measure space of Caratheodory extension \((X,\func{\scrM}{\mu^{\ast}},\mu^{\ast})\) is \(\sigma\)-finite, then both methods of extension result in the same extension. 
+
+\subsection{Completion of measure spaces}
+\begin{lemma}
+    Suppose \(\scrR\) is a ring of subsets of \(X\) and \(\mu:\scrR \to \ExtReals^+_0\) is measure. Furthermore, let \(\mu^{\ast}\) be the outer measure of \(\mu\). If \(\func{\mu^{\ast}}{A} = 0\), then \(A \in \func{\calM}{\mu^{\ast}}\). ESpecially, for every subset \(B \subset A\), \(\func{\mu^{\ast}}{B} = 0\) and \(B \in \func{\calM}{\mu^{\ast}}\).
+\end{lemma}
+
+\begin{definition}
+    A measure space \((X,\scrF,\mu)\) is \textbf{complete} if every subset of a null set, is in \(\scrF\) and is measure zero. 
+\end{definition}
+
+\begin{theorem}
+    Every measure space \((X,\scrF,\mu)\) can be uniquely extended to a complete measure space.
+\end{theorem}
+
+Let \((X,\overline{\scrF}, \overline{\mu})\) be the extended complete measure described above. We shall investigate how \((X,\overline{\scrF},\overline{\mu})\) is related to Caratheodory extension. Firstly, consider the following covering lemma.
+\begin{lemma}
+    Suppose \((X,\scrF,\mu)\) is a measure space. For every \(E \subset X\), there exists a \(A \in \scrF\) such that \(E \subset C\) and \(\func{\mu^{\ast}}{E} = \func{\mu}{C}\).
+\end{lemma}
+
+\begin{theorem}
+    Suppose \((X,\scrF,\mu)\) is a \(\sigma\)-finite measure space. If \((X,\overline{\scrF},\overline{\mu})\) is the completion and \((X,\func{\calM}{\mu^{\ast}},\mu^{\ast})\) is the Caratheodory extension of \((X,\scrF,\mu)\), then \(\overline{\mu} = \mu^{\ast}\) and \(\overline{\scrF} = \func{\calM}{\mu^{\ast}}\).
+\end{theorem}
+
+Let \(\mu\) be a measure on the ring \(\scrR\) and \(\scrF = \func{\sigma}{\scrR}\) and let \(\nu\) be the restriction of \(\mu^{\ast}\) to \(\scrF\).
+\begin{theorem}
+    For every \(A \subset X\), \(\func{\mu^{\ast}}{A} = \func{\nu^{\ast}}{A}\).
+\end{theorem}
+Therefore, if \((X,\scrF,\nu)\) is \(\sigma\)-finite, then its completion is the same as \((X,\func{\calM}{\mu^{\ast}},\mu^{\ast})\)
+
+\subsection{Lebesgue measure}
+
+\begin{example}
+    In the case of Lebesgue measure \(\mu_L\) on \(\scrR_{\Leb}\), since it is a \(\sigma\)-finite measure, then its metric and Caratheodory extensions are equal. The restriction of \(\mu_L^{\ast}\) to \(\func{\calM}{\mu_L^{\ast}}\), is called the \textbf{Lebesgue measure} and it is denoted by \(\lambda_1 = \lambda\). The \(\sigma\)-field \(\func{\calM}{\mu_L^{\ast}}\) is called the \textbf{Lebesgue measurable sets} and it is denoted by \(\Lambda^1 = \Lambda\).
+\end{example}
+
+\begin{proposition}
+    Every open and closed subset of \(\Reals^n\) is in \(\scrM\).
+\end{proposition}
+
+\begin{corollary}
+    All countable unions and intersection of closed and open sets are measurable.
+\end{corollary}
+
+\begin{definition}
+    The Borel sets, \(\scrB\), is the \(\sigma\)-field generated by \(\scrR_{\Leb}\).
+\end{definition}
+
+\begin{proposition}
+    \(\scrB\) contains all intervals and open sets. Moreover, it is the smallest \(\sigma\)-ring containing the open sets.
+\end{proposition}
+
+\begin{theorem}
+    If \(A \in \Lambda\), there exists a Borel set \(B \subset A\) such that \(\func{\lambda}{A - B} =0\). That is, \(A\) can be written as \(A = (A - B) \cup B\) where \(B\) is Borel set and \(\func{\lambda}{A - B} = 0\).
+\end{theorem}
+
+\begin{theorem}
+    For each \(A \subset \Reals\) we have 
+    \begin{equation*}
+        \func{\lambda^{\ast}}{A} = \inf \set<\func{\lambda}{U}>{A \subset U, U \text{ is open}}
+    \end{equation*}
+\end{theorem}
+
+\begin{corollary}
+    If \(A \in \Lambda\) and if \(\epsilon > 0\) is given, then there exists a Borel set such that \(G \supset A\) and \(\func{\lambda}{G - A} < \epsilon\).
+\end{corollary}
+
+\begin{corollary}
+    If \(A \in \Lambda\), there exsists a Borel set \(F \subset A\) with \(\func{\lambda}{A - F} < \epsilon\).
+\end{corollary}
+
+\begin{corollary}
+    If \(\mu\) is a measure on \(\Lambda\) that for each Borel set \(B\), \(\func{\mu}{B} = \func{\lambda}{B}\), then \(\mu = \lambda\).
+\end{corollary}
+
+\begin{theorem}
+    If \(E\) is a Lebesgue measurable set, then 
+    \begin{equation*}
+        \func{\lambda}{E} = \sup \set<\func{\lambda}{K}>{K \subset E, K \text{ is compact}}
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+    For each subset \(A \subset \Reals\) and \(c \in \Reals\), \(\func{\lambda^{\ast}}{A + c} = \func{\lambda^{\ast}}{A}\) and \(\func{\lambda^{\ast}}{cA} = \abs{c} \func{\lambda^{\ast}}{A}\). Moreover, if \(A\) is Lebesgue measurable, then \(A + c\) and \(cA\) are Lebesgue measurable as well.
+\end{theorem}
+
+\begin{theorem}
+    There exists a non-Lebesgue measurable set in \(\Reals\).
+\end{theorem}
+
+\subsection{Finite signed measures}
+
+\begin{definition}
+    Suppose \((X,\scrF)\) is measurable space. The set function \(\nu: \scrF \to \Reals\) is a \textbf{finite signed measure}  if it is countably additive. That is, for every sequence of disjoint subsets \(\set{A_n}\), \(\sum \func{\nu}{A_n}\) is convergent and 
+    \begin{equation*}
+        \func{\nu}{\bigcup_{i = 1}^{\infty} A_n} = \sum_{i = 1}^n \func{\nu}{A_n}
+    \end{equation*}
+    Since the order of right hand side summation does not matter, then the series is absolutely convergent.
+\end{definition}
+
+\begin{proposition}
+    \ 
+    \begin{enumerate}
+        \item \(\func{\nu}{\emptyset} = 0\).
+        \item \(\nu\) is a finitely additive.
+        \item If \(A,B \in \scrF\) and \(A \subset B\), then \(\func{\nu}{B - A} = \func{\nu}{B} - \func{\nu}{A}\).
+        \item \(\nu\) is continuous from below at every \(E \in \scrF\).
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}
+    Let \(\nu\) be a finite signed measure on \(\scrF\). For each \(A \in \scrF\), the signed finite measure \(\nu_A\) is defined as 
+    \begin{equation*}
+        \func{\nu_A}{E} = \func{\nu}{A \cap E}
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    \(\nu_A\) is a measure if and only if for every subset \(F \subset A\) that \(F \in \scrF\), \(\func{\nu}{F} \geq 0\).
+\end{proposition}
+
+\begin{proposition}
+    \ 
+    \begin{enumerate}
+        \item \(\func{\nu_{\emptyset}}{E} = 0\) for all \(E \in \scrF\).
+        \item If \(A,B \in \scrF\) and \(A \cap B = \emptyset\), then \(\nu_{A \cup B} = \nu_A + \nu_B\).
+        \item If \(A,B \in \scrF\) and \(A \subset B\), \(\nu_{B-A} = \nu_B - \nu_A\).
+        \item If \(A,B \in \scrF\), \(\nu_{A \cap B} = (\nu_A)_B\).
+        \item If \(A,B \in \scrF\), \(\nu_{A \cup B} + \nu_{A \cap B} = \nu_A + \nu_B\).
+    \end{enumerate}
+\end{proposition}
+
+\begin{theorem}[Hann-Jordan decomposition]
+    If \(\nu\) is a signed finite measure on a \(\sigma\)-field \(\scrF\), then there exists \(A \in \scrF\) such that \(\nu_A \geq 0\) and \(\nu_{A^c} \leq 0\) hence 
+    \begin{equation*}
+        \nu = \nu_A - (- \nu_{A^c})
+    \end{equation*}
+    That is, \(\nu\) is the difference of two finite measures.
+\end{theorem}
+
+\begin{proof}
+    Let \(\scrN = \set<B \in \scrF>{\nu_B \leq 0}\). Then, \(\scrN\) is closed under finite and countable union. Moreover if \(B \in \scrN\) and \(E \in \scrF\), then \(B \cap E \in \scrN\). Consider the following lemma 
+    \begin{lemma}
+        The set \(\set<\func{\nu}{B}>{B \in \scrN}\) has an smallest element.
+    \end{lemma}
+    then do some more work.
+\end{proof}
+
+
+
+\section{Measure theoretic modeling}
+%TODO: move the definition
+\begin{definition}
+    Let \(X\) be a set and \(\scrF\) a ring of subsets of \(X\).
+    \begin{enumerate}
+        \item \(\scrF\) is a field if \(X \in \scrF\).
+        \item \(\scrF\) is a \(\sigma\)-field if \(X \in \scrF\) and \(\scrF\) is a \(\sigma\)-ring.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Let \(X\) be a set and \(\scrF\) be a field of subsets of \(X\). Suppose \(\mu\) is a measure defined on \(\scrF\). Then, \(\mu\) is a probability measure if \(\func{\mu}{X} = 1\). In this case, the triplet \((X,\scrF,\mu)\) is a called probability space.
+\end{definition}
+
+Let \(X\) be a sample of space of a probabilistic process. A measure theoretic model of the proccess is a \(\sigma\)-field \(\scrF\) of subsets of \(X\) and probability measure \(\mu\) defined on \(\scrF\). So that, for any ``plausible'' event \(E\) in \(X\), we have \(B_E \in \scrF\) and \(\prob{E} =\func{\mu}{B_E}\) where \(B_E\) is the set of points in \(X\) for which in \(E\) occurs.
+
+\begin{definition}
+    Given set \(B_1, B_2 , \dots\) in \(\scrF\), then 
+    \begin{equation*}
+        \set{B_i; \ \mathrm{ i.o.}} = \limsup B_n = \bigcap_{k = 1}^{\infty} \bigcup_{n \geq k} B_n
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}[First Borel-Cantelli lemma]
+    Given a sequence \(B_1, B_2,\dots\) in \(\scrF\) define \(B = \limsup B_n\). Then, \(\sum_{i= 1}^{\infty} \func{\mu}{B_i} < \infty\) implies \(\func{\mu}{B} = 0\).
+\end{theorem}
+
+\begin{definition}
+    Let \(X\) be a sample space with \(\sigma\)-field \(\scrF\) and probability measure \(\mu\). Two sets \(A_1,A_2 \in \scrF\) are \textbf{independent} if 
+    \begin{equation*}
+        \func{\mu}{A_1 \cap A_2} = \func{\mu}{A_1}\func{\mu}{A_2}
+    \end{equation*}
+    More generally, \(A_1, \dots, A_n\) are independent, if for any subset \(I\) of \(\Naturals_n\)
+    \begin{equation*}
+        \func{\mu}{\bigcap_{i \in I}A_i} = \prob{i \in I} \func{\mu}{A_i}
+    \end{equation*}
+    Furthermore, a countable collection of sets is independent if every finite subcollection is independent.
+\end{definition}
+
+\begin{theorem}[Second Borel-Cantelli lemma]
+    Assume \((X,\scrF,\mu)\) is a probability space and let \(A_1,A_2,\dots\) be an independent collection of sets from \(\scrF\). Suppose that \(\sum_{i = 1}^{\infty} \func{\mu}{A_i} \) is not finite, then \(\func{\mu}{\limsup A_n} =1\).
+\end{theorem}
+
+\begin{lemma}
+    Let \(A_1, A_2 , \dots \) be an independent collection of sets in \(\scrF\). Then, \(A_1^c, A_2^c \dots\) is an independent collection of set in \(\scrF\).
+\end{lemma}

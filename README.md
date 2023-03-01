@@ -20,3 +20,11 @@ Supplementary resources:
 
 | Mideterm | Oridibesht 5th |
 | -------- | -------------- |
+
+# Complex Function theory
+The sexiest, the most voluptuous piece of math (ever). This is my notes on her majestic beauty.
+
+# Probability Theory
+
+* Guillemin V. , Adams M. - Measure Theory and Probability
+* Breiman L. - Probability

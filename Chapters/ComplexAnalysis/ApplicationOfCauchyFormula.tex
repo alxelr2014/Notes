@@ -1,0 +1,77 @@
+\chapter{Application of Cauchy's formula}
+\section{Uniform limits of analytical functions}
+\begin{theorem}
+    Let \(\set{f_n}\) be a sequence of holomorphic functions on a open set \(U\). Assume that for each compact subset \(K\) of \(U\), the sequence converges uniformly on \(K\) and let the limit function be \(f\). Then \(f\) is holomorphic.
+\end{theorem}
+
+\begin{theorem}
+    Let \(\set{f_n}\) be a sequence of holomorphic functions on a open set \(U\). Assume that for each compact subset \(K\) of \(U\), the sequence converges uniformly on \(K\) and let the limit function be \(f\). Then the sequence of derivatives converges uniformly on every compact subset \(K\), \(f' = \lim f_n'\).
+\end{theorem}
+
+\section{Laurant seris}
+The series 
+\begin{equation*}
+    \func{f}{z } = \sum_{n = -\infty}^{\infty} a_n z^n
+\end{equation*}
+is the Laurant series expansion. Let \(A\) be a set of complex number. Laurant series converges absolutely (uniformly) on \(A\) if the two series 
+\begin{equation*}
+    \func{f^+}{z} = \sum_{n \geq 0} a_n z^n \qquad \func{f^-}{z} = \sum_{n < 0} a_n z^n
+\end{equation*}  
+converge absolutely (uniformly). In that case 
+\begin{equation*}
+    f = f^{-} + f^{-}
+\end{equation*}
+
+\begin{theorem}
+    Let \(A\) be the annulus \(A = \set<z>{r \leq \abs{z} \leq R}\) for some \(r \leq R\). Let \(f\) be holomorphic on \(A\) and \(r < s < S < R\). Then \(f\) has Laurant expansion 
+    \begin{equation*}
+        \func{f}{z} = \sum_{n = -\infty}^{\infty} a_n z^n
+    \end{equation*}
+    where
+    \begin{equation*}
+        a_n = \begin{cases}
+            \frac{1}{2 \pi i} \int_{C_R} \frac{\func{f}{\xi}}{\xi^{n+1}} & n \geq 0 \\
+            \frac{1}{2 \pi i} \int_{C_r} \frac{\func{f}{\xi}}{\xi^{n+1}} & n < 0 \\
+        \end{cases}
+    \end{equation*}
+    converges absolutely on \(s \leq \abs{z} \leq S\).
+\end{theorem}
+
+\section{Singularity}
+Let \(D\) be an open disc cenetered at \(z_0\) and \(U = D/\set{z_0}\). Let \(f\) be analytic on \(U\). Then, \(f\) is said to have isolated singularity at \(z_0\). 
+\subsection{Removable singularity}
+\begin{theorem}
+    If \(f\) is bounded in some neighbourhood of \(z_0\), then one can define \(\func{f}{z_0}\) in a uninque way such that \(f\) is analytic on \(z_0\)
+\end{theorem}
+\begin{proof}
+    Laurant expansion
+\end{proof}
+This kind of singularity is called Removable singularity.
+\subsection{Poles}
+If \(f\) has finite negative terms in its Laurant expansion 
+\begin{equation*}
+    \func{f}{z} = \dfrac{a_{-m}}{\bracket{z - z_0}^m} + \dots + a_0 + a_1 \bracket{z - z_0} + \dots 
+\end{equation*}
+Then \(f \) is said to have a pole of order \(m\). However, the order of \(f\) at \(z_0\) is \(-m\). 
+\begin{equation*}
+    \ord_{z_0} fg = \ord_{z_0} f + \ord_{z_0} g
+\end{equation*}
+
+\begin{proposition}
+    \(f\) has a pole of order \(m\) at \(z_0\) if and only if \(\func{f}{z} \bracket{z - z_0}^m\) is holomorphic at \(z_0\) and has no zero at \(z_0\).
+\end{proposition}
+
+\begin{definition}
+    \(f\) i defined on \(U/S\), where \(S\) is a discrete set of points which are the poles of \(f\), is mermorphic on \(U\). Thus, it is the quotient of two holomorphic functions in the neighbourhood of a point.
+\end{definition}
+
+\subsection{Essential singularity}
+When the Laurant expansion has inifinite negative terms. 
+
+\begin{theorem}[Casorati-Weirestrass]
+    Let \(0\) be an essential singularity of the function  \(f\). Let \(D\) be a disc cenetered at \(0\) on which \(f\) is holomorphic except at \(0\). Let \(U\) be the complement of \(\set{0}\) in \(D\). Then, \(\func{f}{U}\) is dense in the complex numbers. In other words, the values of \(f\) on \(U\) come arbitrarily close to any complex number. In fact \(f\) takes on every complex value except possible one. 
+\end{theorem}
+
+\begin{theorem}
+    The only analytic automorphism of \(\Complex\) are functions of the form \(\func{f}{z} = az + b\), where \(a,b\) are constants and \(a \neq 0\).
+\end{theorem}

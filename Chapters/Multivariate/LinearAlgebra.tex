@@ -1,5 +1,5 @@
-\section{Linear Algebra}
-\subsection{Vector Spaces}
+\chapter{Linear Algebra}
+\section{Vector Spaces}
 
 \begin{definition}[Normed vector space]
     Let \(V\) be a vector space. A \textbf{norm} is a real valued function \(\norm{ \scdot }: V \to \Reals\) which has the following properties
@@ -45,7 +45,7 @@ To check if the above definition is indeed an equivalence relation, we must show
 \end{theorem}
 
 \begin{proof}
-    Let \(\norm\) be an arbitrary norm on \(V\) and \(\{e_1, e_2, \dots , e_n\} \) be a basis of \(V\). Let \(\norm_2\) be \(L_2\)-norm (Euclidean norm). It will suffice to show \(\norm \sim \norm_2\). Let
+    Let \(\norm{\cdot}\) be an arbitrary norm on \(V\) and \(\{e_1, e_2, \dots , e_n\} \) be a basis of \(V\). Let \(\norm{\cdot}_2\) be \(L_2\)-norm (Euclidean norm). It will suffice to show \(\norm{\cdot} \sim \norm{\cdot}_2\). Let
     \begin{equation*}
         M = \max \! \left( \norm{e_1}, \dots , \norm{e_n} \right)
     \end{equation*}
@@ -55,7 +55,7 @@ To check if the above definition is indeed an equivalence relation, we must show
     \end{equation*}
     Taking \(c_2 = M \sqrt{n}\) proves the right inequality. For the left inequality we need the following lemma
     \begin{lemma} \label{lm:ContinuityOfNorm}
-        If \(V\) is a normed vector space with \(\norm_2\), as defined above, is viewed as metric space \(\metricSpace{V}{\norm_2}\) then \(\norm : V \to \Reals\) is continuous.
+        If \(V\) is a normed vector space with \(\norm{\cdot}_2\), as defined above, is viewed as metric space \(\metricSpace{V}{\norm{\cdot}_2}\) then \(\norm{\cdot} : V \to \Reals\) is continuous.
     \end{lemma}
 
     \begin{prooflemma}
@@ -73,7 +73,7 @@ To check if the above definition is indeed an equivalence relation, we must show
 \end{proof}
 
 \begin{theorem}\label{th:CompactnessOfFiniteDimensional}
-    Let \(\normedSpace{V}{\norm}\) be a normed space over a normed complete field \(\Field\). The following are equivalent
+    Let \(\normedSpace{V}{\norm{\cdot}}\) be a normed space over a normed complete field \(\Field\). The following are equivalent
     \begin{enumerate}
         \item \(V\) is finite dimensional. \label{it:COFD_1}
         \item every bounded closed set in \(V\) is compact. \label{it:COFD_2}
@@ -86,8 +86,8 @@ To check if the above definition is indeed an equivalence relation, we must show
     \Cref{it:COFD_2} \(\implies\) \Cref{it:COFD_3}: Trivial.
 
     \Cref{it:COFD_3} \(\implies\) \Cref{it:COFD_1}: Requires the following lemma:
-    \begin{lemma} [Riesz's lemma} \label{lm:RieszsLemma}
-        If \(V\) is a normed vector space and \(W\) is a closed proper subspace of \(V\) and \(\alpha \in \Reals\) with \(0 < \alpha < 1\), then there exists an \(v \in V\) with \(\norm{v} = 1\) such that \(\norm{v- w} \geq \alpha \) for all \(w \in W\)
+    \begin{lemma}[Riesz's lemma] \label{lm:RieszsLemma}
+        If \(V\) is a normed vector space and \(W\) is a closed proper space of \(V\) and \(\alpha \in \Reals\) with \(0 < \alpha < 1\), then there exists an \(v \in V\) with \(\norm{v} = 1\) such that \(\norm{v- w} \geq \alpha \) for all \(w \in W\).
     \end{lemma}
     Now suppose \(V\) were to be an infinite dimensional vector space. Then by the \Cref{lm:RieszsLemma} there is sequence of unit vectors \({x_n}\) such that \(\forall m,n \in \Naturals, \; \norm{x_n - x_m} > \alpha\) for some \(0 <\alpha < 1\). Which implies that no subsequence of \(\set{x_n}\) is convergent and hence the closed unit ball can not be compact.
 \end{proof}
@@ -97,13 +97,13 @@ To check if the above definition is indeed an equivalence relation, we must show
     \begin{equation*}
         \norm{f}_I = \int_0^1 \abs{\func{f}{x}} \diffOperator x
     \end{equation*}
-    Note that \(\norm_I\) and \(\norm_{\max} \) are not equivalent. Let \(\func{g}{x} = 0\) for all \(x \in \clcl{0}{1}\). Then
+    Note that \(\norm{\cdot}_I\) and \(\norm{\cdot}_{\max} \) are not equivalent. Let \(\func{g}{x} = 0\) for all \(x \in \clcl{0}{1}\). Then
     \begin{equation*}
         \norm{f_n - g}_I = \dfrac{1}{n+1} \to 0 \quad \text{as} n \to \infty.
     \end{equation*}
 \end{example}
 
-\begin{definition}[Banach space}
+\begin{definition}[Banach space]
     A normed vector space \(V\) that is complete is a \textbf{Banach space}. A \textbf{Hilbert Space} is a Banach space whose norm is induced by an inner product.
 \end{definition}
 
@@ -128,7 +128,7 @@ To check if the above definition is indeed an equivalence relation, we must show
     does not converge even though it is Cauchy.
 \end{example}
 
-\subsection{Linear Maps}
+\section{Linear Maps}
 Let \(V\) and \(W\) be a vector spaces over \(\Field\). A map \(T: V \to W\) is \textbf{linear} if
 \begin{equation*}
     \func{T}{x + \lambda y} = \func{T}{x} + \lambda \func{T}{y}
@@ -136,15 +136,15 @@ Let \(V\) and \(W\) be a vector spaces over \(\Field\). A map \(T: V \to W\) is 
 for all \(x,y \in V\) and \(\lambda \in \Field\).
 
 \begin{definition}
-    Let \(\normedSpace{V}{\norm_V}\) and \(\normedSpace{W}{\norm_W}\) be normed spaces then, a linear transformation \(T : V \to W\) is \textbf{bounded} if there exists a constant \(C > 0\) such that
+    Let \(\normedSpace{V}{\norm{\cdot}_V}\) and \(\normedSpace{W}{\norm{\cdot}_W}\) be normed spaces then, a linear transformation \(T : V \to W\) is \textbf{bounded} if there exists a constant \(C > 0\) such that
     \begin{equation*}
         \norm{Tv}_W \leq C \norm{v}_V
     \end{equation*}
-    for all \(v \in V\). We denote the set of all linear map from \(V \to W\) as \(\func{\CalL}{V,W}\) and the set of all bounded linear maps as \(\func{\CalB}{V,W}\). If \(T \in \func{\CalL}{V,W}\) is bijective such that \(T^{-1} \in \func{\CalL}{V,W}\), then \(T\) is called an \textbf{isomorphism} and \(V,W\) are \textbf{isomorphic}. An operator \(T \in \func{\CalL}{V,W}\) is called \textbf{isometric} if \(\norm{Tv}_W = \norm{v}_V\) for all \(v \in V\).
+    for all \(v \in V\). We denote the set of all linear map from \(V \to W\) as \(\func{\calL}{V,W}\) and the set of all bounded linear maps as \(\func{\calB}{V,W}\). If \(T \in \func{\calL}{V,W}\) is bijective such that \(T^{-1} \in \func{\calL}{V,W}\), then \(T\) is called an \textbf{isomorphism} and \(V,W\) are \textbf{isomorphic}. An operator \(T \in \func{\calL}{V,W}\) is called \textbf{isometric} if \(\norm{Tv}_W = \norm{v}_V\) for all \(v \in V\).
 \end{definition}
 
 \begin{definition}
-    If \(\normedSpace{V}{\norm_V},\normedSpace{W}{\norm_W}\) are normed spaces then the \textbf{operator norm} of a linear transformation \(T : V \to W\) is
+    If \(\normedSpace{V}{\norm{\cdot}_V},\normedSpace{W}{\norm{\cdot}_W}\) are normed spaces then the \textbf{operator norm} of a linear transformation \(T : V \to W\) is
     \begin{equation*}
         \norm{T} = \sup \left\{\dfrac{\norm{Tv}_W}{\norm{v}_V} \middle| v \neq 0 \right\}
     \end{equation*}
@@ -169,7 +169,7 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 \end{proof}
 
 \begin{theorem} \label{th:linearTransformation}
-    Let \(\normedSpace{V}{\norm_V}\) and \(\normedSpace{W}{\norm_W}\) be normed spaces and \(T: V \to W\) be a linear transformation. The following are equivalent
+    Let \(\normedSpace{V}{\norm{\cdot}_V}\) and \(\normedSpace{W}{\norm{\cdot}_W}\) be normed spaces and \(T: V \to W\) be a linear transformation. The following are equivalent
     \begin{enumerate}
         \item \(\norm{T}\) is finite. \label{it:LT_1}
         \item \(T\) is bounded. \label{it:LT_2}
@@ -224,7 +224,7 @@ for all \(x,y \in V\) and \(\lambda \in \Field\).
 \end{theorem}
 
 \begin{proof}
-    Since \(V\) is finite dimensional, according to \Cref{th:normsEquivalent}, any two norms are equivalent. Hence, take \(\norm_2\) to be Euclidean norm over a basis \(\{e_1, \dots , e_n\}\). Let \(x\) be such that \(\norm{x}_2 < \delta\) for some \(\delta > 0\). Therefore, \(\abs{\xi_i} < \delta^2\)
+    Since \(V\) is finite dimensional, according to \Cref{th:normsEquivalent}, any two norms are equivalent. Hence, take \(\norm{\cdot}_2\) to be Euclidean norm over a basis \(\{e_1, \dots , e_n\}\). Let \(x\) be such that \(\norm{x}_2 < \delta\) for some \(\delta > 0\). Therefore, \(\abs{\xi_i} < \delta^2\)
     \begin{equation*}
         \norm{Tx}_W = \norm{\sum_{i = 1}^n \xi_i \func{T}{e_i}}_W \leq \sum_{i = 1}^n \abs{\xi_i} \norm{\func{T}{e_i}}_W \leq \delta^2 K
     \end{equation*}
@@ -248,10 +248,10 @@ Another proof of \Cref{pr:FiniteIsBanach}
     \end{equation*}
 \end{remark}
 
-\begin{definition}[Dual space}
+\begin{definition}[Dual space]
     Let \(V\) be a normed space over the normed field \(\Field\), then the \textbf{topological/continuous dual space} of the normed space \(V\) is
     \begin{equation*}
-        V^\ast  = \func{\CalL}{V,\Field}
+        V^\ast  = \func{\calL}{V,\Field}
     \end{equation*}
     elements of \(V^\ast\) are called \textbf{bounded functionals} on \(V\).
 \end{definition}
@@ -278,9 +278,9 @@ Another proof of \Cref{pr:FiniteIsBanach}
     \end{equation*}
     we claim that \(\set{e^\ast_1, \dots , e^\ast_n}\) is a basis for \(V^\ast\). It is easy to see that they are as for each \(j\)
     \begin{equation*}
-        \left[\sum_{i = 1}^n c_i e^\ast_i\right} e_j = c_j
+        \left[\sum_{i = 1}^n c_i e^\ast_i\right] e_j = c_j
     \end{equation*}
-    and for each \(\phi \in \func{\CalL}{V,\Field}\) we have
+    and for each \(\phi \in \func{\calL}{V,\Field}\) we have
     \begin{equation*}
         \func{\phi}{e_j} = \alpha_i =  \sum_{i = 1}^n \alpha_i \func{e^\ast_o}{e_i}\\
     \end{equation*}
@@ -288,12 +288,12 @@ Another proof of \Cref{pr:FiniteIsBanach}
 \end{proof}
 
 \begin{theorem}
-    For two normed vector spaces \(V,W\), \(\normedSpace{\func{\CalB}{V,W}}{\norm{T}}\) is a normed vector space. Moreover, it is a Banach space when \(W\) is a Banach space.
+    For two normed vector spaces \(V,W\), \(\normedSpace{\func{\calB}{V,W}}{\norm{T}}\) is a normed vector space. Moreover, it is a Banach space when \(W\) is a Banach space.
 \end{theorem}
 
 
 \begin{proof}
-    Clearly \(\func{\CalB}{V,W}\) is a vector space. For its norm \(\norm{T}\) we have
+    Clearly \(\func{\calB}{V,W}\) is a vector space. For its norm \(\norm{T}\) we have
     \begin{enumerate}
         \item \(\norm{T} \geq 0\) by definition.
         \item if \(\alpha \in \Field_W\) then
@@ -308,7 +308,7 @@ Another proof of \Cref{pr:FiniteIsBanach}
                                    & = \norm{T_1} + \norm{T_2}
               \end{align*}
     \end{enumerate}
-    Suppose \(W\) is a Banach space and \(\{T_i\} \in \func{\CalB}{V,W}\) is a Cauchy sequence. Then for all \(v \in V\)
+    Suppose \(W\) is a Banach space and \(\{T_i\} \in \func{\calB}{V,W}\) is a Cauchy sequence. Then for all \(v \in V\)
     \begin{equation*}
         \forall \epsilon \, \exists N \; \suchThat \; m,n > N \implies \norm{T_m v - T_n v}_W \leq \norm{T_m - T_n}\norm{v}_V < \epsilon
     \end{equation*}
@@ -321,7 +321,7 @@ Another proof of \Cref{pr:FiniteIsBanach}
     \begin{equation*}
         \dfrac{\norm{Tv}_W}{\norm{v}_V} = \lim_{i \to \infty}  \dfrac{\norm{T_i v}_W}{\norm{v}_V} < t + 1
     \end{equation*}
-    hence \(T\) is bounded and \(T \in \func{\CalB}{V,W}\). Finally, we show that \(T_i \to T\). For an arbitrary \(v \neq 0\) and \(\epsilon > 0\) there exist \(N\) such that
+    hence \(T\) is bounded and \(T \in \func{\calB}{V,W}\). Finally, we show that \(T_i \to T\). For an arbitrary \(v \neq 0\) and \(\epsilon > 0\) there exist \(N\) such that
     \begin{align*}
         n \geq N \implies \norm{T_i v - Tv}_W < \epsilon \norm{v}_V
     \end{align*}
@@ -333,7 +333,7 @@ Another proof of \Cref{pr:FiniteIsBanach}
 \end{proof}
 
 \begin{theorem}
-    Let \(\normedSpace{V}{\norm}\) be a normed space. Then any linear transformation \(T: \Reals^n \to V\) is continuous. Furthermore, if \(T\) is a bijection, it is a homeomorphism.
+    Let \(\normedSpace{V}{\norm{\cdot}}\) be a normed space. Then any linear transformation \(T: \Reals^n \to V\) is continuous. Furthermore, if \(T\) is a bijection, it is a homeomorphism.
 \end{theorem}
 
 \begin{proof}
@@ -364,12 +364,12 @@ Another proof of \Cref{pr:FiniteIsBanach}
     the supremum of such \(c\) is \(\norm{T^{-1}}^{-1}\) which is called the \textbf{conorm} of \(T\).
 \end{remark}
 
-\begin{definition}[General linear group}
+\begin{definition}[General linear group]
     The \textbf{general linear group} of a vector space, written \(\func{\GL}{V}\) is the set of all bijective linear transformation.
 \end{definition}
 
 \begin{proposition}
-    If \(V\) is a finite (also works for infinite) vector space then \(\func{\GL}{V}\) is open in \(\func{\CalL}{V,V}\), in fact, if \(f \in \func{\GL}{V}\) then the open ball centered at \(f\) with radius \(\norm{f^{-1}}^{-1}\) remains in \(\func{\GL}{V}\). Furthermore, the inverse operator \(i : \func{\GL}{V} \to \func{\GL}{V}\), \(\func{i}{T} = T^{-1}\) is continuous.
+    If \(V\) is a finite (also works for infinite) vector space then \(\func{\GL}{V}\) is open in \(\func{\calL}{V,V}\), in fact, if \(f \in \func{\GL}{V}\) then the open ball centered at \(f\) with radius \(\norm{f^{-1}}^{-1}\) remains in \(\func{\GL}{V}\). Furthermore, the inverse operator \(i : \func{\GL}{V} \to \func{\GL}{V}\), \(\func{i}{T} = T^{-1}\) is continuous.
 \end{proposition}
 
 \begin{proof}
@@ -458,25 +458,25 @@ Another proof of \Cref{pr:FiniteIsBanach}
     \end{align*}
 \end{proof}
 
-We denote  the set of all \(n\)-linear functions from \(V_1 \times \dots \times V_n \to W\) by \(\func{\CalL^n}{V_1 \times \dots \times V_n, W}\).
+We denote  the set of all \(n\)-linear functions from \(V_1 \times \dots \times V_n \to W\) by \(\func{\calL^n}{V_1 \times \dots \times V_n, W}\).
 \begin{proposition} \label{pr:nLinearIsmorphicLinear}
-    Let \(V_1, \dots , V_n, W\) be normed vector spaces. Then \(\func{\CalL^n}{V_1 \times \dots \times V_n, W}\) and \(\func{\CalL}{V_1 , \func{\CalL}{V_2, \dots ,\func{\CalL}{V_n,W}}}\) are isomorphic.
+    Let \(V_1, \dots , V_n, W\) be normed vector spaces. Then \(\func{\calL^n}{V_1 \times \dots \times V_n, W}\) and \(\func{\calL}{V_1 , \func{\calL}{V_2, \dots ,\func{\calL}{V_n,W}}}\) are isomorphic.
 \end{proposition}
 
 \begin{proof}
     We want to prove
     \begin{equation*}
-        \func{\CalL^n}{V_1 \times \dots \times V_n, W} \cong \func{\CalL}{V_1 , \func{\CalL}{V_2, \dots ,\func{\CalL}{V_n,W}}}
+        \func{\calL^n}{V_1 \times \dots \times V_n, W} \cong \func{\calL}{V_1 , \func{\calL}{V_2, \dots ,\func{\calL}{V_n,W}}}
     \end{equation*}
-    consider the mapping \(T : \func{\CalL}{V_1 ,\func{\CalL}{V_2, \dots ,\func{\CalL}{V_n,W}}} \to \func{\CalL^n}{V_1 \times \dots \times V_n, W}\), such that for any \(v_1 \in V_1,\; \dots, \; v_n \in V_n\)
+    consider the mapping \(T : \func{\calL}{V_1 ,\func{\calL}{V_2, \dots ,\func{\calL}{V_n,W}}} \to \func{\calL^n}{V_1 \times \dots \times V_n, W}\), such that for any \(v_1 \in V_1,\; \dots, \; v_n \in V_n\)
     \begin{equation*}
         \func{\alpha}{(v_1)(v_2) \dots (v_n)} = \func{\func{T}{\alpha}}{v_1,v_2, \dots, v_n}
     \end{equation*}
     First note that \(T\) is linear. Then if \(\func{T}{\alpha} = 0\) implies \(\alpha  = 0\), thus \(T\) is injective and hence bijective.
 \end{proof}
 
-\begin{definition}[Positive definite}
-    Matrix \(A \in \SquareMatrices[\Reals}{n}\) is \textbf{positive definite} whenever \(A\) is symmetric and 
+\begin{definition}[Positive definite]
+    Matrix \(A \in \func{M_n}{\Reals}\) is \textbf{positive definite} whenever \(A\) is symmetric and 
     \begin{equation*}
         \forall x \in \Reals^n \backslash \set{0}, \ x^T A x > 0
     \end{equation*}

@@ -1,0 +1,314 @@
+\chapter{Formal Power Series}
+\section{Algbraic definitions}
+\subsection*{Monoid}
+A set \(S\) equipped with a binary operation \(\cdot\) is a \textbf{monoid} if it satisfies the following properties:
+\begin{itemize}
+    \item For all \(a,b,c \in S\), \(a\cdot (b\cdot c) = (a\cdot b) \cdot c\).
+    \item There exists \(e \in S\) such that for each \(a \in S\), \(a \cdot e = e \cdot a = a\).
+\end{itemize}
+\subsection*{Group}
+A set \(S\) equipped with a binary operation \(\cdots\) is a \textbf{group} if it satisfies the following properties:
+\begin{itemize}
+    \item For all \(a,b,c \in S\), \(a\cdot (b\cdot c) = (a\cdot b) \cdot c\).
+    \item There exists \(e \in S\) such that for each \(a \in S\), \(a \cdot e = e \cdot a = a\).
+    \item For each element \(a \in S\), there exists \(b \in S\) such that \(a \cdot b = b \cdot a = e\).
+\end{itemize}
+If \(\cdot\) is commutative then the group is an \textit{Abelian group}.
+\subsection*{Ring}
+A set \(S\) equipped with binary operations \(+\) and \(\cdots\) is a \textbf{ring} if it satisfies the folloing properties:
+\begin{enumerate}
+    \item \(S\) is an Abelian group under \(+\).
+    \item \(S\) is a monoid under \(\cdot\).
+    \item \(\cdot\) distributes over \(+\).
+\end{enumerate}
+If \(\cdot\) is commutative then the ring is called a \textit{commutative ring}.
+\subsection*{Integral domain}
+It is commutative ring with property that 
+\begin{equation*}
+    ab =  0 \implies a= 0  \lor b = 0
+\end{equation*}
+
+\subsection*{Field}
+A commutative ring that each non-zero \(a \in S\) has a multiplicative inverse.
+
+\begin{example}
+    A field is an integral domain because if \(ab = 0\) and \(a\) is non-zero then 
+    \begin{equation*} 
+    a^{-1}ab = b = 0
+    \end{equation*}
+\end{example}
+\section{Introduction}
+Let \(K\) be a commutative ring. Then the set of formal power series over \(K\) is 
+\begin{equation*}
+    \FieldFormalSeries{X} = \set[a_i \in K]{a_0 + a_1x + a_2x^2 + \dots}
+\end{equation*}
+The addition and multiplication can be generalized from \(\FieldPolynomial{X}\), the set of polynomials in \(K\).
+\begin{definition}[Order]
+    Let \(S \in \FieldFormalSeries{X}\) then \(\func{\omega}{S}\) is the least \(n \geq 0\) such that \(a_n \neq 0\). Furthermore, \(\func{\omega}{0} = \infty\). 
+\end{definition}
+
+\begin{definition}[Summability]
+    Let \(I\) be a set of indices then the family \(\set{S_i}_{i \in I}\) is \textbf{summable} if for each \(k \geq 0\), \(\func{w}{S_i} \geq k\) for all \(S_i\) except only a finite number of them. Then we can define \(S\) to be the sum of this family 
+    \begin{equation*}
+        S = \sum_{i \in I} S_i = \sum_{i \in I} \sum_{j} a^{(i)}_j x^j
+    \end{equation*}
+    which is sensible since only a finite number of \(a^{(i)}_j\) are non-zero.
+\end{definition}
+
+
+\begin{proposition} \label{th:orderOfMultiplication}
+    Let \(K\) be an integral domain, then for any two formal series 
+    \begin{equation*}
+        \func{\omega}{ST} = \func{\omega}{S} + \func{\omega}{T} 
+    \end{equation*}
+    Asume that \(\infty + k = \infty\) for any finite number \(k\) and \(\infty + \infty = \infty\).
+\end{proposition}
+
+\begin{proof}
+    If either of \(S\) or \(T\) is zero then the proposition is true. Otherwise, both \(n = \func{\omega}{S}\) and \(m = \func{\omega}{T}\) are finite. Equivalently \(a_n \neq 0 \) and \(b_m \neq 0\) while \(a_k = 0, b_l = 0\) for \(k < n, l < m\). Therefore, 
+    \begin{equation*}
+        ST = \sum_i \sum_{j = 0}^i a_{j}b_{i - j} x^i = \sum_i c_i x^i
+    \end{equation*}
+    for \(i < m + n\), \(c_i = 0\) and \(c_{m+n} = a_nb_m\) which is non-zero as \(K\) is an integral domain which was what was wanted.
+\end{proof}
+
+\begin{corollary}
+    For an integral domain \(K\), the ring \(\FieldFormalSeries{X}\) is an integral domain.
+\end{corollary}
+For simplicity from now on assume \(K\) is either an integral domain or a field.
+
+Consider two formal series 
+\begin{equation*}
+    S = \sum_n a_nx^n , \qquad T = \sum_m b_m x^m
+\end{equation*}
+with \(b_0 = 0\). Then we can define the composition \(S \circ T\) as follow 
+\begin{equation*}
+    S \circ T = \sum_n a_n T^n
+\end{equation*}
+
+To show that it is well defined we need to show that only a finite number of \(T^n\) have degree less than \(k\) for all \(k \geq 0\). Which is clear implied by the fact that \(\func{\omega}{T} \geq 1\) and by \Cref{th:orderOfMultiplication}, \(\func{\omega}{T^n} \geq n\). It can easily be shown that 
+\begin{equation*}
+    \begin{cases}
+        (S_1 + S_2) \circ T &= S_1 \circ T + S_2 \circ T\\
+        (S_1 \cdot S_2) \circ T &= (S_1 \circ T) (S_2 \circ T)
+    \end{cases}
+\end{equation*}
+Moreover, if \(\set{S_i}\) is a summable family of formal series then 
+\begin{equation*}
+    (\sum_i S_i)\circ T = \sum_i (S_i \circ T)
+\end{equation*}
+
+\begin{proposition}
+    For three formal series \(S, T,\) and \(U\) with \(\func{\omega}{T},\func{\omega}{U} \geq 1\)
+    \begin{equation*}
+        (S \circ T) \circ U = S \circ (T \circ U)
+    \end{equation*}
+\end{proposition}
+
+\begin{proposition}
+    A formal series \(S = \sum_i a_i x^i\) has a multiplicative if and only if \(a_0 \neq 0\).
+\end{proposition}
+
+\begin{proposition}
+    We have that if \(\func{\omega}{T} \geq 1 \)
+    \begin{equation*}
+        \func{\omega}{S \circ T} = \func{\omega}{S} \func{\omega}{T}
+    \end{equation*}
+\end{proposition}
+
+For two formal series \(f,g\) we write \(f \equiv g \pmod{T^N}\) if \(a_n = b_n\) for all \(n = 0,1,\dots , N- 1\). Cleary \(f \equiv g \pmod{T^N}\) for all \(N\) is equivalent to \(f = g\).
+\begin{proposition}
+    Suppose \(f_1 \equiv f_2, g_1 \equiv g_2, h_1 \equiv h_2 \pmod{T^N}\). Then 
+    \begin{equation*}
+        f_1 + g_1 \equiv f_2 + g_2 \pmod{T^N}, \quad f_1g_1 \equiv f_2g_2 \pmod{T^N}, \quad f_1 \circ h_1 \equiv f_2 \circ h_2 \pmod{T^N}
+     \end{equation*} 
+\end{proposition}
+
+\section{Formal Derivative}
+The derivative of a formal series is defined as 
+\begin{equation*}
+    \ODiff{S}{x} = a_1 + 2a_2 x + 3a_3 x + \dots 
+\end{equation*}
+\begin{proposition}
+    The derivative has the following properties
+    \begin{enumerate}
+        \item \((S_1 + S_2)' = S_1' + S_2'\).
+        \item The Leibniz rule holds 
+        \begin{equation*}
+            (S_1 \cdot S_2)' = S_1' S_2 + S_1 S_2'
+        \end{equation*}
+        \item if \(S\) has multiplicative inverse then 
+        \begin{equation*}
+            \left(\dfrac{1}{S}\right)' = - \dfrac{S'}{S^2}
+        \end{equation*}
+        \item The chain rule holds, if \(\func{\omega}{T} \geq 1\) then 
+        \begin{equation*}
+            (S \circ T)' = (T' \circ S) \circ S'
+        \end{equation*}
+        \item The higher order derivatives can be defined recursively 
+        \begin{equation*}
+            S^{(n)} = (S^{(n-1)})', \qquad S^{(0)} = S
+        \end{equation*}
+        Then, we can write the formal Taylor series of \(S\) as 
+        \begin{equation*}
+            S = \sum_n \dfrac{\func{S^{(n)}}{0}}{n!} x^n
+        \end{equation*}
+    \end{enumerate}
+\end{proposition}
+
+\section{Compositional inverse}
+Given a formal series \(S\) we wish to find a formal series \(T\) such that 
+\begin{enumerate}
+    \item \(\func{\omega}{T} \geq 1\).
+    \item \( S \circ T = X\).
+\end{enumerate}
+
+\begin{theorem}
+    \(S\) has compositional inverse \(T\), if and only if \(\func{\omega}{S} = 1\). In this case, \(T\) is unique and \(T\circ S = X\) as well.
+\end{theorem}
+
+
+\section{Power series}
+A power series is a complex function of the form 
+\begin{equation*}
+      \func{f}{z} = \sum_{n = 0}^{\infty} a_n\bracket{z - z_0}^n
+\end{equation*}
+
+\begin{theorem} 
+      For every power series there exists a number \(0 \leq R \leq \infty\), called the radius of convergence, with the following properties 
+      \begin{itemize}
+            \item The series converges absolutely for every \(z\) with \(\abs{z} < R\) and it is an analytic function. The derivative can be obtained by termwise differentiation and it has the same radius of convergence. The convergence is uniform in \(\abs{z} \leq \rho\) for \(0 \geq \rho \geq R\).
+            \item If \(\abs{z} > R\) the series diverges.
+      \end{itemize}
+\end{theorem}
+
+\begin{proposition}
+    Let \(f\) and \(g\) be two power series that converge absolutely in \(\func{B_r}{0}\). Then \(f + g\), \(gf\), and \(\alpha f\) , \(\alpha \in \Complex\) are absolutely convergent in \(\func{B_r}{0}\).
+\end{proposition}
+
+\begin{example}
+    Let \(\alpha \in \Complex\) 
+    \begin{equation*}
+        \binom{\alpha}{n} = \dfrac{\alpha \bracket{\alpha - 1} \dots \bracket{\alpha -n + 1}}{n!}, \quad \binom{\alpha}{0} = 1
+    \end{equation*}
+    then the binomial formal series is defined as 
+    \begin{equation*}
+        \bracket{1 + T}^{\alpha} = \sum_{n  = 0}^{\infty} \binom{\alpha}{n} T^n
+    \end{equation*}
+    For non-negative integer \(\alpha\) the radius of convergence is infinite but for other values of \(\alpha\) the radius is 1.
+\end{example}
+
+\begin{theorem}[Abel's limit theorem]
+    If \(\sum_{n = 0}^{\infty}\) converges, then \(\func{f}{z} = \sum_{n = 0}^{\infty} a_n z^n\) tends to \(\func{f}{1}\) as \(z\) approaches 1 in such a way that \(\frac{\abs{1- z}}{1 - \abs{z}}\) remains bounded.
+\end{theorem}
+
+\begin{theorem}
+    \begin{enumerate}
+        \item  Let \(f\) be a non-constant power series with non-zero radius of convergence. If \(\func{f}{0} = 0\) then there exists \(s > 0\) such that \(\func{f}{z} \neq 0\) for all non-zero \(z\) with \(\abs{z} \leq s\).
+        \item Let \(f\) and \(g\) to be two convergent power series. Suppse \(\func{f}{z} = \func{f}{z}\) for all points \(x\) in an infinite set having 0 as a point of accumulation. Then \(f= g\).
+    \end{enumerate}
+\end{theorem}
+
+Let \(f = \sum a_nz^n\) and \(\phi = \sum c_n z^n\) with \(c_n \in \Reals_+\) be two formal power series. Then \(f\) is dominated by \(\phi\)
+\begin{equation*}
+    f \prec \phi 
+\end{equation*}
+if \(\abs{a_n} \leq c_n\) for all \(n\).
+
+\begin{proposition}
+    Suppose \(f \prec \phi\) and \(g \prec \psi\) then 
+    \begin{equation*}
+        f + g \prec \phi + \psi , \quad fg \prec \phi \psi
+    \end{equation*}
+\end{proposition}
+
+\begin{theorem}
+    Let \(f\) be a power series with non-zero constant term and non-zero radius of convergence and let \(g\) be the inverse of \(f\) that is, \(fg = 1\). Then \(g\) has a non-zero radius of convergence.
+\end{theorem}
+
+\begin{proposition}
+    Let 
+    \begin{equation*}
+        \func{f}{z} = \sum_{n = 0}^{\infty} a_n z^n , \quad \func{h}{z} = \sum_{n = 1}^{\infty} b_n z^n
+    \end{equation*}
+    be two power series and \(f\) is absolutely convergent for \(\abs{z} \leq r\) for some \(r > 0\) and let \(s > 0\) be such that 
+    \begin{equation*}
+        \sum_{n=1}^{\infty} \abs{b_n}s^n \leq r
+    \end{equation*}
+    Then \(f\circ h\) converges absolutely for \(\abs{z} \leq s\).
+\end{proposition}
+
+\section{Analytic functions}
+Let \(f\) be defined in a neighbourhood of \(z_0\). \(f\) is said to be analytic if there exists some power series 
+\begin{equation*}
+    \sum a_n \bracket{z - z_0}^n
+\end{equation*}
+which converges absolutely for \(\abs{z - z_0} < r\) and for such \(z\)
+\begin{equation*}
+    \func{f}{z} = \sum a_n \bracket{z - z_0}^n
+\end{equation*}
+
+\begin{proposition}
+    If \(f\) and \(g\) are analytic on \(U\) then \(f+ g\), \(fg\), \(f/g\) for \(\func{g}{z} \neq 0\) are also analytic. If \(g : U \to V\) and \(f : V \to \Complex\) then \(f \circ g\) is analytic.
+\end{proposition}
+
+\begin{theorem}
+    Let \(\func{f}{z} = \sum a_n z^n\) with radius of convergence of \(r\). Then \(f\) is analytic on \(\func{B_r}{0}\).
+\end{theorem}
+
+\begin{theorem}
+    Let \(\func{f}{z} = \sum a_n z^n\) with radius of convergence of \(r\) then 
+    \begin{enumerate}
+        \item The series \(\sum na_n z^{n-1}\) has the same radius of convergence.
+        \item \(f\) is holomorphic on \(\func{B_r}{0}\) and its derivative is equal to \(\sum na_n z^{n-1}\).
+    \end{enumerate}
+\end{theorem}
+We shall see later that every holomorphic function admits a power series. 
+
+\section{Inverse and open mapping}
+\(f\) is analytic isomorphism if \(f : U \to V\) is analytic and \(V\) is open and there exists analytic function \(g : V \to U\) such that \(f \circ g = \id_V\) and \(g \circ f = \id_U\). \(f\) is locally analytic isomorphism at \(z_0\) or locally invertible if there exists an open neighbourhood \(U\) containing \(z_0\) such that \(f\) is an analytic isomorphism on \(U\). 
+
+\begin{theorem}
+    Let \(\func{f}{z} = a_1z + \dots \) be a formal power series with \(a_1 \neq 0\). We know there exists a unique \(\func{g}{z}\) such that \(\func{f}{\func{g}{z}} = z\) and \(\func{g}{\func{f}{z}} = z\). If \(f\) is convergent a power series, then \(g\) is a convergent power series as well. 
+\end{theorem}
+
+\begin{theorem}
+    Let \(f\) be an analytic function on open set \(U\) containing \(z_0\). Suppose that \(\func{f'}{z_0} \neq 0\) then, \(f\) is a local analytic isomorphism at \(z_0\).
+\end{theorem}
+
+\begin{definition}
+    Let \(U\) be an open set then \(f : U \to V\) is open mapping if for each open subset \(U' \subset U\), \(\func{f}{U'}\) is open.
+\end{definition}
+
+\begin{theorem}
+    Let \(f\) be an analytic function on open set \(U\) such that for each point of \(U\), \(f\) is not constant on a given neighbourhood of that point. Then \(f\) is an open mapping.
+\end{theorem}
+
+\begin{theorem}
+    Let \(f\) be an analytic function on open set \(U\) and \(f\) is injective. Let \(V = \func{f}{U}\) then, \(f : U \to V\) is an analytic isomorphism and \(\func{f'}{z} \neq 0\) for all \(z \in U\).
+\end{theorem}
+
+\section{The local maximum modulus principle}
+\begin{definition}
+    \(f\) is locally constant at a point \(z_0\) if there exists an open set \(D\) containing \(z_0\) such that \(f\) is constant on \(D\).
+\end{definition}
+
+\begin{theorem}
+    Let \(f\) be an analytic function on open set \(U\). Let \(z_0 \in U\) be a maximum for \(\abs{f}\), that is 
+    \begin{equation*}
+        \abs{\func{f}{z_0}} \geq \abs{\func{f}{z}} \quad \forall z \in U
+    \end{equation*}
+    Then \(f\) is locally constant at \(z_0\).
+\end{theorem}
+
+\begin{corollary}
+    Above theorem also holds for \(\Re\) instead of \(\abs{\; \cdot \;}\).
+\end{corollary}
+
+\begin{theorem}
+    Let \(f\) be a non-constant polynomial 
+    \begin{equation*}
+        \func{f}{z} = a_0 + a_1 z + \dots + a_d z^d
+    \end{equation*}
+    with \(a_d \neq 0\). Then \(f\) has some complex roots. 
+\end{theorem}

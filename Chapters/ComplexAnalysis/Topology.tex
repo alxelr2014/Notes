@@ -1,0 +1,111 @@
+\chapter{Topology}
+\section{Topology}
+A set \(N \subset S\) is called a neighbourhood of \(x \in S\) if it contains a ball \(\func{B_r}{x}\). A set is open if it is a neighbourhood of all its points. A point \(x \in X\) is an isolated point if it has a neighbourhood whose intersection with \(X\) reduces to \(x\). An accumulation point is a point that is not isolated. 
+
+\begin{proposition}
+      A non-empty open set in plane is connected if and only if any two points can be joined by a polygon which lies in the set.
+\end{proposition}
+
+\begin{definition}
+      A non-empty connected open set is called a region. A component or a maximal connected set of a set \(S\) is a connected subset which is not contained in any larger connected subset.
+\end{definition}
+
+\begin{proposition}
+      Every set has a unique decomposition into component.
+\end{proposition}
+
+\begin{proposition}
+      In \(\Reals^n\) the components of any open set are open.
+\end{proposition}
+
+\begin{definition}
+      A set \(A\) is dense in \(X\) if \(\closure E = X\). A metric space is separable if there exists a countable subset union of disjoint regions. A topological space is locally connected if for each neighbourhood of its points there is a connected open subset for that neighbourhood. A metric space that open balls \(\func{B_r}{x}\) are connected is locally connected.
+\end{definition}
+
+\begin{proposition}
+      In a locally connected separable space every open set is union of disjoint regions.
+\end{proposition}
+
+\begin{definition}
+      A set \(S\) is totally bounded if for every \(\epsilon > 0\), \(S\) can be covered by finitely many balls of radius \(\epsilon\).
+\end{definition}
+
+
+\section{Compact sets}
+\begin{definition}[Point of accumulation]
+      point \(v\) is a \textbf{point of accumulation} for the sequence \(\set{z_n}\) if for given \(\epsilon > 0\) there exists infinitely many \(n\) such that 
+      \begin{equation*}
+            \abs{z_n - v} < \epsilon
+      \end{equation*}
+      Similarly, a point of accumulation of an infinite set \(S\) is a point \(v\) that for each open set \(U\) containing \(v\) there are infinitely many elements of \(S\).
+\end{definition}
+
+\begin{theorem}[Weierstrass-Bolzano theorem]
+      If \(S\) is an infinite bounded set of real numbers, then \(S\) has a point of accumulation.
+\end{theorem}
+
+\begin{definition}
+      A \textbf{compact} set \(S\) is a set that every sequence of its elements has a point of accumulation in \(S\). The following defintions are equivalent 
+      \begin{enumerate}
+            \item Every infinite subset of \(S\) has a point of accumulation in \(S\).
+            \item Every sequence of elements of \(S\) has a convergent subsequent whose limit is in \(S\).
+      \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+      A complex set is compact if and only if it is closed and bounded.
+\end{theorem}
+
+\begin{theorem}
+      Let \(S_1 \supset S_2 \supset \dots\) be a sequence of non-empty closed subsets of a compact set \(S\). Then, the interestion of all \(S_n\) is not empty.
+\end{theorem}
+
+\begin{theorem}
+      Let \(S\) be a compact set and \(f\) be continuous function on \(S\). Then the image of \(f\) is compact.
+\end{theorem}
+
+\begin{theorem}
+      Let \(S\) be a compact set and \(f\) be continuous function on \(S\). Then  \(f\) is uniformly continuous.
+\end{theorem}
+
+
+\begin{definition}
+      Let \(A,B\) be two sets of complex numbers. The \textbf{distance} between them is 
+      \begin{equation*}
+            \func{d}{A,B} = \min_{\substack{\alpha \in A \\ \beta \in B}} \abs{\alpha - \beta}
+      \end{equation*}
+\end{definition}
+
+\begin{theorem}
+      Let \(S\) be a closed set and let \(v\) be a complex number. There exists a point \(w \in S\) such that 
+      \begin{equation*}
+            \func{d}{S,\set{v}} = \abs{w - v}
+      \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+      Let \(K\) be a compact set and let be \(S\) a closed set. Then, there are elements \(\alpha \in K\) and \(\beta \in S\) such that 
+      \begin{equation*}
+            \func{d}{K,S} = \abs{\alpha - \beta}
+      \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+      A set is compact if and only if it is complete and totally bounded.
+\end{theorem}
+
+\begin{corollary}
+      Let \(K\) be compact. Let \(r\) be a real number greater than zero. There exists a finite number of discs of radius \(r\) whose union contains \(K\).
+\end{corollary}
+
+We say that a family of open set \(\set{U_i}\) covers a set \(S\) when for every \(z \in S\), \(z \in U_i\) for some \(i\) as well. A subcovering of \(S\) is a covering of \(S\) with a subfamily of \(\set{U_i}\). If that subfamily is finite we say that it is a finite subcovering of \(S\). \(S\) is \textbf{covering compact} if every open convering can reduce to a finite subcovering.
+
+\begin{theorem}
+      Let \(S\) be a set then \(S\) is sequentially comapct if and only if covering compact.
+\end{theorem}
+
+
+\section{Connectedness}
+\begin{proposition}
+      A path connected set is connected but the converse is true when the set is open.
+\end{proposition}

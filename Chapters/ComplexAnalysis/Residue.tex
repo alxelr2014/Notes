@@ -1,0 +1,107 @@
+\chapter{Calculus of Residues}
+\section{Residue}
+Let Laurent expansion of \(f\) at \(z_0\) be 
+\begin{equation*}
+    \func{f}{z} = \sum_{n = -\infty}^{\infty} a_n \bracket{z - z_0}^n
+\end{equation*}
+Then, the residue of \(f\) at \(z_0\) denoted by \(\func{\Res}{f,z_0}\) is \(a_{-1}\).
+\begin{theorem}
+    Let \(z_0\) be an isolated singularity of \(f\), and let \(C\) be a small circle oriented counter-clockwise cenetered at \(z_0\) such that \(f\) is holomorphic on \(C\) and its interior except possibly at \(z_0\). Then 
+    \begin{equation*}
+        \int_C \func{f}{\xi} \diffOperator \xi = 2\pi i \func{\Res}{f,z_0}
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Residue formula]
+    Let \(U\) be an open set, and \(\gamma\) a closed chain in \(U\) such that \(\gamma\) is homologous to \(0\) in \(U\). Let \(f\) be analytic on \(U\) except at a finite number of points \(z_1, \dots , z_n\). Then 
+    \begin{equation*}
+        \int_{\gamma} f = 2 \pi i \sum_{i = 1}^n \func{W}{\gamma, z_i} \func{\Res}{f, z_i}
+    \end{equation*}
+\end{theorem}
+
+\begin{lemma}
+    If \(f\) has a simple pole at \(z_0\) and \(g\) is holomorphic at \(z_0\) 
+    \begin{equation*}
+        \func{\Res}{fg,z_0} = \func{g}{z_0} \func{\Res}{f,z_0}
+    \end{equation*}
+\end{lemma}
+
+\begin{proof}
+    Suppose \(f\) has the following Laurent expansion 
+    \begin{equation*}
+        \func{f}{z} = \sum_{n = -1}^{\infty} a_n \bracket{z - z_0}^n
+    \end{equation*}
+    and \(g\) is the following power series expansion 
+    \begin{equation*}
+        \func{g}{z} = \sum_{n = 0}^{\infty} b_n \bracket{z - z_0}^n
+    \end{equation*}
+    Then 
+    \begin{align*}
+        \func{fg}{z} &= \bracket{\sum_{n = -1}^{\infty} a_n \bracket{z - z_0}^n} \bracket{\sum_{n = 0}^{\infty} b_n \bracket{z - z_0}^n}\\
+        &= \dfrac{a_{-1}b_0}{z - z_0} + \bracket{a_{-1}b_1 + a_{0}b_0} + \dots 
+    \end{align*}
+    therefore 
+    \begin{equation*}
+        \func{\Res}{fg,z_0} = a_{-1}b_0 = \func{g}{z_0} \func{\Res}{f,z_0}
+    \end{equation*}
+\end{proof}
+
+\begin{lemma}
+    Suppose \(\func{f}{z_0} = 0\) but \(\func{f'}{z_0} \neq 0\). Then, \(\frac{1}{f}\) has a pole of order 1 at \(z_0\) with 
+    \begin{equation*}
+        \func{\Res}{\dfrac{1}{f}, z_0} = \dfrac{1}{\func{f'}{z_0}}
+    \end{equation*}
+\end{lemma}
+
+\begin{proof}
+    Suppose \(f\) has the following power series expansion 
+    \begin{equation*}
+        \func{f}{z} = \sum_{n = 1}^{\infty} a_n \bracket{z - z_0}^n
+    \end{equation*}
+    with \(a_1 \neq 0\). Then, 
+    \begin{align*}
+        \func{\dfrac{1}{f}}{z} &= \dfrac{1}{\bracket{z - z_0} \bracket{a_1 + a_2 \bracket{z - z_0} + \dots }}\\
+        &=\dfrac{1}{z - z_0} \bracket{a_1^{-1} + \bigO{z - z_0}}
+    \end{align*}
+    has residue of \(a_1^{-1} =\bracket{\func{f'}{z_0}}^{-1} \) at \(z_0\).
+\end{proof}
+
+\begin{lemma}
+    \(f\) has a pole order \(m\) and \(g\) is holomorphic at \(z_0\)
+    \begin{equation*}
+        \func{\Res}{fg,z_0} = \sum_{i = 0}^{m - 1} \func{g^{(i)}}{z_0} \func{\Res}{(z - z_0)^i \func{f}{z}, z_0}
+    \end{equation*}
+\end{lemma}
+
+\begin{lemma}
+    Let \(f\) be meromorphic at \(z_0\) then 
+    \begin{equation*}
+        \func{\Res}{\dfrac{f'}{f}, z_0} = \func{\ord_{z_0}}{f}
+    \end{equation*}
+\end{lemma}
+
+\begin{theorem}
+    Let \(U\) be an open set, \(\gamma\) closed chain in \(U\), \(f\) meromorphic on \(U\) with only finite number of negative terms and poles at \(z_0, \dots , z_n\), none of which lie on \(\gamma\). 
+    \begin{equation*}
+        \int_{\gamma} \func{f'}{f} = 2\pi i \sum_{i = 1}^n \func{W}{\gamma, z_i} \func{\ord_{z_0}}{f}
+    \end{equation*}
+\end{theorem}
+
+\begin{definition}
+    Let \(\gamma\) be a closed path. It has interior and exterior if for all\( \alpha \in \Complex / \gamma\) the winding the number \(\func{W}{\gamma, \alpha} = 0,1\). Then, the interior is defined as all the points with winding number of \(1\) and exterior is all the points with winding number of \(0\).
+\end{definition}
+
+\begin{theorem}[Rouche's]
+    Let \(\gamma\) be a closed path homologous to \(0\) in \(U\) and assume \(\gamma\) has in interior. Let \(f,g\) be analytic function on \(U\) and 
+    \begin{equation*}
+        \abs{\func{f}{z} - \func{g}{z}} < \abs{\func{f}{z}}
+    \end{equation*}
+    for all \(z\) on \(\gamma\). Then \(f\) and \( g\) have the same number of zeros in the interior of \(\gamma\).
+\end{theorem}
+
+\begin{theorem}
+    Let \(f\) be analytic in neighbourhood of a point \(z_0\) and assumer \(\func{f'}{z_0} \neq 0\). Then, \(f\) is a local analytic isomorphism at \(z_0\).
+\end{theorem}
+
+\section{Evaluation of definite integrals}
+add the integrals
