@@ -1,0 +1,274 @@
+\chapter{Introduction}
+A stochastic process is set of indexed random variables. More formally, a stochastic process maps each sample to a sequence of random variables. 
+\begin{equation*}
+    X : \Omega \to \Reals^{\TimeDomain}, \quad \func{X}{\omega} = \set<\operatorFunc{\func{X}{t}}{\omega}>{t \in \TimeDomain}
+\end{equation*}
+Usually, \(\TimeDomain\) is interpreted as a set of time. Similarly, a stochastic process can be thought of a function time and sample to real numbers.
+\begin{equation*}
+    X : \Omega \times \TimeDomain \to \Reals
+\end{equation*}
+Some definitions regarding stochastic processes are listed below
+\begin{description}
+    \item[Discrete-time] when \(\TimeDomain\) is discrete.
+    \item[Continuous-time] when \(\TimeDomain\) is continuous.
+    \item[Discrete-state] when \(\func{X}{t}\) are discrete.
+    \item[Continuous-state] when \(\func{X}{t}\) are continuous.
+    \item[Equality] Two stochastic processes are equal if 
+    \begin{equation*}
+        \func{X}{\omega,t} = \func{Y}{\omega,t}, \quad \forall \omega \in \Omega, t \in \TimeDomain
+    \end{equation*} 
+    Equality in minimum squared sense is defined as 
+    \begin{equation*}
+        \expected{\bracket{\func{X}{t} - \func{Y}{t}}^2} = 0, \quad \forall t
+    \end{equation*}
+\end{description}
+
+\section{Order distribution}
+The first order distribution of a stochastic process \(X\) is defined as 
+\begin{equation*}
+    \func{F}{x;t} = \prob{\func{X}{t} \leq x}
+\end{equation*}
+Morever, the \(n_{\cardinalTH}\) distribution of \(X\) is 
+\begin{equation*}
+    \func{F}{x_1 , \dots , x_n ; t_1 , \dots , t_n} = \prob{\func{X}{t_1} \leq x_1 , \dots , \func{X}{t_n} \leq x_n }
+\end{equation*}
+the \(n_{\cardinalTH}\) density of \(X\) is partials of distribution with respected \(x\).
+\begin{equation*}
+    \func{f}{x_1 , \dots , x_n ; t_1 , \dots , t_n} = \dfrac{\PDiffOperator^n \func{F}{x_1 , \dots , x_n ; t_1 , \dots , t_n}}{\PDiffOperator x_1 \dots \PDiffOperator x_n}
+\end{equation*}
+To determine all statistical properties of a stochastic process we need every \(n_{\cardinalTH}\) distribution or density. However mostly, we need certain averages which are calculated using the first and second densities. These averages inclue 
+\begin{description}
+    \item[Mean]
+    \begin{equation*}
+        \func{\eta}{t} = \expected{\func{X}{t}} = \int_{-\infty}^{\infty} x \func{f}{x;t} \diffOperator x
+    \end{equation*}
+    \item[Autocorrelation]
+    \begin{align*}
+        \func{R}{t_1, t_2}  &= \expected{\func{X}{t_1} \func{X}{t_2}} \\
+        &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x_1 x_2 \func{f}{x_1 , x_2;t_1 , t_2} \diffOperator x_2 \diffOperator x_1
+    \end{align*}
+    The value of autocorrelation on \(t_1 = t_2\) is the average power of \(\func{X}{t}\).
+    \item[Autocovariance]   
+    \begin{align*}
+        \func{C}{t_1, t_2}  &= \func{R}{t_1, t_2} - \func{\eta}{t_1} \func{\eta}{t_2}
+    \end{align*}
+    The value of autocovariance on \(t_1 = t_2\) is called the variance of \(\func{X}{t}\).
+    \item [Correlation coefficient] 
+    \begin{equation*}
+        \func{r}{t_1,t_2} = \dfrac{\func{C}{t_1, t_2}}{\sqrt{\func{C}{t_1,t_1} \func{C}{t_2,t_2}}}
+    \end{equation*}
+\end{description}
+
+\begin{example}
+    Suppose \(X\) is a stochastic process and \(S\) is a random variable defined as
+    \begin{equation*}
+        S = \int_{a}^b \func{X}{t} \diffOperator t
+    \end{equation*} 
+    then 
+    \begin{align*}
+        \expected{S} &= \int_{a}^b \expected{\func{X}{t}} \diffOperator t = \int_{a}^b \func{\eta}{t} \diffOperator t\\
+        \expected{S^2} &= \expected{\bracket{\int_{a}^b \func{X}{t_1} \diffOperator t_1}\bracket{\int_{a}^b \func{X}{t_2} \diffOperator t_2}}\\
+        &= \expected{\int_{a}^b \int_{a}^b \func{X}{t_1} \func{X}{t_2} \diffOperator t_2 \diffOperator t_1}\\
+        &= \int_{a}^b \int_{a}^b \func{R}{t_1,t_2} \diffOperator t_2 \diffOperator t_1
+    \end{align*}
+\end{example}
+
+
+\section{Joint stochastic process}
+The joint distribution of two stochastic processes \(X\) and \(Y\) is determined in terms of the joint distribution of their random variables 
+\begin{equation*}
+    \func{F}{x_1,\dots, x_n, y_1 , \dots , y_m; t_1, \dots , t_n, t'_1, \dots t'_m}
+\end{equation*}
+
+We can expand the notion of stochastic processes to complex processes in which the process takes on complex value. Then, revising autocorrelation
+\begin{equation*}
+    \func{R_{XX}}{t_1,t_2} = \expected{\func{X}{t_1} \overline{\func{X}{t_2}}}
+\end{equation*}
+Then we have 
+\begin{equation*}
+    \func{R_{XX}}{t_2, t_1} = \overline{\func{R_{XX}}{t_1,t_2}}
+\end{equation*}
+and 
+\begin{equation*}
+    \func{R_{XX}}{t,t} = \expected{\abs{\func{X}{t}}^2} \geq 0
+\end{equation*}
+
+\begin{remark}
+    \(R\) is a positive semi-definite function that is 
+    \begin{equation*}
+        \sum_{i = 1}^n \sum_{j = 1}^n a_i \bar{a_j} \func{R}{t_i, t_j} \geq 0
+    \end{equation*}
+    for all \(n\), \(t_1, \dots , t_n\) and \(a_1 , \dots , a_n \in \Complex\). Conversely, if \(R\) is a positive semi-definite function then there exists a stochastic \(X\) with autocorrelation \(R\).
+\end{remark}
+
+Similarly, autocovariance can be revised to 
+\begin{equation*}
+    \func{C}{t_1,t_2} = \func{R}{t_1, t_2} - \func{\eta}{t_1}\overline{\func{\eta}{t_2}}
+\end{equation*}
+
+Expanding these notation for joint distribution, cross-correlation is 
+\begin{equation*}
+    \func{R_{XY}}{t_1,t_2} = \expected{\func{X}{t_1} \overline{\func{Y}{t_2}}}
+\end{equation*}
+and cross-covariance 
+\begin{equation*}
+    \func{C_{XY}}{t_1,t_2} = \func{R_{XY}}{t_1,t_2} - \func{\eta_X}{t_1}\overline{\func{\eta_Y}{t_2}}
+\end{equation*}
+
+\begin{definition}
+    Two process \(X\) and \(Y\) are called (mutually) \textbf{orthogonal} if 
+    \begin{equation*}
+        \func{R_{XY}}{t_1,t_2} = 0 , \quad \forall t_1,t_2
+    \end{equation*}
+    and they are called \textbf{uncorrelated} if 
+    \begin{equation*}
+        \func{C_{XY}}{t_1,t_2} = 0 , \quad \forall t_1,t_2
+    \end{equation*}
+    Lastly, two processes are independent if for any \(n\) and any \(t_1, \dots , t_n\) and \(t_1' , \dots , t'_n\), the random variable \(\func{X}{t_1}, \dots \func{X}{t_n}\) and \(\func{Y}{t'_1}, \dots \func{Y}{t'_n}\) are mutually independent.
+\end{definition}
+
+\section{Stationary processes}
+\subsection{Strict sense stationary process}
+\(X\) is an SSS process if its statistical properties are invariant to time shifts. That is, the processes \(\func{X}{t}\) and \(\func{X}{t + c}\) have the same statistics for any \(c\). In other word, for any \(n\) and \(x_1, \dots , x_n\) and any \(t_1, \dots ,t_n\) and \(c\)
+\begin{equation*}
+    \func{F}{x_1, \dots, x_n; t_1, \dots t_n} = \func{F}{x_1, \dots, x_n ; t_1 + c, \dots , t_n + c}
+\end{equation*}
+
+Similarly, two process \(X\) and \(Y\) are jointly stationary if the joint statistics of \(\func{X}{t}\) and \(\func{Y}{t}\) are the same as the joint statistics of \(\func{X}{t+c}\) and \(\func{Y}{t +c}\).
+
+\begin{example}
+    Suppose \(X\) is an SSS process. Then its first order distribution is independent of time \(t\) as
+    \begin{equation*}
+        \func{F}{x; t} = \func{F}{x ; t+ c}
+    \end{equation*}
+    for all \(c\). Implying that 
+    \begin{equation*}
+        \func{F}{x;t} = \func{F}{x} \implies \func{\eta_X}{t} = \eta
+    \end{equation*}
+    Its second order distribution is only dependent of the time difference. 
+    \begin{equation*}
+        \func{F}{x_1, x_2 ; t_1, t_2} = \func{F}{x_1,x_2 ; t_1 + c , t_2 + c} = \func{F}{x_1, x_2 ; \tau}, \quad \tau  = t_1 - t_2
+    \end{equation*}
+    therefore 
+    \begin{equation*}
+        \func{R}{t_1,t_2} = \func{R}{t_1 - t_2} = \func{R}{\tau}
+    \end{equation*}
+\end{example}
+
+\subsection{Wide sense stationary process} 
+A stochastic process \(X\) is called \textbf{wide sense stationary} if 
+\begin{equation*}
+    \expected{\func{X}{t}} = \eta \quad (\text{independent of time})
+\end{equation*}
+and 
+\begin{equation*}
+    \func{R}{t + \tau , t} = \func{R}{\tau} \quad (\text{depends on the difference})
+\end{equation*}
+\(\func{R}{\tau}\) can be written symmetrically 
+\begin{equation*}
+    \func{R}{\tau} = \expected{\func{X}{t + \frac{\tau}{2}} \overline{\func{X}{t - \frac{\tau}{2}}}}
+\end{equation*}
+In particular, 
+\begin{align*}
+    \func{R}{0} &= \expected{\abs{\func{X}{t}}^2}\\
+    \variance{\func{X}{t}} &= \sigma_X^2
+\end{align*}
+are both independent of time.
+
+Two processes are jointly WSS if each is WSS and their cross-correlation depends only on \(\tau = t_1 - t_2\)
+
+\subsection{Mean square peridicity}
+A process \(X\) is called mean square periodic if 
+\begin{equation*}
+    \expected{\abs{\func{X}{t + \tau} - \func{X}{t}}^2} = 0
+\end{equation*}
+for every \(t\). Therefore by Markov's inequality
+\begin{equation*}
+    \prob{\abs{\func{X}{t + \tau} - \func{X}{t}}^2 \geq \epsilon^2} \leq \dfrac{\expected{\abs{\func{X}{t + \tau} - \func{X}{t}}^2}}{\epsilon^2} = 0
+\end{equation*}
+It follows that, for a specific \(t\)
+\begin{equation*}
+    \func{x}{t + \tau} = \func{x}{t}
+\end{equation*}
+with probability 1.
+\begin{proposition}
+    \(X\) is MS periodic if and only if its autocorrelation is doubly periodic.
+    \begin{equation*}
+        \func{R}{t_1 + m\tau, t_2 + n\tau} = \func{R}{t_1,t_2}, \quad \forall m,n \in \Integers
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    This follows from the fact that we can define a inner product on the space of random variables 
+    \begin{equation*}
+        \angleBracket{X,Y} = \expected{XY}
+    \end{equation*}
+    and thus by the Cauchy-Shwarz inequality we have 
+    \begin{equation*}
+        \bracket{\expected{XY}}^2 \leq \expected{X^2} \expected{Y^2}
+    \end{equation*}
+\end{proof}
+
+\begin{definition}
+    An independent and identically distributed process \(X\) has the following property
+    \begin{equation*}
+        \forall n, \; \forall t_1, \dots, t_n, \ \func{F}{x_1, \dots ,x_n ; t_1, \dots , t_n} = \func{F}{x_1} \dots \func{F}{x_n}
+    \end{equation*}
+    hence \(X\) is SSS as well.
+\end{definition}
+
+\section{Ergodicity}
+We usually do not have access to multiple runs of a stochastic process to be able estimate its statistical properties. \textbf{Ergodic} processes is process that its statistical properties can be deduced from a single sufficiently run. Formally, A stationary process \(X\) is mean-ergodic if the time average estimates 
+\begin{equation*}
+    \hat{\mu_T} = \dfrac{1}{2T} \int_{-T}^T \func{X}{t} \diffOperator t 
+\end{equation*}
+converges in squared mean to ensemble average \(\func{\mu}{t} = \expected{\func{X}{t}} = \mu\) as \(T \to \infty\).  That is
+\begin{equation*}
+    \lim_{T \to \infty} \variance{\mu_T} = \mu
+\end{equation*}
+expanding the left hand side 
+\begin{align*}
+    \variance{\mu_T} &= \dfrac{1}{4T^2} \int_{-T}^{T} \int_{t - T}^{t + T} \func{C}{\tau}  \diffOperator \tau \diffOperator t\\
+    &= \dfrac{1}{4T^2} \int_{-2T}^{2T} \bracket{2T - \abs{\tau}} \func{C}{\tau}  \diffOperator \tau \\
+    &= \dfrac{1}{2T} \int_{-2T}^{2T} \bracket{1 - \frac{\abs{\tau}}{2T}} \func{C}{\tau}  \diffOperator \tau, \ \underbrace{\func{C}{\tau} = \func{C}{-\tau}}_{\text{for real processes}}\\
+    &= \dfrac{1}{2T} \int_{0}^{2T} \bracket{1 - \frac{\abs{\tau}}{2T}} \func{C}{\tau}  \diffOperator \tau
+\end{align*}
+
+\begin{theorem}[Slutsky]
+    \(X\) is mean-ergodic if and only if 
+    \begin{equation*}
+        \frac{1}{T} \int_{0}^T \func{C}{\tau} \diffOperator \tau \to 0 \ \text{as} \ T \to \infty
+    \end{equation*}
+    Intuitively, \(X\) is loosely correlated to its past and thus it will eventually visits the whole space.
+\end{theorem}
+\begin{remark}
+    research Martingale process.
+\end{remark}
+
+\section{Systems with Stochastic Input}
+Suppose \(X\) is a stochastic process having \(\func{X}{t,\omega_j}\). Let \(\func{Y}{t}\) be a function of sample paths
+\begin{equation*}
+    \func{Y}{t} = \squareFunc{T}{\func{X}{t}}
+\end{equation*}
+Then, the system is described with \(T\). The properties of a system 
+\begin{description}
+    \item[Deterministic]
+    \begin{equation*}
+        \func{X}{t,\omega_1} = \func{X}{t, \omega_2} \implies \squareFunc{T}{\func{X}{t,\omega_1}} = \squareFunc{T}{\func{X}{t,\omega_2}}
+    \end{equation*} 
+    \item[Stochastic] not deterministic?!
+    \item[Memoryless] Output only depends on the input at the particular time.
+    \item[Linear]
+    \begin{equation*}
+        \squareFunc{T}{a\func{X_1}{t} + b \func{X_2}{t}} = a\squareFunc{T}{\func{X_1}{t}} + b \squareFunc{T}{\func{X_2}{t}}
+    \end{equation*}  
+    where \(a,b\) are random variable.
+    \item[Time invariant]
+    \begin{equation*}
+        \func{Y}{t}  = \squareFunc{T}{\func{X}{t}} \implies  \func{Y}{t-c}  = \squareFunc{T}{\func{X}{t-c}} 
+    \end{equation*} 
+    For linear time invariant system, the output can be written as 
+    \begin{equation*}
+        \func{Y}{t} = \func{X}{t} \ast \func{h}{t}
+    \end{equation*}
+    where \(h\) is the impulse response of the system. Moreover, if \(X\) is SSS then \(Y\) is SSS.
+\end{description}
