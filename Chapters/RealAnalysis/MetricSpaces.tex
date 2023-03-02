@@ -1,6 +1,4 @@
-
 \chapter{Topology and Metric Spaces}
-\thispagestyle{headings}
 \section{Topology}
 
 Let \(X\) be a set. A \textbf{topology} on \(X\) is a collection \(\scrT\)  of subsets of \(X\) called \textbf{open set} having the following properties
@@ -12,7 +10,7 @@ Let \(X\) be a set. A \textbf{topology} on \(X\) is a collection \(\scrT\)  of s
 A topological space is a pair \((X,\scrT)\), where \(\scrT\) is a topology on \(X\).
 
 \begin{example}
-    On any set \(X\) we can define two topologies. The \textit{trivial topology} on \(X\) consists of \(\set{\emptyset, X}\). The \textit{discrete topology} on \(X\) is \(\powerSet{X}\).
+    On any set \(X\) we can define two topologies. The \textit{trivial topology} on \(X\) consists of \(\set{\emptyset, X}\) and the \textit{discrete topology} on \(X\) is \(\powerSet{X}\).
 \end{example}
 
 If \(\scrT_1\) and \(\scrT_2\) are topologies on \(X\), we say that \(\scrT_1\) is \textit{weaker}/\textit{coarser} than \(\scrT_2\), or that \(\scrT_2\) is \textit{stronger}/\textit{finer} than \(\scrT_1\), if \(\scrT_1 \subset \scrT_2\).
@@ -26,11 +24,11 @@ If \(\scrT_1\) and \(\scrT_2\) are topologies on \(X\), we say that \(\scrT_1\) 
 \end{proposition}
 
 \begin{proof}
-    Let \(U\) be a neighbourhood for all of its points. That is, for every \(x \in U\) there is an open set \(G_x\) such that \(x \in G_x \subset U\). Then, \(\cup_x G_x \subset U\) however, \(U \subset \cup_x G_x\). Therefore, \(U = \cup_x G_x\) and by the first axiom \(U\) is an open set. If \(U\) is an open set, then \(U\) is a neighbourhood for each point \(x \in U\).
+    Let \(U\) be a neighbourhood for all of its points. That is, for every \(x \in U\) there is an open set \(G_x\) such that \(x \in G_x \subset U\). Then, \(\bigcup_x G_x \subset U\) however, \(U \subset \bigcup_x G_x\). Therefore, \(U = \bigcup_x G_x\) and by the first axiom \(U\) is an open set. If \(U\) is an open set, then \(U\) is a neighbourhood for each point \(x \in U\).
 \end{proof}
 
 \begin{definition}
-    A subset \(F\) of \(X\) is called \textbf{closed} if \(F^c\) is open. \textbf{Closure} of a set \(E\) is the intersection of all closed sets that include \(E\) and it is denoted by \(\closure E\) or \(\bar{E}\). 
+    A subset \(F\) of \(X\) is called \textbf{closed} if \(F^c\) is open. The \textbf{Closure} of a set \(E\) is the intersection of all closed sets that include \(E\) and it is denoted by \(\closure E\) or \(\bar{E}\).
 \end{definition}
 
 \begin{proposition}
@@ -38,7 +36,7 @@ If \(\scrT_1\) and \(\scrT_2\) are topologies on \(X\), we say that \(\scrT_1\) 
 \end{proposition}
 
 \begin{proof}
-    We know that \(\closure E = \cap_{E \subset F} F\) where \(F\) are closed set. Then, \((\closure E)^c = \cup_{E \subset F} F^c\) which is an open set and hence \(\closure E\) is closed.
+    We know that \(\closure E = \bigcap_{E \subset F} F\) where \(F\) are closed set. Then, \((\closure E)^c = \bigcup_{E \subset F} F^c\) which is an open set and hence \(\closure E\) is closed.
 \end{proof}
 
 \begin{proposition}
@@ -70,11 +68,11 @@ If \(\scrT_1\) and \(\scrT_2\) are topologies on \(X\), we say that \(\scrT_1\) 
 \end{definition}
 
 \begin{proposition}
-    Let \(E\) be subset of a topological space \(X\). \(E\) is closed if and only if \(E = \closure E\) and \(E\) is open if and only if \(E = \interior\). Furthermore, \(\boundary E = \emptyset\) if and only if \(E\) is both open and closed.
+    Let \(E\) be subset of a topological space \(X\). \(E\) is closed if and only if \(E = \closure E\) and \(E\) is open if and only if \(E = \interior E\). Furthermore, \(\boundary E = \emptyset\) if and only if \(E\) is both open and closed.
 \end{proposition}
 
 \begin{proof}
-    Note that \(E \subset \closure E\) and when \(E\) is closed, \(\closure E \subset E\) therefore, \(E = \closure E\). 
+    Note that \(E \subset \closure E\) and when \(E\) is closed, \(\closure E \subset E\) therefore, \(E = \closure E\).
 \end{proof}
 
 \begin{definition}
@@ -98,60 +96,70 @@ Let \((X,\scrT)\) be a topological space and \(Y \subset X\). Then, \((Y,\scrT_y
 \section{Metric spaces}
 Let \(X\) be a non-empty set and \(x,y \in X\) then if there exists a non-negative real number \(\func{d}{x,y}\) with following three properties:
 \begin{enumerate}
-    \item \(\func{d}{x,y} = 0 \text{ if and only if } x = y\) (Positive definiteness).
-    \item \(\func{d}{x,y} = \func{d}{y,x}\) (Symmetry).
-    \item \(\func{d}{x,y} \leq \func{d}{x,z} + \func{d}{z,y}\) (Triangle inequality).
+    \item (Positive definiteness.) \(\func{d}{x,y} = 0 \text{ if and only if } x = y\).
+    \item (Symmetry.) \(\func{d}{x,y} = \func{d}{y,x}\).
+    \item (Triangle inequality.)\(\func{d}{x,y} \leq \func{d}{x,z} + \func{d}{z,y}\).
 \end{enumerate}
-the combination \(\metricSpace{X}{d}\) is called a \textbf{metric space} and \(\func{d}{x,y}\) is called the \textbf{metric}, or also \textbf{distance} function.
+the combination \((X,d)\) is called a \textbf{metric space} and \(\func{d}{x,y}\) is called the \textbf{metric}, or also \textbf{distance} function.
 \begin{example}
-    The Euclidean space \(\Reals^n = \{(x_1,x_2,\dots,x_n) : x_i \in \Reals\}\) with \raggedright \(\func{d}{x,y}=\sqrt{(x_1-y_1)^2 + \dots + (x_n - y_n)^2} \) makes a metric space. To prove this we must show the above properties work:
+    The Euclidean space \(\Reals^n = \set<x_1,x_2,\dots,x_n>{ x_i \in \Reals}\) with the metric \(\func{d}{x,y}=\sqrt{(x_1-y_1)^2 + \dots + (x_n - y_n)^2} \) makes a metric space. To prove this we must show the above properties hold.
     \begin{enumerate}
         \item if \(\func{d}{x,y} = 0\) then:
-              \[ \sqrt{(x_1-y_1)^2 + \dots + (x_n - y_n)^2} = 0 \]
-              Therefore each of the terms must be zero:
+              \begin{equation*}  \sqrt{(x_1-y_1)^2 + \dots + (x_n - y_n)^2} = 0  \end{equation*}
+              Therefore eac  terms must be zero:
               \begin{align*}
                   (x_i - y_i)^2 & = 0 \quad  \forall i \leq n \\
                   x_i - y_i     & = 0 \implies x_i = y_i
               \end{align*}
-              Thus \(x = y\)
-        \item  It is obvious that \((x_i - y_i)^2 = (y_i - x_i)^2\) and therefore \(\func{d}{x,y} = d(y,x)\)
+              Thus \(x = y\).
+        \item  It is obvious that \((x_i - y_i)^2 = (y_i - x_i)^2\) and hence \(\func{d}{x,y} = \func{d}{y,x}\)
         \item  The triangle inequality immediately follows from the Cauchy-Schwartz inequality.
     \end{enumerate}
 \end{example}
 
 We can expand the Euclidean norm by defining Minkowski \textit{\(p\)-norm} also called \textit{\(L^p\)-norm} for \(1 \leq p \leq \infty\) as follows:
-\[\func{d_p}{x,y} = \left(\sum_{i}{|x_i - y_i|^p}\right)^{\frac{1}{p}}\]
+\begin{equation*}
+     \func{d_p}{x,y} = \bracket{\sum_{i}{|x_i - y_i|^p}}^{\frac{1}{p}} 
+\end{equation*}
 and by taking the limit, \(p \to \infty\) we find out that:
-\[\func{d_\infty}{x,y} = \max_{i} \{|x_i - y_i|\}\]
+\begin{equation*} 
+    \func{d_\infty}{x,y} = \max_{i} \set{|x_i - y_i|} 
+\end{equation*}
 
 \begin{example}
     We can define \textbf{discrete distance} as follows:
-    \[\func{d}{x,y} =
+    \begin{equation*}\func{d}{x,y} =
         \begin{cases}
             1 & x\neq y \\
             0 & x=y
         \end{cases}
-    \]
+    \end{equation*}
     and it is pretty straightforward to show that the three properties hold.
 \end{example}
 
 \begin{definition}
     The \textbf{open ball} \(\func{B_r}{a}\) with radius \(r\) centered at \(a\) is the set of all points:
-    \[ \func{B_r}{a} = \{ x \in X : \func{d}{x,a} < r\}\]
+    \begin{equation*}  
+        \func{B_r}{a} = \set< x \in X>{ \func{d}{x,a} < r}
+     \end{equation*}
     and the \textbf{closed ball} \(\func{\overline{B}_r}{a}\) with radius \(r\) centered at \(a\) is the set of all points:
-    \[\func{\overline{B}_r}{a} = \{ x \in X: \func{d}{x,a} \leq r\} \]
+    \begin{equation*} 
+        \func{\overline{B}_r}{a} = \set< x \in X>{\func{d}{x,a} \leq r}  
+    \end{equation*}
     The \textbf{sphere} \(\func{S_r}{a}\) with radius \(r\) centered at \(a\) is the set of all the points:
-    \[ \func{S_r}{a} = \{ x \in X: \func{d}{x,a}  = r\} \]
+    \begin{equation*}  
+        \func{S_r}{a} = \set< x \in X>{ \func{d}{x,a}  = r}  
+    \end{equation*}
 \end{definition}
 
 \begin{definition}
-    Let \(\metricSpace{X}{d}\) be a metric space. A subset \(U \subset X\) is an open set if for all \(a \in U\) there exists \(\rho > 0\) such that \( \func{B_\rho}{a} \subset U\).
+    Let \((X,d)\) be a metric space. A subset \(U \subset X\) is an open set if for all \(a \in U\) there exists \(\rho > 0\) such that \( \func{B_\rho}{a} \subset U\).
 \end{definition}
 
-Given this defintion of open sets, we can define a topolgy on metric space \(X\). 
+Given this defintion of open sets, we can define a topolgy on metric space \(X\).
 \begin{enumerate}
-    \item Firstly, we need to show that every union of open sets is open itself. Let \(U_{\alpha}\) be some open sets indexed by \(A\) and let \(x \in \cup_{\alpha} U_{\alpha}\). Then, there exists a \(\alpha \in A\) such that \(x \in U_{\alpha}\). Since, \(U_{\alpha}\) is open, there exists a ball \(\func{B_r}{x}\) which is contained in \(U_{\alpha}\). Clearly, \(\func{B_r}{x} \in \cup_{\alpha} U_{\alpha}\) and hence \(\cup_{\alpha} U_{\alpha}\) is open.
-    \item Secondly, we show that intersection of finite collection of open sets in open. Let \(U_{\alpha}\) be open sets indexed by a finite set \(A\) and let \(x \in \cap_{\alpha} U_{\alpha}\). For each \(\alpha \in A\), there exists a ball \(\func{B_{r_{\alpha}}}{x}\) such that \(\func{B_{r_{\alpha}}}{x} \subset U_{\alpha}\). Let \(r = \min_{\alpha} r_{\alpha}\) and note that \(\func{B_r}{x} \subset \func{B_{r_{\alpha}}}{x} \subset U_{\alpha}\) for all \(\alpha \in A\). Thus, \(\func{B_{r}}{x} \subset \cap_{\alpha} U_{\alpha}\) hence, \(\cap_{\alpha} U_{\alpha}\) is open.
+    \item Firstly, we need to show that every union of open sets is open itself. Let \(U_{\alpha}\) be some open sets indexed by \(A\) and let \(x \in \bigcup_{\alpha} U_{\alpha}\). Then, there exists a \(\alpha \in A\) such that \(x \in U_{\alpha}\). Since, \(U_{\alpha}\) is open, there exists a ball \(\func{B_r}{x}\) which is contained in \(U_{\alpha}\). Clearly, \(\func{B_r}{x} \in \bigcup_{\alpha} U_{\alpha}\) and hence \(\bigcup_{\alpha} U_{\alpha}\) is open.
+    \item Secondly, we show that intersection of finite collection of open sets in open. Let \(U_{\alpha}\) be open sets indexed by a finite set \(A\) and let \(x \in \bigcap_{\alpha} U_{\alpha}\). For each \(\alpha \in A\), there exists a ball \(\func{B_{r_{\alpha}}}{x}\) such that \(\func{B_{r_{\alpha}}}{x} \subset U_{\alpha}\). Let \(r = \min_{\alpha} r_{\alpha}\) and note that \(\func{B_r}{x} \subset \func{B_{r_{\alpha}}}{x} \subset U_{\alpha}\) for all \(\alpha \in A\). Thus, \(\func{B_{r}}{x} \subset \bigcap_{\alpha} U_{\alpha}\) hence, \(\bigcap_{\alpha} U_{\alpha}\) is open.
     \item Thirdly, we show that \(X\) and \(\emptyset\) are open. \(\emptyset\) is trivially open as it has no element. And \(\func{B_r}{x} \subset X\)  by defintion for all \(r\) hence, \(X\) is open as well.
 \end{enumerate}
 
@@ -192,15 +200,15 @@ Consider the following re-defintions of concepts introduced in the previous sect
 We then, show that these re-definitions are equivalent to the topological defintions.
 
 \begin{theorem}
-    Subset \(C \subset X\) is closed if and only if \(X - C\) is open.
+    Subset \(C \subset X\) is closed if and only if \(X \backslash C\) is open.
 \end{theorem}
 
 \begin{proof}
-    Firstly we prove the necessity condition that is \(C\) is closed if \(X - C\) is open . We employ proof by contradiction. Let \(C\) be a closed subset of \(X\) such that its complement is not open. That is, for some \(a \in (X - C)\) there is no \(\rho > 0\) exists such that \(\func{B_\rho}{a} \subset (X-C)\). In other words, for all \(\rho,\: \exists p \in \func{B_\rho}{a} \;\mathrm{ s.t }\; p_\rho \in C\). Which implies that \(a\) is an adherent point of \(C\) but since \(C\) is closed then \(a \in C\) which is a contradiction. Similarly, one can show the sufficiency condition.
+    Firstly, we prove the necessity condition that is \(C\) is closed if \(X \backslash C\) is open . We employ proof by contradiction. Let \(C\) be a closed subset of \(X\) such that its complement is not open. That is, for some \(a \in (X \backslash C)\) there is no \(\rho > 0\) exists such that \(\func{B_\rho}{a} \subset (X \backslash C)\). In other words, for all \(\rho,\: \exists p \in \func{B_\rho}{a} \;\mathrm{ s.t }\; p_\rho \in C\). Which implies that \(a\) is an adherent point of \(C\) but since \(C\) is closed then \(a \in C\) which is a contradiction. Similarly, one can show the sufficiency condition.
 \end{proof}
 
 \begin{corollary}
-    \(X \text{ and } \emptyset\) are both closed and open.
+    \(X\)  and \(\emptyset\) are both closed and open.
 \end{corollary}
 
 \begin{remark} (Equivalent Definitions)
@@ -209,25 +217,27 @@ We then, show that these re-definitions are equivalent to the topological defint
               \begin{prooflemma}
                   For every \(a \in U\) there is a ball \(\func{B_\rho}{a} \subset U\) thus \(\bigcup_{a \in U}{\func{B_\rho}{a}} \subset U\) and since \(a \in \func{B_\rho}{a}\) we must have \(\bigcup_{a \in U}{\func{B_\rho}{a}} \supset U\) hence \(U = \bigcup_{a \in U}{\func{B_\rho}{a}}\).
 
-                  Now let \(U = \bigcup {\func{B_\rho}{a}}\) we need to show that \(U\) is open. Let \(b \in U\) then \(b\) must be a point in at least one of those balls. Let \(b \in B_r(c)\) and \(\rho = r - d(b,c)\). We will show that \(B_\rho(b) \subset B_r(c) \subset U\), for any \(x \in B_\rho(b)\) by triangle inequality we have \(d(x,c) \leq d(x,b) + d(b,c) < \rho + d(b,c) = r\) which means \(x \in B_r(c)\).
+                  Now let \(U = \bigcup {\func{B_\rho}{a}}\) we need to show that \(U\) is open. Let \(b \in U\) then \(b\) must be a point in at least one of those balls. Let \(b \in \func{B_r}{c}\) and \(\rho = r - \func{d}{b,c}\). We will show that \(\func{B_{\rho}}{b} \subset \func{B_r}{c} \subset U\), for any \(x \in \func{B_{\rho}}{b}\) by triangle inequality we have \(\func{d}{x,c} \leq \func{d}{x,b} + \func{d}{b,c} < \rho + \func{d}{b,c} = r\) which means \(x \in \func{B_r}{c}\).
               \end{prooflemma}
         \item A set is open if and only if all of its members are interior points. Therefore, \(U = \interior U\).
-        \item Let \(I = \{ S \subset U : S \text{ is open}\}\) then \(\interior U = \displaystyle{ \bigcup_{S \in I} S}\).
-        \item Let \(I = \{ U \subset S : S \text{ is closed}\}\) then \(\closure U = \displaystyle{ \bigcap_{S \in I} S}\).
+        \item Let \(I = \set< S \subset U>{ S \text{ is open}}\) then \(\interior U =  \bigcup_{S \in I} S\)/
+        \item Let \(I = \set< U \subset S >{S \text{ is closed}}\) then \(\closure U =  \bigcap_{S \in I} S\).
     \end{enumerate}
 \end{remark}
 
-Let \(\metricSpace{X}{d}\) be a metric space and \(Y \subset X\) then \(Y\) may inherit its metric from \(X\) and \(\metricSpace{Y}{d}\) would also be a metric space and is called a \textbf{metric subspace} of \(X\). We will investigate the nature of open and closed sets in subspaces. Let \(\func{B_\rho^Y}{y} = \{ p \in Y : d(y,p) < \rho\}\) Then, it is easy to see that:
-\[B_\rho^Y(y) = B_\rho(y) \bigcap Y \]
+Let \((X,d)\) be a metric space and \(Y \subset X\) then \(Y\) may inherit its metric from \(X\) and \((Y,d)\) would also be a metric space and is called a \textbf{metric subspace} of \(X\). We will investigate the nature of open and closed sets in subspaces. Let \(\func{B_\rho^Y}{y} = \set< p \in Y >{ \func{d}{y,p} < \rho}\) Then, it is easy to see that:
+\begin{equation*} 
+    \func{B_\rho^Y}{y} = \func{B_{\rho}}{y} \bigcap Y
+\end{equation*}
 
 \begin{corollary} \label{InheritancePrinciple}
-    Let \(\metricSpace{X}{d}\) be a metric space and \(Y \subset X\) is a metric subspace of \(X\) then \(U \subset Y\) is an open subset of \(Y\) if and only if there is a open set \(V \subset X\) such that \(U = V \cap Y\). Similarly, for any closed set \(C \subset Y\) there is a closed set \(D \subset X\) such that \(C = D \cap Y\).
+    Let \((X,d)\) be a metric space and \(Y \subset X\) is a metric subspace of \(X\) then \(U \subset Y\) is an open subset of \(Y\) if and only if there is a open set \(V \subset X\) such that \(U = V \cap Y\). Similarly, for any closed set \(C \subset Y\) there is a closed set \(D \subset X\) such that \(C = D \cap Y\).
 \end{corollary}
 
 \begin{proof}
     Ofcourse, if \(U \subset Y\) is open in \(Y\) then by definition it can be represent as a union of open ball \(\func{B_r^Y}{a} \). Each of these balls is the intersection of a \(\func{B_r^X}{a} \cap Y\). Therefore
     \begin{equation*}
-        U = \bigcup \func{B_r^Y}{a} = \bigcup \left(\func{B_r^X}{a} \cap Y\right) = \left( \bigcup \func{B_r^X}{a} \right) \cap Y = V \cap Y
+        U = \bigcup \func{B_r^Y}{a} = \bigcup \bracket{\func{B_r^X}{a} \cap Y} = \bracket{ \bigcup \func{B_r^X}{a} } \cap Y = V \cap Y
     \end{equation*}
     Furthermore, if \(a \in V \cap Y\) then there exists a ball \(\func{B_r^X}{a} \subset V\). Therefore
     \begin{equation*}
@@ -236,18 +246,17 @@ Let \(\metricSpace{X}{d}\) be a metric space and \(Y \subset X\) then \(Y\) may 
     The case for closed subsets can be proved using the complements.
 \end{proof}
 
-{\Large\textbf{Exercises}}
-\begin{enumerate}
+\begin{exercise}
     \item Show that \(\closure S = S \cup \lim S\)
-\end{enumerate}
+\end{exercise}
 \newpage
 
 \section{Convergence}
-Let \(X\) be a topological space. A \textbf{sequence} is a function in form of \( a : \set{k, k+1, k+2, \dots } \to X\) where \(k \in \Integers \). Conventionally, instead of \(\func{a}{n}\), \(a_n\) is used. The sequence \(\{ a_n\}\) is \textbf{convergent} to \(a \in X\) if for all neighbourhood \(U\) of \(a\) there exists \(N\) such that:
+Let \(X\) be a topological space. A \textbf{sequence} is a function of form  \( a : \set{k, k+1, k+2, \dots } \to X\) where \(k \in \Integers\). Conventionally, instead of \(\func{a}{n}\), \(a_n\) is used. The sequence \(\set{ a_n}\) is \textbf{convergent} to \(a \in X\) if for all neighbourhood \(U\) of \(a\) there exists \(N\) such that:
 \begin{equation*}
     n \geq N \implies a_n \in U
 \end{equation*}
-and it is denoted by \(a_n \to a\) or \(\displaystyle{a = \lim_{n \to \infty}{a_n}}\). Given a topolgy, convergence is not necessarily well-behaved. For example, in the trivial topolgy, if \(a_n \to a\), then \(a_n \to b\) for any \(b \in X\). To do away with this we consider \textbf{Hausdorff spaces}.
+and it is denoted by \(a_n \to a\) or \(a = \lim_{n \to \infty}{a_n}\). Given a topolgy, convergence is not necessarily well-behaved. For example, in the trivial topolgy, if \(a_n \to a\), then \(a_n \to b\) for any \(b \in X\). To do away with this we consider \textbf{Hausdorff spaces}.
 
 \begin{definition}
     Let \(X\) be a topological space. \(X\) is a Hausdorff space if for any two \(x,y \in X\) where \(x \neq y\), there exists disjoint open sets \(U\) and \(V\) such that \(x \in U\) and \(y \in V\).
@@ -265,10 +274,12 @@ In the case of a metric space, the set \(\set{ a_k, a_{k + 1} , \dots }\) is bou
 
 Another problem with the defintion of convergence is its dependence on a convergence point. So naturally the following question comes up. Is there a way to show the convergence of sequence based on itself?
 For that, we need to define \textbf{Cauchy sequence}. A sequence \(\set{a_n}\) in a metric space \(X\) is a Cauchy sequence if:
-\[\forall \epsilon > 0,\: \exists N \quad \suchThat \quad n, m \geq N \implies \func{d}{a_n,a_m} < \epsilon \]
+\begin{equation*}
+     \forall \epsilon > 0,\: \exists N \quad \suchThat \quad n, m \geq N \implies \func{d}{a_n,a_m} < \epsilon  
+\end{equation*}
 
 \begin{lemma}
-    In a metric space \(X\), convergence of \(a_n\) to \(a\) is equivalent to 
+    In a metric space \(X\), convergence of \(a_n\) to \(a\) is equivalent to
     \begin{equation*}
         \forall \epsilon > 0,\: \exists N \quad \suchThat \quad n \geq N \implies \func{d}{a_n , a} < \epsilon
     \end{equation*}
@@ -283,26 +294,31 @@ For that, we need to define \textbf{Cauchy sequence}. A sequence \(\set{a_n}\) i
 
 \begin{proof}
     For a given \(\epsilon > 0 \) we know there exist \(N\) such that:
-    \[ n \geq N \implies \func{d}{a_n,a} < \frac{\epsilon}{2}\]
+    \begin{equation*}  
+        n \geq N \implies \func{d}{a_n,a} < \frac{\epsilon}{2} 
+    \end{equation*}
     and equivalently:
-    \[ m \geq N \implies \func{d}{a_m,a} < \frac{\epsilon}{2}\]
+    \begin{equation*}  
+        m \geq N \implies \func{d}{a_m,a} < \frac{\epsilon}{2} 
+    \end{equation*}
     and since by the triangle inequality we have:
-    \[  \func{d}{a_m,a_n} \leq  \func{d}{a_m,a} +  \func{d}{a_n,a} \leq \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon\]
+    \begin{equation*}
+        \func{d}{a_m,a_n} \leq  \func{d}{a_m,a} +  \func{d}{a_n,a} \leq \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+    \end{equation*}
 \end{proof}
 
 \begin{definition} [Subsequence]
     We call \(\set{ b_n }\) a \textbf{subsequence} of \(\set{ a_n }\) if there is a sequence of positive integers \(n_1 < n_2 < n_3 < \dots \) such that for each \(k\), \(b_k = a_{n_k}\).
 \end{definition}
 
-{\Large\textbf{Exercises}}
-\begin{enumerate}
+\begin{exercise}
     \item Show that if a sequence \(\set{a_n }\) is convergent, then its limit is unique. That is, if \(a_n \to a \) and \(a_n \to b\) as \(n \to \infty\) then \(a = b\).
     \item Prove that every subsequence of a convergent sequence converges and it converges to the same limit.
-\end{enumerate}
+\end{exercise}
 \newpage
 
 \section{Completeness}
-A metric space \(\metricSpace{X}{d}\) is \textbf{complete} if every Cauchy sequence converges.
+A metric space \((X,d)\) is \textbf{complete} if every Cauchy sequence converges.
 
 \begin{proposition}
     \(\Reals\) with the normal Euclidean norm is a complete metric space.
@@ -311,7 +327,7 @@ A metric space \(\metricSpace{X}{d}\) is \textbf{complete} if every Cauchy seque
 To prove it, we need the following lemmas.
 
 \begin{lemma} \label{Bounded}
-    If \(\set{ a_n }\) is a Cauchy sequence in a metric space \(\metricSpace{X}{d}\) then the set \(S = \set{ a_k , a_{k + 1}, \dots }\) is bounded.
+    If \(\set{ a_n }\) is a Cauchy sequence in a metric space \((X,d)\) then the set \(S = \set{ a_k , a_{k + 1}, \dots }\) is bounded.
 \end{lemma}
 
 \begin{prooflemma}
@@ -337,7 +353,7 @@ To prove it, we need the following lemmas.
     \end{equation*}
     and since \(\set{a_n} \) is a Cauchy sequence then we also know that there exists \(N_2\) such that:
     \begin{equation*}
-        q,m \geq N_2 \implies \func{d}{a_m,a_q} < \frac{\epsilon}{2} 
+        q,m \geq N_2 \implies \func{d}{a_m,a_q} < \frac{\epsilon}{2}
     \end{equation*}
     Let \(N = \max \set{ N_1, N_2} \) and \(n_q \geq N\) consequently:
     \begin{equation*}
@@ -357,9 +373,9 @@ We present a proof for the completeness of \(\Reals\) under the Euclidean norm.
     Let \(\set{ a_n }\) be a Cauchy sequence. Then by \Cref{Bounded}, the sequence is bounded and there is a closed interval \(I_0 = \clcl{a}{b} \) in which all \(a_n\) lie. Consider the closed intervals \(\clcl*{a}{\dfrac{a + b}{2}} \) and \(\clcl*{\dfrac{a + b}{2}}{b}\). Since the sequence has infinitely many terms then there are infinitely many terms in at least one of the two intervals. Let that interval be \(I_1\) and choose \(x_1 \in I_1\) where \(x_1 = a_{n_1}\) for some \(n_1\).
     Repeat the process for \(I_1\) to get \(I_2 \) and \(x_2 = a_{n_2}\) where \(n_2 > n_1\). Since there are infinitely many terms in \(I_2\) we can find such \(n_2\). By continuing this process we have a subsequence \(\{ x_k \}\) and a sequence of nested closed sets \(\set{ I_k = \clcl{a_k}{b_k}}\). Since for all \(\epsilon > 0\) there exists \(K\) such that \(b_K - a_K < \epsilon\) then the intersection of \(\set{I_k}\) is a point, say \(y\). We claim that that \(x_k \to y\), that is:
     \begin{equation*}
-        \forall \epsilon > 0 \; \exists N \in \Naturals \quad \suchThat \quad n \geq N \implies \abs{x_n - y} < \epsilon  
+        \forall \epsilon > 0 \; \exists N \in \Naturals \quad \suchThat \quad n \geq N \implies \abs{x_n - y} < \epsilon
     \end{equation*}
-    
+
     Since \(y = \bigcap I_k\) then \(y \in I_k\) for all \(k\), especially \(y \in I_n\). Therefore, \(\abs{x_n - y}\) is smaller than or equal to the length of \(I_n\) which is \(\dfrac{b - a}{2^n} \leq \dfrac{b-a}{2^N}\). By setting \(N > \log_2{\dfrac{b-a}{\epsilon}}\) we have:
     \begin{equation*}
         \abs{x_n - y} \leq \dfrac{b - a}{2^n} \leq \dfrac{b-a}{2^N} < \epsilon
@@ -368,7 +384,7 @@ We present a proof for the completeness of \(\Reals\) under the Euclidean norm.
 \end{proof}
 
 
-Let \(\metricSpace{X}{d}\) and \(\metricSpace{X'}{d'}\)be two metric spaces. Define the following norms on the Cartesian product \(X \times X'\):
+Let \((X,d)\) and \((X',d')\)be two metric spaces. Define the following norms on the Cartesian product \(X \times X'\):
 \begin{enumerate}
     \item \(\func{D_1}{(x,x'),(y,y')} = \func{d}{x,y} + \func{d'}{x,y}\)
     \item \(\func{D_2}{(x,x'),(y,y')} = \sqrt{\func{d}{x,y}^2 +\func{d'}{x',y'}^2}\)
@@ -377,7 +393,7 @@ Let \(\metricSpace{X}{d}\) and \(\metricSpace{X'}{d'}\)be two metric spaces. Def
 
 Let \(p_1 = (x,x')\) and \(p_2 = (y,y')\):
 \begin{equation*}
-    \func{D_3}{p_1,p_2} \leq \func{D_2}{p_1,p_2} \leq \func{D_1}{p_1,p_2} \leq 2\func{D_3}{p_1,p_2} 
+    \func{D_3}{p_1,p_2} \leq \func{D_2}{p_1,p_2} \leq \func{D_1}{p_1,p_2} \leq 2\func{D_3}{p_1,p_2}
 \end{equation*}
 
 Then, it is easy to see that if a sequence \(\{ a_n \}\) is convergent under one of these norms, it is convergent to the same value under the other two.
@@ -385,17 +401,17 @@ The same is true if the sequence is a Cauchy sequence.
 
 By induction we can generalize it to \(X_1 \times X_2 \times \dots \times X_n\). For example, \(\Reals^n\) is complete metric under all the three norms introduced above. That is, every Cauchy sequence in \(\Reals^n\) is convergent. To show this assume the sequence \(\set{ x_i }\) is a Cauchy sequence under, WLOG, \(D_1\):
 \begin{equation*}
-    \forall \epsilon > 0, \, \exists N \quad \suchThat \quad i,j \geq N \implies \func{D_1}{x_i,x_j} < \epsilon 
+    \forall \epsilon > 0, \, \exists N \quad \suchThat \quad i,j \geq N \implies \func{D_1}{x_i,x_j} < \epsilon
 \end{equation*}
 
 Then for the \(k\)-th coordinate:
 \begin{equation*}
-    \abs{x_{i_k} - x_{j_k}}  < \func{D_1}{x_i,x_j}  < \epsilon 
+    \abs{x_{i_k} - x_{j_k}}  < \func{D_1}{x_i,x_j}  < \epsilon
 \end{equation*}
 
 Therefore, for every coordinate, the image of the sequence on that coordinate is a Cauchy sequence. Since \(\Reals\) is complete then \(\set{ x_{i_k} } _i\) is convergent to some \(x_k\) for all \(k\). We claim that \(x_i \to x = (x_1, \dots, x_n)\) as \(i \to \infty\):
 \begin{equation*}
-    \func{D_1}{x,x_i} = \abs{x_{i_1} - x_1} + \abs{x_{i_2} - x_2}  + \dots + \abs{x_{i_n} - x_n} 
+    \func{D_1}{x,x_i} = \abs{x_{i_1} - x_1} + \abs{x_{i_2} - x_2}  + \dots + \abs{x_{i_n} - x_n}
 \end{equation*}
 
 We have shown that \(\set{ x_{i_k}} _i\) is convergent to \(x_k\) then there must be \(N_1,N_2, \dots N_n\) such that for all \(k\):
@@ -408,7 +424,7 @@ Setting \( N = \underset{1 \leq k \leq n}{\max}{N_k} \):
 \end{equation*}
 
 \begin{theorem}
-    Let \(\metricSpace{X}{d}\) be a complete metric space and \(Y \subset X\) is a complete metric space if and only \(Y\) is a closed subset of \(X\).
+    Let \((X,d)\) be a complete metric space and \(Y \subset X\) is a complete metric space if and only \(Y\) is a closed subset of \(X\).
 \end{theorem}
 
 \begin{proof}
@@ -421,25 +437,26 @@ Setting \( N = \underset{1 \leq k \leq n}{\max}{N_k} \):
 \end{theorem}
 
 \begin{theorem}
-    Let \((X,d)\) be a complete metric space, and suppose that \(f:X \to X\) has the property that there exists \(\alpha < 1 \) such that 
+    Let \((X,d)\) be a complete metric space, and suppose that \(f:X \to X\) has the property that there exists \(\alpha < 1 \) such that
     \begin{equation*}
         \func{d}{\func{f}{x}, \func{f}{y}} < \alpha \func{d}{x,y}
     \end{equation*}
     for all \(x,y \in X\). Then, there exists a unique point \(x \in X\) such that \(\func{f}{x} x\). Moreover, if \(x_0 \in X\), and \(x_{n+1} = \func{f}{x_n}\), then \(x = \lim_{n \to \infty} x_n\).
 \end{theorem}
-{\Large\textbf{Exercises}}
-\begin{enumerate}
+\begin{exercise}
     \item Show that if a sequence \(\set{ a_n }\) is convergent, then its limit is unique. That is, if \(a_n \to a \) and \(a_n \to b\) as \(n \to \infty\) then \(a = b\).
     \item Prove that every subsequence of a convergent sequence converges and it converges to the same limit.
-\end{enumerate}
+\end{exercise}
 \newpage
 
 \section{Continuity}
 \begin{definition} [Continuity]
     Let \((X,\scrT_X)\) and \((Y,\scrT_Y)\) be two topological spaces and \(f : X \to Y\) be a function. We say \(f\) is continuous if for every open subset \(V\) of \(Y\) the pre-image of it is an open set in \(X\).
-    \[\func{f^{\mathrm{pre}}}{V}= \func{f^{-1}}{V} = \{ x \in X : \func{f}{x} \in V\} \]
+    \begin{equation*} 
+        \func{f^{\mathrm{pre}}}{V}= \func{f^{-1}}{V} = \{ x \in X : \func{f}{x} \in V\}
+    \end{equation*}
 
-    Furthermore, \(f\) is continuous at a point \(x \in X\) when for all subset \(W\) of  \(Y\) that \( \func{f}{x} \) is an internal point of, there is an open set \(U\) containing \(x\) such that \(\set{ f(y) : y \in U } \subset W\). In other words \(x\) is an internal point of \(\func{f^{\mathrm{pre}}}{W}\).
+    Furthermore, \(f\) is continuous at a point \(x \in X\) when for all subset \(W\) of  \(Y\) that \( \func{f}{x} \) is an internal point of, there is an open set \(U\) containing \(x\) such that \(\set<f(y)> {y \in U }\subset W\). In other words \(x\) is an internal point of \(\func{f^{\mathrm{pre}}}{W}\).
 \end{definition}
 
 \begin{proposition}
@@ -448,16 +465,18 @@ Setting \( N = \underset{1 \leq k \leq n}{\max}{N_k} \):
 
 \begin{proof}
     Firstly, if \(f\) is continuous we show that \(f\) is continuous at every point \(x \in X\). Let \(V\) be an open set around \( \func{f}{x}\) then \(x \in \func{f^{\mathrm{pre}}}{V}\) must be an internal point since \(\func{f^{\mathrm{pre}}}{V}\) is open.
-    Secondly, if \(f\) is continuous at every point \(x \in X\) then \(f\) is continuous. Let \(V = \set{\func{f}{x} : x \in U}\) be an open set in \(Y\). For any \(x \in U\), \(\func{f}{x}\) is an internal point of \(V\) and since \(f\) is continuous at \(x\), \(x\) is an internal point of \(U\) which means every point \(x \in U\) is an internal point of \(U\) and thus \(U = \func{f^{\mathrm{pre}}}{V}\) is open.
+    Secondly, if \(f\) is continuous at every point \(x \in X\) then \(f\) is continuous. Let \(V = \set<\func{f}{x} >{ x \in U}\) be an open set in \(Y\). For any \(x \in U\), \(\func{f}{x}\) is an internal point of \(V\) and since \(f\) is continuous at \(x\), \(x\) is an internal point of \(U\) which means every point \(x \in U\) is an internal point of \(U\) and thus \(U = \func{f^{\mathrm{pre}}}{V}\) is open.
 \end{proof}
 
 \begin{theorem} [\(\epsilon-\delta\) condition]
     Let \((X,d)\) and \((Y,d')\) be two metric space. Continuity at a point \(x\) is equivalent to the existence a \(\delta > 0\) for all \(\epsilon > 0\) such that:
-    \[\func{d}{x,y} < \delta \implies \func{d'}{\func{f}{x},\func{f}{y}} < \epsilon \]
+    \begin{equation*}
+        \func{d}{x,y} < \delta \implies \func{d'}{\func{f}{x},\func{f}{y}} < \epsilon  
+    \end{equation*}
 \end{theorem}
 
 \begin{proof}
-    Let \(V = \set{ \func{f}{y} :\func{d'}{\func{f}{x},\func{f}{y}} < \epsilon}\) then \(V\) is open and hence \(f(x)\) is an internal point of \(V\). By continuity at point \(x\), \(x\) must be an internal point of \(\func{f^{\mathrm{pre}}}{V}\). In other words, there exists a \(\delta > 0\) such that \(U = \set{ y : \func{d}{x,y} < \delta } \subset f^{\mathrm{pre}}(V)\).
+    Let \(V = \set< \func{f}{y} >{\func{d'}{\func{f}{x},\func{f}{y}} < \epsilon}\) then \(V\) is open and hence \(\func{f}{x}\) is an internal point of \(V\). By continuity at point \(x\), \(x\) must be an internal point of \(\func{f^{\mathrm{pre}}}{V}\). In other words, there exists a \(\delta > 0\) such that \(U = \set<y>{\func{d}{x,y} < \delta } \subset f^{\mathrm{pre}}(V)\).
     Take an open set \(U \subset Y\), then assuming the \(\epsilon-\delta\) condition, we will show that \(\func{f^{\mathrm{pre}}}{U}\) is open. Let \(y \in U\) then there is \(x \in \func{f^{\mathrm{pre}}}{U}\) such that \(\func{f}{x} = y\). From openness of \(U\), there is a \( \epsilon > 0\) such that \(\func{B_\epsilon}{y} \subset U\), also by continuity condition, there exists a \(\delta > 0 \) such that:
     \begin{equation*}
         \func{d}{x,z} < \delta \implies \func{d'}{\func{f}{x},\func{f}{z}} < \epsilon
@@ -466,7 +485,7 @@ Setting \( N = \underset{1 \leq k \leq n}{\max}{N_k} \):
 \end{proof}
 
 \begin{example}
-    Let \(\metricSpace{X}{d}\) be a metric space with \(\func{d}{x,y}\) being the discrete metric, \(f : X \to X'\) where \(\metricSpace{X'}{d'}\) is an arbitary metric space. Then \(f\) is always continuous. Since for every point \(a\) the open ball \(\func{B_{\frac{1}{2}}}{a} = \{ a \}\), and union of open sets is an open set itself, then every subset of \(X\) is open.
+    Let \((X,d)\) be a metric space with \(\func{d}{x,y}\) being the discrete metric, \(f : X \to X'\) where \((X',d')\) is an arbitary metric space. Then \(f\) is always continuous. Since for every point \(a\) the open ball \(\func{B_{\frac{1}{2}}}{a} = \set{ a }\), and union of open sets is an open set itself, then every subset of \(X\) is open.
 \end{example}
 Equivalently, \(f\) is continuous at \(a\) if for all \(\epsilon > 0\), \(a\) is an internal point of \(\func{f^{\mathrm{pre}}}{\func{B_\epsilon}{\func{f}{a}}}\). That is there exists \(\delta > 0\) such that, \(\func{B_\delta}{a}  \subset \func{f^{\mathrm{pre}}}{\func{B_\epsilon}{\func{f}{a}}}\). More generally, if \(X\) has the discrete topolgy or \(X'\) has the trivial topolgy, then \(f:X\to X'\) is always continous.
 
@@ -479,7 +498,7 @@ Equivalently, \(f\) is continuous at \(a\) if for all \(\epsilon > 0\), \(a\) is
 \end{proof}
 
 \begin{theorem}
-    Let \(\metricSpace{X}{d}\) and \(\metricSpace{X'}{d'}\) be two metric spaces and \( f: X \to X' \). \(f\) is continuous at \( a \in X\) if and only if for every sequence \(\set{ a_n}\) in \(X\) with \(a_n \to a\) we have \(\func{f}{a_n} \to \func{f}{a}\).
+    Let \((X,d)\) and \((X',d')\) be two metric spaces and \( f: X \to X' \). \(f\) is continuous at \( a \in X\) if and only if for every sequence \(\set{ a_n}\) in \(X\) with \(a_n \to a\) we have \(\func{f}{a_n} \to \func{f}{a}\).
 \end{theorem}
 
 \begin{proof}
@@ -504,24 +523,23 @@ Equivalently, \(f\) is continuous at \(a\) if for all \(\epsilon > 0\), \(a\) is
     Let \(X\) and \(Y\) be two topological spaces and \(f:X \to Y\). \(f\) is a \textbf{homeomorphism} of \(X\) to \(Y\) if \(f\) is bijective and, \(f\) and \(f^{-1}\) are continous. Furthermore, \(X\) and \(Y\) are \textbf{homeomorphic} if there exists a homeomorphism between them.
 \end{definition}
 
-{\Large\textbf{Exercises}}
-\begin{enumerate}
-    \item Let \(\metricSpace{X}{d}, (X',d'), \text{ and } (X'',d'')\) be metric spaces and \(f : X \to X'\), \(g : X' \to X''\) be two functions. If \(f\) is continous at \(a\) and \(g\) is continous at \(\func{f}{a}\), then \(g \circ f\) is continuous at \(a\).
+\begin{exercise}
+    \item Let \((X,d), (X',d'),\)   and \((X'',d'')\) be metric spaces and \(f : X \to X'\), \(g : X' \to X''\) be two functions. If \(f\) is continous at \(a\) and \(g\) is continous at \(\func{f}{a}\), then \(g \circ f\) is continuous at \(a\).
     \item Let \((X_i,d_i), \; i = 1, \dots k\) be metric spaces. Define \(D\) to be any of the three discussed metric over \( X = X_1 \times X_2 \times \dots \times X_k\). Then, the projection function, \(\func{\pi_j}{x} : X \to X_j\) is continuous for all \(j\).
-    \begin{equation*}
-        \func{\pi_j}{x_1,x_2, \dots, x_n} = x_j
-    \end{equation*}
+          \begin{equation*}
+              \func{\pi_j}{x_1,x_2, \dots, x_n} = x_j
+          \end{equation*}
 
     \item Let \((X,D)\) be defined as above and let \((X',d')\) be a matic space, and \(f : X' \to X\). \(f\) is continous at \(a' \in X'\) if and only if \(\pi_j \circ f\) is continuous for all \(j = 1, \dots, k\).
     \item The four algebraic operations are continuous on their domain.
           \begin{flalign*}
-              \text{\large{$+$}} &: \Reals \times \Reals \to \Reals, \quad \text{\large{$+$}}(x,y) = x + y &&\\
-              \text{\large{$-$}} &: \Reals \times \Reals \to \Reals, \quad \text{\large{$-$}}(x,y) = x - y &&\\
-              \text{\large{\(\times\)}} &: \Reals \times \Reals \to \Reals, \quad \text{\large{\(\times\)}}(x,y) = x \times y &&\\
-              \text{\large{\(\div\)}} &: \Reals \times \left(\Reals-\{0\}\right) \to \Reals, \quad \text{\large{\(\div\)}}(x,y) = x \div y &&
+              \text{\large{$+$}}        & : \Reals \times \Reals \to \Reals, \quad \text{\large{$+$}}(x,y) = x + y                            &  & \\
+              \text{\large{$-$}}        & : \Reals \times \Reals \to \Reals, \quad \text{\large{$-$}}(x,y) = x - y                            &  & \\
+              \text{\large{\(\times\)}} & : \Reals \times \Reals \to \Reals, \quad \text{\large{\(\times\)}}(x,y) = x \times y                &  & \\
+              \text{\large{\(\div\)}}   & : \Reals \times \left(\Reals-\{0\}\right) \to \Reals, \quad \text{\large{\(\div\)}}(x,y) = x \div y &  &
           \end{flalign*}
           Where the metric of \(\Reals\) on the right hand side is the common Euclidean metric, and on the left hand side is any of the three metric.
-\end{enumerate}
+\end{exercise}
 
 \newpage
 \section{Covering compactness}
@@ -602,16 +620,14 @@ Equivalently, \(f\) is continuous at \(a\) if for all \(\epsilon > 0\), \(a\) is
     Every bounded infinite subset of \(\Reals^k\) has a limit point in \(\Reals^k\).
 \end{theorem}
 
-{\Large\textbf{Exercises}}
-\begin{enumerate}
-    \item Show that \(\mathbb{Q} \cap [0,1]\) is not covering compact, directly from the definition.
-\end{enumerate}
-
-
+\begin{exercise}
+    \item Show that \(\Rationals \cap [0,1]\) is not covering compact, directly from the definition.
+\end{exercise}
 \newpage
+
 \section{Sequential compactness}
 
-A subset \(K \subset X\) is \textbf{compact} if it has the Boltzano-Weierstrass property, if for all sequences \(\set{a_n}\) in \(K\) there exists a subsequence of \(\set{a_n}\) that converges to a point\(a \in K\).
+A subset \(K \subset X\) is \textbf{compact} if it has the Boltzano-Weierstrass property, if for all sequences \(\set{a_n}\) in \(K\) there exists a subsequence of \(\set{a_n}\) that converges to a point \(a \in K\).
 
 \begin{theorem}
     Compactness is equivalent to the existence a finite subcovering for every covering.
@@ -654,8 +670,8 @@ A subset \(K \subset X\) is \textbf{compact} if it has the Boltzano-Weierstrass 
 
 Let \(\set{a_n}\) be a sequence in \(\Reals\). We define:
 \begin{align*}
-    \limsup a_n &= \overline{\lim} \; a_n = \lim_{n \to \infty} \bracket[[\Big]]{\sup{\{a_k : k\geq n\}}}\\
-    \liminf a_n &= \underline{\lim} \; a_n = \lim_{n \to \infty} \bracket[[\Big]]{\inf{\{a_k : k\geq n\}}}
+    \limsup a_n & = \overline{\lim} \; a_n = \lim_{n \to \infty} \bracket[[\Big]]{\sup{\{a_k : k\geq n\}}}  \\
+    \liminf a_n & = \underline{\lim} \; a_n = \lim_{n \to \infty} \bracket[[\Big]]{\inf{\{a_k : k\geq n\}}}
 \end{align*}
 
 \begin{note}
@@ -677,7 +693,7 @@ Let \(\set{a_n}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of
 \end{proof}
 
 \begin{theorem}
-    \(\metricSpace{X}{d}\) and \(\metricSpace{X'}{d'}\) are metric spaces and \(K \subset X\) is compact. If \(f : X \to X'\) is continuous, then \(\func{f}{K}\) is a compact subset of \(X'\).
+    \((X,d)\) and \((X',d')\) are metric spaces and \(K \subset X\) is compact. If \(f : X \to X'\) is continuous, then \(\func{f}{K}\) is a compact subset of \(X'\).
 \end{theorem}
 
 \begin{proof}
@@ -685,7 +701,7 @@ Let \(\set{a_n}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of
 \end{proof}
 
 \begin{corollary}
-    Let \(\metricSpace{X}{d}\) be a metric space and \(f : X \to \Reals\) is continuous. If \(K\) is a compact subset of \(X\). Then \(f\) attains maximum and minimun in \(\Reals\).
+    Let \((X,d)\) be a metric space and \(f : X \to \Reals\) is continuous. If \(K\) is a compact subset of \(X\). Then \(f\) attains maximum and minimun in \(\Reals\).
 \end{corollary}
 
 \begin{note}
@@ -693,7 +709,7 @@ Let \(\set{a_n}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of
 \end{note}
 
 \begin{definition} [Uniform continuity]
-    Let \(\metricSpace{X}{d}\) and \(\metricSpace{X'}{d'}\) be metric spaces.  \(f :X \to X'\) is uniformly continuous if:
+    Let \((X,d)\) and \((X',d')\) be metric spaces.  \(f :X \to X'\) is uniformly continuous if:
     \begin{equation*}
         \forall \epsilon > 0\; \exists \delta > 0, \; x,y \in X, \; \func{d}{x,y} < \delta \implies \func{d'}{\func{f}{x},\func{f}{y}} < \epsilon
     \end{equation*}
@@ -719,7 +735,7 @@ Let \(\set{a_n}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of
 \end{proof}
 
 \begin{proposition}
-    \(\metricSpace{X}{d}\) and \(\metricSpace{X'}{d'}\) are matric spaces and \(X\) is compact. If \(f: X \to X'\) is continuous then it is uniformly continuous.
+    \((X,d)\) and \((X',d')\) are matric spaces and \(X\) is compact. If \(f: X \to X'\) is continuous then it is uniformly continuous.
 \end{proposition}
 
 \begin{proof}
@@ -731,12 +747,12 @@ Let \(\set{a_n}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of
 \end{proof}
 
 % Define the \textbf{diamter} of a set \(S\) to be:
-% \[\diam{S} = \sup{\{d(s,s') : s,s' \in S\}}\]
+% \begin{equation*} \diam{S} = \sup{\{\func{d}{s,s'} : s,s' \in S\}} \end{equation*}
 % the cleary for bounded sets we have:
-% \[\diam{S} < +\infty\]
+% \begin{equation*} \diam{S} < +\infty \end{equation*}
 
 % \begin{proposition}
-%     Let \(\metricSpace{X}{d}\) be a metric space and \(\{K_n\}\) is a sequence of compact subset of \(X\) with \(K_1 \supset K_2 \supset \dots\).
+%     Let \((X,d)\) be a metric space and \(\{K_n\}\) is a sequence of compact subset of \(X\) with \(K_1 \supset K_2 \supset \dots\).
 %     \begin{enumerate}
 %         \item \(\bigcap K_n\) is not empty.
 %         \item If \(\diam{K_n} \to 0\) then \(\bigcap K_n\) is a singular point.
@@ -750,10 +766,9 @@ Let \(\set{a_n}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of
 %     \end{enumerate}
 % \end{proof}
 
-{\Large\textbf{Exercises}}
-\begin{enumerate}
+\begin{exercise}
     \item Prove that \(\sqrt{\mid x \mid} :\Reals \to \Reals\) is uniformly continuous.
-\end{enumerate}
+\end{exercise}
 
 \newpage
 \section{Connectedness}
@@ -766,7 +781,7 @@ Let \(\set{a_n}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of
 \end{definition}
 
 \begin{definition}
-    
+
 \end{definition}
 \begin{example}
     The following subsets of \(\Reals\) are disconnected:
@@ -849,14 +864,6 @@ Let \(\set{a_n}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of
 \begin{proposition}
     Every open set of \(\Reals\) is the union of countably many disjoint open intervals.
 \end{proposition}
-{\Large\textbf{Exercises}}
-\begin{enumerate}
-    \item
-\end{enumerate}
-
-
-\newpage
-
 
 \section{Cantor set}
 \begin{definition}
@@ -877,8 +884,3 @@ Let \(\set{a_n}\) be a bounded sequence in \(\Reals\), and \(A^*\) is the set of
 \begin{theorem}
     Let \(P\) be a non-empty perfect set in \(\Reals^k\). Then, \(P\) is uncountable.
 \end{theorem}
-
-{\Large\textbf{Exercises}}
-\begin{enumerate}
-    \item Show that \(\Rationals \cap \clcl{0}{1}\) is not covering compact, directly from the definition.
-\end{enumerate}

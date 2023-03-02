@@ -11,27 +11,27 @@ The building axioms of real numbers is devided into three groups based on the pr
 A field is a non-empty set \(\Field\) with two binary operations \textit{addition}, \(+\), and \textit{multiplication}, \(\cdot\). For all \(x,y,z \in  \Field\):
 \begin{enumerate}[wide,start=1,label={Axiom \arabic*.}]
     \item Addition and multiplication are commutitive.
-          \[x + y = y + x, \quad \ x \cdot y = y \cdot x\]
+          \begin{equation*} x + y = y + x, \quad \ x \cdot y = y \cdot x \end{equation*}
     \item Addition and multiplication are associative.
-          \[x + (y + z) = (x + y) + z, \quad x\cdot (y\cdot z) = (x \cdot y) \cdot z\]
+          \begin{equation*} x + (y + z) = (x + y) + z, \quad x\cdot (y\cdot z) = (x \cdot y) \cdot z \end{equation*}
     \item  Multiplication distributes over addition.
-          \[x \cdot (y + z) = x \cdot y + x \cdot z\]
+          \begin{equation*} x \cdot (y + z) = x \cdot y + x \cdot z \end{equation*}
     \item There exists a number \(0\) such that for every number \(x\):
-          \[ x + 0  = 0 + x = x\]
+          \begin{equation*}  x + 0  = 0 + x = x \end{equation*}
     \item There exists a number \(1\) such that for every number \(x\):
-          \[ x \cdot 1 = 1 \cdot x = x\]
+          \begin{equation*}  x \cdot 1 = 1 \cdot x = x \end{equation*}
     \item  For every number \(x\), there exists a number \(y\) such that:
-          \[x + y = 0\]
+          \begin{equation*} x + y = 0 \end{equation*}
           \(y\) is called the negative of \(x\) and is denoted by \(-x\).
     \item For every number \(x \neq 0\), there exists a number \(y\) such that:
-          \[x \cdot y = 1\]
+          \begin{equation*} x \cdot y = 1 \end{equation*}
           \(y\) is called the reciprocal of \(x\) and is denoted by \(x^{-1}\) or \(\dfrac{1}{x}\).
 \end{enumerate}
 \subsection{Order Axioms}
 The order axioms establishes an ordering on the numbers of \(\Field\) to determine which element is larger or smaller. To achieve an ordering, we define the set of positive real numbers \(\Field^+ \subset \Field\).
 \begin{enumerate}[wide,resume,label={Axiom \arabic*.}]
     \item The \(\Field^+\) is closed under addition and multiplication.
-          \[\forall x,y \in \Field^+, \quad (x + y) \in \Field^+ \text{ and } (x \cdot y) \in \Field^+\]
+          \begin{equation*} \forall x,y \in \Field^+, \quad (x + y) \in \Field^+ \text{ and } (x \cdot y) \in \Field^+ \end{equation*}
     \item \(0 \notin \Field^+\).
     \item For every number \(x \neq 0\), either \(x \in \Field^+\) or \(-x \in \Field^+\).
 \end{enumerate}
@@ -42,7 +42,7 @@ Given that \((\Field, + ,\cdot , >)\) is an ordered field, we define the followi
     A set \(S \in \Field\) has an upper bound if for some \(a \in \Field\) is greater or equal to all element of \(S\). That is, \(\forall x \in S\: a \geq x\). We say that \(S\) is bounded from above.
 \end{definition}
 \begin{definition} [The least upper bound]
-    \(a \in \Field\) is the least upper bound of a set \(S \subset \Field\) if it is smaller than every upper bound of \(S\). We say \(a\) is the supremum of \(S\), denoted by \(a = \sup{S}\).
+   The element \(a \in \Field\) is the least upper bound of a set \(S \subset \Field\) if it is smaller than every upper bound of \(S\). We say \(a\) is the supremum of \(S\), denoted by \(a = \sup{S}\).
 \end{definition}
 Note that, if the least upper bound exists, it must be unique.
 \begin{enumerate}[wide,resume,label={Axiom \arabic*.}]
@@ -52,14 +52,14 @@ Note that, if the least upper bound exists, it must be unique.
     There exists a unique set that satisifies all the axioms above. It is denoted by \(\Reals\), the set of real numbers.
 \end{theorem}
 \begin{proof}
-    The existence of \(\Reals\) is proved in many ways. One way to construct real numbers uses \textit{Dedekind Cuts}. Let the pair of rational sets \((A,B)\) be a partition of \(\Rationals\) such that:
+    The existence of \(\Reals\) is proved in many ways. One way to construct real numbers is by \textit{Dedekind Cuts}. Let the pair of rational sets \((A,B = \Rationals \backslash A)\) be a partition of \(\Rationals\) such that:
     \begin{enumerate}
         \item \(A \neq \emptyset\) and \(A \neq \Rationals\).
-        \item \(\forall x,y \in \Rationals \; \mathrm{s.t.} \; x < y,\: y \in A \implies x \in A\).
-        \item \(\nexists x \in A \; \mathrm{s.t.} \; \forall y \in A, x \geq y\).
+        \item \(\forall x,y \in \Rationals \ \mathrm{s.t.} \ x < y,\: y \in A \implies x \in A\). That is. if \(y \in A\), then all rationals less than \(y\) are in \(A\).
+        \item \(\nexists \; x \in A \ \mathrm{s.t.} \ \forall y \in A, x \geq y\). That is, \(A\) does not have a maximum element.
     \end{enumerate}
     For convenience we let \(A\) represent the pair \((A,B)\) as \(A\) completely determines \(B\).
-    We define \(+\), \(\cdot\), and \( > \) as follows:
+    We define \(+\), \(\cdot\), and \( > \) on these cuts as follows:
     \begin{flalign*}
         A + B &= \set< a + b >{ a \in A, b\in B} &&\\
         \textcal{0} &= \set< a>{ a < 0}&& \\
@@ -69,10 +69,10 @@ Note that, if the least upper bound exists, it must be unique.
         \intertext{If \(A\) or \(B\) did not have any positive elements, we first take the negative of the set, and then multiply the two sets and take the negative of the product. Similarly, we define the reciprocal of \(A\) if \(A\) has a positive element.}
         \textcal{1} &= \set<a >{ a < 1}&&\\
         A^{-1} &= \set< a' >{\forall a \in A, a > 0, a' < \dfrac{1}{a} } &&
-        \intertext{Lastly:}
+        \intertext{Lastly,}
         A &> B \text{ if } A \supset B &&
     \end{flalign*}
-    Also, if a non-empty set \(S\) of real numbers is bounded from above, then it has a supremum in \(\Reals\) equal to \( \bigcup S\). It is left to the reader that the \((\Reals, + , \cdot, >)\) satisifies the axioms above.
+    If \(S\) is a non-empty set of cuts that is bounded from above, then it has a supremum which is equal to \( \bigcup S\). Let us denote the set of all rational cuts by \(\Reals\). It is left to the reader that the \((\Reals, + , \cdot, >)\) satisifies the axioms above.
 
     The set of real numbers is unique in sense that if \((\Reals, + , \cdot, >)\) and \((\Reals',+',\cdot', >')\) both satisify the axioms, then there exists bijective mapping \(\alpha : \Reals \to \Reals'\) such that:
     \begin{flalign*}
@@ -82,34 +82,27 @@ Note that, if the least upper bound exists, it must be unique.
         \func{\alpha}{1} &= 1' &&\\
         x < y &\iff \func{\alpha}{x} <' \func{\alpha}{y} &&
     \end{flalign*}
-    Lastly, if \(S\) is a non-empty set in \(\Reals\) and \( \func{\alpha}{S} = \set<\func{\alpha}{x}>{ x \in S} \), then \(S\) is has an upper bound if and only if \(\func{\alpha}{S}\) has an upper bound. Furthermore \( \func{\alpha}{\sup{S}} = \sup{\func{\alpha}{S}}\).
+    And if \(S\) is a non-empty set in \(\Reals\) and \( \func{\alpha}{S} = \set<\func{\alpha}{x}>{ x \in S} \), then \(S\) is has an upper bound if and only if \(\func{\alpha}{S}\) has an upper bound, such that, \(\func{\alpha}{\sup{S}} = \sup{\func{\alpha}{S}}\).
 \end{proof}
-\begin{results}
-    \leavevmode
-    \begin{enumerate}
+\begin{exercise}
         \item The set of natural numbers \(\Naturals\) in \(\Reals\) is not bounded from above.
         \item Let \(x \in \Reals\) be such that for all \(n \in \Naturals\)
-              \[ 0\leq x \leq \dfrac{1}{n}\]
+              \begin{equation*}  0\leq x \leq \dfrac{1}{n} \end{equation*}
               then \(x = 0\).
         \item (Archimedean Property) For all \(a,b > 0\) there exists \(n \in \Naturals\):
-              \[ na > b\]
-        \item Consider \(I_n = \clcl{a_n}{b_n} \;\forall n \in \Naturals \) such that \(I_1 \supset I_2 \supset \dots\;\). Then \(\cap{I_n}\) is not empty. Moreover, if for each \(e > 0\) there exists \( n\) such that \(b_n - a_n < e\), then \(\cap{I_n}\) is a single point.
-        \item \(\sqrt{2} \in \Reals\). In addition, for all \(p > 0\), there is a positive real number \(q \) such that \(q^2 = p\)
-    \end{enumerate}
-\end{results}
-\newpage
-{\Large\textbf{Exercises}}
-\begin{enumerate}
+              \begin{equation*}  na > b \end{equation*}
+        \item Consider \(I_n = \clcl{a_n}{b_n} \;\forall n \in \Naturals \) such that \(I_1 \supset I_2 \supset \dots\;\). Show that \(\bigcap{I_n}\) is not empty. Moreover, if for each \(e > 0\) there exists \( n\) such that \(b_n - a_n < e\), then \(\bigcap{I_n}\) is a single point.
+        \item Show that \(\sqrt{2} \in \Reals\) and for all \(p > 0\), there is a positive real number \(q \) such that \(q^2 = p\)
     \item Prove that the addition and multiplication identity elements are unique.
-    \item Show that the Trichotomy law holds for \( (>) \). That is, exactly one of the following three is true.
-          \[ x > y \qquad x = y \qquad y > x\]
+    \item Show that the Trichotomy law holds for \(>\). That is, exactly one of the following three is true.
+          \begin{equation*}  x > y \qquad x = y \qquad y > x \end{equation*}
     \item Show that \(1 \in \Field^+\).
     \item Show that if \(x > -1\) and \(n \in \Naturals\):
-          \[(1 + x)^n \geq 1 + nx\]
+          \begin{equation*} (1 + x)^n \geq 1 + nx \end{equation*}
           and equality only holds when \(n = 1\).
     \item Let \(F_p = \set{ 0, 1, \dots, p -1 }\) where \(p\) is a prime number. Define \(+\) and \(\cdot\) to be the modular addition and product modulus \(p\), respectively. Investigate whether if \(F_p\) can be ordered.
     \item Consider the set of all rational polynomials \(\Rationals[x]\):
-          \[\Rationals[x] = \set< \frac{a_m x^m + \dots + a_1 x + a_0}{b_n x^n + \dots + b_1 x + b_0}>{ a_i, b_j \in \Rationals, b_n \neq 0}\]
+          \begin{equation*} \Rationals[x] = \set< \frac{a_m x^m + \dots + a_1 x + a_0}{b_n x^n + \dots + b_1 x + b_0}>{ a_i, b_j \in \Rationals, b_n \neq 0} \end{equation*}
           Show that \(\Rationals[x]\) under the normal addition and multiplication is a field. Furthermore, show that \(\Rationals^+[x] = \set< q \in \Rationals[x] >{ a_m \cdot b_n > 0 }\) constitutes an ordering on \(\Rationals[x]\).
-\end{enumerate}
+\end{exercise}
 
