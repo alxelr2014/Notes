@@ -33,7 +33,7 @@ Student No. of member 2: `98101844`
     
     1. `status` contains information about the process similar to `stat`, however, it is more human readable.
         
-        ![3.3.3-4](https://github.com/alxelr2014/Notes/blob/oslab/3.3.3-1-4.png)
+        ![3.3.3-4](https://github.com/alxelr2014/Notes/blob/oslab/3.3.3.3-4.png)
     1. `statm` contains information about the process' memory.
 
         ![3.3.3-5](https://github.com/alxelr2014/Notes/blob/oslab/3.3.3-5.png)
@@ -105,7 +105,7 @@ Student No. of member 2: `98101844`
 - [ ] Place your source code for a program that shows details of memory management sub-system:
     - [ ] ![3.3.4-14.1](https://github.com/alxelr2014/Notes/blob/oslab/3.3.4-14.1.png)
 
-    -    ![3.3.4-14.2](https://github.com/alxelr2014/Notes/blob/oslab/3.3.3-14.2.png)
+    -    ![3.3.4-14.2](https://github.com/alxelr2014/Notes/blob/oslab/3.3.4-14.2.png)
 
 - [ ] Write your description about five important files at /proc/sys/kernel:
     - [ ] `/threads_max` determines the maximum number of threads that can be on the system.
