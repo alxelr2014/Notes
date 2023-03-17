@@ -33,7 +33,7 @@ Student No. of member 2: `98101844`
     
     1. `status` contains information about the process similar to `stat`, however, it is more human readable.
         
-        ![3.3.3-4](https://github.com/alxelr2014/Notes/blob/oslab/3.3.3.3-4.png)
+        ![3.3.3-4](https://github.com/alxelr2014/Notes/blob/oslab/3.3.3-4.png)
     1. `statm` contains information about the process' memory.
 
         ![3.3.3-5](https://github.com/alxelr2014/Notes/blob/oslab/3.3.3-5.png)
