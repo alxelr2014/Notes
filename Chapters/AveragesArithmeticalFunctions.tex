@@ -8,3 +8,173 @@ Arithmetical functions fluctuate a lot, by taking averages we can determine thei
 \begin{definition}
     If \(\lim_{x \to \infty } \frac{\func{f}{x}}{\func{g}{x}} = 1\), then \(f\) is asymptotic to \(g\) as \(x \to \infty\) and we write \(\func{f}{x} \sim \func{g}{x}\) as \(x \to \infty\).
 \end{definition}
+\section{Euler's summation formula}
+
+\begin{theorem}
+    If \(f\) has a continuous derivative \(f'\) on the interval \(\clcl{y}{x}\), where \(0 < y < x\), then 
+    \begin{align*}
+        \sum_{y < n \leq x} \func{f}{n} &= \int_{y}^x \func{f}{t} \diffOperator t + \int_y^x \bracket{t - \floor{t}} \func{f'}{t} \diffOperator t\\
+        & \qquad + \func{f}{x} \bracket{\floor{x} - x} - \func{f}{y} \bracket{\floor{y} - y}
+    \end{align*}
+\end{theorem}
+
+\section{Some elementary asymptotic formula}
+\begin{definition}
+    The Euler-Mascheroni constant is defined as 
+    \begin{equation*}
+        \gamma = \lim_{n \to \infty} \bracket{\sum_{k = 1}^n \dfrac{1}{k} - \log n}
+    \end{equation*}
+\end{definition}
+\begin{definition}
+    The Riemann zeta function is defined as 
+    \begin{equation*}
+        \func{\zeta}{s} = \sum_{n = 1}^{\infty} \dfrac{1}{n^s}
+    \end{equation*}
+    where \(s \in \Complex\) is a complex variable.
+\end{definition}
+
+\begin{theorem}
+    If \(x \geq 1\) we have 
+    \begin{align}
+        &\sum_{n \leq x} \frac{1}{n} = \log n + \gamma + \bigO{\frac{1}{x}}\\
+        &\sum_{n \leq x} \dfrac{1}{n^s} = \dfrac{x^{1-s}}{1-s} + \func{\zeta}{s} + \bigO{x^{-s}} & & s > 0 \land s \neq 1\\
+        &\sum_{n > x} \dfrac{1}{n^s} = \bigO{x^{1-s}} & & s > 1\\
+        &\sum_{n \leq x} n^{\alpha} = \dfrac{x^{\alpha + 1}}{\alpha + 1} + \bigO{x^{\alpha}}  & & \alpha \geq 0
+    \end{align}
+\end{theorem}
+\section{The average order of \(\func{d}{n}\)}
+\begin{theorem}
+    For all \(x \geq 1\),
+    \begin{equation*}
+        \sum_{n \leq x} \func{d}{n} = x \log x + (2\gamma - 1) x + \bigO{\sqrt{x}}
+    \end{equation*}
+    The error term can be improved to \(\bigO{x^{12/37 + \epsilon}}\) for all \(\epsilon > 0\).
+\end{theorem}
+
+\section{The average order of \(\func{\sigma_{\alpha}}{n}\)}
+
+\begin{theorem}
+    For all \(x \geq 1\)
+    \begin{align*}
+        \sum_{n \leq x} \func{\sigma_1}{x} &= \dfrac{1}{2} \func{\zeta}{2} x^2 + \bigO{x \log x}\\
+        \sum_{n \leq x} \func{\sigma_{-1}}{x} &= \func{\zeta}{2} x + \bigO{\log x}\\
+    \end{align*}
+    If \(\alpha > 0\) and \(\alpha \neq 1\), then 
+    \begin{align*}
+        \sum_{n \leq x} \func{\sigma_{\alpha}}{x} &= \dfrac{1}{\alpha + 1} \func{\zeta}{\alpha + 1} x^{\alpha + 1} + \bigO{x^{\beta}}\\
+        \sum_{n \leq x} \func{\sigma_{-\alpha}}{x} &= \func{\zeta}{\alpha + 1} x + \bigO{x^{\delta}}\\
+    \end{align*}
+    where \(\beta = \max\set{1,\alpha}\) and \(\delta = \max\set{0,1-\alpha}\).
+\end{theorem}
+
+\section{The average order \(\func{\phi}{n}\)}
+\begin{theorem}
+    For \(x > 1\) we have 
+    \begin{equation*}
+        \sum_{n \leq x} \func{\phi}{n} = \dfrac{3}{\pi^2} x^2 + \bigO{x \log x}
+    \end{equation*}
+\end{theorem}
+
+\section{An application}
+\begin{definition}
+    Two lattice point \(P\) and \(Q\) are mutually visible if the line segment connecting  them contains no other lattice point.
+\end{definition}
+\begin{theorem}
+    Two lattice point \((a,b)\) and \((c,d)\) are mutually visible if and only if \((a -c , b -d)  = 1\).
+\end{theorem}
+
+Consider the square \(\func{C}{r} = \set<(x,y)>{\abs{x},\abs{y} \leq r}\), let \(\func{N}{r} = \#\func{C}{r}\) and let \(\func{N'}{r}\) be the number of visible points from the origin in \(\func{C}{r}\). 
+\begin{theorem}
+    The set of lattice points visible from the origin has density \(\frac{6}{\pi^2}\). That is,
+    \begin{align*}
+        \lim_{n \to \infty} \dfrac{\func{N'}{r}}{\func{N}{r}} = \dfrac{6}{\pi^2}
+    \end{align*}
+\end{theorem}
+
+\section{The average order of \(\func{\mu}{n}\) and \(\func{\Lambda}{n}\)}
+\begin{theorem}
+    We have 
+    \begin{align*}
+        \lim_{x \to \infty} \dfrac{1}{x} \sum_{n \leq x} \func{\mu}{n} &= 0\\
+        \lim_{x \to \infty} \dfrac{1}{x} \sum_{n \leq x} \func{\Lambda}{n} &= 1\\
+    \end{align*}
+    Both are equivalent to prime number theorem.
+\end{theorem}
+\section{The partial sums of Dirichlet product}
+\begin{theorem}
+    If \(h = f \ast g\), let 
+    \begin{align*}
+        \func{H}{x} &= \sum_{n \leq x} \func{h}{n} & \func{F}{x} &= \sum_{n \leq x} \func{f}{n} & \func{G}{x} &= \sum_{n \leq x} \func{g}{n}
+    \end{align*}
+    then we have 
+    \begin{equation*}
+        \func{H}{x} = \sum_{n \leq x} \func{f}{n} \func{G}{\frac{x}{n}} =  \sum_{n \leq x} \func{g}{n} \func{F}{\frac{x}{n}}
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+    If \( \func{F}{x} = \sum_{n \leq x} \func{f}{n}\) we have 
+    \begin{equation*}
+        \sum_{n \leq x} \sum_{d \mid n} \func{f}{d} = \sum_{n \leq x} \func{f}{x} \floor{\dfrac{x}{n}} = \sum_{n \leq x} \func{F}{\frac{x}{n}}
+    \end{equation*}
+\end{theorem}
+\section{Applications to \(\func{\mu}{n}\) and \(\func{\Lambda}{n}\)}
+\begin{theorem}
+    For \(x \geq 1\) we have 
+    \begin{align*}
+        \sum_{n \leq x} \func{\mu}{x} \bracket{\dfrac{x}{n}} &= 1\\
+        \sum_{n \leq x} \func{\Lambda}{x} \bracket{\dfrac{x}{n}} &= \func{\log}{\floor{x}!}\\
+    \end{align*}
+\end{theorem}
+
+\begin{theorem}
+    For all \(x \geq 1\) we have 
+    \begin{equation*}
+        \abs{\sum_{n \leq x} \dfrac{\func{\mu}{n}}{n}} \leq 1
+    \end{equation*}
+    with equality hodling if \(x < 2\).
+\end{theorem}
+
+\begin{theorem}[Legendre's Identity]
+    For all \(x \geq 1\)
+    \begin{equation*}
+        \floor{x}! = \prod_{p \leq x} p^{\func{\alpha}{p}}
+    \end{equation*}
+    where \(\func{\alpha}{p} = \sum_{m = 1}^{\infty} \floor{\frac{x}{p^m}}\).
+\end{theorem}
+
+\begin{theorem}
+    If \(x \geq 2\) 
+    \begin{align*}
+        \func{\log}{\floor{x}!} = x \log x - x + \bigO{\log x}
+    \end{align*}
+    and hence 
+    \begin{equation*}
+        \sum_{n\leq x} \func{\Lambda}{n} \floor{\bracket{x}{n}} = x \log x - x + \bigO{\log x}
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+    For \(x \geq 2\)
+
+    \begin{equation*}
+        \sum_{p\leq x} \floor{\bracket{x}{p}} \log p = x \log x + \bigO{x}
+    \end{equation*}
+\end{theorem}
+\section{Another Identity for the partial sums of a Dirichlet product}
+\begin{theorem}
+    If \(h = f \ast g\), let 
+    \begin{align*}
+        \func{H}{x} &= \sum_{n \leq x} \func{h}{n} & \func{F}{x} &= \sum_{n \leq x} \func{f}{n} & \func{G}{x} &= \sum_{n \leq x} \func{g}{n}
+    \end{align*}
+    then we have 
+    \begin{equation*}
+        \func{H}{x} = \sum_{n \leq x}\sum_{d \mid n} \func{f}{d} \func{g}{\frac{n}{d}} = \sum_{qd \leq x}\func{f}{d} \func{g}{q}
+    \end{equation*}
+\end{theorem}
+\begin{theorem}
+    If \(a,b\) are positive real numbers such that \(ab = x\), then 
+    \begin{equation*}
+        \sum_{qd \leq x}\func{f}{d} \func{g}{q} = \sum_{n \leq a}\func{f}{n} \func{G}{\dfrac{x}{n}} +  \sum_{n \leq b}\func{g}{x} \func{G}{\dfrac{x}{n}} - \func{F}{a}\func{G}{b} 
+    \end{equation*}
+\end{theorem}
