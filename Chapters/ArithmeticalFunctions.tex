@@ -19,10 +19,17 @@ The Mobius function \(\mu\), is defined as \(\func{\mu}{1} = 1\) and for \(n > 1
         \end{cases}
     \end{equation*}
 \end{theorem}
+\begin{proof}
+    Suppose \(n > 1\) and \(n = p_1^{\alpha_1} \dots p_k^{\alpha_k}\), then 
+    \begin{equation*}
+        \sum_{d \mid n} \func{\mu}{d} = \sum_{i = 0}^k (-1)^i\binom{k}{i} = (1 - 1)^{k} = 0
+    \end{equation*}
+    If \(n = 1\), then \(\sum_{d \mid n} \func{\mu}{d} = \func{\mu}{1} = 1\).
+\end{proof}
 \section{The Euler totient function}
 The Euler totient function \(\phi\) is defined as 
 \begin{equation*}
-    \func{\phi}{n} = \left.\sum_{k  = 1}^n\right.' 1 = \abs{\set[[\Big]]<1 \leq k \leq n>{(k,n) = 1}}
+    \func{\phi}{n} = \sum_{\substack{k  = 1 \\ (k,n) = 1}}^n 1 = \abs{\set[[\Big]]<1 \leq k \leq n>{(k,n) = 1}}
 \end{equation*}
 \begin{theorem}
     If \(n \geq 1\), 
@@ -31,12 +38,31 @@ The Euler totient function \(\phi\) is defined as
     \end{equation*}
 \end{theorem}
 
+\begin{proof}
+    Define the equivalence relation \(i \sim j\) whenever \((n,i) = (n,j)\) on the numbers \(\leq n\). The divisors of \(n\) can be taken as class representatives. We claim that the size of the class \(d\) is equal to \(\func{\phi}{\frac{n}{d}}\). Note that, if \((n,i) = d\), then \((n/d, i/d) = 1\) and vice versa. That is, there is a bijection between elements of the class \(d\) and numbers that are coprime to \(n/d\) less than \(n/d\). Therefore,
+    \begin{equation*}
+        n = \sum_{d \mid n} \abs{\text{class}_d} = \sum_{d \mid n } \func{\phi}{\frac{n}{d}} = \sum_{d \mid n} \func{\phi}{d}
+    \end{equation*}
+\end{proof}
+
 \begin{theorem}
     If \(n \geq 1\), 
     \begin{equation*}
         \func{\phi}{n} = \sum_{d \mid n} \func{\mu}{d} \frac{n}{d}
     \end{equation*}
 \end{theorem}
+
+\begin{proof}
+    The statement is clearly true for \(n = 1\). Suppose \(n > 1\) and \(n = p_1^{\alpha_1} \dots p_k^{\alpha_k}\). Let \(A_i\) denote the set of all numbers \(k\) less than or equal to \(n\) such that \(p_i \mid (n,k)\). Then, 
+    \begin{align*}
+        \func{\phi}{n} &= \abs{\bracket{\bigcup_{i = 1}^k A_i}^c} \\
+        &= n - \abs{\bigcup_{i = 1}^k A_i}\\
+        &= n - \sum_{j = 1}^n (-1)^{j-1}\sum_{i_1 < i_2 < \dots < i_j}  \abs{A_{i_1} \cap \dots \cap A_{i_j}}\\
+        &= n + \sum_{j = 1}^n \sum_{i_1 < i_2 < \dots < i_j}  (-1)^{j} \dfrac{n}{p_{i_1} \dots p_{i_j}}\\
+        &= n + \sum_{j = 1}^n \sum_{i_1 < i_2 < \dots < i_j} \func{\mu}{p_{i_1} \dots p_{i_j}}  \dfrac{n}{p_{i_1} \dots p_{i_j}}\\
+        &= \sum_{d \mid n} \func{\mu}{d}  \dfrac{n}{d}
+    \end{align*}
+\end{proof}
 
 \subsection{The product formular for \(\func{\phi}{n}\)}
 \begin{theorem}
@@ -45,15 +71,45 @@ The Euler totient function \(\phi\) is defined as
         \func{\phi}{n} = n \prod_{p \mid n}\bracket{1 - \dfrac{1}{p}}
     \end{equation*}
 \end{theorem}
+
+\begin{proof}
+    If \(n = p_1^{\alpha_1} \dots p_k^{\alpha_k}\) let \(m = p_1 \dots p_k\).
+    \begin{align*}
+        \func{\phi}{n} &= \sum_{d \mid n} \func{\mu}{d} \dfrac{n}{d}\\
+        &=n \sum_{d \mid m}  \dfrac{\func{\mu}{d}}{d} \\
+        &= n \bracket{ \sum_{\substack{d \mid m \\ p_1 \mid d}}  \dfrac{\func{\mu}{d}}{d} + \sum_{\substack{d \mid m \\ p_1 \nmid d}}  \dfrac{\func{\mu}{d}}{d}} \\  
+        &= n \bracket{\sum_{\substack{d \mid m \\ p_1 \nmid d}}  \dfrac{\func{\mu}{p_1 d}}{p_1 d} + \sum_{\substack{d \mid m \\ p_1 \nmid d}}  \dfrac{\func{\mu}{d}}{d}}\\
+        &= n  \bracket{\bracket{1- \dfrac{1}{p_1}} \sum_{\substack{d \mid m \\ p_1 \nmid d}} \dfrac{\func{\mu}{d}}{d}} \\  
+        &= n \prod_{p \mid n} \bracket{1 - \frac{1}{p}}    
+    \end{align*}
+\end{proof}
+
 \begin{corollary}
     \ 
     \begin{enumerate}
         \item \(\func{\phi}{p^{\alpha}} = (p-1) p^{\alpha - 1}\).
         \item \(\func{\phi}{mn} = \func{\phi}{m} \func{\phi}{n} \frac{d}{\func{\phi}{d}}\) where \(d = (m,n)\).
         \item If \(a \mid b\), then \(\func{\phi}{a} \mid \func{\phi}{b}\).
-        \item \(\func{\phi}{n}\) is even for \(n \geq 3\). Moreover, if \(n\) has \(r\) distinct odd prime factos, then \(2^r \mid \func{\phi}{n}\).
+        \item \(\func{\phi}{n}\) is even for \(n \geq 3\). Moreover, if \(n\) has \(r\) distinct odd prime factors, then \(2^r \mid \func{\phi}{n}\).
     \end{enumerate}
 \end{corollary}
+
+\begin{proof}
+    \ 
+    \begin{enumerate}
+        \item \(\func{\phi}{p^{\alpha}} = p^{\alpha} \bracket{\frac{p-1}{p}}= (p - 1)p ^{\alpha - 1}\).
+        \item 
+        \begin{align*}
+            \func{\phi}{mn} &= mn \prod_{p \mid mn} \bracket{1 - \dfrac{1}{p}}\\
+            &= mn \prod_{\substack{p \mid n \\ p \nmid m}} \bracket{1 - \dfrac{1}{p}} \prod_{\substack{p \mid m \\ p \nmid n}} \bracket{1 - \dfrac{1}{p}} \prod_{p \mid n, m} \bracket{1 - \dfrac{1}{p}} \\
+            &= mn \dfrac{\prod_{p \mid n }  \bracket{1 - \dfrac{1}{p}} }{\prod_{p \mid n,m} \bracket{1 - \dfrac{1}{p}}} \dfrac{\prod_{p \mid m }  \bracket{1 - \dfrac{1}{p}} }{\prod_{p \mid n,m} \bracket{1 - \dfrac{1}{p}}}   \prod_{p \mid n,m} \bracket{1 - \dfrac{1}{p}} \\
+            &= \func{\phi}{m} \func{\phi}{n} \dfrac{1}{\prod_{p \mid n,m} \bracket{1 - \dfrac{1}{p}}}\\
+            &= \func{\phi}{m} \func{\phi}{n} \dfrac{d}{\func{\phi}{d}}
+        \end{align*}
+        \item Note that if \(p \mid a\), then \(p \mid b\).
+        \item If \(n\) has an odd prime factor, then \(\func{\phi}{n}\) is even. If \(n\) is power of \(2\) greater than \(4\), then \(\func{\phi}{n}\) is also even. If \(n\) has \(r\) distinct odd prime factors, each contribute at least one factor of \(2\) in \(\func{\phi}{n}\) and thus \(2^r \mid \func{\phi}{n}\).
+    \end{enumerate}
+\end{proof}
 
 \section{The Dirichlet product}
 \begin{definition}
@@ -67,15 +123,39 @@ Then, we can write \(\phi = \mu \ast N\) where \(\func{N}{n}  = n\).
     \ 
     \begin{enumerate}
         \item \(f \ast g = g \ast f\).
-        \item \((f \ast g) \ast k = f \ast ( g \ast k)\).
+        \item \((f \ast g) \ast h = f \ast ( g \ast h)\).
     \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+    \ 
+    \begin{enumerate}
+        \item 
+        \begin{equation*}
+            \func{(f \ast g)}{n} = \sum_{d \mid n} \func{f}{d} \func{g}{\frac{n}{d}}  = \sum_{n/d \mid n} \func{f}{\frac{n}{d}} \func{g}{d} \sum_{d \mid n} \func{f}{\frac{n}{d}} \func{g}{d} = \func{(g \ast f)}{n}
+        \end{equation*}
+        \item 
+        \begin{align*}
+            \func{((f \ast g) \ast h)}{n} &= \sum_{d \mid n} \func{(f \ast g)}{d} \func{h}{\frac{n}{d}}\\
+            &= \sum_{d \mid n} \sum_{k \mid d}  \func{f}{k} \func{g}{\frac{d}{k}} \func{h}{\frac{n}{d}}\\
+            &= \sum_{k \mid n} \sum_{k \mid d, d \mid n} \func{f}{k} \func{g}{\frac{d}{k}} \func{h}{\frac{n}{d}}\\
+            &= \sum_{k \mid n} \sum_{d \mid n/k} \func{f}{k} \func{g}{\frac{kd}{k}} \func{h}{\frac{n}{kd}}\\
+            &= \sum_{k \mid n} \sum_{d \mid n/k} \func{f}{k} \func{g}{d} \func{h}{\frac{n}{kd}}\\
+            &= \sum_{k \mid n} \sum_{d \mid n/k} \func{f}{k} \func{(g \ast h)}{\frac{n}{k}}\\
+            &= \func{(f \ast (g \ast h))}{n}
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
 \begin{definition}
     The identity function, \(\func{I}{n} = \floor{\frac{1}{n}}\).
 \end{definition}
 \begin{theorem}
     For any arithmetical function \(f\), \(I \ast f = f \ast I = f\).
 \end{theorem}
+\begin{proof}
+    Trivial.
+\end{proof}
 
 \begin{theorem}
     If \(f\) is an arithmetical function with \(\func{f}{1} \neq 0\), there is a unique arithmetical function \(f^{-1}\), called the Dirichlet inverse of \(f\) such that
@@ -88,15 +168,31 @@ Then, we can write \(\phi = \mu \ast N\) where \(\func{N}{n}  = n\).
     \end{equation*}
 \end{theorem}
 
+\begin{proof}
+    It can be easily shown that the given function is a Dirichlet inverse of \(f\). That is, 
+    \begin{equation*}
+        f \ast f^{-1} = f^{-1} \ast f = I
+    \end{equation*}
+    Suppose \(g\) is also a Dirichlet inverse of \(f\). Then, 
+    \begin{align*}
+        g \ast f \ast f^{-1} &= (g \ast f) \ast f^{-1} = I \ast f^{-1} = f^{-1}\\
+        &= g \ast (f \ast f^{-1}) = g \ast I = g 
+    \end{align*}
+    Therefore, \(g= f^{-1}\) and \(f^{-1}\) is unique.
+\end{proof}
+
 \begin{remark}
     The set of all arithmetical functions \(f\) with \(\func{f}{1} \neq 0\) is an Abelian group under Dirichlet multiplication.
 \end{remark}
 
 \begin{proposition}
-    \((f \ast g)^{-1} = f^{-1} \ast g^{-1}\).
+    Suppose \(f\) and \(g\) are invertible arithmetical functions, then \((f \ast g)^{-1} = f^{-1} \ast g^{-1}\).
 \end{proposition}
+\begin{proof}
+    We can readily deduct this from the fact that invertible functions form an Abelian group under Dirichlet multiplication. 
+\end{proof}
 \begin{definition}
-    The unit function \(\func{u}{n} = 1\) for all \(n\). Since \(\sum_{d \mid n} \func{\mu}{d} = \func{I}{n}\), then \(\mu \ast u = I\) and thus by uniqueness of inverse \(\mu^{-1} = u\).
+    The unit function \(\func{u}{n} = 1\) for all \(n \geq 1\). Since \(\sum_{d \mid n} \func{\mu}{d} = \func{I}{n}\), then \(\mu \ast u = I\) and thus by uniqueness of inverse \(\mu^{-1} = u\).
 \end{definition}
 
 \begin{theorem}[Mobius inversion formula]
@@ -125,13 +221,21 @@ Then, we can write \(\phi = \mu \ast N\) where \(\func{N}{n}  = n\).
 \begin{theorem}
     For \(n \geq 1\),
     \begin{equation*}
-        \func{\log}{n} = \sum_{d \mid n} \func{\Lambda}{n}
+        \func{\log}{n} = \sum_{d \mid n} \func{\Lambda}{d}
     \end{equation*}
     and 
     \begin{equation*}
         \func{\Lambda}{n} = \sum_{d \mid n} \func{\mu}{d} \func{\log}{\frac{n}{d}} = - \sum_{d \mid n} \func{\mu}{d} \func{\log}{d}
     \end{equation*}
 \end{theorem}
+
+\begin{proof}
+    For the first identity we have 
+    \begin{equation*}
+        \sum_{d \mid n} \func{\Lambda}{d} = \sum_{p^{\alpha} \mid n} \func{\Lambda}{p^{\alpha}} = \sum_{p^{\alpha} \mid n} \log p = \sum_{p^{\alpha} \mid n} \alpha \log p = \log n
+    \end{equation*}
+    Hence, \(\log = \Lambda \ast u\). Therfore, \(\Lambda = \log \ast u^{-1} = \log \ast \mu\).
+\end{proof}
 \section{Multiplicative functions}
 \begin{definition}
     An arithmetical function \(f\) is \textbf{multiplicative} if \(f \not\equiv 0\) and 
@@ -144,21 +248,83 @@ Then, we can write \(\phi = \mu \ast N\) where \(\func{N}{n}  = n\).
     \end{equation*}
 \end{definition}
 \begin{remark}
-    Multiplicative functions for a subgroup under \(\ast\).
+    Multiplicative functions from a subgroup under \(\ast\). The ordinary multiplication and division of two (completely) multiplicative functions are (completely) multiplicative.
 \end{remark}
 \begin{proposition}
     If \(f\) is multiplicative, then \(\func{f}{1} = 1\).
 \end{proposition}
+\begin{proof}
+    Since \(f\) is multiplicative, \(\func{f}{1} = \func{f}{1}\func{f}{1}\) thus, \(\func{f}{1} = 0,1\). If \(\func{f}{1} = 0\), then \(f \equiv 0\) which contradicts our assumption hence \(\func{f}{1}\) must be \(1\).
+\end{proof}
 \begin{theorem}
     Given an arithmetical function \(f\) with \(\func{f}{1} = 1\)
     \begin{enumerate}
         \item  \(f\) is multiplicative if and only if \(\func{f}{\prod p_i^{\alpha_i}} = \prod \func{f}{p_i^{\alpha_i}}\)
-        \item If \(f\) is multiplicative, then \(f\) is completely multiplicative if \(\func{f}{p^{\alpha}} = \bracket{\func{f}{p}}^{\alpha}\).
+        \item If \(f\) is multiplicative, then \(f\) is completely multiplicative if and only if \(\func{f}{p^{\alpha}} = \bracket{\func{f}{p}}^{\alpha}\).
     \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+    \
+    \begin{enumerate}
+        \item If \(f\) is multiplicative, then the formula is obviously true. Suppose the formula holds and the integers \(m,n\) are relatively prime. Let \(m = p_1^{\alpha_1} \dots p_k^{\alpha_k}\) and \(n = q_1^{\beta_1} \dots q_r^{\beta_r}\) with no \(p\) equal to a \(q\).
+        \begin{equation*}
+            \func{f}{mn} = \func{f}{\prod p_i^{\alpha_i} \prod q_i^{\beta_i}} = \prod_{i,j} \func{f}{p_i^{\alpha_i}} \func{f}{q_j^{\beta_j}} = \prod_i \func{f}{p_i^{\alpha_i }} \prod_j \func{f}{q_j^{\beta_j}} = \func{f}{m} \func{f}{n}
+        \end{equation*}
+        Therefore, \(f\) is multiplicative.
+        \item If \(f\) is completely multiplicative, then the formula holds trivially. Suppose the formula holds and \(m,n\) are integers with prime decomposition \(m = p_1^{\alpha_1} \dots p_k^{\alpha_k}\) and \(n = p_1^{\gamma_1} \dots p_k^{\gamma_k} q_1^{\beta_1} \dots q_r^{\beta_r}\) with no \(p\) equal to a \(q\).
+        \begin{align*}
+            \func{f}{mn} &= \func{f}{\prod p_i^{\alpha_i + \gamma_i} \prod q_i^{\beta_i}}\\
+            &= \prod_{i,j} \func{f}{p_i^{\alpha_i + \gamma_i}} \func{f}{q_j^{\beta_j}}\\
+            &= \prod_i \bracket{\func{f}{p_i}}^{\alpha_i + \gamma_i} \prod_j \func{f}{q_j^{\beta_j}} \\
+            &= \prod_i \bracket{\func{f}{p_i}}^{\alpha_i} \prod_i \bracket{\func{f}{p_i}}^{\gamma_i} \prod_j \func{f}{q_j^{\beta_j}} \\
+            &= \prod_i \func{f}{p_i^{\alpha_i}} \prod_i \func{f}{p_i^{\gamma_i}} \prod_j \func{f}{q_j^{\beta_j}}\\
+            &= \func{f}{m} \func{f}{n}
+        \end{align*}
+        
+    \end{enumerate}
+\end{proof}
+
 \begin{theorem}
     If \(f\) and \(g\) are both multiplicative, then \(f \ast g\) is multiplicative. If \(g\) and \(f \ast g\) are both multiplicative, then \(f\) is multiplicative.
 \end{theorem}
+
+\begin{proof}
+    Suppose \(f\) and \(g\) are two multiplicative functions and \(m,n\) are two relatively prime integers. Then, 
+    \begin{align*}
+        \func{f \ast g}{m n} &= \sum_{d \mid mn} \func{f}{d} \func{g}{\frac{mn}{d}}\\
+        &= \sum_{\substack{d_m \mid m \\ d_n \mid n}} \func{f}{d_m d_n} \func{g}{\frac{m}{d_m} \frac{n}{d_n}}\\
+        &= \sum_{d_m \mid m} \sum_{d_n \mid n} \func{f}{d_m} \func{f}{d_n} \func{g}{\frac{m}{d_m}} \func{g}{\frac{n}{d_n}}\\
+        &= \func{f \ast g}{m} \func{f \ast g}{n}
+    \end{align*} 
+    Let \(g\) be a multiplicative function. We show that \(g^{-1}\) is multiplicative as well. Since \(\func{g}{1} = 1\), then \(\func{g^{-1}}{1} = 1\). 
+    % Moreover, suppose \(m,n\) are two relatively prime integers and suppose for all integers less than \(mn\), \(g^{-1}\) is multiplicative. 
+    % \begin{align*}
+    %     \func{g^{-1}}{mn} &= - \sum_{\substack{d \mid mn \\ d < mn}} \func{g}{\frac{mn}{d}} \func{g^{-1}}{d}\\
+    %     &= - \sum_{\substack{d_m \mid m, d_n \mid n \\ d_m < m, d_n < n}} \func{g}{\frac{mn}{d_m d_n}} \func{g^{-1}}{d_m d_n} - \sum_{\substack{d_m \mid m\\ d_m < m}} \func{g}{\frac{m}{d_m}} \func{g^{-1}}{n d_m} \\
+    %     & \qquad - \sum_{\substack{d_n \mid n\\ d_n < n}} \func{g}{\frac{n}{d_n}} \func{g^{-1}}{m d_n}\\
+    %     &= - \sum_{\substack{d_m \mid m, d_n \mid n \\ d_m < m, d_n < n}} \func{g}{\frac{m}{d_m}} \func{g}{\frac{n}{d_n}} \func{g^{-1}}{d_m} \func{g^{-1}}{d_n} \\
+    %     & \qquad + \func{g^{-1}}{m}\func{g^{-1}}{n} + \func{g^{-1}}{n}\func{g^{-1}}{m}\\
+    %     &= - \func{g^{-1}}{m} \func{g^{-1}}{n} + 2\func{g^{-1}}{m}\func{g^{-1}}{n}\\
+    %     &= \func{g^{-1}}{m}\func{g^{-1}}{n}
+    % \end{align*}
+    Note that if \(p\) is a prime for \(k \geq 1\) we have, 
+    \begin{align*}
+        \func{g^{-1}}{p^k} = - \sum_{i = 0}^{k-1} \func{g}{p^{k-i}} \func{g^{-1}}{p^{i}}
+    \end{align*}
+    Let \(h\) be the multiplicative function that agrees with \(g^{-1}\) on prime powers. Consider the Dirichlet multiplication \(g \ast h\) for \(p_1^{\alpha_1} \dots p_k^{\alpha_k}\) with \(\alpha_i \geq 1\).
+    \begin{align*}
+        \func{g \ast h}{p_1^{\alpha_1} \dots p_k^{\alpha_k}} &= \sum_{ 0 \leq  i_j \leq \alpha_j} \func{h}{p_1^{i_1} \dots p_k^{i_k} } \func{g}{p_1^{\alpha_1 - i_1} \dots p_k^{\alpha_k  - i_k} }\\
+        &= \sum_{ 0 \leq  i_j \leq \alpha_j} \func{h}{p_1^{i_1}} \dots\func{h}{ p_k^{i_k} } \func{g}{p_1^{\alpha_1 - i_1}} \dots \func{g}{p_k^{\alpha_k  - i_k} }\\
+        &=  \prod_j \sum_{ 0 \leq  i_j \leq \alpha_j} \func{h}{p_j^{i_j}}\func{g}{p_j^{\alpha_j - i_j}}\\
+        &=  \prod_j \sum_{ 0 \leq  i_j \leq \alpha_j} \func{g^{-1}}{p_j^{i_j}}\func{g}{p_j^{\alpha_j - i_j}}\\
+        &=  \prod_j \bracket{\sum_{ 0 \leq  i_j < \alpha_j} \func{g^{-1}}{p_j^{i_j}}\func{g}{p_j^{\alpha_j - i_j}} + \func{g^{-1}}{p_j^{\alpha_j}}}\\
+        &=  \prod_j \bracket{\sum_{ 0 \leq  i_j < \alpha_j} - \func{g^{-1}}{p_j^{\alpha_j}} + \func{g^{-1}}{p_j^{\alpha_j}}}\\
+        &= 0
+    \end{align*}
+    Also, \(\func{g \ast h}{1} = \func{g}{1} \func{h}{1} = 1\). That is, \(g \ast h = I\) and since Dirichlet inverse is unique it must be that \(g^{-1} = h\).
+\end{proof}
+
 \subsection{Inverse of completely multiplicative functions}
 \begin{theorem}
     Let \(f\) be a multiplicative function. Then, \(f\) is completely multiplicative if and only if 
@@ -166,6 +332,18 @@ Then, we can write \(\phi = \mu \ast N\) where \(\func{N}{n}  = n\).
         \func{f^{-1}}{n} = \func{\mu}{n} \func{f}{n}
     \end{equation*}
 \end{theorem}
+
+\begin{proof}
+    Suppose \(f\) is completely multiplicative and \(\func{g}{n} = \func{\mu}{n} \func{f}{n}\)
+    \begin{equation*}
+        \func{f \ast g}{n} = \sum_{d \mid n} \func{f}{d} \func{\mu}{d} \func{f}{\frac{n}{d}} = \func{f}{n} \sum_{d \mid n} \func{\mu}{d} = \func{f}{n} \func{I}{n} = \func{I}{n}
+    \end{equation*}
+    Thus, \(f^{-1} = g\). Suppose \(f\) is a multiplicative function such that \(f^{-1} = \mu f\). Let \(p\) be prime and \(\alpha \geq 1\) be such that \(\func{f}{p^{\alpha}} = \bracket{\func{f}{p}}^{\alpha}\). Then, note 
+    \begin{equation*}
+        \func{f}{p^{\alpha + 1}} = -\sum_{i = 0}^{\alpha} \func{f}{p^i} \func{f^{-1}}{p^{\alpha + 1 - i}} =- \func{f}{p^{\alpha}} \func{f^{-1}}{p} =\bracket{\func{f}{p}}^{\alpha} \func{f}{p} = \bracket{\func{f}{p}}^{\alpha + 1}
+    \end{equation*}
+\end{proof}
+
 \begin{remark}
     Note that \(N = \phi \ast u\) and \(\phi = N \ast \mu\) therefore, \(\phi^{-1}= \mu^{-1} \ast N^{-1} = u \ast N^{-1}\). Since \(N\) is completely multiplicative, \(\phi^{-1} = u \ast \mu N\). That is, 
     \begin{equation*}
@@ -178,20 +356,59 @@ Then, we can write \(\phi = \mu \ast N\) where \(\func{N}{n}  = n\).
         \sum_{d \mid n} \func{\mu}{d} \func{f}{d} = \prod_{p \mid n} \bracket{1 - \func{f}{p}}
     \end{equation*}
 \end{theorem}
+
+\begin{proof}
+    Let \(\func{g}{n} = \sum_{d \mid n} \func{\mu}{d} \func{f}{d}\). Note that \(g = \mu f \ast u\) and thus it is multiplicative. Then, to determine \(g\) we need to evaluate \(\func{g}{p^{\alpha}}\) for prime \(p\) and \(\alpha \geq 1\).
+    \begin{equation*}
+        \func{g}{p^{\alpha}} = \sum_{d \mid p^{\alpha}} \func{\mu}{d} \func{f}{d} =
+         \sum_{d \mid p} \func{\mu}{d} \func{f}{d} = 1 - \func{f}{p}
+    \end{equation*}
+    As a result, 
+    \begin{equation*}
+        \func{g}{n} = \prod_{p^{\alpha} \mid\mid n} \func{g}{p^{\alpha}} = \prod_{p \mid n} \bracket{1 - \func{f}{p}}
+    \end{equation*}
+\end{proof}
+
 \section{Liouville's function \(\lambda\)}
 \begin{definition}
     The Liouville function \(\lambda\) is defined as \(\func{\lambda}{1} = 1\) and if \(n = p_1^{\alpha_1} \dots p_k^{\alpha_k}\), then 
     \begin{equation*}
         \func{\lambda}{n} = (-1)^{\alpha_1 + \dots + \alpha_k}
     \end{equation*}
-    and also \(\func{\lambda^{-1}}{n} = \abs{\func{\mu}{n}}\).
 \end{definition}
+\begin{theorem}
+    For \(n \geq 1\), 
+    \begin{equation*}
+        \sum_{d \mid n} \func{\lambda}{d} = \begin{cases}
+            1 & n \text{ is a perfect square}\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    and also \(\func{\lambda^{-1}}{n} = \abs{\func{\mu}{n}}\).
+\end{theorem}
+\begin{proof}
+    Note that \(g = \lambda \ast u\) is multiplicative since \(\lambda\) is completely multiplicative. Hence, for a prime \(p\) and \(\alpha \geq 1\) we have 
+    \begin{equation*}
+        \func{g}{p^{\alpha}} = \sum_{i = 0}^{\alpha} \func{\lambda}{p^i} = \sum_{i = 0}^{\alpha} (-1)^i = \frac{1 - (-1)^{\alpha + 1}}{1 - (-1)} =  \frac{1 + (-1)^{\alpha}}{2} = \begin{cases}
+            1 & \alpha \text{ is even}\\
+            0 & \alpha \text{ is odd}\\
+        \end{cases} 
+    \end{equation*}
+    Therefore, 
+    \begin{equation*}
+        \func{g}{n} = \prod_{p^{\alpha} \mid\mid n} \func{g}{p^{\alpha}} = \begin{cases}
+            1 & n \text{ is a perfect square}\\
+            0 & \text{otherwise}
+        \end{cases} 
+    \end{equation*}
+    Since \(\lambda\) is completely multiplicative, \(\lambda^{-1} = \mu \lambda\). If there is a prime \(p\) such that \(p^2 \mid n\), then \(\func{\mu}{n} = 0\) and \(\func{\mu}{n} \func{\lambda}{n}  = \abs{\func{\mu}{n}}\). If \(n = p_1\dots p_k\), then \(\func{\lambda}{n} = \func{\mu}{n}\) and thus \(\func{\lambda}{n} \func{\mu}{n} = \bracket{\func{\mu}{n}}^2 = \abs{\func{\mu}{n}}\).
+\end{proof}
 \section{The divisor function \(\sigma_{\alpha}\)}
 \begin{definition}
-    For all \(\alpha \in \Complex\), \(\func{\sigma_{\alpha}}{n} = \sum_{d \mid n} d^{\alpha} = u \times N^{\alpha}\)
+    For all \(\alpha \in \Complex\), \(\func{\sigma_{\alpha}}{n} = \sum_{d \mid n} d^{\alpha} =  N^{\alpha} \ast u\)
 \end{definition}
 \begin{proposition}
-    The divisor function \(\sigma_{\alpha}\) is multiplicative. Therefore,
+    The divisor function \(\sigma_{\alpha}\) is multiplicative and
     \begin{equation*}
         \func{\sigma_{\alpha}}{p^k} = 1 + p^{\alpha} + \dots + p^{k \alpha} = \begin{cases}
             \dfrac{p^{(k+1)\alpha} - 1}{p^{\alpha} - 1} & \alpha \neq 0\\
@@ -200,12 +417,22 @@ Then, we can write \(\phi = \mu \ast N\) where \(\func{N}{n}  = n\).
     \end{equation*}
 \end{proposition}
 
+\begin{proof}
+    Trivial.
+\end{proof}
+
 \begin{theorem}
     For \(n \geq 1\), we have 
     \begin{equation*}
         \func{\sigma_{\alpha}^{-1}}{n} = \sum_{d \mid n} d^{\alpha} \func{\mu}{d} \func{\mu}{\frac{n}{d}}
     \end{equation*}
 \end{theorem}
+\begin{proof}
+    Since \(N^{\alpha}\) is completely multiplicative we have
+    \begin{equation*}
+        \sigma_{\alpha}^{-1} = (N^{\alpha})^{-1} \ast \mu = N^{\alpha} \mu \ast \mu
+    \end{equation*}
+\end{proof}
 
 \section{Generalized convolution}
 Let \(F: \opop{0}{\infty} \to \Complex\) such that \(\func{F}{x} = 0\) for \(0 < x < 1\). Let \(f\) be an arithmetical function 
@@ -233,12 +460,30 @@ is a function such that \(\func{f \circ F}{x} = 0\) for \(0 < x < 1\) and define
     \end{equation*}
 \end{theorem}
 
+\begin{proof}
+    \begin{align*}
+        \func{f \circ (g \circ F)}{x} &= \sum_{n \leq x} \func{f}{n} \func{g \circ F}{\frac{x}{n}}\\
+        &= \sum_{n \leq x} \func{f}{n} \sum_{k \leq x/n} \func{g}{k} \func{F}{\frac{x}{nk}}\\
+        &= \sum_{n \leq x} \sum_{nk \leq x} \func{f}{n}\func{g}{k} \func{F}{\frac{x}{nk}}\\
+        &= \sum_{nk \leq x} \func{f}{n}\func{g}{k} \func{F}{\frac{x}{nk}}\\
+        &= \sum_{m \leq x} \sum_{d \mid m} \func{f}{d}\func{g}{\frac{m}{d}} \func{F}{\frac{x}{m}}\\
+        &= \sum_{m \leq x} \func{f \ast g}{m} \func{F}{\frac{x}{m}}\\
+        &= \func{(f \ast g) \circ F}{x}
+    \end{align*}
+\end{proof}
+
 \begin{theorem}[Generalized Mobius inversion]
-    Let \(f\) be a completely multiplicative function 
+    Let \(f\) be completely multiplicative 
     \begin{equation*}
         \func{G}{x} = \sum_{n \leq x} \func{f}{n}\func{F}{\frac{x}{n}} \iff \func{F}{x} = \sum_{n \leq x} \func{\mu}{n} \func{f}{n} \func{G}{\frac{x}{n}}
     \end{equation*}    
 \end{theorem}
+\begin{proof}
+    We have 
+    \begin{equation*}
+        \mu f \circ G= f^{-1} \circ G  =  f^{-1}  \circ (f \circ F) = ( f^{-1} \ast f )\circ F = F
+    \end{equation*}
+\end{proof}
 \section{Formal power series}
 Definiton of formal power series as usual with equality, sum, and multiplication. Therefore, formal power series form a ring with \(0\) and \(1\). If the leading coefficient is non-zero, then the formal power series is invertible. 
 \begin{definition}
@@ -252,6 +497,9 @@ Definiton of formal power series as usual with equality, sum, and multiplication
 \begin{theorem}
     If \(f\) and \(g\) are multiplicative, then \(f = g\) if and only if \(f_p = g_p\) for all \(p\). 
 \end{theorem}
+\begin{proof}
+    Trivial.
+\end{proof}
 \begin{example}
     \begin{align*}
         \func{\mu_p}{x} &= 1-x & \func{I_p}{x} &= 1 & \func{\lambda_p}{x} &= \frac{1}{1 + x}\\
@@ -261,6 +509,17 @@ Definiton of formal power series as usual with equality, sum, and multiplication
 \begin{theorem}
     Let \(f\) and \(g\) be two arithmetical functions and \(h = f \ast g\), then \(h_p = f_p g_p\) for all \(p\).
 \end{theorem}
+\begin{proof}
+    We have,
+    \begin{align*}
+        \func{h_p}{x} &= \sum_{n = 0}^{\infty} \func{h}{p^n} x^n\\
+        &= \sum_{n = 0}^{\infty} \sum_{i = 0}^{n} \func{f}{p^i} \func{g}{p^{n-i}} x^n\\
+        &= \sum_{i = 0}^{\infty} \sum_{n = i}^{\infty} \func{f}{p^i} \func{g}{p^{n-i}} x^n\\
+        &= \sum_{i = 0}^{\infty}  \func{f}{p^i} x^i \sum_{n = i}^{\infty} \func{g}{p^{n-i}} x^{n-i}\\
+        &= \sum_{i = 0}^{\infty}  \func{f}{p^i} x^i \sum_{n = 0}^{\infty} \func{g}{p^{n}} x^{n}\\
+        &= \func{f_p}{x} \func{g_p}{x}
+    \end{align*}
+\end{proof}
 As a result, 
 \begin{equation*}
     \func{\bracket{\sigma_{\alpha}}_p}{x} = \func{N^{\alpha}_p}{x} \func{u_p}{x} = \frac{1}{1- p^{\alpha}x} \frac{1}{1- x} = \frac{1}{1 - (p^{\alpha} + 1)x + p^{\alpha}x^2} = \frac{1}{1 - \func{\sigma_{\alpha}}{p} + p^{\alpha} x^2}
@@ -282,6 +541,25 @@ As a result,
     \end{enumerate}
 \end{theorem}
 
+\begin{proof}
+    \ 
+    \begin{enumerate}
+        \item \((f + g)' = (f + g)\log = f \log + g \log \).
+        \item 
+        \begin{align*}
+            \func{(f \ast g)'}{n} &= \func{f \ast g}{n} \log n\\
+            &= \sum_{d \mid n} \func{f}{d} \func{g}{\frac{n}{d}} \log n\\
+            &= \sum_{d \mid n} \func{f}{d} \func{g}{\frac{n}{d}} \bracket{\log d + \log \frac{n}{d}} \\
+            &= \sum_{d \mid n} \func{f}{d}\log d \func{g}{\frac{n}{d}}+ \sum_{d \mid n} \func{f}{d} \func{g}{\frac{n}{d}} \log \frac{n}{d}\\
+            &= \func{f' \ast g}{n} + \func{f \ast g'}{n}
+        \end{align*}
+        \item Note that, \((f \ast f^{-1})' = I' = I \log \equiv 0\). From the previous part we have 
+        \begin{equation*}
+            (f \ast f^{-1})' = f' \ast f^{-1} + f \ast (f^{-1})' = 0 \implies (f^{-1})' = - f^{-1} \ast f' \ast f^{-1} = -f' \ast (f \ast f)^{-1}
+        \end{equation*}
+    \end{enumerate}
+\end{proof}
+
 \section{The Selberg theorem}
 \begin{theorem}
     For \(n \geq 1\), 
@@ -289,3 +567,122 @@ As a result,
         \func{\Lambda}{n} \func{\log}{n} + \sum_{d \mid n} \func{\Lambda}{d} \func{\Lambda}{\frac{n}{d}} = \sum_{d \mid n} \func{\mu}{d} \func{\log^2}{\frac{n}{d}}
     \end{equation*}
 \end{theorem}
+
+\begin{proof}
+    Recall that \(\Lambda = \mu \ast \log\) and \(\Lambda' = \Lambda \log\) by definition.
+    \begin{align*}
+        \Lambda \log + \Lambda \ast \Lambda &= \Lambda' + (\mu \ast \log) \ast \Lambda\\
+        &= (\mu \ast \log)' + (\mu \ast u')\ast \Lambda\\
+        &= \mu' \ast \log + \mu \ast \log' + \squareBracket{(\mu \ast u)' - \mu' \ast u} \ast \Lambda\\
+        &= \mu \log \ast \log + \mu \ast \log^2 - \mu\log \ast u \ast \Lambda\\
+        &= \mu \log \ast \log + \mu \ast \log^2 - \mu\log \ast \log\\
+        &= \mu \ast \log^2 \\
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    \item Prove that
+    \begin{equation*}
+        \frac{n}{\func{\phi}{n}} = \sum_{d \mid n} \dfrac{\func{\mu^2}{d}}{\func{\phi}{d}}
+    \end{equation*}
+    \begin{solution}
+        Note that, both the left hand side \(N/\phi\) and the right hand side \(\mu^2/\phi \ast u\) are multiplicative therefore, it suffices to show that they are equal on prime powers.
+        \begin{align*}
+            LHS &= \dfrac{p^{\alpha}}{\func{\phi}{p^{\alpha}}} = \dfrac{p^{\alpha}}{p^{\alpha - 1}(p - 1)} = \dfrac{p}{p-1} \\
+            RHS &= \sum_{d \mid p^{\alpha}} \frac{\func{\mu^2}{d}}{\func{\phi}{d}} = \dfrac{1}{\func{\phi}{1}} + \frac{1}{\func{\phi}{p}} = \dfrac{p}{p-1} \\
+            \implies& LHS = RHS 
+        \end{align*}
+    \end{solution}
+    \item Let \(\func{\nu}{n}\) be the number of distinct prime factors of \(n\) with \(\func{\nu}{1} = 1\). Let \(f = \mu \ast \nu\) and prove that \(\func{f}{n}\) is either \(0\) or \(1\).
+    \begin{solution}
+        Let \(m,k\) be an integer with \(m,k\geq 1\) and \(p\) a prime such that \((m,p) = 1\). Then, 
+        \begin{align*}
+            \func{\mu \ast \nu}{p^k m} &= \sum_{d \mid p^k m} \func{\mu}{d} \func{\nu}{\dfrac{p^km}{d}}\\
+            &= \sum_{d \mid m}\sum_{l \mid p^k} \func{\mu}{l d} \func{\nu}{\dfrac{p^km}{ld}}\\
+            &=  \sum_{d \mid m}\func{\mu}{d} \func{\nu}{\dfrac{p^km}{d}} + \func{\mu}{pd} \func{\nu}{\dfrac{p^{k-1}m}{d}}\\
+            &= \sum_{d \mid m}\func{\mu}{d} \bracket{1 + \func{\nu}{\dfrac{m}{d}}} - \func{\mu}{d} \bracket{(1 - \func{I}{k}) + \func{\nu}{\dfrac{m}{d}}}\\
+            &= \func{I}{k}\sum_{d \mid m}  \func{\mu}{d}\\
+            &= \func{I}{k} \func{I}{m}
+        \end{align*}
+        Therefore, the value of the function is either \(0\) or \(1\). Moreover, it is only \(1\) for prime numbers.
+    \end{solution}
+    \item Prove that 
+    \begin{equation*}
+        \sum_{d^k \mid n} \func{\mu}{d} = \begin{cases}
+            0 & \text{if } m^k \mid n \text{ for some } m > 1\\
+            1 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    \begin{solution}
+        Let \(n = m^k r\) with \(m \geq 1\) and \(r\) is \(k_{\cardinalTH}\) power free. That is, there is no integer whose \(k_{\cardinalTH}\) power divides \(r\). Therefore,
+        \begin{equation*}
+            \sum_{d^k \mid n} \func{\mu}{d} = \sum_{d^k \mid m^k} \func{\mu}{d} = \sum_{d \mid m} \func{\mu}{d} = \func{I}{m}
+        \end{equation*}
+    \end{solution}
+    \item Prove that 
+    \begin{equation*}
+        \sum_{d \mid n} \func{\mu}{d} \func{\log^m}{d} = 0
+    \end{equation*}
+    if \(m \geq 1\) and \(n\) has more than \(m\) distinct prime factors.
+    \begin{solution}
+        Let \(n = p_1^{\alpha_1} \dots p_k^{\alpha_k}\) has \(k\) distinct prime factors.
+        \begin{align*}
+            \sum_{d \mid n} \func{\mu}{d} \func{\log^m}{d} &= \sum_{d \mid p_1\dots p_k}\func{\mu}{d} \func{\log^m}{d}\\
+            &= \sum_{d \mid p_1\dots p_{k-1}} \func{\mu}{d} \func{\log^m}{d} + \func{\mu}{dp_k} \func{\log^m}{dp_k}\\
+            &= \sum_{d \mid p_1\dots p_{k-1}} \func{\mu}{d} \func{\log^m}{d} - \func{\mu}{d} \bracket{\log d + \log p_k}^m\\
+            &=- \sum_{d \mid p_1\dots p_{k-1}}\sum_{j = 0}^{m-1} \binom{m}{j} \func{\mu}{d}\func{\log^j}{d} \func{\log^{m-j}}{p_k}\\
+            &=- \sum_{j = 0}^{m-1} \binom{m}{j} \func{\log^{m-j}}{p_k}  \sum_{d \mid p_1\dots p_{k-1}} \func{\mu}{d} \func{\log^j}{d} 
+        \end{align*}
+            Assuming that the induction base is true and \(k > m\), then we are done by induction. The base case is when \(m = 1\). Let \(n = p_1^{\alpha_1} \dots p_k^{\alpha_k}\) and \(k \geq 2\), 
+            \begin{align*}
+                \sum_{d \mid n} \func{\mu}{d} \log d &=-  \func{\log}{p_k}  \sum_{d \mid p_1\dots p_{k-1}} \func{\mu}{d} \\
+                &= - \log p_k \func{I}{p_1 \dots p_{k-1}}= 0
+            \end{align*}
+    \end{solution}
+    \item Let \(\func{f}{x}\) be defined for all rational \(x\) in \(0 \leq x \leq 1\) and let 
+    \begin{align*}
+        \func{F}{n} &= \sum_{k = 1}^n \func{f}{\frac{k}{n}} & \func{F^{\ast}}{n} = \sum_{\substack{k = 1\\ (k,n) = 1}} \func{f}{\frac{k}{n}}
+    \end{align*}
+    \begin{enumerate}
+        \item Show that \(F^{\ast} = F \ast \mu\).
+        \item Show that 
+        \begin{equation*}
+            \func{\mu}{n} =\sum_{\substack{k = 1\\ (k,n) = 1}} e^{2\pi ik/n}
+        \end{equation*}
+    \end{enumerate}
+    \begin{solution}
+        \begin{enumerate}
+            \item We have,
+        \begin{align*}
+            \func{F^{\ast}}{n} &= \sum_{k = 1}^n \func{I}{(n,k)} \func{f}{\frac{k}{n}}\\
+            &= \sum_{k = 1}^n \sum_{d \mid (n,k)} \func{\mu}{d} \func{f}{\frac{k}{n}}\\
+            &= \sum_{d \mid n} \sum_{k = 1}^{n/d} \func{\mu}{d} \func{f}{\frac{dk}{n}}\\
+            &= \sum_{d \mid n} \func{\mu}{d} \func{F}{\frac{n}{d}}\\
+            &= \func{\mu \ast F}{n}
+        \end{align*}
+            \item Let \(\func{f}{x} = e^{2 \pi i x}\), then 
+            \begin{equation*}
+                \func{F}{n} = \sum_{k = 1}^n e^{2 \pi i k/n} = \func{I}{n}
+            \end{equation*}
+            and thus 
+            \begin{equation*}
+                \mu \ast F = \mu = F^{\ast} = \sum_{\substack{k = 1\\(k,n) = 1}}^n e^{2 \pi i k/n}
+            \end{equation*}
+    \end{enumerate}
+    \end{solution}
+    \item Prove that,
+    \begin{equation*}
+        \func{\sigma_1}{n} = \sum_{d \mid n} \func{\phi}{d} \func{\sigma_0}{\frac{n}{d}}
+    \end{equation*}
+    And try to generalize it for \(\sigma_{\alpha}\)
+    \begin{solution}
+        For integer \(\alpha \geq 1\)
+        \begin{align*}
+            \sigma_{\alpha} &= N^{\alpha} \ast u = (N^{\alpha - 1} N) \ast u\\
+            &=  (N^{\alpha - 1} N)  \ast (N^{\alpha- 1} \mu) \ast (N^{\alpha - 1} \mu)^{-1} \ast u\\
+            &= (N^{\alpha - 1} \phi) \ast N^{\alpha - 1} \ast u\\
+            &= (N^{\alpha - 1} \phi) \ast \sigma_{\alpha - 1}
+        \end{align*}
+    \end{solution}
+    \item 
+\end{exercise}

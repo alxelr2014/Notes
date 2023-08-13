@@ -1,0 +1,84 @@
+\chapter{Elementary Theorems on the Distribution of Prime Numbers}
+\section{Chebyshev's functions \(\func{\psi}{x}, \func{\theta}{x}\)}
+\begin{definition}
+    For \(x > 0\),
+    \begin{equation*}
+        \func{\psi}{x} = \sum_{n \leq x} \func{\Lambda}{n} = \sum_{m = 1}^{\infty} \sum_{p^m \leq x}\func{\Lambda}{p^m} =  \sum_{m = 1}^{\infty} \sum_{p^m \leq x}\func{\log}{p} 
+    \end{equation*}
+    Moreover, since there are no primes less than \(2\), if \(x^{1/m} < 2\), then the inner sum would be zero. That is,
+    \begin{equation*}
+        \func{\psi}{x} = \sum_{m \leq \lg x} \sum_{p \leq x^{1/m}} \log p
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    For \(x > 0\), 
+    \begin{equation*}
+        \func{\theta}{x} = \sum_{p \leq x} \log p
+    \end{equation*}
+    Therefore, 
+    \begin{equation*}
+        \func{\psi}{x} = \sum_{m \leq \lg x} \func{\theta}{\sqrt[m]{x}}
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    For \(x > 0\), 
+    \begin{equation*}
+        0 \leq \dfrac{\func{\psi}{x} - \func{\theta}{x}}{x} \leq \dfrac{\bracket{\log x}^2}{2 \sqrt{x} \log 2}
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+From this theorem, we are able to conclude that if \(\lim \frac{\func{\psi}{x}}{x}\) exists, then \(\lim \frac{\func{\theta}{x}}{x}\) exists and they are equal.
+\section{Relations connecting \(\func{\theta}{x}\) and \(\func{\pi}{x}\)}
+\begin{theorem}[Abel's identity]
+    Let \(\func{a}{n}\) be arithmetical and let \(\func{A}{n} = \sum_{n \leq x} \func{a}{n}\), with \(\func{A}{x} = 0\) for \(x < 1\). Assume \(f\) has a continuous derivative on interval \(\clcl{y}{x}\). Then, we have 
+    \begin{align*}
+        \sum_{y \leq n \leq x} \func{a}{n}\func{f}{x} = \func{A}{x} \func{f}{x} - \func{A}{y} \func{f}{y} - \int_{y}^x \func{A}{t} \func{f'}{t} \diffOperator t
+    \end{align*}
+\end{theorem}
+The Euler's summation formula can be easily deduced from Abel's.
+
+\begin{theorem}
+    For \(x \geq 2\)
+    \begin{equation*}
+        \func{\theta}{x} = \func{\pi}{x} \log x - \int_{2}^x \dfrac{\func{\pi}{t}}{t} \diffOperator t
+    \end{equation*}
+    and 
+    \begin{equation*}
+        \func{\pi}{x} = \dfrac{\func{\theta}{x}}{\log x} + \int_2^x \dfrac{\func{\theta}{t}}{t \log ^2 t} \diffOperator t
+    \end{equation*}
+\end{theorem}
+
+\section{Equivalent forms of Prime Number Theorem}
+\begin{theorem}
+    The following relations are equivalent.
+    \begin{align}
+        \lim_{x \to \infty} \dfrac{\func{\pi}{x} \log x}{x} &= 1\\
+        \lim_{x \to \infty} \dfrac{\func{\theta}{x}}{x} &= 1\\
+        \lim_{x \to \infty} \dfrac{\func{\psi}{x}}{x} &= 1
+    \end{align}
+\end{theorem}
+\begin{theorem}
+    Let \(p_n\) be the \(n_{\cardinalTH}\) prime, the following relations are equivalent.
+    \begin{align*}
+        \lim_{x \to \infty} \dfrac{\func{\pi}{x} \log x}{x} = 1\\
+        \lim_{x \to \infty} \dfrac{\func{\pi}{x} \log \func{\pi}{x}}{x} = 1\\
+        \lim_{n \to \infty} \dfrac{p_n}{n \log n} = 1
+    \end{align*}
+\end{theorem}
+
+\section{Inequalities for \(\func{\pi}{x}\) and \(p_n\)}
+\begin{theorem}
+    For every integer \(n \geq 2\)
+    \begin{equation*}
+        \dfrac{1}{6} \dfrac{n}{\log n} \leq \func{\pi}{n} \leq 6 \dfrac{n}{\log n}
+    \end{equation*}
+    and for \(n \geq 1\), 
+    \begin{equation*}
+        \dfrac{1}{6}n \log n < p_n < 12 \bracket{n \log n + n \func{\log}{\frac{12}{e}}}
+    \end{equation*}
+\end{theorem}
