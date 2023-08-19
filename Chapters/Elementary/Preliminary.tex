@@ -1,0 +1,23 @@
+\chapter{Preliminary}
+
+Theory of numbers is about the study of natural numbers, denoted by \(\Naturals = \set{0,1,2,\dots}\). Formally, the set of natural numbers is defined as non-empty set with \(0 \in \Naturals\) with a successor function \(S : \Naturals \to \Naturals\) such that 
+\begin{align}
+    & \forall x, \func{S}{x} \neq 0\\
+    & \forall x,y, \func{S}{x} = \func{S}{y} \implies x = y\\
+    & \forall x, x + 0 = 0 + x = x\\
+    & \forall x, x \cdot 0 = 0 \cdot x = 0\\
+    & \forall x,y, \func{S}{x + y} = x + \func{S}{y}\\
+    & \forall x,y, \func{S}{x \cdot y} = x \cdot y + x\\
+    & \forall \phi, \bracket[[\Big]]{\func{\phi}{0} \land (\forall x, \func{\phi}{x} \implies \func{\phi}{\func{S}{x}})} \implies \forall x, \func{\phi}{x} 
+\end{align}
+The last axiom is called the principle of induction. It says that if for some predicate \(\phi\), \(\func{\phi}{0}\) and \(\phi\) is such that if \(\phi\) is true for \(x\) then it is also true for \(\func{S}{x}\), then \(\phi\) is true for all natural numbers.
+
+Algebraically, the natural numbers form a commutative monoid under addition and positive natural numbers form a commutative monoid under multiplication.
+
+\begin{definition}[Well-ordering principle]
+    Any non-empty subset of natural numbers has a smallest element.
+\end{definition}
+
+\begin{theorem}
+    The well-ordering principle and principle of induction are equaivalent.
+\end{theorem}

@@ -1,0 +1,105 @@
+\chapter{Congrueneces}
+\section{Definitions and Properties}
+\begin{theorem}
+    For \(c > 0\), \(a \equiv b \mod m\) if and only if \(ac \equiv bc \mod mc\).
+\end{theorem}
+
+\begin{theorem}[Cancellation law]
+    If \(ac \equiv bc \mod m\) and \((c,m) = d\), thesection
+    \begin{equation*}
+        a \equiv b \mod m/d
+    \end{equation*}
+\end{theorem}
+
+\section{Residue classes}
+\begin{definition}
+    A set of \(m\) representatives, one from each residue classes \(\hat{1}, \hat{2} , \dots, \hat{m}\) is called a complete residue system modulo \(m\).
+\end{definition}
+
+\begin{theorem}
+    If \((k,m) = 1\) and \(\set{a_1,\dots,a_m}\) is a complete residue system, then the set \(\set{ka_1,\dots, k a_m}\) is a complete residue system.
+\end{theorem}
+
+\begin{theorem}
+    If \((a,m) = 1\), then the linear congruence \(ax \equiv b \mod m\) has exactly one solution.
+\end{theorem}
+
+\begin{theorem}
+    If \((a,m) = d\) then \(ax \equiv b \mod m\) has a solution if and only if \(d \mid b\). Moreover, there exactly \(d\) solutions, if any exists.
+\end{theorem}
+
+\begin{theorem}
+    If \((a,b) = d\), then there exists \(x,y \in \Integers\) such that 
+    \begin{equation*}
+        ax + by = d
+    \end{equation*}
+\end{theorem}
+
+\section{Reduced residue classes}
+\begin{definition}
+    A reduced residue system modulo \(m\) is a set of incongruent number modulo \(m\) that are relatively prime to \(m\).
+\end{definition}
+
+\begin{theorem}
+    If \((k,m) = 1\) and \(\set{a_1,\dots,a_{\func{\phi}{m}}}\) is a reduced residue system, then the set \(\set{ka_1,\dots, k a_{\func{\phi}{m}}}\) is a reduced residue system.
+\end{theorem}
+
+\begin{theorem}[Euler-Fermat theorem]
+    Assume \((a,m) = 1\), then we have 
+    \begin{equation*}
+        a^{\func{\phi}{m}} \equiv 1 \mod m
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Fermat's little theorem]
+    For all \(a \in \Integers\) and primes \(p\), \(a^p \equiv a \mod p\)
+\end{theorem}
+
+\begin{corollary}
+    If \((a,m) = 1\), then 
+    \begin{equation*}
+        ax \equiv b \mod m \implies x \equiv b a^{\func{\phi}{m} - 1} \mod m
+    \end{equation*}
+\end{corollary}
+
+\section{Polynomial congruence modulo primes}
+\begin{theorem}[Lagrange's theorem]
+    Let \(p\) be a prime and \(\func{f}{x} = c_0 + \dots + c_n x^n\) be a polynomial with integer coefficient of degree \(n\) such that \(c_n \not\equiv 0 \mod p\). Then, \(\func{f}{n} \equiv 0 \mod p\) has at most \(n\) solutions.
+\end{theorem}
+
+\subsection{Applications of Lagrange's theorem}
+\begin{theorem}
+    If \(\func{f}{x} = c_0 + c_1x + \dots + c_nx^n\) is a polynomial of degreee \(n\) with integer coefficients and if the congruence \(\func{f}{x} \equiv 0 \mod p\) has more than \(n\) solutions modulo \(p\), when \(p\) is a prime, then every coefficient of \(f\) is divisible by \(p\). 
+\end{theorem}
+
+\begin{corollary}
+    For all primes \(p\), all the coefficients of the following polynomial are divisible by \(p\).
+    \begin{equation*}
+        \func{f}{x} = (x - 1) (x-2) \dots (x - (p-1)) - x^{p-1} + 1
+    \end{equation*}
+\end{corollary}
+
+\begin{corollary}[Wilson's theorem]
+    \((n-1)! \equiv -1 \mod n\) if and only if \(n\) is a prime.    
+\end{corollary}
+
+\begin{corollary}[Wolstenholmes' theorem]
+    For any prime \(p \geq 5\)
+    \begin{equation*}
+        \sum_{k = 1}^{p-1} \dfrac{(p-1)!}{k} \equiv 0 \mod p
+    \end{equation*}
+\end{corollary}
+
+\section{Simultaneous linear congruence}
+\begin{theorem}[Chinese remainder theorem]
+    Assume \(m_1,\dots, m_k\) are positive integers that are pairwise relatively prime, \((m_i,m_j) = 1\) for \(i \neq j\). Let \(b_1,\dots, b_k\) be arbitrary integers. Then, the system of congrueneces
+    \begin{equation*}
+        \begin{cases}
+            x &\equiv b_1 \mod m_1\\
+            x &\equiv b_2 \mod m_2\\
+            &\vdots\\
+            x &\equiv b_k \mod m_k\\
+        \end{cases}
+    \end{equation*}
+    has exactly one solution modulo \(M = m_1\dots m_k = \prod m_i\).
+\end{theorem}
