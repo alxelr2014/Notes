@@ -269,6 +269,8 @@ The \(R\) and \(P\) are Hermitian operators -- each one of their components is H
 \end{align*}
 The closure relationships \(\int \ket{\vectbf{r}}\bra{\vectbf{r}} \diffOperator \vectbf{r} = I\) and \(\int \ket{\vectbf{p}}\bra{\vectbf{p}} \diffOperator \vectbf{p} = I\) show that \(R\) and \(P\) are observables.
 \section{Tensor product}
+The tensor product in quantum mechanic tries to describe joint state of two or more systems. It can be viewed as a quantum analog of joint distribution.
+
 Let \(\ket{\psi_1} \in \scrE_1\) and \(\ket{\psi_2} \in \scrE_2\). The \textbf{tensor product} of \(\ket{\psi_1}\) and \(\ket{\psi_2}\) is denoted by 
 \begin{equation*}
     \ket{\psi_1} \otimes \ket{\psi_2} = \ket{\psi_1} \ket{\psi_2} = \ket{\psi_1, \psi_2}
@@ -286,7 +288,7 @@ The tensor product of \(\scrE_1\) and \(\scrE_2\) is defined as \(\scrE = \scrE_
 \begin{definition}
     An inner product for \(\scrE\) can be given from the inner product for \(\scrE_1\) and \(\scrE_2\).
     \begin{equation*}
-        \bracket{\phi_1 \phi_2}{\psi_1 \psi_2} = \braket{\phi_1}{\psi_1} \braket{\phi_2}{\psi_2}
+        \braket{\phi_1 \phi_2}{\psi_1 \psi_2} = \braket{\phi_1}{\psi_1} \braket{\phi_2}{\psi_2}
     \end{equation*}
 \end{definition}
 Let \(A_1\) be an operator in \(\scrE_1\). We can extend it to \(\tilde{A_1}\) an operator in \(\scrE\) such that 
@@ -299,7 +301,15 @@ Generally, if \(A_1\) is an operator in \(\scrE_1\) and \(A_2\) an operator in \
 \end{equation*}
 In this way, \(\tilde{A_1} = A_1 \otimes I\).  We can similarly show that if \(\set{A_1}\) is a basis for \(\func{\calL}{\scrE_1}\) and \(\set{A_2}\) is basis for \(\func{\calL}{\scrE_2}\), then \(\set{A_1 \otimes A_2}\) is a basis for \(\func{\calL}{\scrE}\).
 
-If \(\set{a_n}\) is the spectra of \(A_1\) and \(\set{b_m}\) is the spectra of \(B_2\), then \(\set{a_n + b_m}\) is the spectra of \(C = A_1 \otimes B_2\). 
+\begin{proposition}
+    Suppose \(A,C\) are operators in \(\scrE_1\) and \(B,D\) are operators in \(\scrE_2\), then 
+    \begin{enumerate}
+        \item \((A \otimes B)(C \otimes D) = AC \otimes BD\).
+        \item \((A \otimes B)^{\dagger} = A^{\dagger} \otimes B^{\dagger}\).
+        \item If \(A\) and \(B\) are invertible, then \((A \otimes B)^{-1} = A^{-1} \otimes B^{-1}\).
+    \end{enumerate}
+\end{proposition}
+If \(\set{a_n}\) is the spectra of \(A_1\) and \(\set{b_m}\) is the spectra of \(B_2\), then \(\set{a_n + b_m}\) is the spectra of \(C = \tilde{A_1} + \tilde{B_2}\). 
 
 If \(\set{A_1}\) is a C.S.C.O for \(\scrE_1\) and \(\set{A_2}\) is a C.S.C.O for \(\scrE_2\), then \(\set{A_1 \otimes A_2}\) is a C.S.C.O for \(\scrE\).
 
