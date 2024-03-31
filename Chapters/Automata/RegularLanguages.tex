@@ -1,0 +1,176 @@
+\chapter{Regular Languages}
+
+\section{Finite automata}
+\subsection{Formal definition}
+\begin{definition}
+    A \textbf{finite automaton} is a 5-tuple \((Q,\Sigma, \delta, q_0, F)\) where
+    \begin{enumerate}
+        \item \(Q\) is a finite set called \textbf{states}.
+        \item \(\Sigma\) is a finite set called the \textbf{alphabet}.
+        \item \(\delta: Q \times \Sigma \to \Sigma\) is the \textbf{transition function}.
+        \item \(q_0 \in Q\) is the \textbf{start state}.
+        \item \(F \subset Q\) is the \textbf{set of accept states}.
+    \end{enumerate}
+\end{definition}
+A finite automaton machine \(M\) \textbf{accepts} a string \(w = w_1\dots w_n\) with \(w_i \in \Sigma\), when there exists states \(r_0 , \dots , r_n \in Q\) such that 
+\begin{enumerate}
+    \item \(r_0 = q_0\).
+    \item \(r_{i+1} = \func{\delta}{r_i, w_{i+1}}\) for \(i = 0, \dots, n-1\).
+    \item \(r_n \in F\).
+\end{enumerate}
+The set of strings that \(M\) accept is the \textbf{language of machine} \(M\), denoted by \(\func{L}{M}\). We say that \(M\) \textbf{recognizes} \(\func{L}{M}\).
+
+\begin{definition}
+    A language is called a \textbf{regular language} if some finite automaton recognizes it.
+\end{definition}
+
+\subsection{Regular operations}
+\begin{definition}
+    Let \(A\) and \(B\) be languages. We define the regular operations \textbf{unioun}, \textbf{concatenation}, and \textbf{star} as follows:
+    \begin{description}
+        \item[Union:] \(A \cup B = \set<x>{x \in A \lor x \in B}\).
+        \item[Concatenation:] \(A \circ B = \set<xy>{x \in A, y \in B}\).
+        \item[Star:] \(A^{\ast} = \set<x_1x_2\dots x_k>{k \geq 0, x_i \in A}\).   
+    \end{description}
+\end{definition}
+
+\begin{theorem}
+    The class of regular languages is closed under regular operations.
+\end{theorem}
+
+\section{Nondeterminstic finite automaton}
+\subsection{Formal definition}
+\begin{definition}
+    A \textbf{nondeterminstic finite automaton} is a 5-tuple \((Q,\Sigma, \delta, q_0, F)\) where
+    \begin{enumerate}
+        \item \(Q\) is a finite set called \textbf{states}.
+        \item \(\Sigma\) is a finite set called the \textbf{alphabet}.
+        \item \(\delta: Q \times \Sigma_{\epsilon} \to \powerSet{Q}\) is the \textbf{transition function}.
+        \item \(q_0 \in Q\) is the \textbf{start state}.
+        \item \(F \subset Q\) is the \textbf{set of accept states}.
+    \end{enumerate}
+    where \(\Sigma_{\epsilon} = \Sigma \cup \set{\epsilon}\).
+\end{definition}
+A nondeterminstic finite automaton machine \(M\) \textbf{accepts} a string \(w = w_1\dots w_n\) with \(w_i \in \Sigma_{\epsilon}\), when there exists states \(r_0 , \dots , r_n \in Q\) such that 
+\begin{enumerate}
+    \item \(r_0 = q_0\).
+    \item \(r_{i+1} \in \func{\delta}{r_i, w_{i+1}}\) for \(i = 0, \dots, n-1\).
+    \item \(r_n \in F\).
+\end{enumerate}
+
+\subsection{Equivalence of NFA and DFA}
+Two machine are \textbf{equivalent} if they recognize the same language.
+
+\begin{theorem}
+    Every nondeterminstic finite automaton has an equivalent deterministic finite automaton.
+\end{theorem}
+
+\begin{proof}
+    Define \(\func{E}{R}\) the \textbf{epsilon neighborhood of} \(R \subset Q\) to be 
+    \begin{equation*}
+        \func{E}{R} = \set<q>{q \in \func{\delta}{r,\epsilon^n} \ \mathrm{for some} \ r \in R, n \geq 0}
+    \end{equation*}
+\end{proof}
+
+\begin{corollary}
+    A language is regular language if and only if some nondeterminstic finite automaton recognizes it.
+\end{corollary}
+
+\begin{proof}
+    Add.
+\end{proof}
+
+\subsection{Closure under regular operations}
+
+\begin{theorem}
+    The class of regular languages is closed under union operation.
+\end{theorem}
+
+\begin{proof}
+    Add.
+\end{proof}
+
+\begin{theorem}
+    The class of regular languages is closed under concatenation operation.
+\end{theorem}
+
+\begin{proof}
+    Add.
+\end{proof}
+
+\begin{theorem}
+    The class of regular languages is closed under star operation operation.
+\end{theorem}
+
+\begin{proof}
+    Add.
+\end{proof}
+\section{Regular expression}
+\subsection{Formal defintion}
+\begin{definition}
+    \(R\) is a \textbf{regular expression} if \(R\) is 
+    \begin{enumerate}
+        \item \(\set{a}\) for some \(a \in \Sigma\),
+        \item \(\set{\epsilon}\),
+        \item \(\emptyset\),
+        \item \(R_1 \cup R_2\), where \(R_1\) and \(R_2\) are regular expressions,
+        \item \(R_1 \circ R_2\), where \(R_1\) and \(R_2\) are regular expressions, or
+        \item \(R_1^{\ast}\), where \(R_1\) is a regular expressions,
+    \end{enumerate}
+\end{definition}
+For convenience, we let \(R^+\) be shorthance for \(RR^{\ast}\). i.e. \(R^{\ast} = R^{+} \cup \set{\epsilon}\).
+\begin{align*}
+    \emptyset^{\ast} &= \set{\epsilon}& R \cup \emptyset &= R \\
+    R \circ \emptyset &=  \emptyset & R \circ \set{\epsilon} &= R 
+\end{align*}
+
+\subsection{Equivalence with DFA}
+
+\begin{theorem}
+    A language is regular if and only if some regular expression describes it.
+\end{theorem}
+
+\begin{lemma}
+    If a language is described by a regular expression, then it is regular.
+\end{lemma}
+
+\begin{lemma}
+    If a language is regular, then it is described by a regular expression.
+\end{lemma}
+
+\begin{definition}
+    A \textbf{generalized nondeterminstic finite automaton}, GNFA for short, is a 5-tuple, \((Q,\Sigma, \delta, q_{\start}, q_{\accept})\) where
+    \begin{enumerate}
+        \item \(Q\) is a finite set called \textbf{states}.
+        \item \(\Sigma\) is a finite set called the \textbf{alphabet}.
+        \item \(\delta: Q - \set{q_{\accept}}\times  Q - \set{q_{\start}} \to \calR\) where \(\calR\) is the set of regular expressions, is the \textbf{transition function}.
+        \item \(q_{\start} \in Q\) is the \textbf{start state}.
+        \item \(q_{\accept} \in Q\) is the \textbf{accept states}.
+    \end{enumerate}
+\end{definition}
+A generalized nondeterminstic finite automaton machine \(M\) \textbf{accepts} a string \(w = w_1\dots w_n\) with \(w_i \in \Sigma^{\ast}\), when there exists states \(r_0 , \dots , r_n \in Q\) such that 
+\begin{enumerate}
+    \item \(r_0 = q_{\start}\).
+    \item \(w_{i} \in \func{L}{\func{\delta}{r_{i-1}, r_{i}}}\) for \(i = 0, \dots, n-1\).
+    \item \(r_n = q_{\accept}\).
+\end{enumerate}
+
+\begin{prooflemma}
+    Convert DFA into a GNFA and then reduce that GNFA to a two state GNFA.
+\end{prooflemma}
+
+\section{Nonregular languages}
+\begin{theorem}[Pumping lemma]
+    If \(A\) is a regular language, then there is a number \(p\) where if \(s\) is any string in \(A\) of length at least \(p\), then \(s\) may be divided into three piece, \(s = xyz\), satisfying the following conditions:
+    \begin{enumerate}
+        \item \(\abs{y} > 0\).
+        \item \(\abs{xy} \geq p\).
+        \item \(xy^nz \in A\) for all \(n \geq 0\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Add.
+\end{proof}
+% TODO: add proofs, add examples and problems 
+% TODO: Right linear and left linear grammars
