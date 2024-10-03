@@ -1,0 +1,245 @@
+\chapter{Time Complexity}
+\section{Defintion of time}
+One of the most important resource in computation is time. Hence it is natural to quantify the time required to compute a given task with a computing model. Consider a computation model \(\calM\), and let \(\func{\DD}{\calM}, \func{\DA}{\calM},\func{\ND}{\calM},\)  and \(\func{\NA}{\calM}\) be its four fundamental classes based on its standard language. Fix a machine \(M \in \calM\) and an input \(w \in \Sigma^{\ast}\). Given a computation path \(\calP_w\) on \(M\),  the most obvious measure of time is the length of the path.
+\begin{equation*}
+    \func{\Time_M}{\calP_w} = \abs{\calP_w}
+\end{equation*} 
+Then, we naturallly define the computation time of \(w\) on \(M\) to be the minimum time of accepting path.
+\begin{equation*}
+    \func{\Time_M}{w} = \min_{\substack{\calP_w \text{ ends in}\\\text{an accepting state}}}\func{\Time_M}{\calP_w} 
+\end{equation*}
+We set \(\min \emptyset = \infty\), thus when \(w \in \func{L}{M}\), \(\func{\Time_M}{w} = \infty\). So far, we have a function \(\Time_M : \Sigma^{\ast} \to \Naturals \cup \set{\infty}\) that measures the time complexity of a string \(w\) on \(M\). The goal developing such function is to then compare the efficiency two machines \(M_1\) and \(M_2\) that compute the same task \(L\). Ofcourse, this is usually an impossible task. Firstly, computing \(\func{\Time_M}{w}\) itself is a computationally challanging endeavor. Even, when the exact time measure is computed, it is not obvious how to compare two functions on strings over \(\Sigma\). For example, we can easily construct a `better' algorithm by hardcoding the acceptance of a string \(w\), however, such the new algorithm does not inherently improve the initial algorithm. 
+
+For these reason, and much more, we shall develop our theory through a coarser lens. Our intuition is that a better algorithm works `better' on `more complicated' inputs. We now formalize our intuition.
+
+\begin{enumerate}
+    \item What are the `complicated' inputs? Usually, but ofcourse not always, longer inputs are harder to solve. For example, consider the following linear systems. 
+    \begin{align*}
+        &\begin{cases}
+          2x + y =& 1\\
+          3x - 2y =& 2  
+        \end{cases}\ (1) & 
+        &\begin{cases}
+            x + y + z =& 1\\
+            x - 2y + z =&  2\\
+            3x - y - z =&  3
+          \end{cases}\ (2)
+        &\begin{cases}
+            x  =& 1\\
+            y =&  2\\
+            z =&  3 \\
+            w =& 4
+          \end{cases}\ (3)
+    \end{align*}
+    In a glance, we can see that system \((3)\) is the easiest to solve, then \((1)\), and lastly \((2)\). Even though, generally, a \(4\)-variable linear system is harder than a \(2\)-variable linear system. System \((1)\) is described with \(13\) characters while system \((3)\) is described with \(12\) characters. Thus, it is not hard to argue that shorter inputs are easier to so solve and thus less complicated that longer inputs. 
+
+    By the above reasoning, we partition the time measure over the length of the input, which gives the following defintion for \(\Time_M : \Naturals \to \Naturals \cup \set{\infty}\).
+    \begin{equation*}
+        \func{\Time_M}{n} = \max_{\substack{\abs{w} = n \\ w \in \func{L}{M}}} \func{\Time_M}{w}
+    \end{equation*}
+    \item Suppose we are given two functions \(\Time_{M_1}\) and \(\Time_{M_2}\), how do we compare them over \(\Naturals\). Our intuition tells us that \(\Time_{M_1}\) is better than \(\Time_{M_2}\) if it is smaller for larger inputs. That is, for sufficiently large \(n\), \(\func{\Time_{M_1}}{n} \leq \func{\Time_{M_2}}{n}\). This is closely related to the idea of asymptotic growth. Let \(f : \Naturals \to \Naturals\), then 
+    \begin{itemize}
+        \item \(\bigO{f} = \set<g : \Naturals \to \Naturals>{ \exists N,c \in \Naturals\; \suchThat \; \forall n \geq N, \; \func{g}{n} \leq c \func{f}{n}}\). When \(g \in \bigO{f}\) we say that \(g\) is asymptotically bounded above by \(f\).
+        \item \(\bigOmega{f} = \set<g : \Naturals \to \Naturals>{ \exists N,c \in \Naturals\; \suchThat \; \forall n \geq N, \; \func{g}{n} \geq c \func{f}{n}}\). When \(g \in \bigOmega{f}\) we say that \(g\) is asymptotically bounded below by \(f\).
+        \item  \(\bigTheta{f} = \set<g : \Naturals \to \Naturals>{ \exists N,c,d \in \Naturals\; \suchThat \; \forall n \geq N, \; d \func{f}{n} \leq \func{g}{n} \leq c \func{f}{n}}\). When \(g \in \bigTheta{f}\) we say that \(g\) is asymptotically bounded by \(f\).
+        \item \(\littleO{f} = \set<g : \Naturals \to \Naturals>{ \forall \epsilon > 0, \exists N \in \Naturals\; \suchThat \; \forall n \geq N, \; \func{g}{n} \leq \epsilon \func{f}{n}}\). When \(g \in \littleO{f}\) we say that \(g\) is asymptotically dominated above by \(f\).
+        \item  \(\littleOmega{f} = \set<g : \Naturals \to \Naturals>{ \forall k > 0, \exists N \in \Naturals\; \suchThat \; \forall n \geq N, \;  \func{g}{n} \geq k \func{f}{n}}\). When \(g \in \littleOmega{f}\) we say that \(g\) is asymptotically dominated above by \(f\).
+    \end{itemize}
+    In our treatment of time, we typically use the big-\(O\) notation, since when an algorithm with an efficient upperbound can be considered efficient, even though, its exact time function might not be efficient. 
+
+    For practical and historical reasons, the class of polynomial functions are considered efficient. Thus, an algorithm that has polynomially bounded above is consider efficient.
+\end{enumerate}
+
+\subsection{Accptors vs Deciders}
+So far we have considered \(\Time_M\) for when \(M\) is an acceptor. Ofcourse, this is fine since every decider is an acceptor. However, when we \(M\) a decider, then the reject states shall also be considered. One way to amend the definition of time for deciders is 
+\begin{align*}
+    \func{\Time_M}{w} &= \min_{\substack{\calP_w \text{ ends in}\\\text{a halting state}}}\func{\Time_M}{\calP_w} \\
+    \func{\Time_M}{n} &= \max_{\abs{w} = n } \func{\Time_M}{w}
+\end{align*}
+We can note that, when a decider \(M\) is viewed as an acceptor, its time complexity is lower than we it is viewed as a decider. This is because, it might be the case that rejecting is computationally more expensive than just accepting. For example, consider the following language,
+\begin{equation*}
+    L = \set<1^n>{n \text{ is composite}.}
+\end{equation*}
+and the algorithm \(M\) that does the following.
+\begin{enumerate}
+    \item Set \(m = 2\)
+    \item  Check if \(m\) divides \(n\) and it does accept immediately. Otherwise increment \(m\) by one and repeat.
+    \item When \(m = n\) reject.
+\end{enumerate}
+In this machine, we only reject when we can not accept. Moreover, rejecting requires us to divide \(n\) by all the numbers between \(2\) and \(n-1\), whereas, to accept \(n\) we only divide until we find the first smallest prime divisor of \(n\) which is substantially smaller than \(n\).
+
+One way to reconcile these two definitions is to argue that an acceptor with a time function is equivalent to a decider. Suppose an acceptor \(M\) has an asymptotic upperbound \(f\) on its time complexity. Then, we can construct another machine that first computes \(\func{f}{n}\), then works exactly like \(M\) for \(\func{f}{n}\) clocks. Although this construction might have signficant overheads, we have other constructions -- discussed in the next section-- with negligible overhead which does not affect the time complexity of the machine. However, even with in those construction, the new machine is not a decider since \(M\) may reject even for strings in its language. 
+
+As a result, the time definitions for acceptors and deciders seem to be irreconcilable. 
+\section{Simulation}
+Throughout this section we argue that the standard Turing machine is good model for computation as it can efficiently simulate all other Turing machine models. 
+\begin{definition}
+    A single-tape Turing machine \(M = (\Sigma = \set{0,1},\Gamma=\set{0,1,\blankSymbol},\delta,q_0,q_{\acc}, q_{\rej})\) is called an standard Turing machine. We denote the class of all standard Turing machines by \(\calM\).
+\end{definition}
+
+\begin{theorem}[Alphabet expansion]
+    Suppose \(M\) is a single-tape binary Turing machine with tape alphabet \(\Gamma\) and time complexity \(\bigO{\func{T}{n}}\). There exists a standard Turing machine that accepts the same language in time complexity of \(\bigO{n^2 + \func{T}{n}}\).
+\end{theorem}
+
+\begin{proof}
+    Consider a coding \(\sigma : \Gamma \to \set{0,1}^{\ast}\) such that for all \(x \in \Gamma\), \(\func{\sigma}{x}\) and has length \(\lg \abs{\Gamma}\). Consider a standard Turing machine \(N\) that does the following.
+    \begin{enumerate}
+        \item First \(N\) computes the coding of the input such that the content of tape becomes \(w \blankSymbol \func{\sigma}{w}\) with the head of machine being on the top of the first symbol of \(\func{\sigma}{w}\). This steps takes \(\bigO{n^2}\) steps.
+        \item For each step of \(M\), \(N\) must read \(\lg \abs{\Gamma}\) characters, write another \(\lg \abs{\Gamma}\) characters, and then move to left or right. Suppose \(N\)'s head is always at the leftmost character of the code. Thus, it read \(\lg \abs{\Gamma}\) and moves to rightmost character of the code. Then, it writes from there (backwards) in \(\lg \abs{\Gamma}\) steps. Then, to move to left or right it must move its head another \(\lg \abs{\Gamma}\) steps. In total, each step on \(M\), takes \(3 \lg \abs{\Gamma} = \bigO{1}\) steps in \(N\).
+    \end{enumerate}
+    Therefore, \(N\) simulates \(M\) in \(\bigO{n^2 + \func{T}{n}}\).
+\end{proof}
+
+\begin{remark}
+    Note that, by the above construction we can show that there exists a standard Turing mahcine that accepts \(\func{\sigma}{L}\) in \(\bigO{\func{T}{n}}\).
+\end{remark}
+
+\subsection{Universal machine}
+Turing machines are assumed to be the ultimate computing machines, as it seems that every algorithm can be implemented on Turing machine. Ofcourse, we can think of an algorithm that takes in a description of another algorithm with an input and runs that algorithm on the input. For example, interpreters are programs that take in a code with an input and execute the code with the input. Thus, is there a Turing machine that can simulate all other Turing machines? Consider an encoding of Turing machines \(T\) into binary strings \(\angleBracket{T}\), then we are asking if \(\univ\) as defined below is Turing recognizable.
+\begin{equation*}
+    \univ = \set< \bracket{\angleBracket{T},w}>{ T \text{ is a standart Turing machine and it accepts } w \in \set{0,1}^{\ast}}
+\end{equation*}
+For the sake of simplicity, suppose \(\bracket{\angleBracket{T},w} = \angleBracket{T} \# w\) is given as input. In essence, the Turing machine \(U\) for \(\univ\) does the following.
+
+\begin{enumerate}
+    \item \(U\) goes over the input until it reaches \(\#\) and then copies down the rest on the second tape. Thus, the content of second tape is \(\#w\).
+    \item Suppose the encoding is such that the binary of representation of \(q_0,q_{\acc}, q_{\rej}\) are easily (construct such a representation as an exercise). Copy the binary representation of \(q_0\) on the third tape. 
+    \item Based on the content of second tape which corresponds to the tape of \(T\) and the third tape which is the state of \(T\), find the correct action from the description of \(T\) -- use nondeterminism. 
+    \item \(T\) halts whenever its state is \(q_{\acc}\) or \(q_{\rej}\). After each move, check if the state of the third is equal to either halting state or not.
+\end{enumerate}
+Is this an efficient universal machine?
+
+\begin{enumerate}
+    \item The first step takes \(\bigO{\angleBracket{T} + \abs{w}}\).
+    \item The second step takes \(\bigO{\angleBracket{T}}\) as only need to go over the representation of \(T\) and copy \(q_0\).
+    \item Each time we execute the third step, we read the character after \(\#\) on the second tape, the state on third tape, and nondeterministically find corresponding move on the representation of \(T\). Then, we just apply the transition on the second and third tape. This is done in the order of \(\bigO{\angleBracket{T}}\). 
+    \item We do third step until \(T\) halts on \(w\). If \(T\) halts in \(t\) steps on \(w\), then the overall time complexity is 
+    \begin{equation*}
+        \bigO{t \angleBracket{T} + \abs{w} } = \bigO{t + \abs{w}}
+    \end{equation*}
+\end{enumerate}
+
+\section{Time constructiblity}
+When designing a Turing machine with some time constraint \(\func{t}{n}\), we ought to make sure the Turing machine halts after \(\func{t}{n}\) or \(\bigO{\func{t}{n}}\) clocks. 
+
+The first way to achieve this is to devise a Turing machine that given \(1^n\) runs for \(\func{t}{n}\) steps and then halts. We can then equip our original Turing machine with this timer so that it halts in \(\func{t}{n}\) clocks.
+\begin{definition}
+    A \(t\)-timer is a multi-tape Turing machine that given any \(w\) with lenght \(n\), halts exactly after \(\func{t}{n}\) clocks. A function \(t:\Naturals \to \Naturals\) is said to be time constructible if there exists a \(t\)-timer. 
+\end{definition}
+
+\begin{example}
+    The function \(\func{t}{n} = n\) is time constructible. The machine simply reads the input until it reaches a blank symbol and then halts.
+    \begin{center}
+        \begin{tikzpicture}
+            \node[state, initial,initial text = ] (q0) {$q_0$};
+            \draw
+            (q0) edge[loop above] node{$ 1 \to 1, R $} (q0);
+        \end{tikzpicture}
+    \end{center}
+\end{example}
+
+\begin{example}
+    The function \(\func{t}{n} = n^2\) is time constructible. The machine starts with an empty second tape and works as follows.
+    \begin{center}
+        \begin{tikzpicture}
+            \node[state, initial,initial text = ] (q0) {$q_0$};
+            \node[state] (q1) [right of = q0] {$q_1$};
+            \draw
+            (q0) edge[loop above] node{$\substack{1 \to 1, S \\ 1 \to 1, L}$} (q0)
+            (q0) edge[bend left] node[above]{$\substack{1 \to 1, R \\ \blankSymbol\to \blankSymbol, R}$} (q1)
+            (q1) edge[loop above] node{$\substack{1 \to 1, S \\ 1 \to 1, R}$} (q0)
+            (q1) edge[bend left] node[below]{$\substack{1 \to 1, S \\ \blankSymbol\to 1, S}$} (q0);
+        \end{tikzpicture}
+    \end{center}
+\end{example}
+
+\begin{remark}
+    We claim that we can transform the unary the representation of \(n\) into its binary representation and vice versa in \(\bigO{n}\) steps. This is done by a 2-tape Turing machine. To map binary to unary, the Turing machine decrements the binary number and add a \(1\) in the output tape. To map unary to binary, the Turing machine removes a \(1\) and increments the binary representation on the output tape.
+\end{remark}
+
+\begin{definition}
+    A function \(f: \Naturals \to \Naturals\) is computable if there exists a multi-tape Turing machine that on input \(1^{n}\) computes \(1^{\func{f}{n}}\) in the output tape. Moreover, \(f\) is said to be in-time computable if a Turing machine exists than can compute it in \(\bigO{\func{f}{n}}\) steps. 
+\end{definition}
+
+In the rest of this section we present the Kobayashi's proof of equivalency of time constructible functions and in-time computable functions.
+
+Let \(\calF_0\) be class of all natural functions, \(\calF_1\) be the class of natural function \(f\) such that \(\func{f}{n} \geq n\), lastly let \(\calF_2\) be the class of functions in \(\calF_1\) that \(\exists \epsilon > 0 \; \suchThat\; \forall n,\; \func{f}{n} \geq (1+\epsilon) n\). 
+
+
+\begin{theorem}
+    If both \(f_1 + f_2\) and \(f_2\) are time constructible, \(f_1 \in \calF_1\), and 
+    \begin{equation*}
+        \exists \epsilon > 0 \; \suchThat \; \forall n,\; \func{f_1}{n} \geq \epsilon \func{f_2}{n} + (1+\epsilon)n
+    \end{equation*}
+    Then, \(f_1\) is time constructible.
+\end{theorem}
+
+
+\begin{proof}
+    Suppose \(M_1\) and \(M_2\) are the timers for \(f_1+f_2\) and \(f_2\) both with same alphabet \(\Gamma\). Consider the timer \(M = \func{M}{k}\) with integer parameters \(k\) with \(k > 7\) that does the following.
+    \begin{enumerate}
+        \item It is given an input of length \(n\).
+        \item On the second tape it compress the input \(n\) by a factor of \(k\), i.e. each \(k\) symbol is represented in 1 symbol, for the simulation of \(M_1\). The resulting string is of length \(\ceil{\frac{n}{k}}\). Also, it puts a dot on the last character to represnet the head tape, the machines will be working ``backwards''.
+        \item On the third tape it compress the input \(n\) by a factor of \(l = k-7\) for the simulation of \(M_2\). The resulting string is of length \(\ceil{\frac{n}{k}}\). 
+        \item On the fourth tape it writes another string of length  \(\ceil{\frac{n}{l}}\). Here the machine learn the value \(i\) such that \(\ceil{\frac{n}{l}} = \frac{n+i}{l}\)
+        \item The last three steps can be done simultaneously in \(n +1\) steps, since it needs to read \(n\) charcters and the first blank symbol. Moreover, \(M\) can compute \(k\) steps on \(M_1\) and \(l\) steps in \(M_2\) in seven steps. Suppose the head of each tape is on the dotted character. \(M\) read the adjecents cells of each tape -- by going left, right,right--, then it repleces the content of these three cells -- going right,right--, and lastly puts the head on the correct place, i.e. the dotted character, which takes at most 2 steps (if it less then it just stays).
+        \item \(M\) simulates \(M_1\) and \(M_2\) until \(M_2\) halts. This requires \(\ceil{\frac{\func{f_2}{n}}{l}}\) clocks. Here the machine learn the value \(j\) such that \(\ceil{\frac{\func{f_2}{n}}{l}} = \frac{\func{f_2}{n}+j}{l}\)
+        \item  Then, \(M\) simulates \(M_1\) for \(\ceil{\frac{n}{l}}+1\) steps. The third taped is used as counter for here.
+        \item Then, \(M\) simulates \(M_1\) until it halts, where in each step it only simulates one step of \(M_1\).
+        \item Finally, \(M\) counts upto \(i+j+k-8\) and halts. 
+    \end{enumerate}
+    The total number of steps is as follows.
+    \begin{align*}
+        &n+1 + 7\ceil{\frac{\func{f_2}{n}}{l}} + 7\ceil{\frac{n}{l}}+ 7 + \bracket{\func{f_2}{n} + \func{f_1}{n} - k\ceil{\frac{\func{f_2}{n}}{l}} - k\ceil{\frac{n}{l}} - k} + i+j+k-8 \\
+        &= \func{f_1}{n} + \func{f_2}{n} + (7-k)\ceil{\frac{\func{f_2}{n}}{l}} + n + (7-k)\ceil{\frac{n}{l}} + i + j\\
+        &= \func{f_1}{n} 
+    \end{align*}
+    This construction only requires that 
+    \begin{equation*}
+        \func{f_2}{n} + \func{f_1}{n} - k\ceil{\frac{\func{f_2}{n}}{l}} - k\ceil{\frac{n}{l}} - k \geq 0 
+    \end{equation*}
+    Note that, 
+    \begin{align*}
+        &\func{f_2}{n} + \func{f_1}{n} - k\ceil{\frac{\func{f_2}{n}}{l}} - k\ceil{\frac{n}{l}} - k\\
+        &= \func{f_1}{n} - \dfrac{k-l}{l}\func{f_2}{n} - \dfrac{k}{l}n - k\dfrac{i+j+l}{l}\\
+        &\geq \func{f_1}{n} - \dfrac{k-l}{l}\func{f_2}{n} - \dfrac{k}{l}n - 3k \\
+        &\geq (1+\epsilon)(\func{f_2}{n} + n) - \dfrac{k}{l} (\func{f_2}{n} + n) - 3k\\
+        &= \bracket{1+\epsilon - \dfrac{k}{k-7}}(\func{f_2}{n} + n) -3k \geq \dfrac{\epsilon}{2}n - 3k
+    \end{align*}
+    for \(k \geq 7(1+ 2\epsilon^{-1})\). And for \(n\geq 6k\epsilon^{-1}\) the value is positive. Thus, we have constructed a timer for \(\func{f_1}{n}\) for \(n\geq N\) some sufficiently large \(N\). Note that since \(\func{f_1}{n} \geq n\) for all \(n\), then we can build a timer \(M'\) such that,
+    \begin{enumerate}
+        \item It works like \(M\), however, in the first step it also determines if the length of the input exceeds \(N\). 
+        \item If it does it continues with \(M\).
+        \item If it does not, it clocks for exactly \(n - \func{f_1}{n}\).
+    \end{enumerate} 
+\end{proof}
+
+\begin{theorem}
+    For \(f \in \calF_2\), \(f\) is time constructible if and only if \(f\) is in-time computable.
+\end{theorem}
+
+\begin{proof}
+    Suppose \(f\) is time constructible. Then, construct a Turing machine such that it simulates the \(f\)-timers and adds a \(1\) on the output tape in each clock. 
+
+    Now, suppose \(f\) is in-time computable and the Turing machine \(M\) computes \(f\) in \(\bigO{f}\). Let \(N_1\) be a timer such that, it runs \(M\) until it halts, and \(N_2\) be a timer that run \(M\) and then goes over the output tape which takes exactly \(1^{\func{f}{n}}\) clocks. Suppose \(N_1\) is a \(g\)-timer. Then, \(g\) and \(g + f\) are both time constructible. Moreover, \(g \leq c f\) for some constant \(c\). Since \(f \in \calF_2\) thus \(f \in \calF_1\) as well. Lastly, for sufficiently small \(\delta > 0\)
+    \begin{equation*}
+        \delta \func{g}{n} + (1+\delta) n \leq \delta c \func{f}{n} + \dfrac{1+\delta}{1 + \epsilon} \func{f}{n} \leq \func{f}{n}
+    \end{equation*}
+\end{proof}
+
+\section{\(\compClass{P}\) vs \(\compClass{NP}\)}
+\begin{definition}
+    The class of all polynomially bounded standard Turing machines is denoted by \(\calM_{\poly}\).
+\end{definition}
+
+\begin{definition}
+    The class \(\compClass{P}\) is the class of languages that have polynomially bounded standard deterministic decider, \(\compClass{P} = \func{\DD}{\calM_{\poly}}\). The class \(\compClass{NP}\) is the class of languages that have polynomially bounded standard nondeterministic acceptor, \(\compClass{NP} = \func{\NA}{\calM_{\poly}}\). 
+\end{definition}
+
+Let \(t: \Naturals \to \Naturals\) be a time-constructible function and define \(\calM_t\) to be the class of standard Turing machines that are equipped with a \(t\)-timer. That is, on input \(w\) of length \(n\), after \(\func{t}{n}\) clocks, the machine halts and rejects the input. 
+
+\begin{theorem}
+    \(\compClass{P} = \bigcup_{p \text{ is poly}} \func{\DD}{\calM_p}\) and  \(\compClass{NP} = \bigcup_{p \text{ is poly}} \func{\NA}{\calM_p}\).
+\end{theorem}
+
+By the virtue of the above's theorem, we can define \(\compClass{P}\) and \(\compClass{NP}\) in terms of standard Turing machines that always halt, i.e. do not loop.

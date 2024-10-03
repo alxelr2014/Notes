@@ -1,0 +1,26 @@
+\chapter{Introduction}
+some stuff on propositional logic, induction, well-formed formula. -- need to be completed.
+For all proposition \(A\) we can define the set of all its sub-proposition, \(\subprop {A}\), and it can be defined inductively. Order of operation. A meaning is a function \(I : \mathrm{PR} \to \set{0,1}\) such that;
+\begin{enumerate}
+    \item \(\func{I}{\perp} = 0 \).
+    \item \(\func{I}{A \land B} = \func{I}{A} \func{I}{B}\).
+    \item \(\func{I}{\neg A} = 1 - \func{I}{A}\). (a book on negation)
+    \item \(\func{I}{A \lor B} = \max \set{\func{I}{A}, \func{I}{B}}\).
+    \item \(\func{I}{A \to B} = \func{I}{\neg A \lor B}\). A point of contention among logician.
+\end{enumerate}
+An evaluation is a meaning function restricted to the atomes, \(\nu : P \to \set{0,1}\).
+
+\begin{theorem}
+    For each evaluation function there is unique extension to a meaning function.
+\end{theorem}
+
+\(I \models A\) if \(\func{I}{A} = 1\). \(\models A\) means \(I \models A\) for all \(I\), a tautology. \(\not\models A\) if \(\func{I}{A} = 0\) for all \(I\). If \(\Gamma\) is a subset of proposition then, \(\Gamma \models A\) when for all \(I \models \Gamma\) then \(I \models A\).
+
+some propositions regarding meaning and evaluation.
+
+\(A[P|b]\)
+ substituition  theorem.
+ \section{Inference rules}
+ -- Hilbert's method
+ \subsection{Natural Deduction}
+ Everything is a rule. Two types of rules, introduction rules and elimination rules.

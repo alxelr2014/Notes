@@ -1,0 +1,35 @@
+\chapter{\(\compClass{P}\) vs \(\compClass{NP}\), and \(\compClass{NP}\)-completeness} 
+In order to determine whether \(\compClass{P} = \compClass{NP}\), one may try to emulate the proof of \(\compClass{r} \neq \compClass{re}\). Firstly, we defined a notion hardness with many-to-one reduction. Then, we find a hardess problem in \(\compClass{r}\), the halting problem. Lastly, we showed that this problem can not be in \(\compClass{re}\).
+
+\begin{definition}
+    A language \(L\) is polynomial-time reducible \(K\), denoted by \(L \leq_p K\) if there exists a polynomial-time computable function \(f: \Sigma^{\ast} \to \Sigma^{\ast}\) such that \(w \in L \iff \func{f}{w} \in K\).
+\end{definition}
+
+\begin{definition}
+    A language \(L\) is said to be \(\compClass{NP}\)-hard, if for all \(K \in \compClass{NP}\), \(K \leq_p L\). If \(L \in \compClass{NP}\), then \(L\) is called \(\compClass{NP}\)-complete.
+\end{definition}
+
+Consider this modified version of the Halting problem.
+\begin{equation*}
+    H_{np} = \set<\angleBracket{T,w,1^t}>{w \text{ is accepted by } T \text{ in at most } t \text{ clocks.}}
+\end{equation*}
+
+\begin{theorem}
+    \(H_{np}\) is \(\compClass{NP}\)-hard.
+\end{theorem}
+
+\begin{proof}
+    Suppose \(L\) is in \(\compClass{NP}\). As a consequence, there exists a polynomial \(p\) and Turing machine \(T\) such that \(T\)'s time is bounded by \(p\) and \(T\) accepts \(L\). Moreover, there exists a function \(f_p\) such that \(\func{f_p}{w} = \angleBracket{T,w,1^{\func{p}{\abs{w}}}}\). This encoding can be computed in polynomial time? and obviously \(w \in L \iff \func{f_p}{w} \in H_{np}\). Hence, \(L \leq_p H_{np}\).
+\end{proof}
+
+\begin{theorem}
+    \(H_{np}\) is \(\compClass{NP}\)-complete. 
+\end{theorem}
+
+\begin{proof}
+    The nondeterministic acceptor for \(H_{np}\) is the universal machine that also counts down from \(t\) to \(0\). The time complexity of the universal machine is 
+    \begin{equation*}
+        \bigO{t\angleBracket{T} + \abs{w}} 
+    \end{equation*}
+    which is polynomial in size of the input \(\abs{\angleBracket{T}} + \abs{w} + t\).
+\end{proof}
