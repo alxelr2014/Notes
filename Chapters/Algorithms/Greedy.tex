@@ -1,0 +1,26 @@
+\chapter{Greedy}
+Greedy proofs
+\section*{Interval scheduling}
+Given a set of intervals in form of \((s_i,f_i)\), find the maximum subset of non-overlapping these intervals. Fist sort by \(f_i\) and each step pick the interval with least \(f\), that does not overlap. 
+\lstinputlisting[style = cpp-code, firstline = 7, lastline = 17,linewidth = \textwidth]{Code/Greedy/greedy.cpp}
+We prove the optimality of this algorithm. Let \(G\) be the solution of the greedy algorithm and \(O\) be an optimal solution. Suppose both are ordered, i.e. \(s_i^O < s_{i+1}^O\) and \(s_i^G < s_{i+1}^G\). Then, with induction we can show that \(f_i^G \leq f_i^O\). Let \(k = \abs{G}\) and \(m = \abs{O}\), if \(k < m\), since \(f_k^O \leq f_k^O\), then the algorithm would have added the remaining intervals of \(O\) as they are compatible with \((s_k^G, f_k^G)\). We thus arrive at a contradiction hence, \(k = m\).
+\subsection*{Interval Partitioning}
+Given a set of intervals in form of \((s_i,f_i)\), find the minimum number of partitions such that each partition is a set of non-overlapping these intervals. The minimum number is at least the size of the maximum subset with non-empty intersection. If we sort based on \(s\), and greedily assign the least unused label, no request would be unlabeled and hence the algorithm produces the optimal result.
+
+We can represent this problem, by a graph where each vertex corresponds to a request and there is an edge between two vertex if the corresponding intervals overlap. The minimum number of partitions is equivalent to minimum number of colors needed to color the graph such that no two neighbouring are of the same color. Even though, finding the chromatic number of a graph is NP-hard, it can be shown that there exists a vertex ordering such that the greedy algorithm would produces the optimal result.
+\subsection*{Minimize Lateness}
+Given \(m\) identical resources and \(n\) requests \(\set{(t_i,d_i)}\), where \(t_i\) denotes the time required to complete the task and \(d_i\) is its deadline, assign the requests to resources such that the overall lateness \(l_i = f_i - d_i\) is minimized. When \(m = 1\) and we want to minimize the maximum lateness, the best strategy is pick the request that is due sooner. Arguing that swapping request \(i\) with \(j\) when \(d_i < d_j\) doesn't affect the optimality of the solution and all solutions with no inversion and idle time have the same lateness.
+\subsection*{Optimal Caching}
+
+\section*{Coin Changing}
+Given a set of denomination \(v_1, \dots, v_k\), present a way to break \(c\) into the given coins that minimizes the number of coins. A canonical coin system, is coin system that the greedy algorithm always outputs the optimal value. 
+\section*{Graph algorithms}
+\subsection*{Shortest paths}
+\subsection*{Minimum Spanning Tree}
+\subsection*{Clustering}
+\section*{Huffman Code}
+\begin{exercise}
+
+\item Suppose the coins are in form of \(c^0, c^1, \dots, c^k\) where \(c > 1\) and \(k \geq 1\). Show that this coin system is canonical.
+\item Consider a weighted graph \(G=(V,E)\) such that \(\abs{E} \leq \abs{V} + 8\). Suppose the weights are distinct, design an algorithm that finds the minimum spanning tree of this graph in \(\bigO{n}\) time.
+\end{exercise}

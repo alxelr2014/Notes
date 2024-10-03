@@ -1,0 +1,113 @@
+\chapter{Network Flow}
+A match \(M \subset E\) in a graph \(G = (V,E)\) is a set of edges uch that each node appears at most once. In a perfect matching each node appears exactly once. In a bipartite graph, there is a perfect matching if and only if the number of vertices in each side are equal. A problem is to find the largest matching in a bipartite graph.
+\section{Flow network and Maximum cut}
+\begin{definition}
+    Flow network is directed graph \(G\) with 
+\begin{enumerate}
+    \item each edge \(e\) has non-negative capacity \(\func{c}{e}\).
+    \item There is a single source node \(s \in V\).
+    \item There is a single sink node \(t \in V\).
+\end{enumerate}
+The other nodes are called internal nodes.
+\end{definition}
+\begin{definition}
+    An \(s-t\) flow is a function \(f : E \to \Reals^+\) such that 
+    \begin{enumerate}
+        \item for all edges \(e \in E\), \(0 \leq \func{f}{e} \leq \func{c}{e}\).
+        \item for all vertices \(v \neq s,t\)
+        \begin{equation*}
+            \sum_{e \text{ into } v} \func{f}{e} = \sum_{e \text{ out of } v} \func{f}{e}
+        \end{equation*}
+    \end{enumerate}
+    The value of the flow is defined by 
+    \begin{equation*}
+        \func{v}{f} = \sum_{e  \text{ out of } s} \func{f}{e} = \func{f^{out}}{s} = \func{f^{in}}{t}
+    \end{equation*}
+    More generally, for any \(S \subset V\)
+    \begin{align*}
+        \func{f^{in}}{S} &= \sum_{e \text{ into } S} \func{f}{e} & \func{f^{out}}{S} &=  \sum_{e \text{ out of } S} \func{f}{e}
+    \end{align*}
+\end{definition}
+The problem is given a flow network, find the maximum flow. 
+\begin{definition}
+    Given flow network \(G\) and flow \(f\) on \(G\), the residual graph \(G_f\) is 
+    \begin{enumerate}
+        \item the nodes are the same as \(G\).
+        \item for all \(e =(u,v) \in E\) which \(\func{f}{e} < \func{c}{e}\) there is an edge from \(u\) to \(v\) with capacity \(\func{c}{e}  - \func{f}{e}\). These are called forward edges.
+        \item for all \(e =(u,v) \in E\) which \(0 < \func{f}{e}\) there is an edge from \(v\) to \(u\) with capacity \(\func{f}{e}\). These are called backward edges.
+    \end{enumerate}
+\end{definition}
+The bottleneck of a path \(P\) in \(G_f\) is defined as 
+\begin{equation*}
+    \func{bottleneck}{P,f} = \min_{e \in P} \func{c_f}{e}
+\end{equation*}
+where \(\func{c_f}{e}\) is the residual capacity.
+Suppose \(P\) is a \(s-t\) path in \(G_f\) that visits each node at most once.
+\begin{algorithm}
+    \DontPrintSemicolon
+    \(b = \func{bottleneck}{P,f}\)\; 
+    \For{\(e = (u,v) \in P\)}{
+        \If{\(e\) is a forward edge}{
+            \(\func{f'}{e} = \func{f}{e} + b\)\;
+        }
+        \If{\(e\) is a backward edge}{
+            \(\func{f'}{(v,u)} = \func{f}{(v,u)} - b\)\;
+        }
+    }
+    \Return{\(f'\)}
+    \caption{Augment\((P,f)\)}
+\end{algorithm}
+
+\begin{theorem}
+    Augment\((P,f)\) is a flow in \(G\). 
+\end{theorem}
+The Ford-Fulkerson algorithm for maximum is given below.
+\begin{algorithm}
+    \(f \equiv 0\)\; 
+    \While{there is an \(s-t\) path \(P\) in \(G_f\)}{
+        \(f' = \)Augment\((P,f)\)\;
+        \(f \gets f'\)\;
+        update \(G_f\)\; 
+    }
+    \Return{\(f\)}
+    \caption{Maxflow}
+\end{algorithm}
+Let assume that each node has at least one incident edge.
+\begin{proposition}
+    Assuming capacities are integers, then at every step of the algorithm, the flow values and the residual capacities are integers. Moreover, \(\func{v}{f'} = \func{v}{f} + \func{bottleneck}{P,f}\) and hence \(\func{v}{f'} \geq \func{v}{f}\).
+\end{proposition}
+
+\begin{proposition}
+    Let \(v\) be the value of maximum flow. Then, \(v \leq \sum_{e \text{ out of} s} c_e = C\). 
+\end{proposition}
+
+\begin{proposition}
+    The complexity of the algorithm is \(\bigO{mC}\).
+\end{proposition}
+
+\begin{definition}
+    An \(s-t\) cut \((A,B)\) is such that \(s \in A\) and \(t \in B\). The capacity of a cut \((A,B)\) is given by 
+    \begin{equation*}
+        \func{c}{A,B} = \sum_{e \text{ out of } A} c_e
+    \end{equation*}
+    A minimum cut is a cut with minimum capacity.
+\end{definition}
+\begin{definition}
+    For any flow \(f\) and any cut \((A,B)\) the flow of cut is 
+    \begin{equation*}
+        \func{f}{A,B}  = \sum_{e \text{ out of } A} \func{f}{e} - \sum_{e \text{ into } A} \func{f}{e}
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    For any flow \(f\) and any cut \((A,B)\) the flow of cut 
+    \begin{enumerate}
+        \item \(\func{v}{f} = \func{f^{out}}{A} - \func{f^{in}}{A} = \func{f}{A,B}\).
+        \item \(\func{v}{f} \leq \func{c}{A,B}\).
+    \end{enumerate}
+\end{proposition}
+
+\begin{lemma}
+    A flow \(f\) is maximum if there exists a cut \((A,B)\) such that \(\func{v}{f} = \func{c}{A,B}\) and \((A,B)\) is minimum cut. Also there always exist such matching.
+\end{lemma}
+

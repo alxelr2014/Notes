@@ -1,0 +1,178 @@
+\chapter{Graph Algorithms}
+\section*{Traversal and connectivity}
+\subsection*{BFS}
+\subsection*{DFS}
+\subsection*{Topological sort}
+\subsection*{Strongly connected components}
+First, run a DFS to compute the finishing times. Then, compute \(G^T\) and run a DFS on it in the order of decreasing finishing times. Output the vertices of each tree in the depth first formed formed in the last step as a separate SCC.
+\begin{corollary}
+    Strongly connected components form a directed acyclic graph.
+\end{corollary}
+\section*{Minimum spanning tree}
+\begin{lemma}[Cut property]
+    If \(e\) is the minimum cost edge \(e\) connecting \(S \subset V\) and \(V- S\), then all minimum spanning trees contain \(e\).
+\end{lemma}
+
+\begin{lemma}[Cycle property]
+    For any cycle \(C\), the maximum edge is not in any minimum spanning tree. Moreover, any edge that is not the maximum edge of a cycle is in some minimum spanning tree.
+\end{lemma}
+
+\subsection*{Kruskal}
+Sort the edge list \(E\) by their weight. At each step add the smallest \(e\) that does not create loop. To check for loops in an efficient manner, use a union-find disjoint sets data structure. Find is done in \(\bigO{\lg n}\) and union in \(\bigO{\lg n}\) as well.
+\subsection*{Prim}
+Let \(S = \set{s}\) and at each step add the least cost edge \(e\) between \(S\) and \(V - S\).
+\subsection*{Reverse-delete}
+Sort the edge list \(E\) by their weight. At each step remove the largest \(e\) that does not disconnect the graph.
+\subsection*{Clustering}
+A set \(U\) of \(n\) objects labeled \(p_1, \dots, p_n\) with a distance function \(d\) is a given. The problem is to divide \(U\) into \(k\) clusters such that minimum distance between two clusters is maximized. We can achieve such clustering by running the Kruskal's algorithm until there are \(k\) components.
+\section*{Single source shortest path}
+\begin{lemma}
+    Subpaths of the shortest paths are shortest paths.
+\end{lemma}
+Assume there is no negative cycle in the graph. Shortest path may only have \(0\)-cycles. We can remove them or just assume that shortest path are simple paths.
+
+Let \(s\) be the source node and \(\func{\delta}{s,v}\) be the shortest distance between \(s\) and \(v \in V\). 
+
+\begin{algorithm}
+    \DontPrintSemicolon
+    \ForEach{\(v \in V\)}{
+        \(v \cdot \pi = NIL\)\; 
+        \(v \cdot d = \infty\)\;
+    }
+    \(s \cdot d = 0\)
+    \caption{Initialize}
+\end{algorithm}
+
+
+\begin{algorithm}
+    \DontPrintSemicolon
+    \SetKwInOut{Input}{Input}
+    \Input{the edge \((u,v)\)}
+    \If{\(v\cdot d > u \cdot d + \func{w}{u,v}\)}{
+        \(v \cdot d = u \cdot d + \func{w}{u,v}\)\;
+        \(v \cdot \pi = u\)\;
+    }
+    \caption{Relax}
+\end{algorithm}
+
+\begin{description}
+    \item[Triangle inequality] for all edges \((u,v) \in E\), \(\func{\delta}{s,v} \leq \func{\delta}{s,u} + \func{w}{u,v}\). 
+    \item[Upperbound] \(v\cdot d \geq \func{\delta}{s,v}\) and once it achieves \(\func{\delta}{s,v}\) it never changes.
+    \item[No path] If there is no path from \(s\) to \(v\), \(v \cdot d = \func{\delta}{s,v} = \infty\)  always. 
+    \item[Convergence] If \(s \leadsto u \to v\) is the shortest path and if \(u\cdot d = \func{\delta}{s,u}\) at any time prior to relaxing the edge \((u,v)\), then \(v \cdot d = \func{\delta}{s,v}\) at all times after relaxing.
+    \item[Path relaxation property] If \(p = \angleBracket{v_0, \dots, v_k}\) is the shortest path from \(s = v_0\) to \(v_k\), and we relax the edges of \(P\) in order -- it does not matter if they are mixed with other edges or even mingled with themselve--, then \(v_k \cdot d = \func{\delta}{s,v_k}\).
+    \item[]  
+\end{description}
+\subsection*{Bellman-Ford}
+Edges may be negative. It detects negative cycles as well. 
+
+\begin{algorithm}
+    \DontPrintSemicolon
+    \SetKwInOut{Input}{Input}
+    Initialize\(()\)\;
+    \For{\(i = 1 \to \abs{V} - 1\)}{
+        \For{\((u,v) \in E\)}{
+            Relax\((u,v)\)\;
+        }
+    }
+    \tcc*{Detecting negative cycle}
+    \For{\((u,v) \in E\)}{
+            \If{\(v \cdot d > u \cdot d + \func{w}{u,v}\)}{
+                \Return{False}
+            }
+    }
+    \Return{True}
+    \caption{Bellman-Ford}
+\end{algorithm}
+After \(i_{\cardinalTH}\) pass, the shortest paths of length \(i\) are correct. Therefore, after \(\abs{V} - 1\) passes we should be done. If any more corrections are made, then there is a negative cycle. 
+
+For a DAG we can modify the algorithm to run in \(\bigO{\abs{V} + \abs{E}}\).
+\subsection*{Dijkstra}
+Let \(Q\) be a minimum priority queue that holds \((u,u \cdot d)\).
+\begin{algorithm}
+    \DontPrintSemicolon
+    \(Q = V\)\;
+    \While{\(Q\) is not empty}{
+        \(u\) = \(Q\cdot\)extract\_min()\;
+        \ForEach{\(v \in G\cdot Adj[u]\)}{
+            Relax\((u,v)\) and update \(Q\).\;
+        }
+    }
+    \caption{Dijkstra}
+\end{algorithm}
+The algorithm outputs the correct result when the edges are non-negative.
+\section*{All pairs shortest path}
+Let \(\Pi\) be the predecessor matrix and \(G_{\pi,i}\) be the predecessor matrix for each vertex. Let \(l_{i,j}^{(m)}\) be the minimum path of length \(m\) between \(i\) and \(j\). 
+\begin{equation*}
+    l_{i,j}^{(0)} = \begin{cases}
+        0 & i = j \\
+        \infty & \mathrm{otherwise}
+    \end{cases}
+\end{equation*}
+and 
+\begin{equation*}
+    l_{i,j}^{(m)} = \min_{1 \leq k \leq n} \curlyBracket{l_{i,k}^{(m-1)} + \func{w}{k,j}}
+\end{equation*}
+Let \(L^{(m)} = \begin{bmatrix}
+    l_{i,j}^{(m)}
+\end{bmatrix}\), and set \(L^{(1)} = W\), then 
+\begin{algorithm}
+    \DontPrintSemicolon
+    \SetKwInOut{Input}{input}
+    \Input{L}
+    \For{\(i = 1 , \dots , n\)}{
+        \For{\(j = 1, \dots, n\)}{
+            \For{\(k = 1, \dots, n\)}{
+                \(l'_{i,j}\) = \(\min(l_{i,j}, l_{i,k} + w_{k,j} )\)\;
+            }
+        }
+    }
+    \Return{L'}
+    \caption{Expand Shortest Path}
+\end{algorithm}
+This algorithm is equivalent to matrix multiplication if swap \(\min\) with \(+\) and \(+\) with \(\cdot\) -- product--. Therefore, \(L^{(n-1)} = W^{n-1}\) which can be computed in \(\bigO{\lg n}\) steps instead of \(\bigO{n}\). Therefore, the complexity of finding all-pairs shortest path is \(\bigO{n^3 \lg n}\).
+\subsection*{Floyd-Warshall}
+Let \(d_{i,j}^{(k)}\) be the shortest path from \(i\) to \(j\) with its intermediate in \(\set{1,\dots, k}\). We set \(d_{i,j}^{(0)} = w_{i,j}\) and then
+\begin{equation*}
+    d_{i,j}^{(k)} = \min \curlyBracket{d_{i,j}^{(k-1)}, d_{i,k}^{(k-1)} + d_{k,j}^{(k-1)}}
+\end{equation*}
+for \(k \geq 1\). The Floyd-Warshall algorithm computes \(d_{i,j}^{(n)}\) from the above's recurrence equation in \(\bigO{\abs{V}^3}\). Finding the transitive closure of a relation \(R\) is one of the applications of the Floyd-Warshall algorithm.
+\subsection*{Johnson}
+The idea is to re-write the weight and make them all positive. Let \(\func{c}{v}\) be the cost of vertex \(v\) and let
+\begin{equation*}
+    \func{w'}{u,v} = \func{w}{u,v} + \func{c}{u} - \func{c}{v}
+\end{equation*}
+The shortest path does not change under \(w'\). Hence, if set \(\func{c}{v}\) such that \(\func{w'}{u,v}\) are all non-negative, we are able then to apply the Dijkstra's algorithm \(n\) times. The complexity of this algorithm is \(\bigO{nm + n^2 \lg n}\) which is better than Floyd-Warshall's algorithm for sparse graphs. 
+
+To do this, add a dummy vertex \(s\) to the graph and connect it to the rest of the nodes by \(0\)-weight edges. Let \(\func{c}{v} = \func{\delta}{s,v}\). Note that, by the triangle inequaly for any path \(u \to v\) we have 
+\begin{equation*}
+    \func{\delta}{s,v}\leq \func{\delta}{s,u} + \func{w}{u,v}
+\end{equation*}
+which implies 
+\begin{equation*}
+    \func{w'}{u,v} = \func{w}{u,v} + \func{c}{u} - \func{c}{v} \geq 0
+\end{equation*}
+To find the \(\func{c}{v}\) we need to a Bellman-Ford. 
+\begin{algorithm}
+    \DontPrintSemicolon
+    \(c\) = Bellamn-Ford\((G)\)\;
+    \For{\(u,v,w \in E\)}{
+        \(w = w + \func{c}{u} - \func{c}{v}\)\;
+    }
+    \ForEach{\(v \in V\)}{
+        \(\delta_v\) = Dijkstra\((v,G)\)\; 
+        \ForEach{\(u \in V\)}{
+            \(\func{\delta_v}{u} = \func{\delta_v}{u} - \func{c}{v} + \func{c}{u}\)\;
+        }
+    }
+    \caption{Johnson}
+\end{algorithm}
+The overall complexity is \(\bigO{\abs{V} \abs{E} + \abs{V} \lg \abs{V}}\).
+\begin{exercise}
+    \item Show that if an edge \((u,v)\) is contained in some minimum spanning tree, then it is a light edge crossing some cut of the graph.
+    \item Show that a graph has a unique minimum spanning tree if, for every cut of the graph, there is a unique light edge crossing the cut. Show that the converse is not true by giving a counterexample.
+    \item Given a graph \(G\) and a minimum spanning tree \(T\), suppose that we decrease the weight of one of the edges not in \(T\). Give an algorithm for finding the minimum spanning tree in the modified graph.
+    \item Suppose that all edge weights in a graph are integers in the range from \(1\) to \(V\). How fast can you make Kruskal/Prim's algorithm run? What if the edge weights are integers in the range from \(1\) to \(W\) for some constant \(W\). What if the weights are uniformly distributed on the interval \(\clop{0}{1}\).
+    \item Suppose that a graph \(G\) has a minimum spanning tree already computed. How quickly can we update the minimum spanning tree if we add a new vertex and incident edges to \(G\).
+    \item 
+\end{exercise}

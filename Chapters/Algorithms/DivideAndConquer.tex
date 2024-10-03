@@ -1,0 +1,33 @@
+\chapter{Divide and Conquer}
+\section*{Merge sort}
+Recursive form of merge sort, runs in \(\bigO{n \lg n}\).
+\lstinputlisting[style = cpp-code, firstline = 3, lastline = 31,linewidth = \textwidth]{Code/DivideAndConquer/dnc.cpp}
+
+\subsection*{Counting Inversions}
+Similar to merge sort, runs in \(\bigO{n \lg n}\).
+\lstinputlisting[style = cpp-code, firstline = 32, lastline = 62,linewidth = \textwidth]{Code/DivideAndConquer/dnc.cpp}
+\subsection*{Remove repeated elements}
+\lstinputlisting[style = cpp-code, firstline = 63, lastline = 94,linewidth = \textwidth]{Code/DivideAndConquer/dnc.cpp}
+\section*{Closest pair}
+Given \(n\) points in the plane, find the closest pair of points. Tricky merge part, it is done in \(\bigO{n}\).
+\lstinputlisting[style = cpp-code, firstline = 111, lastline = 191,linewidth = \textwidth]{Code/DivideAndConquer/dnc.cpp}
+\section*{Integer multiplication}
+\lstinputlisting[style = cpp-code, firstline = 97, lastline = 109,linewidth = \textwidth]{Code/DivideAndConquer/dnc.cpp}
+\subsection*{Matrix multiplication}
+\section*{Fast Fourier transform}
+\section*{Convex Hull}
+\begin{exercise}
+    \item There are two arrays of length \(n\). The queries we are allowed to make are in form of ``What is the \(k_{\cardinalTH}\) smallest value?''. Find the median of the \(2n\) values in \(\bigO{\lg n}\).
+    \item Given an array of numbers of length \(n\), determine whether there is a number that appears more that \(n/2\) times.
+    \item Given \(n\) distributions on the interval \(\clcl{0}{1}\), assign each distribution to an interval such that probability is at least \(1/n\). The intervals must be disjoint. Assume that the following operations are carried out in constant time.
+    \begin{enumerate}
+        \item \(\func{F_i}{a,b} = \func{F_i}{b} - \func{F_i}{a}\).
+        \item \(\func{P_i}{a,v} = b\) if \(\func{F_i}{a,b} = v\).
+    \end{enumerate}
+    \begin{solution}
+        We claim that an interval \(\clcl{a}{b}\) can be partitioned by \(k\) distribution such that the probability of each distribution over its partition is at least \(1/n\), if the probability each distribution over \(\clcl{a}{b}\) is at least \(k/n\). Induct over \(k\). Clearly true for \(k = 1\). Suppose it is true for \(k = m\), for \(k = m + 1\), first pick the least \(x\) such that the probability of one of the distribution over \(\clcl{a}{x}\) is at least \(1/n\). By removing \(\clcl{a}{x}\) and that distribution, we can apply our inductive assumption. 
+        
+        A \(\bigO{n \lg n}\) can constructed by sorting the medians of distributions, and divide the problem in half.
+    \end{solution}
+    \item Given \(n\) line \(l_i: a_i x + b_i\), \(i =1, \dots, n\) output the lines that at some points are higher than the rest of lines. 
+\end{exercise} 

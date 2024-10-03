@@ -1,0 +1,31 @@
+\chapter{Dynamic Programming}
+\section*{Weighted interval scheduling}
+Given a set of requests \(R_i = (s_i,f_i,w_i)\) find a non-overlapping subset of these requests with maximum weights.
+\lstinputlisting[style = cpp-code, firstline = 3, lastline = 38,linewidth = \textwidth]{Code/DynamicProgramming/dp.cpp}
+\section*{Segmented least squares}
+Given a set of points \(P = \set{(x_1,y_1), \dots, (x_n,y_n)}\) with \(x_1 < x_2 < \dots < x_n\) and a constant \(C > 0\), find a partition \(\calP = \set{P_1, P_2, \dots, P_k}\) such that each \(P_i\) is a set of consecutive points-- that is, \(P_i = \set{(x_{i_1}, y_{i_1}), (x_{i_1 + 1}, y_{i_1 + 1}) , \dots (x_{i_1 + j}, y_{i_1+j})}\) -- and the sum 
+\begin{equation*}
+    C \abs{\calP} + \sum_{i =1}^k \func{error}{P_i}
+\end{equation*}
+is minimized. The error function \(\func{error}{P_i}\) is the error made by the optimal line passing through \(P_i\)-- the least square method.
+\section*{Knapsack problem}
+\subsection*{Subset problem}
+Given a set of items \(\set{(i,w_i)}\) and a constant \(W\), find the maximum sum \(\sum w_i \leq W\).
+\subsection*{Knapsack problem}
+Given a set of items \(\set{(i,v_i, w_i)}\) and a constant \(W\), find the maximum sum \(\sum v_i\) subject to \(\sum w_i \leq W\).
+\section*{Graph algorithms}
+\subsection*{Negative cycle detection}
+\subsection*{Minimum cost path}
+\section*{Largest independent set}
+Given a tree, find the largest set of vertices that have no edge in common.
+\subsection*{Longest common subsequence}
+Given two sequences, find the longest common subsequence.
+\subsection*{Longest increasing subsequence}
+Given a sequence, find the longest increasing subsequence.
+\subsection*{Edit distance}
+Given two strings \(s,s'\), find the minimum number of operations needed to convert \(s\) to \(s'\). The permitted operations are 
+\begin{itemize}
+    \item Insert a character
+    \item Delete a character
+    \item Replace a character
+\end{itemize}
