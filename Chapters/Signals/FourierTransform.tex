@@ -1,0 +1,123 @@
+\chapter{Continuous Fourier Transform}
+\section{Fourier transform for a periodic function}
+Suppose \(\func{x}{t}\) with \(\func{x}{t} = 0\) for \(\abs{t} \geq T_1\) is a finite duration aperiodic signal. Make a periodic signal \(\func{\tilde{x}}{t}\) a from \(\func{x}{t}\) with period \(T \geq T_1\). Then \(\tilde{x}\) has a Fourier series 
+\begin{align*}
+    \func{\tilde{x}}{t} &= \sum_k a_k e^{jk\omega_0 t} \qquad \omega_0 = \dfrac{2\pi}{T}\\
+    a_k &= \dfrac{1}{T} \int_T \func{\tilde{x}}{t} e^{-jk\omega_0 t} \diffOperator t\\
+    &= \dfrac{1}{T} \int_{-T/2}^{T/2} \func{x}{t} e^{-jk\omega_0 t} \diffOperator t \\
+    &= \dfrac{1}{T} \int_{-\infty}^{\infty} \func{x}{t} e^{-jk\omega_0} \diffOperator t \\
+    &= \dfrac{1}{T} \func{X}{jk\omega_0}
+\end{align*}
+since for \(\abs{t} \leq T/2, \func{x}{t} = \func{\tilde{x}}{t}\) and for \(\abs{t} > T \geq T_1\), \(\func{x}{t} = 0\). \(\func{X}{j\omega}\) is the \textit{Fourier integral} or \textit{Fourier transform} of \(x\). 
+\begin{equation*}
+    \func{X}{j\omega} = \int_{-\infty}^{\infty} \func{x}{t} e^{-j\omega t} \diffOperator t
+\end{equation*}
+Therefore, 
+\begin{align*}
+    \func{\tilde{x}}{t} &= \sum_k \dfrac{1}{T} \func{X}{jk\omega_0} e^{jk\omega_0 t}\\
+    &= \dfrac{1}{2\pi} \sum_k \func{X}{jk\omega_0} e^{jk\omega_0 t} \omega_0
+\end{align*}
+as \(T \to \infty\), \(\tilde{x} \to x\) and \(\omega_0 \to 0\) hence 
+\begin{equation*}
+    \func{x}{t} = \dfrac{1}{2\pi} \int_{-\infty}^{\infty} \func{X}{j\omega} e^{j\omega t} \diffOperator \omega
+\end{equation*}
+For this to converge we need the Dirichlet condition, that is \(\func{x}{t}\) must be 
+\begin{enumerate}
+    \item absolutely integrable.
+    \item bounded variation.
+    \item finite number of finite discontinuities.
+\end{enumerate}
+
+For periodic signals the Fourier transform is a collection of impulse signals occuring at harmonic
+\begin{align*}
+    \func{x}{t} &= \dfrac{1}{2\pi} \int_{-\infty}^{\infty} \func{X}{j\omega} e^{j\omega t}\diffOperator \omega
+    \intertext{Let \(\func{X}{j\omega} = 2\pi \sum_{k = -\infty}^{\infty} a_k \func{\delta}{\omega - k\omega_0}\)}
+    &= \dfrac{1}{2\pi} \int_{-\infty}^{\infty} \bracket{2\pi \sum_{k = -\infty}^{\infty} a_k \func{\delta}{\omega - k\omega_0}} e^{j\omega t}\diffOperator \omega\\
+    &= \sum_{k = -\infty}^{\infty} a_k \int_{-\infty}^{\infty} \func{\delta}{\omega - k\omega_0} e^{j\omega t}\diffOperator \omega\\
+    &= \sum_{k = -\infty}^{\infty} a_k e^{jk \omega_0 t}
+\end{align*}
+or equivalently 
+\begin{align*}
+    \func{X}{j\omega} &= \int_{-\infty}^{\infty} \func{x}{t} e^{-j\omega t} \diffOperator t \\
+    &= \sum_{k = -\infty}^{\infty} a_k\int_{-\infty}^{\infty} e^{jk \omega_0 t} e^{-j\omega t} \diffOperator t \qquad \text{(distribution integra)}\\
+    &= \sum_{k = -\infty}^{\infty} a_k \func{\delta}{\omega - k \omega_0}
+\end{align*}
+\section{Properties}
+\begin{description}
+    \item[Linearity]
+    \begin{equation*}
+        \Fourier{a \func{x}{t} + b \func{y}{t}} = a \Fourier{\func{x}{t}} + b \Fourier{\func{y}{t}}
+    \end{equation*}
+    \item[Time shifting]
+    \begin{equation*}
+        \Fourier{\func{x}{t - t_0}} = e^{-j\omega t_0} \Fourier{\func{x}{t}}
+    \end{equation*}
+    \item[Conjugate symmetries]
+    \begin{equation*}
+        \Fourier{\overline{\func{x}{t}}} = \overline{\Fourier{\func{x}{-t}}}    
+    \end{equation*}
+    Therefore, for a real signal \(x\) 
+    \begin{align*}
+        & \Fourier{\func{x}{-t}} = \overline{\Fourier{\func{x}{t}}}\\
+        \implies & \Fourier{\func{Od}{\func{x}{t}}} = \dfrac{\Fourier{\func{x}{t}} - \overline{\Fourier{\func{x}{t}}}}{2} = i \Im \Fourier{\func{x}{t}}\\
+        \implies &  \Fourier{\func{Ev}{\func{x}{t}}} = \dfrac{\Fourier{\func{x}{t}} + \overline{\Fourier{\func{x}{t}}}}{2} = \Re \Fourier{\func{x}{t}}\\
+    \end{align*}
+    \item[Derivatives]
+    \begin{equation*}
+        \Fourier{\dfrac{\diffOperator^n}{\diffOperator t^n} \func{x}{t}} = \bracket{j\omega}^n \Fourier{\func{x}{t}}
+    \end{equation*}
+    \item[Convolution]
+    \begin{equation*}
+        \Fourier{\func{x}{t} \ast \func{y}{t}} = \Fourier{\func{x}{t}} \Fourier{\func{x}{t}}
+    \end{equation*}
+    \item[Time scaling]
+    \begin{equation*}
+        \Fourier{\func{x}{at}} =\dfrac{1}{\abs{a}} \func{\Fourier{\func{x}{t}}}{\dfrac{\omega}{a}}
+    \end{equation*}
+    \item[Integral]
+    \begin{equation*}
+        \Fourier{\int_{\infty}^t \func{x}{\tau} \diffOperator \tau} = \dfrac{1}{j\omega} \Fourier{\func{x}{t}} + \pi \func{\Fourier{\func{x}{t}}}{0} \func{\delta}{\omega} 
+    \end{equation*}
+    \item[Inverse of derivative]
+    \begin{equation*}
+        \InvFourier{\dfrac{\diffOperator}{\diffOperator \omega} \Fourier{\func{x}{t}}} =-jt \func{x}{t}
+    \end{equation*}
+    \item[Inverse of frequency shifting]
+    \begin{equation*}
+        \InvFourier{\func{\Fourier{\func{x}{t}}}{\omega - \omega_0}} = e^{j\omega_0 t} \func{x}{t}
+    \end{equation*}
+    \item[Multiplication]
+    \begin{equation*}
+        \Fourier{\func{x}{t} \func{y}{t}} = \Fourier{\func{x}{t}} \ast \Fourier{\func{y}{t}}
+    \end{equation*}
+    \item[Parseval]
+    \begin{equation*}
+        \int_{\infty}^{\infty} \abs{\func{x}{t}}^2 \diffOperator t = \dfrac{1}{2\pi} \int_{-\infty}^{\infty} \abs{\Fourier{\func{x}{t}}}^2 \diffOperator \omega 
+    \end{equation*}
+\end{description}
+Fourier transform of some functions 
+% \begin{center}
+%     \renewcommand{\arraystretch}{1.9}
+%     \begin{tabular}{>{$}c<{$} | >{$}c<{$}}
+%         \func{x}{t} & \Fourier{\func{x}{t}} \\ \hline 
+%         1 & 2\pi \func{\delta}{\omega}\\\hline
+%         e^{j\omega_0 t} & 2\pi \func{\delta}{\omega - \omega_0}\\\hline
+%         \func{\cos}{\omega_0 t} & \pi \bracket{ \func{\delta}{ \omega - \omega_0} + \func{\delta}{\omega + \omega_0}}\\\hline
+%         \func{\sin}{\omega_0 t} & \dfrac{\pi}{j} \bracket{ \func{\delta}{ \omega - \omega_0} - \func{\delta}{\omega + \omega_0}}\\\hline
+%         \func{\delta}{t} & 1 \\\hline
+%         \dfrac{t^{n-1}}{(n-1)!} e^{-at} \func{u}{t} & \dfrac{1}{(a + j\omega)^n} \quad \Re a > 0
+%     \end{tabular}
+% \end{center}
+\section{Applications}
+We can make frequency-selective filtering with variable center frequency (bandpass around \(\omega_c\). Solve ODEs in the following format 
+\begin{equation*}
+    \sum_{k = 0}^K a_k \dfrac{\diffOperator^k }{\diffOperator t^k} \func{y}{t} = \sum_{m = 0}^M a_m \dfrac{\diffOperator^m }{\diffOperator t^m} \func{x}{t} 
+\end{equation*}
+since it is an LTI system then \(\func{y}{t} = \func{x}{t } \ast \func{h}{t}\) and
+\begin{equation*}
+    \func{Y}{j\omega} = \Fourier{\func{y}{t}} = \Fourier{\func{x}{t} \ast \func{h}{t}}= \func{H}{j\omega} \func{X}{j\omega}
+\end{equation*}
+therefore 
+\begin{equation*}
+    \func{H}{j\omega} = \dfrac{\sum_{m = 0}^M b_k (j\omega)^m}{\sum_{k=0}^K a_k (j\omega)^k}
+\end{equation*}

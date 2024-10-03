@@ -1,0 +1,74 @@
+\chapter{Introduction}
+Signals are functions if independent variables that carry information. It can be continuous or discrete and be multi-dimensional.
+A system responds to applies input signals, and its response is described in terms of one or more output signals. A continuous time system receives and gives continuous signals and discrete time system receives and gives discrete signals. Systems can be connected together in series, parallel, or feedback loop.
+
+\section{Signal Properties}
+\begin{definition}
+    The energy of a continuous signal over interval \(\clcl{t_1}{t_2}\) is defined as 
+    \begin{equation*}
+        \int_{t_1}^{t_2} \abs{\func{x}{t}}^2 \diffOperator t
+    \end{equation*}
+    and similarly for a discrete signal over interval \(n_1 \leq n \leq n_2\)
+    \begin{equation*}
+        \sum_{n = n_1}^{n_2} \abs{\squareFunc{x}{n}}^2 
+    \end{equation*}
+    The power of signal is the time averaged energy of that signal. The total energy of signal is defined to be 
+    \begin{equation*}
+        E_{\infty} = \lim_{T \to \infty} \int_{-T}{T} \abs{\func{x}{t}}^2 \diffOperator t
+    \end{equation*}
+    for a continuous time signal and 
+    \begin{equation*}
+        E_{\infty} =\lim_{N \to \infty}\sum_{n = -N}^{N} \abs{\squareFunc{x}{n}}^2 
+    \end{equation*}
+    Lastly, the total power of a signal is 
+    \begin{equation*}
+        P_{\infty} = \lim_{T \to \infty} \dfrac{1}{T} \int_{-T}{T} \abs{\func{x}{t}}^2 \diffOperator t
+    \end{equation*}
+    and 
+    \begin{equation*}
+        P_{\infty} =\lim_{N \to \infty} \dfrac{1}{2N + 1} \sum_{n = -N}^{N} \abs{\squareFunc{x}{n}}^2
+    \end{equation*}
+\end{definition}
+
+\section{System Properties}
+\begin{description}
+    \item[Memoryless] A system is memoryless if it depends only on the present input. On the other hand, a system has memory if it depends on present and past values. For example, \textit{accumulator} and \textit{delay} are two such systems.
+    \begin{equation*}
+        \squareFunc{y}{n} = \sum_{k = -\infty}^n \squareFunc{x}{n}, \qquad \squareFunc{y}{n} = \squareFunc{x}{n - 1}
+    \end{equation*}
+    \item[Invertible] A system is invertible if there exists a system \(\func{y}{t} \to \func{w}{t}\) such that \(\func{w}{t} = \func{x}{t}\), for all \(t\).
+    \item[Causal] A system is casual or \textit{nonancitipative} if it depends on past and present value. Mathematicall, a system \(\func{x}{t} \to \func{y}{t}\) is causal if 
+    \begin{equation*}
+        \func{x_1}{t} = \func{x_2}{t},\quad \forall t \leq t_0 \implies \func{y_1}{t} = \func{y_2}{t} , \quad \forall t \leq t_0
+    \end{equation*}
+    \item[Stability] Informally means that small change in the input does not converge. That is, bounded input results in bounded output.
+    \item[Time invariant] Time shift input results in an identical time shift in the output signal. 
+    \begin{equation*}
+        \func{x}{t} \to \func{y}{t} \implies \func{x}{t- t_0} \to \func{y}{t - t_0}
+    \end{equation*}
+    \item[Linearity] A system is linear if
+    \begin{equation*}
+        a \func{x_1}{t} + \func{x_2}{t} \to a \func{y_1}{t} + \func{y_2}{t}, \quad \forall a \in \Complex
+    \end{equation*}
+\end{description} 
+\begin{proposition}
+    A linear system is causal if and only if it satisfies the condition of initial rest 
+    \begin{equation*}
+        \func{x}{t} = 0, \quad  \forall t \leq t_0 \implies \func{y}{t} = 0 ,\quad  \forall t \leq t_0 
+    \end{equation*}
+\end{proposition}
+
+\begin{proof}
+    Consider a linear system such that the responses to \(\func{x_1}{t}\) and \(\func{x_2}{t}\) are \(\func{y_1}{t}\) and \(\func{y_2}{t}\), respectively. Suppos this system is causal. By linearity,\(\func{x_2}{t} = 0 \implies \func{y_2}{t} = 0\) and hence 
+    \begin{equation*}
+        \func{x_1}{t} = \func{x_2}{t} = 0,\quad \forall t \leq t_0 \implies \func{y_1}{t} = \func{y_2}{t} = 0 , \quad \forall t \leq t_0
+    \end{equation*}
+    Suppose the system has the initial rest condition. By linearity, 
+    \begin{equation*}
+         \func{x_1}{t} - \func{x_2}{t} \to \func{y_1}{t} - \func{y_2}{t}
+    \end{equation*}
+    Then, if \(\func{x_1}{t} = \func{x_2}{t} , \quad \forall t \leq t_0\) then 
+    \begin{equation*}
+        \func{x_1}{t} = \func{x_2}{t} \implies \func{x_1}{t} - \func{x_2}{t} = 0 \implies \func{y_1}{t} - \func{y_2}{t} = 0 \implies \func{y_1}{t} = \func{y_2}{t} , \quad \forall t \leq t_0
+    \end{equation*} 
+ \end{proof}

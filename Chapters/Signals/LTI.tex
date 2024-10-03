@@ -1,0 +1,74 @@
+\chapter{Linear Time Invariant Signals}
+\section{Discrete signals}
+Let \(\squareFunc{x}{n}\) be a discrete signal then it can be written as
+\begin{equation*}
+    \squareFunc{x}{n} = \sum_{k = -\infty}^{\infty} \squareFunc{x}{k} \squareFunc{\delta}{n -k} = \squareFunc{x}{n} \ast \squareFunc{\delta}{n}
+\end{equation*}
+which is called \textit{sifting property}. Consider a discrete LTI system \(\squareFunc{x}{n} \to \squareFunc{y}{n}\), by sifting property
+\begin{equation*}
+    \squareFunc{y}{n} = \squareFunc{x}{n} \ast \squareFunc{h}{n}
+\end{equation*}
+where \(\squareFunc{h}{n}\) is the response to \(\squareFunc{\delta}{n}\). Hence a LTI system can be completely characterized by its response to \(\squareFunc{\delta}{n}\).
+
+\section{Continuous signal}
+Similarly we can write the sifting propery as 
+\begin{equation*}
+    \func{x}{t} = \int_{-\infty}^{\infty} \func{x}{\tau} \func{\delta}{t - \tau} \diffOperator \tau = \func{x}{t} \ast \func{\delta}{t}
+\end{equation*}
+and a continuous LTI system \(\func{x}{t} \to \func{y}{t}\) can be written in terms of its response \(\func{h}{t}\) to unit impluse \(\func{\delta}{t}\)
+\begin{equation*}
+    \func{y}{t} = \func{x}{t} \ast \func{h}{t}
+\end{equation*}
+
+\section{Properties of convolution and LTI}
+For simplicity we only bring the continuous, however, the equivalent discrete form also holds.
+\begin{description}
+    \item [Commutative] \(\func{x}{t} \ast \func{y}{t} = \func{y}{t}\ast \func{x}{t}\).
+    \item [Distributive] \(\func{x}{t} \ast \bracket{\func{y}{t} + \func{z}{t}} = \func{x}{t}\ast \func{y}{t} + \func{x}{t}\ast \func{z}{t}\).
+    \item [Associative] \(\func{x}{t} \ast \bracket{\func{y}{t} \ast \func{z}{t}} = \bracket{\func{x}{t} \ast \func{y}{t}} \ast \func{z}{t}\).
+\end{description}
+
+\begin{itemize}
+    \item LTI is memoryless if \(\func{h}{t} = 0\) for \(t \neq 0 \implies \func{h}{t} = K \func{\delta}{t} \implies \func{y}{t} = K \func{x}{t}\).
+    \item LTI system is invertible if there exists \(\func{g}{t}\) such that \(\func{h}{t} \ast \func{g}{t} = \func{\delta}{t}\).
+    \item LTI system is causal if \(\func{h}{t} = 0\) for \(t  < 0\).
+    \item LTI is stable iff 
+    \begin{equation*}
+        \int_{-\infty}^{\infty} \abs{\func{h}{\tau}} \diffOperator \tau < \infty
+    \end{equation*} 
+\end{itemize}
+
+\section{Singularity functions}
+We can view the unit impluse as a short signal that has integral of \(1\) and hence signals with such property are similar. Consider the LTI system 
+\begin{equation*}
+    \func{y}{t} = \dfrac{\diffOperator^n \func{x}{t}}{\diffOperator t^n}
+\end{equation*}
+Then the unit impluse response is \(\func{u_n}{t}\) such that 
+\begin{equation*}
+    \func{y}{t} = \func{x}{t} \ast \func{u_n}{t} = \bracket{\func{x}{t} \ast \func{u_{n-1}}{t}} \ast \func{u_1}{t}
+\end{equation*}
+and therefore 
+\begin{equation*}
+    \func{u_n}{t} = \underbrace{\func{u_1}{t} \ast \func{u_1}{t} \ast \dots \ast \func{u_1}{t}}_n
+\end{equation*}
+\(\func{u_1}{t}\) is called the unit doublet and it is defined 
+\begin{equation*}
+   \func{u_1}{t} = \ODiff{\func{\delta}{t}}{t}
+\end{equation*}
+Similarly for integral 
+\begin{equation*}
+   \func{u_{-1}}{t} = \func{u}{t} = \int_{-\infty}^t \func{\delta}{\tau} \diffOperator \tau \implies \func{x}{t} \ast \func{u}{t} = \int_{-\infty}^t \func{x}{\tau} \diffOperator \tau
+\end{equation*}
+for the double integral 
+\begin{equation*}
+   \func{u_{-2}}{t} = \func{u_{-1}}{t}  \func{u_{-1}}{t} = \int_{-\infty}^t \func{u_{-1}}{\tau} \diffOperator \tau
+\end{equation*}
+similarly for higher order integrals 
+\begin{equation*}
+   \func{u_{-n}}{t} = \underbrace{\func{u_{-1}}{t} \ast \func{u_{-1}}{t} \ast \dots \ast \func{u_{-1}}{t}}_n
+\end{equation*}
+Lastly we can denote \(\func{\delta}{t} = \func{u_0}{t}\) to then arrive at 
+\begin{equation*}
+   \func{u_r}{t} \ast \func{u_s}{t} = \func{u_{r + s}}{t}
+\end{equation*}
+for all \(u,s \in \Integers\).

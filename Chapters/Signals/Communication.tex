@@ -1,0 +1,48 @@
+\chapter{Communication}
+image pg 181
+
+\section{Amplitude modulation}
+\begin{equation*}
+    \func{y}{t} = \func{x}{t} \func{c}{t}
+\end{equation*}
+\(\func{x}{t}\) is called the modulating signal and \(\func{c}{t}\) is the carrier signal. For example, we want to turn voice signal which is between 200 Hz to 4 kHz into microwave signal of frequence 300 MHz to 300 GHz.
+\subsection*{Complex exponential AM}
+modulation is done via 
+\begin{equation*}
+    \func{c}{t} = e^{j\omega_c t + j\theta_c}
+\end{equation*} 
+For convenience we assume that \(\theta_c = 0\). Then, 
+\begin{align*}
+    \func{y}{t} &= \func{x}{t} e^{j\omega_c t}\\
+    \implies \func{Y}{j\omega} &= \func{X}{j\omega - j \omega_c}
+\end{align*}
+demodulation is as 
+\begin{equation*}
+    \func{x}{t} = \func{y}{t} e^{-j\omega_c t}
+\end{equation*}
+\subsection*{Sinusoidal}
+modulation is done via 
+\begin{equation*}
+    \func{c}{t} = \func{\cos}{\omega_c t + \theta_c}
+\end{equation*} 
+For convenience we assume that \(\theta_c = 0\). Then, 
+\begin{align*}
+    \func{y}{t} &= \func{x}{t} \func{\cos}{\omega_c t}\\
+    \implies \func{Y}{j\omega} &= \dfrac{1}{2} \func{X}{j\omega - j \omega_c} + \dfrac{1}{2} \func{X}{j\omega + j \omega_c}
+\end{align*}
+if \(\func{X}{j\omega}  = 0\) for \(\abs{\omega} > \omega_M\) then \(\omega_c > \omega_m\) so \(\func{x}{t}\) is recoverable. demodulation is as 
+\begin{align*}
+    \func{w}{t} &= \func{y}{t} \func{\cos}{\omega_c t} = \func{x}{t} \func{\cos^2}{\omega_c t} \\
+    &= \dfrac{1}{2} \func{x}{t} + \dfrac{1}{2} \func{x}{t} \func{\cos}{2\omega_c t}\\
+    \implies \func{W}{j\omega} &= \dfrac{1}{2} \func{X}{j\omega} + \dfrac{1}{4} \func{X}{j\omega - 2j\omega_c} + \dfrac{1}{4} \func{X}{j\omega + 2j\omega_c}
+\end{align*}
+Thus, using a lowpass filter with \(\omega_c\) and gain of 2, recovers \(\func{x}{t}\) from \(\func{w}{t}\). 
+
+For general \(\theta_c\), we can use the following modulation and demodulation scheme for exponential AM
+\begin{equation*}
+    \begin{cases} 
+        \func{y}{t} &= \func{x}{t} e^{j\omega_c t + j\theta_c}\\
+        \func{w}{t} &= \func{y}{t} e^{-j\omega_ct -j \phi_c} 
+    \end{cases} \implies \func{x}{t} = \abs{\func{w}{t}}
+\end{equation*}
+and for sinusoidal AM we have
