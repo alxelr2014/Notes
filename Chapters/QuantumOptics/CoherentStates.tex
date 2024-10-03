@@ -1,0 +1,200 @@
+\chapter{Coherent Quasi-Classical States of Harmonic Oscilator}
+As the energy increases the behaviour of a quantum system should resemble a classical one. We may ask whether there are quantum states that give classical predications. Yes, there are; they are called the \textit{quasi-classical states} or \textit{coherent} states.
+\section{Classical states}
+In classical mechanic the harmonic oscilator is described by 
+\begin{equation*}
+    \begin{cases}
+        \dfrac{\diffOperator}{\diffOperator t} \func{x}{t} =& \dfrac{1}{m} \func{p}{t}\\
+        & \\
+        \dfrac{\diffOperator}{\diffOperator t} \func{p}{t} =& -m\omega^2 \func{x}{t}
+    \end{cases}
+\end{equation*}
+Let \(\func{\hat{x}}{t} = \beta \func{x}{t}\) and \(\func{\hat{p}}{t} = \frac{1}{\beta \hbar} \func{p}{t}\) where \(\beta = \sqrt{\frac{m\omega}{\hbar}}\). Then,
+\begin{equation*}
+    \begin{cases}
+        \dfrac{\diffOperator}{\diffOperator t} \func{\hat{x}}{t} =& \omega \func{\hat{p}}{t}\\
+        & \\
+        \dfrac{\diffOperator}{\diffOperator t} \func{\hat{p}}{t} =& -\omega \func{\hat{x}}{t}
+    \end{cases}
+\end{equation*}
+Let \(\func{\alpha}{t} = \frac{1}{\sqrt{2}} \bracket{\func{\hat{x}}{t} + i \func{\hat{p}}{t}}\), then 
+\begin{equation*}
+        \dfrac{\diffOperator}{\diffOperator t} \func{\alpha}{t} = -i\omega \func{\alpha}{t}
+\end{equation*}
+which gives \(\func{\alpha}{t} = \alpha_0 e^{-i\omega t}\) with \(\alpha_0 =\func{\alpha}{0} \in \Complex\). Everything is determied by \(\alpha_0\).
+\begin{equation*}
+    \begin{cases}
+        \func{\hat{x}}{t} =& \dfrac{1}{\sqrt{2}} \bracket{\alpha_0 e^{-i\omega t} + \bar{\alpha_0} e^{i\omega t}}\\
+        & \\
+        \func{\hat{p}}{t} =& -\dfrac{i}{\sqrt{2}} \bracket{\alpha_0 e^{-i\omega t} - \bar{\alpha_0} e^{i\omega t}}
+    \end{cases}
+\end{equation*}
+Moreover, the total energy of the system is given by
+\begin{align*}
+    \func{\calH}{t} &= \dfrac{1}{2m} \bracket{\func{p}{t}}^2+ \dfrac{1}{2}m\omega^2 \bracket{\func{x}{t}}^2 \\
+    &= \dfrac{\hbar \omega}{2} \bracket{\func{\hat{p}}{t}}^2 + \dfrac{\hbar \omega}{2} \bracket{\func{\hat{x}}{t}}^2\\
+    &= \hbar \omega \abs{\func{\alpha}{t}}^2 \\
+    &= \hbar \omega \abs{\alpha_0}^2
+\end{align*}
+For classical system \(\calH\) is must greater then \(\hbar \omega\), hence \(\abs{\alpha_0} \gg 1\).
+\section{Defining quasi-classical states}
+We want quantum states such that \(\angleBracket{X}, \angleBracket{P},\) and \(\angleBracket{H}\) at any given instant are equal to the classical \(x,p,\calH\). We have 
+\begin{align*}
+    \hat{X} &= \beta X = \dfrac{1}{\sqrt{2}} \bracket{a + a^{\dagger}}\\
+    \hat{P} &= \frac{1}{\hbar \beta} P = -\dfrac{i}{\sqrt{2}} \bracket{a - a^{\dagger}}\\
+    \hat{H} &= \frac{1}{\hbar \omega} H = a^{\dagger} a + \frac{1}{2}
+\end{align*}
+The time evolution of \(\angleBracket{a}\) is given by 
+\begin{equation*}
+    i \hbar \dfrac{\diffOperator}{\diffOperator t} \angleBracket{a} = \angleBracket{\commutator{a}{H}} = \hbar \omega \angleBracket{a} \implies \dfrac{\diffOperator}{\diffOperator t} \angleBracket{a} = - i \omega \angleBracket{a}
+\end{equation*}
+Thus, \(\angleBracket{a} = \func{\angleBracket{a}}{0}e^{-i\omega t}\). As a result, we get similar equations to the classical case if we set \(\func{\angleBracket{a}}{0} = \alpha_0\) and from \(\angleBracket{H}\) we get the condition 
+\begin{equation*}
+    \hbar \omega \angleBracket{a^{\dagger}a} + \frac{\hbar \omega}{2} \approx \hbar \omega \angleBracket{a^{\dagger}a} = \hbar \omega \abs{\alpha_0}^2
+\end{equation*}
+Therefore, the conditions are \(\func{\angleBracket{a}}{0} = \alpha_0\) and \(\func{\angleBracket{a^{\dagger}a}}{0} = \abs{\alpha_0}^2\). These are sufficient to determine \(\ket{\func{\psi}{0}}\).
+
+Let \(\func{b}{\alpha} = a - \alpha\), then 
+\begin{equation*}
+    \func{b^{\dagger}}{\alpha_0}\func{b}{\alpha_0} = a^{\dagger}a - \alpha_0 a^{\dagger} - \conj{\alpha_0} a + \abs{\alpha_0}^2
+\end{equation*}
+and we have 
+\begin{align*}
+    \norm{\func{b}{\alpha_0} \ket{\func{\psi}{0}}} &= \bra{\func{\psi}{0}} \func{b^{\dagger}}{\alpha_0}\func{b}{\alpha_0} \ket{\func{\psi}{0}}\\
+    &= \bra{\func{\psi}{0}} a^{\dagger}a - \alpha_0 a^{\dagger} - \conj{\alpha_0} a + \abs{\alpha_0}^2 \ket{\func{\psi}{0}}\\
+    &= \func{\angleBracket{a^{\dagger}a}}{0} - \alpha_0 \func{\angleBracket{a^{\dagger}}}{0} - \conj{\alpha_0} \func{\angleBracket{a}}{0} + \abs{\alpha_0}^2\\
+    &= \abs{\alpha_0}^2 - \alpha_0 \conj{\alpha_0} - \conj{\alpha_0} \alpha_0 - \abs{\alpha_0}^2 = 0
+\end{align*}
+Therefore, \(a \ket{\func{\psi}{0}} = \alpha_0 \ket{\func{\psi}{0}}\). Moreover, the converse is true -- i.e. eigenvectors of \(a\) satisfy the quasi-classical conditions. 
+
+Let \(\ket{\alpha}\) denote the eigenvector of \(a\) with eigenvalue \(\alpha\). Let \(\ket{\alpha} = \sum \func{c_n}{\alpha} \ket{n}\). Then, 
+\begin{align*}
+    a \ket{\alpha} &= a \bracket{\sum \func{c_n}{\alpha} \ket{n}} \\
+    &= \sum \sqrt{n}\func{c_n}{\alpha}\ket{n - 1}\\
+    &= \sum \sqrt{n + 1}\func{c_{n+1}}{\alpha}\ket{n}\\
+    \alpha \ket{\alpha}&= \sum \alpha\func{c_{n}}{\alpha}\ket{n}\\
+    \implies & \func{c_{n+1}}{\alpha} = \dfrac{\alpha}{\sqrt{n+1}} \func{c_n}{\alpha} \\
+    \implies & \func{c_n}{\alpha} = \dfrac{\alpha^{n}}{\sqrt{n!}} \func{c_0}{\alpha}
+\end{align*}
+Since \(\ket{\alpha}\) is normalized
+\begin{equation*}
+    \sum_{n = 0}^{\infty} \abs{\dfrac{\alpha^{n}}{\sqrt{n!}} \func{c_0}{\alpha}}^2 = \abs{\func{c_0}{\alpha}}^2 \sum_{n= 0}^{\infty} \dfrac{\abs{\alpha^2}^n}{n!} = \abs{\func{c_0}{\alpha}}^2 e^{\abs{\alpha}^2} = 1 \implies \func{c_0}{\alpha} = e^{- \frac{\abs{\alpha}^2}{2}}
+\end{equation*}
+Therefore, probability distribution of the states of \(\ket{\alpha}\) is Poisson.
+\begin{equation*}
+    \ket{\alpha} = e^{- \frac{\abs{\alpha}^2}{2}} \sum \frac{\alpha^n}{\sqrt{n!}} \ket{n}
+\end{equation*}
+Furthermore, \(\prob{\ket{n}} = \frac{\alpha^2}{n} \prob{\ket{n-1}}\) hence the maximum value of \(\prob{\ket{m}}\) is achieved when \(m = \floor{\abs{\alpha}^2}\). 
+\begin{align*}
+    \angleBracket{H} &= \sum_n \prob{\ket{n}} \bracket{n + \frac{1}{2}}\hbar \omega = \bracket{\abs{\alpha}^2 + \frac{1}{2}}\hbar \omega \approx E_m\\
+    \angleBracket{H^2} &= \sum_n \prob{\ket{n}} \bracket{n + \frac{1}{2}}^2\hbar^2 \omega^2 = \bracket{\abs{\alpha}^4 +2 \abs{\alpha}^2 + \frac{1}{4}}\hbar^2 \omega^2 \\
+    \implies& \Delta H = \hbar \omega \abs{\alpha}\\
+    \implies& \dfrac{\Delta H}{\angleBracket{H}} \approx \frac{1}{\abs{\alpha}} \ll 1
+\end{align*}
+when \(\abs{\alpha} \gg 1\). And for \(\angleBracket{X}, \angleBracket{P}\) we have 
+\begin{align*}
+    \angleBracket{X}&= \sqrt{\dfrac{2\hbar}{m \omega}} \Re{\alpha} & \angleBracket{P} &= \sqrt{2m \hbar \omega} \Im \alpha \\
+    \angleBracket{X^2}&= \dfrac{\hbar}{2m \omega} \bracket{(\alpha + \conj{\alpha})^2 + 1} & \angleBracket{P} &= \frac{m \hbar \omega}{2} \bracket{1- (\alpha - \conj{\alpha})^2}  \\
+    \implies \Delta X  &= \sqrt{\dfrac{\hbar}{2 m \omega}} & \Delta P &= \sqrt{\dfrac{m\hbar \omega}{2 m }} 
+\end{align*}
+which implies that \(\Delta X \Delta P = \hbar/2\). Lastly, note that 
+\begin{align*}
+    \angleBracket{N}_{\alpha} &= \abs{\alpha}^2 & 
+    \Delta N_{\alpha} &= \abs{\alpha} 
+\end{align*}
+Thus, to obtain a coherent state, close to classical state, we must linearly superpose a very large number of states since \(\Delta N_{\alpha} \gg 1\). However, the relative value of the dispersion over \(N\) is very small. 
+\begin{equation*}
+    \dfrac{\angleBracket{N}_{\alpha}}{\Delta N_{\alpha}} = \dfrac{1}{\abs{\alpha}} \ll 1
+\end{equation*}
+\section{Displacement Operator}
+Let \(\func{D}{\alpha} = e^{\alpha a^{\dagger} - \conj{\alpha} a}\) be the displacement operator. Note that \(\commutator{\alpha a^{\dagger}}{-\conj{\alpha} a} = \abs{\alpha}^2\) and hence 
+\begin{equation*}
+    \func{D}{\alpha} = e^{-\frac{\abs{\alpha}^2}{2}} e^{\alpha a^{\dagger}} e^{-\conj{\alpha} a}
+\end{equation*}
+
+\begin{proposition}
+    The displacement operator \(\func{D}{\alpha}\) is a unitary operator that transform \(\ket{0}\) to \(\ket{\alpha}\). That is,
+    \begin{equation*}
+         \ket{\alpha} = \func{D}{\alpha} \ket{0}
+    \end{equation*}
+\end{proposition}
+
+\begin{proposition}
+    The displacement operator is unitary, i.e \(\func{D}{\alpha} \func{D^{\dagger}}{\alpha} = \func{D^{\dagger}}{\alpha} \func{D}{\alpha} = I\). Moreover, \(\func{D^{\dagger}}{\alpha} = \func{D}{-\alpha}\), 
+    \begin{equation*}
+        \func{D}{\alpha} \func{D}{\beta} = e^{i \Im \alpha\conj{\beta}} \func{D}{\alpha + \beta}  
+    \end{equation*}
+    and, 
+    \begin{equation*}
+        \func{D}{\alpha} \func{D}{\beta} = e^{2 i \Im \alpha\conj{\beta}} \func{D}{\beta}   \func{D}{\alpha} 
+    \end{equation*}
+\end{proposition}
+
+\begin{lemma}
+    \(\bra{x} e^{\lambda X} = e^{\lambda x} \bra{x}\) and \(\bra{x} e^{-i\lambda/\hbar P} = \bra{x - \lambda}\).
+\end{lemma}
+We know that \(\alpha a^{\dagger} - \conj{\alpha}a = \lambda_x X - i\lambda_p/\hbar P\) with 
+\begin{align*}
+    \lambda_x &= \sqrt{\dfrac{2m\omega}{\hbar}} \Im \alpha & \lambda_p &= \sqrt{\frac{2\hbar}{m\omega}} \Re \alpha.
+\end{align*}
+Therefore, from the two statements above we have 
+\begin{align*}
+    \func{\psi_{\alpha}}{x} &= \braket{x}{\alpha} = \bra{x} \func{D}{\alpha} \ket{0}\\
+    &=  \bra{x} e^{\lambda_x X - i\lambda_p P}\ket{0}\\
+    &= e^{-i\hbar \lambda_x \lambda_p/2} \bra{x} e^{\lambda_x X} e^{-i\lambda_p P} \ket{0}\\
+    &= e^{-i\hbar \lambda_x \lambda_p/2} e^{\lambda_x x} \bra{x} e^{-i\lambda_p P} \ket{0}\\
+    &= e^{-i\hbar \lambda_x \lambda_p/2} e^{\lambda_x x} \braket{x - \lambda_p}{0}\\
+    &= e^{-i\hbar \lambda_x \lambda_p/2} e^{\lambda_x x} \func{\phi_0}{x - \lambda_p}
+\end{align*}
+-- needs correction maybe
+It is evident that the displacement operator causes displacement in both position and momentum. 
+\begin{align*}
+    \func{\psi_{\alpha}}{x} &= e^{i \theta_{\alpha}} e^{i \angleBracket{P}_{\alpha} x/\hbar} \func{\phi}{x - \angleBracket{X}_{\alpha}}\\
+    &= e^{i \theta_{\alpha}} \bracket{\dfrac{m\omega}{\pi \hbar}}^{1/4} \func{\exp}{- \bracket{\dfrac{x - \angleBracket{X}_{\alpha}}{2 \Delta X_{\alpha}}}^2 + i \angleBracket{P}_{\alpha} x/\hbar}\\
+    \implies \abs{\func{\psi_{\alpha}}{x}}^2 &= \sqrt{\dfrac{m\omega}{\pi \hbar}} \func{\exp}{- \frac{1}{2}\bracket{\dfrac{x - \angleBracket{X}_{\alpha}}{ \Delta X_{\alpha}}}}
+\end{align*}
+which is a Gaussian wavepacket, which is consistent with \(\Delta X_{\alpha} \Delta P_{\alpha} = \hbar/2 \). 
+
+\begin{proposition}
+    The displacement operator commutes with the creation operator as follows.
+    \begin{align*}
+        \func{D}{\alpha} a \func{D^{\dagger}}{\alpha} &= (a - \alpha)\\
+        \func{D^{\dagger}}{\alpha} a \func{D}{\alpha} &= (a + \alpha)\\
+    \end{align*}
+\end{proposition}
+
+
+Although, the quasi-classical states are not orthonormal 
+\begin{equation*}
+    \abs{\braket{\alpha}{\alpha'}}^2 = e^{-\abs{\alpha - \alpha'}^2} \neq 0
+\end{equation*}
+but they satisfy a closure relationship 
+\begin{equation*}
+    \dfrac{1}{\pi} \int \ket{\alpha}\bra{\alpha} \diffOperator^2 \alpha = \dfrac{1}{\pi} \int \int \ket{\alpha} \bra{\alpha} \diffOperator \Re{\alpha} \Im{\alpha} = 1
+\end{equation*}
+--add proofs for both
+\section{Time evolution of a quasi-classical state}
+\begin{align*}
+    \ket{\func{\alpha_0}{t}} &= e^{- \abs{\alpha}^2/2} \sum_{n} \dfrac{\alpha^n}{\sqrt{n!}} e^{-i E_n t/\hbar} \ket{n}\\
+    &= e^{- \abs{\alpha}^2/2} e^{-i\omega t/2} \sum_{n} \dfrac{\alpha^n}{\sqrt{n!}} e^{-i n \omega t} \ket{n}
+\end{align*}
+which means \(\ket{\func{\alpha_0}{t}} = e^{-i\omega t/2}\ket{e^{-i\omega t} \alpha_0}\) and thus remains a quasi-classical state.
+\begin{align*}
+    &\begin{cases}
+        \angleBracket{X}_t &= \sqrt{\dfrac{2\hbar}{m\omega}} \func{\Re}{\alpha e^{-i \omega t}}\\
+        \angleBracket{P}_t &= \sqrt{2m\hbar\omega} \func{\Im}{\alpha e^{-i \omega t}}\\
+        \angleBracket{H}_t &= \hbar \omega \bracket{\abs{\alpha}^2 + \frac{1}{2}}
+    \end{cases} & 
+    & \begin{cases}
+        \Delta X &= \sqrt{\dfrac{\hbar}{2m\omega}}\\
+        \Delta P &= \sqrt{\dfrac{m\hbar\omega}{2}}\\
+        \Delta H &= \hbar \omega \abs{\alpha}
+    \end{cases}
+\end{align*}
+\subsection{The motion of the Wavepacket}
+At \(t\), the wave packet is still Gaussian. Following figure show the motion of the wavepacket which performs a periodic oscillation along the \(x\)-axis, without becoming distorted. It is well known that a Gaussian wavepacket, when it is free, becomes distorted as it propagates, since its width varie. However, under the effect of the parabolic potential \(\func{V}{x}\), the wavepacket oscillates without becoming distorted.
+
+\section{P-representation}
+-- p-representation and 
+\section{Q-representation}
+\section{Wigner function and characteristic functions}

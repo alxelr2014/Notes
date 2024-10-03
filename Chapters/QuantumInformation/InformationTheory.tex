@@ -1,14 +1,16 @@
 \chapter{Quantum Information Theory}
-von-Neumann entropy of a mixed state \(\psi = \bigoplus \ket{p_i,\phi_i}\) is 
+The von-Neumann entropy of density matrix \(\rho\) is 
 \begin{equation*}
-    \func{QS}{\rho_{\ket{\psi}}} = - \func{\trace}{\rho_{\ket{\psi}} \lg \rho_{\ket{\psi}}}
+    \func{S}{\rho} = - \func{\trace}{\rho \lg \rho}
 \end{equation*}
-where \(\lg \rho_{\ket{\psi}}\) is defined as the matrix \(\begin{bmatrix}
-    \lg M^B_{\rho_{\ket{\psi}}}
+where \(\lg \rho\) is defined as the matrix \(\begin{bmatrix}
+    \lg \rho_D
 \end{bmatrix}\)
-where \(M^B_{\rho_{\ket{\psi}}}\) is the diagonal matrix representation of \(\rho_{\psi}\).
-Suppose \(\calH = \calH_A \otimes \calH_B\) and \(\rho\) is a density operator in \(\calH\). Tracing out ??
-\begin{equation*}
-    \rho_{\calH_A} = \func{\trace_{\calH_B}}{\rho}
-\end{equation*}
-Fidelity of two states \(\func{F}{\ket{\psi}, \ket{\phi}} = \abs{\bracket{\psi}{\phi}}^2\).
+where \(\rho_D\) is the diagonal matrix representation of \(\rho\).
+
+\begin{proposition}
+    The entropy of a pure state is zero.
+\end{proposition}
+\begin{proof}
+    When \(\rho = \ket{\psi}\bra{\psi}\), it can be viewed as a projection onto \(\ket{\psi}\). This projection, with one eigenvalue of \(\lambda = 1\) and rest are zeros. Thus, \(\func{S}{\rho} = - 1 \lg 1 = 0\).
+\end{proof}

@@ -1,0 +1,29 @@
+\chapter{Quantum Noise}
+The quantum operation formalism is a mathematical tool that helps us describe the evolution of open quantum systems. A quantum operation \(\calE\) is a special function that maps the input density operator to the output density matrix.
+\begin{equation*}
+    \rho'= \func{\calE}{\rho}
+\end{equation*}
+Clearly, the unitary evolution and quantum measurement can be described with this formalism. To describe the evolution of an open system we first must consider the state of the environment \(\rho_{\env}\). Assuming that the initial state \(\rho\) is prepared without any former coupling with environment, the state of the whole system would be \(\rho \otimes \rho_{\env}\). We may now consider this system closed and thus its evolution will be described by some unitary operator \(U\). To get density operator of the principal system we just need to trace over the environment.
+\begin{equation*}
+    \func{\calE}{\rho} = \func{\trace_{\env}}{U (\rho \otimes \rho_{\env}) U^{\dagger}} 
+\end{equation*}
+We may denote \(\calE\) by its operator-sum representation.
+\begin{align*}
+    \func{\calE}{\rho} &= \sum_k \bra{e_k} U (\rho \otimes \rho_{\env}) U^{\dagger} \ket{e_k}\\
+    &= \sum_{k,l} p_l \bra{e_k} U (\rho \otimes \ket{e_l}\bra{e_l}) U^{\dagger} \ket{e_k}\\
+    &= \sum_{k,l} \sqrt{p_l}\bra{e_k}U\ket{e_l} \rho \sqrt{p_l}\bra{e_l}U^{\dagger} \ket{e_k}\\
+    &= \sum_{k,l} E_{k,l} \rho E_{k,l}^{\dagger}
+\end{align*}
+The operators \(\set{E_{k,l}}\) are called the operation elements. Since \(\func{\calE}{\rho}\) is supposed to be a density matrix with trace of \(1\), then we must have 
+\begin{equation*}
+    \sum_{k,l} E_{k,l}^{\dagger} E_{k,l} = I
+\end{equation*}
+When \(\sum E_{k}^{\dagger} E_k \leq I\) we say that \(\calE\) is non-trace-preserving. The quantum operator must follow the following axioms.
+\begin{enumerate}
+    \item The trace \(\trace \func{\calE}{\rho}\) is the probability that \(\calE\) occurs given \(\rho\). Thus, \(0 \leq \trace \func{\calE}{\rho} \leq 1\).
+    \item \(\calE\) is a convex-linear map on the set of density matrices.
+    \begin{equation*}
+        \func{\calE}{\sum p_i \rho_i} = \sum p_i \func{\calE}{\rho_i}
+    \end{equation*}
+    \item \(\calE\) is completely positive. That is for every positive \(A\), \(\func{\calE}{A}\) is also positive. Moreover, for any arbitrary system \(R\), \((I \otimes \calE)(A)\) is positive for any positive \(A\) on the combined system.
+\end{enumerate}

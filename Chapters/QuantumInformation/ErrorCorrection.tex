@@ -1,0 +1,34 @@
+\chapter{Quantum Error Correction}
+There are four major differences between quantum and classical error.
+
+\begin{enumerate}
+    \item Classical bits and errors are macroscopic but the quantum ones are microscopic. As a result, quantum information is more prone to errors.
+    \item Classical information can be copied, however due to non-cloning theorem, quantum information can not be copied.
+    \item Classical errors are discrete, especially when considering the digital information. Again, quantum information are subject to continuous errors.
+    \item Classical bits may be measured but quantum measurement will result in collapse of wave function. 
+\end{enumerate}
+Despite these challenges that make quantum error correction look impossible, we will show that we can reliable quantum compution and communication.
+
+\section{One qubit error correction}
+Suppose we have a qubit \(\ket{\psi}\) that is subject to error. Let \(\rho_{env}\) be the denisty operator corresponding to that of the environment. Then, there exists a unitary operator \(U\) that describes how \(\ket{\psi}\) and \(\rho_{env}\) evolve.
+\begin{equation*}
+    \ket{\psi}\otimes \rho_{env} \mapsto U(\ket{\psi}\otimes \rho_{env})
+\end{equation*}
+We may formulate \(U\) in terms of Pauli matrices
+\begin{equation*}
+    U = I \otimes U_0 + X \otimes U_1 + Y \otimes U_2 + Z \otimes U_3
+\end{equation*}
+Where \(X= \sigma_x, Y = i\sigma_Y,\) and \(Z = \sigma_Z\). Now suppose \(\ket{\psi}\) is such that 
+\begin{align*}
+    \ket{\psi} && X \ket{\psi} && Y\ket{\psi} && Z\ket{\psi}
+\end{align*}
+are perpendicular to each other. Thus, there is a measurement that enables to distinguish which error happened and then correct it. Typically, this is not the case for \(\ket{\psi}\). As result, we need a mapping \(\ket{\psi} \mapsto \ket{\psi'}\) such that 
+\begin{equation*}
+    \bra{\psi'}X \ket{\psi'} = \bra{\psi'}Y \ket{\psi'} = \bra{\psi'}Z\ket{\psi'} = 0
+\end{equation*}
+You may also note that it is enough that only \(X\ket{\psi'}\) and \(Z\ket{\psi'}\) be perpendicular to each other and \(\ket{\psi'}\). Because,
+\begin{equation*}
+    \bra{\psi'}Y\ket{\psi'} = \bra{\psi'}XZ\ket{\psi'} = 0
+\end{equation*}
+\section{Simple quantum error correction codes}
+

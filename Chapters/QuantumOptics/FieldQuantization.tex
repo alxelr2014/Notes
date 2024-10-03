@@ -1,0 +1,158 @@
+\chapter{Field Qauntization}
+We would like to quantize the electromagnetic field. This new quantized theory must follow the axioms of the quantum mechanics.
+
+\begin{enumerate}
+    \item For all particles of and systems there corresponds a Hilbert space.
+    \item For all observables there corresponds a Hermitian operator.
+    \item The evolution of closed systems must be unitary.
+    \item The Schr\"{o}dinger equation holds.
+\end{enumerate}
+
+For particle systems we employ a technique called the \emph{second quatnization} or the \emph{canonical quantization}. This method provides a framework to find suitable operators corresponding to the electric and magnetic fields. In hindsight,
+
+\begin{enumerate}
+    \item We need to find a generalized coordinate systems \(\vectbf{q}\) for the electromagnetic field.
+    \item Find the generalized coordinate \(\vectbf{p}\) and the Hamiltonian.
+    \item Quantize by \((\vectbf{q},\vectbf{p}) \mapsto (\hat{q}, \hat{p})\).
+\end{enumerate}
+
+We assume the system is a photon trapped in a one-dimensional cavity. There are two perfectly conducting walls at \(z = 0\) and \(z = L\) and the electric field is polarized in the \(x\)-axis. 
+\begin{equation*}
+    \begin{cases}
+        &\nabla \cdot E = 0\\
+        &\nabla \cdot B = 0\\
+        &\nabla \times E =  -\dfrac{\partial B}{\partial t}\\
+        &\nabla \times B = \mu \epsilon \dfrac{\partial E}{\partial t}
+    \end{cases}
+\end{equation*}
+
+From the Maxwell's equations we have.
+\begin{equation*}
+    \dfrac{\partial^2 E}{\partial z^2} - \dfrac{1}{v^2} \dfrac{\partial^2 E}{\partial t^2} = 0
+\end{equation*}
+The resulting standing wave may be written in terms of its harmonic components.
+\begin{equation*}
+    E = \sum_{n = 1}^{\infty} E_n \func{\sin}{k_n z} e^{i\omega_n t}
+\end{equation*}
+with 
+\begin{align*}
+    k_n &= \dfrac{n\pi}{L} & \omega_n = v k_n
+\end{align*}
+By factoring the time dependecies we have 
+\begin{equation*}
+    E = \sum_{n = 1}^{\infty} \func{q_n}{t} \func{\sin}{\dfrac{n\pi z}{L}} \hat{\vectbf{x}}
+\end{equation*}
+From the Farady's law we get 
+\begin{equation*}
+    B = \sum_{n = 1}^{\infty} \dfrac{L \mu \epsilon}{n \pi }\func{\dot{q_n}}{t} \func{\cos}{\dfrac{n\pi z}{L}} \hat{\vectbf{y}}
+\end{equation*}
+One can verify that \(\set{q_n}\) is a set of generalized coordinate for the system. To find the generalized momentums we need to write the Lagrangian denstiy of the free electromagnetic field.
+\begin{align*}
+    \calL &= \int_V \dfrac{1}{2}\epsilon E^2 - \dfrac{1}{2\mu} B^2 \diffOperator v\\
+    &= \int_0^L \dfrac{\epsilon}{2} \sum_{n,m} \func{q_n}{t}\func{q_m}{t} \func{\sin}{k_n z} \func{\sin}{k_m z} \diffOperator z\\
+    &\qquad - \int_0^L \dfrac{L^2 \mu \epsilon^2 }{2\pi^2} \sum_{n,m} \dfrac{1}{nm} \func{\dot{q_n}}{t}\func{\dot{q_m}}{t} \func{\cos}{k_n z} \func{\cos}{k_m z} \diffOperator z\\
+    &= \dfrac{L\epsilon}{4} \sum_{n,m}  \func{q_n}{t}\func{q_m}{t} \delta_{n,m} - \dfrac{L^3 \mu \epsilon^2 }{4\pi^2} \sum_{n,m} \dfrac{1}{nm}\func{\dot{q_n}}{t}\func{\dot{q_m}}{t} \delta_{n,m}\\
+    &= \dfrac{L\epsilon}{4} \bracket{\sum_n \func{q_n^2}{t} - \dfrac{L^2 \mu \epsilon }{n^2 \pi^2} \func{\dot{q_n}^2}{t}}\\
+    &= \dfrac{L\epsilon}{4} \bracket{\sum_n \func{q_n^2}{t} - \dfrac{1 }{k_n^2 v^2}\func{\dot{q_n}^2}{t}}\\
+    &= \dfrac{L\epsilon}{4} \bracket{\sum_n \func{q_n^2}{t} - \dfrac{1 }{\omega_n^2}\func{\dot{q_n}^2}{t}}
+\end{align*}
+Let \(\func{r_n}{t} \coloneqq \sqrt{\frac{L\epsilon}{2\omega_n^2}} \func{q_n}{t}\), then 
+\begin{equation*}
+    \calL = \dfrac{1}{2} \sum_n  \omega_n^2 \func{r_n^2}{t} - \func{\dot{r}_n^2}{t}
+\end{equation*}
+For simplicity, we keep denoting \(r\) by just \(q\), moreover, because a negative sign does not affect the dynamic of the system, multiply the Lagrangian by a negative sign. The generalized momentums are given by,
+\begin{equation*}
+    p = \dfrac{\partial \calL}{\partial \dot{q}} = \dot{q}
+\end{equation*}
+Therefore, the Hamiltonian for the electromagnetic field is as follows.
+\begin{equation*}
+    \calH = \sum p_n \dot{q}_n - \calL = \dfrac{1}{2} \sum_n p_n^2 + \omega_n^2 q_n^2
+\end{equation*}
+which is similar to that of a free vibrating harmonic oscillator. Lastly, consider the Poission brackets of \(q\) and \(p\).
+\begin{equation*}
+    \curlyBracket{F,G} = \sum_n \dfrac{\partial F}{\partial q_n} \dfrac{\partial G}{\partial p_n} - \dfrac{\partial F}{\partial p_n} \dfrac{\partial G}{\partial q_n} 
+\end{equation*}
+which means that 
+\begin{equation*}
+    \curlyBracket{q_n,p_m} = \sum_n \delta_n \delta_{n,m} = \delta_{n,m} 
+\end{equation*}
+The canonical transformation \((q,p) \mapsto (\hat{q}, \hat{p})\) gives us the Hamiltonian of the quatum system.
+\begin{equation*}
+    \calH = \dfrac{1}{2} \sum_n \hat{p}_n^2 + \omega_n^2 \hat{q}_n^2
+\end{equation*}
+where \(\hat{q}_n\) and \(\hat{p}_n\) are Hermitian operators such that 
+\begin{equation*}
+    \squareBracket{\hat{q}_n, \hat{p}_m} = i\hbar\curlyBracket{q_n, p_m}= i\hbar \delta_{n,m}
+\end{equation*}
+Lets now consider the single mode Hamiltonian. 
+\begin{align*}
+    \calH &= \dfrac{1}{2} \bracket{\hat{p}^2 + \omega^2 \hat{q}^2}\\
+    &= \dfrac{1}{2}\bracket{\omega \hat{q} -i \hat{p}}\bracket{\omega \hat{q} + i \hat{p}} - i\omega \squareBracket{\hat{q}, \hat{p}}
+\end{align*}
+Let 
+\begin{align*}
+    a &= \dfrac{1}{\sqrt{2\hbar \omega }}\bracket{\omega \hat{q} +i \hat{p}} &
+    a^{\dagger} &= \dfrac{1}{\sqrt{2\hbar \omega }}\bracket{\omega \hat{q} -i \hat{p}}
+\end{align*}
+Then, 
+\begin{equation*}
+    \calH = \hbar \omega \bracket{a^{\dagger} a + \dfrac{1}{2}}
+\end{equation*}
+Moreover, note that \(\squareBracket{a,a^{\dagger}} = 1\). -------- eigenvalues of \(\hat{n} = a^{\dagger} a\) -------
+The time evolution of \(\func{a}{t}\) is as follows.
+\begin{align*}
+    \dfrac{\diffOperator a}{\diffOperator t} &= -\frac{i}{\hbar} \squareBracket{a,H}\\
+    &= i\omega \squareBracket{a^{\dagger}a , a}\\
+    &= i\omega \bracket{a^{\dagger} \squareBracket{a,a} + \squareBracket{a^{\dagger},a}a}\\
+    &= -i\omega a \\
+    \implies& \func{a}{t} = e^{-i\omega t} \func{a}{0} = e^{-i\omega t} a
+\end{align*}
+The electric field and magnetic field operators can be written in terms of the annihilation and creation operators.  
+\begin{align*}
+    \hat{E} &= \calE_0 (a + a^{\dagger}) \func{\sin}{kz} &
+    \hat{B} &= -i\calB_0 (a - a^{\dagger}) \func{\cos}{kz}
+\end{align*}
+with \(\calE_0 = \sqrt{\frac{\hbar\omega}{L \epsilon}}\) and \(\calB_0 = \frac{1}{c} \sqrt{\frac{\hbar \omega}{L \epsilon}} \)
+The time evolution of the electric field is given by 
+\begin{align*}
+    \func{\hat{E}}{t} &= \calE_0 \bracket{a e^{-i\omega t} + a^{\dagger} e^{i\omega t}}\func{\sin}{kz}\\
+    &= 2\calE_0 \bracket{\dfrac{a + a^{\dagger}}{2} \func{\cos}{\omega t}  + \dfrac{a - a^{\dagger}}{2i} \func{\sin}{\omega t}}\func{\sin}{kz}
+\end{align*}
+We may define the quadrature operators by 
+\begin{align*}
+    X_1 &= \dfrac{a + a^{\dagger}}{2}  & X_2 &= \dfrac{a - a^{\dagger}}{2i} 
+\end{align*}
+thus 
+\begin{equation*}
+    \func{\hat{E}}{t}= 2\calE_0 \bracket{X_1 \func{\cos}{\omega t} + iX_2 \func{\sin}{\omega t}}\func{\sin}{kz}\\
+\end{equation*}
+with \(\squareBracket{X_1,X_2} = \frac{i}{2}\) and hence \(\Delta X_1 \Delta X_2 \geq \frac{1}{4}\).
+
+
+\section{Thermal field}
+The density operator of a single mode thermal light at temperature \(T\) is given by
+\begin{equation*}
+    \rho_{th} = \dfrac{e^{-H/k_B T}}{\func{\trace}{e^{-H/k_B T}}}
+\end{equation*}
+thus 
+\begin{align*}
+    (\rho_{th})_{n,m} &= \bra{n}\rho_{th} \ket{m}\\
+    &= \dfrac{\bra{n} e^{-H/k_B T}\ket{m}}{\sum \bra{n} e^{-H/k_B T} \ket{n}}\\
+    &= \dfrac{\bra{n} e^{-\hbar\omega(2m + 1) /2k_B T}\ket{m}}{\sum \bra{n} e^{-\hbar\omega(2n+1)/2k_B T} \ket{n}}\\
+    &= \dfrac{e^{-\hbar\omega(2n + 1) /2k_B T} \delta_{n,m}}{\sum  e^{-\hbar\omega(2n+1)/2k_B T}}\\
+    &= \bracket{\dfrac{e^{-\hbar\omega/2k_BT}}{1- e^{-\hbar\omega/k_BT}}}^{-1} e^{-\hbar\omega(2n + 1) /2k_B T} \delta_{n,m} \\
+    &=  \bracket{ e^{\hbar\omega/2k_BT} - e^{-\hbar\omega/2k_BT}} e^{-\hbar\omega(2n + 1) /2k_B T}\delta_{n,m}\\
+    &= 2 \func{\sinh}{\dfrac{\hbar\omega}{2 k_B T}} e^{-\hbar\omega(2n + 1) /2k_B T}\delta_{n,m}
+\end{align*}
+The average number photons in a theram light is 
+\begin{align*}
+    \angleBracket{\hat{n}} &= \func{\trace}{\hat{n}\rho_{th}}\\
+    &= \sum_n n\bra{n} \rho_{th} \ket{n}\\
+    &= \sum_n 2 n  e^{-\hbar\omega(2n + 1) /2k_B T}\\
+    &= 2\func{\sinh}{\dfrac{\hbar\omega}{2 k_B T}} e^{-\hbar \omega /2k_B T} \sum_n n e^{-\hbar \omega n/k_B T}\\
+    &= 2\func{\sinh}{\dfrac{\hbar\omega}{2 k_B T}} e^{-\hbar \omega /2k_B T} \dfrac{1}{\bracket{2 \func{\sinh}{\frac{\hbar\omega}{2k_B T}}}^2}\\
+    &= \dfrac{e^{-\hbar \omega /2k_B T} }{2 \func{\sinh}{\frac{\hbar\omega}{2k_B T}}}\\
+    &= \dfrac{1}{e^{\hbar\omega/2k_BT} - 1}
+\end{align*}
+
+\section{Multimode field}
