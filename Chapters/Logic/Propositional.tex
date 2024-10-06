@@ -1,0 +1,35 @@
+\chapter{Propositional Logic}
+
+\section{Sequent Calculus}
+Suppose \(\Gamma\) and \(\Delta\) are finite sets of propositions. By \(\Gamma \Rightarrow \Delta\) we mean 
+\begin{equation}
+   ( \gamma_1 \land \gamma_2 \land \dots \land \gamma_n) \to (\delta_1 \lor \delta_2 \lor \dots \lor \delta_m)
+\end{equation}
+If \(\Gamma = \emptyset\) or \(\Delta = \emptyset\), then \(\Gamma \Rightarrow \Delta\) is \(\top\).
+
+\begin{definition}[Axiom system]
+    The axiomatic principles is 
+    \begin{enumerate}
+        \item \(A \Rightarrow A\).
+        \item \(\bot \Rightarrow A\).
+    \end{enumerate}
+    The structural principles
+    \begin{enumerate}
+        \item If \(\Gamma \Rightarrow \Delta\), then \(\Gamma \Rightarrow \Delta,A\).
+        \item If \(\Gamma \Rightarrow \Delta\), then \(A,\Gamma \Rightarrow \Delta\).
+        \item If \(\Gamma \Rightarrow \Delta,A,A\), then \(\Gamma \Rightarrow \Delta,A\).
+        \item If \(A,A,\Gamma \Rightarrow \Delta\), then \(A,\Gamma \Rightarrow \Delta,A\).
+    \end{enumerate}
+    The logical principles.
+    \begin{enumerate}
+        \item If \(\Gamma \Rightarrow \Delta,A\) and \(\Gamma \Rightarrow \Delta,B\), then \(\Gamma \Rightarrow \Delta,A\land B\).
+        \item If \(A,\Gamma \Rightarrow \Delta\) and \(B,\Gamma \Rightarrow \Delta,B\), then \(A\land B,\Gamma \Rightarrow \Delta\).
+        \item If \(\Gamma \Rightarrow \Delta,A\), then \(\Gamma \Rightarrow \Delta,A\lor B\).
+        \item If \(A,\Gamma \Rightarrow \Delta\) and \(B,\Gamma \Rightarrow \Delta,B\), then \(A\lor B,\Gamma \Rightarrow \Delta\).
+        \item If \(A,\Gamma \Rightarrow \Delta,B\), then \(\Gamma \Rightarrow \Delta,A\to B\).
+        \item If \(\Gamma \Rightarrow \Delta,A\) and \(B,\Gamma \Rightarrow \Delta,B\), then \(A\to B,\Gamma \Rightarrow \Delta\).
+    \end{enumerate}
+    
+\end{definition}
+
+-- two properties : subformula and cut elimination.

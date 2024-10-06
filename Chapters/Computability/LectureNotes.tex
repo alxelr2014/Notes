@@ -1,10 +1,10 @@
 \chapter{Lecture Notes}
 \section{Computation}
-Abstractly, a \textit{computation} is the ``work done'' by a \textit{computation machine}. For example, we can consider our brains as computation machines and whatever they do is considered a computation. A computation machine \(M\) can be viewed as a black box that takes an input \(w\) and acts on the input in a step by a step manner. Suppose a brain is tasked with calculating a formula. This formula is the input and at each step the brain may calculate or simplify a certain part of the formula. 
+Abstractly, a \textit{computation} is the ``work done'' by a \textit{computation machine}. For example, we can regard our brains as computation machines and whatever they do is considered a computation. A computation machine \(M\) can be viewed as a black box that takes an input \(w\) and acts on the input in a step by a step manner. Suppose a brain is tasked with calculating a formula. This formula is the input and at each step the brain may calculate or simplify a certain part of the formula. 
 
-A \textit{configuration} is a description of the internals and the state of the machine. Note that the state of the machine may be described in many ways, however, we usually fix a method of describing so that the resulting configurations are unique. A configuration of a brain computing a formula might be the state of neurons in the brain and the steps of the calculation as written in a piece of paper.
+A \textit{configuration} is a description of the internals and the state of the machine. Note that the state of the machine may be described in many ways, however, we usually fix a method of describing so that the resulting configurations are unique. A configuration of a brain computing a formula might be the state of neurons in the brain and the steps of the calculation as written on the piece of paper.
 
-In each unit of time the configuration of the machine changes based on its \textit{configuration graph}. This is like saying that in each time unit the brain does an algebraic step such as addition or multiplication and then changes the content of the paper to the new intermediate result. This graph is a directed graph with all the possible configurations of \(M\) as nodes. There is an edges from configuration \(C\) to \(C'\) if the machine go from \(C\) to \(C'\) in one unit of time. In our case, the brain can go from \(C\) to \(C'\) if the corresponding formula of \(C'\) can be arrived by doing one algebraic step from the corresponding formula of \(C\). This graph might be infinite, and in fact, finite configuration graphs can be dealt with tools from graph theory and thus do not provide a rich theory of computation.
+In each unit of time the configuration of the machine changes based on its \textit{configuration graph}. This is like saying that in each time unit the brain does an algebraic step such as addition or multiplication and then changes the content of the paper to a new intermediatary result. The configuration graph is a directed graph with all the possible configurations of \(M\) as nodes. There is an edges from configuration \(C\) to \(C'\) if the machine can go from \(C\) to \(C'\) in one unit of time. In our case, the brain can go from \(C\) to \(C'\) if the corresponding formula of \(C'\) can be arrived by doing one algebraic step from the corresponding formula of \(C\). This graph might be infinite, and in fact, finite configuration graphs can be dealt with tools from graph theory and thus do not provide a rich theory of computation.
 
 In this way, we can formalize the notion of computation machines as a discrete dynamical system. 
 
@@ -20,10 +20,10 @@ In this way, we can formalize the notion of computation machines as a discrete d
 \end{remark}
 
 \begin{definition}
-    A \textbf{computation machine} is a discrete dynamical system \(M = (\calC,\calE)\). The state \(C \in \calC\) is called a \textbf{configuration} of the machine and \(E \in \calE\) is called a \textbf{transition}. On an input \(w\), the machine will be placed in an \textit{initial configuration} \(C_0^w \in \calC\). At each unit of time, a neighbouring configuration is chosen if it exists. If no neighbouring configurations exists, then the machine stops. A computation machine \(M\) is deterministic for any \(C \in \calC\) there is at most one neighbour.
+    A \textbf{computation machine} is a discrete dynamical system \(M = (\calC,\calE)\). The state \(C \in \calC\) is called a \textbf{configuration} of the machine and \(E \in \calE\) is called a \textbf{transition}. On an input \(w\), the machine will be placed in an \textit{initial configuration} \(C_0^w \in \calC\). At each unit of time, a neighbouring configuration is chosen if it exists. If no neighbouring configurations exists, then the machine \textit{crashes}. A computation machine \(M\) is deterministic for any \(C \in \calC\) there is at most one neighbour.
 \end{definition}
 
-The possible configurations that may be attained by an input \(w\), form a tree. If the computation is deterministic, then the tree is a path. 
+The possible configurations that are attained by an input \(w\), form a tree. If the computation is deterministic, then the tree is a path. 
 
 \begin{remark}
     In computation, we usually distinguish between halting and crashing. Loosely defined, halting is an expected stopping and crashing is an unexpected stopping. To distinguish between these two scenarios, we may consider \(\calC_h \subset \calC\) as the set of halting configuration and add it to the description of \(M\). Therefore, if a non-halting configuration has no neighbour, the computation machine crahses.
@@ -60,7 +60,6 @@ The coding of the problem must not have any pre-processing. We enforce this by m
 \end{enumerate}
 In general, the classes of languages that can be described by several of the above's methods are interesting.
 
-A definition is given by specifying a type, the data, and the properties.
 
 \section{Computation Machines}
 
