@@ -1,26 +1,14 @@
 \chapter{Introduction}
-some stuff on propositional logic, induction, well-formed formula. -- need to be completed.
-For all proposition \(A\) we can define the set of all its sub-proposition, \(\mathrm{SP} {A}\), and it can be defined inductively. Order of operation. A meaning is a function \(I : \mathrm{PR} \to \set{0,1}\) such that;
+Mathematical logic is about formalizing mathematic thinking and considers inferences and proofs. The goal in mathematical logic is to construct mathematical models and systems.
+
+It must be noted that mathematical logic is a part of mathematics. In fact it is akin to a Persian grammar book in Persian. It talks about the rules in the language in the same language. In the same way, logic explains various models, mathematically. 
+
+To formalize a thought we need a language. In other words, the materalization of a thought is a set of words in a language. There are two aspects two languages; syntax and semantic. The syntax of a language is the rules and principles of the language. On the other hand, the semantic is about the meaning of words in a language.
+
+Mathematical logic is typically divided into four parts;
 \begin{enumerate}
-    \item \(\func{I}{\perp} = 0 \).
-    \item \(\func{I}{A \land B} = \func{I}{A} \func{I}{B}\).
-    \item \(\func{I}{\neg A} = 1 - \func{I}{A}\). (a book on negation)
-    \item \(\func{I}{A \lor B} = \max \set{\func{I}{A}, \func{I}{B}}\).
-    \item \(\func{I}{A \to B} = \func{I}{\neg A \lor B}\). A point of contention among logician.
+    \item Set theory.
+    \item Model theory.
+    \item Proof theory.
+    \item Recursion theory.
 \end{enumerate}
-An evaluation is a meaning function restricted to the atomes, \(\nu : P \to \set{0,1}\).
-
-\begin{theorem}
-    For each evaluation function there is unique extension to a meaning function.
-\end{theorem}
-
-\(I \models A\) if \(\func{I}{A} = 1\). \(\models A\) means \(I \models A\) for all \(I\), a tautology. \(\not\models A\) if \(\func{I}{A} = 0\) for all \(I\). If \(\Gamma\) is a subset of proposition then, \(\Gamma \models A\) when for all \(I \models \Gamma\) then \(I \models A\).
-
-some propositions regarding meaning and evaluation.
-
-\(A[P|b]\)
- substituition  theorem.
- \section{Inference rules}
- -- Hilbert's method
- \subsection{Natural Deduction}
- Everything is a rule. Two types of rules, introduction rules and elimination rules.

@@ -1,5 +1,115 @@
 \chapter{Propositional Logic}
 
+A language is formed from an alphabet and a set of principles to construct words and sentences.
+
+\begin{definition}
+    The language \(\calL\) of a propositional logic contains
+    \begin{enumerate}
+        \item A countable alphabet, also known as propositional symbol or atomic propsitions, \(P = \set{p_0, p_1, p_2,\dots}\).
+        \item Logical connectives \(\land, \lor, \neg, \to,\) and \(\bot\).
+        \item Paranthesis \((,)\).
+    \end{enumerate}
+\end{definition}
+\section{Syntax}
+The words in a mathematical language are called expressions.
+
+\begin{definition}
+    An expression is a finite sequence of propositional symbols, logical connectives, and paranthesis. The set of all expressions in \(\calL\) is denoted by \(\LEXP_{\calL}\), however, we usually omit the subscript.
+\end{definition}
+
+However, not all strings are acceptable in a language. In propositional logic, propisitions or well-formed formulea are the acceptable expression.
+
+\begin{definition}
+    The set of well-formed formulea, \(\LPR_{\calL} \subset \LEXP_{\calL}\) is the smallest subset with the following properties.
+    \begin{enumerate}
+        \item \(\bot \in \LPR\),
+        \item The atomic propisition \(p_i\) are in \(\LPR\), \(P \subset \LPR\).
+        \item For all propositions \(A,B \in \LPR\), the expressions \((A \land B)\), \((A \lor B),\) and \((A \to B)\) are propositions.
+        \item For all propositions \(A, \in \LPR\), the expression \((\neg A) \in \LPR\).
+    \end{enumerate}
+\end{definition}
+
+The majority of results in propsitional logic are proved with induction.
+
+\begin{theorem}[Principle of Induction]
+    Suppose \(\calP\) is a property of propositions that;
+    \begin{enumerate}
+        \item \(\calP\) holds all atomic propositions \(p_i\) and \(\bot\).
+        \item If \(\calP\) holds propositions \(A\) and \(B\), then \((A \lor B), (A \land B)\), and \((A \to B)\) satisfy \(\calP\).
+        \item If \(\calP\) holds for a proposition \(A\), then it holds for \((\neg A)\).
+    \end{enumerate}
+    Then, \(\calP\) holds for all propsitions.
+\end{theorem}
+
+\begin{proof}
+    Suppose \(X \subset \LPR\) is the set of all propositions that satisfy \(\calP\). Then, by definition, \(P,\bot \subset X\) and thus \(X\) is non-empty. Moreover, from the second and third statement, we conclude that \(\LPR \subset X\) hence, \(X = \LPR\).
+\end{proof}
+
+In these notes, we consider the symbol \(\bot\) as an atomic proposition.
+
+\begin{theorem}[Uniqueness of Function Extension] 
+    Suppose there are functions, \(f_P: P \to S\), \(f_{\land},f_{\lor}, f_{\to} : S^2 \to S\) and \(f_{\neg}: S \to S\), where \(S\) is an arbitrary set, then there exists a unique function \(F: \LPR \to S\) such that;
+    \begin{enumerate}
+        \item \(\func{F}{p} = \func{f_p}{p}\) for all \(p \in \LPR\).
+        \item \(\func{F}{(A \circ B)} = \func{f_{\circ}}{\func{F}{A}, \func{F}{B}}\) for all propisitions \(A\) and \(B\), where \(\circ \in \set{\land,\lor,\to}\).
+        \item \(\func{F}{(\neg A)} = \func{f_{\neg}}{\func{F}{A}}\) for all propositions \(A\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We call a function \(f_P \subset F \subset \LPR \times S\) a good function if it satisfies the following conditions.
+    \begin{enumerate}
+        \item When \((A \circ B)\) is in its domain, then \(A\) and \(B\) are in its domain as well, and \(\func{F}{(A \circ B)} = \func{f_{\circ}}{\func{F}{A}, \func{F}{B}}\).
+        \item When \((\neg A)\) is in its domain, then \(A\) is in its domain as well, and \(\func{F}{(\neg A)} = \func{f_{\neg}}{\func{F}{A}}\).
+    \end{enumerate}
+    Consider the set of such good function. This set is non-empty as \(f_P\) is a good function. Let \(F\) be the union of all good functions. Obviously, such a set \(F\) exists.
+    \begin{enumerate}
+        \item First we must show that \(F\) is a function. That is, for each \(A\) in its domain there is at most one \(s \in S\). Let \(X\) be the set of all propositions that have at most one value \(s\) such that \((A,s) \in F\). By construction, all atomic propositions are in \(X\). Suppose \(A,B \in X\) and \((A \circ B)\) is in the domain \(F\). Then, there must some good functions such as \(G_0,G_1,\dots\) that have \((A \circ B)\) in their domain. Since \(A,B \in X\), then we must have \(\func{G_i}{A} = \func{G_0}{A}\) and \(\func{G_i}{B} = \func{G_0}{B}\) for any \(i\). As a result, 
+        \begin{equation}
+            \func{G_i}{(A \circ B)} = \func{f_{\circ}}{\func{G_i}{A},\func{G_i}{B}} =  \func{f_{\circ}}{\func{G_0}{A},\func{G_0}{B}} =  \func{G_0}{(A \circ B)} 
+        \end{equation}
+        hence, \((A \circ B) \in X\). Similarly, when \(A \in X\) and \((\neg A)\) is in the domain \(F\), there must some good functions such as \(G_0,G_1,\dots\) that have \((\neg A)\) in their domain. Since \(A \in X\), then we must have \(\func{G_i}{A} = \func{G_0}{A}\) for any \(i\). As a result,
+        \begin{equation}
+            \func{G_i}{(\neg A)} = \func{f_{\neg}}{\func{G_i}{A}} =  \func{f_{\neg}}{\func{G_0}{A}} =  \func{G_0}{(\neg A)} 
+        \end{equation}
+        hence, \((\neg A) \in X\). By the principle of induction \(X = \LPR\) and thus, \(F\) is a function.
+        \item  Moreover, \(F\) must be a good function. This, follows immediately from the definition.
+        \item The domain \(F\) is \(\LPR\). Let \(X\) be the domain of \(F\). By definition, \(P \subset X\). Moreover, if \(A,B \in X\), then there must exists a good function \(G\) with \(A\) and \(B\) in its domain. Let \(G^{\ast} = G \cup \set{((A \circ B), \func{f_{\circ}}{\func{G}{A}, \func{G}{B}})}\). Clearly, \(G^{\ast}\) is a good function, hence \((A \circ B) \in X\). A similiar argument can be for \((\neg A) \in X\) when \(A \in X\). Thus, \(X = \LPR\).
+        \item Lastly, we must show that \(F\) is unique.  Suppose, there is another function \(G\) that satisfies the criteria and let \(X\) be the set of propositions \(A\) such that \(\func{F}{A} = \func{G}{A}\). From the principle of induction we must have \(F \equiv G\) thus, \(F\) is unique.
+    \end{enumerate}
+\end{proof}
+-- priority of operations.
+
+\section{Semantic}
+
+
+some stuff on propositional logic, induction, well-formed formula. -- need to be completed.
+For all proposition \(A\) we can define the set of all its sub-proposition, \(\mathrm{SP} {A}\), and it can be defined inductively. Order of operation. A meaning is a function \(I : \mathrm{PR} \to \set{0,1}\) such that;
+\begin{enumerate}
+    \item \(\func{I}{\perp} = 0 \).
+    \item \(\func{I}{A \land B} = \func{I}{A} \func{I}{B}\).
+    \item \(\func{I}{\neg A} = 1 - \func{I}{A}\). (a book on negation)
+    \item \(\func{I}{A \lor B} = \max \set{\func{I}{A}, \func{I}{B}}\).
+    \item \(\func{I}{A \to B} = \func{I}{\neg A \lor B}\). A point of contention among logician.
+\end{enumerate}
+An evaluation is a meaning function restricted to the atomes, \(\nu : P \to \set{0,1}\).
+
+\begin{theorem}
+    For each evaluation function there is unique extension to a meaning function.
+\end{theorem}
+
+\(I \models A\) if \(\func{I}{A} = 1\). \(\models A\) means \(I \models A\) for all \(I\), a tautology. \(\not\models A\) if \(\func{I}{A} = 0\) for all \(I\). If \(\Gamma\) is a subset of proposition then, \(\Gamma \models A\) when for all \(I \models \Gamma\) then \(I \models A\).
+
+some propositions regarding meaning and evaluation.
+
+\(A[P|b]\)
+ substituition  theorem.
+ \section{Inference rules}
+ -- Hilbert's method
+ \subsection{Natural Deduction}
+ Everything is a rule. Two types of rules, introduction rules and elimination rules.
+
+
 \section{Sequent Calculus}
 Suppose \(\Gamma\) and \(\Delta\) are finite sets of propositions. By \(\Gamma \Rightarrow \Delta\) we mean 
 \begin{equation}
