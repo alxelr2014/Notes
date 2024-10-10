@@ -5,8 +5,8 @@ A language is formed from an alphabet and a set of principles to construct words
 \begin{definition}
     The language \(\calL\) of a propositional logic contains
     \begin{enumerate}
-        \item A countable alphabet, also known as propositional symbol or atomic propsitions, \(P = \set{p_0, p_1, p_2,\dots}\).
-        \item Logical connectives \(\land, \lor, \neg, \to,\) and \(\bot\).
+        \item A countable alphabet, also known as propositional symbol, \(Q = \set{p_0, p_1, p_2,\dots}\).
+        \item Logical connectives \(\land, \lor, \neg, \to,\top\), and \(\bot\).
         \item Paranthesis \((,)\).
     \end{enumerate}
 \end{definition}
@@ -22,19 +22,20 @@ However, not all strings are acceptable in a language. In propositional logic, p
 \begin{definition}
     The set of well-formed formulea, \(\LPR_{\calL} \subset \LEXP_{\calL}\) is the smallest subset with the following properties.
     \begin{enumerate}
-        \item \(\bot \in \LPR\),
+        \item \(\top,\bot \in \LPR\),
         \item The atomic propisition \(p_i\) are in \(\LPR\), \(P \subset \LPR\).
         \item For all propositions \(A,B \in \LPR\), the expressions \((A \land B)\), \((A \lor B),\) and \((A \to B)\) are propositions.
         \item For all propositions \(A, \in \LPR\), the expression \((\neg A) \in \LPR\).
     \end{enumerate}
 \end{definition}
+The set of \(P = Q \cup \set{\top,\bot}\) is called the atmoic symbols.
 
 The majority of results in propsitional logic are proved with induction.
 
 \begin{theorem}[Principle of Induction]
     Suppose \(\calP\) is a property of propositions that;
     \begin{enumerate}
-        \item \(\calP\) holds all atomic propositions \(p_i\) and \(\bot\).
+        \item \(\calP\) holds all propositional symbol \(p_i\) and \(\top,\bot\).
         \item If \(\calP\) holds propositions \(A\) and \(B\), then \((A \lor B), (A \land B)\), and \((A \to B)\) satisfy \(\calP\).
         \item If \(\calP\) holds for a proposition \(A\), then it holds for \((\neg A)\).
     \end{enumerate}
@@ -47,10 +48,10 @@ The majority of results in propsitional logic are proved with induction.
 
 In these notes, we consider the symbol \(\bot\) as an atomic proposition.
 
-\begin{theorem}[Uniqueness of Function Extension] 
+\begin{theorem}[Uniqueness of Function Extension] \label{thm:uniqueext}
     Suppose there are functions, \(f_P: P \to S\), \(f_{\land},f_{\lor}, f_{\to} : S^2 \to S\) and \(f_{\neg}: S \to S\), where \(S\) is an arbitrary set, then there exists a unique function \(F: \LPR \to S\) such that;
     \begin{enumerate}
-        \item \(\func{F}{p} = \func{f_p}{p}\) for all \(p \in \LPR\).
+        \item \(\func{F}{p} = \func{f_p}{p}\) for all \(p \in P\).
         \item \(\func{F}{(A \circ B)} = \func{f_{\circ}}{\func{F}{A}, \func{F}{B}}\) for all propisitions \(A\) and \(B\), where \(\circ \in \set{\land,\lor,\to}\).
         \item \(\func{F}{(\neg A)} = \func{f_{\neg}}{\func{F}{A}}\) for all propositions \(A\).
     \end{enumerate}
@@ -79,32 +80,138 @@ In these notes, we consider the symbol \(\bot\) as an atomic proposition.
     \end{enumerate}
 \end{proof}
 -- priority of operations.
+-- examples of induction
 
+For all proposition \(A\) we can define the set of all its sub-proposition, \(\mathrm{SP} {A}\), and it can be defined inductively. Order of operation.
 \section{Semantic}
+The semantic of a propositional logic considers the truth and falsity of propositions.
+\begin{definition}
+    An interpretation is a function \(I : \LPR \to \set{0,1}\) such that;
+    \begin{enumerate}
+        \item \(\func{I}{\perp} = 0 \) and \(\func{I}{\top} = 1\).
+        \item \(\func{I}{A \land B} = 1\) if and only if \(\func{I}{A} = 1\) and \(\func{I}{B} = 1\).
+        \item \(\func{I}{A \lor B} = 0\) if and only if \(\func{I}{A} = 0\) and \(\func{I}{B} = 0\).
+        \item \(\func{I}{A \to B} = 0\) if and only if \(\func{I}{A} = 1\) and \(\func{I}{B} = 0\).
+        \item \(\func{I}{\neg A} = 1\) if and only if \(\func{I}{A} = 0\).
+    \end{enumerate}
+    The last two properties are points of contention among logicians. we say \(I\) models \(A\), denoted by \(I \models A\), when \(\func{I}{A} = 1\) and \(I \not\models A\) when \(\func{I}{A} = 0\), for some proposition \(A\). Generally, if \(\Gamma\) is a set of propositions, \(I \models \Gamma\) means that \(I\) models every proposition \(B \in \Gamma\). 
+\end{definition}
 
+\begin{definition}
+    A valuation is an interpretation function restricted to the atoms, \(v : P \to \set{0,1}\), with \(\func{v}{\top} = 1\) and \(\func{v}{\bot} = 0\).
+\end{definition}
 
-some stuff on propositional logic, induction, well-formed formula. -- need to be completed.
-For all proposition \(A\) we can define the set of all its sub-proposition, \(\mathrm{SP} {A}\), and it can be defined inductively. Order of operation. A meaning is a function \(I : \mathrm{PR} \to \set{0,1}\) such that;
-\begin{enumerate}
-    \item \(\func{I}{\perp} = 0 \).
-    \item \(\func{I}{A \land B} = \func{I}{A} \func{I}{B}\).
-    \item \(\func{I}{\neg A} = 1 - \func{I}{A}\). (a book on negation)
-    \item \(\func{I}{A \lor B} = \max \set{\func{I}{A}, \func{I}{B}}\).
-    \item \(\func{I}{A \to B} = \func{I}{\neg A \lor B}\). A point of contention among logician.
-\end{enumerate}
-An evaluation is a meaning function restricted to the atomes, \(\nu : P \to \set{0,1}\).
 
 \begin{theorem}
-    For each evaluation function there is unique extension to a meaning function.
+    For each valuation function \(v\) there is unique extension to an interpretation function \(I\).
 \end{theorem}
 
-\(I \models A\) if \(\func{I}{A} = 1\). \(\models A\) means \(I \models A\) for all \(I\), a tautology. \(\not\models A\) if \(\func{I}{A} = 0\) for all \(I\). If \(\Gamma\) is a subset of proposition then, \(\Gamma \models A\) when for all \(I \models \Gamma\) then \(I \models A\).
+\begin{proof}
+    Let \(I\) be defined as follows.
+    \begin{enumerate}
+        \item \(\func{I}{p} = \func{v}{p}\) for atomic propositions.
+        \item \(\func{I}{A \land B} = \func{I}{A} \cdot \func{I}{B}\).
+        \item \(\func{I}{A \lor B} = \func{I}{A} + \func{I}{B} - \func{I}{A}\cdot \func{I}{B}\).
+        \item \(\func{I}{A \to B} = \func{I}{A}\cdot \func{I}{B} + 1 - \func{I}{A}\).
+        \item \(\func{I}{\neg A} = 1- \func{I}{A}\).
+    \end{enumerate}
+    The existence and uniqueness of \(I\) is proved from \autoref{thm:uniqueext}.
+\end{proof}
 
-some propositions regarding meaning and evaluation.
+\begin{definition}
+    If for all interpretation functions \(I\) that models \(\Gamma\), \(I\) models \(A\) as well, we write \(\Gamma \models A\). When \(\Gamma = \emptyset\), we say \(A\) is a tautology, denoted by \(\models A\). Moreover, two propositions \(A\) and \(B\) are equivalent, denoted by \(A \equiv B\), if \(\models (A \to B) \land (B \to A)\).
+\end{definition}
+We introduce the logical connective \(A \leftrightarrow B\) as a shorthand for \((A \to B) \land (B \to A)\).
 
-\(A[P|b]\)
- substituition  theorem.
- \section{Inference rules}
+Let \(A[p/B]\) denote the substituition of every propositional symbol \(p\) in \(A\) with the proposition \(B\). For example, if \(A = p_0 \land p_1\) and \(B = p_2 \lor p_0\), then \(A[p_0/B] = (p_2 \lor p_0) \land p_1\).
+
+\begin{theorem}
+    If \(\models A\), then \(\models A[p/B]\) for all choices of \(p\) and \(B\).
+\end{theorem}
+
+\begin{proof}
+    Suppose the interpretation function \(I\) is generated by valuation \(v\). Define the valuation function \(u\) such that \(\func{u}{p} = \func{I}{B}\) and \(\func{u}{q} = \func{v}{q}\) for all propositional symbols \(q\) other than \(p\). Let \(J\) be the interpretation function generated by \(u\). Then, \(J \models A\) if and only if \(I \models A[p/B]\). Since \(\models A\), then \( \models A[p/B]\)
+\end{proof}
+
+\begin{lemma}
+    We have \(\models A \to B\) if and only if \(\func{I}{A} \leq \func{I}{B}\) for all interpretations \(I\).
+\end{lemma}
+
+\begin{proof}
+    For any interpretation \(I\), we must have \(\func{I}{A \to B} = 1\). Thus,
+    \begin{align}
+        \func{I}{A \to B} - 1 &= \func{I}{A} \func{I}{B} - \func{I}{A}\\
+        &= \func{I}{A}(\func{I}{B} -1)
+    \end{align}
+    If \(\func{I}{A} = 0\), then the lemma follows trivially. If \(\func{I}{A} =1\), then we must have \(\func{I}{B} = 1\) and hence, \(\func{I}{A}\leq \func{I}{B}\).
+\end{proof}
+
+\begin{lemma}
+    Suppose \(\models A \to B\), then if \(\models A\), then \(\models B\). 
+\end{lemma}
+\begin{proof}
+    An immediate corrolary of the previous lemma.
+\end{proof}
+
+\begin{lemma}
+    For all choices of \(p\), \(\func{I}{B_1 \leftrightarrow B_2} \leq \func{I}{A[p/B_1] \leftrightarrow A[p/B_2]}\).
+\end{lemma}
+
+\begin{proof}
+    Without loss of generality suppose \(\func{I}{B_1 \leftrightarrow B_2} = 1\) and suppose \(A\) contains the propositional symbol \(p\). Then, \(A[p/B_1] = B_1\) and \(A[p/B_2] = B_2\) and thus, the substituition holds trivially, \(\func{I}{A[p/B_1] \leftrightarrow A[p/B_2]} = 1\).  Let \(A = A_1 \circ A_2\), then \(\func{I}{A_i[p/B_j]} = \func{I}{A_i[p/B_k]}\) for \(j\neq k\) and as a result, \(\func{I}{A[p/B_j]} = \func{I}{A[p/B_k]}\). A similiar argument holds for \(\neg\). 
+\end{proof}
+
+\begin{theorem}[Substituition]
+    If \(\models B_1 \leftrightarrow B_2\), then \(\models A[p/B_1] \leftrightarrow A[p/B_2]\).
+\end{theorem}
+
+\begin{proof}
+    Immediately follows from the preceeding lemmas and theorems. 
+\end{proof}
+
+\subsection{Truth Table}
+The simplest method determining whether a proposition is a tautology is constructing a truth table. In each row, we consider a valuation function on the propsitional symbols of that proposition. As a result, for proposition containing \(n\) symbols, we need a table of \(2^n\) rows. We thus have the following theorem.
+
+\begin{theorem}
+    The set of tautologies in the set of propositions is decidable.
+\end{theorem}
+
+-- some tautologies + deMorgans
+
+From the above tautologies and the deMorgan's ralations, it is apparent that we describe all connectives with \(\set{\land, \neg}, \set{\lor,\neg}\), \(\set{\land,\to}\), etc. We call a set of connective functionally complete if all other connectives can be written in terms that set. The Sheffer connective \(|\), defined as \(A | B = \neg (A \land B)\), is complete by itself. One might ask if there is another connective that can not be written with Sheffer connective. Suppose \(O\) is an \(n\)-ary functional connective, that is there exists a function \(f_O\) such that for all interpretations \(I\) and symbols \(p_1,\dots,p_n\).
+\begin{equation*}
+    \func{I}{\func{O}{p_1,\dots, p_n}} = \func{f_O}{\func{I}{p_1}, \dots, \func{I}{p_n}}
+\end{equation*} 
+The following theorem states that all functional connectives can be written in terms of Sheffer or any other complete set of connectives.
+
+\begin{theorem}
+    For all functional connectives \(O\), there exists a proposition only composed of \(p_1,\dots,p_n\) and connectives \(\set{\lor,\neg}\) such that \(\models \func{O}{p_1,\dots,p_n} \leftrightarrow A\).
+\end{theorem}
+
+When the constrained to \(\set{\land,\lor,\not}\) we can writte every proposition in a conjunctive or distinjuctive normal form. 
+\begin{enumerate}
+    \item A proposition \(A\) is in the conjunctive normal form if \(A\) is 
+    \begin{equation*}
+        (A_{1,1} \lor \dots \lor A_{1,i_1}) \land \dots \land (A_{m,1} \lor \dots \lor A_{m,i_m})
+    \end{equation*}
+    where all \(A_{i,j}\) are either a propositional symbol or its negate.
+    \item A proposition \(A\) is in the disjunctive normal form if \(A\) is 
+    \begin{equation*}
+        (A_{1,1} \land \dots \land A_{1,i_1}) \lor \dots \lor (A_{m,1} \land \dots \land A_{m,i_m})
+    \end{equation*}
+    where all \(A_{i,j}\) are either a propositional symbol or its negate.
+\end{enumerate}
+
+\begin{theorem}
+    For a propisition \(A\) with symbols \(p_1,\dots,p_n\);
+    \begin{enumerate}
+        \item there exists an equivalent conjunctive normal form with the same symbols.
+         \item there exists an equivalent disjunctive normal form with the same symbols.
+    \end{enumerate}
+\end{theorem}
+
+\section{Proofs}
+ \subsection{Inference rules}
  -- Hilbert's method
  \subsection{Natural Deduction}
  Everything is a rule. Two types of rules, introduction rules and elimination rules.
