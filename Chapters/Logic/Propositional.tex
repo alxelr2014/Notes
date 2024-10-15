@@ -188,7 +188,7 @@ The following theorem states that all functional connectives can be written in t
     For all functional connectives \(O\), there exists a proposition only composed of \(p_1,\dots,p_n\) and connectives \(\set{\lor,\neg}\) such that \(\models \func{O}{p_1,\dots,p_n} \leftrightarrow A\).
 \end{theorem}
 
-When the constrained to \(\set{\land,\lor,\not}\) we can writte every proposition in a conjunctive or distinjuctive normal form. 
+When the constrained to \(\set{\land,\lor,\neg}\) we can writte every proposition in a conjunctive or distinjuctive normal form. 
 \begin{enumerate}
     \item A proposition \(A\) is in the conjunctive normal form if \(A\) is 
     \begin{equation*}
@@ -211,13 +211,148 @@ When the constrained to \(\set{\land,\lor,\not}\) we can writte every propositio
 \end{theorem}
 
 \section{Proofs}
- \subsection{Inference rules}
-We consider 
- \subsection{Natural Deduction}
- Everything is a rule. Two types of rules, introduction rules and elimination rules.
+We consider proofs in propositional logic, where proof is a logical derivation of the assumptions. Note that, there are some tautologies in propositional logic. We would like find all tautologies with proofs and inferences instead of semantics. In this section, we study three proof systems.
+\subsection{Hilbert System}
+In the Hilbert system, we have 10 axioms and an inference rule, which as as follows.
+\begin{enumerate}
+    \item \(A \to (B \to A)\).
+    \item \((A \to (B \to C)) \to ((A \to B) \to (A \to C))\).
+    \item \(A \to (B \to (A \land B))\).
+    \item \((A \land B) \to A\).
+    \item \((A \land B) \to B\).
+    \item \((A \to B) \to ((C\to B) \to ((A \lor C) \to B))\).
+    \item \(A \to (A \lor B)\).
+    \item \(B \to (A \lor B)\).
+    \item \(\neg \neg A \to A\).
+    \item \(\neg A \leftrightarrow (A \to \bot)\).
+\end{enumerate}
+The inference rule is just Modus Ponens.
+\begin{equation}
+    \begin{array}{ccc} 
+        A  & & A \to B  \\
+        \cline{1-3}
+        & B &
+    \end{array}
+\end{equation}
+We may also use substituition.
+\begin{equation}
+    \begin{array}{c} 
+        A[p_i] \\
+        \cline{1-1}
+        A[p_i/B]
+    \end{array}
+\end{equation}
+We say \(A\) is proved from \(\Gamma\), denoted by \(\Gamma \sststile{HP}{} A\), if there exists a sequence of propositions \(A_1,\dots,A_n\) such that \(A_n = A\) and for \(i \leq n\).
+\begin{enumerate}
+    \item  \(A_i \in \Gamma\).
+    \item \(A_i\) is an axiom.
+    \item There exists \(j,k < i\) such that \(A_k = A_j \to A_i\).
+\end{enumerate}
+When \(\Gamma = \emptyset\), we say \(A\) is a theorem, denoted by \(\sststile{HP}{} A\).
+\begin{theorem}
+    Suppose \(\Gamma \cup \set{A,B}\) is a set of propositions. Then, \(\Gamma,A \sststile{HP}{} B\) if and only if \(\Gamma \sststile{HP}{} A \to B\).
+\end{theorem}
+ \subsection{Natural Deduction} 
+ There are 10 inference rules, introduction rules and elimination rules. 
 
+\begin{table}[t]
+    \SetTblrInner{rowsep=2ex}
+    \centering
+    \begin{tblr}{c | c | c}
+        & Introduction Rules & Elimination Rules \\\hline
+        \(\land\) & \(\begin{array}{ccc}
+            \calD & & \calD'\\
+            A & & B\\
+            \cline{1-3}
+            & A \land B & 
+            \end{array} \)  &  \(\begin{array}{ccc} 
+            \calD & & \calD\\
+            A \land B & & A \land B\\
+            \cline{1-1} \cline{3-3}
+            A & & B
+            \end{array}\)\\\hline
+        \(\lor\) & \(\begin{array}{ccc}
+            \calD & & \calD'\\
+            A & & B\\
+            \cline{1-1} \cline{3-3}
+            A \lor B & & A \lor B 
+            \end{array}\) & \( \begin{array}{cccc} 
+            [A] & [B] & & \\
+            \calD & \calD' & & \\
+            C & C & & A \lor  B\\
+            \cline{1-4} 
+            & & C & 
+            \end{array}\)\\\hline
+        \(\to\) & \(\begin{array}{c}
+            [A]\\
+            \calD\\
+            B\\
+            \cline{1-1}
+            A \to B
+            \end{array}\) &  \(\begin{array}{ccc} 
+            \calD & & \calD'\\
+            A & & A \to B\\
+            \cline{1-3} 
+            & B & 
+            \end{array}\)\\\hline
+        \(\neg\)& \(\begin{array}{c}
+            [A]\\
+            \calD\\
+            \bot\\
+            \cline{1-1}
+            \neg A
+            \end{array} \)&  \(\begin{array}{ccc} 
+            \calD & & \calD'\\
+            A & & \neg A\\
+            \cline{1-3} 
+            & \bot & 
+        \end{array}\)\\\hline
+        \(\bot\)& \(\begin{array}{c}
+            \calD\\
+            \bot\\
+            \cline{1-1}
+            A
+            \end{array}\) &  \(\begin{array}{c} 
+            [\neg A]\\
+            \calD\\
+            \bot\\
+            \cline{1-1} 
+            A 
+            \end{array}\)
+    \end{tblr}
+\end{table}
 
-\section{Sequent Calculus}
+\begin{definition}
+    An inference set/tree is the smallest set \(X\) such that;
+    \begin{enumerate}
+        \item for all proposition \(A\), the one-node tree of \(A\) is in \(X\).
+        \item For all rules.   
+    \end{enumerate}
+    If such a tree exists with leaves \(\Gamma\) and root \(A\), then we say \(A\) is proved from \(\Gamma\), denoted by \(\Gamma \sststile{NP}{} A\). When \(\Gamma\) is empty, we call \(A\) a theorem. 
+\end{definition}
+
+\begin{lemma}
+    \begin{enumerate}
+        \item If \(A \in \Gamma\), \(\Gamma \sststile{NP}{} A\).
+        \item If \(\Gamma \sststile{NP}{} A\) and \(\Delta \sststile{NP}{} A\), then \(\Gamma \cup \Delta \sststile{NP}{} A \land B\).
+        \item If \(\Gamma \sststile{NP}{} A \land B\), then \(\Gamma \sststile{NP}{} A\) and \(\Gamma \sststile{NP}{} B\).
+        \item If \(\Gamma \cup \set{A} \sststile{NP}{} B \), then \(\Gamma \sststile{NP}{} A \to B\).
+        \item If \(\Gamma \sststile{NP}{} A\) and \(\Gamma \sststile{NP}{} A \to B\), then \(\Gamma \sststile{NP}{} B\).
+        \item If \(\Gamma \sststile{NP}{} \bot\), then \(\Gamma \sststile{NP}{} A\).
+        \item If \(\Gamma \cup \set{\neg A} \sststile{NP}{} \bot\), then \(\Gamma \sststile{NP}{} A\).
+        \item If \(\Gamma \sststile{NP}{} A\), then \(\Gamma \sststile{NP}{} A \lor B\).
+        \item If \(\Gamma \sststile{NP}{} B\), then \(\Gamma \sststile{NP}{} A \lor B\).
+        \item If \(\Gamma \cup \set{A} \sststile{NP}{} C\) and \(\Delta \cup \set{B} \sststile{NP}{} C\), then \(\Gamma \cup \Delta \cup \set{A \lor B} \sststile{NP}{} C\).
+        \item If \(\Gamma \cup \set{A} \sststile{NP}{} \bot\), then \(\Gamma \sststile{NP}{} \neg A\).
+        \item If \(\Gamma \sststile{NP}{} A\) and \(\Gamma \sststile{NP}{} \neg A\), then \(\Gamma \sststile{NP}{} \bot\).
+    \end{enumerate}
+\end{lemma}
+ 
+\begin{theorem}
+    \(\Gamma \sststile{NP}{} A\) if and only if \(\Gamma \sststile{HP}{} A\).
+\end{theorem}
+
+\subsection{Sequent Calculus}
 Suppose \(\Gamma\) and \(\Delta\) are finite sets of propositions. By \(\Gamma \Rightarrow \Delta\) we mean 
 \begin{equation}
    ( \gamma_1 \land \gamma_2 \land \dots \land \gamma_n) \to (\delta_1 \lor \delta_2 \lor \dots \lor \delta_m)
@@ -246,7 +381,24 @@ If \(\Gamma = \emptyset\) or \(\Delta = \emptyset\), then \(\Gamma \Rightarrow \
         \item If \(A,\Gamma \Rightarrow \Delta,B\), then \(\Gamma \Rightarrow \Delta,A\to B\).
         \item If \(\Gamma \Rightarrow \Delta,A\) and \(B,\Gamma \Rightarrow \Delta,B\), then \(A\to B,\Gamma \Rightarrow \Delta\).
     \end{enumerate}
-    
 \end{definition}
 
--- two properties : subformula and cut elimination.
+\begin{definition}
+    A proof for \(\Gamma \Rightarrow \Delta\) in sequent calculus is a finite tree whose root is \(\Gamma \Rightarrow \Delta\) and the leaves are axioms of the system.
+\end{definition}
+
+In sequent calculus, the assumptions in a inference is simpler than the result. Thus, a bruteforce search for proof will terminate eventually. This is called subformula property.
+
+The cut elimination property describes the transitivity.
+\begin{equation}
+    Cut: \begin{array}{c c c}
+        \Gamma \Rightarrow \Delta,A & & A,\Gamma'  \Rightarrow \Delta'\\\cline{1-3}
+        &  \Gamma, \Gamma'  \Rightarrow \Delta,\Delta' &
+    \end{array}
+\end{equation}
+The addition cut elimination destroys the subformula property. However, we can show that the cut elimination does not grant us any additional power.
+
+\begin{theorem}
+    If \(GP + Cut\vdash \Gamma \Rightarrow \Delta \), then \(GP \vdash \Gamma \Rightarrow \Delta\).
+\end{theorem}
+
